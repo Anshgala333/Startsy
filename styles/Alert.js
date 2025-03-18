@@ -11,9 +11,20 @@ const styles1 = StyleSheet.create({
     message: { fontSize: 16, marginVertical: 10, textAlign: "center", color: "#D9D9D9", fontFamily: "Roboto" },
     button: { marginTop: 10, backgroundColor: "#00de62", padding: 6, paddingHorizontal: 37, borderRadius: 10 },
     buttonText: { color: "#1A1D1F", fontSize: 16, fontFamily: "Roboto", fontWeight: "bold" },
-    showButton: { backgroundColor: "#28a745", padding: 10, borderRadius: 5 },
+    showButton: { backgroundColor: "#28a745", padding: 10, borderRadius: 6 },
     showButtonText: { color: "#fff", fontSize: 16 },
-})
+});
+
+///first commit with this branch
+///first commit with this branch
+///first commit with this branch
+///first commit with this branch
+
+
+
+
+
+
 
 
 export default styles1
