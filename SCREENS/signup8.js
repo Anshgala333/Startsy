@@ -20,7 +20,7 @@ import {
     KeyboardAvoidingView
 } from "react-native";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
-import {url} from "../config.js"
+import { url } from "../config.js"
 import { useFocusEffect } from "expo-router";
 
 import signup3styles from "../styles/signup3styles.js";
@@ -97,7 +97,12 @@ const Signup8 = ({ navigation, route }) => {
 
             const data = await response.json();
             console.log(data);
-            navigation.navigate("Main2")
+            // navigation.navigate("Main2")
+
+            navigation.reset({
+                index: 0,
+                routes: [{ name: "Main2" }],
+            });
         }
         catch (err) {
             console.log(err);

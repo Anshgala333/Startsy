@@ -225,7 +225,11 @@ const Signup13 = ({ navigation, route }) => {
                 await AsyncStorage.setItem('accessToken', data.newToken);
                 updateField("token", data.newToken);
                 console.log('Data saved successfully!');
-                navigation.navigate("Main2")
+                navigation.reset({
+                    index: 0,
+                    routes: [{ name: "Main2" }],
+                });
+                // navigation.navigate("Main2")
             } catch (error) {
                 console.error('Error saving data:', error);
             }

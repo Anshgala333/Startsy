@@ -171,7 +171,6 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
   const handlelogin = async (navigation) => {
 
     // console.log("login route called");
-    // console.log(token);
     
 
 
@@ -200,6 +199,7 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
       identifier: email,
       password: password,
     }
+    
 
 
     try {
