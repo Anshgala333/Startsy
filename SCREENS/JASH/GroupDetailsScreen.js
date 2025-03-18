@@ -17,7 +17,7 @@ const GroudDetailsScreen = ({ route }) => {
 
     var communityAdmin = item.communityAdmin;
     var communityID = item._id;
-    
+
 
     const mainpagebottomsheet = useRef();
     const snapPoints = useMemo(() => ['20%'], []);
@@ -166,11 +166,13 @@ const GroudDetailsScreen = ({ route }) => {
     }
 
     // var [image  , setImage] = useState("")
-    var [groupImage  , setgroupImage] = useState("")
+    var [groupImage, setgroupImage] = useState("")
 
-    if(item.groupPhoto){
-        setgroupImage(item.groupPhoto)
-    }
+    useEffect(() => {
+        if (item.groupPhoto) {
+            setgroupImage(item.groupPhoto)
+        }
+    }, [item])
 
     const uploadImage = async () => {
         console.log("file upload");
@@ -201,22 +203,24 @@ const GroudDetailsScreen = ({ route }) => {
                     uri: imageUri,
                     type: "image/jpeg",
                     name: `image_${Date.now()}.jpg`,
-    
+
                 })
             }
-    
+
             try {
 
                 const response = await fetch(`${url}posts/groupPhoto/${communityID}`, {
                     method: 'POST',
-                    body :  final,
+                    body: final,
                     headers: {
                         accept: "application/json",
                         "Authorization": token,
                     },
                 });
                 const data = await response.json();
-              
+                console.log(data);
+
+
             }
             catch (err) {
                 console.log(err);
