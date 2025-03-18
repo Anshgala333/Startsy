@@ -291,7 +291,7 @@ const Signup10 = ({ navigation, route }) => {
                             <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 15 }]}>About Startup</Text>
                             <TextInput
                                 allowFontScaling={false}
-                                placeholder="Name"
+                                placeholder="Name *"
                                 placeholderTextColor="#B8B8B8"
                                 style={styles.input11}
                                 value={name}
@@ -300,7 +300,7 @@ const Signup10 = ({ navigation, route }) => {
                             {nameerror && <Text style={styles.err}>* please write a startup name</Text>}
                             <TextInput
                                 allowFontScaling={false}
-                                placeholder="One liner for your startup"
+                                placeholder="One liner for your startup *"
                                 placeholderTextColor="#B8B8B8"
                                 style={styles.input11}
                                 value={goal}
@@ -330,13 +330,13 @@ const Signup10 = ({ navigation, route }) => {
                                 />
                             </View>
 
-                            <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 10 }]}>Startup sector </Text>
+                            <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 10 }]}>Startup sector <Text style={{fontSize:15 ,color: "#94A3B8"}}>*</Text></Text>
                             <Text allowFontScaling={false} style={[styles.t2, { marginBottom: 15 }]}>Define your startup’s focus: horizontal sectors serve multiple industries, while vertical sectors target a specific niche.</Text>
                             <Drop borderwidth={3} borderColor={"#16181a"} items={ss} onValueChange={(value) => { setstartupsector(value) }} setOpen={setOpen1} open={open1} nestedScrollEnabled={true} />
                             {sserror && <Text style={styles.err1}>* please select a sector </Text>}
 
 
-                            <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 10, marginTop: 25 }]}>Startup stage </Text>
+                            <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 10, marginTop: 25 }]}>Startup stage <Text style={{fontSize:15 ,color: "#94A3B8"}}>*</Text></Text>
                             <Text allowFontScaling={false} style={[styles.t2, { marginBottom: 15 }]}>Identify where your startup is in its journey—whether you’re in ideation, have a prototype, or are generating revenue.</Text>
                             <Drop borderwidth={3} borderColor={"#16181a"} items={stage} onValueChange={(value) => { setsetstartupstage(value) }} setOpen={setOpen2} open={open2} nestedScrollEnabled={true} />
                             {stageerror && <Text style={styles.err1}>* please select your startup stage </Text>}

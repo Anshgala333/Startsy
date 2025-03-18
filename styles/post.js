@@ -220,19 +220,32 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     next1: {
-        width: 180,
-        // padding : 10,
-        // paddingHorizontal: 10,
+        // width: 180,
+        // // padding : 10,
+        // // paddingHorizontal: 10,
+        // backgroundColor: "#ccc",
+        // // backgroundColor: "red",
+        // borderRadius: 30,
+        // margin: "auto",
+        // // padding : 10,
+        // // paddingHorizontal: 20,
+        // height: 40,
+        // // marginRight  : 20,
+        // marginBottom: 10,
+        // alignSelf: "flex-start",
+        // justifyContent: "center",
         backgroundColor: "#ccc",
-        // backgroundColor: "red",
         borderRadius: 30,
         margin: "auto",
+        width: 130,
         // padding : 10,
-        // paddingHorizontal: 20,
+        paddingHorizontal: 10,
         height: 40,
         // marginRight  : 20,
-        marginBottom: 10,
-        alignSelf: "flex-start",
+        marginBottom: 8,
+        marginTop: 10,
+        // width : 100,
+        // alignSelf: "flex-end",
         justifyContent: "center",
     },
     nexttext: {
@@ -241,23 +254,10 @@ const styles = StyleSheet.create({
         fontSize: scalingfactor * 16,
         textAlign: "center",
         marginTop: -4,
-        // width : 80
-
-        // textAlign: "right",
+       
 
     },
-    nexttext11: {
-        color: "#24272A",
-        fontFamily: "Alata",
-        fontSize: scalingfactor * 16,
-        textAlign: "center",
-        marginTop: -4,
-        // width : 80
-
-
-        // textAlign: "right",
-
-    },
+   
     nexttext1: {
         color: "#000",
         fontFamily: "Alata",

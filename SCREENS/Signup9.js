@@ -243,7 +243,7 @@ const Signup9 = ({ navigation, route }) => {
                                 value={skills}
                                 onChangeText={(text) => { setskills(text) }}
                             />
-                            <Text style={[styles.t1, { marginBottom: 5 }]}>Education</Text>
+                            <Text style={[styles.t1, { marginBottom: 5 }]}>Education <Text style={{fontSize:15 ,color: "#94A3B8"}}>*</Text></Text>
                             <Text style={[styles.t2, { marginBottom: 20 }]}>List your highest degree achieved, which helps to establish your academic background and qualifications.</Text>
                             <Drop borderwidth={3}  borderColor={"#16181a"} 
                              items={education} open={open} setOpen={setOpen} onValueChange={(value) => {

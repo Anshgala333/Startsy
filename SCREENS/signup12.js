@@ -260,7 +260,7 @@ const Signup12 = ({ navigation, route }) => {
                         {/* bottom */}
 
                         <View style={styles.bottom}>
-                            <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 15 }]}>Investing experience</Text>
+                            <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 15 }]}>Investing experience <Text style={{fontSize:15 ,color: "#94A3B8"}}>*</Text></Text>
                             <Pressable onPress={() => { handleOutsideTouch() }} style={styles.btn1}>
                                 <Text allowFontScaling={false} style={styles.nexttext}>{sliderrange1.toLocaleString("en-IN")} {sliderrange1 > 1 ? "years" : "year"}</Text>
                             </Pressable>
@@ -298,14 +298,14 @@ const Signup12 = ({ navigation, route }) => {
                             )} */}
 
 
-                            <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 10, marginTop: 25 }]}>Preferred startup stage </Text>
+                            <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 10, marginTop: 25 }]}>Preferred startup stage <Text style={{fontSize:15 ,color: "#94A3B8"}}>*</Text></Text>
                             <Text allowFontScaling={false} style={[styles.t2, { marginBottom: 15 }]}>Indicate the stages of development at which you prefer to invest.</Text>
                             <Drop borderwidth={3} borderColor={"#16181a"} items={stage} onValueChange={(value) => { setsetstartupstage(value) }} setOpen={setOpen2} open={open2} nestedScrollEnabled={true} />
                             {errors.startupStage && (
                                 <Text style={signup3styles.errorText}>{errors.startupStage}</Text>
                             )}
 
-                            <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 10, marginTop: 25 }]}>Preferred startup sector  </Text>
+                            <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 10, marginTop: 25 }]}>Preferred startup sector <Text style={{fontSize:15 ,color: "#94A3B8"}}>*</Text></Text>
                             <Text allowFontScaling={false} style={[styles.t2, { marginBottom: 15 }]}>This distinction helps founders understand the scope and nature of your investment interests, ensuring that you receive opportunities that align with your strategic preferences and expertise.
                             </Text>
                             <Drop borderwidth={3} borderColor={"#16181a"} items={sectorlist} onValueChange={(value) => { setsector(value) }} setOpen={setOpen3} open={open3} nestedScrollEnabled={true} />
@@ -314,7 +314,7 @@ const Signup12 = ({ navigation, route }) => {
                             )}
 
 
-                            <Text allowFontScaling={false} style={[styles.t1, { marginTop: 20, marginBottom: 25 }]}>Investment capacity</Text>
+                            <Text allowFontScaling={false} style={[styles.t1, { marginTop: 20, marginBottom: 25 }]}>Investment capacity <Text style={{fontSize:15 ,color: "#94A3B8"}}>*</Text></Text>
 
 
                             <Pressable onPress={() => { handleOutsideTouch() }} style={styles.btn}>
