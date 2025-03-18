@@ -551,12 +551,12 @@ const Signup5 = ({ navigation, route }) => {
                                 <Profile />
                             )}
                         </Pressable>
-                        <Text style={s5.t1}>Upload a profile picture</Text>
+                        <Text style={s5.t1}>Upload a profile picture *</Text>
                         {errors.image && <Text style={[styles.errorText, { textAlign: "center" }]}>{errors.image}</Text>}
                         <View style={{ marginTop: 30 }}>
                             <TextInput
                                 allowFontScaling={false}
-                                placeholder="Full name"
+                                placeholder="Full name *"
                                 placeholderTextColor="#B8B8B8"
                                 style={s5.input}
                                 value={fullname}
@@ -568,7 +568,7 @@ const Signup5 = ({ navigation, route }) => {
                             {errors.fullname && <Text style={styles.errorText}>{errors.fullname}</Text>}
                             <TextInput
                                 allowFontScaling={false}
-                                placeholder="Email address"
+                                placeholder="Email address *"
                                 placeholderTextColor="#B8B8B8"
                                 style={[s5.input, { marginBottom: 12, marginTop: 0 }]}
                                 value={email}
@@ -624,7 +624,7 @@ const Signup5 = ({ navigation, route }) => {
 
 
                                 allowFontScaling={false}
-                                placeholder="Phone number"
+                                placeholder="Phone number *"
                                 placeholderTextColor="#B8B8B8"
                                 style={[s5.input, { marginTop: 14 }]}
                                 value={number}

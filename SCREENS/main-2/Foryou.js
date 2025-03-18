@@ -429,7 +429,7 @@ const Foryou =
                                 },
                             })}
 
-                            name="Requests"
+                            name="Forums"
                             // component={Test2}
                             children={(props) => <Community allpost={allpost} setallpost={setallpost} getpost={getpost} scrollY={scrollY} navigation={navigation} />}
                             options={{

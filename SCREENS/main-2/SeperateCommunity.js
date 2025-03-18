@@ -221,11 +221,11 @@ const Community = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
                                     Vibration.vibrate(100)
                                     gotochatscreen(item)
                                 }} style={styles.next1} >
-                                    <Text allowFontScaling={false} style={styles.nexttext1}>
+                                    <Text allowFontScaling={false} style={styles.nexttext}>
                                         {/* <Text style={{marginTop : -10 , alignSelf : "flex-start"}}></Text> */}
                                         Chat
-                                        <View style={{ marginTop: 10, paddingLeft: 3, zIndex: 100, elevation: 100 }}>
-                                            <MaterialCommunityIcons name="message-text-outline" size={16} color="#000" />
+                                        <View style={{ marginTop: 11, paddingLeft: 3, zIndex: 100, elevation: 100 }}>
+                                            <MaterialCommunityIcons name="message-text-outline" size={20} color="#000" />
                                         </View>
                                     </Text>
                                 </TouchableOpacity>}

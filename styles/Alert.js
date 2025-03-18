@@ -13,7 +13,14 @@ const styles1 = StyleSheet.create({
     buttonText: { color: "#1A1D1F", fontSize: 16, fontFamily: "Roboto", fontWeight: "bold" },
     showButton: { backgroundColor: "#28a745", padding: 10, borderRadius: 5 },
     showButtonText: { color: "#fff", fontSize: 16 },
-})
+});
+
+
+
+
+
+
+
 
 //jash devkar
 

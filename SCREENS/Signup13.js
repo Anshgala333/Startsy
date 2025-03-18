@@ -283,7 +283,7 @@ const Signup13 = ({ navigation, route }) => {
                         <View style={styles.bottom}>
 
 
-                            <Text allowFontScaling={false} style={styles.t1}>Authenticity Verification</Text>
+                            <Text allowFontScaling={false} style={styles.t1}>Authenticity Verification </Text>
                             <Drop borderwidth={3} borderColor={"#16181a"} items={role} onValueChange={handlerole} open={open1} setOpen={t1} />
                             {errors.roleError && <Text style={styles.errorText}>please select a valid type</Text>}
                             <TextInput

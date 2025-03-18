@@ -1,4 +1,5 @@
 
+
 import React, { useState, useRef, useEffect, useContext, useCallback, memo } from "react";
 import {
     ScrollView,
@@ -1168,7 +1169,7 @@ const styles = StyleSheet.create({
         width: "100%",
         // height: 320,
         height: "auto",
-        maxHeight: 320,
+        maxHeight: height,
         backgroundColor: "transparent",
         position: "absolute",
         paddingTop: 10,
