@@ -22,6 +22,7 @@ import BottomSheet, { BottomSheetView, BottomSheetScrollView, BottomSheetTextInp
 
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { useStoreRootState } from 'expo-router/build/global-state/router-store.js';
 
 const Singleprofilepage = ({ props, openshare }) => {
 
@@ -720,11 +721,11 @@ const Singleprofilepage = ({ props, openshare }) => {
             }
 
 
-            {userdata.user_id.role == "CommunityMember" &&
+            {userdata.user_id.role == "CommunityMember" && userdata.tagline != "" &&
               <Text style={styles1.goal}>{userdata.tagline}</Text>
             }
 
-            {userdata.user_id.role == "CommunityMember" &&
+            {userdata.user_id.role == "CommunityMember" && userdata.skills != "" &&
               <Text style={styles1.fund}>{userdata.skills}</Text>
             }
 
