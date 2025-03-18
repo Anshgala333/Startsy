@@ -1,0 +1,37 @@
+<KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}>
+
+                        <Animated.View style={{ flex: 1.1 }}>
+                            <BottomSheetView style={{ flex: 1 }}>
+                                <Text style={styles.comment}>Comments</Text>
+                                {emptycomment && <Text style={styles.no}>No comments yet</Text>}
+                                <FlatList
+                                    ref={flatListRef}
+                                    data={allcomments}
+                                    renderItem={comments}
+                                    scrollEnabled={true}
+                                    contentContainerStyle={{ flexGrow: 1, padding: 10, }}
+
+                                />
+                                {/* <View style={styles.sc1}> */}
+                                <Animated.View style={[styles1.inputContainer, { marginBottom: keyboardOffset }]}>
+                                    <TextInput
+                                        placeholder="Add a comment"
+                                        placeholderTextColor="#828282"
+                                        style={styles.input111}
+                                        value={commenttext}
+                                        multiline={true}
+                                        ref={commentinput}
+                                        onFocus={() => setk(true)}
+                                        onBlur={() => setk(false)}
+                                        onChangeText={text => setcommenttext(text)}
+                                    />
+                                    <Pressable onPress={docomment} style={styles.send}>
+                                        {uploadingcomment && <ActivityIndicator size={24} color="#00de62" />}
+                                        {!uploadingcomment && <Ionicons name="send" size={24} color="#00DE62" />}
+                                    </Pressable>
+                                </Animated.View>
+
+                                {/* </View> */}
+                            </BottomSheetView>
+                        </Animated.View>
+                    </KeyboardAvoidingView>

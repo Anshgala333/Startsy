@@ -1,0 +1,1222 @@
+import React, { useState, useRef, useEffect, useCallback, useContext, useMemo } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import {
+    ScrollView,
+    SafeAreaView,
+    View,
+    Text,
+    TextInput,
+    Keyboard,
+    Image,
+    Animated,
+    Pressable,
+    StyleSheet,
+    Dimensions,
+    StatusBar,
+    FlatList,
+    RefreshControl,
+    Platform,
+    TouchableWithoutFeedback,
+    ActivityIndicator,
+    Alert,
+    Modal,
+    BackHandler,
+    TouchableOpacity,
+    KeyboardAvoidingView
+} from "react-native";
+
+import RB from "../SCREENS/ReactBottomsheet.js"
+import Drop from "./dropdown.js";
+
+import Ansh from "../SCREENS/main-1/Ansh.js";
+import Ionicons from '@expo/vector-icons/Ionicons';
+import * as ImagePicker from 'expo-image-picker';
+import { configureReanimatedLogger, ReanimatedLogLevel } from 'react-native-reanimated';
+import { Video } from 'expo-av';
+import styles from "../styles/post.js";
+import Apnauser from "./Apnauser.js";
+import B1 from "../assets/icons/b1.js";
+import B2 from "../assets/icons/b2.js";
+import B3 from "../assets/icons/b3.js";
+import B4 from "../assets/icons/b4.js";
+import BottomSheet, { BottomSheetView, BottomSheetScrollView, BottomSheetTextInput, BottomSheetFlatList, BottomSheetBackdrop } from '@gorhom/bottom-sheet';
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import NewsLettericon from "../assets/icons/Newsletter.js";
+import main from "../styles/main.js";
+import NewsLetter from "./main-2/Newsletter.js";
+import Notification from "./main-2/Notification.js";
+import Foryou from "./main-2/Foryou.js";
+import Startsy from "./main-1/Startsy.js";
+import ChatScreen from "./main-2/Message.js";
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import Profile from "./main-2/Profile.js";
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+
+import { BottomTabView, createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer } from "@react-navigation/native";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import Fontisto from '@expo/vector-icons/Fontisto';
+import NewsletterPage from "./main-2/news1.js";
+import Singleprofilepage from "../SCREENS/singleprofilepage.js";
+import { GlobalContext } from "@/Global/globalcontext.js";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { url } from "../config.js";
+
+configureReanimatedLogger({
+    level: ReanimatedLogLevel.warn,
+    strict: false,
+});
+
+const Main2 = ({ navigation, route }) => {
+
+    const query = route?.params
+    const focus = query?.focus
+
+
+    // console.log(focus, "focus");
+
+    const [token, setToken] = useState("");
+    const { globaldata } = useContext(GlobalContext);
+
+    useEffect(() => {
+        async function getToken() {
+            const temp = await AsyncStorage.getItem("accessToken");
+            setToken(temp);
+        }
+        getToken();
+    }, []);
+
+    const [peopledata, setpeopledata] = useState([])
+    const [people1, setpeople1] = useState([])
+
+    const renderBackdrop = (props) => (
+        <BottomSheetBackdrop
+            {...props}
+            disappearsOnIndex={-1} // Backdrop disappears when BottomSheet is closed
+            appearsOnIndex={0} // Backdrop appears when BottomSheet is open
+            opacity={0.9} // Set opacity for the backdrop
+        />
+    );
+
+    async function fetchdata() {
+        if (token) {
+            try {
+                var route = "founder/getFounderChatUserList"
+                const response = await fetch(
+                    `${url}${route}`,
+                    {
+                        method: "GET",
+                        headers: {
+                            accept: "application/json",
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+                const result = await response.json();
+                console.log(result, "list of followers");
+
+
+                const uniqueData = result.filter((item, index, self) =>
+                    self.findIndex(innerItem => innerItem.user.userName === item.user.userName) === index
+                );
+                var final1 = uniqueData.map((item) => {
+                    return { ...item, isSelected: false }
+                })
+                console.log(final1);
+
+
+
+
+
+                if (response.status === 200) {
+                    // You can update the data state here if needed
+                    // setData(result); // Example, you can handle the response data
+                    setpeople1(final1)
+                    setpeopledata(final1)
+                    // setdata1(result)
+                }
+            } catch (err) {
+                console.log(err);
+            } finally {
+                setloading(false); // Set loading to false when done
+            }
+        }
+    }
+
+    useEffect(() => {
+        fetchdata()
+    }, [token])
+
+    useFocusEffect(
+        useCallback(() => {
+            StatusBar.setBackgroundColor("#16181a");
+            StatusBar.setBarStyle("light-content");
+            StatusBar.setTranslucent(true);
+        }, [])
+    );
+
+    const [bg, setbg] = useState("#16181a");
+    const [uri, setImage] = useState(null);
+
+
+    const Tab = createBottomTabNavigator();
+    const t1 = new Animated.Value(0);
+    const diffclamp = Animated.diffClamp(t1, 0, 55);
+    const bottomposition = diffclamp.interpolate({
+        inputRange: [0, 55],
+        outputRange: [0, 55],
+        extrapolate: "clamp",
+    });
+
+    const bottomSheetRef5 = useRef(null);
+    const mainpagebottomsheet = useRef();
+    const commentinput = useRef(null);
+    const snapPoints = useMemo(() => ['29%'], []);
+    const snapPoints1 = useMemo(() => ['120%'], []);
+    const snapPoints2 = useMemo(() => ['120%'], []);
+    const snapPoints3 = useMemo(() => ['120%'], []);
+    const snapPoints4 = useMemo(() => ['120%'], []);
+    const snapPoints5 = useMemo(() => ["100%"], []);
+    const snapPoints6 = useMemo(() => ['70%'], []);
+    const bottomSheetRef1 = useRef(null);
+    const bottomSheetRef2 = useRef(null);
+    const bottomSheetRef3 = useRef(null);
+    const bottomSheetRef4 = useRef(null);
+    const bottomSheetRef6 = useRef(null);
+
+    const [type, settype] = useState("");
+    const [err1, seterr1] = useState(false);
+    const [err2, seterr2] = useState(false);
+    const [err3, seterr3] = useState(false);
+    const [err4, seterr4] = useState(false);
+    const [err5, seterr5] = useState(false);
+    const [err6, seterr6] = useState(false);
+    const [err7, seterr7] = useState(false);
+    const [err10, seterr10] = useState(false);
+    const [err11, seterr11] = useState(false);
+    const [err12, seterr12] = useState(false);
+    const [err13, seterr13] = useState(false);
+    const [err14, seterr14] = useState(false);
+    const [err15, seterr15] = useState(false);
+    const [status1, setstatus] = useState(false);
+    const [two, settwo] = useState(false);
+    const [three, setthree] = useState(false);
+    const [four, setfour] = useState(false);
+    const [five, setfive] = useState(false);
+    const [uploadingcomment, setuploadingcomment] = useState(false);
+    const [visible, setVisible] = useState(false);
+    const [textlength, settextlength] = useState(0);
+    const [firstbottomsheet, setfirstbottomsheet] = useState(false);
+    const [firstbottomsheet1, setfirstbottomsheet1] = useState(false);
+    const [p1u, setp1u] = useState(false);
+    const [p2u, setp2u] = useState(false);
+    const [p3u, setp3u] = useState(false);
+    const [p4u, setp4u] = useState(false);
+    const [p1text, setp1text] = useState("Post");
+    const [p2text, setp2text] = useState("Post");
+    const [p3text, setp3text] = useState("Post");
+    const [p4text, setp4text] = useState("Post");
+    const [role4, setrole4] = useState("");
+    const [description4, setdescription4] = useState("");
+    const [duration4, setduration4] = useState("");
+    const [pay4, setpay4] = useState("");
+    const [caption, setcaption] = useState("");
+    const [content, setcontent] = useState("");
+    const [communityname, setcommunityname] = useState("");
+    const [description, setdescription] = useState("");
+    const [rules, setrules] = useState("");
+    const [comment, setcomment] = useState(false);
+    const [rule1, setrule] = useState("");
+    const [open1, setOpen1] = useState(false);
+    const [list, setlist] = useState(false);
+    const [emptycomment, setemptycomment] = useState(false);
+    const flatListRef = useRef(null);
+    const [allcomments, setallcomments] = useState([]);
+    const [commenttext, setcommenttext] = useState("");
+    const [c2, setc2] = useState("");
+    const [aspect, setaspect] = useState("");
+    const [newaspect, setnewaspect] = useState("");
+    const [IsBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
+    const [postid, setpostid] = useState(null);
+    const [ansh, setansh] = useState(false);
+    const [ansh1, setansh1] = useState(false);
+
+    const role = [
+        { label: "Only for Founders", value: "Only for Founders" },
+        { label: "Only for Community Members", value: "Only for Community Members" },
+        { label: "Job seeker", value: "Jobseeker" },
+        { label: "Startup Enthusiast", value: "Startup Enthusiast" },
+        { label: "Mentor", value: "Mentor" },
+        { label: "Networker", value: "Networker" },
+        { label: "Founder or Mentor", value: "Founder or Mentor" },
+        { label: "Founder or Startup Enthusiast", value: "Founder or Startup Enthusiast" },
+        { label: "No rules", value: "No rules" },
+    ];
+
+    const updatescroll = (val) => {
+        t1.setValue(val);
+    };
+
+    const comments = ({ item, index }) => {
+        function time(time) {
+            var data1 = new Date(time);
+            var seconds = Math.floor((new Date() - data1) / 1000);
+            var interval = seconds / 31536000;
+
+            if (interval > 1) {
+                return Math.floor(interval) + " years ago";
+            }
+            interval = seconds / 2592000;
+            if (interval > 1) {
+                return Math.floor(interval) + " months ago";
+            }
+            interval = seconds / 86400;
+            if (interval > 1) {
+                return Math.floor(interval) + " days ago";
+            }
+            interval = seconds / 3600;
+            if (interval > 1) {
+                return Math.floor(interval) + " hours ago";
+            }
+            interval = seconds / 60;
+            if (interval > 1) {
+                return Math.floor(interval) + " minutes ago";
+            }
+            return Math.floor(seconds) + " seconds ago";
+        }
+        return (
+            <View key={index} style={styles.listItem}>
+                <Image source={{ uri: item.userId.profilePhoto }} style={styles.avatar} />
+                <View style={styles.textContainer}>
+                    <Text allowFontScaling={false} style={styles.username}>{item.userId.userName}</Text>
+                    <Text allowFontScaling={false} style={styles.message}>{item.comment.trim()}</Text>
+                </View>
+                <Text allowFontScaling={false} style={styles.time}>{time(item.createdAt)}</Text>
+            </View>
+        );
+    };
+
+    const [keyboardOffset, setKeyboardOffset] = useState(new Animated.Value(0));
+    // useFocusEffect(
+    //     useCallback(() => {
+    //         const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', (event) => {
+    //             Animated.timing(keyboardOffset, {
+    //                 toValue: 0,
+    //                 duration: 300,
+    //                 useNativeDriver: false,
+    //             }).start();
+    //         });
+
+    //         const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
+    //             Animated.timing(keyboardOffset, {
+    //                 toValue: 0,
+    //                 duration: 300,
+    //                 useNativeDriver: false,
+    //             }).start();
+    //             // setk(false)
+    //             // inputRef.current?.blur()
+    //         });
+
+    //         return () => {
+    //             keyboardDidShowListener.remove();
+    //             keyboardDidHideListener.remove();
+    //         };
+    //     }, [keyboardOffset])
+    // )
+
+    const openBottomSheet1 = () => {
+        settwo(true);
+        setfirstbottomsheet1(true);
+        bottomSheetRef1.current?.expand();
+        seterr1(false);
+        seterr2(false);
+        seterr3(false);
+        setstatus(true);
+    };
+
+    const openBottomSheet2 = () => {
+        setthree(true);
+        bottomSheetRef2.current?.expand();
+        seterr4(false);
+        seterr5(false);
+        setstatus(true);
+    };
+
+    const openBottomSheet3 = () => {
+        setfour(true);
+        bottomSheetRef3.current?.expand();
+        setstatus(true);
+        seterr7(false);
+        seterr6(false);
+        setVisible(false);
+    };
+
+    const openBottomSheet4 = () => {
+        setfive(true);
+        bottomSheetRef4.current?.expand();
+        setstatus(true);
+        seterr10(false);
+        seterr11(false);
+        seterr12(false);
+        seterr13(false);
+        seterr14(false);
+        seterr15(false);
+    };
+
+    const CustomAlert = ({ visible, onClose }) => {
+        const fadeAnim = useRef(new Animated.Value(0)).current;
+
+        useEffect(() => {
+            if (visible) {
+                Animated.timing(fadeAnim, { toValue: 1, duration: 300, useNativeDriver: true }).start();
+            } else {
+                Animated.timing(fadeAnim, { toValue: 0, duration: 300, useNativeDriver: true }).start(() => {
+                    if (typeof onClose === "function") {
+                        onClose();
+                    }
+                });
+            }
+        }, [visible]);
+
+        if (!visible) return null;
+
+        async function deletepost1() {
+            if (idofposttobedeleetd != null) {
+                try {
+                    const response = await fetch(`${url}posts/deletepost/${idofposttobedeleetd}`, {
+                        method: 'POST',
+                        body: "",
+                        headers: {
+                            accept: "application/json",
+                            "Authorization": `Bearer ${token}`,
+                        },
+                    });
+
+                    const data = await response.json();
+                    const updatedPosts = posts.filter((post) => post._id !== idofposttobedeleetd);
+                    setPosts(updatedPosts);
+                    setVisible(false);
+                } catch (err) {
+                    console.log(err);
+                }
+            }
+        }
+
+        return (
+            <Modal transparent visible={visible} animationType="none" onRequestClose={() => onClose?.()}>
+                <TouchableWithoutFeedback onPress={() => onClose?.()}>
+                    <Animated.View style={[styles1.overlay, { opacity: fadeAnim }]}>
+                        <View style={styles1.alertBox}>
+                            <Text style={styles1.title}>Choose aspect ratio</Text>
+                            <TouchableOpacity onPress={() => { setnewaspect("4/3"); fileupload([4, 3]); }} style={styles1.button}>
+                                <Text style={styles1.buttonText}>4:3 (Standard)</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { setnewaspect("16/9"); fileupload([16, 9]); }} style={styles1.button}>
+                                <Text style={styles1.buttonText}>16:9 (Wide)</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { setnewaspect("1/1"); fileupload([1, 1]); }} style={styles1.button}>
+                                <Text style={styles1.buttonText}>1:1 (Square)</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </Animated.View>
+                </TouchableWithoutFeedback>
+            </Modal>
+        );
+    };
+
+    const askAspectRatio = async () => {
+        setVisible(true);
+    };
+
+    const post1 = async function () {
+        setp1u(true);
+        let hasError = false;
+        if (communityname == "") {
+            seterr1(true);
+            hasError = true;
+        }
+        if (description == "") {
+            seterr2(true);
+            hasError = true;
+        }
+        if (rule1 == "") {
+            seterr3(true);
+            hasError = true;
+        }
+
+        if (hasError) {
+            setp1u(false);
+            return;
+        }
+
+        if (p1u) {
+            setp1u(false);
+            return;
+        }
+
+        const postType = "communityPost";
+        const finaldata = {
+            "communityName": communityname,
+            "communityDescription": description,
+            "communityRules": rule1
+        };
+
+        try {
+            const response = await fetch(`${url}posts/createCommunityPost/${postType}`, {
+                method: 'POST',
+                body: JSON.stringify(finaldata),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Server Error: ${response.status} - ${errorText}`);
+            }
+
+            const data = await response.json();
+            setp1text("Posted");
+            setcommunityname("");
+            setdescription("");
+            setrules("");
+            setdropdownvalue("");
+
+            mainpagebottomsheet.current?.close();
+            setTimeout(() => {
+                bottomSheetRef1.current?.close();
+                setp1text("Post");
+            }, 1000);
+        } catch (err) {
+            console.error("Error:", err);
+        } finally {
+            setp1u(false);
+        }
+    };
+
+    const post2 = async function () {
+        setp2u(true);
+        let hasError = false;
+        if (content == "") {
+            seterr4(true);
+            hasError = true;
+        }
+        if (caption == "") {
+            seterr5(true);
+            hasError = true;
+        }
+
+        if (hasError) return;
+        if (p2u) return;
+
+        const postType = "textBlog";
+        const finaldata = {
+            "caption": caption,
+            "content": content,
+        };
+
+        try {
+            const response = await fetch(`${url}posts/createPost/${postType}`, {
+                method: 'POST',
+                body: JSON.stringify(finaldata),
+                headers: {
+                    "Content-Type": "application/json",
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Server Error: ${response.status} - ${errorText}`);
+            }
+
+            const data = await response.json();
+            setp2text("Posted");
+            mainpagebottomsheet.current?.close();
+            setTimeout(() => {
+                setcontent("");
+                setcaption("");
+                setp2text("Post");
+                bottomSheetRef2.current?.close();
+            }, 1000);
+        } catch (err) {
+            console.error("Error:", err);
+        } finally {
+            setp2u(false);
+            seterr4(false);
+            seterr5(false);
+        }
+    };
+
+    const post3 = async function () {
+        setp3u(true);
+        let hasError = false;
+        if (uri == "") {
+            seterr6(true);
+            hasError = true;
+        }
+        if (c2 == "") {
+            seterr7(true);
+            hasError = true;
+        }
+
+        if (hasError) {
+            setp3u(false);
+            return;
+        }
+        if (p3u) {
+            setp3u(false);
+            return;
+        }
+
+        const finaldata = new FormData();
+        if (uri) {
+            finaldata.append("media", {
+                uri: uri,
+                type: "image/jpeg",
+                name: `image_${Date.now()}.jpg`,
+            });
+        }
+        finaldata.append("caption", c2);
+        finaldata.append("aspectRatio", newaspect);
+
+        try {
+            if (type == "images") {
+                type = "photo";
+            }
+            const response = await fetch(`${url}posts/createPost/${type}`, {
+                method: 'POST',
+                body: finaldata,
+                headers: {
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Server Error: ${response.status} - ${errorText}`);
+            }
+
+            const data = await response.json();
+            setp3text("Posted");
+            mainpagebottomsheet.current?.close();
+            setTimeout(() => {
+                bottomSheetRef3.current?.close();
+            }, 1000);
+        } catch (err) {
+            console.error("Error:", err);
+        } finally {
+            setp3u(false);
+            seterr6(false);
+            seterr7(false);
+            setc2("");
+            setp3text("Post");
+        }
+    };
+
+    const post4 = async function () {
+        let joberror = false;
+
+        setp4u(true);
+        if (role4 == "") {
+            seterr10(true);
+            joberror = true;
+        }
+        if (description4 == "") {
+            seterr11(true);
+            joberror = true;
+        }
+        if (duration4 == "") {
+            seterr12(true);
+            joberror = true;
+        }
+        if (pay4 == "") {
+            seterr13(true);
+            joberror = true;
+        }
+
+        if (joberror == true) {
+            setp4u(false);
+            return;
+        }
+
+        if (isNaN(duration4) || duration4 < 0 || duration4 > 100) {
+            seterr14(true);
+            setp4u(false);
+            joberror = true;
+            return;
+        }
+        if (isNaN(pay4) || pay4 < 0 || pay4 > 1000000000) {
+            seterr15(true);
+            setp4u(false);
+            joberror = true;
+            return;
+        }
+        if (joberror == true) {
+            setp4u(false);
+            return;
+        }
+
+        const postType = "jobPost";
+        const finaldata = {
+            "role": role4,
+            "description": description4,
+            "duration": duration4,
+            "pay": pay4,
+        };
+        if (p4u) return;
+
+        try {
+            const response = await fetch(`${url}posts/createJobPost/${postType}`, {
+                method: 'POST',
+                body: JSON.stringify(finaldata),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Server Error: ${response.status} - ${errorText}`);
+            }
+
+            const data = await response.json();
+            setp4text("Posted");
+            mainpagebottomsheet.current?.close();
+            setTimeout(() => {
+                setrole4("");
+                setduration4("");
+                setpay4("");
+                setdescription4("");
+                setp4text("Post");
+                bottomSheetRef4.current?.close();
+            }, 1000);
+        } catch (err) {
+            console.error("Error:", err);
+        } finally {
+            setp4u(false);
+        }
+    };
+    const [open, setOpen] = useState(false)
+    const [postToShareId, setpostToShareId] = useState("")
+
+    async function opencomment(id) {
+        setansh(true);
+        setcomment(true);
+        setOpen(true)
+        bottomSheetRef5.current?.open();
+        // bottomSheetRef5.current?.expand();
+        setpostid(id);
+
+        try {
+            const response = await fetch(`${url}posts/getComments/${id}`, {
+                method: 'GET',
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                },
+            });
+            const data = await response.json();
+            setallcomments(data.data);
+            if (data.data.length == 0) {
+                setemptycomment(true);
+            } else {
+                setemptycomment(false);
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+
+    async function openshare(postid) {
+        console.log(postid);
+        setpostToShareId(postid);
+        setSelectedItems(new Set())
+
+
+        // bottomSheetRef6.current?.expand();
+        bottomSheetRef6.current?.snapToIndex(0);
+    }
+
+    async function docomment() {
+        setuploadingcomment(true);
+
+        try {
+            const response = await fetch(`${url}posts/createComment/${postid}`, {
+                method: 'POST',
+                body: JSON.stringify({ comment: commenttext }),
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+            });
+            const data = await response.json();
+            console.log(data);
+
+            setemptycomment(false);
+            setcommenttext("");
+
+            var object = {
+                comment: commenttext,
+                createdAt: new Date(),
+                userId: {
+                    profilePhoto: data.profilePhoto,
+                    userName: data.userName,
+                }
+            };
+
+            console.log(object)
+            var newarray = [...allcomments];
+            newarray.unshift(object);
+            setallcomments(newarray);
+
+            const scrollToTop = () => {
+                flatListRef.current?.scrollToOffset({ offset: 0, animated: false });
+            };
+            scrollToTop();
+            scrollToTop();
+        } catch (err) {
+            console.log(err);
+        } finally {
+            setuploadingcomment(false);
+        }
+    }
+
+    function counttext(text) {
+        settextlength(text.length);
+    }
+
+
+    const [SelectedItems, setSelectedItems] = useState(new Set())
+
+    async function handleshareselection(id, index) {
+
+        console.log(index);
+        console.log(id);
+        console.log(peopledata[index].isSelected);
+
+
+
+        var temp = peopledata.map((item, i) => {
+            if (i == index) {
+                return { ...item, isSelected: !item.isSelected }
+            }
+            else return item
+        })
+        setpeopledata(temp)
+
+        if (temp[index].isSelected) {
+            // Add to selected array (You can create a selectedItems array if needed)
+            // Assuming you want to add it to some other array like selectedItems
+            // setSelectedItems(prev => [...prev, peopledata[index].user._id]);
+            setSelectedItems(prev => new Set(prev).add(peopledata[index].user._id));
+        } else {
+            // Remove from selectedItems array
+            // setSelectedItems(prev => prev.filter(item => item !== id));
+            const updatedSet = new Set(SelectedItems);
+            updatedSet.delete(id);
+            setSelectedItems(updatedSet);
+        }
+
+
+    }
+
+    function setdropdownvalue(items) {
+        setlist(false);
+        setrule(items.value);
+    }
+
+    function del() {
+        seterr10(false);
+        seterr11(false);
+        seterr12(false);
+        seterr13(false);
+    }
+
+    const BottomSheetContent = () => (
+        <BottomSheetView style={styles.bottomSheetContent}>
+            <Pressable style={styles.iconButton} onPress={openBottomSheet1}>
+                <View style={[styles.ic, { flex: 1, width: "100%", alignSelf: "center" }]}>
+                    <B1 />
+                </View>
+                <Text style={styles.bottomsheettext}>Community</Text>
+            </Pressable>
+            <Pressable style={styles.iconButton} onPress={openBottomSheet2}>
+                <View style={[styles.ic, { flex: 1, width: "100%", alignSelf: "center" }]}>
+                    <B2 />
+                </View>
+                <Text style={styles.bottomsheettext}>Blog</Text>
+            </Pressable>
+            <Pressable style={styles.iconButton} onPress={() => askAspectRatio()}>
+                <View style={[styles.ic, { flex: 1, width: "100%", alignSelf: "center" }]}>
+                    <B3 />
+                </View>
+                <Text style={styles.bottomsheettext}>Media</Text>
+            </Pressable>
+            <Pressable style={styles.iconButton} onPress={openBottomSheet4}>
+                <View style={[styles.ic, { flex: 1, width: "100%", alignSelf: "center" }]}>
+                    <B4 />
+                </View>
+                <Text style={styles.bottomsheettext}>Job Posting</Text>
+            </Pressable>
+        </BottomSheetView>
+    );
+
+    useEffect(() => {
+        // const unsubscribe = navigation.addListener("tabPress", () => {
+        //     console.log("Tab changed!");
+        // });
+
+        // return unsubscribe;
+    }, [navigation]);
+
+    function closeall() {
+        mainpagebottomsheet.current?.close();
+        bottomSheetRef1.current?.close();
+        bottomSheetRef2.current?.close();
+        bottomSheetRef3.current?.close();
+        bottomSheetRef4.current?.close();
+        bottomSheetRef5.current?.close();
+    }
+
+    useEffect(() => {
+        // console.log(uri, "uri ki ");
+    }, [uri]);
+
+    const [sendingpost, setsendingpost] = useState(false)
+
+
+    async function finalsubmit() {
+        console.log(SelectedItems);
+        console.log(Array.from(SelectedItems));
+        setsendingpost(true)
+        var array = Array.from(SelectedItems)
+
+
+        try {
+            const response = await fetch(`${url}chats/sendMessage/${postToShareId}`, {
+                method: 'POST',
+                body: JSON.stringify({ sharedToUsers: array }),
+                headers: {
+                    "Content-Type": "application/json",
+                    accept: "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+            });
+            const data = await response.json();
+            // setloading(false)
+            console.log(data);
+            console.log(response.status);
+            bottomSheetRef6.current?.close()
+
+        }
+        catch (e) {
+
+        }
+        finally {
+            setsendingpost(false)
+            setSelectedItems(new Set());
+            var final1 = peopledata.map((item) => {
+                return { ...item, isSelected: false }
+            })
+            setpeopledata(final1)
+            setpeople1(final1)
+
+            bottomSheetRef6.current?.close()
+
+
+        }
+
+
+
+
+    }
+
+
+
+    var durationvalues = [
+        { label: "Full time", value: "Full time" },
+        { label: "Part time", value: "Part time" },
+
+
+    ]
+
+    const [durationopen, setdurationopen] = useState(false);
+
+
+
+    const renderpeople = ({ item, index }) => {
+        return (
+            <TouchableOpacity onPress={() => {
+                // gotochatscreen(item)
+            }}>
+                <View style={styles.listItem}>
+                    <Image
+                        source={{ uri: item.user.profilePhoto || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8slgZXgqnSIXDS8wF2uDT_SmsYlBe-W1soQ&s" }}
+                        style={styles.avatar} />
+                    <View style={styles.textContainer}>
+                        <Text numberOfLines={1}
+                            ellipsizeMode="tail" allowFontScaling={false} style={styles.username}>{item.user.userName}</Text>
+
+                        <Text
+                            numberOfLines={1}
+                            ellipsizeMode="tail"
+                            allowFontScaling={false} style={styles.message}>{item.user.userName}</Text>
+                    </View>
+                    <TouchableOpacity onPress={() => { handleshareselection(item.user._id, index) }} style={item.isSelected ? styles1.sendbtn1 : styles1.sendbtn}><Text style={item.isSelected ? styles1.sendbtnText1 : styles1.sendbtnText}>{item.isSelected ? "selected" : "Send"}</Text></TouchableOpacity>
+                </View>
+            </TouchableOpacity>
+        )
+    }
+
+    const [k, setk] = useState(false)
+
+    // useEffect(() => {
+    //     const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+    //         setk(false)
+    //         // inputref?.current?.blur()
+    //         commentinput?.current?.blur()
+    //         return true;
+    //     });
+
+    // }, [])
+
+
+    const isKeyboardVisible = useRef(false);
+    const [, forceUpdate] = useState(0);
+
+
+    useEffect(() => {
+        const keyboardDidShowListener = Keyboard.addListener("keyboardDidShow", () => {
+            if (!isKeyboardVisible.current) {
+                isKeyboardVisible.current = true;
+                forceUpdate((prev) => prev + 1);
+            }
+        });
+
+        const keyboardDidHideListener = Keyboard.addListener("keyboardDidHide", () => {
+            if (isKeyboardVisible.current) {
+                isKeyboardVisible.current = false;
+                forceUpdate((prev) => prev + 1);
+            }
+        });
+
+        return () => {
+            keyboardDidShowListener.remove();
+            keyboardDidHideListener.remove();
+        };
+    }, []);
+
+    return (
+        <GestureHandlerRootView style={{ flex: 1, backgroundColor: "red" }}>
+
+
+
+            <Tab.Navigator
+
+                initialRouteName="Startsy"
+                screenOptions={{
+
+                    tabBarActiveTintColor: "#00DE62",
+                    tabBarInactiveTintColor: "#7A7B7C",
+                    headerShown: false,
+
+                    tabBarStyle: {
+                        backgroundColor: '#16181a',
+                        height: 60,
+                        display: isKeyboardVisible.current ? "none" : "flex",
+                        width: "100%",
+                        zIndex: 1,
+                        elevation: 0,
+                        opacity: 1,
+                        borderTopWidth: 0,
+                        paddingTop: 10,
+                        // bottom: k ? -60 : 0
+                    },
+                }}
+            >
+                <Tab.Screen
+                    name="NewsLetter"
+                    children={(props) => <NewsLetter mainpagebottomsheet={mainpagebottomsheet} token={token} closeall={closeall} k={k} setk={setk} />}
+                    options={{
+                        tabBarLabel: "",
+                        tabBarIcon: ({ focused }) => (
+                            <View style={{ flex: 1, width: 30, marginLeft: 10, marginTop: -3, justifyContent: "center", height: 30 }}>
+                                <NewsLettericon color={focused ? "#00DE62" : "#828282"} />
+                            </View>
+                        ),
+                    }}
+                />
+                <Tab.Screen
+                    name="bell"
+                    children={(props) => <Notification mainpagebottomsheet={mainpagebottomsheet} token={token} closeall={closeall} />}
+                    options={{
+                        tabBarLabel: "",
+                        tabBarIcon: ({ focused }) => (
+                            <View style={{ marginTop: -4 }}><Fontisto name="bell" size={31} color={focused ? "#00DE62" : "#7A7B7C"} /></View>
+                        ),
+                    }}
+                />
+                <Tab.Screen
+                    name="Startsy"
+                    children={(props) => <Foryou ansh={ansh} keyboardOffset={keyboardOffset} commentinput={commentinput} setk={setk} ansh1={ansh1} setansh1={setansh1} two={two} three={three} four={four} five={five} bottomSheetRef5={bottomSheetRef5} bottomSheetRef1={bottomSheetRef1} bottomSheetRef2={bottomSheetRef2} bottomSheetRef3={bottomSheetRef3} bottomSheetRef4={bottomSheetRef4} type={type} settype={settype} setImage={setImage} uri={uri} openBottomSheet3={openBottomSheet3} scroll={updatescroll} token={token} mainpagebottomsheet={mainpagebottomsheet} opencomment={opencomment} visible={visible} setVisible={setVisible} newaspect={newaspect} setnewaspect={setnewaspect} openshare={openshare} />}
+                    options={{
+                        keyboardBehavior: true,
+                        tabBarLabel: "",
+                        tabBarIcon: ({ focused }) => (
+                            <Image style={{ width: 50, height: 50 }} source={require("../assets/images/logo.png")} />
+                        ),
+                    }}
+                />
+                <Tab.Screen
+                    name="Message"
+                    children={(props) => <ChatScreen k={k} setk={setk} mainpagebottomsheet={mainpagebottomsheet} closeall={closeall} token={token} />}
+                    options={{
+                        keyboardBehavior: true,
+
+                        tabBarLabel: "",
+                        tabBarIcon: ({ focused }) => (
+                            <View style={{ marginTop: -3 }}><MaterialCommunityIcons name="message-text-outline" size={34} color={focused ? "#00DE62" : "#7A7B7C"} /></View>
+                        ),
+                    }}
+                />
+                <Tab.Screen
+                    name="Profile"
+                    children={() => <Apnauser closeall={closeall} mainpagebottomsheet={mainpagebottomsheet} navigation={navigation} token={token} />}
+                    options={{
+                        tabBarLabel: "",
+                        tabBarIcon: ({ focused }) => (
+                            <View style={{ marginTop: -4, marginLeft: -2 }}><FontAwesome6 name="circle-user" size={31} color={focused ? "#00DE62" : "#7A7B7C"} /></View>
+                        ),
+                    }}
+                />
+                <Tab.Screen
+                    name="NewsletterPage"
+                    component={NewsletterPage}
+                    options={{
+                        tabBarItemStyle: { display: 'none' },
+                    }}
+                />
+                <Tab.Screen
+                    name="Singleuserpage"
+                    children={() => <Singleprofilepage navigation={navigation} />}
+                    options={{
+                        tabBarItemStyle: { display: 'none' },
+                    }}
+                />
+            </Tab.Navigator>
+
+
+
+
+
+
+
+        </GestureHandlerRootView>
+    );
+};
+
+export default Main2;
+const { height, width } = Dimensions.get("window");
+
+var a = width / 360;
+var b = height / 800;
+
+const scalingfactor = Math.sqrt(a * b);
+
+const styles1 = StyleSheet.create({
+    searchContainer: {
+        marginHorizontal: "auto",
+        justifyContent: "center",
+        alignItems: "center",
+        alignContent: "center",
+        display: "flex",
+        backgroundColor: "transparent",
+    },
+    searchInput: {
+        height: "auto",
+        minHeight: 50,
+        width: width * 0.95,
+        borderColor: "#00DE62",
+        borderWidth: 1,
+        borderRadius: 30,
+        paddingHorizontal: 20,
+        color: "#828282",
+        fontFamily: "Roboto",
+        fontSize: 18,
+        maxHeight: 100,
+    },
+    send: {
+        position: "absolute",
+        top: 12,
+        right: 10,
+        transform: [{ scale: 1.1 }],
+        alignSelf: "center",
+        verticalAlign: "center",
+        bottom: 0,
+    },
+    container: { flex: 1, justifyContent: "center", alignItems: "center" },
+    overlay: { flex: 1, backgroundColor: "rgba(0,0,0,0.7)", justifyContent: "center", alignItems: "center" },
+    alertBox: { width: 300, height: 250, zIndex: 100000000000, elevation: 10000000000, marginLeft: 350, marginTop: 750, backgroundColor: "#1A1D1F", padding: 20, borderRadius: 20, alignItems: "center", alignSelf: "center" },
+    title: { fontSize: 20, fontWeight: "bold", color: "#D9D9D9", fontFamily: "Alata" },
+    message: { fontSize: 16, marginVertical: 10, textAlign: "center", color: "#D9D9D9", fontFamily: "Roboto" },
+    button: { marginTop: 15, backgroundColor: "#00de62", padding: 10, paddingHorizontal: 37, borderRadius: 10, minWidth: 200, textAlign: "center" },
+    buttonText: { color: "#1A1D1F", fontSize: 16, fontFamily: "Roboto", fontWeight: "700", textAlign: "center" },
+    showButton: { backgroundColor: "#28a745", padding: 10, borderRadius: 5 },
+    showButtonText: { color: "#fff", fontSize: 16 },
+
+
+    sendbtn: {
+        backgroundColor: "#00de62",
+        paddingHorizontal: 12,
+        paddingVertical: 6,
+        borderRadius: 8,
+        borderWidth: 2,
+        borderColor: "#00de62",
+
+    },
+
+    sendbtnText: {
+        fontSize: 14,
+        color: "#333",
+        fontFamily: "Alata"
+
+
+    },
+
+    sendbtn1: {
+        backgroundColor: "#16181a",
+        borderWidth: 2,
+        borderColor: "#00de62",
+        paddingHorizontal: 12,
+        paddingVertical: 6,
+        borderRadius: 8,
+
+    },
+
+    sendbtnText1: {
+        fontSize: 14,
+        color: "#00de62",
+        fontFamily: "Alata"
+
+    },
+    confirm: {
+        position: "absolute", bottom: 15, margin: "auto", paddingVertical: 12, backgroundColor: "#ccc", alignSelf: "center",
+        borderRadius: 12,
+        width: "75%"
+    },
+    confirmText: {
+        fontSize: 25,
+        fontFamily: "Alata",
+        textAlign: "center",
+    },
+    inputContainer: { flexDirection: "row", backgroundColor: "#1A1D1F", width: "100%", padding: 10, bottom: 70, position: "relative" },
+
+});

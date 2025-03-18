@@ -1,0 +1,30 @@
+[33md8444db[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mtemp-branch[m[33m)[m HEAD@{0}: commit: "in his office"
+[33me3b1bb9[m HEAD@{1}: commit: 4
+[33m6b02b97[m HEAD@{2}: commit: "3"
+[33m17ab46b[m HEAD@{3}: commit: before investor meet 2"
+[33m9a36848[m HEAD@{4}: commit: "before investor meet "
+[33ma5a933e[m HEAD@{5}: commit: Anish Maheshwari
+[33m060df75[m HEAD@{6}: checkout: moving from ansh-final to temp-branch
+[33mef8d040[m[33m ([m[1;31morigin/Ansh-Final[m[33m, [m[1;32mAnsh-Final[m[33m)[m HEAD@{7}: reset: moving to HEAD
+[33mef8d040[m[33m ([m[1;31morigin/Ansh-Final[m[33m, [m[1;32mAnsh-Final[m[33m)[m HEAD@{8}: checkout: moving from temp-branch to ansh-final
+[33m060df75[m HEAD@{9}: checkout: moving from ansh-final to temp-branch
+[33mef8d040[m[33m ([m[1;31morigin/Ansh-Final[m[33m, [m[1;32mAnsh-Final[m[33m)[m HEAD@{10}: checkout: moving from temp-branch to ansh-final
+[33m060df75[m HEAD@{11}: checkout: moving from 060df7565589cde3b85478cdb3589ac8f1c8e4f8 to temp-branch
+[33m060df75[m HEAD@{12}: commit: commit after long time
+[33mdd4f382[m[33m ([m[1;32mrecovered-code[m[33m)[m HEAD@{13}: checkout: moving from recovered-code to dd4f382
+[33mdd4f382[m[33m ([m[1;32mrecovered-code[m[33m)[m HEAD@{14}: checkout: moving from Ansh-Final to recovered-code
+[33mef8d040[m[33m ([m[1;31morigin/Ansh-Final[m[33m, [m[1;32mAnsh-Final[m[33m)[m HEAD@{15}: reset: moving to HEAD
+[33mef8d040[m[33m ([m[1;31morigin/Ansh-Final[m[33m, [m[1;32mAnsh-Final[m[33m)[m HEAD@{16}: commit: jash3
+[33mb9ddfc9[m HEAD@{17}: commit: jash ke liye commit kar rahe hai
+[33me3e1c3b[m HEAD@{18}: checkout: moving from ca3f274ff66d17bb2b4dc6239647513b78e03dad to Ansh-Final
+[33mca3f274[m HEAD@{19}: commit: jash ke liye
+[33mdd4f382[m[33m ([m[1;32mrecovered-code[m[33m)[m HEAD@{20}: commit: "6th attempt of beta v3 solved nan "
+[33m8ae876b[m HEAD@{21}: commit: aa
+[33mf39edcd[m HEAD@{22}: commit: "beta v3 the 5th version"
+[33mdac0f78[m HEAD@{23}: commit: "beta v3 aka part 3 "
+[33md3b26fd[m HEAD@{24}: commit: "beta v3 aka second version of beta v4"
+[33mf0f5fd0[m HEAD@{25}: commit: "beta 4 aka beta 3"
+[33mba4e45b[m HEAD@{26}: commit: "bete v3 ka version 2 "
+[33m38d1656[m HEAD@{27}: commit: "beta v3 before show day"
+[33me3e1c3b[m HEAD@{28}: checkout: moving from main to remotes/origin/Ansh-Final
+[33me3c145f[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{29}: clone: from https://github.com/rspytech/startsy.git

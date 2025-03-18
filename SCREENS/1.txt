@@ -1,0 +1,84 @@
+  <SafeAreaView style={[signup3styles.container , {  minHeight : 1000}]}>
+                <View style={[signup3styles.row ]}>
+                    {/* top */}
+                    <View style={signup3styles.top}>
+                        <View style={signup3styles.left}>
+                            <Image style={signup3styles.logo} source={require("../assets/images/logo.png")} />
+                        </View>
+                        <View style={signup3styles.right}>
+                            <Line progresswidth={"105%"} />
+                        </View>
+                    </View>
+
+
+
+                    {/* bottom */}
+
+                    <ScrollView style={styles.bottom} contentContainerStyle={{paddingBottom  : 100}}>
+
+                        <Text allowFontScaling={false} style={styles.t1}>Authenticity Verification</Text>
+                        <TextInput
+                            allowFontScaling={false}
+                            placeholder="LinkedIN URL*"
+                            placeholderTextColor="#B8B8B8"
+                            style={styles.input}
+                            value={linkedinurl}
+                            onChangeText={(text) => { setlinkedinurl(text) }}
+                        />
+                        {errors.linkedinUrlError &&( <Text style={styles.errorText}>{errors.linkedinUrlError}</Text>)}
+                        <TextInput
+                            allowFontScaling={false}
+                            placeholder="Website URL"
+                            placeholderTextColor="#B8B8B8"
+                            style={styles.input}
+                            value={websiteurl}
+                            onChangeText={(text) => { setwebsiteurl(text) }}
+                        />
+
+                        {errors.websiteUrlError && 
+                        <Text style={styles.errorText}>{errors.websiteUrlError}</Text>}
+                        
+                        <TextInput
+                            allowFontScaling={false}
+                            placeholder="Official Domain Email"
+                            placeholderTextColor="#B8B8B8"
+                            style={styles.input}
+                            value={domainemail}
+                            onChangeText={(text) => { setdomainemail(text) }}
+                        />
+                        {errors.domainEmailError && <Text style={styles.errorText}>{errors.domainEmailError}</Text>}
+
+                        <TextInput
+                            allowFontScaling={false}
+                            placeholder="Pan Number"
+                            placeholderTextColor="#B8B8B8"
+                            style={styles.input}
+                            value={panCard}
+                            onChangeText={(text) => { setpanCard(text) }}
+                        />
+
+                        {errors.panCardError && <Text style={styles.errorText}>{errors.panCardError}</Text>}
+                        <Text allowFontScaling={false} style={styles.t11}>E-KYC document upload</Text>
+                        <Pressable style={styles.upload} onPress={openFilePicker}>
+                            <Text allowFontScaling={false} style={styles.nexttext}>Upload</Text>
+                        </Pressable>
+                        {errors.fileError && <Text style={styles.errorText}>{errors.fileError}</Text>}
+
+
+
+
+
+                        <View style={styles.icons}>
+                            <Pressable onPress={() => {
+
+                                navigation.goBack();
+                            }}><FontAwesome6 name="chevron-left" size={45} color="#00DF60" /></Pressable>
+                            <Pressable style={styles.btn} onPress={() => { finalsubmit() }}>
+                                <Text allowFontScaling={false} style={styles.nexttext}>Submit</Text>
+                            </Pressable>
+                        </View>
+
+
+                    </ScrollView>
+                </View>
+            </SafeAreaView>

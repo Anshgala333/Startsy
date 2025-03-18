@@ -1,0 +1,24 @@
+  // <DrawerLayoutAndroid
+            //     ref={drawer}
+            //     drawerBackgroundColor="transparent"
+            //     drawerWidth={100}
+            //     drawerPosition={drawerPosition}
+            //     onDrawerOpen={() => setIsDrawerOpen(true)}
+            //     onDrawerClose={() => setIsDrawerOpen(false)}
+            //     renderNavigationView={navigationView}
+            // >
+
+            //     {/* {isDrawerOpen && (
+            //         <BlurView
+
+            //             intensity={20}
+            //             blurReductionFactor={12}
+            //             tint="systemThinMaterialDark"
+
+            //             style={styles1.blurOverlay}  blurAmount={0} experimentalBlurMethod="dimezisBlurView"
+            //         />
+            //     )} */}
+
+
+            // </DrawerLayoutAndroid>
+

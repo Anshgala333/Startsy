@@ -1,0 +1,66 @@
+{
+  "expo": {
+    "name": "Startsy",
+    "slug": "startsy1",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/logo.png",
+    "scheme": "myapp",
+    "resizeMode": "contain",
+    "backgroundColor" : "#16181a",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "image": "./assets/images/logofinal.png", 
+      "resizeMode": "contain",
+      "backgroundColor": "#16181a"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.rspytech.startsy"
+    },
+    "android": {
+      "softwareKeyboardLayoutMode": "adjustResize",
+
+      "androidStatusBar": {
+        "backgroundColor": "#16181A",
+        "translucent": false
+      },
+      "permissions": [
+        "ACCESS_NETWORK_STATE",
+        "INTERNET"
+      
+      ],
+
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/logofinal.png",
+        "backgroundColor": "#16181a",
+        "resizeMode" : "contain"
+      },
+      "package": "com.rspytech.startsy"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-asset",
+      "expo-font"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "104869d6-a4db-4041-8b76-8deb8d1a34c5"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/104869d6-a4db-4041-8b76-8deb8d1a34c5"
+    }
+  }
+}

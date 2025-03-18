@@ -1,0 +1,37 @@
+ // useFocusEffect(
+        //     useCallback(() => {
+        //         console.log("for you page hu mai");
+        //         const backHandler = BackHandler.addEventListener("hardwareBackPress", function () {
+        //             console.log("ansh", ansh);
+        //             console.log("one", one);
+        //             console.log("two", two);
+        //             console.log("three", three);
+        //             console.log("four", four);
+        //             console.log("five", five);
+
+        //             var canclose = true
+
+        //             
+        //            
+        //            
+        //             if (one == true) {
+        //                 // setone(false);
+        //                 mainpagebottomsheet.current?.close();
+        //                 canclose = false
+
+        //                 return true
+        //             }
+
+        //             if (canclose) {
+        //                 //  BackHandler.exitApp()
+        //             }
+
+        //             // commentinput.current?.blur()
+
+        //             // setk(false)
+        //         })
+
+        //         return () => backHandler.remove()
+
+        //     }, [ansh, one, two, three, four, five])
+        // )
