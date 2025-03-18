@@ -116,8 +116,7 @@ const ChatScreen = ({ token, mainpagebottomsheet, closeall, k, setk }) => {
             <Tab.Navigator
                 
                 screenOptions={({ route }) => ({
-                    // lazy : true,
-                    // animationEnabled: true,
+                    
 
 
                     tabBarStyle: {
