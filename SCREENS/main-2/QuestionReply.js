@@ -135,7 +135,7 @@ const QuestionReply = ({ route }) => {
 
                     <LinearGradient style={styles.item} colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}>
                         <View style={{ flexDirection: 'row', gap: 10, padding: 10 }}>
-                            <Image source={require('../../assets/images/logo.png')} style={{ width: '40', height: '40', borderRadius: 30, borderWidth: 1, borderColor: "#333", padding: 5, objectFit: "scale-down" }} />
+                            <Image source={require('../../assets/images/logo.png')} style={{ width: 40, height: 40, borderRadius: 30, borderWidth: 1, borderColor: "#333", padding: 5,  }} />
                             <Text style={styles.userNameStyle}>Anonymous</Text>
                         </View>
 
@@ -197,7 +197,7 @@ const QuestionReply = ({ route }) => {
                         <View style={[styles.listItem, styles.commentContainer]} >
 
                             <View style={{ flexDirection: 'row', gap: 10, padding: 10 }}>
-                                <Image source={{ uri: item.userId.profilePhoto }} style={{ width: '30', height: '30', borderRadius: 30 }} />
+                                <Image source={{ uri: item.userId.profilePhoto }} style={{ width: 30, height: 30, borderRadius: 30 }} />
                                 <Text style={styles.userNameStyle1}>{item.userId.userName}</Text>
                                 <Text style={styles.time}>{time(item.createdAt)}</Text>
                             </View>

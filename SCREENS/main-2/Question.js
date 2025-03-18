@@ -180,7 +180,7 @@ const Question = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
                         >
 
                             <View style={{ flexDirection: 'row', gap: 10 }}>
-                                <Image source={require('../../assets/images/logo.png')} style={{ width: '30', height: '30', borderRadius: 20 }} />
+                                <Image source={require('../../assets/images/logo.png')} style={{ width: 30, height: 30, borderRadius: 20 }} />
                                 <Text style={styles1.userNameStyle}>Anonymous</Text>
                                 <Text style={styles1.time}>{time(item.createdAt)}</Text>
                             </View>
@@ -256,6 +256,9 @@ const Question = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
                                 setRefreshing11(true);
                                 getpost()
                                 Vibration.vibrate(100)
+                                setTimeout(()=>{
+                                    setRefreshing11(false);
+                                } , 2000)
                                 
                             }}
                         />

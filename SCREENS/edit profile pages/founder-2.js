@@ -537,9 +537,9 @@ const Founder2 = ({ navigation, route }) => {
                     <Text allowFontScaling={false} style={styles1.headertext}>Profile</Text>
                 </Animated.View>
                 <View style={{ width: width * 0.98, margin: "auto" }}>
-                    <Text style={styles1.edit}>Edit Profile</Text>
+                    {/* <Text style={styles1.edit}>Edit Profile</Text> */}
 
-                    <Text allowFontScaling={false} style={[styles.t1, { marginTop: 0, marginBottom: 0, paddingLeft: 12 }]}>About Startup/Organisation</Text>
+                    <Text allowFontScaling={false} style={[styles.t1, { marginTop: 15, marginBottom: 0, paddingLeft: 12 }]}>About Startup/Organisation</Text>
 
 
 
@@ -602,13 +602,13 @@ const Founder2 = ({ navigation, route }) => {
 
                         <Text onTouchStart={handleOutsideTouch} allowFontScaling={false} style={[styles.t1, { marginTop: 25, marginBottom: 10, paddingLeft: 7 }]}>Startup sector  </Text>
                         <Text onTouchStart={handleOutsideTouch} allowFontScaling={false} style={[styles.t2, { marginBottom: 15 }]}>List your highest degree achieved, which helps to establish your academic background and qualifications. </Text>
-                        <Drop width={"88%"} placeholder={sector} width1={"86%"} items={areaofinterestlist} onValueChange={(value) => { setSector(value) }} setOpen={t2} open={open2} nestedScrollEnabled={true} />
+                        <Drop borderwidth={0} bb={1} pccolor={"#B8B8B8"}  width={"88%"} placeholder={sector} width1={"86%"} items={areaofinterestlist} onValueChange={(value) => { setSector(value) }} setOpen={t2} open={open2} nestedScrollEnabled={true} />
                         {errors.sector && <Text style={styles1.errnew}>{errors.sector}</Text>}
 
 
                         <Text onTouchStart={handleOutsideTouch} allowFontScaling={false} style={[styles.t1, { marginBottom: 10, marginTop: 25, paddingLeft: 7 }]}>Startup stage  </Text>
                         <Text onTouchStart={handleOutsideTouch} allowFontScaling={false} style={[styles.t2, { marginBottom: 15 }]}>Detail any relevant industry experience, particularly if you’ve worked in a specific company or held roles that have prepared you for your current venture.</Text>
-                        <Drop width={"88%"} placeholder={stageOfStartup} width1={"86%"} items={stage} onValueChange={(value) => setStageOfStartup(value)} open={open1} setOpen={t1} />
+                        <Drop borderwidth={0} bb={1} pccolor={"#B8B8B8"}  width={"88%"} placeholder={stageOfStartup} width1={"86%"} items={stage} onValueChange={(value) => setStageOfStartup(value)} open={open1} setOpen={t1} />
                         {errors.stage && <Text style={styles1.errnew}>{errors.stage}</Text>}
 
 
