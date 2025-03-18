@@ -1,16 +1,11 @@
 import React, { useEffect, useState, useContext, useCallback } from "react";
-import { View, Text, StyleSheet, TextInput, BackHandler, Keyboard, FlatList, Image, RefreshControl, Dimensions, TouchableOpacity, ActivityIndicator, Vibration } from "react-native";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { NavigationContainer } from "@react-navigation/native";
-import { Pressable } from "react-native";
+import { View, Text, StyleSheet, TextInput, Keyboard, FlatList, Image, RefreshControl, Dimensions, TouchableOpacity, Vibration } from "react-native";
 import { useFocusEffect, useNavigation } from "expo-router";
 
 import { url } from "../../config.js"
-import { GlobalContext } from "@/Global/globalcontext.js";
+
 
 import { jwtDecode } from "jwt-decode";
-import { StackActions } from "@react-navigation/native";
-// import { Skeleton } from "moti/skeleton/index.js";
 import { Skeleton } from 'moti/skeleton';
 import { MotiView } from 'moti';
 
@@ -33,14 +28,13 @@ const data1 = Array(5).fill({
 
 const ConnectionsScreen = ({ search, token, setk, inputref }) => {
 
-    // console.log(search);
-    // console.log(navigation);
+
 
     const navigation = useNavigation()
     const [skeleton, setskeletonloading] = useState(false)
 
-
     const [filtereddata, setfiltereddata] = useState([])
+
     useEffect(() => {
         console.log(search);
         if (data && data.length > 0) {
@@ -50,48 +44,14 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
         }
     }, [search, data])
     const [refreshing, setRefreshing] = useState(false);
-    const { globaldata } = useContext(GlobalContext);
-
-    // useFocusEffect(
-    //     useCallback(() => {
-    //         // closeall()
-    //         console.log('====================================');
-    //         console.log("connections");
-    //         console.log('====================================');
-    //         const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
-    //             console.log('====================================');
-    //             console.log("ok");
-    //             console.log('====================================');
-    //             if (setk) {
-    //                 setk(false);
-    //             }
-    //             inputref.current?.blur()
-    //         });
-    //         const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-    //             if (setk) {
-    //                 setk(false)
-    //             }
-    //             console.log('====================================');
-    //             console.log("jijjj");
-    //             console.log('====================================');
-    //             inputref?.current?.blur()
-    //             navigation.navigate("Startsy");
-    //             return true;
-    //         });
-
-    //         return () => backHandler.remove();
-
-    //     }, [])
-    // )
 
 
 
 
-    // useFocusEffect(
-    //     useCallback(() => {
-    //         fetchData()
-    //     }, [])
-    // )
+
+
+
+
 
     const [data, setData] = useState(null)
     const [loading, setloading] = useState(false)
@@ -99,9 +59,7 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
     const fetchData = async () => {
         var route = ""
         const decoded = jwtDecode(token);
-        // console.log(decoded);
-
-        // console.log(decoded.role);
+       
 
 
         if (decoded.role == "Founder") {
@@ -120,7 +78,6 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
 
         setloading(true); // Start loading before fetching data
         if (token) {
-            // console.log(token, "second use focus effect");
             try {
                 setskeletonloading(true)
                 const response = await fetch(
@@ -134,12 +91,7 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
                     }
                 );
                 const result = await response.json();
-                // console.log(result, "investor");
-
-                console.log(result);
-
-
-
+                
 
                 const uniqueData = result.filter((item, index, self) =>
                     self.findIndex(innerItem => innerItem.user.userName === item.user.userName) === index
@@ -156,15 +108,16 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
                     return dateB - dateA; // Sort in descending order of time
                 });
 
-                // console.log(result.data, "investor");
-                // console.log(result.data.messages.length, "investor");
-
+           
                 if (response.status === 200) {
                     // You can update the data state here if needed
                     // setData(result); // Example, you can handle the response data
                     setData(sortedData)
                     setfiltereddata(sortedData)
-                    // setdata1(result)
+         
+
+
+
                 }
             } catch (err) {
                 console.log(err);
@@ -183,11 +136,7 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
     }, [])
 
 
-    // useFocusEffect(
-    //     useCallback(()=>{
-    //         fetchData();
-    //     } , [])
-    // )
+
 
 
     function gotochatscreen(item) {
@@ -273,6 +222,12 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
 
     return (
         <View style={styles.listContainer}>
+            {data?.length == 0 && !loading
+                &&
+                <View style={styles.emptyListText}>
+                    <Text style={{ color: 'gray' }}>No conversations yet</Text>
+                </View>
+            }
             {filtereddata && !skeleton && <FlatList
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{ paddingBottom: 100 }}
@@ -375,7 +330,8 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
                 )}
             </View>}
 
-            {/* {loading &&   <ActivityIndicator size="large" color="#fff" />} */}
+
+
         </View>
     )
 }
@@ -567,6 +523,16 @@ const styles = StyleSheet.create({
         fontSize: 14,
         textAlign: "center",
         marginVertical: 5
+    },
+
+    emptyListText: {
+        flex: 1,
+        marginHorizontal: "auto",
+        alignSelf: "center",
+        justifyContent: 'center',
+        marginTop: 100,
+        top: '8%',
+        height: height
     },
 
 

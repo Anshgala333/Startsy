@@ -994,35 +994,53 @@ const Main2 = ({ navigation, route }) => {
                         // handleStyle={{display : "none"}}
                         contentContainerStyle={{ zIndex: 1000000, elevation: 20000000, height: 100 }}
                     >
-                        <View style={{ flex : 1 }}>
+                        <View style={{ flex: 1 }}>
                             <Pressable onPress={() => {
-                                // console.log(SelectedItems)
-                                // console.log(SelectedItems.size);
+
 
                             }
                             }>
                                 <Text style={styles.comment}>Share</Text>
                             </Pressable>
 
-                            {/* {emptycomment && <Text style={styles.no}>No comments yet</Text>} */}
-                            <BottomSheetFlatList
-                                ref={flatListRef}
-                                data={peopledata}
-                                nestedScrollEnabled={true}
-                                renderItem={renderpeople}
-                                contentContainerStyle={{ paddingBottom: 80 }}
-                                scrollEnabled={true}
-                            // contentContainerStyle={{ height: 100 }}
-                            // style={{ backgroundColor: 'red' }}
-                            />
+
+                            {peopledata.length == 0 ?
 
 
-                            {SelectedItems.size > 0 && (<TouchableOpacity onPress={finalsubmit} style={styles1.confirm}>
-                                {!sendingpost && <Text style={styles1.confirmText}>Confirm</Text>}
-                                {sendingpost && <ActivityIndicator size={24} color="#16181a" />}
-                            </TouchableOpacity>)}
+                                <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
 
-                            
+
+                                    <Text  style={{color:'gray'}}>You are not connected to anyone</Text>
+
+                                </View>
+
+                                :
+                                <>
+
+
+                                    <BottomSheetFlatList
+                                        ref={flatListRef}
+                                        data={peopledata}
+                                        nestedScrollEnabled={true}
+                                        renderItem={renderpeople}
+                                        contentContainerStyle={{ paddingBottom: 80 }}
+                                        scrollEnabled={true}
+                                    
+                                    />
+
+
+                                    <>
+                                        {SelectedItems.size > 0 && (<TouchableOpacity onPress={finalsubmit} style={styles1.confirm}>
+                                            {!sendingpost && <Text style={styles1.confirmText}>Confirm</Text>}
+                                            {sendingpost && <ActivityIndicator size={24} color="#16181a" />}
+                                        </TouchableOpacity>)}
+                                    </>
+
+                                </>
+
+                            }
+
+
 
                         </View>
                     </BottomSheet>)

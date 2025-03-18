@@ -40,26 +40,10 @@ const InvestorCard = ({ route }) => {
             console.log(result);
 
 
-            // console.log(result.data[0].investor);
-            // console.log(result.investor.roleId);
-            // console.log(result.investor.roleId.requestNotifications);
+           
 
 
-            // console.log('====================================');
-            // console.log(response.status);
-            // console.log('====================================');
-            // console.log(result.data.upvotesPerDay);
-            // console.log(result.data.investorUpvotes);
-            // console.log(result.data.length, "length");
-            // console.log(result.data[0]);
-            // console.log(result.data[0].investor.profilePhoto , "iuyt");
-            // console.log(result.data[0].investor.roleId.user_id.userName);
-            // console.log(result.data[0].investor.userName);
-            // console.log(result.data[0].investor.roleId.user_id.role);
-            // console.log(result.data[0].investor.roleId.previousExperience);
-            // console.log(result.data[0].investor.roleId.fullName);
-            // console.log(result.data[0].investor.roleId.investmentRange);
-            // console.log(result.data[0].requestDate);
+          
 
             if (response.status == 200) {
 
@@ -390,7 +374,7 @@ const InvestorCard = ({ route }) => {
                 progressBackgroundColor="#16181a"
                 colors={['#00de62']}
                     onRefresh={() => {
-                        console.log("start");
+                        // console.log("start");
                         // setRefreshing(true)
  Vibration.vibrate(200)
                         getData();

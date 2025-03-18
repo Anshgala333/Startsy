@@ -27,8 +27,8 @@ import styles1 from '@/styles/Alert2.js';
 function Upvotedata({ route }) {
 
 
-    console.log("up vote re render");
-    
+    // console.log("up vote re render");
+
 
     var { token, navigation } = route.params
 
@@ -36,7 +36,7 @@ function Upvotedata({ route }) {
     const [data, setdata] = useState(null)
     const [suggestion, setsuggestion] = useState([])
     const [normal, setnormal] = useState(null)
-    const [subnotification, setsubnotification] = useState([])
+    const [subNotification, setSubNotification] = useState([])
     const [loading, setloading] = useState(true)
     const [skeleton, setskeletonloading] = useState(false)
     const [statistic, setstatistic] = useState({
@@ -47,83 +47,83 @@ function Upvotedata({ route }) {
     })
 
 
-    const [visible , setVisible] = useState(false)
-    const [entirecontent , setentirecontent] = useState("")
+    const [visible, setVisible] = useState(false)
+    const [entirecontent, setentirecontent] = useState("")
 
-     const CustomAlert = ({ visible, onClose  }) => {
-            const fadeAnim = useRef(new Animated.Value(0)).current; // Persistent animated value
-    
-            useEffect(() => {
-                if (visible) {
-                    Animated.timing(fadeAnim, { toValue: 1, duration: 300, useNativeDriver: true }).start();
-                } else {
-                    Animated.timing(fadeAnim, { toValue: 0, duration: 300, useNativeDriver: true }).start(() => {
-                        if (typeof onClose === "function") {
-                            onClose(); // Ensure onClose exists before calling
-                        }
-                    });
-                }
-            }, [visible]);
-    
-            if (!visible) return null; // Prevent rendering when not visible
-    
-            // async function deletepost1() {
-            //     console.log("Deleting post...");
-            //     if (idofposttobedeleetd != null) {
-            //         setisdeleting(true)
-            //         try {
-            //             const response = await fetch(`${url}posts/deletepost/${idofposttobedeleetd}`, {
-            //                 method: 'POST',
-            //                 body: "",
-            //                 headers: {
-            //                     accept: "application/json",
-            //                     "Authorization": `Bearer ${token}`,
-            //                 },
-            //             });
-    
-            //             const data = await response.json();
-            //             console.log(data);
-    
-            //             // Remove the post from the local state
-            //             const updatedPosts = posts.filter((post) => post._id !== idofposttobedeleetd);
-            //             setPosts(updatedPosts);
-            //             setVisible(false)
-            //         } catch (err) {
-            //             console.log(err);
-            //         }
-            //         finally {
-            //             setisdeleting(false)
-            //         }
-            //     }
-            // }
-    
-            return (
-                <Modal transparent visible={visible} animationType="none" onRequestClose={() => onClose?.()}>
-                    <TouchableWithoutFeedback onPress={() => onClose?.()}>
-                        <Animated.View style={[styles1.overlay, { opacity: fadeAnim }]}>
-                            <TouchableWithoutFeedback>
-                                <View style={styles1.alertBox}>
-                                    <Text style={styles1.title}>Suggestion</Text>
-                                    <Text style={styles1.message}>{entirecontent}</Text>
-                                   
-                                    <View style={{ display: "flex", flexDirection: "row", gap: 10 }}>
-    
-                                        {/* <TouchableOpacity onPress={() => onClose?.()} style={styles1.button}>
+    const CustomAlert = ({ visible, onClose }) => {
+        const fadeAnim = useRef(new Animated.Value(0)).current; // Persistent animated value
+
+        useEffect(() => {
+            if (visible) {
+                Animated.timing(fadeAnim, { toValue: 1, duration: 300, useNativeDriver: true }).start();
+            } else {
+                Animated.timing(fadeAnim, { toValue: 0, duration: 300, useNativeDriver: true }).start(() => {
+                    if (typeof onClose === "function") {
+                        onClose(); // Ensure onClose exists before calling
+                    }
+                });
+            }
+        }, [visible]);
+
+        if (!visible) return null; // Prevent rendering when not visible
+
+        // async function deletepost1() {
+        //     console.log("Deleting post...");
+        //     if (idofposttobedeleetd != null) {
+        //         setisdeleting(true)
+        //         try {
+        //             const response = await fetch(`${url}posts/deletepost/${idofposttobedeleetd}`, {
+        //                 method: 'POST',
+        //                 body: "",
+        //                 headers: {
+        //                     accept: "application/json",
+        //                     "Authorization": `Bearer ${token}`,
+        //                 },
+        //             });
+
+        //             const data = await response.json();
+        //             console.log(data);
+
+        //             // Remove the post from the local state
+        //             const updatedPosts = posts.filter((post) => post._id !== idofposttobedeleetd);
+        //             setPosts(updatedPosts);
+        //             setVisible(false)
+        //         } catch (err) {
+        //             console.log(err);
+        //         }
+        //         finally {
+        //             setisdeleting(false)
+        //         }
+        //     }
+        // }
+
+        return (
+            <Modal transparent visible={visible} animationType="none" onRequestClose={() => onClose?.()}>
+                <TouchableWithoutFeedback onPress={() => onClose?.()}>
+                    <Animated.View style={[styles1.overlay, { opacity: fadeAnim }]}>
+                        <TouchableWithoutFeedback>
+                            <View style={styles1.alertBox}>
+                                <Text style={styles1.title}>Suggestion</Text>
+                                <Text style={styles1.message}>{entirecontent}</Text>
+
+                                <View style={{ display: "flex", flexDirection: "row", gap: 10 }}>
+
+                                    {/* <TouchableOpacity onPress={() => onClose?.()} style={styles1.button}>
                                             <Text style={styles1.buttonText}>Cancel</Text>
                                         </TouchableOpacity>
                                         <TouchableOpacity onPress={() => deletepost1()} style={styles1.button}>
                                             {isdeleting && <ActivityIndicator size={24} color="#16181a" />}
                                             {!isdeleting && <Text style={styles1.buttonText}>Confirm</Text>}
                                         </TouchableOpacity> */}
-                                    </View>
                                 </View>
-                            </TouchableWithoutFeedback>
-                        </Animated.View>
-                    </TouchableWithoutFeedback>
-                </Modal>
-            );
-        };
-    
+                            </View>
+                        </TouchableWithoutFeedback>
+                    </Animated.View>
+                </TouchableWithoutFeedback>
+            </Modal>
+        );
+    };
+
 
 
 
@@ -141,9 +141,8 @@ function Upvotedata({ route }) {
                 }
             );
             const result = await response.json();
-            console.log(result.data.totalUpvotes, "a");
-            console.log(result.data.upvotesPerDay, "b");
-            console.log(result.data.investorUpvotes, "c");
+            console.log(response.status);
+            console.log(result)
 
             var object = {
                 totalUpvotes: result.data.totalUpvotes,
@@ -164,15 +163,11 @@ function Upvotedata({ route }) {
     }
 
     useEffect(() => {
-        getdata()
+        // getdata()
         getData1()
     }, [])
 
-    // useFocusEffect(
-    //     useCallback(() => {
-    //         getdata()
-    //         getData1()
-    //     }, []))
+
 
 
 
@@ -191,30 +186,32 @@ function Upvotedata({ route }) {
                 }
             );
             const result = await response.json();
-
-            console.log(result, "rendersub");
-
-
+            console.log(response.status);
+            console.log(result);
 
 
-            // console.log(result.data, "top 3 data ajilffkhedskfh");
-            var suggestionArray = result.data.filter((e) => e.notificationType == "suggestion")
-
-            setsuggestion(suggestionArray.reverse())
-
-            var normalArray = result.data.filter((e) => e.notificationType != "suggestion")
-            normalArray.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
-
-            setnormal(normalArray)
-
-            console.log(suggestion, "suggestion");
 
 
-            var array = result.data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+            if (response.status != 404) {
+                // console.log(result.data, "top 3 data ajilffkhedskfh");
+                var suggestionArray = result.data.filter((e) => e.notificationType == "suggestion")
 
-            // var array = result.data.reverse()
+                setsuggestion(suggestionArray.reverse())
 
-            setsubnotification(array);
+                var normalArray = result.data.filter((e) => e.notificationType != "suggestion")
+                normalArray.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+
+                setnormal(normalArray)
+
+                console.log(suggestion, "suggestion");
+
+
+                var array = result.data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+
+                // var array = result.data.reverse()
+
+                setSubNotification(array);
+            }
 
 
 
@@ -325,12 +322,13 @@ function Upvotedata({ route }) {
 
 
 
-                <TouchableOpacity onLongPress={()=>{setVisible(true)
+                <TouchableOpacity onLongPress={() => {
+                    setVisible(true)
                     setentirecontent(item.notificationMessage)
                     Vibration.vibrate(10)
 
                     console.log("heopen");
-                    
+
                 }}>
                     <View style={{
                         backgroundColor: "#24272A",
@@ -420,72 +418,70 @@ function Upvotedata({ route }) {
         else {
             return (
 
+               
+                        <View style={styles.box1}>
 
 
+                            <View style={styles.left}>
 
-
-
-                <View style={styles.box1}>
-
-
-                    <View style={styles.left}>
-
-
-                        <Pressable
-                            style={{ paddingTop: 10 }}
-                            onPress={() => { navigation.navigate("Singleuserpage", { token: token, id: item.sendingUserId._id, page: "bell" }) }}
-
-                        >
-                            {item.sendingUserId?.profilePhoto && <Image style={styles.topimage} source={{ uri: item.sendingUserId.profilePhoto }} />}
-                            {!item.sendingUserId?.profilePhoto && <Image style={styles.topimage} source={require("../../assets/images/p2.png")} />}
-
-                        </Pressable>
-                        <View style={styles.bottominfo1}>
-                            <View style={{ display: "flex", flexDirection: "row" }}>
 
                                 <Pressable
+                                    style={{ paddingTop: 10 }}
                                     onPress={() => { navigation.navigate("Singleuserpage", { token: token, id: item.sendingUserId._id, page: "bell" }) }}
 
                                 >
-                                    <Text style={styles.topu1}>{item.sendingUserId.userName} <Text style={styles.topu2}>{item.sendingUserId.role == "CommunityMember" ? "Member" : item.sendingUserId.role}</Text> <View style={styles.circle}></View> <AutoSizeText
-                                        numberOfLines={1}
-                                        fontSize={11}
-                                        mode={ResizeTextMode.max_lines}
-                                        ellipsizeMode='tail'
-                                        style={styles.time}>{time(item.timestamp)}
-                                    </AutoSizeText>
+                                    {item.sendingUserId?.profilePhoto && <Image style={styles.topimage} source={{ uri: item.sendingUserId.profilePhoto }} />}
+                                    {!item.sendingUserId?.profilePhoto && <Image style={styles.topimage} source={require("../../assets/images/p2.png")} />}
 
-                                    </Text>
                                 </Pressable>
-                                {/* <Text style={styles.time}>{time(item.taggedUser.createdAt)}</Text> */}
+                                <View style={styles.bottominfo1}>
+                                    <View style={{ display: "flex", flexDirection: "row" }}>
 
+                                        <Pressable
+                                            onPress={() => { navigation.navigate("Singleuserpage", { token: token, id: item.sendingUserId._id, page: "bell" }) }}
+
+                                        >
+                                            <Text style={styles.topu1}>{item.sendingUserId.userName} <Text style={styles.topu2}>{item.sendingUserId.role == "CommunityMember" ? "Member" : item.sendingUserId.role}</Text> <View style={styles.circle}></View> <AutoSizeText
+                                                numberOfLines={1}
+                                                fontSize={11}
+                                                mode={ResizeTextMode.max_lines}
+                                                ellipsizeMode='tail'
+                                                style={styles.time}>{time(item.timestamp)}
+                                            </AutoSizeText>
+
+                                            </Text>
+                                        </Pressable>
+                                        {/* <Text style={styles.time}>{time(item.taggedUser.createdAt)}</Text> */}
+
+
+                                    </View>
+                                    {/* <Text style={styles.sub2}>{item.notificationMessage}</Text> */}
+                                    <Text
+                                        numberOfLines={1}
+                                        fontSize={12}
+                                        // mode={ResizeTextMode.max_lines}
+                                        // ellipsizeMode='tail'
+                                        style={[styles.sub2, { fontSize: 12, marginLeft: 10 }]}>{item.notificationMessage}
+                                    </Text>
+                                </View>
+                            </View>
+                            <View style={styles.right}>
+                                {item.notificationType == "upvotePost"}
+                                {item.notificationType == "upvoteProfile"}
+                                {item.notificationType == "jobApplied" &&
+                                    <Pressable onPress={sendmessage} style={{ top: 16, right: 0 }}>
+                                        <MaterialCommunityIcons name="message-text-outline" size={34} color={"#00DE62"} />
+                                    </Pressable>
+                                }
+                                {item.notificationType == "joinCommunity"}
+                                {/* {item.notificationType == "upvotePost" && item.postId?.type == "blogPost" && <B2 width={40} height={40} />} */}
+                                {item.notificationType == "upvotePost" && item.postId?.type == "photo" && <Image style={styles.image1} source={{ uri: item.postId.mediaUrl }} />}
+                                {item.notificationType == "commentPost"}
 
                             </View>
-                            {/* <Text style={styles.sub2}>{item.notificationMessage}</Text> */}
-                            <Text
-                                numberOfLines={1}
-                                fontSize={12}
-                                // mode={ResizeTextMode.max_lines}
-                                // ellipsizeMode='tail'
-                                style={[styles.sub2, { fontSize: 12, marginLeft: 10 }]}>{item.notificationMessage}
-                            </Text>
                         </View>
-                    </View>
-                    <View style={styles.right}>
-                        {item.notificationType == "upvotePost"}
-                        {item.notificationType == "upvoteProfile"}
-                        {item.notificationType == "jobApplied" &&
-                            <Pressable onPress={sendmessage} style={{ top: 16, right: 0 }}>
-                                <MaterialCommunityIcons name="message-text-outline" size={34} color={"#00DE62"} />
-                            </Pressable>
-                        }
-                        {item.notificationType == "joinCommunity"}
-                        {/* {item.notificationType == "upvotePost" && item.postId?.type == "blogPost" && <B2 width={40} height={40} />} */}
-                        {item.notificationType == "upvotePost" && item.postId?.type == "photo" && <Image style={styles.image1} source={{ uri: item.postId.mediaUrl }} />}
-                        {item.notificationType == "commentPost"}
+                 
 
-                    </View>
-                </View>
 
 
 
@@ -519,12 +515,12 @@ function Upvotedata({ route }) {
                 <Text style={styles.t11}>Investor Suggestions</Text>
                 <FlatList
                     horizontal={true}
-                    style={{ display: "flex", flexDirection: "row", gap: 10  }}
+                    style={{ display: "flex", flexDirection: "row", gap: 10 }}
                     data={suggestion}
                     renderItem={rendersub}
                 // renderItem={() => <Text style={{ fontSize: 100 }}>okkk</Text>}
                 />
-                <View style={[styles.divider , {marginBottom : -10}]}></View>
+                <View style={[styles.divider, { marginBottom: -10 }]}></View>
 
 
 
@@ -594,24 +590,16 @@ function Upvotedata({ route }) {
         )
     }
 
+    const emptyListText = () => {
+        return (
+           <>{subNotification.length==0 && !loading &&  <View style={[styles.emptyListContainer]}>
+           <Text style={styles.emptyListText}>No new notifications</Text>
+       </View>}</>
+        );
+    }
 
-    // function top1() {
-    //     return (
-    //         <View style={{ flex: 1 }}>
-    //             <View style={styles.divider}></View>
+    
 
-
-    //             <FlatList
-    //                 ListHeaderComponent={top3data}
-    //                 data={subnotification}
-    //                 renderItem={rendersub}
-    //                 contentContainerStyle={{ elevation: 10, height: 700, backgroundColor: "#16181a", marginTop: 20 }}
-
-
-    //             />
-    //         </View>
-    //     )
-    // }
 
 
 
@@ -621,12 +609,10 @@ function Upvotedata({ route }) {
     return (
         <View style={{ flex: 1, backgroundColor: "#16181a" }}>
 
-
-            {/* <View style={styles.divider}></View> */}
+          
             <CustomAlert visible={visible} onClose={() => setVisible(false)} />
 
 
-            {/* {skeleton && <top3data} */}
 
 
 
@@ -635,16 +621,17 @@ function Upvotedata({ route }) {
             <FlatList
                 // style={{marginTop : 300}}
                 // style={{flex:1 , height : 100}}
+                ListHeaderComponent={emptyListText}
                 scrollEnabled={true}
                 refreshControl={<RefreshControl progressViewOffset={0} refreshing={refreshing}
-                progressBackgroundColor="#16181a"
-                colors={['#00de62']}
+                    progressBackgroundColor="#16181a"
+                    colors={['#00de62']}
                     onRefresh={() => {
                         console.log("start");
                         setRefreshing(true)
-                         Vibration.vibrate(200)
+                        Vibration.vibrate(200)
 
-                        getdata();
+                        // getdata();
                         getData1()
 
                         setTimeout(() => {
@@ -652,8 +639,9 @@ function Upvotedata({ route }) {
                         }, 2000);
                     }} />}
 
-                ListHeaderComponent={top3data}
+                // ListHeaderComponent={top3data}
                 data={normal}
+                // rendersub
                 // data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
                 renderItem={rendersub}
                 contentContainerStyle={{ paddingBottom: 100, elevation: 0, backgroundColor: "#16181a", marginTop: 10 }}
@@ -885,8 +873,8 @@ const styles = StyleSheet.create({
     },
     listItem1: {
         padding: 10,
-        paddingTop :20,
-        marginTop : 10
+        paddingTop: 20,
+        marginTop: 10
     },
     text: {
         fontSize: 12,
@@ -1072,6 +1060,26 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         // justifyContent: "center",
         // alignSelf: "center",
+    },
+    emptyListContainer: {
+
+        flex:1,
+        // height:height,
+        
+
+    },
+    emptyListText:{
+        textAlign: "center",
+        color: "#666",
+        alignSelf : "center",
+        justifyContent : "center",
+        // position : "absolute",
+        elevation: 100,
+        bottom : 0,
+        // fontFamily: "Roboto",
+        fontSize: 16,
+        paddingTop: 300,
+       
     }
 
 });

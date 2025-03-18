@@ -470,7 +470,7 @@ const Founder1 = ({ navigation }) => {
                     <Text allowFontScaling={false} style={styles1.headertext}>Profile</Text>
                 </Animated.View>
                 <View style={{ width: width * 0.98, margin: "auto" }}>
-                    <Text style={styles1.edit}>Edit Profile</Text>
+                    {/* <Text style={styles1.edit}>Edit Profile</Text> */}
                     {/* <Profile /> */}
                     <Pressable onPress={fileupload}>
                         {image != "" ? (
