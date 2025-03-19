@@ -768,12 +768,13 @@ const NewsLetter = React.memo(
                 })
             )
             return (
-                <SafeAreaView style={{ minHeight: 800, backgroundColor: "#16181a" }}>
+                <SafeAreaView style={{ minHeight: 800, backgroundColor: "#16181a" , }}>
+                    <View style={{paddingBottom:50}}>
                     <FlatList
                         keyExtractor={(item, index) => index}
                         data={suggestionarray}
                         renderItem={renderSuggestion}
-                        style={styles.suggestionbox}
+                        style={[styles.suggestionbox,{paddingBottom:120}]}
 
                         refreshControl={
                             <RefreshControl
@@ -788,10 +789,11 @@ const NewsLetter = React.memo(
                         }
 
 
-                    >
+                   />
+                    </View>
 
 
-                    </FlatList>
+                   
                 </SafeAreaView>
             )
         })
@@ -880,9 +882,16 @@ const NewsLetter = React.memo(
                         <Tab.Screen
 
                             name="Job"
-                            component={User}
+                            component={() => (
+                                <ScrollView 
+                                    style={{ flex: 1 ,paddingBottom: 50}}
+                                    showsVerticalScrollIndicator={false}
+                                >
+                                    <User />
+                                // </ScrollView>
+                            )}
                             // children={(props) => <User />}
-
+    
                             options={{
                                 lazy: false,
                                 unmountOnBlur: false,
