@@ -22,30 +22,15 @@ const ViewSendedPost = ({ route, openshare, opencomment }) => {
 
     async function upvotepost(id, index, isSingle) {
         Vibration.vibrate(50)
+       
+
         if (!isSingle) {
+           
             var toset = !allPost[index].isliked
             var status = toset ? "like" : "unlike"
 
             var increment = toset == true ? 1 : -1
-        }
-        else {
-            var toset = !sentPost.isliked
-            var status = toset ? "like" : "unlike"
 
-            var increment = toset == true ? 1 : -1
-        }
-
-
-        // setallpost(allpost.map((e, i) => {
-        //     if (i == index) {
-        //         var object = { ...e, isliked: !e.isliked, itemlikedcount: e.itemlikedcount + increment }
-        //         return object
-        //     }
-        //     else return e
-        // }))
-
-        if (!isSingle) {
-           
             setAllPost(prevPosts =>
                 prevPosts.map((e, i) => {
                     if (i === index) {
@@ -57,7 +42,12 @@ const ViewSendedPost = ({ route, openshare, opencomment }) => {
         }
 
         if (isSingle) {
-            console.log("single");
+
+            var toset = !sentPost.isliked
+            var status = toset ? "like" : "unlike"
+            var increment = toset == true ? 1 : -1
+            
+
             setSentPost(prevSentPost => ({
                 ...prevSentPost,
                 isliked: toset,
@@ -220,24 +210,24 @@ const ViewSendedPost = ({ route, openshare, opencomment }) => {
 
 
 
-const styles1 = StyleSheet.create({
+// const styles1 = StyleSheet.create({
 
-    container: {
-        backgroundColor: '#16181a',
-        flex: 1,
-    },
+//     container: {
+//         backgroundColor: '#16181a',
+//         flex: 1,
+//     },
 
-    sendedPost: {
-        flex: 1,
+//     sendedPost: {
+//         flex: 1,
 
-    },
-    suggestionsContainer: {
-        flex: 1,
-        backgroundColor: 'red',
-        marginTop: 20,
-    }
+//     },
+//     suggestionsContainer: {
+//         flex: 1,
+//         backgroundColor: 'red',
+//         marginTop: 20,
+//     }
 
 
-})
+// })
 
 export default ViewSendedPost
