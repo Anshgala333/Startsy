@@ -7,7 +7,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Green from "../SCREENS/greenscreen.js"; //page 1
 import Login1 from "../SCREENS/logintrial.js"; // login page
 import ReadMore1 from "../SCREENS/trial-1.js"; // read more page
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, Settings } from "react-native";
 import Signup1 from "../SCREENS/signup-1.js";
 import Signup2 from "../SCREENS/signup2.js";
 import Signup3 from "../SCREENS/signup3.js";
@@ -84,6 +84,7 @@ SystemUI.setBackgroundColorAsync("#16181a");
 import { enableFreeze } from "react-native-screens";
 import { enableScreens } from 'react-native-screens';
 import QuestionReply from "@/SCREENS/main-2/QuestionReply.js";
+import settings from "@/SCREENS/settings.js";
 enableScreens();
 
 enableFreeze(true); 
@@ -239,6 +240,7 @@ export default function App() {
           <Stack.Screen name="StartsyCard" component={Startsy} />
           <Stack.Screen name="QuestionReply" component={QuestionReply} />
           <Stack.Screen name="PricePage" component={PricePage} />
+          <Stack.Screen name="Settings" component={settings} />
 
           <Stack.Screen
             name="KeyboardAvoidingComponent"
@@ -259,6 +261,8 @@ export default function App() {
             name="Singleprofilepage"
             component={Singleprofilepage}
           />
+
+          <Stack.Screen name="settings" component={settings}/>
         </Stack.Navigator>
       )}
       {/* </View> */}
