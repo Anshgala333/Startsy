@@ -20,14 +20,22 @@ const ViewSendedPost = ({ route, openshare, opencomment }) => {
     const [allPost, setAllPost] = useState([]);
     const [sentPost, setSentPost] = useState({});
 
-    async function upvotepost(id, index,isSingle) {
+    async function upvotepost(id, index, isSingle) {
         Vibration.vibrate(50)
-        var toset = !allPost[index].isliked
-        var status = toset ? "like" : "unlike"
-        
-        var increment = toset == true ? 1 : -1
-        
-        
+        if (!isSingle) {
+            var toset = !allPost[index].isliked
+            var status = toset ? "like" : "unlike"
+
+            var increment = toset == true ? 1 : -1
+        }
+        else {
+            var toset = !sentPost.isliked
+            var status = toset ? "like" : "unlike"
+
+            var increment = toset == true ? 1 : -1
+        }
+
+
         // setallpost(allpost.map((e, i) => {
         //     if (i == index) {
         //         var object = { ...e, isliked: !e.isliked, itemlikedcount: e.itemlikedcount + increment }
@@ -36,14 +44,17 @@ const ViewSendedPost = ({ route, openshare, opencomment }) => {
         //     else return e
         // }))
 
-        setAllPost(prevPosts =>
-            prevPosts.map((e, i) => {
-                if (i === index) {
-                    return { ...e, isliked: toset, itemlikedcount: e.itemlikedcount + increment };
-                }
-                return e;
-            })
-        );
+        if (!isSingle) {
+           
+            setAllPost(prevPosts =>
+                prevPosts.map((e, i) => {
+                    if (i === index) {
+                        return { ...e, isliked: toset, itemlikedcount: e.itemlikedcount + increment };
+                    }
+                    return e;
+                })
+            );
+        }
 
         if (isSingle) {
             console.log("single");
@@ -66,7 +77,7 @@ const ViewSendedPost = ({ route, openshare, opencomment }) => {
                 },
             });
             const data = await response.json();
-            console.log(data);
+            
             console.log(response.status);
 
         }
@@ -82,11 +93,15 @@ const ViewSendedPost = ({ route, openshare, opencomment }) => {
     const { globaldata, updateField } = useContext(GlobalContext);
 
     const token = globaldata.token;
+
+    ///call this when page renders
     useEffect(() => {
         getpost();
     }, [])
 
 
+
+    ///fetch all data
     const getpost = async () => {
         setSkeletonLoading(true)
         try {
@@ -98,7 +113,7 @@ const ViewSendedPost = ({ route, openshare, opencomment }) => {
                 },
             });
             const data = await response.json();
-            // console.log(data);
+           
 
             var decode = jwtDecode(token)
             var loggedinUserID = decode._id
@@ -114,13 +129,13 @@ const ViewSendedPost = ({ route, openshare, opencomment }) => {
             if (data.data.length > 0) {
 
                 setAllPost(data1);
-                console.log(data1);
+
                 setSentPost(data1[0])
-                console.log(sentPost);
+
                 setSkeletonLoading(false);
-                // console.log(data1[0]);
+                
                 updateField("allpost", data1.reverse())
-                // setSkeletonLoading(false);
+            
             }
 
         }
@@ -129,23 +144,10 @@ const ViewSendedPost = ({ route, openshare, opencomment }) => {
         }
         finally {
             setTimeout(() => {
-                // console.log(skeletonLoading)
-                // setSkeletonLoading(false)
+                setSkeletonLoading(false)
             }, 0);
         }
     };
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     return (
@@ -153,7 +155,7 @@ const ViewSendedPost = ({ route, openshare, opencomment }) => {
             {
                 skeletonLoading ?
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
-                        <ActivityIndicator size={'large'} />
+                        <ActivityIndicator size={'large'} color={"#00de62"} />
                     </View>
                     : <FlatList
                         showsVerticalScrollIndicator={false}
@@ -162,8 +164,8 @@ const ViewSendedPost = ({ route, openshare, opencomment }) => {
                             return (
                                 <>
                                     <View style={{ borderBottomColor: 'grey', borderBottomWidth: 2, marginBottom: 20 }}>
-                                        <SendedPost  item={sentPost} index={0}
-                                        openshare={openshare}
+                                        <SendedPost item={sentPost} index={0}
+                                            openshare={openshare}
                                             opencomment={opencomment}
                                             upvotepost={upvotepost} />
                                     </View>
@@ -172,15 +174,12 @@ const ViewSendedPost = ({ route, openshare, opencomment }) => {
                             )
                         }}
                         scrollEventThrottle={16}
-                        // keyExtractor={(item) => item._id.toString()}
-                        // removeClippedSubview={false}
                         data={allPost}
-                        // renderItem={renderItem}
                         renderItem={({ item, index }) => {
-                            return(
+                            return (
                                 <SuggestedPost item={item} index={index}
-                                opencomment={opencomment}
-                                openshare={openshare} upvotepost={upvotepost} />
+                                    opencomment={opencomment}
+                                    openshare={openshare} upvotepost={upvotepost} />
                             );
                         }
                         }
@@ -188,9 +187,6 @@ const ViewSendedPost = ({ route, openshare, opencomment }) => {
                             paddingTop: 10,
                             paddingBottom: 100
                         }}
-
-
-
 
 
                         refreshControl={

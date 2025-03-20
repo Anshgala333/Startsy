@@ -84,7 +84,7 @@ const SuggestedPost = ({ item, index, opencomment, openshare, upvotepost }) => {
 
                 <View style={styles.iconcontainer}>
                     <View style={styles.icon2}>
-                        <TouchableOpacity onPress={() => { upvotepost(item._id, index) }}>
+                        <TouchableOpacity onPress={() => { upvotepost(item._id, index,false) }}>
                             {/* {item.likedBy.includes(loggedinUserID) && <Upvote width={36} height={36} style={{ marginHorizontal: 0 }} selected={true} />} */}
                             {/* {!item.likedBy.includes(loggedinUserID)   && <Upvote width={36} height={36} style={{ marginLeft: 5, marginRight: -5 }} />} */}
 

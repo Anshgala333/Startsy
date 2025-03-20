@@ -23,7 +23,7 @@ const ChangePassword1 = ({ navigation }) => {
     useEffect(() => {
         const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
             navigation.goBack();
-
+            
             return true; // This prevents the default back action
         });
 

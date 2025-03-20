@@ -384,7 +384,7 @@ const NewsLetter = React.memo(
                 console.log(err);
 
             }
-            finally{
+            finally {
                 setRefreshing1(false)
             }
         }
@@ -439,7 +439,7 @@ const NewsLetter = React.memo(
                 <TouchableOpacity onPress={() => {
                     navigation.navigate("Singleuserpage", { token: token, id: item._id, page: "NewsLetter" })
                 }}>
-                    <View style={[styles.listItem,{}]}>
+                    <View style={[styles.listItem, {}]}>
                         {/* <Image
                             source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8slgZXgqnSIXDS8wF2uDT_SmsYlBe-W1soQ&s" }}
                             style={styles.avatar} /> */}
@@ -519,7 +519,11 @@ const NewsLetter = React.memo(
 
             useFocusEffect(
                 useCallback(() => {
+
                     // console.log("ok");
+
+
+                    console.log("ok");
 
                     handleTabChange("Newsletter")
                 }, [])
@@ -621,8 +625,6 @@ const NewsLetter = React.memo(
                                         </View>
                                     </MotiView>
                                 </View>}
-
-
 
                                 {!loading && <FlatList
 
@@ -761,7 +763,7 @@ const NewsLetter = React.memo(
 
         // useEffect(()=>{
         //     console.log("suggestions array",suggestionarray);
-            
+
         // },[])
 
         const User = memo(() => {
@@ -773,148 +775,163 @@ const NewsLetter = React.memo(
                 })
             )
             return (
-                
-                   <View style={{flex:1,backgroundColor:'#16181a'}}>
-                     <FlatList
+
+
+                <View style={{ flex: 1, backgroundColor: '#16181a' }}>
+                   
+                                     
+                            <FlatList
+                                keyExtractor={(item, index) => index}
+                                data={suggestionarray}
+                                renderItem={renderSuggestion}
+                                style={[styles.suggestionbox]}
+                                contentContainerStyle={{ paddingBottom: 100 }}
+
+                                refreshControl={
+                                    <RefreshControl
+                                        progressBackgroundColor="#16181a"
+                                        colors={['#00de62']}
+                                        onRefresh={() => {
+                                            setRefreshing1(true)
+                                            // Vibration.vibrate(200)
+                                            searchUser()
+
+                                        }} refreshing={refreshing1} />
+                                }
+
+
+                                // contentContainerStyle={{ paddingBottom: 66 }}
+
+                            >
+
+
+
+                            </FlatList>
+                        </View>
                     
-                    keyExtractor={(item, index) => index}
-                    data={suggestionarray}
-                    renderItem={renderSuggestion}
-                    style={[styles.suggestionbox,{ }]}
-
-                    refreshControl={
-                        <RefreshControl
-                            progressBackgroundColor="#16181a"
-                            colors={['#00de62']}
-                            onRefresh={() => {
-                                setRefreshing1(true)
-                                // Vibration.vibrate(200)
-                                searchUser()
-
-                            }} refreshing={refreshing1} />
-                    }
-
-                    contentContainerStyle={{paddingBottom:66}}
-                    
-                    >
 
 
+                   
 
-                    </FlatList>
-                   </View>
-               
             )
         })
 
 
-        return (
-            <SafeAreaView style={{ flexGrow: 1, minHeight: 700, backgroundColor: "#16181a", position: "relative" }}>
+return (
+    <SafeAreaView style={{ flexGrow: 1, minHeight: 700, backgroundColor: "#16181a", position: "relative" }}>
 
-                {/* {filterednewsletter.length == 0 && <Render />} */}
-
-
-                <Animated.View><Text allowFontScaling={false} style={styles.headerText}>Search</Text></Animated.View>
-
-                <View style={styles.searchContainer}>
-                    <Pressable>
-                        <Search style={styles.search} />
-
-                        <TextInput
-                            ref={inputref}
-                            allowFontScaling={false}
-                            style={styles.searchInput}
-                            placeholder="Search"
-                            placeholderTextColor="#828282"
-                            onChangeText={(text) => {
-                                settext(text)
-                                search(text)
-                            }}
-                            returnKeyType="done" // Adjusts the keyboard's Enter key label
-                            onSubmitEditing={(text) => { globalsearch(text) }}
-
-                        />
-                    </Pressable>
-                </View>
-
-                <View style={{ flex: 1, height: "100%", minHeight: 500, backgroundColor: "#16181a" }}>
+        {/* {filterednewsletter.length == 0 && <Render />} */}
 
 
-                    <Tab.Navigator
-                        //  detachInactiveScreens={true}
+        <Animated.View><Text allowFontScaling={false} style={styles.headerText}>Search</Text></Animated.View>
 
-                        screenOptions={({ route }) => ({
-                            unmountOnBlur: false,
+        <View style={styles.searchContainer}>
+            <Pressable>
+                <Search style={styles.search} />
 
-                            // animationEnabled: true,
-                            tabBarStyle: {
-                                backgroundColor: "#16181a",
-                                justifyContent: "space-between",
-                                display: "flex",
-                                width: "98%",
-                                margin: "auto",
-                                elevation: 0,
-                            },
+                <TextInput
+                    ref={inputref}
+                    allowFontScaling={false}
+                    style={styles.searchInput}
+                    placeholder="Search"
+                    placeholderTextColor="#828282"
+                    onChangeText={(text) => {
+                        settext(text)
+                        search(text)
+                    }}
+                    returnKeyType="done" // Adjusts the keyboard's Enter key label
+                    onSubmitEditing={(text) => { globalsearch(text) }}
 
-                            tabBarIndicatorStyle: {
-                                backgroundColor: "#00DE62",
-                                height: 1,
-                            },
+                />
+            </Pressable>
+        </View>
 
-                        })}
-                    >
-                        <Tab.Screen
-                            name="Connections"
-                            component={NewsletterComponent}
-                            options={{
-                                lazy: false,
-                                unmountOnBlur: false,
-                                freezeOnBlur: true,
+        <View style={{ flex: 1, height: "100%", minHeight: 500, backgroundColor: "#16181a" }}>
 
-                                tabBarLabel: ({ focused }) => (
-                                    <View>
-                                        <Text allowFontScaling={false} style={[
-                                            styles.tabbarpill, {
-                                                fontSize: 18,
-                                                fontFamily: "Alata",
-                                                color: focused ? "#00DE62" : "#808080",
-                                                borderColor: focused ? "#00DE62" : "#808080",
-                                            }
-                                        ]}> Newsletter
-                                        </Text>
-                                    </View>
-                                ),
 
-                            }}
-                        />
+            <Tab.Navigator
+                //  detachInactiveScreens={true}
 
-                        <Tab.Screen
+                screenOptions={({ route }) => ({
+                    unmountOnBlur: false,
 
-                            name="Job"
-                            component={User}
-                            // children={(props) => <User />}
+                    // animationEnabled: true,
+                    tabBarStyle: {
+                        backgroundColor: "#16181a",
+                        justifyContent: "space-between",
+                        display: "flex",
+                        width: "98%",
+                        margin: "auto",
+                        elevation: 0,
+                    },
 
-                            options={{
-                                lazy: false,
-                                unmountOnBlur: false,
-                                freezeOnBlur: true,
-                                tabBarLabel: ({ focused }) => (
-                                    <Text allowFontScaling={false} style={[
-                                        styles.tabbarpill, {
-                                            fontSize: 18,
-                                            fontFamily: "Alata",
-                                            color: focused ? "#00DE62" : "#808080",
-                                            borderColor: focused ? "#00DE62" : "#808080",
-                                        }
-                                    ]}> Users
-                                    </Text>
-                                ),
+                    tabBarIndicatorStyle: {
+                        backgroundColor: "#00DE62",
+                        height: 1,
+                    },
 
-                            }}
-                        />
-                    </Tab.Navigator>
-                </View>
-            </SafeAreaView>
-        )
+                })}
+            >
+                <Tab.Screen
+                    name="Connections"
+                    component={NewsletterComponent}
+                    options={{
+                        lazy: false,
+                        unmountOnBlur: false,
+                        freezeOnBlur: true,
+
+                        tabBarLabel: ({ focused }) => (
+                            <View>
+                                <Text allowFontScaling={false} style={[
+                                    styles.tabbarpill, {
+                                        fontSize: 18,
+                                        fontFamily: "Alata",
+                                        color: focused ? "#00DE62" : "#808080",
+                                        borderColor: focused ? "#00DE62" : "#808080",
+                                    }
+                                ]}> Newsletter
+                                </Text>
+                            </View>
+                        ),
+
+                    }}
+                />
+
+                <Tab.Screen
+
+                    name="Job"
+                    component={() => (
+                        // <ScrollView 
+                        //     style={{ flex: 1 ,paddingBottom: 50}}
+                        //     showsVerticalScrollIndicator={false}
+                        // >
+                        <User />
+                        //  </ScrollView>
+                    )}
+                    // children={(props) => <User />}
+
+                    options={{
+                        lazy: false,
+                        unmountOnBlur: false,
+                        freezeOnBlur: true,
+                        tabBarLabel: ({ focused }) => (
+                            <Text allowFontScaling={false} style={[
+                                styles.tabbarpill, {
+                                    fontSize: 18,
+                                    fontFamily: "Alata",
+                                    color: focused ? "#00DE62" : "#808080",
+                                    borderColor: focused ? "#00DE62" : "#808080",
+                                }
+                            ]}> Users
+                            </Text>
+                        ),
+
+                    }}
+                />
+            </Tab.Navigator>
+        </View>
+    </SafeAreaView>
+)
     }
 )
 
@@ -1177,7 +1194,7 @@ const styles = StyleSheet.create({
 
     suggestionbox: {
         // width: "100%",
-        flex:1,
+        flex: 1,
         // height: 320,
         height: "auto",
         maxHeight: height,
@@ -1185,7 +1202,7 @@ const styles = StyleSheet.create({
         // position: "absolute",
         paddingTop: 10,
 
-        
+
         // top: 135,
         // elevation: 100,
         // zIndex: 1000

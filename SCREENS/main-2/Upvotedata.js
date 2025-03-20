@@ -186,7 +186,7 @@ function Upvotedata({ route }) {
                 }
             );
             const result = await response.json();
-            console.log(response.status);
+            // console.log(response.status);
             console.log(result);
 
 
@@ -195,8 +195,9 @@ function Upvotedata({ route }) {
             if (response.status != 404) {
                 // console.log(result.data, "top 3 data ajilffkhedskfh");
                 var suggestionArray = result.data.filter((e) => e.notificationType == "suggestion")
-
                 setsuggestion(suggestionArray.reverse())
+                console.log(suggestion);
+
 
                 var normalArray = result.data.filter((e) => e.notificationType != "suggestion")
                 normalArray.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
@@ -209,9 +210,7 @@ function Upvotedata({ route }) {
 
 
                 var array = result.data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
-
                 // var array = result.data.reverse()
-
                 setSubNotification(array);
             }
 
@@ -231,6 +230,8 @@ function Upvotedata({ route }) {
 
     function rendersub({ item }) {
 
+        console.log(item);
+        console.log(item.notificationType, "render sub");
 
         if (item.sendingUserId == null) return
 
@@ -324,7 +325,7 @@ function Upvotedata({ route }) {
 
 
 
-                <TouchableOpacity onPress={() => {
+                <TouchableOpacity onLongPress={() => {
                     setVisible(true)
                     setentirecontent(item.notificationMessage)
                     Vibration.vibrate(10)
@@ -416,7 +417,6 @@ function Upvotedata({ route }) {
         }
 
 
-
         else {
             return (
 
@@ -480,9 +480,9 @@ function Upvotedata({ route }) {
                         {item.notificationType == "upvotePost" && item.postId?.type == "photo" && <Image style={styles.image1} source={{ uri: item.postId.mediaUrl }} />}
                         {item.notificationType == "commentPost"}
 
-                    </View>
-                </View>
-
+                            </View>
+                        </View>
+                 
 
 
 
@@ -599,29 +599,9 @@ function Upvotedata({ route }) {
 
     const emptyListText = () => {
         return (
-            <>{normal.length == 0 && suggestion.length == 0 ?
-
-
-
-                <View style={[styles.emptyListContainer]}>
-                    <Text style={styles.emptyListText}>No new notifications</Text>
-                </View>
-
-                :
-
-                 normal?.length==0 && suggestion.length!=0?
-                <>
-                    <Suggestions />
-
-                    <View style={[styles.emptyListContainer]}>
-                        <Text style={[styles.emptyListText2,{paddingTop: 200,}]}>No new notifications</Text>
-                    </View>
-                </>
-                :
-                <Suggestions/>
-
-            }
-            </>
+           <>{subNotification.length==0 && !loading &&  <View style={[styles.emptyListContainer]}>
+           <Text style={styles.emptyListText}>No new notifications</Text>
+       </View>}</>
         );
     }
 
@@ -644,7 +624,7 @@ function Upvotedata({ route }) {
 
 
 
-
+            {/* {normal.length == 0 && <Text>no new notification found</Text>} */}
             <FlatList
                 // style={{marginTop : 300}}
                 // style={{flex:1 , height : 100}}
@@ -657,16 +637,14 @@ function Upvotedata({ route }) {
                         console.log("start");
                         setRefreshing(true)
                         Vibration.vibrate(200)
-
                         // getdata();
                         getData1()
-
                         setTimeout(() => {
                             setRefreshing(false);
                         }, 2000);
                     }} />}
 
-                ListHeaderComponent={emptyListText}
+                // ListHeaderComponent={top3data}
                 data={normal}
                 // rendersub
                 // data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
@@ -1102,24 +1080,11 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         // position : "absolute",
         elevation: 100,
-        bottom: 0,
-     
+        bottom : 0,
+        // fontFamily: "Roboto",
         fontSize: 16,
-        paddingTop: 295,
-
-    },
-    emptyListText2: {
-        textAlign: "center",
-        color: "#666",
-        alignSelf: "center",
-        justifyContent: "center",
-        // position : "absolute",
-        elevation: 100,
-        bottom: 0,
-     
-        fontSize: 16,
-        paddingTop: 200,
-
+        paddingTop: 300,
+       
     }
 
 });

@@ -348,7 +348,11 @@ const Signup7 = ({ navigation, route }) => {
                     console.error('Error saving data:', error);
                 }
                 updateField("token", data.newToken);
-                navigation.navigate("Main2")
+                navigation.reset({
+                    index: 0,
+                    routes: [{ name: "Main2" }],
+                });
+                // navigation.navigate("Main2")
             }
             else if (response.status === 400) {
                 console.log("internal error");

@@ -28,7 +28,7 @@ import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import Octicons from '@expo/vector-icons/Octicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import AntDesign from '@expo/vector-icons/AntDesign';
-
+import settings from "../SCREENS/settings.js"
 import BottomSheet, { BottomSheetView, BottomSheetScrollView, BottomSheetTextInput, BottomSheetDraggableView, BottomSheetFlatList, BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import Ionicons from '@expo/vector-icons/Ionicons';
 // import dotenv from 'dotenv/config'
@@ -1039,13 +1039,16 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
     const Header = function () {
         return (
             <View style={{ marginTop: 0 }} key={1}>
-                <Pressable onPress={logout}>
+                <Pressable onPress={()=>{
+                    navigation.navigate("settings" , {token : token})
+                }}>
                     <View style={styles1.header}>
                         <Text numberOfLines={1} style={styles1.username}>{userdata.user_id.userName}</Text>
                         <View style={styles1.logout}>
-                            <Logout />
+                            {/* <Logout /> */}
+                            <Entypo name="menu" size={40} color="#ccc" />
                         </View>
-                        <Text style={styles1.logoutText}>Logout</Text>
+                        {/* <Text style={styles1.logoutText}>Logout</Text> */}
                         {/* <TouchableOpacity onPress={() => setVisible(true)} style={styles1.showButton}>
                             <Text style={styles1.showButtonText}>Show Alert</Text>
                         </TouchableOpacity> */}
@@ -1135,12 +1138,12 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                         </Text>
 
                       <View style={{display : "flex" , flexDirection : "row" , gap : 0}}>
-                      <Pressable onPress={() => {
+                      {/* <Pressable onPress={() => {
                             navigation.navigate(editprofilepage)
                         }} style={styles1.f1}>
                             <Text style={styles1.ft}>Edit profile</Text>
                             
-                        </Pressable>
+                        </Pressable> */}
                        {userdata.user_id.role == "CommunityMember" &&  <Pressable style={styles1.f1} onPress={() => handleswitch()}>
                             <Text style={styles1.ft}>Switch Role </Text>
                         </Pressable>}
@@ -1532,9 +1535,9 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                 {!userdata && <View style={styles1.header}>
                     <Text style={styles1.username}>Profile</Text>
                     <View style={styles1.logout}>
-                        <Logout />
+                        {/* <Logout /> */}
                     </View>
-                    <Text style={styles1.logoutText}>Logout</Text>
+                    {/* <Text style={styles1.logoutText}>Logout</Text> */}
                 </View>}
 
                 {/* {!userdata && <ActivityIndicator style={{ marginVertical: "auto", top: -50 }} size="large" color="#ccc" />} */}

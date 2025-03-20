@@ -187,7 +187,7 @@ const GroudDetailsScreen = ({ route }) => {
         const result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Images, // Allow all media types
             allowsEditing: true, // Allows cropping the image
-            aspect: [4, 3], // Aspect ratio of the image
+            aspect: [1, 1], // Aspect ratio of the image
             quality: 1, // Image quality (0 to 1)
 
         });
