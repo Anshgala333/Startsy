@@ -520,7 +520,6 @@ const NewsLetter = React.memo(
             useFocusEffect(
                 useCallback(() => {
                     console.log("ok");
-
                     handleTabChange("Newsletter")
                 }, [])
             )
@@ -621,8 +620,6 @@ const NewsLetter = React.memo(
                                         </View>
                                     </MotiView>
                                 </View>}
-
-
 
                                 {!loading && <FlatList
 

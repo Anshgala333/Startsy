@@ -849,21 +849,21 @@ const Main2 = ({ navigation, route }) => {
                             options={{
                                 keyboardBehavior: true,
                                 freezeOnBlur: true,
-                                tabBarButton: (props) => {
-                                    return (
-                                        <TouchableOpacity
-                                            {...props}
-                                            onLongPress={() => {
-                                                // console.log("long press")
-                                                if (loggedinrole == "Investor") {
-                                                    navigation.navigate("StartsyCard", { token })
-                                                }
-                                            }
-                                            } // Change to your destination screen
-                                        >
-                                        </TouchableOpacity>
-                                    )
-                                },
+                                // tabBarButton: (props) => {
+                                //     return (
+                                //         <TouchableOpacity
+                                //             {...props}
+                                //             onLongPress={() => {
+                                //                 // console.log("long press")
+                                //                 if (loggedinrole == "Investor") {
+                                //                     navigation.navigate("StartsyCard", { token })
+                                //                 }
+                                //             }
+                                //             } // Change to your destination screen
+                                //         >
+                                //         </TouchableOpacity>
+                                //     )
+                                // },
 
 
                                 tabBarLabel: "",
