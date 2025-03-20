@@ -127,7 +127,7 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation })
                                 {  item.jobPosts.amount != "" && <Text allowFontScaling={false} style={styles.u8}><Text style={{ color: "#828282" }}></Text>Amount: {item.jobPosts.amount} </Text>}
 
                                 <TouchableOpacity onPress={() => { applyjob(item._id, index) }} style={[!item.Jobapplied ? styles.job : styles.next11,]} >
-                                    <Text allowFontScaling={false} style={!item.Jobapplied ? styles.nexttext : styles.nexttext11}>{item.Jobapplied ? 'Applied' : "Apply"}</Text>
+                                    <Text allowFontScaling={false} style={!item.Jobapplied ? styles.nexttext : styles.nexttext}>{item.Jobapplied ? 'Applied' : "Apply"}</Text>
                                 </TouchableOpacity>
                             </View>
                         </LinearGradient>

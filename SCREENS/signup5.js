@@ -67,7 +67,7 @@ const Signup5 = ({ navigation, route }) => {
     }, []);
 
 
-    const { type, id, useremail } = route.params
+    const { type, id, useremail , email } = route.params
     // console.log(route.params);
     // console.log('====================================');
     // console.log(type);
@@ -80,7 +80,7 @@ const Signup5 = ({ navigation, route }) => {
     const [filtereddate, setfiltereddate] = useState("Enter your DOB");
 
     const [fullname, setfullname] = useState("")
-    const [email, setemail] = useState("")
+    // const [email, setemail] = useState("")
     const [country, setcountry] = useState("")
     const [number, setnumber] = useState("")
     const [age, setage] = useState("")
@@ -224,7 +224,7 @@ const Signup5 = ({ navigation, route }) => {
         const result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Images, // Allow all media types
             allowsEditing: true, // Allows cropping the image
-            aspect: [4, 3], // Aspect ratio of the image
+            aspect: [1, 1], // Aspect ratio of the image
             quality: 1, // Image quality (0 to 1)
 
         });
@@ -326,7 +326,7 @@ const Signup5 = ({ navigation, route }) => {
 
 
             setfullname(data.data.fullName)
-            setemail(data.data.email)
+            // setemail(data.data.email)
             setcountry(data.data.country)
             setnumber(data.data.contactInfo)
             // setDate(tempdate)
@@ -368,32 +368,32 @@ const Signup5 = ({ navigation, route }) => {
         else {
 
 
-            try {
-                const response = await fetch(`${url}api/checkemail`, {
-                    method: 'POST',
-                    body: JSON.stringify({ "email": email }),
-                    headers: {
-                        "Content-Type": "application/json",
-                        accept: "application/json",
-                        "Authorization": `Bearer ${token}`,
-                    },
-                });
-                const data = await response.json();
-                // setloading(false)
-                // console.log(data);
-                // console.log(response.status);
+            // try {
+            //     const response = await fetch(`${url}api/checkemail`, {
+            //         method: 'POST',
+            //         body: JSON.stringify({ "email": email }),
+            //         headers: {
+            //             "Content-Type": "application/json",
+            //             accept: "application/json",
+            //             "Authorization": `Bearer ${token}`,
+            //         },
+            //     });
+            //     const data = await response.json();
+            //     // setloading(false)
+            //     // console.log(data);
+            //     // console.log(response.status);
 
-                if (response.status === 400) {
-                    setEmailUniqueError(true);
-                    return
-                }
-            }
-            catch (err) {
+            //     if (response.status === 400) {
+            //         setEmailUniqueError(true);
+            //         return
+            //     }
+            // }
+            // catch (err) {
 
-            }
-            finally {
+            // }
+            // finally {
 
-            }
+            // }
 
         }
 
@@ -566,7 +566,7 @@ const Signup5 = ({ navigation, route }) => {
                                 }}
                             />
                             {errors.fullname && <Text style={styles.errorText}>{errors.fullname}</Text>}
-                            <TextInput
+                            {/* <TextInput
                                 allowFontScaling={false}
                                 placeholder="Email address *"
                                 placeholderTextColor="#B8B8B8"
@@ -576,7 +576,7 @@ const Signup5 = ({ navigation, route }) => {
                                     check()
                                     setemail(text)
                                 }}
-                            />
+                            /> */}
                             {/* <CalendarPicker  /> */}
                             {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
                             {EmailUniqueError && <Text style={styles.errorText}>*Email ID already registered.</Text>}

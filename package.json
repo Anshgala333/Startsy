@@ -60,7 +60,7 @@
     "invariant": "^2.2.4",
     "jwt-decode": "^4.0.0",
     "moti": "^0.30.0",
-    "npm": "^11.1.0",
+    "npm": "^11.2.0",
     "react": "^18.3.1",
     "react-content-loader": "^7.0.2",
     "react-dom": "^18.3.1",
@@ -96,6 +96,7 @@
     "react-navigation-material-bottom-tabs": "^2.3.5",
     "react-tinder-card": "^1.6.4",
     "recat": "^0.0.0",
+    "router": "^1.3.8",
     "socket.io-client": "^4.8.1"
   },
   "devDependencies": {

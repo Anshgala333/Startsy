@@ -81,7 +81,7 @@ const signupstyles = StyleSheet.create({
     },
     t2: {
         fontFamily: "Roboto",
-        fontSize: scalingfactor * 15,
+        fontSize: scalingfactor * 12,
         color: "#94A3B8",
         textAlign: "center",
         marginBottom: scalingfactor * 30,

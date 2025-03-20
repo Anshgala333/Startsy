@@ -69,7 +69,8 @@ const Signup2 = function ({ navigation, route }) {
             if (type === "Investor") {
                 navigation.navigate("Signup4", { type ,username, password});
             } else {
-                navigation.navigate("Signup5", { type, username, password });
+                navigation.navigate("Email", { type, username, password });
+                // navigation.navigate("Signup5", { type, username, password });
             }
         } catch (err) {
             console.log(err);
