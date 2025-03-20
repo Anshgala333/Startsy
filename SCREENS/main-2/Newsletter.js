@@ -771,7 +771,8 @@ const NewsLetter = React.memo(
                         keyExtractor={(item, index) => index}
                         data={suggestionarray}
                         renderItem={renderSuggestion}
-                        style={[styles.suggestionbox,{paddingBottom:120}]}
+                        style={[styles.suggestionbox]}
+                        contentContainerStyle={{paddingBottom : 100}}
 
                         refreshControl={
                             <RefreshControl
@@ -880,12 +881,12 @@ const NewsLetter = React.memo(
 
                             name="Job"
                             component={() => (
-                                <ScrollView 
-                                    style={{ flex: 1 ,paddingBottom: 50}}
-                                    showsVerticalScrollIndicator={false}
-                                >
+                                // <ScrollView 
+                                //     style={{ flex: 1 ,paddingBottom: 50}}
+                                //     showsVerticalScrollIndicator={false}
+                                // >
                                     <User />
-                                // </ScrollView>
+                                //  </ScrollView>
                             )}
                             // children={(props) => <User />}
     
