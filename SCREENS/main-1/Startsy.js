@@ -217,7 +217,7 @@ export default function Startsy({ navigation, route, token }) {
             }} style={{ flex: 1, height: 100 }}>
 
                 <LinearGradient
-                    colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}
+                    colors={["rgba(33, 34, 35, 1)", "rgba(25, 26, 27, 1)"]}
                     locations={[0, 1]}
                     style={[styles.container]} contentContainerStyle={styles.contentContainer}
                     // style={styles.box}
@@ -639,7 +639,7 @@ export default function Startsy({ navigation, route, token }) {
                             setCardIndex(index)
                         }}
                     />
-                    {loading && <ActivityIndicator color={"#fff"} size={'large'} />}
+                    {/* {loading && <ActivityIndicator color={"#fff"} size={'large'} />} */}
 
                     <View style={styles.iconcontainer}>
 

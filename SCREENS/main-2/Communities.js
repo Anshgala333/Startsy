@@ -1,25 +1,24 @@
 
 
-import { useFocusEffect } from "expo-router";
-import React, { useCallback, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { url } from "../../config.js"
 import { Skeleton } from 'moti/skeleton';
-import { MotiView } from 'moti';
+
 import B1 from "../../assets/icons/b1.js"
 import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, ActivityIndicator, RefreshControl, FlatList, StatusBar, Vibration } from "react-native";
 const Communities = ({ token, navigation }) => {
-    const [filtereddata, setfiltereddata] = useState([])
+    const [filteredData, setFilteredData] = useState([])
     const [refreshing, setRefreshing] = useState(false)
-    const [loading, setloading] = useState(false)
-    const [skeleton, setskeletonloading] = useState(true)
+    const [loading, setLoading] = useState(false)
+    const [skeleton, setSkeletonLoading] = useState(true)
 
-    const [jisuserkosendkarnahaiuskiid, setjisuserkosendkarnahaiuskiid] = useState("")
+    // const [jisuserkosendkarnahaiuskiid, setjisuserkosendkarnahaiuskiid] = useState("")
 
     var [messages, setmessage] = useState(null)
     async function getdata() {
-        setloading(true)
+        setLoading(true)
         try {
-            setskeletonloading(true)
+            setSkeletonLoading(true)
 
             const response = await fetch(`${url}groupChat/getCommunityGroupChatList`, {
                 method: 'GET',
@@ -28,38 +27,34 @@ const Communities = ({ token, navigation }) => {
                     "Authorization": `Bearer ${token}`,
                 },
             });
+            
             const data = await response.json();
 
-            // console.log(data.data, "entire data");
-
-            // console.log(data.data.length, "length");
-            // console.log(data.data[0].community.community.groupPhoto);
-            // console.log(data.data[1].community.community.groupPhoto);
-            // console.log(data.data[2].community.community.groupPhoto);
-            // console.log(data.data[3].community.community.groupPhoto);
-
-            // console.log(response.status);
-
-            const uniqueData = data.data.filter((item, index, self) =>
-                self.findIndex(innerItem => innerItem.community.community.communityName === item.community.community.communityName) === index
-
-            );
-            uniqueData.sort((a, b) => new Date(a.conversation.updatedAt) - new Date(b.conversation.updatedAt));
+         
+            if (response.status != 404) {
 
 
-            const sortedData = uniqueData.sort((a, b) => {
-                if (a.conversation.lastMessage === null && b.conversation.lastMessage === null) return 0;
-                if (a.conversation.lastMessage === null) return 1;
-                if (b.conversation.lastMessage === null) return -1;
+                const uniqueData = data.data.filter((item, index, self) =>
+                    self.findIndex(innerItem => innerItem.community.community.communityName === item.community.community.communityName) === index
 
-                const dateA = new Date(a.conversation.lastMessage.createdAt);
-                const dateB = new Date(b.conversation.lastMessage.createdAt);
-                return dateB - dateA; // Sort in descending order of time
-            });
+                );
+                uniqueData.sort((a, b) => new Date(a.conversation.updatedAt) - new Date(b.conversation.updatedAt));
 
 
-            console.log(uniqueData.length);
-            setfiltereddata(sortedData)
+                const sortedData = uniqueData.sort((a, b) => {
+                    if (a.conversation.lastMessage === null && b.conversation.lastMessage === null) return 0;
+                    if (a.conversation.lastMessage === null) return 1;
+                    if (b.conversation.lastMessage === null) return -1;
+
+                    const dateA = new Date(a.conversation.lastMessage.createdAt);
+                    const dateB = new Date(b.conversation.lastMessage.createdAt);
+                    return dateB - dateA; // Sort in descending order of time
+                });
+
+
+                console.log(uniqueData.length);
+                setFilteredData(sortedData)
+            }
 
 
 
@@ -69,19 +64,12 @@ const Communities = ({ token, navigation }) => {
 
         }
         finally {
-            setskeletonloading(false)
-            setloading(false);
+            setSkeletonLoading(false)
+            setLoading(false);
         }
     }
 
-    // useFocusEffect(
-    //     useCallback(() => {
-    //         console.log("group call");
 
-    //         getdata();
-
-    //     }, [])
-    // )
 
 
 
@@ -96,8 +84,8 @@ const Communities = ({ token, navigation }) => {
 
     async function gotochatscreen(item) {
 
-        console.log(item , "okkkkkkkkkk");
-        
+        // console.log(item, "okkkkkkkkkk");
+
 
 
 
@@ -169,7 +157,12 @@ const Communities = ({ token, navigation }) => {
     return (
         <View style={{ flex: 1, backgroundColor: "#16181a" }}>
             <View style={styles.listContainer}>
-
+                {filteredData?.length == 0 && !loading
+                                &&
+                                <View style={styles.emptyListText}>
+                                    <Text style={{ color: 'gray' }}>No communities found</Text>
+                                </View>
+                            }
 
 
                 {skeleton && <View style={styles.listItem1}>
@@ -217,7 +210,7 @@ const Communities = ({ token, navigation }) => {
 
                     )}
                 </View>}
-                {filtereddata && !skeleton && <FlatList
+                {filteredData && !skeleton && <FlatList
                     refreshControl={<RefreshControl refreshing={refreshing}
                         progressBackgroundColor="#16181a"
                         colors={['#00de62']}
@@ -230,7 +223,7 @@ const Communities = ({ token, navigation }) => {
                     showsVerticalScrollIndicator={false}
                     contentContainerStyle={{ paddingBottom: 100 }}
 
-                    data={filtereddata}
+                    data={filteredData}
                     keyExtractor={(item, index) => index.toString()}
                     // refreshControl={<RefreshControl refreshing={refreshing}
                     //     onRefresh={getdata}
@@ -248,7 +241,7 @@ const Communities = ({ token, navigation }) => {
 
                                     <View style={styles.avatar}>
                                         {(item.community.community.groupPhoto == undefined || item.community.community.groupPhoto == "") && <B1 color={"#ccc"} />}
-                                        {item.community.community.groupPhoto  && <Image style={{width : 44 , height : 44 , borderRadius:30}} source={{ uri: item.community.community.groupPhoto }} />}
+                                        {item.community.community.groupPhoto && <Image style={{ width: 44, height: 44, borderRadius: 30 }} source={{ uri: item.community.community.groupPhoto }} />}
                                     </View>
                                     <View style={styles.textContainer}>
                                         <Text
@@ -402,7 +395,16 @@ const styles = StyleSheet.create({
     listItem1: {
         minHeight: 400,
         backgroundColor: "#16181a"
-    }
+    },
+    emptyListText: {
+        flex: 1,
+        marginHorizontal: "auto",
+        alignSelf: "center",
+        justifyContent: 'center',
+        marginTop: 100,
+        top: '8%',
+        height: height
+    },
 
 
 

@@ -50,6 +50,7 @@ import Login2 from "../../SCREENS/login2.js";
 import Test1 from "../../SCREENS/test1.js";
 import Skeleton1 from "../../SCREENS/main-2/skeleton.js";
 import Skeleton2 from "../../SCREENS/Skeleton2.js";
+import Email from "../../SCREENS/email.js";
 
 import { enableFreeze } from "react-native-screens";
 
@@ -65,7 +66,7 @@ import Editcommunity from "../../SCREENS/edit profile pages/Editcommunity.js";
 // import drop from "../../SCREENS/dropdown.js"
 // import Login1 from "../../SCREENS/logintrial.js";
 import F1 from "../../SCREENS/test.js";
-import F2 from "../../SCREENS/FP2.js/index.js";
+//mport F2 from "../../SCREENS/FP2.js/index.js";
 import KeyboardAvoidingComponent from "../../SCREENS/Keyboard.js";
 import Blur from "../../SCREENS/blur.js"; // trial blur page
 import { useEffect, createContext } from "react";
@@ -154,7 +155,7 @@ export default function App() {
       <StatusBar backgroundColor="#16181a" barStyle={"light-content"} />
       {appisready && (
         <Stack.Navigator
-          initialRouteName="F1"
+          initialRouteName="Email"
           screenOptions={{
             headerStyle: {
               backgroundColor: "#16181a",
@@ -168,10 +169,12 @@ export default function App() {
           }}
         >
           <Stack.Screen name="Green" component={Green} />
-          <Stack.Screen name="LoginTrial" component={Login1} />
+          <Stack.Screen name="LoginTrial"  component={Login1} />
           {/* <Stack.Screen name="ReadMore1" component={ReadMore1} /> */}
 
           <Stack.Screen name="Signup1" component={Signup1} />
+          <Stack.Screen name="Email" component={Email} />
+
           <Stack.Screen name="Signup2" component={Signup2} />
           <Stack.Screen name="Signup3" component={Signup3} />
           <Stack.Screen name="Signup4" component={Signup4} />

@@ -253,11 +253,13 @@ const Editcommunity = ({ navigation }) => {
         if (existingdata) {
 
             var socialMediaLinks = existingdata.roleId.hiddenInfo.socialProof
-            console.log(socialMediaLinks);
+            // console.log(socialMediaLinks);
 
-            console.log(socialMediaLinks[0]);
-            console.log(socialMediaLinks[1]);
-            console.log(socialMediaLinks[2]);
+            // console.log(socialMediaLinks[0]);
+            // console.log(socialMediaLinks[1]);
+            // console.log(socialMediaLinks[2]);
+            console.log(existingdata.roleId.portfolio);
+            
 
             if (socialMediaLinks[0]) {
                 setInstagramUrl(socialMediaLinks[0].url);
@@ -296,13 +298,17 @@ const Editcommunity = ({ navigation }) => {
             })
             setcertificate(modified)
 
+
             var m1 = existingdata.roleId.portfolio.map((e) => {
                 return {
                     id: e._id,
-                    url: e.url
+                    url: e.url,
+                    name : e.name
 
                 }
             })
+            console.log(m1);
+            
             setportfolio(m1)
 
 
@@ -369,7 +375,7 @@ const Editcommunity = ({ navigation }) => {
 
         }
 
-        
+
 
         for (var i = 0; i < certificate.length; i++) {
 
@@ -419,13 +425,20 @@ const Editcommunity = ({ navigation }) => {
             return obj
 
         })
-        var portfolio = portfolio1.map(({ id, url }) => {
-            return {
-                name: "",
-                url: url
-            }
 
+
+        // var portfolio = portfolio1.map(({ id, url }) => {
+        //     return {
+        //         name: "",
+        //         url: url
+        //     }
+
+        // })
+
+        var portfolio = portfolio1.map(({ id, url, name }) => {
+            return { url, name }
         })
+
 
 
 
@@ -468,9 +481,9 @@ const Editcommunity = ({ navigation }) => {
             }
         ]
 
-        
+
         formData.append("socialProof", JSON.stringify(array))
-        
+
         console.log("okkkkkkkkkkkkkkkkkkkhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
 
 
@@ -619,10 +632,10 @@ const Editcommunity = ({ navigation }) => {
     function handleurlchange(id, field, value) {
         var array = portfolio1.map((e) => {
             if (e.id === id) {
-                return { ...e, [field]: value }
+                return { ...e, [field]: value, firsterror: false, seconderror: false }
 
             }
-            else return e
+            else return { ...e, firsterror: false, seconderror: false }
         })
         setportfolio(array);
     }
@@ -639,6 +652,15 @@ const Editcommunity = ({ navigation }) => {
 
 
     ]
+
+    function deleteportfolio(index) {
+        // setportfolio(
+        //     [...portfolio1, { id: Date.now(), url: "", name: "" }]
+        // )
+
+        var array = portfolio1.splice(index, 1)
+        setportfolio(array);
+    }
     return (
 
         <SafeAreaView style={{ flex: 1, backgroundColor: "#16181a" }}>
@@ -800,7 +822,7 @@ const Editcommunity = ({ navigation }) => {
 
 
                             <Text style={[styles.t1, { marginTop: 30 }]}>Portfolio</Text>
-                            {portfolio1.map((items, index) => (
+                            {/* {portfolio1.map((items, index) => (
                                 <View style={styles1.v1} key={items.id}>
                                     <Pressable onPress={addportfolio}>
                                         <Entypo style={styles1.plus1} name="plus" size={24} color="#00DE62" />
@@ -820,6 +842,40 @@ const Editcommunity = ({ navigation }) => {
                                         onChangeText={(text) => { handleurlchange(items.id, "url", text) }}
 
                                     />
+
+                                </View>
+                            ))} */}
+
+
+                            {portfolio1.map((items, index) => (
+                                <View style={styles1.certificate} key={items.id}>
+                                    <Pressable onPress={addportfolio}>
+                                        <Entypo style={styles1.plus} name="plus" size={24} color="#00DE62" />
+                                    </Pressable>
+                                    {index > 0 && <Pressable onPress={() => { deleteportfolio(index) }}>
+                                        <FontAwesome6 name="trash" style={styles1.minus} size={15} color="#00DE62" />
+                                    </Pressable>}
+                                    <TextInput
+                                        allowFontScaling={false}
+                                        placeholder="URL"
+                                        value={items.url}
+                                        // value={items.name}
+                                        placeholderTextColor="#B8B8B8"
+                                        style={[styles1.input, { marginTop: 20, backgroundColor: "transparent"  }]}
+                                        onChangeText={(text) => { handleurlchange(items.id, "url", text) }}
+
+                                    />
+                                    {items.seconderror && <Text style={styles.err}>* please enter this field</Text>}
+                                    <TextInput
+                                        allowFontScaling={false}
+                                        placeholder="Portfolio name"
+                                        value={items.name}
+                                        placeholderTextColor="#B8B8B8"
+                                        style={styles1.input}
+                                        onChangeText={(text) => { handleurlchange(items.id, "name", text) }}
+
+                                    />
+                                    {items.firsterror && <Text style={styles.err}>* please enter this field</Text>}
 
                                 </View>
                             ))}
@@ -987,7 +1043,7 @@ const styles1 = StyleSheet.create({
         // borderBottomWidth: 1,
         // borderRadius : 20,
         // paddingLeft: scalingfactor * 10,
-        borderBottomColor: "#AEAFAF",
+        borderBottomColor: "#ccc",
         fontSize: scalingfactor * 20, // Responsive font size
         color: "#B8B8B8",
         paddingBottom: scalingfactor * 7,
@@ -1133,7 +1189,7 @@ const styles1 = StyleSheet.create({
     minus: {
         position: "absolute",
         right: 45,
-        top: 22,
+        top: 0,
         zIndex: 100
     },
 
@@ -1181,8 +1237,18 @@ const styles1 = StyleSheet.create({
         borderBottomColor: "red",
         borderwidth: 10
 
-
-
+    },
+    certificate : {
+        padding: 4,
+        paddingTop: 15,
+        marginTop: 10,
+        margin: "auto",
+        width: "92%",
+        backgroundColor: "transparent",
+        borderWidth: 3,
+        borderColor: "#666",
+        borderRadius: 10,
+        position: "relative"
     }
 
 

@@ -96,17 +96,17 @@ const Founder1 = ({ navigation }) => {
             console.log(existingdata.roleId.country);
             var First = existingdata.roleId.country[0];
             var Second = existingdata.roleId.country.substring(1,);
-            console.log(First);
-            console.log(Second);
-            var Country1 = First+  Second;
-            console.log(Country1);
+            // console.log(First);
+            // console.log(Second);
+            // var Country1 = First+  Second;
+            // console.log(Country1);
             
             
 
             setImage(existingdata.profilePhoto)
 
             setfullname(existingdata.roleId.fullName)
-            // setcountry(Country1)
+            setcountry(existingdata.roleId.country)
             setphone(existingdata.roleId.contactInfo)
             setskills(existingdata.roleId.skills)
 
@@ -467,10 +467,10 @@ const Founder1 = ({ navigation }) => {
         <SafeAreaView style={{ flex: 1, backgroundColor: "#16181a" }}>
             <ScrollView style={{ flex: 1 }}>
                 <Animated.View style={styles1.header}>
-                    <Text allowFontScaling={false} style={styles1.headertext}>Profile</Text>
+                    <Text allowFontScaling={false} style={styles1.headertext}>Edit Profile</Text>
                 </Animated.View>
                 <View style={{ width: width * 0.98, margin: "auto" }}>
-                    <Text style={styles1.edit}>Edit Profile</Text>
+                    {/* <Text style={styles1.edit}>Edit Profile</Text> */}
                     {/* <Profile /> */}
                     <Pressable onPress={fileupload}>
                         {image != "" ? (
@@ -637,6 +637,7 @@ const styles1 = StyleSheet.create({
         // position : "absolute",
         top: 0,
         left: 0,
+        marginBottom : 15,
         width: "100%",
         zIndex: 1000,
         // backgroundColor : "red",
@@ -649,6 +650,7 @@ const styles1 = StyleSheet.create({
         fontFamily: "myanmar",
         fontWeight: "bold",
         paddingTop: 5,
+        // paddingBottom : 20,
         paddingHorizontal: 20,
     },
     edit: {

@@ -171,6 +171,8 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
   const handlelogin = async (navigation) => {
 
     // console.log("login route called");
+    // console.log(token);
+    
 
 
     setemailerror(false)
@@ -228,7 +230,7 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
           const decoded = jwtDecode(token);
           // console.log(decoded);
           if (decoded.role == "Investor") {
-            navigation.navigate("Main1")
+            navigation.navigate("Main2")
           }
           else {
             navigation.navigate("Main2");

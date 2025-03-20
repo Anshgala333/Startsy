@@ -14,6 +14,7 @@ import Header from '../Header1.js';
 
 import { Skeleton } from 'moti/skeleton';
 import { MotiView } from 'moti';
+import { jwtDecode } from "jwt-decode";
 
 
 const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, navigation, getpost , skeleton , setskeletonloading }) => {
@@ -133,14 +134,14 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
         lastTap.current = now;
     };
 
+    var decode = jwtDecode(token)
+    
+
 
     const renderItem =
         ({ item, index }) => {
             // console.log("render scroll");
-
-
             // const isVideoPlaying = videoStates[item._id] || false;
-
             if (item.user_id == null) {
                 return
             }
@@ -160,10 +161,17 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                 <View style={styles.top} >
                                     <Pressable
                                         onPress={() => { 
-                                            if(item.user_id.role != "Investor"){
-                                                navigation.navigate("Singleuserpage", { token: token, id: item.user_id._id, page: "Startsy" })
-
+                                            console.log(decode.role);
+                                            
+                                            if(decode.role == "Investor"){
+                                                console.log("qpqpqp");
+                                                if(item.user_id.role == "Founder")return
+                                                else  navigation.navigate("Singleuserpage", { token: token, id: item.user_id._id, page: "Startsy" })
                                             }
+                                            else if(item.user_id.role != "Investor"){
+                                                navigation.navigate("Singleuserpage", { token: token, id: item.user_id._id, page: "Startsy" })
+                                            }
+                                           
                                          }}
                                         style={{ display: "flex", flexDirection: "row", width: "100%" }}>
                                         <Image style={styles.userimg} source={{ uri: item.user_id.profilePhoto }} />

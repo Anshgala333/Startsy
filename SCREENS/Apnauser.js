@@ -894,8 +894,14 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
         } catch (error) {
             console.error('Error removing token:', error);
         }
+        console.log("removing");
+        
+        navigation.reset({
+            index: 0,
+            routes: [{ name: "LoginTrial" }],
+        });
 
-        navigation.navigate("LoginTrial")
+        // navigation.navigate("LoginTrial")
 
     }
 
@@ -1019,12 +1025,12 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
     }
 
     const handleswitch = ()=>{
-        if(profilecompletion < 80){
-            showToastWithGravity("Please complete a minimum of 80% of the profile in order to switch role")
-        }
-        else{
-            setattop(false)
-        }
+        // if(profilecompletion < 80){
+        //     showToastWithGravity("Please complete a minimum of 80% of the profile in order to switch role")
+        // }
+        // else{
+        //     setattop(false)
+        // }
         setattop(false)
 
        

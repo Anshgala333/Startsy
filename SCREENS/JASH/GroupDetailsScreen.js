@@ -5,6 +5,7 @@ import { url } from "@/config.js";
 import Profile from "../../assets/icons/profile.js"
 import { jwtDecode } from "jwt-decode";
 
+import * as ImagePicker from 'expo-image-picker';
 
 import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -16,6 +17,7 @@ const GroudDetailsScreen = ({ route }) => {
 
     var communityAdmin = item.communityAdmin;
     var communityID = item._id;
+
 
     const mainpagebottomsheet = useRef();
     const snapPoints = useMemo(() => ['20%'], []);
@@ -163,6 +165,74 @@ const GroudDetailsScreen = ({ route }) => {
 
     }
 
+    // var [image  , setImage] = useState("")
+    var [groupImage, setgroupImage] = useState("")
+
+    useEffect(() => {
+        if (item.groupPhoto) {
+            setgroupImage(item.groupPhoto)
+        }
+    }, [item])
+
+    const uploadImage = async () => {
+        console.log("file upload");
+
+
+        const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (permissionResult.granted === false) {
+            alert("Permission to access camera roll is required!");
+            return;
+        }
+
+        const result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images, // Allow all media types
+            allowsEditing: true, // Allows cropping the image
+            aspect: [1, 1], // Aspect ratio of the image
+            quality: 1, // Image quality (0 to 1)
+
+        });
+
+
+        if (!result.canceled) {
+            const imageUri = result.assets[0].uri;
+            console.log(imageUri);
+            var final = new FormData()
+
+            if (imageUri) {
+                final.append("media", {
+                    uri: imageUri,
+                    type: "image/jpeg",
+                    name: `image_${Date.now()}.jpg`,
+
+                })
+            }
+
+            try {
+
+                const response = await fetch(`${url}posts/groupPhoto/${communityID}`, {
+                    method: 'POST',
+                    body: final,
+                    headers: {
+                        accept: "application/json",
+                        "Authorization": token,
+                    },
+                });
+                const data = await response.json();
+                console.log(data);
+
+
+            }
+            catch (err) {
+                console.log(err);
+            }
+
+            setgroupImage(imageUri);
+
+
+        }
+
+    }
+
 
     const renderItem = ({ item }) => {
         return (
@@ -200,14 +270,17 @@ const GroudDetailsScreen = ({ route }) => {
     const ListHeader = () => (<View style={{ alignItems: "center", marginBottom: 10 }}>
 
 
-        {item.groupPhoto && <Image
-            source={{ uri: item.groupPhoto }}
-            style={{ width: 120, height: 120, borderRadius: 100 }}
-        />}
-
-        {(item.groupPhoto == "" || item.groupPhoto == undefined) &&
-            <Profile />
-        }
+        <Pressable onPress={uploadImage}>
+            {groupImage && <Image
+                source={{ uri: groupImage }}
+                style={{ width: 120, height: 120, borderRadius: 100 }}
+            />}
+        </Pressable>
+        <Pressable onPress={uploadImage} style={{ maxHeight: 120 }}>
+            {!groupImage &&
+                <Profile />
+            }
+        </Pressable>
         <Text style={styles.groupName}>
             {item.communityName}
         </Text>

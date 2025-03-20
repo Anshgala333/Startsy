@@ -43,7 +43,7 @@ const Signup12 = ({ navigation, route }) => {
 
     const validateInputs = () => {
         const newErrors = {};
-        if (!sliderrange1) newErrors.years = "Please select the years of experience.";
+        if (sliderrange1 < 0) newErrors.years = "Please select the years of experience.";
         // if (!areaofinterest) newErrors.areaOfInterest = "Please select an area of interest.";
         if (!startupstage) newErrors.startupStage = "Please select a startup stage.";
         if (!sector) newErrors.sector = "Please select a preferred sector.";
