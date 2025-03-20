@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
-import { View, Text, Image,Linking, FlatList, StatusBar, ActivityIndicator, RefreshControl, StyleSheet, BackHandler, SafeAreaView, ScrollView, Pressable, TextInput, Vibration, TouchableOpacity } from "react-native";
+import { View, Text, Image, Linking, FlatList, StatusBar, ActivityIndicator, RefreshControl, StyleSheet, BackHandler, SafeAreaView, ScrollView, Pressable, TextInput, Vibration, TouchableOpacity } from "react-native";
 import Entypo from '@expo/vector-icons/Entypo';
 import EvilIcons from '@expo/vector-icons/EvilIcons'; import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import Banner from "../assets/icons/banner.js"
@@ -212,16 +212,6 @@ const Singleprofilepage = ({ props, openshare }) => {
       });
       const data = await response.json();
       console.log(data);
-      
-      // console.log(data.data.posts[0]);
-      // console.log(data.data.posts[0]);
-
-      // console.log(data.status, "abhi ka");
-
-      // console.log(data.data.user_id);
-      // console.log(response.status);
-      // console.log(data.data.posts, "yeh saara data hai");
-      // console.log(data.data);
 
 
 
@@ -232,13 +222,13 @@ const Singleprofilepage = ({ props, openshare }) => {
       var decode = jwtDecode(token)
       var data1 = data.data.posts.map(e => {
 
-        console.log(e);
+        // console.log(e);
 
         var object = { ...e, isliked: e.likedBy ? e.likedBy.includes(decode._id) : false, Applied: e.communityPost ? e.communityPost.communityMembers.includes(decode._id) : false, Jobapplied: e.jobPosts ? e.jobPosts.jobApplicants.includes(decode._id) : false }
         return object
       })
 
-      console.log(data1);
+      // console.log(data1);
 
 
 
@@ -258,6 +248,7 @@ const Singleprofilepage = ({ props, openshare }) => {
 
       setuserdata(data.data)
 
+
       setinstaurl(data.data.hiddenInfo.socialProof[0]?.url)
       setlinkedInUrl(data.data.hiddenInfo.socialProof[1]?.url)
       setyturl(data.data.hiddenInfo.socialProof[2]?.url)
@@ -265,7 +256,7 @@ const Singleprofilepage = ({ props, openshare }) => {
 
       setImage(data.data.user_id.bannerImage)
 
-      // console.log(data.status, "oiuy");
+      console.log(data.status, "oiuy");
       // setImage(data.data.user_id.bannerImage)
       setconnecteddata(data.status)
 
@@ -567,7 +558,37 @@ const Singleprofilepage = ({ props, openshare }) => {
 
   async function sendfollowrequest(id) {
 
-    if (connecteddata == "Connected") {
+    console.log(connecteddata);
+    console.log(connecteddata);
+    console.log(connecteddata);
+    console.log(connecteddata);
+    console.log(connecteddata);
+
+
+    if (connecteddata == "Followed") {
+      console.log("connect");
+      setconnecteddata("Follow")
+
+
+      async function makesubmit() {
+
+        try {
+          const response = await fetch(`${url}founder/rejectRequest/${id}`, {
+            method: 'POST',
+            headers: {
+              Authorization: `Bearer ${token}`,
+            }
+          })
+          const data = await response.json();
+          console.log(data);
+
+        }
+        catch (err) {
+          console.log(err);
+
+        }
+      }
+      makesubmit()
       return
     }
 
@@ -589,7 +610,7 @@ const Singleprofilepage = ({ props, openshare }) => {
       console.log(response.status);
 
       // setfollowstatus("request sent")
-      setconnecteddata("Request sent")
+      setconnecteddata("Pending Request")
 
 
     }
@@ -693,9 +714,17 @@ const Singleprofilepage = ({ props, openshare }) => {
               {userdata.fullName}  <Text style={styles1.role}>{userdata.user_id.role == "CommunityMember" ? "Member" : userdata.user_id.role}</Text>
             </Text>
 
-            {!mypage && <Pressable onPress={() => { sendfollowrequest(userdata.user_id._id) }} style=
-              {connecteddata == "Follow" ? styles1.f1 : styles1.f2}
-            ><Text style={connecteddata != "Follow" ? styles1.ft1 : styles1.ft}>{tellConnection(connecteddata)}</Text></Pressable>}
+            {!mypage &&
+              <Pressable onPress={() => { sendfollowrequest(userdata.user_id._id) }} 
+              style={connecteddata == "Follow" ? styles1.f1 : styles1.f2}
+              >
+                {/* <Text style={connecteddata != "Follow" ? styles1.ft1 : styles1.ft}>{tellConnection(connecteddata)}</Text>
+                <Text style={connecteddata != "Follow" ? styles1.ft1 : styles1.ft}>{tellConnection(connecteddata)}</Text>
+                <Text style={connecteddata != "Follow" ? styles1.ft1 : styles1.ft}>{tellConnection(connecteddata)}</Text> */}
+                {connecteddata == "Follow" && <Text style={{color : "#16181a"}}>{tellConnection(connecteddata)}</Text>}
+                {connecteddata == "Pending Request" && <Text style={{color : "#ccc"}}>{tellConnection(connecteddata)}</Text>}
+                {connecteddata == "Followed" && <Text style={{color : "#ccc"}}>{tellConnection(connecteddata)}</Text>}
+              </Pressable>}
 
             {mypage && <Pressable onPress={() => { sendfollowrequest(userdata.user_id._id) }} style={styles1.f1}><Text style={styles1.ft}>{tellConnection(connecteddata)}</Text></Pressable>}
             {/* <Text style={styles1.goal}>{userdata.goal}</Text> */}
@@ -1456,14 +1485,14 @@ const styles1 = StyleSheet.create({
     backgroundColor: "#24272A"
   },
 
-  ss :{
-    display : "flex",
-    flexDirection : "row",
-    gap : 10,
-    paddingLeft : 10,
+  ss: {
+    display: "flex",
+    flexDirection: "row",
+    gap: 10,
+    paddingLeft: 10,
     marginRight: 18,
-    marginTop : -10
-},
+    marginTop: -10
+  },
 
 
 })

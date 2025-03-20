@@ -771,8 +771,7 @@ const NewsLetter = React.memo(
                         keyExtractor={(item, index) => index}
                         data={suggestionarray}
                         renderItem={renderSuggestion}
-                        style={[styles.suggestionbox]}
-                        contentContainerStyle={{paddingBottom : 100}}
+                        style={[styles.suggestionbox,{paddingBottom:120}]}
 
                         refreshControl={
                             <RefreshControl
