@@ -59,7 +59,7 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
     const fetchData = async () => {
         var route = ""
         const decoded = jwtDecode(token);
-       
+
 
 
         if (decoded.role == "Founder") {
@@ -91,7 +91,7 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
                     }
                 );
                 const result = await response.json();
-                
+
 
                 const uniqueData = result.filter((item, index, self) =>
                     self.findIndex(innerItem => innerItem.user.userName === item.user.userName) === index
@@ -108,13 +108,12 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
                     return dateB - dateA; // Sort in descending order of time
                 });
 
-           
+
                 if (response.status === 200) {
-                    // You can update the data state here if needed
-                    // setData(result); // Example, you can handle the response data
+
                     setData(sortedData)
                     setfiltereddata(sortedData)
-         
+
 
 
 
@@ -169,7 +168,7 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
 
 
 
-                navigation.push("Chat", { item, messages: result.data?.messages || [], token, navigation, photo1: result.senderProfilePhoto, photo2: result.recieverProfilePhoto });
+                navigation.push("Chat", { item, messages: result.data?.messages || [], token, navigation, photo1: result.senderProfilePhoto, photo2: result.recieverProfilePhoto  , tabnavigation : navigation});
                 // navigation.push("Ansh", { item, messages: result.data?.messages || [], token, navigation, photo1: result.senderProfilePhoto, photo2: result.recieverProfilePhoto });
 
                 // navigation.push("Ansh");
@@ -222,17 +221,25 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
 
     return (
         <View style={styles.listContainer}>
-            {data?.length == 0 && !loading
-                &&
-                <View style={styles.emptyListText}>
-                    <Text style={{ color: 'gray' }}>No conversations yet</Text>
-                </View>
-            }
+
             {filtereddata && !skeleton && <FlatList
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{ paddingBottom: 100 }}
 
+                ListHeaderComponent={
+                    <>
 
+                        {
+                            filtereddata.length == 0 ?
+                                <View style={styles.emptyListContainer}>
+                                    <Text style={[{ color: 'gray' }, styles.emptyListText]}>No conversations yet</Text>
+                                </View>
+                                : null
+                        }
+
+
+                    </>
+                }
                 data={filtereddata}
                 keyExtractor={(item, index) => index.toString()}
                 refreshControl={<RefreshControl refreshing={refreshing}
@@ -526,13 +533,24 @@ const styles = StyleSheet.create({
     },
 
     emptyListText: {
-        flex: 1,
-        marginHorizontal: "auto",
+        textAlign: "center",
+        color: "#666",
         alignSelf: "center",
-        justifyContent: 'center',
-        marginTop: 100,
-        top: '8%',
-        height: height
+        justifyContent: "center",
+        // position : "absolute",
+        elevation: 100,
+        bottom: 0,
+
+        fontSize: 16,
+        paddingTop: 250,
+    },
+
+    emptyListContainer: {
+
+        flex: 1,
+        // height:height,
+
+
     },
 
 

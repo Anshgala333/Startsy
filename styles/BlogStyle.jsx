@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         color: "white",
         padding: 10,
+        paddingBottom:25,
         textAlignVertical: "top",
     },
     button: {

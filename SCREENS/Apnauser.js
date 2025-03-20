@@ -407,7 +407,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                     return object
                 })
                 if (data1) {
-                    setPosts(data1)
+                    setPosts(data1.reverse())
                 }
                 else {
                     setPosts([])

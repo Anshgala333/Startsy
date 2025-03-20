@@ -57,7 +57,7 @@ import Editcommunity from "../SCREENS/edit profile pages/Editcommunity.js";
 // import drop from "../../SCREENS/dropdown.js"
 // import Login1 from "../../SCREENS/logintrial.js";
 import F1 from "../SCREENS/test.js";
-import F2 from "../SCREENS/F2.js";
+// import F2 from "../SCREENS/F2.js";
 import KeyboardAvoidingComponent from "../SCREENS/Keyboard.js";
 import Blur from "../SCREENS/blur.js"; // trial blur page
 import { useEffect, createContext } from "react";
@@ -77,6 +77,10 @@ import BlogPage from "../SCREENS/BlogPage.jsx"
 import MediaPost from "../SCREENS/MediaPost.js"
 import JobPostingPage from "../SCREENS/JobPosting.jsx"
 // import ReadMore1 from "../../SCREENS/trial-1.js";
+
+
+import  ViewSendedPost from '../SCREENS/JASH/View post/ViewSendedPost.jsx'
+
 
 const Stack = createNativeStackNavigator();
 SystemUI.setBackgroundColorAsync("#16181a");
@@ -111,18 +115,14 @@ enableFreeze(true);
 // export const Global = createContext("ok");
 
 export default function App() {
-  // <StatusBar style="dark" />
+  
 
   useEffect(() => {
     StatusBar.setBackgroundColor("#16181a");
     StatusBar.setBarStyle("light-content");
   }, []);
 
-  // SplashScreen.preventAutoHideAsync();
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //   }, 300);
-  // }, []);
+  
 
   useFocusEffect(() => {
     StatusBar.setBackgroundColor("#16181a");
@@ -259,6 +259,11 @@ export default function App() {
             name="Singleprofilepage"
             component={Singleprofilepage}
           />
+
+
+          {/* <Stack.Screen name="ViewSendedPost" component={ViewSendedPost}/> */}
+
+
         </Stack.Navigator>
       )}
       {/* </View> */}

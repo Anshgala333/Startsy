@@ -28,30 +28,30 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
 
 
 
-    useEffect(() => {
-        console.log("allpost re render os scroll page 1");
-    }, [allpost])
-    useEffect(() => {
-        console.log("setallpost re render of scroll page");
-    }, [setallpost])
     // useEffect(() => {
-    //     console.log("opencomment re render of scroll page");
-    // }, [opencomment])
-    useEffect(() => {
-        console.log("openshare re render of scroll page");
-    }, [openshare])
-    useEffect(() => {
-        console.log("getpost re render of scroll page of scroll page");
-    }, [getpost])
-    useEffect(() => {
-        console.log("scrollY re render of scroll page of page 1");
-    }, [scrollY])
-    useEffect(() => {
-        console.log("scroll okkkkk re render of scroll page");
-    }, [scroll])
-    useEffect(() => {
-        console.log("navigation re render of scroll page");
-    }, [navigation])
+    //     // console.log("allpost re render os scroll page 1");
+    // }, [allpost])
+    // useEffect(() => {
+    //     // console.log("setallpost re render of scroll page");
+    // }, [setallpost])
+    // // useEffect(() => {
+    // //     console.log("opencomment re render of scroll page");
+    // // }, [opencomment])
+    // useEffect(() => {
+    //     console.log("openshare re render of scroll page");
+    // }, [openshare])
+    // useEffect(() => {
+    //     console.log("getpost re render of scroll page of scroll page");
+    // }, [getpost])
+    // useEffect(() => {
+    //     console.log("scrollY re render of scroll page of page 1");
+    // }, [scrollY])
+    // useEffect(() => {
+    //     console.log("scroll okkkkk re render of scroll page");
+    // }, [scroll])
+    // useEffect(() => {
+    //     console.log("navigation re render of scroll page");
+    // }, [navigation])
 
     useFocusEffect(useCallback(() => {
         console.log("focused ");

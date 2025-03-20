@@ -1,6 +1,6 @@
 
 
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { url } from "../../config.js"
 import { Skeleton } from 'moti/skeleton';
 
@@ -27,10 +27,10 @@ const Communities = ({ token, navigation }) => {
                     "Authorization": `Bearer ${token}`,
                 },
             });
-            
+
             const data = await response.json();
 
-         
+
             if (response.status != 404) {
 
 
@@ -157,12 +157,7 @@ const Communities = ({ token, navigation }) => {
     return (
         <View style={{ flex: 1, backgroundColor: "#16181a" }}>
             <View style={styles.listContainer}>
-                {filteredData?.length == 0 && !loading
-                                &&
-                                <View style={styles.emptyListText}>
-                                    <Text style={{ color: 'gray' }}>No communities found</Text>
-                                </View>
-                            }
+
 
 
                 {skeleton && <View style={styles.listItem1}>
@@ -214,6 +209,8 @@ const Communities = ({ token, navigation }) => {
                     refreshControl={<RefreshControl refreshing={refreshing}
                         progressBackgroundColor="#16181a"
                         colors={['#00de62']}
+
+
                         onRefresh={() => {
                             Vibration.vibrate(100)
                             getdata()
@@ -222,7 +219,19 @@ const Communities = ({ token, navigation }) => {
                     />}
                     showsVerticalScrollIndicator={false}
                     contentContainerStyle={{ paddingBottom: 100 }}
+                    ListHeaderComponent={
 
+                        <>
+                            {
+                                filteredData.length == 0 ?
+                                    <View style={styles.emptyListContainer}>
+                                        <Text style={[{ color: 'gray' }, styles.emptyListText]}>No conversations yet</Text>
+                                    </View>
+                                    : null
+                            }
+
+                        </>
+                    }
                     data={filteredData}
                     keyExtractor={(item, index) => index.toString()}
                     // refreshControl={<RefreshControl refreshing={refreshing}
@@ -404,6 +413,27 @@ const styles = StyleSheet.create({
         marginTop: 100,
         top: '8%',
         height: height
+    },
+
+    emptyListText: {
+        textAlign: "center",
+        color: "#666",
+        alignSelf: "center",
+        justifyContent: "center",
+        // position : "absolute",
+        elevation: 100,
+        bottom: 0,
+
+        fontSize: 16,
+        paddingTop: 250,
+    },
+
+    emptyListContainer: {
+
+        flex: 1,
+        // height:height,
+
+
     },
 
 
