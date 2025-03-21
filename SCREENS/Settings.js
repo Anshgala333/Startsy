@@ -1,13 +1,15 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { jwtDecode } from "jwt-decode";
-import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
+import React, { useEffect } from "react";
+import { View, Text, TouchableOpacity, StyleSheet, Image, BackHandler } from "react-native";
 import { List, Avatar, Divider } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 const Settings = ({ navigation , route}) => {
 
-  var {token} = route.params
+  var { token , tabnavigation } = route.params
+  // console.log(route.params);
+  
 
   var decode = jwtDecode(token)
 
@@ -22,41 +24,50 @@ const Settings = ({ navigation , route}) => {
     editprofilepage = "Editcommunity";
   }
 
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+      // navigation.navigate("Apnauser")
+
+    });
+
+    return () => backHandler.remove();
+  }, []);
+
   async function Logout() {
-          try {
-              await AsyncStorage.removeItem('accessToken'); // Replace 'token' with your key
-          } catch (error) {
-              console.error('Error removing token:', error);
-          }
-          console.log("removing");
-          
-          navigation.reset({
-              index: 0,
-              routes: [{ name: "LoginTrial" }],
-          });
-  
-          // navigation.navigate("LoginTrial")
-  
-      }
+    try {
+      await AsyncStorage.removeItem('accessToken'); // Replace 'token' with your key
+    } catch (error) {
+      console.error('Error removing token:', error);
+    }
+    console.log("removing");
+
+    navigation.reset({
+      index: 0,
+      routes: [{ name: "LoginTrial" }],
+    });
+
+    // navigation.navigate("LoginTrial")
+
+  }
 
   return (
     <View style={styles.container}>
       <View style={styles.bottom}>
         <TouchableOpacity style={styles.option} onPress={() => {
           console.log(editprofilepage);
-          
+
           navigation.navigate(editprofilepage)
         }}>
           <Icon name="account-edit" size={24} color="#00DE62" />
           <Text style={styles.optionText}>Edit Profile</Text>
         </TouchableOpacity>
 
-        {/* <TouchableOpacity style={styles.option} onPress={() => navigation.navigate("SavedPosts")}>
+        <TouchableOpacity style={styles.option} onPress={()=>navigation.navigate("SavedPost",{tabnavigation})}>
           <Icon name="bookmark-outline" size={24} color="#00DE62" />
           <Text style={styles.optionText}>Saved Posts</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.option} onPress={() => alert("Switch Account")}>
+        {/* <TouchableOpacity style={styles.option} onPress={() => alert("Switch Account")}>
           <Icon name="account-switch" size={24} color="#00DE62" />
           <Text style={styles.optionText}>Switch Account</Text>
         </TouchableOpacity> */}

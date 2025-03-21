@@ -11,32 +11,88 @@ import { GlobalContext } from "@/Global/globalcontext.js";
 import { useFocusEffect } from "expo-router";
 import Header from '../Header1.js';
 // import { Skeleton } from "moti/skeleton/index.js";
-
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Skeleton } from 'moti/skeleton';
 import { MotiView } from 'moti';
 import { jwtDecode } from "jwt-decode";
 
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
-const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, navigation, getpost , skeleton , setskeletonloading }) => {
+const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, navigation, getpost, skeleton, setskeletonloading }) => {
 
 
     const [refreshing11, setRefreshing11] = useState(false)
+    const [savedPosts, setSavedPosts] = useState({});
+    const [isSaved, setIsSaved] = useState(false);
+
+
+
     // const [skeleton, setskeletonloading] = useState(true)
+    // .......................................................................................
+
+    const toggleSavePost = async (id ,index) => {
+        console.log(id);
+        console.log(index);
+        
+        console.log("book");
+        setallpost(prevPosts =>
+            prevPosts.map((e, i) => {
+                if (i === index) {
+                    return { ...e, issaved: !e.issaved };
+                }
+                return e;
+            })
+        );
+
+        var toset = !allpost[index].issaved
+       
+        
+        var status = toset ? "remove" : "add"
 
 
-    console.log("scroll re render");
+        
+        try {
+
+            const response = await fetch(`${url}test/savePost/${id}/${status}`, {
+                method: 'POST',
+                body: "",
+                headers: {
+                    "Content-Type": "application/json",
+                    accept: "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+            });
+            const data = await response.json();
+            console.log(data);
+            console.log(response.status);
+
+        }
+        catch (err) {
+            console.log(err);
+
+        }
+
+
+
+
+        //setIsSaved(!isSaved);
+    };
+
+    // ........................................................................................
+    // console.log("scroll re render");
 
 
 
     // useEffect(() => {
-    //     // console.log("allpost re render os scroll page 1");
+    //     console.log("allpost re render os scroll page 1");
     // }, [allpost])
     // useEffect(() => {
-    //     // console.log("setallpost re render of scroll page");
+    //     console.log("setallpost re render of scroll page");
     // }, [setallpost])
-    // // useEffect(() => {
-    // //     console.log("opencomment re render of scroll page");
-    // // }, [opencomment])
+    // useEffect(() => {
+    //     console.log("opencomment re render of scroll page");
+    // }, [opencomment])
+
     // useEffect(() => {
     //     console.log("openshare re render of scroll page");
     // }, [openshare])
@@ -53,11 +109,11 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
     //     console.log("navigation re render of scroll page");
     // }, [navigation])
 
-    useFocusEffect(useCallback(() => {
-        console.log("focused ");
-        scrollY.setValue(0)
+    // useFocusEffect(useCallback(() => {
+    //     console.log("focused ");
+    //     scrollY.setValue(0)
 
-    }, []))
+    // }, []))
 
 
 
@@ -72,8 +128,9 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
     const data = useContext(GlobalContext)
     var token = data.globaldata.token
 
+    // .............................................
 
-
+    // ................................................
     var [count, setcount] = useState(0)
     async function upvotepost(id, index) {
         Vibration.vibrate(50)
@@ -135,7 +192,7 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
     };
 
     var decode = jwtDecode(token)
-    
+
 
 
     const renderItem =
@@ -160,19 +217,19 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                 {/* <View onTouchStart={closebottomsheet} style={styles.box}> */}
                                 <View style={styles.top} >
                                     <Pressable
-                                        onPress={() => { 
+                                        onPress={() => {
                                             console.log(decode.role);
-                                            
-                                            if(decode.role == "Investor"){
+
+                                            if (decode.role == "Investor") {
                                                 console.log("qpqpqp");
-                                                if(item.user_id.role == "Founder")return
-                                                else  navigation.navigate("Singleuserpage", { token: token, id: item.user_id._id, page: "Startsy" })
+                                                if (item.user_id.role == "Founder") return
+                                                else navigation.navigate("Singleuserpage", { token: token, id: item.user_id._id, page: "Startsy" })
                                             }
-                                            else if(item.user_id.role != "Investor"){
+                                            else if (item.user_id.role != "Investor") {
                                                 navigation.navigate("Singleuserpage", { token: token, id: item.user_id._id, page: "Startsy" })
                                             }
-                                           
-                                         }}
+
+                                        }}
                                         style={{ display: "flex", flexDirection: "row", width: "100%" }}>
                                         <Image style={styles.userimg} source={{ uri: item.user_id.profilePhoto }} />
                                         <View style={styles.userdetail}>
@@ -217,10 +274,40 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                             <FontAwesome style={{ marginLeft: 4 }} name="comment-o" size={30} color="#ccc" />
                                         </Pressable>
                                     </View>
+                                    {/* ............................................................................................ */}
+
+
+                                    <View style={{
+                                        flexDirection: "row",
+                                        justifyContent: "center",    // Center horizontally
+                                        alignItems: "center",        // Center vertically
+                                        marginLeft:"175"       
+                                    }}>
+                                        <TouchableOpacity onPress={() => toggleSavePost(item._id ,index)}>
+                                            {item.issaved ? (
+                                                <MaterialIcons name="bookmark-border" size={30} color="#ccc" />
+                                            ) : (
+                                                <MaterialCommunityIcons
+                                                    name="bookmark"
+                                                    size={30}
+                                                    color="#ccc"             // Gray when unsaved
+                                                   
+                                                />
+                                            )}
+                                        </TouchableOpacity>
+                                    </View>
+
+
+
+                                    {/* ............................................................................................ */}
+
+
                                     <Pressable onPress={() => {
                                         Vibration.vibrate(20)
                                         openshare(item._id)
-                                    }}><Share style={{ marginTop: 5, marginRight: 10, right: 0 }} /></Pressable>
+                                    }}>
+                                        <Share style={{ marginTop: 5, marginRight: 10, right: 0 }} />
+                                    </Pressable>
 
 
                                 </View>
@@ -269,7 +356,7 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
 
 
 
-            {skeleton && <View style={{ flex: 1, marginTop : 110, alignItems: "center" }}>
+            {skeleton && <View style={{ flex: 1, marginTop: 110, alignItems: "center" }}>
 
                 {/* <View> */}
                 <View style={{ display: "flex", flexDirection: "row", gap: 5, width: "92%", alignItems: "center" }}>
@@ -416,7 +503,7 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
             </View>}
 
 
-           {!skeleton &&  <FlatList
+            {!skeleton && <FlatList
                 showsVerticalScrollIndicator={false}
                 // initialNumToRender={5}
                 // windowSize={10}
@@ -465,6 +552,4 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
         </SafeAreaView>
     )
 }
-
-
-export default memo(Scroll)
+export default memo(Scroll) 

@@ -791,41 +791,32 @@ const NewsLetter = React.memo(
             )
             return (
 
+                <View style={{flex:1,backgroundColor:"#16181a" }}>
 
-                <View style={{ flex: 1, backgroundColor: '#16181a' }}>
-                   
-                                     
-                            <FlatList
-                                keyExtractor={(item, index) => index}
-                                data={suggestionarray}
-                                renderItem={renderSuggestion}
-                                style={[styles.suggestionbox]}
-                                contentContainerStyle={{ paddingBottom: 100 }}
-
-                                refreshControl={
-                                    <RefreshControl
-                                        progressBackgroundColor="#16181a"
-                                        colors={['#00de62']}
-                                        onRefresh={() => {
-                                            setRefreshing1(true)
-                                            // Vibration.vibrate(200)
-                                            searchUser()
-
-                                        }} refreshing={refreshing1} />
-                                }
+               
+                    <FlatList
+                        keyExtractor={(item, index) => index}
+                        data={suggestionarray}
+                        renderItem={renderSuggestion}
+                        style={[styles.suggestionbox,{paddingBottom:120}]}
+                        contentContainerStyle={{paddingBottom:100}}
 
 
-                                // contentContainerStyle={{ paddingBottom: 66 }}
+                        refreshControl={
+                            <RefreshControl
+                                progressBackgroundColor="#16181a"
+                                colors={['#00de62']}
+                                onRefresh={() => {
+                                    setRefreshing1(true)
+                                    Vibration.vibrate(200)
+                                    searchUser()
 
-                            >
+                                }} refreshing={refreshing1} />
+                        }
 
 
-
-                            </FlatList>
-                        </View>
-                    
-
-
+                   />
+                    </View>
                    
 
             )
@@ -864,21 +855,23 @@ return (
         <View style={{ flex: 1, height: "100%", minHeight: 500, backgroundColor: "#16181a" }}>
 
 
-            <Tab.Navigator
-                //  detachInactiveScreens={true}
+                    <Tab.Navigator
+                        //  detachInactiveScreens={true}
+                        
+                        screenOptions={({ route }) => ({
+                            unmountOnBlur: false,
 
-                screenOptions={({ route }) => ({
-                    unmountOnBlur: false,
+                            // animationEnabled: true,
+                            tabBarStyle: {
+                                backgroundColor: "#16181a",
+                                justifyContent: "space-between",
+                                display: "flex",
+                                width: "98%",
+                                margin: "auto",
+                            
+                                elevation: 0,
+                            },
 
-                    // animationEnabled: true,
-                    tabBarStyle: {
-                        backgroundColor: "#16181a",
-                        justifyContent: "space-between",
-                        display: "flex",
-                        width: "98%",
-                        margin: "auto",
-                        elevation: 0,
-                    },
 
                     tabBarIndicatorStyle: {
                         backgroundColor: "#00DE62",
@@ -914,39 +907,44 @@ return (
 
                 <Tab.Screen
 
-                    name="Job"
-                    component={() => (
-                        // <ScrollView 
-                        //     style={{ flex: 1 ,paddingBottom: 50}}
-                        //     showsVerticalScrollIndicator={false}
-                        // >
-                        <User />
-                        //  </ScrollView>
-                    )}
-                    // children={(props) => <User />}
 
-                    options={{
-                        lazy: false,
-                        unmountOnBlur: false,
-                        freezeOnBlur: true,
-                        tabBarLabel: ({ focused }) => (
-                            <Text allowFontScaling={false} style={[
-                                styles.tabbarpill, {
-                                    fontSize: 18,
-                                    fontFamily: "Alata",
-                                    color: focused ? "#00DE62" : "#808080",
-                                    borderColor: focused ? "#00DE62" : "#808080",
-                                }
-                            ]}> Users
-                            </Text>
-                        ),
+                            name="Job"
+                            component={() => (
+                                // <ScrollView 
+                                //     style={{ flex: 1 ,paddingBottom: 50}}
+                                //     showsVerticalScrollIndicator={false}
+                                // >
+                                    <User />
+                                //  </ScrollView>
+                            )}
+                            // children={(props) => <User />}
+    
+                            options={{
+                                lazy: false,
+                                unmountOnBlur: false,
+                                freezeOnBlur: true,
+                                
+                                tabBarLabel: ({ focused }) => (
+                                    <Text allowFontScaling={false} style={[
+                                        styles.tabbarpill, {
+                                            fontSize: 18,
+                                            fontFamily: "Alata",
+                                            color: focused ? "#00DE62" : "#808080",
+                                            borderColor: focused ? "#00DE62" : "#808080",
+                                        }
+                                    ]}> Users
+                                    </Text>
+                                ),
 
-                    }}
-                />
-            </Tab.Navigator>
-        </View>
-    </SafeAreaView>
-)
+                            }}
+                        
+                        />
+                    </Tab.Navigator>
+                    
+                </View>
+                
+            </SafeAreaView>
+        )
     }
 )
 
