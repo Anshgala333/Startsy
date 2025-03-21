@@ -7,7 +7,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 const settings = ({ navigation, route }) => {
 
-  var { token } = route.params
+  var { token , tabnavigation } = route.params
 
   var decode = jwtDecode(token)
 
@@ -60,12 +60,12 @@ const settings = ({ navigation, route }) => {
           <Text style={styles.optionText}>Edit Profile</Text>
         </TouchableOpacity>
 
-        {/* <TouchableOpacity style={styles.option} onPress={() => navigation.navigate("SavedPosts")}>
+        <TouchableOpacity style={styles.option} onPress={() => navigation.navigate("SavedPost" , {tabnavigation})}>
           <Icon name="bookmark-outline" size={24} color="#00DE62" />
           <Text style={styles.optionText}>Saved Posts</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.option} onPress={() => alert("Switch Account")}>
+        {/* <TouchableOpacity style={styles.option} onPress={() => alert("Switch Account")}>
           <Icon name="account-switch" size={24} color="#00DE62" />
           <Text style={styles.optionText}>Switch Account</Text>
         </TouchableOpacity> */}

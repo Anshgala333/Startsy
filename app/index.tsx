@@ -78,6 +78,8 @@ import BlogPage from "../SCREENS/BlogPage.jsx"
 import MediaPost from "../SCREENS/MediaPost.js"
 import JobPostingPage from "../SCREENS/JobPosting.jsx"
 // import ReadMore1 from "../../SCREENS/trial-1.js";
+import AllPostsScreen from '../SCREENS/SavedPost.js'
+
 
 const Stack = createNativeStackNavigator();
 SystemUI.setBackgroundColorAsync("#16181a");
@@ -85,7 +87,7 @@ SystemUI.setBackgroundColorAsync("#16181a");
 import { enableFreeze } from "react-native-screens";
 import { enableScreens } from 'react-native-screens';
 import QuestionReply from "@/SCREENS/main-2/QuestionReply.js";
-import settings from "@/SCREENS/settings.js";
+import settings from "@/SCREENS/Settings.js";
 enableScreens();
 
 enableFreeze(true); 
@@ -243,6 +245,7 @@ export default function App() {
           <Stack.Screen name="QuestionReply" component={QuestionReply} />
           <Stack.Screen name="PricePage" component={PricePage} />
           <Stack.Screen name="Settings" component={settings} />
+          
 
           <Stack.Screen
             name="KeyboardAvoidingComponent"
@@ -265,6 +268,7 @@ export default function App() {
           />
 
           <Stack.Screen name="settings" component={settings}/>
+          <Stack.Screen name="SavedPost" component={AllPostsScreen}/>
         </Stack.Navigator>
       )}
       {/* </View> */}

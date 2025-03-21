@@ -28,9 +28,10 @@ import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import Octicons from '@expo/vector-icons/Octicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import AntDesign from '@expo/vector-icons/AntDesign';
-import settings from "../SCREENS/settings.js"
+import settings from "./Settings.js"
 import BottomSheet, { BottomSheetView, BottomSheetScrollView, BottomSheetTextInput, BottomSheetDraggableView, BottomSheetFlatList, BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import Ionicons from '@expo/vector-icons/Ionicons';
+
 // import dotenv from 'dotenv/config'
 
 
@@ -1040,13 +1041,13 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
         return (
             <View style={{ marginTop: 0 }} key={1}>
                 <Pressable onPress={()=>{
-                    navigation.navigate("settings" , {token : token})
+                    navigation.navigate("settings" , {token : token , tabnavigation : navigation})
                 }}>
                     <View style={styles1.header}>
                         <Text numberOfLines={1} style={styles1.username}>{userdata.user_id.userName}</Text>
                         <View style={styles1.logout}>
                             {/* <Logout /> */}
-                            <Entypo name="menu" size={40} color="#ccc" />
+                            <AntDesign name="setting" size={28} color="#ccc" style={{marginRight:10,alignContent:'center'}} />
                         </View>
                         {/* <Text style={styles1.logoutText}>Logout</Text> */}
                         {/* <TouchableOpacity onPress={() => setVisible(true)} style={styles1.showButton}>
@@ -1801,12 +1802,14 @@ const styles1 = StyleSheet.create({
         backgroundColor: "#16181A",
         paddingHorizontal: 15,
         paddingVertical: 5,
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        alignItems : "center",
     },
     header1: {
         display: "flex",
         flexDirection: "row",
         height: 55,
+        // alignItems : "center",
         backgroundColor: "#16181A",
         paddingHorizontal: 15,
         // paddingVertical: 5,
@@ -1819,7 +1822,8 @@ const styles1 = StyleSheet.create({
         color: "#00DE62",
         fontWeight: "bold",
         marginLeft: 5,
-        marginTop: 5
+        marginTop: 5,
+        flex: 1
     },
     logout: {
         fontFamily: "myanmar",
@@ -1827,7 +1831,9 @@ const styles1 = StyleSheet.create({
         color: "#00DE62",
         fontWeight: "bold",
         marginLeft: 10,
-        marginTop: 5
+        marginTop: 5,
+        flexDirection: "row",  // If adding more icons in the future
+        alignItems: "center"
     },
     top: {
         width: "100%",

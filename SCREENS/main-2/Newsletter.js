@@ -765,13 +765,16 @@ const NewsLetter = React.memo(
                 })
             )
             return (
-                <SafeAreaView style={{ minHeight: 800, backgroundColor: "#16181a" , }}>
-                    <View style={{paddingBottom:50}}>
+                <View style={{flex:1,backgroundColor:"#16181a" }}>
+
+               
                     <FlatList
                         keyExtractor={(item, index) => index}
                         data={suggestionarray}
                         renderItem={renderSuggestion}
                         style={[styles.suggestionbox,{paddingBottom:120}]}
+                        contentContainerStyle={{paddingBottom:100}}
+
 
                         refreshControl={
                             <RefreshControl
@@ -788,10 +791,7 @@ const NewsLetter = React.memo(
 
                    />
                     </View>
-
-
                    
-                </SafeAreaView>
             )
         })
 
@@ -830,7 +830,7 @@ const NewsLetter = React.memo(
 
                     <Tab.Navigator
                         //  detachInactiveScreens={true}
-
+                        
                         screenOptions={({ route }) => ({
                             unmountOnBlur: false,
 
@@ -841,6 +841,7 @@ const NewsLetter = React.memo(
                                 display: "flex",
                                 width: "98%",
                                 margin: "auto",
+                            
                                 elevation: 0,
                             },
 
@@ -893,6 +894,7 @@ const NewsLetter = React.memo(
                                 lazy: false,
                                 unmountOnBlur: false,
                                 freezeOnBlur: true,
+                                
                                 tabBarLabel: ({ focused }) => (
                                     <Text allowFontScaling={false} style={[
                                         styles.tabbarpill, {
@@ -906,9 +908,12 @@ const NewsLetter = React.memo(
                                 ),
 
                             }}
+                        
                         />
                     </Tab.Navigator>
+                    
                 </View>
+                
             </SafeAreaView>
         )
     }
@@ -1177,11 +1182,11 @@ const styles = StyleSheet.create({
         height: "auto",
         maxHeight: height,
         backgroundColor: "transparent",
-        position: "absolute",
+        // position: "absolute",
         paddingTop: 10,
         // top: 135,
-        elevation: 100,
-        zIndex: 1000
+        // elevation: 100,
+        // zIndex: 1000
     },
     listItem: {
         flexDirection: "row",
