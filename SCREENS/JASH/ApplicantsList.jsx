@@ -12,10 +12,7 @@ import Entypo from '@expo/vector-icons/Entypo';
 import { useFocusEffect } from 'expo-router';
 // import { navigate } from 'expo-router/build/global-state/routing.js';
 const ApplicantsList = ({ route , navigation }) => {
-    // const data = [
-    //     {name  : "ansh"},
-    //     {name : "kaj"}
-    // ]
+
     const { Applicants, token } = route.params
     console.log(Applicants, "target 1");
     const [data, setdata] = useState()
@@ -149,7 +146,7 @@ const ApplicantsList = ({ route , navigation }) => {
                                 </View>
                                 <TouchableOpacity
                                     onPress={() => open(item.userName, item.email, item.contactInfo)}
-                                    style={[styles.toggleFollow, { backgroundColor: item.followed ? "#ff5c5c" : "#4CAF50", }]}
+                                    style={[styles.toggleFollow, { backgroundColor: item.followed ? "#ff5c5c" : "#ccc", }]}
                                 >
                                     <Text style={{ color: "#16181a", fontFamily: "Alata" }}>
                                         Contact

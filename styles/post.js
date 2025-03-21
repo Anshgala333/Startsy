@@ -253,7 +253,9 @@ const styles = StyleSheet.create({
         fontFamily: "Alata",
         fontSize: scalingfactor * 16,
         textAlign: "center",
-        marginTop: -4,
+        // marginTop: -4,
+        justifyContent:'center',
+        flexDirection:'row'
        
 
     },

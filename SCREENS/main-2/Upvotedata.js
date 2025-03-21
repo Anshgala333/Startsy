@@ -35,7 +35,7 @@ function Upvotedata({ route }) {
     const [refreshing, setRefreshing] = useState(false)
     const [data, setdata] = useState(null)
     const [suggestion, setsuggestion] = useState([])
-    const [normal, setnormal] = useState(null)
+    const [normal, setnormal] = useState([])
     const [subNotification, setSubNotification] = useState([])
     const [loading, setloading] = useState(true)
     const [skeleton, setskeletonloading] = useState(false)
@@ -204,7 +204,9 @@ function Upvotedata({ route }) {
 
                 setnormal(normalArray)
 
-                console.log(suggestion, "suggestion");
+                // console.log(suggestion, "suggestion");
+                console.log(normal)
+                // console.log(suggestion)
 
 
                 var array = result.data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
@@ -320,6 +322,9 @@ function Upvotedata({ route }) {
 
         if (item.notificationType == "suggestion") {
             return (
+
+
+
                 <TouchableOpacity onLongPress={() => {
                     setVisible(true)
                     setentirecontent(item.notificationMessage)
@@ -475,8 +480,14 @@ function Upvotedata({ route }) {
                         {item.notificationType == "upvotePost" && item.postId?.type == "photo" && <Image style={styles.image1} source={{ uri: item.postId.mediaUrl }} />}
                         {item.notificationType == "commentPost"}
 
-                    </View>
-                </View>
+                            </View>
+                        </View>
+                 
+
+
+
+
+
 
 
 
@@ -566,7 +577,12 @@ function Upvotedata({ route }) {
     }
     var decode;
 
-    function top3data() {
+
+    // useEffect(()=>{
+    //     nor
+    // },[])
+
+    function Suggestions() {
 
         decode = jwtDecode(token)
 
@@ -583,9 +599,9 @@ function Upvotedata({ route }) {
 
     const emptyListText = () => {
         return (
-            <>{subNotification.length == 0 && !loading && <View style={[styles.emptyListContainer]}>
-                <Text style={styles.emptyListText}>No new notifications</Text>
-            </View>}</>
+           <>{subNotification.length==0 && !loading &&  <View style={[styles.emptyListContainer]}>
+           <Text style={styles.emptyListText}>No new notifications</Text>
+       </View>}</>
         );
     }
 
@@ -628,7 +644,7 @@ function Upvotedata({ route }) {
                         }, 2000);
                     }} />}
 
-                ListHeaderComponent={top3data}
+                // ListHeaderComponent={top3data}
                 data={normal}
                 // rendersub
                 // data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
@@ -1064,11 +1080,11 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         // position : "absolute",
         elevation: 100,
-        bottom: 0,
+        bottom : 0,
         // fontFamily: "Roboto",
         fontSize: 16,
         paddingTop: 300,
-
+       
     }
 
 });
