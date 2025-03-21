@@ -25,12 +25,12 @@ const Chat = ({ route }) => {
     const navigation = useNavigation();
 
 
-    console.log(messages.at(-2), "blog");
+    // console.log(messages.at(-2), "blog");
 
 
 
-    console.log(photo1);
-    console.log(photo2);
+    // console.log(photo1);
+    // console.log(photo2);
 
 
 
@@ -49,7 +49,7 @@ const Chat = ({ route }) => {
     function sendmessage() {
 
 
-        console.log("hiiii");
+        // console.log("hiiii");
 
 
         if (newtext == "") {
@@ -59,7 +59,7 @@ const Chat = ({ route }) => {
 
 
 
-        console.log(messages);
+        // console.log(messages);
 
         const finaldata = {
             senderId: id,
@@ -93,7 +93,7 @@ const Chat = ({ route }) => {
 
     useEffect(() => {
         var decode = jwtDecode(token);
-        console.log(decode);
+        // console.log(decode);
 
         if (extra && extra.status) {
             setnewtext(`${decode.userName} has considered your application for ${extra.jobrole} Now you can chat for further discussion.`)
@@ -137,9 +137,9 @@ const Chat = ({ route }) => {
             setTimeout(() => {
                 // Ensure we are only scrolling when new messages are added
                 InteractionManager.runAfterInteractions(() => {
-                    console.log('====================================');
-                    console.log(messages.length);
-                    console.log('====================================');
+                    // console.log('====================================');
+                    // console.log(messages.length);
+                    // console.log('====================================');
                     flatListRef.current?.scrollToOffset({
                         offset: messages.length * 100,  // Adjust to actual item height
                         animated: false,
@@ -318,7 +318,7 @@ const Chat = ({ route }) => {
     const renderItem = React.useMemo(
         () => ({ item, index }) => {
             const dataLength = data.length;
-            console.log(dataLength);
+            // console.log(dataLength);
 
             return (
                 <>
@@ -361,7 +361,7 @@ const Chat = ({ route }) => {
                             {index < dataLength - 1 && item.senderId != data[index + 1].senderId && <Image style={item.senderId == jisuserkosendkarnahaiuskiid ? styles.pfpleft1 : styles.pfpright1} source={{ uri: item.senderId == jisuserkosendkarnahaiuskiid ? photo2 : photo1 }} />}
 
                             {index == dataLength - 1 && <Image style={item.senderId == jisuserkosendkarnahaiuskiid ? styles.pfpleft1 : styles.pfpright1} source={{ uri: item.senderId == jisuserkosendkarnahaiuskiid ? photo2 : photo1 }} />}
-                            <TouchableOpacity onPress={()=>tabnavigation.navigate("ViewSendedPost",{item:item})}>
+                            <TouchableOpacity onPress={()=>tabnavigation.navigate("ViewSendedPost",{id:item.message.postShared})}>
 
                                 <View style={[styles.box, {
                                     marginRight: item.senderId != jisuserkosendkarnahaiuskiid ? 25 : 0,
@@ -385,10 +385,9 @@ const Chat = ({ route }) => {
                                     </View>
                                     {item.message.postImage == null && <View style={styles.divider}></View>
                                     }
-                                    <TouchableOpacity onPress={() => tabnavigation.navigate('ViewSendedPost', { item: item })}
-                                    >
+                                    
                                         {item.message.postImage != null && <Image style={[styles.template, { aspectRatio: item.aspectRatio ? item.aspectRatio : 1 / 1 }]} source={{ uri: item.message.postImage }} />}
-                                    </TouchableOpacity>
+                                  
                                     {item.message.postImage == null && <Text style={styles.blogtext}>{item.message.postContent}</Text>}
                                     {/* {item.type == "video" &&
                                     <Video

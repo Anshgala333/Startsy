@@ -11,15 +11,18 @@ import Share from "@/assets/icons/share.js";
 import styles from "../../../styles/post.js"
 import SuggestedPost from './SuggestedPost.jsx'
 import SendedPost from './SendedPost.jsx'
+import { useRoute } from "@react-navigation/native";
 
 
-const ViewSendedPost = ({ route, openshare, opencomment }) => {
+const ViewSendedPost = ({  openshare, opencomment }) => {
 
     const [skeletonLoading, setSkeletonLoading] = useState(false);
     const [refreshing, setRefresing] = useState(false);
     const [allPost, setAllPost] = useState([]);
     const [sentPost, setSentPost] = useState({});
-
+    const route = useRoute()
+    // console.log(route.params.id)
+    const id = route.params.id;
     async function upvotepost(id, index, isSingle) {
         Vibration.vibrate(50)
        
@@ -78,6 +81,27 @@ const ViewSendedPost = ({ route, openshare, opencomment }) => {
     }
 
 
+    const getSinglePost = async()=>{
+        setSkeletonLoading(true)
+        try {
+            const response = await fetch(`${url}test/getOnePost/${route.params.id}`, {
+                method: 'GET',
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                },
+            });
+            const {data} = await response.json();
+            setSentPost(data[0]);
+            // console.log(data[0]);
+            // setAllPost(data.data)
+            // setSkeletonLoading(false)
+        }
+        catch (err) {
+            console.log(err);
+            // setSkeletonLoading(false)
+        }
+    }
+
 
 
     const { globaldata, updateField } = useContext(GlobalContext);
@@ -86,14 +110,15 @@ const ViewSendedPost = ({ route, openshare, opencomment }) => {
 
     ///call this when page renders
     useEffect(() => {
+        getSinglePost();
         getpost();
-    }, [])
+    }, [route.params.id])
 
 
 
     ///fetch all data
     const getpost = async () => {
-        setSkeletonLoading(true)
+        
         try {
             // setSkeletonLoading(true)
             const response = await fetch(`${url}posts/getPosts`, {
@@ -120,7 +145,7 @@ const ViewSendedPost = ({ route, openshare, opencomment }) => {
 
                 setAllPost(data1);
 
-                setSentPost(data1[0])
+                
 
                 setSkeletonLoading(false);
                 

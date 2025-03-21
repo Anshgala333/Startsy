@@ -147,7 +147,11 @@ const Foryou =
 
                 var data1 = data.data.map(e => {
 
-                    var object = { ...e, isliked: e.likedBy.includes(loggedinUserID), Applied: e.communityPost ? e.communityPost.communityMembers.includes(loggedinUserID) : false, Jobapplied: e.jobPosts ? e.jobPosts.jobApplicants.includes(loggedinUserID) : false, itemlikedcount: e.likedBy.length }
+                    var object = { ...e,
+                         isliked: e.likedBy.includes(loggedinUserID), 
+                         Applied: e.communityPost ? e.communityPost.communityMembers.includes(loggedinUserID) : false, Jobapplied: e.jobPosts ? e.jobPosts.jobApplicants.includes(loggedinUserID) : false, itemlikedcount: e.likedBy.length ,
+                        //  bookmark : 
+                        }
                     return object
                 })
 

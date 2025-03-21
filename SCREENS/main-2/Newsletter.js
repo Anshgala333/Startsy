@@ -393,13 +393,28 @@ const NewsLetter = React.memo(
         async function sendfollowrequest(stat, id) {
 
             if (stat) return
-            setsuggestionarray(suggestionarray.map((e) => {
-                if (e._id == id) {
-                    return { ...e, status: "Request Sent" }
-                }
-                else return e
+            // setsuggestionarray(suggestionarray.map((e) => {
+            //     if (e._id == id) {
+            //         return { ...e, status: "Request Sent" }
+            //     }
+            //     else return e
 
-            }))
+            // }))
+
+            setsuggestionarray((prevArray) => 
+                prevArray.map((item) => 
+                    item._id === id 
+                        ? { ...item, status: item.status === "Request Sent" ? "Pending" : "Request Sent" } 
+                        : item
+                )
+            );
+
+            // setsuggestionarray((e)=>{
+            //     if (e._id == id) {
+            //         return { ...e, status: "Request Sent" }
+            //     }
+            //     else return e
+            // })
 
 
             // console.log(id);
