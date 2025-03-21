@@ -25,12 +25,12 @@ const Chat = ({ route }) => {
     const navigation = useNavigation();
 
 
-    console.log(messages.at(-2), "blog");
+    // console.log(messages.at(-2), "blog");
 
 
 
-    console.log(photo1);
-    console.log(photo2);
+    // console.log(photo1);
+    // console.log(photo2);
 
 
 
@@ -49,7 +49,7 @@ const Chat = ({ route }) => {
     function sendmessage() {
 
 
-        console.log("hiiii");
+        // console.log("hiiii");
 
 
         if (newtext == "") {
@@ -59,7 +59,7 @@ const Chat = ({ route }) => {
 
 
 
-        console.log(messages);
+        // console.log(messages);
 
         const finaldata = {
             senderId: id,
@@ -93,7 +93,7 @@ const Chat = ({ route }) => {
 
     useEffect(() => {
         var decode = jwtDecode(token);
-        console.log(decode);
+        // console.log(decode);
 
         if (extra && extra.status) {
             setnewtext(`${decode.userName} has considered your application for ${extra.jobrole} Now you can chat for further discussion.`)
@@ -132,14 +132,19 @@ const Chat = ({ route }) => {
         }, 500);
     }, []);  // This runs only on mount
 
+
+    useEffect(() => {
+
+    }, [])
+
     useFocusEffect(
         useCallback(() => {
             setTimeout(() => {
                 // Ensure we are only scrolling when new messages are added
                 InteractionManager.runAfterInteractions(() => {
-                    console.log('====================================');
-                    console.log(messages.length);
-                    console.log('====================================');
+                    // console.log('====================================');
+                    // console.log(messages.length);
+                    // console.log('====================================');
                     flatListRef.current?.scrollToOffset({
                         offset: messages.length * 100,  // Adjust to actual item height
                         animated: false,
@@ -317,7 +322,7 @@ const Chat = ({ route }) => {
     const renderItem = React.useMemo(
         () => ({ item, index }) => {
             const dataLength = data.length;
-            console.log(dataLength);
+            // console.log(dataLength);
 
             return (
                 <>
@@ -360,7 +365,7 @@ const Chat = ({ route }) => {
                             {index < dataLength - 1 && item.senderId != data[index + 1].senderId && <Image style={item.senderId == jisuserkosendkarnahaiuskiid ? styles.pfpleft1 : styles.pfpright1} source={{ uri: item.senderId == jisuserkosendkarnahaiuskiid ? photo2 : photo1 }} />}
 
                             {index == dataLength - 1 && <Image style={item.senderId == jisuserkosendkarnahaiuskiid ? styles.pfpleft1 : styles.pfpright1} source={{ uri: item.senderId == jisuserkosendkarnahaiuskiid ? photo2 : photo1 }} />}
-                            <TouchableOpacity onPress={()=>tabnavigation.navigate("ViewSendedPost",{item:item})}>
+                            <TouchableOpacity onPress={() => tabnavigation.navigate("ViewSendedPost", { id: item.message.postShared })}>
 
                                 <View style={[styles.box, {
                                     marginRight: item.senderId != jisuserkosendkarnahaiuskiid ? 25 : 0,
@@ -371,7 +376,7 @@ const Chat = ({ route }) => {
                                         <Pressable
                                             // onPress={() => { navigation.navigate("Singleuserpage", { token: token, id: "6793703e4d5879e729e089f2", page: "Chat" }) }}
                                             onPress={() => {
-                                                navigation.navigate("Singleuserpage", { token: token, id: "6793703e4d5879e729e089f2", page: "Chat", item: itemdummy, messages, })
+                                                navigation.navigate("Singleprofilepage", { token: token, id: jisuserkosendkarnahaiuskiid, page: "Chat", item: itemdummy, messages, })
 
                                             }}
                                             style={{ display: "flex", flexDirection: "row", width: "100%" }}>
@@ -384,10 +389,9 @@ const Chat = ({ route }) => {
                                     </View>
                                     {item.message.postImage == null && <View style={styles.divider}></View>
                                     }
-                                    <TouchableOpacity onPress={() => tabnavigation.navigate('ViewSendedPost', { item: item })}
-                                    >
-                                        {item.message.postImage != null && <Image style={[styles.template, { aspectRatio: item.aspectRatio ? item.aspectRatio : 1 / 1 }]} source={{ uri: item.message.postImage }} />}
-                                    </TouchableOpacity>
+
+                                    {item.message.postImage != null && <Image style={[styles.template, { aspectRatio: item.aspectRatio ? item.aspectRatio : 1 / 1 }]} source={{ uri: item.message.postImage }} />}
+
                                     {item.message.postImage == null && <Text style={styles.blogtext}>{item.message.postContent}</Text>}
                                     {/* {item.type == "video" &&
                                     <Video
@@ -474,15 +478,52 @@ const Chat = ({ route }) => {
     }, [token]);
 
     useEffect(() => {
+        async function markAsRead() {
+            console.log("marking read");
+            var decode = jwtDecode(token)
+            console.log(decode);
+            
+            var object = {
+                senderId: decode._id,
+                receiverId: jisuserkosendkarnahaiuskiid,
+            }
 
-    }, [data]);
+            console.log(object);
+            console.log(`${url}test/markAsRead`);
+            
+            
+            try {
+                const response = await fetch(`${url}test/markAsRead`,
+                    {
+                        method: "POST",
+                        body: JSON.stringify(object),
+                        headers: {
+                            "Content-Type": "application/json",
+                            'Accept': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                          }
+                    }
+                );
+                const result = await response.json();
+                console.log(response);
+                console.log(result);
+
+            }
+            catch (e) {
+                console.log(e);
+
+            }
+
+        }
+        markAsRead()
+    }, []);
 
     function handlenext() {
         var decode = jwtDecode(token)
         if (decode.role == "Investor") {
             return
         }
-        navigation.navigate("Singleuserpage", { token: token, id: item.user._id, page: "Chat", item, messages, })
+        navigation.navigate("Singleprofilepage", { token: token, id: item.user._id, page: "Chat", item, messages, })
     }
 
 

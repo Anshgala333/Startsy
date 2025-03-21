@@ -196,7 +196,7 @@ const Question = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
 
 
                             <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
-                                <Pressable onPress={() =>navigation.navigate("QuestionReply", { data: item, token })  }>
+                                <Pressable  onPress={() => { navigation.navigate("QuestionReply", { data: item, token }) }}>
                                     <Text style={styles1.reply}>Reply</Text>
                                 </Pressable>
                                 <Text style={styles1.totalRepliesText}> {item.postComments.length} Replies</Text>

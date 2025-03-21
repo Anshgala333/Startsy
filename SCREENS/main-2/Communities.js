@@ -210,7 +210,7 @@ const Communities = ({ token, navigation }) => {
                         progressBackgroundColor="#16181a"
                         colors={['#00de62']}
 
-
+                    
                         onRefresh={() => {
                             Vibration.vibrate(100)
                             getdata()

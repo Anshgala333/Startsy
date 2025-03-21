@@ -401,12 +401,21 @@ const NewsLetter = React.memo(
 
             // }))
 
-            setsuggestionarray(array => array.map(() => {
-                if (e._id == id) {
-                    return { ...e, status: "Request Sent" }
-                }
-                else return e
-            }))
+
+            setsuggestionarray((prevArray) => 
+                prevArray.map((item) => 
+                    item._id === id 
+                        ? { ...item, status: item.status === "Request Sent" ? "Pending" : "Request Sent" } 
+                        : item
+                )
+            );
+
+            // setsuggestionarray((e)=>{
+            //     if (e._id == id) {
+            //         return { ...e, status: "Request Sent" }
+            //     }
+            //     else return e
+            // })
 
 
             // console.log(id);

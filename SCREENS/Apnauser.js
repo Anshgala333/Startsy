@@ -28,7 +28,7 @@ import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import Octicons from '@expo/vector-icons/Octicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import AntDesign from '@expo/vector-icons/AntDesign';
-import settings from "../SCREENS/settings.js"
+import Settings from "../SCREENS/Settings.js"
 import BottomSheet, { BottomSheetView, BottomSheetScrollView, BottomSheetTextInput, BottomSheetDraggableView, BottomSheetFlatList, BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import Ionicons from '@expo/vector-icons/Ionicons';
 // import dotenv from 'dotenv/config'
