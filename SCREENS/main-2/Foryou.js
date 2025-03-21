@@ -138,15 +138,17 @@ const Foryou =
                     },
                 });
                 const data = await response.json();
-                console.log(data);
+                console.log(data.bookmarks);
+                console.log(data.data[0]);
 
                 var decode = jwtDecode(token)
                 var loggedinUserID = decode._id
 
 
+
                 var data1 = data.data.map(e => {
 
-                    var object = { ...e, isliked: e.likedBy.includes(loggedinUserID), Applied: e.communityPost ? e.communityPost.communityMembers.includes(loggedinUserID) : false, Jobapplied: e.jobPosts ? e.jobPosts.jobApplicants.includes(loggedinUserID) : false, itemlikedcount: e.likedBy.length }
+                    var object = { ...e, isliked: e.likedBy.includes(loggedinUserID), Applied: e.communityPost ? e.communityPost.communityMembers.includes(loggedinUserID) : false, Jobapplied: e.jobPosts ? e.jobPosts.jobApplicants.includes(loggedinUserID) : false, itemlikedcount: e.likedBy.length , issaved : !data.bookmarks.includes(e._id) }
                     return object
                 })
 
