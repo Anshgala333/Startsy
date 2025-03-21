@@ -23,6 +23,9 @@ const ViewSendedPost = ({  openshare, opencomment }) => {
     const route = useRoute()
     // console.log(route.params.id)
     const id = route.params.id;
+
+    console.log(id);
+
     async function upvotepost(id, index, isSingle) {
         Vibration.vibrate(50)
        
@@ -192,7 +195,7 @@ const ViewSendedPost = ({  openshare, opencomment }) => {
                         data={allPost}
                         renderItem={({ item, index }) => {
                             return (
-                                <SuggestedPost item={item} index={index}
+                                <SuggestedPost item={item} index={index} id={id}
                                     opencomment={opencomment}
                                     openshare={openshare} upvotepost={upvotepost} />
                             );

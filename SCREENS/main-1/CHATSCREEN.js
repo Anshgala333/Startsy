@@ -371,10 +371,10 @@ const Chat = ({ route }) => {
                                     <View style={styles.top} >
                                         <Pressable
                                             // onPress={() => { navigation.navigate("Singleuserpage", { token: token, id: "6793703e4d5879e729e089f2", page: "Chat" }) }}
-                                            onPress={() => {
-                                                navigation.navigate("Singleuserpage", { token: token, id: "6793703e4d5879e729e089f2", page: "Chat", item: itemdummy, messages, })
+                                            // onPress={() => {
+                                            //     navigation.navigate("Singleuserpage", { token: token, id: "6793703e4d5879e729e089f2", page: "Chat", item: itemdummy, messages, })
 
-                                            }}
+                                            // }}
                                             style={{ display: "flex", flexDirection: "row", width: "100%" }}>
                                             <Image style={styles.userimg} source={{ uri: item.message.profilePhoto }} />
                                             <View style={styles.userdetail}>
