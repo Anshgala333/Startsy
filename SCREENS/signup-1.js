@@ -98,7 +98,7 @@ const Signup1 = function ({ navigation, route }) {
 
                     <View style={signupstyles.bottom}>
                         <Text allowFontScaling={false} style={signupstyles.t1}>Choose Username</Text>
-                        {!error && <Text allowFontScaling={false} style={signupstyles.t2}>You can always change it later.</Text>}
+                        {!error && <Text allowFontScaling={false} style={signupstyles.t2}>You won't be able to change it later.</Text>}
                         {error && <Text style={signupstyles.error}>{message}</Text>}
 
                         {/* TextInput for entering the username */}

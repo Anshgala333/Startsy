@@ -23,6 +23,10 @@ const ViewSendedPost = ({  openshare, opencomment }) => {
     const route = useRoute()
     // console.log(route.params.id)
     const id = route.params.id;
+
+
+    console.log(route.params.id);
+
     async function upvotepost(id, index, isSingle) {
         Vibration.vibrate(50)
        
@@ -178,13 +182,13 @@ const ViewSendedPost = ({  openshare, opencomment }) => {
                         ListHeaderComponent={() => {
                             return (
                                 <>
-                                    <View style={{ borderBottomColor: 'grey', borderBottomWidth: 2, marginBottom: 20 }}>
+                                    <View style={{  marginBottom: -10 }}>
                                         <SendedPost item={sentPost} index={0}
                                             openshare={openshare}
                                             opencomment={opencomment}
                                             upvotepost={upvotepost} />
                                     </View>
-                                    <Text style={{ color: 'white', fontSize: 24, paddingLeft: 20, marginBottom: 10 }}>Suggestions</Text>
+                                    <Text style={{ color: '#ccc', fontSize: 20, paddingLeft: 20, marginBottom: 20 , fontFamily : "Alata" }}>Suggestions</Text>
                                 </>
                             )
                         }}
@@ -192,7 +196,7 @@ const ViewSendedPost = ({  openshare, opencomment }) => {
                         data={allPost}
                         renderItem={({ item, index }) => {
                             return (
-                                <SuggestedPost item={item} index={index}
+                                <SuggestedPost item={item} index={index} id={id}
                                     opencomment={opencomment}
                                     openshare={openshare} upvotepost={upvotepost} />
                             );

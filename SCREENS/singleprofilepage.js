@@ -454,7 +454,7 @@ const Singleprofilepage = ({ props, openshare }) => {
             <Text allowFontScaling={false} style={styles.u7}>Rules & Guidelines: {item.communityPost.communityRules}</Text>
 
             <Pressable style={[styles.next]} >
-              <Text allowFontScaling={false} style={styles.nexttext}>Join Community</Text>
+              <Text allowFontScaling={false} style={styles.nexttext}>Join Forum</Text>
             </Pressable>
           </View>
 
@@ -723,9 +723,9 @@ const Singleprofilepage = ({ props, openshare }) => {
                 {/* <Text style={connecteddata != "Follow" ? styles1.ft1 : styles1.ft}>{tellConnection(connecteddata)}</Text>
                 <Text style={connecteddata != "Follow" ? styles1.ft1 : styles1.ft}>{tellConnection(connecteddata)}</Text>
                 <Text style={connecteddata != "Follow" ? styles1.ft1 : styles1.ft}>{tellConnection(connecteddata)}</Text> */}
-                {connecteddata == "Follow" && <Text style={{color : "#16181a"}}>{tellConnection(connecteddata)}</Text>}
-                {connecteddata == "Pending Request" && <Text style={{color : "#ccc"}}>{tellConnection(connecteddata)}</Text>}
-                {connecteddata == "Followed" && <Text style={{color : "#ccc"}}>{tellConnection(connecteddata)}</Text>}
+                {connecteddata == "Follow" && <Text style={{color : "#16181a",fontFamily:"Alata",alignItems:"center",marginTop: 1,fontSize: 16,}}>{tellConnection(connecteddata)}</Text>}
+                {connecteddata == "Pending Request" && <Text style={{color : "#ccc",fontFamily:"Alata",alignItems:"center",marginTop: 1,fontSize: 16,}}>{tellConnection(connecteddata)}</Text>}
+                {connecteddata == "Followed" && <Text style={{color : "#ccc",fontFamily:"Alata",alignItems:"center",marginTop: 1,fontSize: 16,}}>{tellConnection(connecteddata)}</Text>}
               </Pressable>}
 
             {mypage && <Pressable onPress={() => { sendfollowrequest(userdata.user_id._id) }} style={styles1.f1}><Text style={styles1.ft}>{tellConnection(connecteddata)}</Text></Pressable>}

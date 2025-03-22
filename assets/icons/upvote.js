@@ -2,7 +2,7 @@ import * as React from "react";
 import Svg, { G, Path } from "react-native-svg";
 import { View, StyleSheet } from "react-native";
 
-const Upvote = ({ dt, selected, width = 32, height = 32, color = "#ccc", style, ...props }) => {
+const Upvote = ({ dt, selected, width = 32, height = 34, color = "#ccc", style, ...props }) => {
 
   // if(dt){
   //   color = "#00de62"
@@ -15,7 +15,7 @@ const Upvote = ({ dt, selected, width = 32, height = 32, color = "#ccc", style, 
   // }
 
   if(selected){
-    color = "#00de62"
+    color = "#ccc"
   }
   return (
     <View style={[styles.container, style]} >
@@ -30,7 +30,7 @@ const Upvote = ({ dt, selected, width = 32, height = 32, color = "#ccc", style, 
       >
         <G>
           <Path
-            fill={selected == true ? "#00de62" : "transparent"}
+            fill={selected == true ? "#ccc" : "transparent"}
             // stroke={selected == true ? "#00de62" : "#ccc"}
             stroke={color}
 

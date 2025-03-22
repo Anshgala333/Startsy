@@ -375,6 +375,7 @@ const Chat = ({ route }) => {
                                     <View style={styles.top} >
                                         <Pressable
                                             // onPress={() => { navigation.navigate("Singleuserpage", { token: token, id: "6793703e4d5879e729e089f2", page: "Chat" }) }}
+
                                             onPress={() => {
                                                 navigation.navigate("Singleprofilepage", { token: token, id: jisuserkosendkarnahaiuskiid, page: "Chat", item: itemdummy, messages, })
 

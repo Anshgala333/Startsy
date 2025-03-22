@@ -33,6 +33,7 @@ import { useFocusEffect, useNavigation } from "expo-router";
 import { url } from "../../config.js"
 import { GlobalContext } from "@/Global/globalcontext.js";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { jwtDecode } from "jwt-decode";
 
 // import styles from "@/styles/l.js";
 
@@ -110,6 +111,7 @@ const NewsLetter = React.memo(
 
 
         const [token, setToken] = useState("");
+        const [loggedinuserid, setloggedin] = useState("");
         const { globaldata } = useContext(GlobalContext);
 
         useEffect(() => {
@@ -122,6 +124,15 @@ const NewsLetter = React.memo(
         //         closeall()
         //     }, [])
         // )
+
+        useEffect(() => {
+            if (token){
+                var decode = jwtDecode(token)
+                console.log(decode);
+                
+                setloggedin(decode._id)
+            }
+        }, [token])
 
 
         const [newsletter, setnewsletter] = useState([])
@@ -375,9 +386,10 @@ const NewsLetter = React.memo(
                     },
                 });
                 const data = await response.json();
-                // console.log(data);
+                console.log(data.data);
+                var filterUser = data.data.filter(e => e._id != loggedinuserid)
 
-                setsuggestionarray(data.data)
+                setsuggestionarray(filterUser)
 
             }
             catch (err) {
@@ -402,10 +414,10 @@ const NewsLetter = React.memo(
             // }))
 
 
-            setsuggestionarray((prevArray) => 
-                prevArray.map((item) => 
-                    item._id === id 
-                        ? { ...item, status: item.status === "Request Sent" ? "Pending" : "Request Sent" } 
+            setsuggestionarray((prevArray) =>
+                prevArray.map((item) =>
+                    item._id === id
+                        ? { ...item, status: item.status === "Request Sent" ? "Pending" : "Request Sent" }
                         : item
                 )
             );
@@ -500,8 +512,10 @@ const NewsLetter = React.memo(
                     });
                     const data = await response.json();
                     // console.log(data);
+                    var filterUser = data.data.filter(e => e._id != loggedinuserid)
 
-                    setsuggestionarray(data.data)
+
+                    setsuggestionarray(filterUser)
 
                 }
                 catch (err) {
@@ -792,15 +806,18 @@ const NewsLetter = React.memo(
             )
             return (
 
-                <View style={{ flex: 1, backgroundColor: '#16181a' }}>
+
+                <View style={{ flex: 1, backgroundColor: "#16181a" }}>
 
 
                     <FlatList
                         keyExtractor={(item, index) => index}
                         data={suggestionarray}
                         renderItem={renderSuggestion}
+
                         style={[styles.suggestionbox]}
                         contentContainerStyle={{ paddingBottom: 100 }}
+
 
                         refreshControl={
                             <RefreshControl
@@ -815,13 +832,7 @@ const NewsLetter = React.memo(
                         }
 
 
-                    // contentContainerStyle={{ paddingBottom: 66 }}
-
-                    >
-
-
-
-                    </FlatList>
+                    />
                 </View>
 
 
@@ -877,6 +888,7 @@ const NewsLetter = React.memo(
                                 elevation: 0,
                             },
 
+
                             tabBarIndicatorStyle: {
                                 backgroundColor: "#00DE62",
                                 height: 1,
@@ -911,6 +923,7 @@ const NewsLetter = React.memo(
 
                         <Tab.Screen
 
+
                             name="Job"
                             component={() => (
                                 // <ScrollView 
@@ -922,10 +935,13 @@ const NewsLetter = React.memo(
                             )}
                             // children={(props) => <User />}
 
+
                             options={{
                                 lazy: false,
                                 unmountOnBlur: false,
                                 freezeOnBlur: true,
+
+
                                 tabBarLabel: ({ focused }) => (
                                     <Text allowFontScaling={false} style={[
                                         styles.tabbarpill, {
@@ -939,6 +955,7 @@ const NewsLetter = React.memo(
                                 ),
 
                             }}
+
                         />
                     </Tab.Navigator>
                 </View>

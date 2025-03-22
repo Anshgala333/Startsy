@@ -142,7 +142,8 @@ function Upvotedata({ route }) {
             );
             const result = await response.json();
             console.log(response.status);
-            console.log(result)
+            // console.log(result)
+
 
             var object = {
                 totalUpvotes: result.data.totalUpvotes,
@@ -196,7 +197,7 @@ function Upvotedata({ route }) {
                 // console.log(result.data, "top 3 data ajilffkhedskfh");
                 var suggestionArray = result.data.filter((e) => e.notificationType == "suggestion")
                 setsuggestion([...suggestionArray.reverse()])
-                console.log(suggestion);
+                // console.log(suggestion);
 
 
                 var normalArray = result.data.filter((e) => e.notificationType != "suggestion")
@@ -205,7 +206,7 @@ function Upvotedata({ route }) {
                 setnormal(normalArray)
 
                 // console.log(suggestion, "suggestion");
-                console.log(normal)
+                // console.log(normal)
                 // console.log(suggestion)
 
 
@@ -252,12 +253,12 @@ function Upvotedata({ route }) {
                 });
                 const data = await response.json();
                 // setloading(false)
-                console.log(data);
+                // console.log(data);
             }
             catch (err) {
 
             }
-            console.log(item.sendingUserId._id);
+            // console.log(item.sendingUserId._id);
 
 
             console.log(message);
@@ -285,13 +286,9 @@ function Upvotedata({ route }) {
 
 
         function time(time) {
-            // console.log('====================================');
-            // console.log(time);
+
             var data1 = new Date(time)
-            // console.log('====================================');
-            // console.log(data1);
-            // console.log('====================================');
-            // console.log('====================================');
+
             var seconds = Math.floor((new Date() - data1) / 1000);
 
             var interval = seconds / 31536000;
@@ -330,7 +327,7 @@ function Upvotedata({ route }) {
                     setentirecontent(item.notificationMessage)
                     Vibration.vibrate(10)
 
-                    console.log("heopen");
+                    // console.log("heopen");
 
                 }}>
                     <View style={{
@@ -338,7 +335,7 @@ function Upvotedata({ route }) {
                         borderRadius: 20,
                         height: "auto",
                         maxHeight: 200,
-                        marginHorizontal: 10,
+                        marginHorizontal: 20,
                         marginVertical: 10,
                         paddingHorizontal: 10,
                         paddingBottom: 10
@@ -399,7 +396,9 @@ function Upvotedata({ route }) {
                             }
                             {item.notificationType == "joinCommunity"}
                             {/* {item.notificationType == "upvotePost" && item.postId?.type == "blogPost" && <B2 width={40} height={40} />} */}
-                            {item.notificationType == "upvotePost" && item.postId?.type == "photo" && <Image style={styles.image1} source={{ uri: item.postId.mediaUrl }} />}
+                            {item.notificationType == "upvotePost" && item.postId?.type == "photo" &&
+                                <Image style={styles.image1} source={{ uri: item.postId.mediaUrl }} />
+                            }
                             {item.notificationType == "commentPost"}
 
                         </View>
@@ -420,68 +419,77 @@ function Upvotedata({ route }) {
         else {
             return (
 
-
-                <View style={styles.box1}>
-
-
-                    <View style={styles.left}>
-
-
-                        <Pressable
-                            style={{ paddingTop: 10 }}
-                            onPress={() => { navigation.navigate("Singleuserpage", { token: token, id: item.sendingUserId._id, page: "bell" }) }}
-
-                        >
-                            {item.sendingUserId?.profilePhoto && <Image style={styles.topimage} source={{ uri: item.sendingUserId.profilePhoto }} />}
-                            {!item.sendingUserId?.profilePhoto && <Image style={styles.topimage} source={require("../../assets/images/p2.png")} />}
-
-                        </Pressable>
-                        <View style={styles.bottominfo1}>
-                            <View style={{ display: "flex", flexDirection: "row" }}>
-
-                                <Pressable
-                                    onPress={() => { navigation.navigate("Singleuserpage", { token: token, id: item.sendingUserId._id, page: "bell" }) }}
-
-                                >
-                                    <Text style={styles.topu1}>{item.sendingUserId.userName} <Text style={styles.topu2}>{item.sendingUserId.role == "CommunityMember" ? "Member" : item.sendingUserId.role}</Text> <View style={styles.circle}></View> <AutoSizeText
-                                        numberOfLines={1}
-                                        fontSize={11}
-                                        mode={ResizeTextMode.max_lines}
-                                        ellipsizeMode='tail'
-                                        style={styles.time}>{time(item.timestamp)}
-                                    </AutoSizeText>
-
-                                    </Text>
-                                </Pressable>
-                                {/* <Text style={styles.time}>{time(item.taggedUser.createdAt)}</Text> */}
+                <TouchableOpacity onPress={()=>{
+                    // console.log(item.postId._id)
+                    navigation.navigate("ViewSendedPost",{id:item.postId._id})
+                }}>
 
 
+                    <View style={styles.box1}>
+
+
+                        <View style={styles.left}>
+
+
+                            <Pressable
+                                style={{ paddingTop: 10 }}
+                                // onPress={() => {
+                                //     console.log("hello")
+                                //     navigation.navigate("Singleuserpage", { token: token, id: item.sendingUserId._id, page: "bell" })
+                                // }}
+
+                            >
+                                {item.sendingUserId?.profilePhoto && <Image style={styles.topimage} source={{ uri: item.sendingUserId.profilePhoto }} />}
+                                {!item.sendingUserId?.profilePhoto && <Image style={styles.topimage} source={require("../../assets/images/p2.png")} />}
+
+                            </Pressable>
+                            <View style={styles.bottominfo1}>
+                                <View style={{ display: "flex", flexDirection: "row" }}>
+
+                                    <Pressable
+                                        onPress={() => { navigation.navigate("Singleuserpage", { token: token, id: item.sendingUserId._id, page: "bell" }) }}
+
+                                    >
+                                        <Text style={styles.topu1}>{item.sendingUserId.userName} <Text style={styles.topu2}>{item.sendingUserId.role == "CommunityMember" ? "Member" : item.sendingUserId.role}</Text> <View style={styles.circle}></View> <AutoSizeText
+                                            numberOfLines={1}
+                                            fontSize={11}
+                                            mode={ResizeTextMode.max_lines}
+                                            ellipsizeMode='tail'
+                                            style={styles.time}>{time(item.timestamp)}
+                                        </AutoSizeText>
+
+                                        </Text>
+                                    </Pressable>
+                                    {/* <Text style={styles.time}>{time(item.taggedUser.createdAt)}</Text> */}
+
+
+                                </View>
+                                {/* <Text style={styles.sub2}>{item.notificationMessage}</Text> */}
+                                <Text
+                                    numberOfLines={1}
+                                    fontSize={12}
+                                    // mode={ResizeTextMode.max_lines}
+                                    // ellipsizeMode='tail'
+                                    style={[styles.sub2, { fontSize: 12, marginLeft: 10 }]}>{item.notificationMessage}
+                                </Text>
                             </View>
-                            {/* <Text style={styles.sub2}>{item.notificationMessage}</Text> */}
-                            <Text
-                                numberOfLines={1}
-                                fontSize={12}
-                                // mode={ResizeTextMode.max_lines}
-                                // ellipsizeMode='tail'
-                                style={[styles.sub2, { fontSize: 12, marginLeft: 10 }]}>{item.notificationMessage}
-                            </Text>
+                        </View>
+                        <View style={styles.right}>
+                            {item.notificationType == "upvotePost"}
+                            {item.notificationType == "upvoteProfile"}
+                            {item.notificationType == "jobApplied" &&
+                                <Pressable onPress={sendmessage} style={{ top: 16, right: 0 }}>
+                                    <MaterialCommunityIcons name="message-text-outline" size={34} color={"#00DE62"} />
+                                </Pressable>
+                            }
+                            {item.notificationType == "joinCommunity"}
+                            {/* {item.notificationType == "upvotePost" && item.postId?.type == "blogPost" && <B2 width={40} height={40} />} */}
+                            {item.notificationType == "upvotePost" && item.postId?.type == "photo" && <Image style={styles.image1} source={{ uri: item.postId.mediaUrl }} />}
+                            {item.notificationType == "commentPost"}
+
                         </View>
                     </View>
-                    <View style={styles.right}>
-                        {item.notificationType == "upvotePost"}
-                        {item.notificationType == "upvoteProfile"}
-                        {item.notificationType == "jobApplied" &&
-                            <Pressable onPress={sendmessage} style={{ top: 16, right: 0 }}>
-                                <MaterialCommunityIcons name="message-text-outline" size={34} color={"#00DE62"} />
-                            </Pressable>
-                        }
-                        {item.notificationType == "joinCommunity"}
-                        {/* {item.notificationType == "upvotePost" && item.postId?.type == "blogPost" && <B2 width={40} height={40} />} */}
-                        {item.notificationType == "upvotePost" && item.postId?.type == "photo" && <Image style={styles.image1} source={{ uri: item.postId.mediaUrl }} />}
-                        {item.notificationType == "commentPost"}
-
-                    </View>
-                </View>
+                </TouchableOpacity>
 
 
 
@@ -601,22 +609,22 @@ function Upvotedata({ route }) {
         return (
             <>
                 {
-                    (suggestion.length == 0 && data.length == 0) ?
-
+                    (suggestion.length == 0 && normal.length == 0) ?
                         <View style={[styles.emptyListContainer]}>
-                            <Text style={[styles.emptyListText,{}]}>No new notifications</Text>
+                            <Text style={[styles.emptyListText, {}]}>No new notifications</Text>
                         </View>
                         :
-                        (suggestion.length != 0 && data.length == 0) ?
+                        (suggestion.length != 0 && normal.length == 0) ?
                             <View>
                                 <Suggestions />
                                 <View style={[styles.emptyListContainer]}>
-                                    <Text style={[styles.emptyListText,{paddingTop:200}]}>No new notifications</Text>
+                                    <Text style={[styles.emptyListText, { paddingTop: 200 }]}>No new notifications</Text>
                                 </View>
                             </View>
                             :
-                            <Suggestions/>
-            }
+                            <Suggestions />
+
+                }
 
             </>
         )

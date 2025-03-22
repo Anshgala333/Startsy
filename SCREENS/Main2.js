@@ -23,7 +23,8 @@ import {
     BackHandler,
     TouchableOpacity,
     KeyboardAvoidingView,
-    Vibration
+    Vibration,
+    ToastAndroid
 } from "react-native";
 import RBSheet from 'react-native-raw-bottom-sheet';
 import BottomSheet1 from "./Bottomsheet1.js"
@@ -656,12 +657,23 @@ const Main2 = ({ navigation, route }) => {
     const [loggedinrole, setloggedinrole] = useState("")
 
 
+      const showToastWithGravity = (message) => {
+        ToastAndroid.showWithGravityAndOffset(
+          `${message}`,
+          ToastAndroid.SHORT,
+          ToastAndroid.TOP,
+          100, 100
+        );
+      };
 
     async function finalsubmit() {
         // console.log(SelectedItems);
         // console.log(Array.from(SelectedItems));
         setsendingpost(true)
         var array = Array.from(SelectedItems)
+
+       
+        
 
 
         try {
@@ -679,6 +691,8 @@ const Main2 = ({ navigation, route }) => {
             // console.log(data);
             // console.log(response.status);
             bottomSheetRef6.current?.close()
+            showToastWithGravity("Post shared successfully")
+
 
         }
         catch (e) {
