@@ -7,7 +7,7 @@ import Back from "@/components/back.js";
 import { url } from "../config.js";
 import { GlobalContext } from "@/Global/globalcontext";
 import { OtpInput } from "react-native-otp-entry";  // ✅ Added OTP input
-
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 const Email = ({ navigation, route }) => {
     const { globaldata } = useContext(GlobalContext);
 
@@ -160,7 +160,7 @@ const Email = ({ navigation, route }) => {
         <KeyboardAvoidingView style={signupstyles.container} behavior="padding" keyboardVerticalOffset={-100}>
             <ScrollView automaticallyAdjustContentInsets={true} style={{ flex: 1 }}>
                 <View style={signupstyles.row}>
-                    <Pressable style={signupstyles.back} onPress={() => {
+                    {/* <Pressable style={signupstyles.back} onPress={() => {
                         if (step === 2) {
                             setStep(1);  // Go back to email step if on OTP step
                         } else {
@@ -168,8 +168,16 @@ const Email = ({ navigation, route }) => {
                         }
                     }}>
                         <Back />
+                    </Pressable> */}
+                    <Pressable onPress={() =>{ 
+                        if (step === 2) {
+                            setStep(1);
+                        } else {
+                            navigation.goBack();
+                        }
+                        }}>
+                        <FontAwesome6 name="chevron-left" size={34} style={{ alignSelf: 'flex-start', marginLeft: 16 }} color="#00DF60" />
                     </Pressable>
-
                     <View style={signupstyles.top}>
                         <Image style={signupstyles.logo} source={require("../assets/images/logo.png")} />
                     </View>

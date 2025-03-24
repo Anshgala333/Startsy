@@ -85,11 +85,11 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
         }
 
 
-
+    }
 
 
         //setIsSaved(!isSaved);
-    };
+  
 
     // ........................................................................................
     // console.log("scroll re render");
@@ -210,7 +210,7 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
 
     const renderItem =
         ({ item, index }) => {
-            // console.log("render scroll");
+            //console.log(item.user_id , "treeeeeeeeeeeeeeee");
             // const isVideoPlaying = videoStates[item._id] || false;
             if (item.user_id == null) {
                 return
