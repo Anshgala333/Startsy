@@ -5,7 +5,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Image, BackHandler } from "re
 import { List, Avatar, Divider } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
-const settings = ({ navigation, route }) => {
+const Settings = ({ navigation , route}) => {
 
   var { token } = route.params
 
@@ -60,15 +60,15 @@ const settings = ({ navigation, route }) => {
           <Text style={styles.optionText}>Edit Profile</Text>
         </TouchableOpacity>
 
-        {/* <TouchableOpacity style={styles.option} onPress={() => navigation.navigate("SavedPosts")}>
+        <TouchableOpacity style={styles.option} onPress={() => navigation.navigate("SavedPosts")}>
           <Icon name="bookmark-outline" size={24} color="#00DE62" />
           <Text style={styles.optionText}>Saved Posts</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.option} onPress={() => alert("Switch Account")}>
+        {/* <TouchableOpacity style={styles.option} onPress={() => alert("Switch Account")}>
           <Icon name="account-switch" size={24} color="#00DE62" />
           <Text style={styles.optionText}>Switch Account</Text>
-        </TouchableOpacity> */}
+        </TouchableOpacity>  */}
 
         <TouchableOpacity style={styles.option} onPress={() => Logout()}>
           <Icon name="logout" size={24} color="#00DE62" />
@@ -121,4 +121,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default settings;
+export default Settings;

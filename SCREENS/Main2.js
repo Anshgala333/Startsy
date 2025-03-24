@@ -74,6 +74,10 @@ import { jwtDecode } from "jwt-decode";
 import JobsPostedScreen from "./JASH/JobsPostedScreen.jsx";
 import ApplicantsList from "./JASH/ApplicantsList.jsx";
 
+
+
+import ViewSendedPost from "./JASH/View post/ViewSendedPost.jsx";
+
 configureReanimatedLogger({
     level: ReanimatedLogLevel.warn,
     strict: false,
@@ -945,6 +949,8 @@ const Main2 = ({ navigation, route }) => {
                                 tabBarVisible: false,
                             }}
                         />
+
+
                         <Tab.Screen
                             name="Applicant"
                             component={ApplicantsList}
@@ -955,6 +961,18 @@ const Main2 = ({ navigation, route }) => {
                                 tabBarVisible: false,
                             }}
                         />
+
+                        <Tab.Screen
+                            name="ViewSendedPost"
+                            // component={ViewSendedPost}
+                            children={(props)=><ViewSendedPost openshare={openshare} opencomment={opencomment}/>}
+                            options={{
+                                tabBarItemStyle: { display: 'none' },
+                                tabBarButton: () => null,
+                                tabBarVisible: false,
+                            }}
+                        />
+
                     </Tab.Navigator>
                     {showBottomSheet && (<BottomSheet
                         enablePanDownToClose
@@ -1007,10 +1025,10 @@ const Main2 = ({ navigation, route }) => {
                             {peopledata.length == 0 ?
 
 
-                                <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
 
 
-                                    <Text  style={{color:'gray'}}>You are not connected to anyone</Text>
+                                    <Text style={{ color: 'gray' }}>You are not connected to anyone</Text>
 
                                 </View>
 
@@ -1025,7 +1043,7 @@ const Main2 = ({ navigation, route }) => {
                                         renderItem={renderpeople}
                                         contentContainerStyle={{ paddingBottom: 80 }}
                                         scrollEnabled={true}
-                                    
+
                                     />
 
 

@@ -254,6 +254,9 @@ const styles = StyleSheet.create({
         fontSize: scalingfactor * 16,
         textAlign: "center",
         marginTop: -4,
+        justifyContent:'center',
+        flexDirection:'row',
+        alignSelf: "center",
        
 
     },

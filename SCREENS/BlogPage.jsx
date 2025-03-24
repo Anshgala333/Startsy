@@ -91,7 +91,8 @@ const BlogPage = () => {
                 style={styles.textArea}
                 value={blog}
                 multiline
-                numberOfLines={4}
+                numberOfLines={maxLength}
+                
                 maxLength={maxLength}
                 onChangeText={setBlog}
               />
