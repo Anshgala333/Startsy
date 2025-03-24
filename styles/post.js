@@ -268,12 +268,10 @@ const styles = StyleSheet.create({
         textAlign: "center",
         alignSelf: "center",
         justifyContent: "center",
-        // paddingBottom : 10
-        // paddingVertical : 10
-
-        // marginTop: -4,
-
-        // textAlign: "right",
+        width: 150,                
+        height: 50,                 
+        lineHeight: 50, 
+        
 
     },
 
