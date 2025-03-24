@@ -25,7 +25,7 @@ const ViewSendedPost = ({  openshare, opencomment }) => {
     const id = route.params.id;
 
 
-    console.log(route.params.id);
+    // console.log(route.params.id);
 
     async function upvotepost(id, index, isSingle) {
         Vibration.vibrate(50)

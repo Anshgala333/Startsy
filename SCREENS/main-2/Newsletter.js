@@ -401,6 +401,7 @@ const NewsLetter = React.memo(
 
             // }))
 
+
             setsuggestionarray((prevArray) => 
                 prevArray.map((item) => 
                     item._id === id 
@@ -791,15 +792,17 @@ const NewsLetter = React.memo(
             )
             return (
 
-                <View style={{flex:1,backgroundColor:"#16181a" }}>
 
-               
+                <View style={{ flex: 1, backgroundColor: '#16181a' }}>
+
+
+
                     <FlatList
                         keyExtractor={(item, index) => index}
                         data={suggestionarray}
                         renderItem={renderSuggestion}
-                        style={[styles.suggestionbox,{paddingBottom:120}]}
-                        contentContainerStyle={{paddingBottom:100}}
+                        style={[styles.suggestionbox]}
+                        contentContainerStyle={{ paddingBottom: 100 }}
 
 
                         refreshControl={
@@ -808,7 +811,7 @@ const NewsLetter = React.memo(
                                 colors={['#00de62']}
                                 onRefresh={() => {
                                     setRefreshing1(true)
-                                    Vibration.vibrate(200)
+                                    // Vibration.vibrate(200)
                                     searchUser()
 
                                 }} refreshing={refreshing1} />
@@ -823,41 +826,42 @@ const NewsLetter = React.memo(
         })
 
 
-return (
-    <SafeAreaView style={{ flexGrow: 1, minHeight: 700, backgroundColor: "#16181a", position: "relative" }}>
+        return (
+            <SafeAreaView style={{ flexGrow: 1, minHeight: 700, backgroundColor: "#16181a", position: "relative" }}>
 
-        {/* {filterednewsletter.length == 0 && <Render />} */}
+                {/* {filterednewsletter.length == 0 && <Render />} */}
 
 
-        <Animated.View><Text allowFontScaling={false} style={styles.headerText}>Search</Text></Animated.View>
+                <Animated.View><Text allowFontScaling={false} style={styles.headerText}>Search</Text></Animated.View>
 
-        <View style={styles.searchContainer}>
-            <Pressable>
-                <Search style={styles.search} />
+                <View style={styles.searchContainer}>
+                    <Pressable>
+                        <Search style={styles.search} />
 
-                <TextInput
-                    ref={inputref}
-                    allowFontScaling={false}
-                    style={styles.searchInput}
-                    placeholder="Search"
-                    placeholderTextColor="#828282"
-                    onChangeText={(text) => {
-                        settext(text)
-                        search(text)
-                    }}
-                    returnKeyType="done" // Adjusts the keyboard's Enter key label
-                    onSubmitEditing={(text) => { globalsearch(text) }}
+                        <TextInput
+                            ref={inputref}
+                            allowFontScaling={false}
+                            style={styles.searchInput}
+                            placeholder="Search"
+                            placeholderTextColor="#828282"
+                            onChangeText={(text) => {
+                                settext(text)
+                                search(text)
+                            }}
+                            returnKeyType="done" // Adjusts the keyboard's Enter key label
+                            onSubmitEditing={(text) => { globalsearch(text) }}
 
-                />
-            </Pressable>
-        </View>
+                        />
+                    </Pressable>
+                </View>
 
-        <View style={{ flex: 1, height: "100%", minHeight: 500, backgroundColor: "#16181a" }}>
+                <View style={{ flex: 1, height: "100%", minHeight: 500, backgroundColor: "#16181a" }}>
 
 
                     <Tab.Navigator
                         //  detachInactiveScreens={true}
-                        
+
+
                         screenOptions={({ route }) => ({
                             unmountOnBlur: false,
 
@@ -868,44 +872,42 @@ return (
                                 display: "flex",
                                 width: "98%",
                                 margin: "auto",
-                            
                                 elevation: 0,
                             },
 
+                            tabBarIndicatorStyle: {
+                                backgroundColor: "#00DE62",
+                                height: 1,
+                            },
 
-                    tabBarIndicatorStyle: {
-                        backgroundColor: "#00DE62",
-                        height: 1,
-                    },
+                        })}
+                    >
+                        <Tab.Screen
+                            name="Connections"
+                            component={NewsletterComponent}
+                            options={{
+                                lazy: false,
+                                unmountOnBlur: false,
+                                freezeOnBlur: true,
 
-                })}
-            >
-                <Tab.Screen
-                    name="Connections"
-                    component={NewsletterComponent}
-                    options={{
-                        lazy: false,
-                        unmountOnBlur: false,
-                        freezeOnBlur: true,
+                                tabBarLabel: ({ focused }) => (
+                                    <View>
+                                        <Text allowFontScaling={false} style={[
+                                            styles.tabbarpill, {
+                                                fontSize: 18,
+                                                fontFamily: "Alata",
+                                                color: focused ? "#00DE62" : "#808080",
+                                                borderColor: focused ? "#00DE62" : "#808080",
+                                            }
+                                        ]}> Newsletter
+                                        </Text>
+                                    </View>
+                                ),
 
-                        tabBarLabel: ({ focused }) => (
-                            <View>
-                                <Text allowFontScaling={false} style={[
-                                    styles.tabbarpill, {
-                                        fontSize: 18,
-                                        fontFamily: "Alata",
-                                        color: focused ? "#00DE62" : "#808080",
-                                        borderColor: focused ? "#00DE62" : "#808080",
-                                    }
-                                ]}> Newsletter
-                                </Text>
-                            </View>
-                        ),
+                            }}
+                        />
 
-                    }}
-                />
-
-                <Tab.Screen
+                        <Tab.Screen
 
 
                             name="Job"
@@ -914,16 +916,16 @@ return (
                                 //     style={{ flex: 1 ,paddingBottom: 50}}
                                 //     showsVerticalScrollIndicator={false}
                                 // >
-                                    <User />
+                                <User />
                                 //  </ScrollView>
                             )}
                             // children={(props) => <User />}
-    
+
                             options={{
                                 lazy: false,
                                 unmountOnBlur: false,
                                 freezeOnBlur: true,
-                                
+                            
                                 tabBarLabel: ({ focused }) => (
                                     <Text allowFontScaling={false} style={[
                                         styles.tabbarpill, {
@@ -937,12 +939,10 @@ return (
                                 ),
 
                             }}
-                        
+
                         />
                     </Tab.Navigator>
-                    
                 </View>
-                
             </SafeAreaView>
         )
     }
