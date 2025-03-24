@@ -1,17 +1,34 @@
 import { useEffect, useState, useRef, useMemo } from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View, FlatList, Pressable } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View, FlatList, ToastAndroid, Pressable, KeyboardAvoidingView } from "react-native";
 import { url } from "@/config.js";
 import Profile from "../../assets/icons/profile.js"
+import Entypo from '@expo/vector-icons/Entypo';
+
 import { jwtDecode } from "jwt-decode";
 
 import * as ImagePicker from 'expo-image-picker';
 
 import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
-import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { GestureHandlerRootView, TextInput } from "react-native-gesture-handler";
+
+
+// import Entypo from '@expo/vector-icons/Entypo';
+
 
 
 const GroudDetailsScreen = ({ route }) => {
     var { item, token } = route.params;
+
+
+    const [isCommunityLocked, setIsCommunityLocked] = useState(false);
+    const [editIsEnabled, setEditIsEnabled] = useState(false);
+
+    const [groupName, setGroupName] = useState(item.communityName)
+    const [groupDescription, setGroupDescription] = useState(item.communityDescription);
+    var [groupImage, setgroupImage] = useState("")
+    const [data, setData] = useState([]);
+    const [targetid, settargetid] = useState(null);
+    const [Deletebtn, setDeletebtn] = useState(false);
 
 
     var communityAdmin = item.communityAdmin;
@@ -21,6 +38,8 @@ const GroudDetailsScreen = ({ route }) => {
     const mainpagebottomsheet = useRef();
     const snapPoints = useMemo(() => ['20%'], []);
 
+    var gName = ""
+    var des = ""
 
     const renderBackdrop = (props) => (
         <BottomSheetBackdrop
@@ -30,6 +49,83 @@ const GroudDetailsScreen = ({ route }) => {
             opacity={0.7} // Set opacity for the backdrop
         />
     );
+
+
+    const updateGroupDetail = async () => {
+
+        const data = {
+            communityName: groupName,
+            communityDescription: groupDescription,
+        }
+
+        const response = await fetch(`${url}posts/updateCommunity`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify(data),
+        });
+        console.log(response.status);
+        console.log(response.json());
+
+        if (response.status == 200) {
+            showToastWithGravity(`Group detail updated successfully`)
+        }
+
+
+    }
+
+    const showToastWithGravity = (message) => {
+        ToastAndroid.showWithGravityAndOffset(
+            `${message}`,
+            ToastAndroid.LONG,
+            ToastAndroid.TOP,
+            100, 100
+        );
+    };
+
+
+
+
+    const lockCommunity = async () => {
+        let status = "";
+
+
+        if (isCommunityLocked) {
+            status = "unlocked"
+        }
+
+        else {
+            status = "locked"
+
+
+        }
+        try {
+
+            const response = await fetch(`${url}posts/lockCommunity/${communityID}/${status}`, {
+                method: 'POST',
+                // body: "",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+
+            });
+
+            console.log(response.status);
+            console.log(response.json());
+            if (response.status == 200) {
+                showToastWithGravity(`Group ${status} successfully`)
+            }
+
+
+        }
+        catch (error) {
+            console.log(error)
+        }
+
+    }
 
 
     useEffect(() => {
@@ -46,8 +142,14 @@ const GroudDetailsScreen = ({ route }) => {
                     },
                 });
                 const data = await response.json();
-                console.log(data);
-                setData(data.data)
+
+                var rec1 = data.data.filter((item) => item.id == communityAdmin)
+                var rec2 = data.data.filter((item) => item.id != communityAdmin)
+
+                var rec3 = [...rec1, ...rec2];
+
+
+                setData(rec3)
             } catch (err) {
                 console.log(err);
             }
@@ -61,9 +163,7 @@ const GroudDetailsScreen = ({ route }) => {
 
 
 
-    const [data, setData] = useState([]);
-    const [targetid, settargetid] = useState(null);
-    const [Deletebtn, setDeletebtn] = useState(false);
+
 
 
     const toggleFollow = (id) => {
@@ -151,10 +251,7 @@ const GroudDetailsScreen = ({ route }) => {
             });
             const data = await response.json();
             console.log(data);
-            // console.log(response.status);
 
-            // setfollowstatus("request sent")
-            // setconnecteddata("Request sent")
 
         }
         catch (err) {
@@ -165,7 +262,7 @@ const GroudDetailsScreen = ({ route }) => {
     }
 
     // var [image  , setImage] = useState("")
-    var [groupImage, setgroupImage] = useState("")
+
 
     useEffect(() => {
         if (item.groupPhoto) {
@@ -266,41 +363,133 @@ const GroudDetailsScreen = ({ route }) => {
         )
     }
 
-    const ListHeader = () => (<View style={{ alignItems: "center", marginBottom: 10 }}>
 
 
-        <Pressable onPress={uploadImage}>
-            {groupImage && <Image
-                source={{ uri: groupImage }}
-                style={{ width: 120, height: 120, borderRadius: 100 }}
-            />}
-        </Pressable>
-        <Pressable onPress={uploadImage} style={{ maxHeight: 120 }}>
-            {!groupImage &&
-                <Profile />
+
+
+    const ListHeader = () => (
+        <View style={{ alignItems: "center", marginBottom: 10 }}>
+
+
+            <Pressable onPress={uploadImage}>
+                {groupImage && <Image
+                    source={{ uri: groupImage }}
+                    style={{ width: 120, height: 120, borderRadius: 100 }}
+                />}
+            </Pressable>
+            <Pressable onPress={uploadImage} style={{ maxHeight: 120 }}>
+                {!groupImage &&
+                    <Profile />
+                }
+            </Pressable>
+
+
+
+            {
+                editIsEnabled ?
+                    <>
+
+                        <TextInput
+
+                            placeholderTextColor='white'
+                            defaultValue={groupName}
+                            onChangeText={(text) => gName = text}
+                            // onEndEditing={() => setGroupName(gName)}
+                            style={styles.input}
+                        />
+
+                        <TextInput
+
+                            placeholderTextColor='white'
+                            defaultValue={groupDescription}
+                            onChangeText={(text) => des = text}
+                            // onEndEditing={() => setGroupDescription(des)}
+                            style={styles.desInput}
+                            multiline={true}
+                            numberOfLines={4}
+                        />
+
+
+                    </>
+                    :
+                    <>
+
+                        <>
+                            <Text style={styles.groupName}>
+                                {groupName}
+                            </Text>
+                            <Text
+                                numberOfLines={3}
+                                ellipsizeMode="tail"
+                                style={styles.description}>
+                                {groupDescription}
+                            </Text>
+                        </>
+
+                    </>
             }
-        </Pressable>
-        <Text style={styles.groupName}>
-            {item.communityName}
-        </Text>
-        <Text
-            numberOfLines={3}
-            ellipsizeMode="tail"
-            style={styles.description}>
-            {item.communityDescription}
-        </Text>
-    </View>
+
+
+
+
+
+        </View>
     )
 
     return (
+
 
         <GestureHandlerRootView>
             <View style={styles.page}>
                 <View style={styles.header}>
                     <Text style={styles.tittle}>Group Details</Text>
 
+                    <View style={{ display: 'flex', flexDirection: 'row', gap: 20, justifyContent: 'flex-end', alignItems: 'flex-end' }}>
+
+                        <TouchableOpacity onPress={() => { setIsCommunityLocked(prev => !prev) }}>
+
+                            {
+                                isCommunityLocked ?
+                                    <Entypo name="lock" size={24} color="#00de62" />
+                                    :
+                                    <Entypo name="lock-open" size={24} color="#ccc" />
+                            }
+                        </TouchableOpacity>
+                        {/* <Entypo name="edit" size={24} color="#ccc" /> */}
+                        {
+                            !editIsEnabled ?
+                                <TouchableOpacity onPress={() => setEditIsEnabled(prev => !prev)}>
+                                    <Text style={{ color: "#ccc", fontSize: 16 }}>Edit</Text>
+                                </TouchableOpacity>
+                                :
+                                <TouchableOpacity onPress={() => {
+                                    // console.log(groupDescription);
+
+                                    if (gName != "") {
+                                        //change group name name field was not same as before, so update the group name and description in the backend
+                                        setGroupName(gName)
+
+                                    }
+                                    if (des != "") {
+
+                                        //change group description name field was not same as before, so update the group name and description in the backend
+                                        setGroupDescription(des);
+                                    }
+
+
+                                    setEditIsEnabled(prev => !prev)
+
+                                    updateGroupDetail();
+                                }}>
+                                    <Text style={{ color: "#ccc", fontSize: 16 }}>Save</Text>
+                                </TouchableOpacity>
+                        }
+                    </View>
+
                 </View>
                 <FlatList
+                    keyboardShouldPersistTaps="handled"
+                    removeClippedSubviews={false}
                     contentContainerStyle={{ padding: 5 }}
                     ListHeaderComponent={
                         <ListHeader />
@@ -325,13 +514,17 @@ const GroudDetailsScreen = ({ route }) => {
                     index={-1}
                 >
 
-                    <Pressable onPress={finalDelete} style={styles.deletebtn}>
-                        <Text style={styles.delete}>delete</Text>
-                    </Pressable>
+                    <View style={{ flex: 1, alignItems: 'center' }}>
+                        <TouchableOpacity onPress={finalDelete} style={styles.deletebtn}>
+                            <Text style={styles.delete}>Remove</Text>
+                        </TouchableOpacity>
+                    </View>
 
                 </BottomSheet>
             </View>
+
         </GestureHandlerRootView>
+
 
 
     )
@@ -383,33 +576,44 @@ const styles = StyleSheet.create({
     },
     header: {
         width: "100%",
+        // backgroundColor:'red',
+        alignItems: 'center',
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
         marginBottom: 0,
         paddingHorizontal: 20,
-        marginTop: 10
+        marginTop: 10,
+        marginBottom: 20
     },
     tittle: {
         fontSize: 25,
         fontWeight: "bold",
         color: "#00DE62",
-        marginBottom: 12,
+        // marginBottom: 12,
         fontFamily: "myanmar",
         color: "#00DE62",
     },
     delete: {
-        color: "#fff"
+        color: "#fff",
+        // textAlign:'left',
+
         // padding : 10
     },
     deletebtn: {
-        backgroundColor: "red",
+        marginTop: 20,
+        backgroundColor: "red ",
         borderRadius: 20,
         paddingHorizontal: 20,
         justifyContent: "center",
+        // paddingBottom:5,
+        // textAlign:'left',
+        alignItems: 'center',
         height: 35,
-        width: 100,
-        marginHorizontal: 20
+        width: "30%",
+        marginHorizontal: 20,
+        // borderBottomColor:"#ccc",
+        // borderBottomWidth:1
     },
 
 
@@ -465,7 +669,45 @@ const styles = StyleSheet.create({
         //  maxWidth : 200,
         color: "#bbbbbb",
         marginBottom: -10
+    },
+
+    input: {
+        color: 'white',
+        borderRadius: 10,
+        borderBottomWidth: 2,
+        borderColor: 'grey',
+        paddingHorizontal: 10,
+        marginBottom: 10,
+        fontFamily: "Alata",
+        width: '80%'
+    },
+    desInput: {
+        height: 150,
+        borderWidth: 1,
+        borderColor: "gray",
+        borderRadius: 12,
+        color: "white",
+        width: '80%',
+        padding: 10,
+        textAlignVertical: "top",
     }
 });
 
 export default GroudDetailsScreen;
+
+
+
+
+// (
+// <>
+//     <Text style={styles.groupName}>
+//         {item.communityName}
+//     </Text>
+//     <Text
+//         numberOfLines={3}
+//         ellipsizeMode="tail"
+//         style={styles.description}>
+//         {item.communityDescription}
+//     </Text>
+// </>
+// )
