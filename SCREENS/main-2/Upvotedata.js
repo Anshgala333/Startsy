@@ -33,9 +33,9 @@ function Upvotedata({ route }) {
     var { token, navigation } = route.params
 
     const [refreshing, setRefreshing] = useState(false)
-    const [data, setdata] = useState(null)
+    const [data, setdata] = useState([])
     const [suggestion, setsuggestion] = useState([])
-    const [normal, setnormal] = useState(null)
+    const [normal, setnormal] = useState([])
     const [subNotification, setSubNotification] = useState([])
     const [loading, setloading] = useState(true)
     const [skeleton, setskeletonloading] = useState(false)
@@ -187,7 +187,7 @@ function Upvotedata({ route }) {
             );
             const result = await response.json();
             // console.log(response.status);
-            console.log(result);
+            // console.log(result);
 
 
 
@@ -195,7 +195,7 @@ function Upvotedata({ route }) {
             if (response.status != 404) {
                 // console.log(result.data, "top 3 data ajilffkhedskfh");
                 var suggestionArray = result.data.filter((e) => e.notificationType == "suggestion")
-                setsuggestion(suggestionArray.reverse())
+                setsuggestion([...suggestionArray.reverse()])
                 console.log(suggestion);
 
 
@@ -204,7 +204,9 @@ function Upvotedata({ route }) {
 
                 setnormal(normalArray)
 
-                console.log(suggestion, "suggestion");
+                // console.log(suggestion, "suggestion");
+                console.log(normal)
+                // console.log(suggestion)
 
 
                 var array = result.data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
@@ -228,8 +230,8 @@ function Upvotedata({ route }) {
 
     function rendersub({ item }) {
 
-        console.log(item);
-        console.log(item.notificationType, "render sub");
+        // console.log(item);
+        // console.log(item.notificationType, "render sub");
 
         if (item.sendingUserId == null) return
 
@@ -320,6 +322,9 @@ function Upvotedata({ route }) {
 
         if (item.notificationType == "suggestion") {
             return (
+
+
+
                 <TouchableOpacity onLongPress={() => {
                     setVisible(true)
                     setentirecontent(item.notificationMessage)
@@ -481,6 +486,12 @@ function Upvotedata({ route }) {
 
 
 
+
+
+
+
+
+
             )
 
         }
@@ -566,7 +577,12 @@ function Upvotedata({ route }) {
     }
     var decode;
 
-    function top3data() {
+
+    // useEffect(()=>{
+    //     nor
+    // },[])
+
+    function Suggestions() {
 
         decode = jwtDecode(token)
 
@@ -583,10 +599,27 @@ function Upvotedata({ route }) {
 
     const emptyListText = () => {
         return (
-            <>{subNotification.length == 0 && !loading && <View style={[styles.emptyListContainer]}>
-                <Text style={styles.emptyListText}>No new notifications</Text>
-            </View>}</>
-        );
+            <>
+                {
+                    (suggestion.length == 0 && data.length == 0) ?
+
+                        <View style={[styles.emptyListContainer]}>
+                            <Text style={[styles.emptyListText,{}]}>No new notifications</Text>
+                        </View>
+                        :
+                        (suggestion.length != 0 && data.length == 0) ?
+                            <View>
+                                <Suggestions />
+                                <View style={[styles.emptyListContainer]}>
+                                    <Text style={[styles.emptyListText,{paddingTop:200}]}>No new notifications</Text>
+                                </View>
+                            </View>
+                            :
+                            <Suggestions/>
+            }
+
+            </>
+        )
     }
 
 
@@ -612,7 +645,7 @@ function Upvotedata({ route }) {
             <FlatList
                 // style={{marginTop : 300}}
                 // style={{flex:1 , height : 100}}
-                // ListHeaderComponent={emptyListText}
+                ListHeaderComponent={emptyListText}
                 scrollEnabled={true}
                 refreshControl={<RefreshControl progressViewOffset={0} refreshing={refreshing}
                     progressBackgroundColor="#16181a"
@@ -628,7 +661,7 @@ function Upvotedata({ route }) {
                         }, 2000);
                     }} />}
 
-                ListHeaderComponent={top3data}
+                // ListHeaderComponent={top3data}
                 data={normal}
                 // rendersub
                 // data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}

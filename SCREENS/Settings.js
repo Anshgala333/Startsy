@@ -5,7 +5,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Image, BackHandler } from "re
 import { List, Avatar, Divider } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
-const settings = ({ navigation, route }) => {
+const Settings = ({ navigation , route}) => {
 
   var { token , tabnavigation } = route.params
 
@@ -121,4 +121,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default settings;
+export default Settings;

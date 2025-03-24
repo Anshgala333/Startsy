@@ -14,21 +14,23 @@ import { jwtDecode } from "jwt-decode";
 // import styles from "../../styles/post.js"
 
 import { url } from "../../config.js"
+import { useNavigation } from "@react-navigation/native";
 
-const Chat = ({ navigation, route }) => {
+const Chat = ({ route }) => {
 
     const [newtext, setnewtext] = useState("")
-    const { item, messages, token, photo1, photo2 } = route.params;
+    const { item, messages, token, photo1, photo2, tabnavigation } = route.params;
     const { extra } = route.params;
     const itemdummy = route.params.item
+    const navigation = useNavigation();
 
 
-    console.log(messages.at(-2), "blog");
+    // console.log(messages.at(-2), "blog");
 
 
 
-    console.log(photo1);
-    console.log(photo2);
+    // console.log(photo1);
+    // console.log(photo2);
 
 
 
@@ -47,7 +49,7 @@ const Chat = ({ navigation, route }) => {
     function sendmessage() {
 
 
-        console.log("hiiii");
+        // console.log("hiiii");
 
 
         if (newtext == "") {
@@ -57,7 +59,7 @@ const Chat = ({ navigation, route }) => {
 
 
 
-        console.log(messages);
+        // console.log(messages);
 
         const finaldata = {
             senderId: id,
@@ -91,7 +93,7 @@ const Chat = ({ navigation, route }) => {
 
     useEffect(() => {
         var decode = jwtDecode(token);
-        console.log(decode);
+        // console.log(decode);
 
         if (extra && extra.status) {
             setnewtext(`${decode.userName} has considered your application for ${extra.jobrole} Now you can chat for further discussion.`)
@@ -130,14 +132,19 @@ const Chat = ({ navigation, route }) => {
         }, 500);
     }, []);  // This runs only on mount
 
+
+    useEffect(() => {
+
+    }, [])
+
     useFocusEffect(
         useCallback(() => {
             setTimeout(() => {
                 // Ensure we are only scrolling when new messages are added
                 InteractionManager.runAfterInteractions(() => {
-                    console.log('====================================');
-                    console.log(messages.length);
-                    console.log('====================================');
+                    // console.log('====================================');
+                    // console.log(messages.length);
+                    // console.log('====================================');
                     flatListRef.current?.scrollToOffset({
                         offset: messages.length * 100,  // Adjust to actual item height
                         animated: false,
@@ -155,7 +162,6 @@ const Chat = ({ navigation, route }) => {
         });
 
         setSocket(newSocket);
-
         setid(decoded._id)
 
 
@@ -316,7 +322,7 @@ const Chat = ({ navigation, route }) => {
     const renderItem = React.useMemo(
         () => ({ item, index }) => {
             const dataLength = data.length;
-            console.log(dataLength);
+            // console.log(dataLength);
 
             return (
                 <>
@@ -329,6 +335,7 @@ const Chat = ({ navigation, route }) => {
                         <View style={{ display: "flex", flex: 1 }}>
                             {index < dataLength - 1 && item.senderId != data[index + 1].senderId && <Image style={item.senderId == jisuserkosendkarnahaiuskiid ? styles.pfpleft : styles.pfpright} source={{ uri: item.senderId == jisuserkosendkarnahaiuskiid ? photo2 : photo1 }} />}
                             {index == dataLength - 1 && <Image style={item.senderId == jisuserkosendkarnahaiuskiid ? styles.pfpleft : styles.pfpright} source={{ uri: item.senderId == jisuserkosendkarnahaiuskiid ? photo2 : photo1 }} />}
+
 
 
 
@@ -358,31 +365,35 @@ const Chat = ({ navigation, route }) => {
                             {index < dataLength - 1 && item.senderId != data[index + 1].senderId && <Image style={item.senderId == jisuserkosendkarnahaiuskiid ? styles.pfpleft1 : styles.pfpright1} source={{ uri: item.senderId == jisuserkosendkarnahaiuskiid ? photo2 : photo1 }} />}
 
                             {index == dataLength - 1 && <Image style={item.senderId == jisuserkosendkarnahaiuskiid ? styles.pfpleft1 : styles.pfpright1} source={{ uri: item.senderId == jisuserkosendkarnahaiuskiid ? photo2 : photo1 }} />}
-                            <View style={[styles.box, {
-                                marginRight: item.senderId != jisuserkosendkarnahaiuskiid ? 25 : 0,
-                                marginLeft: item.senderId != jisuserkosendkarnahaiuskiid ? 25 : 0
+                            <TouchableOpacity onPress={() => tabnavigation.navigate("ViewSendedPost", { id: item.message.postShared })}>
 
-                            }]}>
-                                <View style={styles.top} >
-                                    <Pressable
-                                        // onPress={() => { navigation.navigate("Singleuserpage", { token: token, id: "6793703e4d5879e729e089f2", page: "Chat" }) }}
-                                        onPress={() => {
-                                            navigation.navigate("Singleuserpage", { token: token, id: "6793703e4d5879e729e089f2", page: "Chat", item: itemdummy, messages, })
+                                <View style={[styles.box, {
+                                    marginRight: item.senderId != jisuserkosendkarnahaiuskiid ? 25 : 0,
+                                    marginLeft: item.senderId != jisuserkosendkarnahaiuskiid ? 25 : 0
 
-                                        }}
-                                        style={{ display: "flex", flexDirection: "row", width: "100%" }}>
-                                        <Image style={styles.userimg} source={{ uri: item.message.profilePhoto }} />
-                                        <View style={styles.userdetail}>
-                                            <Text allowFontScaling={false} style={styles.u1}>{item.message.userName}</Text>
+                                }]}>
+                                    <View style={styles.top} >
+                                        <Pressable
+                                            // onPress={() => { navigation.navigate("Singleuserpage", { token: token, id: "6793703e4d5879e729e089f2", page: "Chat" }) }}
+                                            onPress={() => {
+                                                navigation.navigate("Singleprofilepage", { token: token, id: jisuserkosendkarnahaiuskiid, page: "Chat", item: itemdummy, messages, })
 
-                                        </View>
-                                    </Pressable>
-                                </View>
-                                {item.message.postImage == null && <View style={styles.divider}></View>
-                                }
-                                {item.message.postImage != null && <Image style={[styles.template, { aspectRatio: item.aspectRatio ? item.aspectRatio : 1 / 1 }]} source={{ uri: item.message.postImage }} />}
-                                {item.message.postImage == null && <Text style={styles.blogtext}>{item.message.postContent}</Text>}
-                                {/* {item.type == "video" &&
+                                            }}
+                                            style={{ display: "flex", flexDirection: "row", width: "100%" }}>
+                                            <Image style={styles.userimg} source={{ uri: item.message.profilePhoto }} />
+                                            <View style={styles.userdetail}>
+                                                <Text allowFontScaling={false} style={styles.u1}>{item.message.userName}</Text>
+
+                                            </View>
+                                        </Pressable>
+                                    </View>
+                                    {item.message.postImage == null && <View style={styles.divider}></View>
+                                    }
+
+                                    {item.message.postImage != null && <Image style={[styles.template, { aspectRatio: item.aspectRatio ? item.aspectRatio : 1 / 1 }]} source={{ uri: item.message.postImage }} />}
+
+                                    {item.message.postImage == null && <Text style={styles.blogtext}>{item.message.postContent}</Text>}
+                                    {/* {item.type == "video" &&
                                     <Video
                                         ref={ref => videoRefs.current[item._id] = ref}
                                         style={[styles.template, { width: newwidth, height: getVideoHeight(item.aspectRatio) }]}
@@ -393,22 +404,23 @@ const Chat = ({ navigation, route }) => {
                                         shouldPlay={isVideoPlaying}
                                     />
                                 } */}
-                                {/* {item.type == "textBlog" && <Text style={styles.blogtext}>{item.content}</Text>} */}
+                                    {/* {item.type == "textBlog" && <Text style={styles.blogtext}>{item.content}</Text>} */}
 
-                                <View style={styles.iconcontainer}>
-                                    <View style={styles.icon2}>
+                                    <View style={styles.iconcontainer}>
+                                        <View style={styles.icon2}>
+
+                                        </View>
+                                        {/* <Pressable onPress={() => openshare(item._id)}><Share style={{ marginTop: 5, marginRight: 10, right: 0 }} /></Pressable> */}
+
 
                                     </View>
-                                    {/* <Pressable onPress={() => openshare(item._id)}><Share style={{ marginTop: 5, marginRight: 10, right: 0 }} /></Pressable> */}
+                                    <View style={styles.lower}>
+                                        <Text allowFontScaling={false} style={styles.u3}>{item.message.postCaption != undefined ? item.message.postCaption : "caption"} </Text>
 
-
-                                </View>
-                                <View style={styles.lower}>
-                                    <Text allowFontScaling={false} style={styles.u3}>{item.message.postCaption != undefined ? item.message.postCaption : "caption"} </Text>
+                                    </View>
 
                                 </View>
-
-                            </View>
+                            </TouchableOpacity>
                         </View>
                     }
 
@@ -466,15 +478,52 @@ const Chat = ({ navigation, route }) => {
     }, [token]);
 
     useEffect(() => {
+        async function markAsRead() {
+            console.log("marking read");
+            var decode = jwtDecode(token)
+            console.log(decode);
+            
+            var object = {
+                senderId: decode._id,
+                receiverId: jisuserkosendkarnahaiuskiid,
+            }
 
-    }, [data]);
+            console.log(object);
+            console.log(`${url}test/markAsRead`);
+            
+            
+            try {
+                const response = await fetch(`${url}test/markAsRead`,
+                    {
+                        method: "POST",
+                        body: JSON.stringify(object),
+                        headers: {
+                            "Content-Type": "application/json",
+                            'Accept': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                          }
+                    }
+                );
+                const result = await response.json();
+                console.log(response);
+                console.log(result);
+
+            }
+            catch (e) {
+                console.log(e);
+
+            }
+
+        }
+        markAsRead()
+    }, []);
 
     function handlenext() {
         var decode = jwtDecode(token)
         if (decode.role == "Investor") {
             return
         }
-        navigation.navigate("Singleuserpage", { token: token, id: item.user._id, page: "Chat", item, messages, })
+        navigation.navigate("Singleprofilepage", { token: token, id: item.user._id, page: "Chat", item, messages, })
     }
 
 
@@ -486,52 +535,52 @@ const Chat = ({ navigation, route }) => {
 
     return (
         // <KeyboardAvoidingView style={{ flex: 1, height: height }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}>
-            <Animated.View style={{ flex: 1, }}>
-                <View style={{ flex: 1.1, backgroundColor: "#16181a" }}>
+        <Animated.View style={{ flex: 1, }}>
+            <View style={{ flex: 1.1, backgroundColor: "#16181a" }}>
 
 
-                    <View style={[styles.header]}>
-                        <Pressable onPress={() => { navigation.goBack() }}>
-                            <Ionicons name="arrow-back-circle-outline" size={40} color="#00DE62" />
-                        </Pressable>
+                <View style={[styles.header]}>
+                    <Pressable onPress={() => { navigation.goBack() }}>
+                        <Ionicons name="arrow-back-circle-outline" size={40} color="#00DE62" />
+                    </Pressable>
 
-                        <Pressable
-                            onPress={() => { handlenext() }}
-                        >
-                            <View style={styles.details}>
-                                <View style={styles.userimg}>
-                                    <Image style={styles.image} source={{ uri: item.user.profilePhoto }} />
-                                </View>
-                                <View style={styles.d2}>
-                                    <Text allowFontScaling={false} style={styles.userid}>{item.user.userName}</Text>
-                                    <Text allowFontScaling={false} style={styles.username}>{item.user.userName}</Text>
-                                </View>
+                    <Pressable
+                        onPress={() => { handlenext() }}
+                    >
+                        <View style={styles.details}>
+                            <View style={styles.userimg}>
+                                <Image style={styles.image} source={{ uri: item.user.profilePhoto }} />
                             </View>
-                        </Pressable>
+                            <View style={styles.d2}>
+                                <Text allowFontScaling={false} style={styles.userid}>{item.user.userName}</Text>
+                                <Text allowFontScaling={false} style={styles.username}>{item.user.userName}</Text>
+                            </View>
+                        </View>
+                    </Pressable>
 
 
-                    </View>
-                    <FlatList
-                        // style={{height : 600}}
-                        data={data}
-                        // inverted={true}
-                        removeClippedSubview={false}
-                        initialNumToRender={20}  // Only load 20 items initially
-                        maxToRenderPerBatch={10}  // Render only 10 items per batch
-                        windowSize={21}
-                        legacyImplementation={true}
-                        bounces={true}
-                        contentInset={{ top: 10 }}
-                        ref={flatListRef}
-                        renderItem={renderItem}
-                        keyExtractor={(item, index) => item._id}
-                        // onContentSizeChange={() => flatListRef.current?.scrollToEnd({ animated: true })}
+                </View>
+                <FlatList
+                    // style={{height : 600}}
+                    data={data}
+                    // inverted={true}
+                    removeClippedSubview={false}
+                    initialNumToRender={20}  // Only load 20 items initially
+                    maxToRenderPerBatch={10}  // Render only 10 items per batch
+                    windowSize={21}
+                    legacyImplementation={true}
+                    bounces={true}
+                    contentInset={{ top: 10 }}
+                    ref={flatListRef}
+                    renderItem={renderItem}
+                    keyExtractor={(item, index) => item._id}
+                    // onContentSizeChange={() => flatListRef.current?.scrollToEnd({ animated: true })}
 
-                        getItemLayout={(data, index) => ({ length: 100, offset: 100 * index, index })}
-                        contentContainerStyle={styles.messagesContainer}
-                    />
+                    getItemLayout={(data, index) => ({ length: 100, offset: 100 * index, index })}
+                    contentContainerStyle={styles.messagesContainer}
+                />
 
-                    {/* <FlatList
+                {/* <FlatList
                         data={data}
                         keyExtractor={(item) => item._id}
                         renderItem={({ item }) => <Text style={styles.message}>ok</Text>}
@@ -541,35 +590,35 @@ const Chat = ({ navigation, route }) => {
 
 
 
-                    <View style={{ zIndex: 100000, bottom: 0 }} >
-                        <Animated.View style={[styles.searchContainer, { marginBottom: keyboardOffset }]}>
-                            <TextInput
-                                ref={inputRef}
-                                autoCorrect={true}
-                                allowFontScaling={false}
-                                multiline={true}
-                                style={styles.searchInput}
-                                placeholder="Type ..."
-                                placeholderTextColor="#828282"
-                                // onBlur={() => setkeyboardstatus(false)}
-                                onChangeText={(val) => setnewtext(val)}
-                                value={newtext}
+                <View style={{ zIndex: 100000, bottom: 0 }} >
+                    <Animated.View style={[styles.searchContainer, { marginBottom: keyboardOffset }]}>
+                        <TextInput
+                            ref={inputRef}
+                            autoCorrect={true}
+                            allowFontScaling={false}
+                            multiline={true}
+                            style={styles.searchInput}
+                            placeholder="Type ..."
+                            placeholderTextColor="#828282"
+                            // onBlur={() => setkeyboardstatus(false)}
+                            onChangeText={(val) => setnewtext(val)}
+                            value={newtext}
 
 
-                            />
+                        />
 
 
 
-                        </Animated.View>
+                    </Animated.View>
 
-                        <TouchableOpacity
-                            ref={btn11}
-                            onTouchStart={() => { inputRef.current.focus(); }}
-                            style={styles.send} onPress={sendmessage}>
-                            <Ionicons name="send" size={24} color="#ccc" />
-                        </TouchableOpacity>
-                    </View>
-                    {/* <Animated.View style={[styles.inputContainer, { marginBottom: keyboardOffset }]}>
+                    <TouchableOpacity
+                        ref={btn11}
+                        onTouchStart={() => { inputRef.current.focus(); }}
+                        style={styles.send} onPress={sendmessage}>
+                        <Ionicons name="send" size={24} color="#ccc" />
+                    </TouchableOpacity>
+                </View>
+                {/* <Animated.View style={[styles.inputContainer, { marginBottom: keyboardOffset }]}>
                         <TextInput
                             style={styles.input}
                             // value={inputText}
@@ -581,8 +630,8 @@ const Chat = ({ navigation, route }) => {
                         </TouchableOpacity>
                     </Animated.View> */}
 
-                </View>
-            </Animated.View>
+            </View>
+        </Animated.View>
 
         // </KeyboardAvoidingView>
     )

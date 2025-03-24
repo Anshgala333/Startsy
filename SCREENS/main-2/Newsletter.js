@@ -40,70 +40,70 @@ const NewsLetter = React.memo(
     ({ closeall, }) => {
         const navigation = useNavigation()
         const Tab = createMaterialTopTabNavigator();
-        console.log('newsletter okkkkkkkkkkk re render');
+        // console.log('newsletter okkkkkkkkkkk re render');
 
 
 
         useEffect(() => {
-            console.log('====================================');
-            console.log("closeall re render");
-            console.log('====================================');
+            // console.log('====================================');
+            // console.log("closeall re render");
+            // console.log('====================================');
         }, [closeall])
         useEffect(() => {
-            console.log('====================================');
-            console.log("token re render");
-            console.log('====================================');
+            // console.log('====================================');
+            // console.log("token re render");
+            // console.log('====================================');
         }, [token])
         useEffect(() => {
-            console.log('====================================');
-            console.log("newsletter re render");
-            console.log('====================================');
+            // console.log('====================================');
+            // console.log("newsletter re render");
+            // console.log('====================================');
         }, [newsletter])
         useEffect(() => {
-            console.log('====================================');
-            console.log("filterednewsletter re render");
-            console.log('====================================');
+            // console.log('====================================');
+            // console.log("filterednewsletter re render");
+            // console.log('====================================');
         }, [filterednewsletter])
         useEffect(() => {
-            console.log('====================================');
-            console.log("globaldata re render");
-            console.log('====================================');
+            // console.log('====================================');
+            // console.log("globaldata re render");
+            // console.log('====================================');
         }, [globaldata])
 
         useEffect(() => {
-            console.log('====================================');
-            console.log("newsletter11 re render");
-            console.log('====================================');
+            // console.log('====================================');
+            // console.log("newsletter11 re render");
+            // console.log('====================================');
         }, [newsletter])
         useEffect(() => {
-            console.log('====================================');
-            console.log("filtered new letter re render");
-            console.log('====================================');
+            // console.log('====================================');
+            // console.log("filtered new letter re render");
+            // console.log('====================================');
         }, [filterednewsletter])
         useEffect(() => {
-            console.log('====================================');
-            console.log("suggestion array new letter re render");
-            console.log('====================================');
+            // console.log('====================================');
+            // console.log("suggestion array new letter re render");
+            // console.log('====================================');
         }, [suggestionarray])
         useEffect(() => {
-            console.log('====================================');
-            console.log("refreshing re render");
-            console.log('====================================');
+            // console.log('====================================');
+            // console.log("refreshing re render");
+            // console.log('====================================');
         }, [refreshing])
         useEffect(() => {
-            console.log('====================================');
-            console.log("getdata re render");
-            console.log('====================================');
+            // console.log('====================================');
+            // console.log("getdata re render");
+            // console.log('====================================');
         }, [getdata])
         useEffect(() => {
-            console.log('====================================');
-            console.log("renderItem re render");
-            console.log('====================================');
+            // console.log('====================================');
+            // console.log("renderItem re render");
+            // console.log('====================================');
         }, [renderItem])
         useEffect(() => {
-            console.log('====================================');
-            console.log("renderItem1 re render");
-            console.log('====================================');
+            // console.log('====================================');
+            // console.log("renderItem1 re render");
+            // console.log('====================================');
         }, [renderItem1])
 
 
@@ -113,7 +113,7 @@ const NewsLetter = React.memo(
         const { globaldata } = useContext(GlobalContext);
 
         useEffect(() => {
-            console.log("gd re rendr");
+            // console.log("gd re rendr");
             setToken(globaldata.token);
         }, [globaldata])
 
@@ -183,9 +183,9 @@ const NewsLetter = React.memo(
 
         const renderItem = useCallback(({ item }) => {
 
-            console.log('====================================');
-            console.log("render 1");
-            console.log('====================================');
+            // console.log('====================================');
+            // console.log("render 1");
+            // console.log('====================================');
 
 
             function time(time) {
@@ -263,7 +263,7 @@ const NewsLetter = React.memo(
 
         const renderItem1 = ({ item }) => {
 
-            console.log("render2");
+            // console.log("render2");
 
             function time(time) {
                 var data1 = new Date(time)
@@ -364,7 +364,7 @@ const NewsLetter = React.memo(
 
         async function searchUser() {
 
-            console.log("user search");
+            // console.log("user search");
             var final = `@${text1}`
             try {
                 const response = await fetch(`${url}api/getUserNameSuggestions/${final}`, {
@@ -375,7 +375,7 @@ const NewsLetter = React.memo(
                     },
                 });
                 const data = await response.json();
-                console.log(data);
+                // console.log(data);
 
                 setsuggestionarray(data.data)
 
@@ -384,7 +384,7 @@ const NewsLetter = React.memo(
                 console.log(err);
 
             }
-            finally{
+            finally {
                 setRefreshing1(false)
             }
         }
@@ -393,16 +393,32 @@ const NewsLetter = React.memo(
         async function sendfollowrequest(stat, id) {
 
             if (stat) return
-            setsuggestionarray(suggestionarray.map((e) => {
-                if (e._id == id) {
-                    return { ...e, status: "Request Sent" }
-                }
-                else return e
+            // setsuggestionarray(suggestionarray.map((e) => {
+            //     if (e._id == id) {
+            //         return { ...e, status: "Request Sent" }
+            //     }
+            //     else return e
 
-            }))
+            // }))
 
 
-            console.log(id);
+            setsuggestionarray((prevArray) => 
+                prevArray.map((item) => 
+                    item._id === id 
+                        ? { ...item, status: item.status === "Request Sent" ? "Pending" : "Request Sent" } 
+                        : item
+                )
+            );
+
+            // setsuggestionarray((e)=>{
+            //     if (e._id == id) {
+            //         return { ...e, status: "Request Sent" }
+            //     }
+            //     else return e
+            // })
+
+
+            // console.log(id);
             try {
 
                 const response = await fetch(`${url}connections/followUser/${id}`, {
@@ -416,7 +432,7 @@ const NewsLetter = React.memo(
                 });
                 const data = await response.json();
                 console.log(data);
-                console.log(response.status);
+                // console.log(response.status);
 
                 // setfollowstatus("request sent")
                 setconnecteddata("Request sent")
@@ -431,15 +447,15 @@ const NewsLetter = React.memo(
 
         function renderSuggestion({ item }) {
 
-            console.log('====================================');
-            console.log("render3");
-            console.log('====================================');
+            // console.log('====================================');
+            // console.log("render3");
+            // console.log('====================================');
             return (
                 // <Text style={{color : "#fff"}}>hello</Text>
                 <TouchableOpacity onPress={() => {
                     navigation.navigate("Singleuserpage", { token: token, id: item._id, page: "NewsLetter" })
                 }}>
-                    <View style={styles.listItem}>
+                    <View style={[styles.listItem, {}]}>
                         {/* <Image
                             source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8slgZXgqnSIXDS8wF2uDT_SmsYlBe-W1soQ&s" }}
                             style={styles.avatar} /> */}
@@ -472,7 +488,7 @@ const NewsLetter = React.memo(
         useEffect(() => {
             async function searchUser() {
 
-                console.log("user search");
+                // console.log("user search");
                 var final = `showAllUser`
                 try {
                     const response = await fetch(`${url}api/getUserNameSuggestions/${final}`, {
@@ -483,7 +499,7 @@ const NewsLetter = React.memo(
                         },
                     });
                     const data = await response.json();
-                    console.log(data);
+                    // console.log(data);
 
                     setsuggestionarray(data.data)
 
@@ -519,7 +535,12 @@ const NewsLetter = React.memo(
 
             useFocusEffect(
                 useCallback(() => {
+
+                    // console.log("ok");
+
+
                     console.log("ok");
+
                     handleTabChange("Newsletter")
                 }, [])
             )
@@ -752,9 +773,14 @@ const NewsLetter = React.memo(
 
         function handleTabChange(selected) {
             setselectedword(selected)
-            console.log(selected);
+            // console.log(selected);
 
         }
+
+        // useEffect(()=>{
+        //     console.log("suggestions array",suggestionarray);
+
+        // },[])
 
         const User = memo(() => {
 
@@ -765,15 +791,18 @@ const NewsLetter = React.memo(
                 })
             )
             return (
-                <View style={{flex:1,backgroundColor:"#16181a" }}>
 
-               
+
+                <View style={{ flex: 1, backgroundColor: '#16181a' }}>
+
+
                     <FlatList
                         keyExtractor={(item, index) => index}
                         data={suggestionarray}
                         renderItem={renderSuggestion}
-                        style={[styles.suggestionbox,{paddingBottom:120}]}
-                        contentContainerStyle={{paddingBottom:100}}
+
+                        style={[styles.suggestionbox]}
+                        contentContainerStyle={{ paddingBottom: 100 }}
 
 
                         refreshControl={
@@ -782,16 +811,18 @@ const NewsLetter = React.memo(
                                 colors={['#00de62']}
                                 onRefresh={() => {
                                     setRefreshing1(true)
-                                    Vibration.vibrate(200)
+                                    // Vibration.vibrate(200)
                                     searchUser()
 
                                 }} refreshing={refreshing1} />
                         }
 
 
+
                    />
                     </View>
                    
+
             )
         })
 
@@ -885,11 +916,11 @@ const NewsLetter = React.memo(
                                 //     style={{ flex: 1 ,paddingBottom: 50}}
                                 //     showsVerticalScrollIndicator={false}
                                 // >
-                                    <User />
+                                <User />
                                 //  </ScrollView>
                             )}
                             // children={(props) => <User />}
-    
+
                             options={{
                                 lazy: false,
                                 unmountOnBlur: false,
@@ -1177,13 +1208,16 @@ const styles = StyleSheet.create({
     },
 
     suggestionbox: {
-        width: "100%",
+        // width: "100%",
+        flex: 1,
         // height: 320,
         height: "auto",
         maxHeight: height,
         backgroundColor: "transparent",
         // position: "absolute",
         paddingTop: 10,
+
+
         // top: 135,
         // elevation: 100,
         // zIndex: 1000

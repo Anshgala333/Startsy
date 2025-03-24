@@ -566,6 +566,8 @@ const Singleprofilepage = ({ props, openshare }) => {
 
 
     if (connecteddata == "Followed") {
+      console.log("ok");
+      
       console.log("connect");
       setconnecteddata("Follow")
 

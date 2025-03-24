@@ -10,6 +10,15 @@ import { url } from "@/config.js";
 import { GlobalContext } from "@/Global/globalcontext.js";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { useFocusEffect } from "expo-router";
+import { Dimensions } from "react-native";
+
+const { height, width } = Dimensions.get("window")
+
+var a = width / 360;
+var b = height / 800;
+
+
+const scalingfactor = Math.sqrt(a * b)
 
 
 const Community = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
@@ -221,13 +230,13 @@ const Community = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
                                     Vibration.vibrate(100)
                                     gotochatscreen(item)
                                 }} style={styles.next1} >
-                                    <Text allowFontScaling={false} style={styles.nexttext}>
+                                    <View allowFontScaling={false} style={styles.nexttext}>
                                         {/* <Text style={{marginTop : -10 , alignSelf : "flex-start"}}></Text> */}
-                                        Chat
-                                        <View style={{ marginTop: 11, paddingLeft: 3, zIndex: 100, elevation: 100 }}>
+                                        <Text style={{fontSize: scalingfactor * 16,}}>Chat</Text>
+                                        <View style={{  paddingLeft: 3,justifyContent:'center', }}>
                                             <MaterialCommunityIcons name="message-text-outline" size={20} color="#000" />
                                         </View>
-                                    </Text>
+                                    </View>
                                 </TouchableOpacity>}
                             </View>
                         </LinearGradient>

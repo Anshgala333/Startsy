@@ -57,9 +57,9 @@ const ChatScreen = ({ token, mainpagebottomsheet, closeall, k, setk }) => {
             closeall()
 
             const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
-                console.log('====================================');
-                console.log("ok");
-                console.log('====================================');
+                // console.log('====================================');
+                // console.log("ok");
+                // console.log('====================================');
                 setk(false);
                 inputref.current?.blur()
             });
@@ -157,7 +157,7 @@ const ChatScreen = ({ token, mainpagebottomsheet, closeall, k, setk }) => {
                 />
                 <Tab.Screen
 
-                    name="Requests"
+                    name="Communities"
                     // component={Communities}
                     children={(props) => <Communities navigation={navigation} token={token} />}
                     options={{

@@ -34,6 +34,7 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
     const [skeleton, setskeletonloading] = useState(false)
 
     const [filtereddata, setfiltereddata] = useState([])
+    const [loggedinuserid, setLoggedInUserId] = useState([])
 
     useEffect(() => {
         console.log(search);
@@ -46,6 +47,16 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
     const [refreshing, setRefreshing] = useState(false);
 
 
+    useEffect(() => {
+        if (token) {
+            var decode = jwtDecode(token)
+            console.log(decode._id);
+            
+            setLoggedInUserId(decode._id)
+        }
+    }, [token])
+
+
 
 
 
@@ -56,10 +67,16 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
     const [data, setData] = useState(null)
     const [loading, setloading] = useState(false)
 
+    useFocusEffect(
+        useCallback(()=>{
+            fetchData()
+        } , [])
+    )
+
     const fetchData = async () => {
         var route = ""
         const decoded = jwtDecode(token);
-       
+
 
 
         if (decoded.role == "Founder") {
@@ -91,7 +108,7 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
                     }
                 );
                 const result = await response.json();
-                
+
 
                 const uniqueData = result.filter((item, index, self) =>
                     self.findIndex(innerItem => innerItem.user.userName === item.user.userName) === index
@@ -108,13 +125,15 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
                     return dateB - dateA; // Sort in descending order of time
                 });
 
-           
+                console.log(sortedData);
+
+
+
                 if (response.status === 200) {
-                    // You can update the data state here if needed
-                    // setData(result); // Example, you can handle the response data
+
                     setData(sortedData)
                     setfiltereddata(sortedData)
-         
+
 
 
 
@@ -132,6 +151,7 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
     useEffect(() => {
 
         fetchData();
+
 
     }, [])
 
@@ -169,7 +189,7 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
 
 
 
-                navigation.push("Chat", { item, messages: result.data?.messages || [], token, navigation, photo1: result.senderProfilePhoto, photo2: result.recieverProfilePhoto });
+                navigation.push("Chat", { item, messages: result.data?.messages || [], token, navigation, photo1: result.senderProfilePhoto, photo2: result.recieverProfilePhoto, tabnavigation: navigation });
                 // navigation.push("Ansh", { item, messages: result.data?.messages || [], token, navigation, photo1: result.senderProfilePhoto, photo2: result.recieverProfilePhoto });
 
                 // navigation.push("Ansh");
@@ -222,17 +242,25 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
 
     return (
         <View style={styles.listContainer}>
-            {data?.length == 0 && !loading
-                &&
-                <View style={styles.emptyListText}>
-                    <Text style={{ color: 'gray' }}>No conversations yet</Text>
-                </View>
-            }
+
             {filtereddata && !skeleton && <FlatList
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{ paddingBottom: 100 }}
 
+                ListHeaderComponent={
+                    <>
 
+                        {
+                            filtereddata.length == 0 ?
+                                <View style={styles.emptyListContainer}>
+                                    <Text style={[{ color: 'gray' }, styles.emptyListText]}>No conversations yet</Text>
+                                </View>
+                                : null
+                        }
+
+
+                    </>
+                }
                 data={filtereddata}
                 keyExtractor={(item, index) => index.toString()}
                 refreshControl={<RefreshControl refreshing={refreshing}
@@ -263,7 +291,10 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
                                         <Text
                                             numberOfLines={1}
                                             ellipsizeMode="tail"
-                                            allowFontScaling={false} style={styles.message}>{item.lastMessage?.message || "No chats yet"}</Text>
+                                            allowFontScaling={false}
+                                            style={!item.lastMessage.isRead && item.lastMessage.senderId != loggedinuserid ? styles.bold : styles.message}>
+                                            {item.lastMessage?.message || "No chats yet"}
+                                        </Text>
                                     }
 
 
@@ -275,9 +306,11 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
                                     }
                                 </View>
                                 <Text
+                                    allowFontScaling={false}
+                                    style={item.lastMessage && !item.lastMessage.isRead && item.lastMessage.senderId != loggedinuserid  ? styles.boldtime : styles.time}>
+                                    {item.lastMessage ? time(item.lastMessage.createdAt) : "today"}</Text>
 
-
-                                    allowFontScaling={false} style={styles.time}>{item.lastMessage ? time(item.lastMessage.createdAt) : "today"}</Text>
+                                {item.lastMessage && item.lastMessage.isRead == false && item.lastMessage.senderId != loggedinuserid && <Text style={{ marginTop: 25, marginRight: 10, width: 8, height: 8, backgroundColor: "#00de62", borderRadius: 30 }}></Text>}
                             </View>
                         </TouchableOpacity>
                     )
@@ -425,15 +458,32 @@ const styles = StyleSheet.create({
         color: "#B8B8B8",
         marginTop: -3,
     },
+    bold: {
+        fontSize: 14,
+        color: "white",
+        fontWeight: "bold",
+        marginTop: -3,
+    },
     time: {
         fontSize: 11,
         width: 100,
         position: "absolute",
         right: 0,
-        top: 10,
+        top: 15,
         textAlign: "right",
         // backgroundColor : "red",
         color: "#B8B8B8",
+        fontFamily: "Roboto",
+    },
+    boldtime: {
+        fontSize: 11,
+        width: 100,
+        position: "absolute",
+        right: 0,
+        top: 15,
+        textAlign: "right",
+        // backgroundColor : "red",
+        color: "#00de62",
         fontFamily: "Roboto",
     },
     placeholderText: {
@@ -526,13 +576,24 @@ const styles = StyleSheet.create({
     },
 
     emptyListText: {
-        flex: 1,
-        marginHorizontal: "auto",
+        textAlign: "center",
+        color: "#666",
         alignSelf: "center",
-        justifyContent: 'center',
-        marginTop: 100,
-        top: '8%',
-        height: height
+        justifyContent: "center",
+        // position : "absolute",
+        elevation: 100,
+        bottom: 0,
+
+        fontSize: 16,
+        paddingTop: 250,
+    },
+
+    emptyListContainer: {
+
+        flex: 1,
+        // height:height,
+
+
     },
 
 

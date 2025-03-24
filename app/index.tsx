@@ -7,7 +7,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Green from "../SCREENS/greenscreen.js"; //page 1
 import Login1 from "../SCREENS/logintrial.js"; // login page
 import ReadMore1 from "../SCREENS/trial-1.js"; // read more page
-import { SafeAreaView, Settings } from "react-native";
+import { SafeAreaView } from "react-native";
 import Signup1 from "../SCREENS/signup-1.js";
 import Signup2 from "../SCREENS/signup2.js";
 import Signup3 from "../SCREENS/signup3.js";
@@ -58,7 +58,7 @@ import Editcommunity from "../SCREENS/edit profile pages/Editcommunity.js";
 // import drop from "../../SCREENS/dropdown.js"
 // import Login1 from "../../SCREENS/logintrial.js";
 import F1 from "../SCREENS/test.js";
-import F2 from "../SCREENS/F2.js";
+// import F2 from "../SCREENS/F2.js";
 import KeyboardAvoidingComponent from "../SCREENS/Keyboard.js";
 import Blur from "../SCREENS/blur.js"; // trial blur page
 import { useEffect, createContext } from "react";
@@ -81,13 +81,19 @@ import JobPostingPage from "../SCREENS/JobPosting.jsx"
 import AllPostsScreen from '../SCREENS/SavedPost.js'
 
 
+
+import  ViewSendedPost from '../SCREENS/JASH/View post/ViewSendedPost.jsx'
+
+
 const Stack = createNativeStackNavigator();
 SystemUI.setBackgroundColorAsync("#16181a");
 
 import { enableFreeze } from "react-native-screens";
 import { enableScreens } from 'react-native-screens';
 import QuestionReply from "@/SCREENS/main-2/QuestionReply.js";
-import settings from "@/SCREENS/Settings.js";
+
+import Settings from '../SCREENS/Settings.js'
+
 enableScreens();
 
 enableFreeze(true); 
@@ -115,18 +121,14 @@ enableFreeze(true);
 // export const Global = createContext("ok");
 
 export default function App() {
-  // <StatusBar style="dark" />
+  
 
   useEffect(() => {
     StatusBar.setBackgroundColor("#16181a");
     StatusBar.setBarStyle("light-content");
   }, []);
 
-  // SplashScreen.preventAutoHideAsync();
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //   }, 300);
-  // }, []);
+  
 
   useFocusEffect(() => {
     StatusBar.setBackgroundColor("#16181a");
@@ -244,8 +246,9 @@ export default function App() {
           <Stack.Screen name="StartsyCard" component={Startsy} />
           <Stack.Screen name="QuestionReply" component={QuestionReply} />
           <Stack.Screen name="PricePage" component={PricePage} />
-          <Stack.Screen name="Settings" component={settings} />
-          
+
+          <Stack.Screen name="Settings" component={Settings} />
+
 
           <Stack.Screen
             name="KeyboardAvoidingComponent"
@@ -267,8 +270,17 @@ export default function App() {
             component={Singleprofilepage}
           />
 
-          <Stack.Screen name="settings" component={settings}/>
+
+          
           <Stack.Screen name="SavedPost" component={AllPostsScreen}/>
+
+
+          {/* <Stack.Screen name="ViewSendedPost" component={ViewSendedPost}/> */}
+
+
+
+          <Stack.Screen name="settings" component={Settings}/>
+
         </Stack.Navigator>
       )}
       {/* </View> */}

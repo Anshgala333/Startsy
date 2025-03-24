@@ -29,78 +29,79 @@ import Startsy from "../main-1/Startsy.js";
 const Foryou =
     ({ scroll, settype, token, mainpagebottomsheet, opencomment, openshare, visible, setVisible, setnewaspect, setImage }) => {
 
-        console.log("for you re render");
+        // console.log("for you re render");
+
 
         useFocusEffect(() => {
-            console.log('for you 1 focused');
+            // console.log('for you 1 focused');
 
             return () => {
-                console.log('for you 1 blurred'); // This fires when switching screens
+                // console.log('for you 1 blurred'); // This fires when switching screens
             };
         });
 
 
 
-        useEffect(() => {
-            console.log("scroll of parent page re render");
-        }, [scroll])
         // useEffect(() => {
-        // 
-        //     console.log("globaldata of parent page re render");
-        // 
-        // }, [globaldata])
-        useEffect(() => {
-            console.log("settype of parent page re render");
-        }, [settype])
-        useEffect(() => {
-            console.log("getpost of parent page re render");
-        }, [getpost])
-        useEffect(() => {
-            console.log("scrolly of parent page re render");
-        }, [scrollY])
-        useEffect(() => {
-            console.log("token of parent page re render");
-        }, [token])
-        useEffect(() => {
-            console.log("mainpagebottomsheet of parent page re render");
-        }, [mainpagebottomsheet])
-        useEffect(() => {
-            console.log("opencomment of parent page re render");
-        }, [opencomment])
-        useEffect(() => {
-            console.log("setVisible of parent page re render");
-        }, [setVisible])
-        useEffect(() => {
-            console.log("openshare of parent page re render");
-        }, [openshare])
-        useEffect(() => {
-            console.log("visible of parent page re render");
-        }, [visible])
-        useEffect(() => {
-            console.log("setnewaspect of parent page re render");
-        }, [setnewaspect])
-        useEffect(() => {
-            console.log("setImage of parent page re render");
-        }, [setImage])
-        useEffect(() => {
-            console.log("allpost of parnet page re render");
-        }, [allpost])
-        useEffect(() => {
-            console.log("loggedinUserID parent page re render");
-        }, [loggedinUserID])
-        useEffect(() => {
-            console.log("skeleton re parent page render");
-        }, [skeleton])
+        //     console.log("scroll of parent page re render");
+        // }, [scroll,Tab,settype,getpost,scrollY,token,mainpagebottomsheet,opencomment,setVisible,openshare,visible,setnewaspect])
+        // // useEffect(() => {
+        // // 
+        // //     console.log("globaldata of parent page re render");
+        // // 
+        // // }, [globaldata])
+        // useEffect(() => {
+        //     // console.log("settype of parent page re render");
+        // }, [settype])
+        // useEffect(() => {
+        //     // console.log("getpost of parent page re render");
+        // }, [getpost])
+        // useEffect(() => {
+        //     // console.log("scrolly of parent page re render");
+        // }, [scrollY])
+        // useEffect(() => {
+        //     // console.log("token of parent page re render");
+        // }, [token])
+        // useEffect(() => {
+        //     // console.log("mainpagebottomsheet of parent page re render");
+        // }, [mainpagebottomsheet])
+        // useEffect(() => {
+        //     // console.log("opencomment of parent page re render");
+        // }, [opencomment])
+        // useEffect(() => {
+        //     // console.log("setVisible of parent page re render");
+        // }, [setVisible])
+        // useEffect(() => {
+        //     // console.log("openshare of parent page re render");
+        // }, [openshare])
+        // useEffect(() => {
+        //     // console.log("visible of parent page re render");
+        // }, [visible])
+        // useEffect(() => {
+        //     // console.log("setnewaspect of parent page re render");
+        // }, [setnewaspect])
+        // useEffect(() => {
+        //     // console.log("setImage of parent page re render");
+        // }, [setImage])
+        // useEffect(() => {
+        //     console.log("allpost of parnet page re render");
+        // }, [allpost])
+        // useEffect(() => {
+        //     // console.log("loggedinUserID parent page re render");
+        // }, [loggedinUserID])
+        // useEffect(() => {
+        //     // console.log("skeleton re parent page render");
+        // }, [skeleton])
 
-        useEffect(() => {
-            console.log(", re render");
-        }, [,])
-        useEffect(() => {
-            console.log("openbottomsheet re render");
-        }, [openBottomSheet])
-        useEffect(() => {
-            console.log("tab re render");
-        }, [Tab])
+        // useEffect(() => {
+        //     // console.log(", re render");
+        // }, [,])
+        // useEffect(() => {
+        //     // console.log("openbottomsheet re render");
+        // }, [openBottomSheet])
+        // useEffect(() => {
+        //     // console.log("tab re render");
+        // }, [Tab])
 
 
         const navigation = useNavigation()
@@ -118,7 +119,7 @@ const Foryou =
                 const decode = jwtDecode(token);
                 setloggedInuserID(decode._id)
                 setrole(decode.role)
-                console.log(decode.role);
+                // console.log(decode.role);
 
             }
         }, [token])
@@ -138,8 +139,10 @@ const Foryou =
                     },
                 });
                 const data = await response.json();
+
                 console.log(data.bookmarks);
                 console.log(data.data[0]);
+
 
                 var decode = jwtDecode(token)
                 var loggedinUserID = decode._id
@@ -148,15 +151,23 @@ const Foryou =
 
                 var data1 = data.data.map(e => {
 
-                    var object = { ...e, isliked: e.likedBy.includes(loggedinUserID), Applied: e.communityPost ? e.communityPost.communityMembers.includes(loggedinUserID) : false, Jobapplied: e.jobPosts ? e.jobPosts.jobApplicants.includes(loggedinUserID) : false, itemlikedcount: e.likedBy.length , issaved : !data.bookmarks.includes(e._id) }
+
+                   
+
+                    var object = { ...e,
+                         isliked: e.likedBy.includes(loggedinUserID), 
+                         Applied: e.communityPost ? e.communityPost.communityMembers.includes(loggedinUserID) : false, Jobapplied: e.jobPosts ? e.jobPosts.jobApplicants.includes(loggedinUserID) : false, itemlikedcount: e.likedBy.length ,
+                        //  bookmark : 
+                        }
+
                     return object
                 })
 
 
                 if (data.data.length > 0) {
 
-                    setallpost(data1.reverse())
-                    // updateField("allpost", data1.reverse())
+                    setallpost(data1)
+                    updateField("allpost", data1.reverse())
                 }
 
             }
