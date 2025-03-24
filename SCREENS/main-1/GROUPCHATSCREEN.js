@@ -407,9 +407,9 @@ const Chat1 = ({ navigation, route }) => {
 
     function handlenext() {
         var decode = jwtDecode(token)
-        if (decode.role == "Investor") {
-            return
-        }
+        // if (decode.role == "Investor") {
+        //     return
+        // }
         navigation.navigate("GroupDescriptionPage", { token: token, item })
         // navigation.navigate("Singleprofilepage", { token: token, id: item.user._id, page: "Chat", item, messages, })
     }

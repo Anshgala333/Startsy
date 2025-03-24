@@ -13,7 +13,7 @@ import styles from "../../../styles/post.js"
 const SendedPost = ({ item, opencomment, openshare ,upvotepost,index}) => {
 
 
-    // console.log(item,"single hu mai")
+    console.log(item,"single hu mai")
     if (!item.user_id) return
     const lastTap = useRef(null);
     const handleDoubleTap = (id, index) => {

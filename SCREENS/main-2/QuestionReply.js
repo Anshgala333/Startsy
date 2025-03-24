@@ -76,7 +76,7 @@ const QuestionReply = ({ route }) => {
         try {
             const response = await fetch(`${url}posts/createComment/${postid}`, {
                 method: 'POST',
-                body: JSON.stringify({ comment: commenttext }),
+                body: JSON.stringify({ comment: commenttext , message : 'Answered Your Question' }),
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`,

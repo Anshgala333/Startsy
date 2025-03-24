@@ -2,6 +2,7 @@
 
 
 import React, { useState, useRef, useEffect, useMemo, useContext, useCallback, memo } from "react";
+import * as Application from 'expo-application';
 import {
     View, Text, Animated, Pressable, StyleSheet, StatusBar, Dimensions, TouchableWithoutFeedback, BackHandler,
     TouchableOpacity,
@@ -320,6 +321,8 @@ const Foryou =
 
                 }}>
                     <Text allowFontScaling={false} style={main.headertext}>Startsy</Text>
+                    {/* <Text allowFontScaling={false} style={main.headertext}> <Text>App Version: {Application.nativeApplicationVersion}</Text></Text> */}
+                    
                     {/* {loggedinRole == "Investor" && <Pressable
                         onPress={() => {
 
