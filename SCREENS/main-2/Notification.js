@@ -329,7 +329,7 @@ const styles = StyleSheet.create({
         // paddingHorizontal: 20,
         // marginVertical: 12,
 
-        fontSize: 35,
+        fontSize: 30,
         fontWeight: "bold",
         color: "#00DE62",
         marginBottom: 12,

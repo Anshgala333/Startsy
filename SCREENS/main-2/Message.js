@@ -198,12 +198,12 @@ const styles = StyleSheet.create({
         backgroundColor: "#16181a",
     },
     header: {
-        fontSize: 35,
+        fontSize: 30,
         fontWeight: "bold",
         color: "#00DE62",
-        marginVertical: 5,
+        // marginVertical: 5,
         marginBottom: 10,
-        marginLeft: 20,
+        marginLeft: 15,
         fontFamily: "myanmar",
     },
     searchContainer: {

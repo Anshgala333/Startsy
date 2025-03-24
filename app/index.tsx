@@ -82,7 +82,7 @@ import AllPostsScreen from '../SCREENS/SavedPost.js'
 
 
 
-import  ViewSendedPost from '../SCREENS/JASH/View post/ViewSendedPost.jsx'
+import ViewSendedPost from '../SCREENS/JASH/View post/ViewSendedPost.jsx'
 
 
 const Stack = createNativeStackNavigator();
@@ -93,10 +93,9 @@ import { enableScreens } from 'react-native-screens';
 import QuestionReply from "@/SCREENS/main-2/QuestionReply.js";
 
 import Settings from '../SCREENS/Settings.js'
-
 enableScreens();
 
-enableFreeze(true); 
+enableFreeze(true);
 
 // LogBox.ignoreLogs([
 //   // "VirtualizedLists should never be nested", // Example warning
@@ -121,14 +120,14 @@ enableFreeze(true);
 // export const Global = createContext("ok");
 
 export default function App() {
-  
+
 
   useEffect(() => {
     StatusBar.setBackgroundColor("#16181a");
     StatusBar.setBarStyle("light-content");
   }, []);
 
-  
+
 
   useFocusEffect(() => {
     StatusBar.setBackgroundColor("#16181a");
@@ -199,7 +198,7 @@ export default function App() {
           <Stack.Screen name="Blogpage" component={BlogPage} />
           <Stack.Screen name="Mediapage" component={MediaPost} />
           <Stack.Screen name="Jobpost" component={JobPostingPage} />
-          <Stack.Screen name="ApplicantsList" component={ApplicantsList}  />
+          <Stack.Screen name="ApplicantsList" component={ApplicantsList} />
           <Stack.Screen name="JobsPostedScreen" component={JobsPostedScreen} />
           <Stack.Screen name="Email" component={Email} />
 
@@ -228,8 +227,8 @@ export default function App() {
             component={Main2}
           />
 
-<Stack.Screen name="FP1" component={FP1} />
-<Stack.Screen name="FP2" component={FP2} />
+          <Stack.Screen name="FP1" component={FP1} />
+          <Stack.Screen name="FP2" component={FP2} />
 
           <Stack.Screen name="F1" component={F1} />
           <Stack.Screen name="Ct" component={Ct} />
@@ -248,6 +247,7 @@ export default function App() {
           <Stack.Screen name="PricePage" component={PricePage} />
 
           <Stack.Screen name="Settings" component={Settings} />
+          {/* <Stack.Screen name="Settings" component={Settings} /> */}
 
 
           <Stack.Screen
@@ -271,20 +271,21 @@ export default function App() {
           />
 
 
-          
-          <Stack.Screen name="SavedPost" component={AllPostsScreen}/>
-
 
           {/* <Stack.Screen name="ViewSendedPost" component={ViewSendedPost}/> */}
 
 
 
-          <Stack.Screen name="settings" component={Settings}/>
+          <Stack.Screen name="settings" component={Settings} />
 
-        </Stack.Navigator>
-      )}
+
+          {/* <Stack.Screen name="settings" component={Settings}/> */}
+          <Stack.Screen name="SavedPost" component={AllPostsScreen} />
+        </Stack.Navigator >
+      )
+      }
       {/* </View> */}
-    </GlobalProvider>
+    </GlobalProvider >
     // </NavigationContainer>
   );
 }

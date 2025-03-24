@@ -758,7 +758,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                         <Text allowFontScaling={false} style={styles.u7}>Rules & Guidelines: {item.communityPost.communityRules}</Text>
 
                         <Pressable style={[styles.next]} >
-                            <Text allowFontScaling={false} style={styles.nexttext}>Join Community</Text>
+                            <Text allowFontScaling={false} style={styles.nexttext}>Join Forum</Text>
                         </Pressable>
                     </View>
 
@@ -1043,7 +1043,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
         return (
             <View style={{ marginTop: 0 }} key={1}>
                 <Pressable onPress={()=>{
-                    navigation.navigate("settings" , {token : token , tabnavigation : navigation})
+                    navigation.navigate("Settings" , {token : token , tabnavigation : navigation})
                 }}>
                     <View style={styles1.header}>
                         <Text numberOfLines={1} style={styles1.username}>{userdata.user_id.userName}</Text>
@@ -1823,7 +1823,7 @@ const styles1 = StyleSheet.create({
         width: "70%",
         color: "#00DE62",
         fontWeight: "bold",
-        marginLeft: 5,
+        // marginLeft: 5,
         marginTop: 5,
         flex: 1
     },

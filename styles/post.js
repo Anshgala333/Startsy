@@ -481,7 +481,7 @@ const styles = StyleSheet.create({
     },
     username: {
         fontSize: 18,
-        color: "#00DE62",
+        color: "#fff",
         fontFamily: "Alata",
         alignSelf: "flex-start",
         marginTop: 0,
@@ -657,7 +657,7 @@ const styles = StyleSheet.create({
         paddingVertical : 10,
         marginBottom: 20,
         paddingTop : 8,
-        paddingBottom : 10,
+        paddingBottom : 8,
         marginTop: -10,
         justifyContent: "center",
         borderWidth : 1,

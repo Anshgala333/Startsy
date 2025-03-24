@@ -7,21 +7,24 @@ import {
   FlatList,
   StyleSheet,
   Dimensions,
+  ActivityIndicator
 } from "react-native";
 import Back from "@/components/back.js";
 import { url } from "@/config";
 import { GlobalContext } from "@/Global/globalcontext";
 
 
-const {width} = Dimensions.get("window")
+
+const { width } = Dimensions.get("window")
 
 
 const numColumns = 3; // 3-column grid
 
-const AllPostsScreen = ({ navigation , route }) => {
+const AllPostsScreen = ({ navigation, route }) => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const{tabnavigation} = route.params
+  const { tabnavigation } = route.params
 
   const { globaldata, updateField } = useContext(GlobalContext);
   const token = globaldata.token;
@@ -31,25 +34,12 @@ const AllPostsScreen = ({ navigation , route }) => {
   }, []);
 
 
-  const samplePosts = [
-    { id: "1", image: "https://via.placeholder.com/150" },
-    { id: "2", image: "https://via.placeholder.com/150" },
-    { id: "3", image: "https://via.placeholder.com/150" },
-    { id: "4", image: "https://via.placeholder.com/150" },
-    { id: "5", image: "https://via.placeholder.com/150" },
-    { id: "6", image: "https://via.placeholder.com/150" },
-    { id: "7", image: "https://via.placeholder.com/150" },
-    { id: "8", image: "https://via.placeholder.com/150" },
-    { id: "9", image: "https://via.placeholder.com/150" },
-  ];
-
-
 
 
   const getSavedPost = async () => {
     try {
 
-
+      setLoading(true);
 
       const response = await fetch(`${url}test/getSavedPost/`, {
         method: 'GET',
@@ -60,17 +50,24 @@ const AllPostsScreen = ({ navigation , route }) => {
         },
       });
       const { data } = await response.json();
-      // console.log(data[0].saveId);
-      // setData(data[0].saveId);
+      if (data.length > 0) {
+        // console.log(data);
+        // setData(data[0].saveId);
 
-      const filteredData = data[0].saveId.filter(item=>item.type == "photo");
+        const filteredData = data[0].saveId.filter(item => item.type == "photo");
 
-      setData(filteredData);
+        setData(filteredData);
+      }
 
 
 
     } catch (err) {
       console.log(err);
+    }
+    finally {
+      setTimeout(() => {
+        setLoading(false);
+      }, 0);
     }
   }
 
@@ -93,27 +90,42 @@ const AllPostsScreen = ({ navigation , route }) => {
         <Text style={styles.title}>Saved Posts</Text>
       </View>
 
+      {
 
-      <FlatList
-        data={data}
-        numColumns={3}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => {
-          if (item.type == "textBlog") {
-            return<></>
-          }
-          else {
-            return (
-              <Pressable
-               onPress={()=>{tabnavigation.navigate("ViewSendedPost") , {id : item.id}}} style={styles.gridItem} >
-                <View >
-                  <Image source={{ uri: item.mediaUrl }} style={styles.image} />
-                </View>
-              </Pressable>
-            )
-          }
-        }}
-      />
+
+        loading ?
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <ActivityIndicator color="#00de62" />
+          </View>
+          :
+          data.length > 0 ?
+            <FlatList
+              data={data}
+              numColumns={3}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => {
+                if (item.type == "textBlog") {
+                  return <></>
+                }
+                else {
+                  // console.log(item._id);
+                  return (
+                    <Pressable
+                      onPress={() => { tabnavigation.navigate("ViewSendedPost",{id:item._id})}} style={styles.gridItem} >
+                      <View >
+                        <Image source={{ uri: item.mediaUrl }} style={styles.image} />
+                      </View>
+                    </Pressable>
+                  )
+                }
+              }}
+            />
+            :
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+              <Text style={{ color: '#ccc' }}>No post saved</Text>
+            </View>
+
+      }
     </View>
   );
 };
@@ -144,28 +156,34 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   gridItem: {
-    flex: 1/3, // Distributes space equally in the row
+    flex: 1 / 3, // Distributes space equally in the row
     aspectRatio: 1, // Ensures perfect squares
     // justifyContent: "center",
     // alignItems: "center",
     borderWidth: 1,
     borderColor: "#24272A",
-    alignItems : "center",
+    alignItems: "center",
     //justifyContent: "center",
-    width : "33.33%",
+    width: "33.33%",
     overflow: 'hidden',
-   // flex:1/3,
+    // flex:1/3,
     //flexWrap:'wrap',
     // margin:2
     // width : "10%"
   },
   image: {
-    width: width/3,
-    height: width/3,
+    width: width / 3,
+    height: width / 3,
     // flex:1,
-    objectFit : "cover",
-    resizeMode:"cover"
+    objectFit: "cover",
+    resizeMode: "cover"
   },
 });
 
 export default AllPostsScreen;
+
+
+
+
+
+

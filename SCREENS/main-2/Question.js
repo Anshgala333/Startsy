@@ -211,7 +211,7 @@ const Question = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
         }
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: "#16181a", minHeight: 500, marginTop: 92 }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: "#16181a", minHeight: 500, marginTop: 85 }}>
             <View style={{ zIndex: 100000, paddingTop: 25, marginBottom: 10, }} >
                 <View style={styles1.searchContainer}>
                     <TextInput
