@@ -1,26 +1,16 @@
 import React, { useState, useRef, useEffect, useCallback, useContext, useMemo, memo } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import {
-    ScrollView,
-    SafeAreaView,
     View,
     Text,
-    TextInput,
-    Keyboard,
     Image,
     Animated,
     Pressable,
     StyleSheet,
     Dimensions,
-    StatusBar,
-    FlatList,
-    RefreshControl,
-    Platform,
     TouchableWithoutFeedback,
     ActivityIndicator,
-    Alert,
     Modal,
-    BackHandler,
     TouchableOpacity,
     KeyboardAvoidingView,
     Vibration
@@ -93,6 +83,7 @@ const Main2 = ({ navigation, route }) => {
     const [token, setToken] = useState("");
     const [currpage, setcurrpage] = useState(false);
     const { globaldata } = useContext(GlobalContext);
+    const[userProfilePhoto,setProfilePhoto]=useState(null);
 
     useEffect(() => {
         async function getToken() {
@@ -113,6 +104,35 @@ const Main2 = ({ navigation, route }) => {
             opacity={0.7} // Set opacity for the backdrop
         />
     );
+
+
+
+
+    useEffect(() => {
+        const token = globaldata.token;
+        async function fetchProfilePhoto() {
+            try {
+                const response = await fetch(
+                    `${url}api/PFP`,
+                    {
+                        method: "GET",
+                        headers: {
+                            accept: "application/json",
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+                const result = await response.json();
+                console.log("okskasxksdidbibd",result);
+                setProfilePhoto(result.data)
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        if(token != ""){
+            fetchProfilePhoto()
+        }
+    }, [])
 
     async function fetchdata() {
         if (token) {
@@ -495,9 +515,7 @@ const Main2 = ({ navigation, route }) => {
 
     }
 
-    // const openshare = useCallback(()=>{
 
-    // },[])
 
     async function docomment() {
         setuploadingcomment(true);
@@ -582,11 +600,7 @@ const Main2 = ({ navigation, route }) => {
 
     }
 
-    useEffect(() => {
 
-        // console.log(JSON.stringify(BottomSheetContent));
-
-    }, [])
 
     const [count, forcerender] = useState(0)
 
@@ -905,8 +919,16 @@ const Main2 = ({ navigation, route }) => {
 
                                 tabBarLabel: "",
                                 tabBarIcon: ({ focused }) => (
-                                    <View style={{ marginTop: -4, marginLeft: -2 }}><FontAwesome6 name="circle-user" size={30} color={focused ? "#00DE62" : "#7A7B7C"} /></View>
+                                    <View style={{ marginTop: -4, marginLeft: -2 }}>
+                                        {
+                                            userProfilePhoto ==null ?
+                                            <FontAwesome6 name="circle-user" size={30} color={focused ? "#00DE62" : "#7A7B7C"} />
+                                            :
+                                            <Image source={{uri:(userProfilePhoto)}} width={30} height={30} style={{borderRadius:50,borderColor:"#00de62",borderWidth:focused?1:0}}/>
+                                        }
+                                    </View>
                                 ),
+                                
                             }}
                         />
                         <Tab.Screen
@@ -965,7 +987,7 @@ const Main2 = ({ navigation, route }) => {
                         <Tab.Screen
                             name="ViewSendedPost"
                             // component={ViewSendedPost}
-                            children={(props)=><ViewSendedPost openshare={openshare} opencomment={opencomment}/>}
+                            children={(props) => <ViewSendedPost openshare={openshare} opencomment={opencomment} />}
                             options={{
                                 tabBarItemStyle: { display: 'none' },
                                 tabBarButton: () => null,

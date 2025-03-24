@@ -14,6 +14,8 @@ const SendedPost = ({ item, opencomment, openshare ,upvotepost,index}) => {
 
 
     // console.log(item,"single hu mai")
+
+    // console.log("item",item);
     if (!item.user_id) return
     const lastTap = useRef(null);
     const handleDoubleTap = (id, index) => {
@@ -81,7 +83,7 @@ const SendedPost = ({ item, opencomment, openshare ,upvotepost,index}) => {
 
                     <View style={styles.iconcontainer}>
                         <View style={styles.icon2}>
-                            <TouchableOpacity onPress={() => { upvotepost(item._id, index,isSingle=true) }}>
+                            <TouchableOpacity onPress={() => { upvotepost(item._id, index,true) }}>
                                 {/* {item.likedBy.includes(loggedinUserID) && <Upvote width={36} height={36} style={{ marginHorizontal: 0 }} selected={true} />} */}
                                 {/* {!item.likedBy.includes(loggedinUserID)   && <Upvote width={36} height={36} style={{ marginLeft: 5, marginRight: -5 }} />} */}
 

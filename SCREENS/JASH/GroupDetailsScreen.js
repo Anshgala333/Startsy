@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef, useMemo } from "react";
-import participants from "./Data.jsx";
 import { Image, StyleSheet, Text, TouchableOpacity, View, FlatList, Pressable } from "react-native";
 import { url } from "@/config.js";
 import Profile from "../../assets/icons/profile.js"

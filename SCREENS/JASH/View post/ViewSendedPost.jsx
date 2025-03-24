@@ -24,8 +24,17 @@ const ViewSendedPost = ({  openshare, opencomment }) => {
     // console.log(route.params.id)
     const id = route.params.id;
 
+    
+    const { globaldata, updateField } = useContext(GlobalContext);
 
-    // console.log(route.params.id);
+    const token = globaldata.token;
+
+
+    var decode = jwtDecode(token)
+    var loggedinUserID = decode._id
+
+
+    // console.log(id);
 
     async function upvotepost(id, index, isSingle) {
         Vibration.vibrate(50)
@@ -95,7 +104,15 @@ const ViewSendedPost = ({  openshare, opencomment }) => {
                 },
             });
             const {data} = await response.json();
-            setSentPost(data[0]);
+
+            // console.log("daaattaaaaaa",data);
+            var data1 = data.map(e => {
+
+                var object = { ...e, isliked: e.likedBy.includes(loggedinUserID), Applied: e.communityPost ? e.communityPost.communityMembers.includes(loggedinUserID) : false, Jobapplied: e.jobPosts ? e.jobPosts.jobApplicants.includes(loggedinUserID) : false, itemlikedcount: e.likedBy.length }
+                return object
+            })
+            
+            setSentPost(data1[0]);
             // console.log(data[0]);
             // setAllPost(data.data)
             // setSkeletonLoading(false)
@@ -108,9 +125,7 @@ const ViewSendedPost = ({  openshare, opencomment }) => {
 
 
 
-    const { globaldata, updateField } = useContext(GlobalContext);
-
-    const token = globaldata.token;
+   
 
     ///call this when page renders
     useEffect(() => {
