@@ -147,6 +147,7 @@ const Settings = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
+      <Text allowFontScaling={false} style={styles.headerText}>Settings</Text>
       <View style={styles.bottom}>
 
         <TouchableOpacity style={styles.option} onPress={() => downloadAPK()}>
@@ -208,6 +209,7 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#16181a",
     padding: 20,
+    paddingTop : 0
   },
   option: {
     flexDirection: "row",
@@ -222,6 +224,15 @@ const styles = StyleSheet.create({
     fontFamily: "Alata",
     marginLeft: 15,
   },
+  headerText: {
+    fontSize: 30,
+    fontWeight: "bold",
+    color: "#00DE62",
+    // marginBottom: 12,
+    fontFamily: "myanmar",
+    color: "#00DE62",
+    paddingLeft: 15
+},
 });
 
 export default Settings;

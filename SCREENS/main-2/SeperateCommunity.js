@@ -262,7 +262,7 @@ const Community = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
                 data={allpost}
                 renderItem={renderItem}
                 contentContainerStyle={{
-                    paddingTop: 112,
+                    paddingTop: 108,
                     paddingBottom: 100
                 }}
 

@@ -35,6 +35,7 @@ import { GlobalContext } from "@/Global/globalcontext.js";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { jwtDecode } from "jwt-decode";
 
+import User from "../main-2/SuggestedUser.js"
 // import styles from "@/styles/l.js";
 
 const NewsLetter = React.memo(
@@ -126,10 +127,10 @@ const NewsLetter = React.memo(
         // )
 
         useEffect(() => {
-            if (token){
+            if (token) {
                 var decode = jwtDecode(token)
                 console.log(decode);
-                
+
                 setloggedin(decode._id)
             }
         }, [token])
@@ -373,128 +374,37 @@ const NewsLetter = React.memo(
 
         const [loading, setloading] = useState(true)
 
-        async function searchUser() {
+        // async function searchUser() {
 
-            // console.log("user search");
-            var final = `@${text1}`
-            try {
-                const response = await fetch(`${url}api/getUserNameSuggestions/${final}`, {
-                    method: 'GET',
-                    headers: {
-                        accept: "application/json",
-                        "Authorization": `Bearer ${token}`,
-                    },
-                });
-                const data = await response.json();
-                console.log(data.data);
-                var filterUser = data.data.filter(e => e._id != loggedinuserid)
+        //     // console.log("user search");
+        //     var final = `@${text1}`
+        //     try {
+        //         const response = await fetch(`${url}api/getUserNameSuggestions/${final}`, {
+        //             method: 'GET',
+        //             headers: {
+        //                 accept: "application/json",
+        //                 "Authorization": `Bearer ${token}`,
+        //             },
+        //         });
+        //         const data = await response.json();
+        //         console.log(data.data);
+        //         var filterUser = data.data.filter(e => e._id != loggedinuserid)
 
-                setsuggestionarray(filterUser)
+        //         setsuggestionarray(filterUser)
 
-            }
-            catch (err) {
-                console.log(err);
+        //     }
+        //     catch (err) {
+        //         console.log(err);
 
-            }
-            finally {
-                setRefreshing1(false)
-            }
-        }
-
-
-        async function sendfollowrequest(stat, id) {
-
-            if (stat) return
-            // setsuggestionarray(suggestionarray.map((e) => {
-            //     if (e._id == id) {
-            //         return { ...e, status: "Request Sent" }
-            //     }
-            //     else return e
-
-            // }))
+        //     }
+        //     finally {
+        //         setRefreshing1(false)
+        //     }
+        // }
 
 
-            setsuggestionarray((prevArray) =>
-                prevArray.map((item) =>
-                    item._id === id
-                        ? { ...item, status: item.status === "Request Sent" ? "Pending" : "Request Sent" }
-                        : item
-                )
-            );
-
-            // setsuggestionarray((e)=>{
-            //     if (e._id == id) {
-            //         return { ...e, status: "Request Sent" }
-            //     }
-            //     else return e
-            // })
-
-
-            // console.log(id);
-            try {
-
-                const response = await fetch(`${url}connections/followUser/${id}`, {
-                    method: 'POST',
-                    body: "",
-                    headers: {
-                        "Content-Type": "application/json",
-                        accept: "application/json",
-                        "Authorization": `Bearer ${token}`,
-                    },
-                });
-                const data = await response.json();
-                console.log(data);
-                // console.log(response.status);
-
-                // setfollowstatus("request sent")
-                setconnecteddata("Request sent")
-
-            }
-            catch (err) {
-                console.log(err);
-
-            }
-
-        }
-
-        function renderSuggestion({ item }) {
-
-            // console.log('====================================');
-            // console.log("render3");
-            // console.log('====================================');
-            return (
-                // <Text style={{color : "#fff"}}>hello</Text>
-                <TouchableOpacity onPress={() => {
-                    navigation.navigate("Singleuserpage", { token: token, id: item._id, page: "NewsLetter" })
-                }}>
-                    <View style={[styles.listItem, {}]}>
-                        {/* <Image
-                            source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8slgZXgqnSIXDS8wF2uDT_SmsYlBe-W1soQ&s" }}
-                            style={styles.avatar} /> */}
-                        {!item.profilePhoto && <Image style={styles.avatar} source={require("../../assets/images/blank.png")} />}
-                        {item.profilePhoto && <Image style={styles.avatar} source={{ uri: item.profilePhoto }} />}
-
-
-
-
-                        <View style={styles.textContainer}>
-                            <Text numberOfLines={1}
-
-                                allowFontScaling={false} style={styles.username}>{item.userName}</Text>
-                            <Text allowFontScaling={false} style={styles.message}>{item.role == "CommunityMember" ? "Member" : item.role}</Text>
-                        </View>
-
-                        <TouchableOpacity
-                            onPress={() => { sendfollowrequest(item.isfollowing, item._id) }}
-                            style={item.status != "Connect" ? styles.sendbtn1 : styles.sendbtn}>
-                            <Text style={item.status != "Connect" ? styles.sendbtnText1 : styles.sendbtnText}>
-                                {item.status}</Text>
-                        </TouchableOpacity>
-                        {/* <Text allowFontScaling={false} style={styles.time}> "today"}</Text> */}
-                    </View>
-                </TouchableOpacity>
-            )
-        }
+     
+     
 
 
         useEffect(() => {
@@ -796,48 +706,190 @@ const NewsLetter = React.memo(
 
         // },[])
 
-        const User = memo(() => {
+        // const User = memo(() => {
+
+        //     const scrollPosition = useRef(0);
+        //     const listRef = useRef(null);
+        //     const handleScroll = (event) => {
+        //         scrollPosition.current = event.nativeEvent.contentOffset.y;
+        //     };
 
 
-            useFocusEffect(
-                useCallback(() => {
-                    handleTabChange("users")
-                })
-            )
-            return (
+        //     async function sendfollowrequest(stat, id) {
+
+        //         // if (stat) return
+    
+        //         console.log(stat);
+        //         console.log(stat);
+        //         console.log(stat);
+        //         console.log(stat);
+        //         console.log(stat);
+    
+        //         if (stat == "Connected" || stat == "Request Sent") {
+                    
+        //             // setconnecteddata("Follow")
+    
+    
+        //             async function makesubmit() {
+        //                 setsuggestionarray((prevArray) =>
+        //                     prevArray.map((e) =>
+        //                         e._id === id ? { ...e, status: "Connect" } : e
+        //                     )
+        //                 );
+    
+        //                 try {
+        //                     const response = await fetch(`${url}founder/rejectRequest/${id}`, {
+        //                         method: 'POST',
+        //                         headers: {
+        //                             Authorization: `Bearer ${token}`,
+        //                         }
+        //                     })
+        //                     const data = await response.json();
+        //                     console.log(data);
+                            
+    
+    
+        //                 }
+        //                 catch (err) {
+        //                     console.log(err);
+    
+        //                 }
+        //             }
+        //             makesubmit()
+        //             return
+        //         }
+    
+               
+        //         setsuggestionarray((prevArray) =>
+        //             prevArray.map((e) =>
+        //                 e._id === id ? { ...e, status: "Request Sent" } : e
+        //             )
+        //         );
+                
+    
+    
+        //         // console.log(id);
+        //         try {
+    
+        //             const response = await fetch(`${url}connections/followUser/${id}`, {
+        //                 method: 'POST',
+        //                 body: "",
+        //                 headers: {
+        //                     "Content-Type": "application/json",
+        //                     accept: "application/json",
+        //                     "Authorization": `Bearer ${token}`,
+        //                 },
+        //             });
+        //             const data = await response.json();
+        //             console.log(data);
+        //             // console.log(response.status);
+    
+        //             // setfollowstatus("request sent")
+        //             // setconnecteddata("Request sent")
+    
+        //         }
+        //         catch (err) {
+        //             console.log(err);
+    
+        //         }
+    
+        //     }
+    
 
 
-                <View style={{ flex: 1, backgroundColor: "#16181a" }}>
+        //     function renderSuggestion({ item }) {
+
+        //         // console.log('====================================');
+        //         console.log("render3");
+        //         // console.log('====================================');
+        //         if (item.role == "Admin") return
+        //         if (item._id == loggedinuserid) return
+        //         return (
+        //             // <Text style={{color : "#fff"}}>hello</Text>
+        //             <TouchableOpacity onPress={() => {
+        //                 navigation.navigate("Singleuserpage", { token: token, id: item._id, page: "NewsLetter" })
+        //             }}>
+        //                 <View style={[styles.listItem, {}]}>
+        //                     {/* <Image
+        //                         source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8slgZXgqnSIXDS8wF2uDT_SmsYlBe-W1soQ&s" }}
+        //                         style={styles.avatar} /> */}
+        //                     {!item.profilePhoto && <Image style={styles.avatar} source={require("../../assets/images/blank.png")} />}
+        //                     {item.profilePhoto && <Image style={styles.avatar} source={{ uri: item.profilePhoto }} />}
+    
+    
+    
+    
+        //                     <View style={styles.textContainer}>
+        //                         <Text numberOfLines={1}
+    
+        //                             allowFontScaling={false} style={styles.username}>{item.userName}</Text>
+        //                         <Text allowFontScaling={false} style={styles.message}>{item.role == "CommunityMember" ? "Member" : item.role}</Text>
+        //                     </View>
+    
+        //                     <TouchableOpacity
+        //                         onPress={() => { sendfollowrequest(item.status, item._id) }}
+        //                         style={item.status != "Connect" ? styles.sendbtn1 : styles.sendbtn}>
+    
+        //                         {item.status == "Connect" && <Text style={{ color: "#16181a", fontFamily: "Alata", alignItems: "center", textAlign: "center", marginTop: -2, fontSize: 14, }}>{item.status}</Text>}
+    
+        //                         {item.status == "Request Sent" && <Text style={{ color: "#ccc", fontFamily: "Alata", alignItems: "center", textAlign: "center", marginTop: -2, fontSize: 14, }}>{item.status}</Text>}
+    
+        //                         {item.status == "Connected" && <Text style={{ color: "#ccc", fontFamily: "Alata", alignItems: "center", textAlign: "center", marginTop: -2, fontSize: 14, }}>{item.status}</Text>}
+        //                     </TouchableOpacity>
+        //                     {/* <Text allowFontScaling={false} style={styles.time}> "today"}</Text> */}
+        //                 </View>
+        //             </TouchableOpacity>
+        //         )
+        //     }
 
 
-                    <FlatList
-                        keyExtractor={(item, index) => index}
-                        data={suggestionarray}
-                        renderItem={renderSuggestion}
-
-                        style={[styles.suggestionbox]}
-                        contentContainerStyle={{ paddingBottom: 100 }}
-
-
-                        refreshControl={
-                            <RefreshControl
-                                progressBackgroundColor="#16181a"
-                                colors={['#00de62']}
-                                onRefresh={() => {
-                                    setRefreshing1(true)
-                                    // Vibration.vibrate(200)
-                                    searchUser()
-
-                                }} refreshing={refreshing1} />
-                        }
+        //     useFocusEffect(
+        //         useCallback(() => {
+        //             handleTabChange("users")
+        //         })
+        //     )
+        //     return (
 
 
-                    />
-                </View>
+        //         <View style={{ flex: 1, backgroundColor: "#16181a" }}>
 
 
-            )
-        })
+        //             <FlatList
+        //                 keyExtractor={(item, index) => index}
+        //                 data={suggestionarray}
+        //                 ref={listRef}
+        //                 renderItem={renderSuggestion}
+        //                 onScroll={handleScroll}
+        //                 style={[styles.suggestionbox]}
+        //                 contentContainerStyle={{ paddingBottom: 100 }}
+        //                 extraData={suggestionarray}
+        //                 getItemLayout={(data, index) => ({ length: 200, offset: 200 * index, index })} 
+        //                 maintainVisibleContentPosition={{ minIndexForVisible: 20 }}
+        //                 onContentSizeChange={() => {
+        //                     if (listRef.current) {
+        //                         listRef.current.scrollToOffset({ offset: scrollPosition.current, animated: false });
+        //                     }
+        //                 }}
+
+        //                 refreshControl={
+        //                     <RefreshControl
+        //                         progressBackgroundColor="#16181a"
+        //                         colors={['#00de62']}
+        //                         onRefresh={() => {
+        //                             setRefreshing1(true)
+        //                             // Vibration.vibrate(200)
+        //                             searchUser()
+
+        //                         }} refreshing={refreshing1} />
+        //                 }
+
+
+        //             />
+        //         </View>
+
+
+        //     )
+        // })
 
 
         return (
@@ -925,15 +977,8 @@ const NewsLetter = React.memo(
 
 
                             name="Job"
-                            component={() => (
-                                // <ScrollView 
-                                //     style={{ flex: 1 ,paddingBottom: 50}}
-                                //     showsVerticalScrollIndicator={false}
-                                // >
-                                <User />
-                                //  </ScrollView>
-                            )}
-                            // children={(props) => <User />}
+                            // component={User}
+                            children={(props) => <User handleTabChange={handleTabChange} token={token} />}
 
 
                             options={{
@@ -1022,7 +1067,7 @@ const styles = StyleSheet.create({
 
     },
     headerText: {
-        fontSize: 35,
+        fontSize: 30,
         fontWeight: "bold",
         color: "#00DE62",
         marginBottom: 12,
@@ -1247,6 +1292,8 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: "#333",
         marginVertical: 5,
+        paddingBottom: 10,
+        paddingTop: 5,
         paddingHorizontal: 20,
         marginHorizontal: "auto"
     },
@@ -1287,6 +1334,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 12,
         paddingVertical: 6,
         borderRadius: 8,
+        width: 120,
 
 
     },
@@ -1294,7 +1342,8 @@ const styles = StyleSheet.create({
     sendbtnText1: {
         fontSize: 14,
         color: "#ccc",
-        fontFamily: "Alata"
+        fontFamily: "Alata",
+        textAlign: "center"
 
     },
 
@@ -1303,7 +1352,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: 18,
         paddingVertical: 6,
         borderRadius: 8,
+        verticalAlign: "top",
+        // marginTop: -20,
         borderWidth: 2,
+        width: 120,
         borderColor: "#ccc",
 
     },
@@ -1311,7 +1363,8 @@ const styles = StyleSheet.create({
     sendbtnText: {
         fontSize: 14,
         color: "#333",
-        fontFamily: "Alata"
+        fontFamily: "Alata",
+        textAlign: "center",
 
 
     },

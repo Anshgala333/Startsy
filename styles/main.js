@@ -54,7 +54,7 @@ const main = StyleSheet.create({
         // paddingHorizontal: 20,
         // zIndex: 100,
 
-        fontSize: 35,
+        fontSize: 30,
         fontWeight: "bold",
         color: "#00DE62",
         marginBottom: 12,

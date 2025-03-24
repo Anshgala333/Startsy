@@ -1823,7 +1823,7 @@ const styles1 = StyleSheet.create({
         width: "70%",
         color: "#00DE62",
         fontWeight: "bold",
-        marginLeft: 5,
+        // marginLeft: 5,
         marginTop: 5,
         flex: 1
     },

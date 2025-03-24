@@ -530,7 +530,7 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                 data={allpost}
                 renderItem={renderItem}
                 contentContainerStyle={{
-                    paddingTop: 120,
+                    paddingTop: 108,
                     paddingBottom: 100
                 }}
                 extraData={allpost}
