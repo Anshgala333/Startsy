@@ -12,6 +12,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import io from "socket.io-client";
 import { jwtDecode } from "jwt-decode";
 // import styles from "../../styles/post.js"
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 import { url } from "../../config.js"
 import { useNavigation } from "@react-navigation/native";
@@ -375,6 +376,7 @@ const Chat = ({ route }) => {
                                     <View style={styles.top} >
                                         <Pressable
                                             // onPress={() => { navigation.navigate("Singleuserpage", { token: token, id: "6793703e4d5879e729e089f2", page: "Chat" }) }}
+
                                             onPress={() => {
                                                 navigation.navigate("Singleprofilepage", { token: token, id: jisuserkosendkarnahaiuskiid, page: "Chat", item: itemdummy, messages, })
 
@@ -540,8 +542,9 @@ const Chat = ({ route }) => {
 
 
                 <View style={[styles.header]}>
-                    <Pressable onPress={() => { navigation.goBack() }}>
-                        <Ionicons name="arrow-back-circle-outline" size={40} color="#00DE62" />
+                    <Pressable style={{paddingLeft : 10 , paddingTop : 7}} onPress={() => { navigation.goBack() }}>
+                        {/* <Ionicons name="arrow-back-circle-outline" size={40} color="#00DE62" /> */}
+                        <FontAwesome6 name="chevron-left" size={25} color="#00DF60" />
                     </Pressable>
 
                     <Pressable
@@ -721,7 +724,8 @@ const styles = StyleSheet.create({
 
     userid: {
         fontFamily: "Alata",
-        fontSize: 22,
+        fontSize: 20,
+        paddingTop : 8,
         color: "#00DE62",
         alignSelf: "flex-start",
 
@@ -745,6 +749,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#16181a",
         // left: 0,
         padding: 10,
+        paddingTop : 0,
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
@@ -917,7 +922,7 @@ const styles = StyleSheet.create({
         width: 36,
         aspectRatio: 1,
         margin: 10,
-        marginLeft: 15,
+        marginLeft: 0,
         alignSelf: "flex-start",
         justifyContent: "flex-start"
     },

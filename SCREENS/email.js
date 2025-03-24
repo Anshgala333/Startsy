@@ -18,6 +18,7 @@ const Email = ({ navigation, route }) => {
     const [loading, setLoading] = useState(false);
     const [step, setStep] = useState(1);  // Step 1: Email, Step 2: OTP
     const [token, setToken] = useState("");
+    const [otploading, setotploading] = useState(false);
 
 
     const { type, id, useremail } = route.params
@@ -55,6 +56,9 @@ const Email = ({ navigation, route }) => {
             setError(true);
             return;
         }
+
+        // return
+        setLoading(true);
         try {
             const response = await fetch(`${url}api/checkemail`, {
                 method: 'POST',
@@ -84,7 +88,7 @@ const Email = ({ navigation, route }) => {
 
         }
         finally {
-
+            setLoading(false)
         }
 
 
@@ -114,6 +118,7 @@ const Email = ({ navigation, route }) => {
     };
 
     async function check(params) {
+        setotploading(true)
         try {
             const response = await fetch(`${url}api/verifyOtp`, {
                 method: 'POST',
@@ -146,6 +151,9 @@ const Email = ({ navigation, route }) => {
             console.log(err);
 
         }
+        finally{
+            setotploading(false)
+        }
     }
 
     return (
@@ -170,7 +178,7 @@ const Email = ({ navigation, route }) => {
                         {step === 1 ? (
                             <>
                                 <Text style={signupstyles.t1}>Enter Your Email</Text>
-                                {!error && <Text style={signupstyles.t2}>We’ll use this to contact you.</Text>}
+                                {!error && <Text style={signupstyles.t2}>You won't be able to change this later.</Text>}
                                 {error && <Text style={signupstyles.error}>{message}</Text>}
 
                                 <TextInput
@@ -237,7 +245,8 @@ const Email = ({ navigation, route }) => {
 
                                 {/* ✅ "Verify OTP" Button */}
                                 <Pressable style={signupstyles.next} onPress={() => check()}>
-                                    <Text style={signupstyles.nexttext}>Verify OTP</Text>
+                                    {!otploading && <Text style={signupstyles.nexttext}>Verify OTP</Text>}
+                                    {otploading &&  <ActivityIndicator size={24} color="#16181a" />}
                                 </Pressable>
                             </>
                         )}

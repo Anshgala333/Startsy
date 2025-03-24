@@ -10,12 +10,15 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Share from "@/assets/icons/share.js";
 import styles from "../../../styles/post.js"
 
-const SuggestedPost = ({ item, index, opencomment, openshare, upvotepost }) => {
+const SuggestedPost = ({ item, index, opencomment, openshare, upvotepost ,id}) => {
 
+    // console.log(item)
+    
     if (!item.user_id) return
     if (item.type == "communityPost") return
     if (item.type == "jobPost") return
     if (item.type == "Question") return
+    if(item._id==id)return;
 
     const lastTap = useRef(null);
     const handleDoubleTap = (id, index) => {
@@ -27,6 +30,7 @@ const SuggestedPost = ({ item, index, opencomment, openshare, upvotepost }) => {
         lastTap.current = now;
     };
 
+    
 
 
 

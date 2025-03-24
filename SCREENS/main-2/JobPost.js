@@ -163,7 +163,7 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation })
                 data={allpost}
                 renderItem={renderItem}
                 contentContainerStyle={{
-                    paddingTop: 130,
+                    paddingTop: 118,
                     paddingBottom: 100
                 }}
 

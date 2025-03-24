@@ -1,5 +1,5 @@
 import React, { useContext, useState, useRef, memo, useCallback, useEffect } from "react";
-import { FlatList, Text, Animated, Touchable, TouchableOpacity, Pressable, View, Vibration, Image, SafeAreaView, RefreshControl } from "react-native";
+import { FlatList, Text, Animated, Touchable, TouchableOpacity, ToastAndroid, Pressable, View, Vibration, Image, SafeAreaView, RefreshControl } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import styles from "../../styles/post.js"
@@ -11,7 +11,7 @@ import { GlobalContext } from "@/Global/globalcontext.js";
 import { useFocusEffect } from "expo-router";
 import Header from '../Header1.js';
 // import { Skeleton } from "moti/skeleton/index.js";
-
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Skeleton } from 'moti/skeleton';
 import { MotiView } from 'moti';
 import { jwtDecode } from "jwt-decode";
@@ -25,12 +25,26 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
     const [savedPosts, setSavedPosts] = useState({});
     const [isSaved, setIsSaved] = useState(false);
 
+    
+      const showToastWithGravity = (message) => {
+        ToastAndroid.showWithGravityAndOffset(
+          `${message}`,
+          ToastAndroid.SHORT,
+          ToastAndroid.TOP,
+          100, 100
+        );
+      };
+    
+
 
 
     // const [skeleton, setskeletonloading] = useState(true)
     // .......................................................................................
 
-    const toggleSavePost = (index) => {
+    const toggleSavePost = async (id, index) => {
+        console.log(id);
+        console.log(index);
+
         console.log("book");
         setallpost(prevPosts =>
             prevPosts.map((e, i) => {
@@ -40,6 +54,38 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                 return e;
             })
         );
+
+        var toset = !allpost[index].issaved
+
+
+        var status = toset ? "remove" : "add"
+        var message = toset ? "Unsaved" : "Saved"
+        showToastWithGravity(`Post ${message} successfully`)
+
+        try {
+
+            const response = await fetch(`${url}test/savePost/${id}/${status}`, {
+                method: 'POST',
+                body: "",
+                headers: {
+                    "Content-Type": "application/json",
+                    accept: "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+            });
+            const data = await response.json();
+            console.log(data);
+            console.log(response.status);
+            Vibration.vibrate(20)
+
+        }
+        catch (err) {
+            console.log(err);
+
+        }
+
+
+
 
         //setIsSaved(!isSaved);
     };
@@ -51,14 +97,15 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
 
 
     // useEffect(() => {
-    //     // console.log("allpost re render os scroll page 1");
+    //     console.log("allpost re render os scroll page 1");
     // }, [allpost])
     // useEffect(() => {
-    //     // console.log("setallpost re render of scroll page");
+    //     console.log("setallpost re render of scroll page");
     // }, [setallpost])
-    // // useEffect(() => {
-    // //     console.log("opencomment re render of scroll page");
-    // // }, [opencomment])
+    // useEffect(() => {
+    //     console.log("opencomment re render of scroll page");
+    // }, [opencomment])
+
     // useEffect(() => {
     //     console.log("openshare re render of scroll page");
     // }, [openshare])
@@ -202,6 +249,27 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                             <Text allowFontScaling={false} style={styles.u1}>{item.user_id.userName}</Text>
                                             <Text allowFontScaling={false} style={styles.u2}>{item.user_id.role == "CommunityMember" ? "Member" : item.user_id.role}</Text>
                                         </View>
+
+                                        <View style={{
+                                            flexDirection: "row",
+                                            justifyContent: "center",    // Center horizontally
+                                            alignItems: "center",        // Center vertically
+                                            right : 20,
+                                            top : 0
+                                        }}>
+                                            <TouchableOpacity style={{ paddingRight: 0 }} onPress={() => toggleSavePost(item._id, index)}>
+                                                {item.issaved ? (
+                                                    <MaterialIcons name="bookmark-border" size={30} color="#ccc" />
+                                                ) : (
+                                                    <MaterialCommunityIcons
+                                                        name="bookmark"
+                                                        size={30}
+                                                        color="#ccc"             // Gray when unsaved
+
+                                                    />
+                                                )}
+                                            </TouchableOpacity>
+                                        </View>
                                     </Pressable>
                                 </View>
 
@@ -243,30 +311,7 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                     {/* ............................................................................................ */}
 
 
-                                    <View style={{
-                                        flexDirection: "row",
-                                        justifyContent: "center",    // Center horizontally
-                                        alignItems: "center",        // Center vertically
-                                        marginLeft:"175"       
-                                    }}>
-                                        <TouchableOpacity onPress={() => toggleSavePost(index)}>
-                                            {item.issaved ? (
-                                                <MaterialCommunityIcons
-                                                    name="bookmark"
-                                                    size={34}
-                                                    color="#00de62"          // Green when saved
-                                                    
-                                                />
-                                            ) : (
-                                                <MaterialCommunityIcons
-                                                    name="bookmark"
-                                                    size={34}
-                                                    color="#ccc"             // Gray when unsaved
-                                                   
-                                                />
-                                            )}
-                                        </TouchableOpacity>
-                                    </View>
+
 
 
 
@@ -486,7 +531,7 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                 data={allpost}
                 renderItem={renderItem}
                 contentContainerStyle={{
-                    paddingTop: 120,
+                    paddingTop: 108,
                     paddingBottom: 100
                 }}
                 extraData={allpost}

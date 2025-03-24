@@ -23,7 +23,8 @@ import {
     BackHandler,
     TouchableOpacity,
     KeyboardAvoidingView,
-    Vibration
+    Vibration,
+    ToastAndroid
 } from "react-native";
 import RBSheet from 'react-native-raw-bottom-sheet';
 import BottomSheet1 from "./Bottomsheet1.js"
@@ -656,12 +657,23 @@ const Main2 = ({ navigation, route }) => {
     const [loggedinrole, setloggedinrole] = useState("")
 
 
+      const showToastWithGravity = (message) => {
+        ToastAndroid.showWithGravityAndOffset(
+          `${message}`,
+          ToastAndroid.SHORT,
+          ToastAndroid.TOP,
+          100, 100
+        );
+      };
 
     async function finalsubmit() {
         // console.log(SelectedItems);
         // console.log(Array.from(SelectedItems));
         setsendingpost(true)
         var array = Array.from(SelectedItems)
+
+       
+        
 
 
         try {
@@ -679,6 +691,8 @@ const Main2 = ({ navigation, route }) => {
             // console.log(data);
             // console.log(response.status);
             bottomSheetRef6.current?.close()
+            showToastWithGravity("Post shared successfully")
+
 
         }
         catch (e) {
@@ -799,7 +813,8 @@ const Main2 = ({ navigation, route }) => {
 
                             tabBarStyle: {
                                 backgroundColor: 'transparent',
-                                height: 60,
+                                // backgroundColor: 'red',
+                                height: 55,
                                 // zIndex  : -1,
                                 opacity: 1,
                                 borderTopWidth: 0,
@@ -824,7 +839,7 @@ const Main2 = ({ navigation, route }) => {
                                     // <Pressable onPress={()=>{Vibration.vibrate(20)}}>
                                     <View style={{ flex: 1, width: 30, marginLeft: 10, marginTop: -3, justifyContent: "center", height: 30 }}>
                                         {/* <Search  width={40} height={40} /> */}
-                                        <Feather name="search" size={30} color={focused ? "#00DE62" : "#7A7B7C"} />
+                                        <Feather name="search" size={24} color={focused ? "#00DE62" : "#7A7B7C"} />
                                         {/* <NewsLettericon color={focused ? "#00DE62" : "#828282"} /> */}
                                     </View>
                                     // </Pressable>
@@ -841,7 +856,7 @@ const Main2 = ({ navigation, route }) => {
                                 tabBarLabel: "",
                                 tabBarIcon: ({ focused }) => (
                                     <View style={{ marginTop: -4 }}>
-                                        <Fontisto name="bell" size={30} color={focused ? "#00DE62" : "#7A7B7C"} />
+                                        <Fontisto name="bell" size={24} color={focused ? "#00DE62" : "#7A7B7C"} />
                                         {/* <Feather name="bell" size={32} color={focused ? "#00DE62" : "#7A7B7C"} /> */}
                                     </View>
                                 ),
@@ -874,8 +889,8 @@ const Main2 = ({ navigation, route }) => {
                                 tabBarIcon: ({ focused }) => (
 
                                     <>
-                                        {!focused && <Image style={{ width: 48, height: 48 }} source={require("../assets/images/logogray1.png")} />}
-                                        {focused && <Image style={{ width: 48, height: 48 }} source={require("../assets/images/logo.png")} />}
+                                        {!focused && <Image style={{ width: 40, height: 40 , marginTop : -5 }} source={require("../assets/images/logogray1.png")} />}
+                                        {focused && <Image style={{ width: 40, height: 40 , marginTop : -5}} source={require("../assets/images/logo.png")} />}
                                     </>
                                 ),
                             }}
@@ -892,7 +907,7 @@ const Main2 = ({ navigation, route }) => {
 
                                 tabBarLabel: "",
                                 tabBarIcon: ({ focused }) => (
-                                    <View style={{ marginTop: -3 }}><MaterialCommunityIcons name="message-text-outline" size={32} color={focused ? "#00DE62" : "#7A7B7C"} /></View>
+                                    <View style={{ marginTop: -3 }}><MaterialCommunityIcons name="message-text-outline" size={24} color={focused ? "#00DE62" : "#7A7B7C"} /></View>
                                 ),
                             }}
                         />
@@ -905,7 +920,7 @@ const Main2 = ({ navigation, route }) => {
 
                                 tabBarLabel: "",
                                 tabBarIcon: ({ focused }) => (
-                                    <View style={{ marginTop: -4, marginLeft: -2 }}><FontAwesome6 name="circle-user" size={30} color={focused ? "#00DE62" : "#7A7B7C"} /></View>
+                                    <View style={{ marginTop: -4, marginLeft: -2 }}><FontAwesome6 name="circle-user" size={24} color={focused ? "#00DE62" : "#7A7B7C"} /></View>
                                 ),
                             }}
                         />

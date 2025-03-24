@@ -12,6 +12,7 @@ import { useFocusEffect } from "@react-navigation/native";
 
 import io from "socket.io-client";
 import { jwtDecode } from "jwt-decode";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 import { url } from "../../config.js"
 
@@ -534,8 +535,10 @@ const Chat1 = ({ navigation, route }) => {
 
 
                 <View style={[styles.header]}>
-                    <Pressable onPress={() => { navigation.goBack() }}>
-                        <Ionicons name="arrow-back-circle-outline" size={36} color="#00DE62" />
+                    <Pressable style={{paddingLeft : 10 , paddingTop : 7}} onPress={() => { navigation.goBack() }}>
+                        {/* <Ionicons name="arrow-back-circle-outline" size={36} color="#00DE62" /> */}
+                        <FontAwesome6 name="chevron-left" size={25} color="#00DF60" />
+
                     </Pressable>
 
                     <Pressable

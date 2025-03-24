@@ -80,8 +80,8 @@ const GroudDetailsScreen = ({ route }) => {
 
         settargetid(userid)
         var decode = jwtDecode(token)
-        // if (communityAdmin != decode._id) return
-        // if (userid == decode._id) return
+        if (communityAdmin != decode._id) return
+        if (userid == decode._id) return
 
         mainpagebottomsheet.current.expand()
         setDeletebtn(true)

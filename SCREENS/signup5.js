@@ -98,12 +98,12 @@ const Signup5 = ({ navigation, route }) => {
         }
 
         // Email validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!email.trim()) {
-            newErrors.email = "* Email is required.";
-        } else if (!emailRegex.test(email)) {
-            newErrors.email = "* Enter a valid email address.";
-        }
+        // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        // if (!email.trim()) {
+        //     newErrors.email = "* Email is required.";
+        // } else if (!emailRegex.test(email)) {
+        //     newErrors.email = "* Enter a valid email address.";
+        // }
 
         // Country validation
         // if (!country.trim()) {
@@ -132,9 +132,9 @@ const Signup5 = ({ navigation, route }) => {
         // }
 
         // Image validation
-        if (image === "xyz") {
-            newErrors.image = "* Profile picture is required.";
-        }
+        // if (image === "xyz") {
+        //     newErrors.image = "* Profile picture is required.";
+        // }
 
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
@@ -165,6 +165,7 @@ const Signup5 = ({ navigation, route }) => {
     formData.append("contactInfo", number)
     formData.append("age", JSON.stringify(date))
     formData.append("gender", gender)
+
 
 
     const rotateValue = useRef(new Animated.Value(0)).current;
@@ -314,7 +315,7 @@ const Signup5 = ({ navigation, route }) => {
                 },
             });
             const data = await response.json();
-            // console.log(data.data.age);
+            // console.log(data.data.age , "ikkkkkk");
             // console.log(JSON.parse(data.data.age));
             var tempdate = new Date(JSON.parse(data.data.age)).toLocaleDateString("en-US", {
                 day: "2-digit",
@@ -396,6 +397,14 @@ const Signup5 = ({ navigation, route }) => {
             // }
 
         }
+
+        console.log(image == "xyz");
+        if(image == "xyz"){
+            console.log("no image ");
+            
+            
+        }
+        
 
 
 
@@ -551,7 +560,7 @@ const Signup5 = ({ navigation, route }) => {
                                 <Profile />
                             )}
                         </Pressable>
-                        <Text style={s5.t1}>Upload a profile picture *</Text>
+                        <Text style={s5.t1}>Upload a profile picture </Text>
                         {errors.image && <Text style={[styles.errorText, { textAlign: "center" }]}>{errors.image}</Text>}
                         <View style={{ marginTop: 30 }}>
                             <TextInput

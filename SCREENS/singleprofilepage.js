@@ -454,7 +454,7 @@ const Singleprofilepage = ({ props, openshare }) => {
             <Text allowFontScaling={false} style={styles.u7}>Rules & Guidelines: {item.communityPost.communityRules}</Text>
 
             <Pressable style={[styles.next]} >
-              <Text allowFontScaling={false} style={styles.nexttext}>Join Community</Text>
+              <Text allowFontScaling={false} style={styles.nexttext}>Join Forum</Text>
             </Pressable>
           </View>
 
@@ -653,12 +653,10 @@ const Singleprofilepage = ({ props, openshare }) => {
     return (
       <>
         <View style={styles1.header}>
-          <Pressable onPress={() => {
+          <Pressable style={{paddingLeft : 0 , paddingTop : 7}} onPress={() => {
             if (page == "Chat") {
 
               console.log(page);
-
-
               navigation.navigate(page, { item, messages, token });
             }
             else {
@@ -671,7 +669,8 @@ const Singleprofilepage = ({ props, openshare }) => {
             // navigation.goBack()
 
 
-          }}><FontAwesome6 name="chevron-left" size={36} color="#00de62" /></Pressable>
+          }}><FontAwesome6 name="chevron-left" size={24} color="#00de62" /></Pressable>
+          
           <Text numberOfLines={1} style={styles1.username}>{userdata.user_id.userName}</Text>
         </View>
         <View>
@@ -723,9 +722,9 @@ const Singleprofilepage = ({ props, openshare }) => {
                 {/* <Text style={connecteddata != "Follow" ? styles1.ft1 : styles1.ft}>{tellConnection(connecteddata)}</Text>
                 <Text style={connecteddata != "Follow" ? styles1.ft1 : styles1.ft}>{tellConnection(connecteddata)}</Text>
                 <Text style={connecteddata != "Follow" ? styles1.ft1 : styles1.ft}>{tellConnection(connecteddata)}</Text> */}
-                {connecteddata == "Follow" && <Text style={{color : "#16181a"}}>{tellConnection(connecteddata)}</Text>}
-                {connecteddata == "Pending Request" && <Text style={{color : "#ccc"}}>{tellConnection(connecteddata)}</Text>}
-                {connecteddata == "Followed" && <Text style={{color : "#ccc"}}>{tellConnection(connecteddata)}</Text>}
+                {connecteddata == "Follow" && <Text style={{color : "#16181a",fontFamily:"Alata",alignItems:"center",marginTop: 1,fontSize: 16,}}>{tellConnection(connecteddata)}</Text>}
+                {connecteddata == "Pending Request" && <Text style={{color : "#ccc",fontFamily:"Alata",alignItems:"center",marginTop: 1,fontSize: 16,}}>{tellConnection(connecteddata)}</Text>}
+                {connecteddata == "Followed" && <Text style={{color : "#ccc",fontFamily:"Alata",alignItems:"center",marginTop: 1,fontSize: 16,}}>{tellConnection(connecteddata)}</Text>}
               </Pressable>}
 
             {mypage && <Pressable onPress={() => { sendfollowrequest(userdata.user_id._id) }} style={styles1.f1}><Text style={styles1.ft}>{tellConnection(connecteddata)}</Text></Pressable>}
@@ -1272,7 +1271,7 @@ const styles1 = StyleSheet.create({
     fontSize: 24,
     color: "#00DE62",
     fontWeight: "bold",
-    marginLeft: 10,
+    marginLeft: 20,
     marginTop: 2,
     width: "80%",
     // backgroundColor: "red",

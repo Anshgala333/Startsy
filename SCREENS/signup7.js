@@ -23,7 +23,7 @@ import {
 // import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AntDesign from '@expo/vector-icons/AntDesign';
-
+import { Asset } from "expo-asset";
 
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { LinearGradient } from "expo-linear-gradient";
@@ -77,6 +77,12 @@ const Signup7 = ({ navigation, route }) => {
 
 
 
+    const loadDefaultImage = async () => {
+        const asset = Asset.fromModule(require("../assets/images/logofinal.png"));
+        await asset.downloadAsync(); // Ensure it is available
+        return asset.localUri
+        // setDefaultImageUri(asset.localUri);
+    };
 
 
     function nextpage(navigation, type) {
@@ -289,6 +295,24 @@ const Signup7 = ({ navigation, route }) => {
                 name: `image_${Date.now()}.jpg`,
 
             })
+        }
+        else{
+           
+            
+            console.log("no image");
+            var defaulImage = await loadDefaultImage();
+            console.log(defaulImage , "okkkkkkkkkkkkk");
+            
+
+            final.append("profilePhoto", {
+                uri: defaulImage,
+                type: "image/jpeg",
+                name: `image_${Date.now()}.jpg`,
+
+            })
+
+            // return
+            
         }
 
 

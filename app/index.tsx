@@ -78,6 +78,8 @@ import BlogPage from "../SCREENS/BlogPage.jsx"
 import MediaPost from "../SCREENS/MediaPost.js"
 import JobPostingPage from "../SCREENS/JobPosting.jsx"
 // import ReadMore1 from "../../SCREENS/trial-1.js";
+import AllPostsScreen from '../SCREENS/SavedPost.js'
+
 
 
 import  ViewSendedPost from '../SCREENS/JASH/View post/ViewSendedPost.jsx'
@@ -243,6 +245,8 @@ export default function App() {
           <Stack.Screen name="QuestionReply" component={QuestionReply} />
           <Stack.Screen name="PricePage" component={PricePage} />
           <Stack.Screen name="Settings" component={Settings} />
+          {/* <Stack.Screen name="Settings" component={Settings} /> */}
+          
 
           <Stack.Screen
             name="KeyboardAvoidingComponent"
@@ -269,7 +273,8 @@ export default function App() {
 
 
 
-          <Stack.Screen name="settings" component={Settings}/>
+          {/* <Stack.Screen name="settings" component={Settings}/> */}
+          <Stack.Screen name="SavedPost" component={AllPostsScreen}/>
         </Stack.Navigator>
       )}
       {/* </View> */}

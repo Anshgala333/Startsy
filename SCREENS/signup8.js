@@ -81,8 +81,14 @@ const Signup8 = ({ navigation, route }) => {
 
             })
         }
+        else{
+            console.log("no image");
+            
+            return
+        }
 
         console.log(final);
+        return
 
 
         try {
