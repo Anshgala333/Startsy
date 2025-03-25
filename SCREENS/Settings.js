@@ -164,6 +164,7 @@ const Settings = ({ navigation, route }) => {
           <Text style={styles.optionText}>Edit Profile</Text>
         </TouchableOpacity>
 
+
         <TouchableOpacity style={styles.option} onPress={() => navigation.navigate("SavedPost", { tabnavigation })}>
           <Icon name="bookmark-outline" size={24} color="#00DE62" />
           <Text style={styles.optionText}>Saved Posts</Text>
@@ -172,7 +173,7 @@ const Settings = ({ navigation, route }) => {
         {/* <TouchableOpacity style={styles.option} onPress={() => alert("Switch Account")}>
           <Icon name="account-switch" size={24} color="#00DE62" />
           <Text style={styles.optionText}>Switch Account</Text>
-        </TouchableOpacity> */}
+        </TouchableOpacity>  */}
 
         <TouchableOpacity style={styles.option} onPress={() => Logout()}>
           <Icon name="logout" size={24} color="#00DE62" />

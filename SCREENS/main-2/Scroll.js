@@ -95,6 +95,7 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
 
 
 
+
     // useEffect(() => {
     //     console.log("allpost re render os scroll page 1");
     // }, [allpost])

@@ -152,6 +152,7 @@ const Foryou = ({ scroll, token, openshare, mainpagebottomsheet, visible, setVis
                     </Animated.View>
                 </TouchableWithoutFeedback>
             </Modal>
+    
         );
     };
 
