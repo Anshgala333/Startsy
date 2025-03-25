@@ -1102,19 +1102,22 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                                 )}
                             </AnimatedCircularProgress>
                             <Text style={styles1.progressText}>{`${profilecompletion}%`}</Text>
+                            {/* <MaterialCommunityIcons name="certificate-outline" size={24} color="#ccc" /> */}
+                           
                         </View>
 
-
+                      
                         {/* <View style={styles1.profilephoto}>
                             <Image style={styles1.img2} source={{ uri: userdata.user_id.profilePhoto }} />
                         </View> */}
                         <View style={styles1.upvote}>
+                        
                             <View style={{ transform: [{ scale: 1.1 }], marginRight: 0 }} >
                                 {/* <Upvote width={decode.role == "Investor" ? 0 : 50} height={44} /> */}
-                                {decode.role == "CommunityMember" &&
+                                {decode.role == "CommunityMember" && 
                            <View style={styles1.ss}>
                              {/* <MaterialCommunityIcons name="certificate-outline" size={24} color="#ccc" /> */}
-
+                             
                               {instaurl != "" && <Pressable onPress={() => Linking.openURL(instaurl)} >
                                        <AntDesign name="instagram" style={styles.plus1} size={20} color="#bbbbbb" />
                                      </Pressable>}
@@ -1129,6 +1132,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
 
                            </View>
                         }
+                        
                             </View>
                             <Text style={styles1.followers}>
                                 {/* {decode.role != "Investor" && (userdata.totalUpvotes || 0)} */}

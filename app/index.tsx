@@ -81,7 +81,7 @@ import JobPostingPage from "../SCREENS/JobPosting.jsx"
 import AllPostsScreen from '../SCREENS/SavedPost.js'
 import VerificationPendingScreen from '../SCREENS/InvestorVerify.js'
 import InvestorNotVerifiedScreen from '../SCREENS/NotVerified.js'
-
+import CertificatePortfolioPage from '../SCREENS/Certificates.js'
 import ViewSendedPost from '../SCREENS/JASH/View post/ViewSendedPost.jsx'
 
 
@@ -283,6 +283,7 @@ export default function App() {
           <Stack.Screen name="SavedPost" component={AllPostsScreen} />
           <Stack.Screen name="VerificationPendingScreen" component={VerificationPendingScreen}/>
           <Stack.Screen name="InvestorNotVerifiedScreen" component={InvestorNotVerifiedScreen} />
+          <Stack.Screen name="CertificatePortfolioPage" component={CertificatePortfolioPage} />
           </Stack.Navigator >
       )
       }
