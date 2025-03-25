@@ -213,7 +213,7 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
         }
       });
       const data = await response.json();
-      // console.log(data);
+      console.log(data);
       if (response.status === 200) {
         updateField("token", data.accessToken);
 

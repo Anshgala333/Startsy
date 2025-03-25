@@ -28,7 +28,7 @@ import { GlobalContext } from "@/Global/globalcontext.js";
 import { jwtDecode } from "jwt-decode";
 
 
-const User = memo(({ handleTabChange, token }) => {
+const User = memo(({ handleTabChange, token , navigation }) => {
 
     const scrollPosition = useRef(0);
     const listRef = useRef(null);

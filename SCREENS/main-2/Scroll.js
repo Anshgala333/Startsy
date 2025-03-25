@@ -42,10 +42,10 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
     // .......................................................................................
 
     const toggleSavePost = async (id, index) => {
-        console.log(id);
-        console.log(index);
+        // console.log(id);
+        // console.log(index);
 
-        console.log("book");
+        // console.log("book");
         setallpost(prevPosts =>
             prevPosts.map((e, i) => {
                 if (i === index) {
@@ -130,10 +130,10 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
 
 
     useEffect(() => {
-        console.log("refreshing11 state change");
+        // console.log("refreshing11 state change");
     }, [refreshing11])
     useEffect(() => {
-        console.log("skeleton state change");
+        // console.log("skeleton state change");
     }, [skeleton])
 
 
@@ -180,8 +180,8 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                 },
             });
             const data = await response.json();
-            console.log(data);
-            console.log(response.status);
+            // console.log(data);
+            // console.log(response.status);
 
         }
         catch (err) {
@@ -230,10 +230,10 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                 <View style={styles.top} >
                                     <Pressable
                                         onPress={() => {
-                                            console.log(decode.role);
+                                            // console.log(decode.role);
 
                                             if (decode.role == "Investor") {
-                                                console.log("qpqpqp");
+                                                // console.log("qpqpqp");
                                                 if (item.user_id.role == "Founder") return
                                                 else navigation.navigate("Singleuserpage", { token: token, id: item.user_id._id, page: "Startsy" })
                                             }
@@ -308,7 +308,6 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                         </Pressable>
                                     </View>
                                     {/* ............................................................................................ */}
-
 
 
 
