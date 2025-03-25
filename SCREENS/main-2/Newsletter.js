@@ -715,6 +715,7 @@ const NewsLetter = React.memo(
         //     };
 
 
+
         //     async function sendfollowrequest(stat, id) {
 
         //         // if (stat) return

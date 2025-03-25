@@ -6,7 +6,7 @@ import signupstyles from "../styles/signup1styles.js";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Back from "../components/back.js";
 import { url } from "../config.js";
-
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 const Signup2 = function ({ navigation, route }) {
     const { type, username } = route.params;
     const [loading, setLoading] = useState(false);
@@ -88,11 +88,8 @@ const Signup2 = function ({ navigation, route }) {
         <KeyboardAvoidingView style={signupstyles.container} behavior="padding" keyboardVerticalOffset={0}>
             <ScrollView>
                 <View style={signupstyles.row}>
-                    <Pressable style={signupstyles.back} onPress={() => {
-                        navigation.setParams({ type });
-                        navigation.goBack();
-                    }}>
-                        <Back />
+                <Pressable onPress={() => navigation.goBack()}>
+                        <FontAwesome6 name="chevron-left" size={34} style={{ alignSelf: 'flex-start', marginLeft: 16 }} color="#00DF60" />
                     </Pressable>
                     <View style={signupstyles.top}>
                         <Image style={signupstyles.logo} source={require("../assets/images/logo.png")} />
