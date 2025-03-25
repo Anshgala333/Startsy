@@ -145,6 +145,9 @@ const Community = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
             if (response.status === 403) {
                 showToastWithGravity("you are not allowed to join this community")
             }
+            if (response.status === 303) {
+                showToastWithGravity("Community is Locked")
+            }
             if (response.status === 200) {
                 setallpost(allpost.map((e, i) => {
                     if (i == index) {

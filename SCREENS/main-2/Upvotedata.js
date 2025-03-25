@@ -317,8 +317,11 @@ function Upvotedata({ route }) {
         const Spacer = ({ height = 16 }) => <View style={{ height }} />;
 
 
+
         if (item.notificationType == "suggestion") {
             return (
+
+
 
 
 
@@ -399,7 +402,7 @@ function Upvotedata({ route }) {
                             {item.notificationType == "upvotePost" && item.postId?.type == "photo" &&
                                 <Image style={styles.image1} source={{ uri: item.postId.mediaUrl }} />
                             }
-                            {item.notificationType == "commentPost"}
+                            {item.notificationType == "commentPost" && <Image style={styles.image1} source={{ uri: item.postId.mediaUrl }} />}
 
                         </View>
                         <Text
@@ -417,79 +420,104 @@ function Upvotedata({ route }) {
 
 
         else {
+
+            console.log(item);
+            console.log(item.postId, "okkkkkkkkkkkkkkkk");
+
             return (
 
-                <TouchableOpacity onPress={()=>{
-                    // console.log(item.postId._id)
-                    navigation.navigate("ViewSendedPost",{id:item.postId._id})
-                }}>
+                // <TouchableOpacity onPress={()=>{
+                //     // console.log(item.postId._id)
+                //     navigation.navigate("ViewSendedPost",{id:item.postId._id})
+                // }}>
 
 
-                    <View style={styles.box1}>
+                <View style={styles.box1}>
 
 
-                        <View style={styles.left}>
+                    <View style={styles.left}>
 
 
-                            <Pressable
-                                style={{ paddingTop: 10 }}
-                                // onPress={() => {
-                                //     console.log("hello")
-                                //     navigation.navigate("Singleuserpage", { token: token, id: item.sendingUserId._id, page: "bell" })
-                                // }}
+                        <Pressable
+                            style={{ paddingTop: 10 }}
+                        // onPress={() => {
+                        //     console.log("hello")
+                        //     navigation.navigate("Singleuserpage", { token: token, id: item.sendingUserId._id, page: "bell" })
+                        // }}
 
-                            >
-                                {item.sendingUserId?.profilePhoto && <Image style={styles.topimage} source={{ uri: item.sendingUserId.profilePhoto }} />}
-                                {!item.sendingUserId?.profilePhoto && <Image style={styles.topimage} source={require("../../assets/images/p2.png")} />}
+                        >
+                            {item.sendingUserId?.profilePhoto && <Image style={styles.topimage} source={{ uri: item.sendingUserId.profilePhoto }} />}
+                            {!item.sendingUserId?.profilePhoto && <Image style={styles.topimage} source={require("../../assets/images/p2.png")} />}
 
-                            </Pressable>
-                            <View style={styles.bottominfo1}>
-                                <View style={{ display: "flex", flexDirection: "row" }}>
+                        </Pressable>
+                        <View style={styles.bottominfo1}>
+                            <View style={{ display: "flex", flexDirection: "row" }}>
 
-                                    <Pressable
-                                        onPress={() => { navigation.navigate("Singleuserpage", { token: token, id: item.sendingUserId._id, page: "bell" }) }}
+                                <Pressable
+                                    onPress={() => { navigation.navigate("Singleuserpage", { token: token, id: item.sendingUserId._id, page: "bell" }) }}
 
-                                    >
-                                        <Text style={styles.topu1}>{item.sendingUserId.userName} <Text style={styles.topu2}>{item.sendingUserId.role == "CommunityMember" ? "Member" : item.sendingUserId.role}</Text> <View style={styles.circle}></View> <AutoSizeText
-                                            numberOfLines={1}
-                                            fontSize={11}
-                                            mode={ResizeTextMode.max_lines}
-                                            ellipsizeMode='tail'
-                                            style={styles.time}>{time(item.timestamp)}
-                                        </AutoSizeText>
+                                >
+                                    <Text style={styles.topu1}>{item.sendingUserId.userName} <Text style={styles.topu2}>{item.sendingUserId.role == "CommunityMember" ? "Member" : item.sendingUserId.role}</Text> <View style={styles.circle}></View> <AutoSizeText
+                                        numberOfLines={1}
+                                        fontSize={11}
+                                        mode={ResizeTextMode.max_lines}
+                                        ellipsizeMode='tail'
+                                        style={styles.time}>{time(item.timestamp)}
+                                    </AutoSizeText>
 
-                                        </Text>
-                                    </Pressable>
-                                    {/* <Text style={styles.time}>{time(item.taggedUser.createdAt)}</Text> */}
-
-
-                                </View>
-                                {/* <Text style={styles.sub2}>{item.notificationMessage}</Text> */}
-                                <Text
-                                    numberOfLines={1}
-                                    fontSize={12}
-                                    // mode={ResizeTextMode.max_lines}
-                                    // ellipsizeMode='tail'
-                                    style={[styles.sub2, { fontSize: 12, marginLeft: 10 }]}>{item.notificationMessage}
-                                </Text>
-                            </View>
-                        </View>
-                        <View style={styles.right}>
-                            {item.notificationType == "upvotePost"}
-                            {item.notificationType == "upvoteProfile"}
-                            {item.notificationType == "jobApplied" &&
-                                <Pressable onPress={sendmessage} style={{ top: 16, right: 0 }}>
-                                    <MaterialCommunityIcons name="message-text-outline" size={34} color={"#00DE62"} />
+                                    </Text>
                                 </Pressable>
-                            }
-                            {item.notificationType == "joinCommunity"}
-                            {/* {item.notificationType == "upvotePost" && item.postId?.type == "blogPost" && <B2 width={40} height={40} />} */}
-                            {item.notificationType == "upvotePost" && item.postId?.type == "photo" && <Image style={styles.image1} source={{ uri: item.postId.mediaUrl }} />}
-                            {item.notificationType == "commentPost"}
+                                {/* <Text style={styles.time}>{time(item.taggedUser.createdAt)}</Text> */}
 
+
+                            </View>
+                            {/* <Text style={styles.sub2}>{item.notificationMessage}</Text> */}
+                            <Text
+                                numberOfLines={1}
+                                fontSize={12}
+                                // mode={ResizeTextMode.max_lines}
+                                // ellipsizeMode='tail'
+                                style={[styles.sub2, { fontSize: 12, marginLeft: 10 }]}>{item.notificationMessage}
+                            </Text>
                         </View>
                     </View>
-                </TouchableOpacity>
+                    <View style={styles.right}>
+                        {item.notificationType == "upvotePost"}
+                        {item.notificationType == "upvoteProfile"}
+                        {item.notificationType == "jobApplied" &&
+                            <Pressable onPress={sendmessage} style={{ top: 16, right: 0 }}>
+                                <MaterialCommunityIcons name="message-text-outline" size={34} color={"#00DE62"} />
+                            </Pressable>
+                        }
+                        {item.notificationType == "joinCommunity"}
+                        {/* {item.notificationType == "upvotePost" && item.postId?.type == "blogPost" && <B2 width={40} height={40} />} */}
+                        {item.notificationType == "upvotePost" && item.postId?.type == "photo" &&
+
+                            <TouchableOpacity onPress={() => {
+                                // console.log(item.postId._id)
+                                navigation.navigate("ViewSendedPost", { id: item.postId._id })
+                            }}>
+                                <Image style={styles.image1} source={{ uri: item.postId.mediaUrl }} />
+                            </TouchableOpacity>
+
+                        }
+                        {item.notificationType == "commentPost" &&
+
+                            <TouchableOpacity onPress={() => {
+                                // console.log(item.postId._id)
+                                navigation.navigate("ViewSendedPost", { id: item.postId._id })
+                            }}>
+
+                                <Image style={styles.image1} source={{ uri: item.postId?.mediaUrl }}
+                                />
+
+                            </TouchableOpacity>}
+
+
+
+                    </View>
+                </View>
+                // </TouchableOpacity>
 
 
 

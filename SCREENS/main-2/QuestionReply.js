@@ -12,8 +12,9 @@ const QuestionReply = ({ route }) => {
     const [question, setQuestion] = useState("");
     const [inputValue, setInputValue] = useState('');
     const [commenttext, setreply] = useState('');
-    const [uploadingcomment, setuploadingcomment] = useState(false);
-    const [allcomment, setallcomments] = useState([]);
+    const [uploadingcomment, setUploadingComment] = useState(false);
+    const [allComments, setAllComments] = useState([]);
+    const [loading, setLoading] = useState(false);
 
 
     const { data, token } = route.params;
@@ -29,7 +30,9 @@ const QuestionReply = ({ route }) => {
     useEffect(() => {
         var id = data._id
         console.log(id);
-        // return
+
+
+        setLoading(true);
 
         async function getComment() {
             try {
@@ -40,9 +43,9 @@ const QuestionReply = ({ route }) => {
                     },
                 });
                 const data = await response.json();
-                console.log(data.data[0].userId);
+                // console.log(data.data[0].userId);
 
-                setallcomments(data.data);
+                setAllComments(data.data);
                 if (data.data.length == 0) {
                     // setemptycomment(true);
                 } else {
@@ -50,6 +53,9 @@ const QuestionReply = ({ route }) => {
                 }
             } catch (err) {
                 console.log(err);
+            }
+            finally {
+                setLoading(false);
             }
         }
         getComment()
@@ -63,12 +69,12 @@ const QuestionReply = ({ route }) => {
         </Svg>
     );
 
-    async function docomment() {
+    async function doComment() {
 
         let postid = data._id
-        setuploadingcomment(true);
+        setUploadingComment(true);
         if (commenttext.trim() == "") {
-            setuploadingcomment(false);
+            setUploadingComment(false);
             return
         }
         console.log(commenttext);
@@ -76,7 +82,7 @@ const QuestionReply = ({ route }) => {
         try {
             const response = await fetch(`${url}posts/createComment/${postid}`, {
                 method: 'POST',
-                body: JSON.stringify({ comment: commenttext }),
+                body: JSON.stringify({ comment: commenttext , message : 'Answered Your Question' }),
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`,
@@ -98,7 +104,7 @@ const QuestionReply = ({ route }) => {
 
 
 
-            setallcomments([data.newComment, ...allcomment])
+            setAllComments([data.newComment, ...allComments])
 
             // var object = {
             //     comment: commenttext,
@@ -122,7 +128,7 @@ const QuestionReply = ({ route }) => {
         } catch (err) {
             console.log(err);
         } finally {
-            setuploadingcomment(false);
+            setUploadingComment(false);
         }
     }
 
@@ -133,9 +139,10 @@ const QuestionReply = ({ route }) => {
             <FlatList
                 ListHeaderComponent={
 
+
                     <LinearGradient style={styles.item} colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}>
                         <View style={{ flexDirection: 'row', gap: 10, padding: 10 }}>
-                            <Image source={require('../../assets/images/logo.png')} style={{ width: 40, height: 40, borderRadius: 30, borderWidth: 1, borderColor: "#333", padding: 5,  }} />
+                            <Image source={require('../../assets/images/logo.png')} style={{ width: 40, height: 40, borderRadius: 30, borderWidth: 1, borderColor: "#333", padding: 5, }} />
                             <Text style={styles.userNameStyle}>Anonymous</Text>
                         </View>
 
@@ -162,7 +169,7 @@ const QuestionReply = ({ route }) => {
                     </LinearGradient>
 
                 }
-                data={allcomment}
+                data={allComments}
                 renderItem={({ item }) => {
                     function time(time) {
 
@@ -193,6 +200,7 @@ const QuestionReply = ({ route }) => {
                         }
                         return Math.floor(seconds) + " seconds ago";
                     }
+
                     return (
                         <View style={[styles.listItem, styles.commentContainer]} >
 
@@ -212,24 +220,28 @@ const QuestionReply = ({ route }) => {
 
                     )
                 }
+
                 }
+
+            // style={{ backgroundColor: 'red' }}
             />
-            {/* <View style={{ flexDirection: 'row', alignItems: 'center', padding: 10, borderColor: '#ccc' }}>
-                <TextInput
-                    style={{
-                        borderColor: 'white', borderWidth: 1, height: 40, flex: 1, padding: 10, color
-                            : "#ccc", borderRadius: 10
-                    }}
-                    placeholder='Reply'
-                    placeholderTextColor={"#ccc"}
-                    value={inputValue}
-                    onChangeText={setInputValue}
-                />
-                <Pressable onPress={() => console.log("hello")
-                } style={{ marginLeft: 10, padding: 10, backgroundColor: '#ccc', borderRadius: 5 }}>
-                    <Text style={{ color: '#000' }}>Send</Text>
-                </Pressable>
-            </View> */}
+
+            {
+                loading ? (
+                    <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center' }}>
+                        <ActivityIndicator color="#00de62" size={24} />
+                    </View>
+                )
+                    :
+                    allComments.length == 0 ?
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center' }}>
+                            <Text style={{ color: '#ccc', fontSize: 18 }}>No replies yet</Text>
+                        </View>
+                        : null
+
+            }
+
+
 
             <View style={{ zIndex: 100000 }} >
                 <View style={styles.searchContainer}>
@@ -246,14 +258,12 @@ const QuestionReply = ({ route }) => {
 
                     />
 
-
-
                 </View>
 
                 <TouchableOpacity
                     // onTouchStart={() => { inputRef.current.focus(); }}
                     style={styles.send}
-                    onPress={docomment}
+                    onPress={doComment}
                 >
                     {uploadingcomment && <ActivityIndicator size={24} color="#00de62" />}
                     {!uploadingcomment && <Ionicons name="send" size={24} color="#ccc" />}
@@ -421,4 +431,25 @@ const styles = StyleSheet.create({
     },
 });
 
-export default QuestionReply
+export default QuestionReply;
+
+
+
+
+
+{/* <View style={{ flexDirection: 'row', alignItems: 'center', padding: 10, borderColor: '#ccc' }}>
+                <TextInput
+                    style={{
+                        borderColor: 'white', borderWidth: 1, height: 40, flex: 1, padding: 10, color
+                            : "#ccc", borderRadius: 10
+                    }}
+                    placeholder='Reply'
+                    placeholderTextColor={"#ccc"}
+                    value={inputValue}
+                    onChangeText={setInputValue}
+                />
+                <Pressable onPress={() => console.log("hello")
+                } style={{ marginLeft: 10, padding: 10, backgroundColor: '#ccc', borderRadius: 5 }}>
+                    <Text style={{ color: '#000' }}>Send</Text>
+                </Pressable>
+            </View> */}

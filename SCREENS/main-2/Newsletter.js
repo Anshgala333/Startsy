@@ -941,7 +941,6 @@ const NewsLetter = React.memo(
                                 elevation: 0,
                             },
 
-
                             tabBarIndicatorStyle: {
                                 backgroundColor: "#00DE62",
                                 height: 1,
@@ -979,7 +978,7 @@ const NewsLetter = React.memo(
 
                             name="Job"
                             // component={User}
-                            children={(props) => <User handleTabChange={handleTabChange} token={token} />}
+                            children={(props) => <User handleTabChange={handleTabChange} token={token} navigation={navigation} />}
 
 
                             options={{

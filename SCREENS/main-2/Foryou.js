@@ -2,6 +2,7 @@
 
 
 import React, { useState, useRef, useEffect, useMemo, useContext, useCallback, memo } from "react";
+import * as Application from 'expo-application';
 import {
     View, Text, Animated, Pressable, StyleSheet, StatusBar, Dimensions, TouchableWithoutFeedback, BackHandler,
     TouchableOpacity,
@@ -150,6 +151,7 @@ const Foryou =
 
 
                     var object = { ...e, isliked: e.likedBy.includes(loggedinUserID), Applied: e.communityPost ? e.communityPost.communityMembers.includes(loggedinUserID) : false, Jobapplied: e.jobPosts ? e.jobPosts.jobApplicants.includes(loggedinUserID) : false, itemlikedcount: e.likedBy.length , issaved : !data.bookmarks.includes(e._id) }
+
 
                     return object
                 })
@@ -322,6 +324,8 @@ const Foryou =
 
                 }}>
                     <Text allowFontScaling={false} style={main.headertext}>Startsy</Text>
+                    {/* <Text allowFontScaling={false} style={main.headertext}> <Text>App Version: {Application.nativeApplicationVersion}</Text></Text> */}
+                    
                     {/* {loggedinRole == "Investor" && <Pressable
                         onPress={() => {
 
@@ -336,8 +340,7 @@ const Foryou =
                 </Animated.View>
 
                 <View style={{ flex: 1, height: "100%", minHeight: 500 }}>
-                    <Tab.Navigator
-                        initialRouteName="Connections"
+                    <Tab.Navigator initialRouteName="Connections"
 
 
 

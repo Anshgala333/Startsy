@@ -565,7 +565,7 @@ const Singleprofilepage = ({ props, openshare }) => {
     console.log(connecteddata);
 
 
-    if (connecteddata == "Followed") {
+    if (connecteddata == "Followed" || connecteddata == "Pending Request") {
       console.log("ok");
       
       console.log("connect");

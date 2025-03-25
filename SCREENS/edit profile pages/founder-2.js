@@ -392,7 +392,12 @@ const Founder2 = ({ navigation, route }) => {
             });
             const data = await response.json();
             if (response.status == 200) {
-                navigation.navigate("Main2")
+
+                // navigation.replace("Main2")
+                navigation.reset({
+                    index: 0,
+                    routes: [{ name: "Main2" }],
+                });
             }
             else if (response.status == 555) {
                 for (items of data.invalidTeamMates) {

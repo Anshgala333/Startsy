@@ -370,7 +370,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
             });
             const data = await response.json();
 
-            // console.log(data.profileCompletion, "investor ka data");
+            console.log(data.profileCompletion, "completion ka data");
             // console.log(data);
             
 
@@ -1150,6 +1150,10 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                        {userdata.user_id.role == "CommunityMember" &&  <Pressable style={styles1.f1} onPress={() => handleswitch()}>
                             <Text style={styles1.ft}>Switch Role </Text>
                         </Pressable>}
+
+{/* <Pressable style={styles1.f1} onPress={() => handleswitch()}>
+                            <Text style={styles1.ft}>Switch Role </Text>
+                        </Pressable> */}
                       </View>
                         {/* <Text style={styles1.goal}>{userdata.goal}</Text> */}
 

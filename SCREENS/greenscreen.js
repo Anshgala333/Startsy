@@ -36,7 +36,7 @@ const Green = ({ navigation }) => {
     useEffect(() => {
         async function getToken() {
             temp = await AsyncStorage.getItem("accessToken");
-            // console.log(temp, "app khulte vakt toke hai ya nai");
+            console.log(temp, "app khulte vakt toke hai ya nai");
 
             setfalsetoken(temp)
 
@@ -81,6 +81,9 @@ const Green = ({ navigation }) => {
                 else if (decode && decode.role == "CommunityMember") {
                     setstate("CommunityMember")
                 }
+                else if (decode && decode.role == "Job seeker") {
+                    setstate("Job seeker")
+                }
 
             }
         }
@@ -91,7 +94,7 @@ const Green = ({ navigation }) => {
         if (state == "Investor" && animationover) {
             navigation.navigate("Main2")
         }
-        else if ((state == "Founder" || state == "CommunityMember") && animationover) {
+        else if ((state == "Founder" || state == "CommunityMember" || state == "Job seeker") && animationover) {
             // navigation.navigate("Main2")
             navigation.replace("Main2")
 

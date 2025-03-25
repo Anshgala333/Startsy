@@ -13,7 +13,7 @@ import styles from "../../../styles/post.js"
 const SuggestedPost = ({ item, index, opencomment, openshare, upvotepost ,id}) => {
 
     // console.log(item)
-    
+    // console.log(item)
     if (!item.user_id) return
     if (item.type == "communityPost") return
     if (item.type == "jobPost") return
