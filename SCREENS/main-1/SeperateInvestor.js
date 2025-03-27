@@ -26,7 +26,7 @@ const data1 = Array(5).fill({
 
 
 
-const ConnectionsScreen = ({ search, token, setk, inputref }) => {
+const SeperateInvestor = ({ search, token, setk, inputref }) => {
 
 
 
@@ -109,14 +109,11 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
                 );
                 const result = await response.json();
 
-                if(decoded.role == "Founder"){
-                    var rec1 = result.filter(e => e.user.role != "Investor")
-                }
-                else{
-                    var rec1 = result
-                }
-
-
+               var rec1 = result.filter((e)=>e.user.role == "Investor")
+            //    console.log(rec1 , "plj");
+               
+                
+                
 
 
                 const uniqueData = rec1.filter((item, index, self) =>
@@ -134,7 +131,7 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
                     return dateB - dateA; // Sort in descending order of time
                 });
 
-                console.log(sortedData);
+                // console.log(sortedData);
 
 
 
@@ -628,4 +625,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default ConnectionsScreen
+export default SeperateInvestor

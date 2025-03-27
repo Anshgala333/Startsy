@@ -150,9 +150,9 @@ const GroudDetailsScreen = ({ route }) => {
     }
 
 
+    var decode = jwtDecode(token)
     useEffect(() => {
 
-        var decode = jwtDecode(token)
         async function getData() {
             try {
                 const response = await fetch(`${url}api/getCommunityMemberProfile`, {
@@ -375,12 +375,12 @@ const GroudDetailsScreen = ({ route }) => {
                         </View>
                     </View>
 
-                    <TouchableOpacity
+                    {item.id != decode._id && <TouchableOpacity
                         // onPress={() => { sendfollowrequest(item.status, item._id) }}
                         style={item.status != "Connect" ? styles.sendbtn1 : styles.sendbtn}>
                         <Text style={item.status != "Connect" ? styles.sendbtnText1 : styles.sendbtnText}>
                             {item.status}</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity>}
                 </View>
             </TouchableOpacity>
         )

@@ -96,6 +96,9 @@ const ViewSendedPost = ({  openshare, opencomment }) => {
 
     const getSinglePost = async()=>{
         setSkeletonLoading(true)
+        console.log(route.params);
+        console.log(route.params.id);
+        
         try {
             const response = await fetch(`${url}test/getOnePost/${route.params.id}`, {
                 method: 'GET',
@@ -105,7 +108,8 @@ const ViewSendedPost = ({  openshare, opencomment }) => {
             });
             const {data} = await response.json();
 
-            // console.log("daaattaaaaaa",data);
+
+            console.log("daaattaaaaaa",data);
             var data1 = data.map(e => {
 
                 var object = { ...e, isliked: e.likedBy.includes(loggedinUserID), Applied: e.communityPost ? e.communityPost.communityMembers.includes(loggedinUserID) : false, Jobapplied: e.jobPosts ? e.jobPosts.jobApplicants.includes(loggedinUserID) : false, itemlikedcount: e.likedBy.length }
@@ -197,13 +201,13 @@ const ViewSendedPost = ({  openshare, opencomment }) => {
                         ListHeaderComponent={() => {
                             return (
                                 <>
-                                    <View style={{ borderBottomColor: 'grey', borderBottomWidth: 2, marginBottom: 20 }}>
+                                    <View style={{ borderBottomColor: 'grey', borderBottomWidth: 0, marginBottom: -5 }}>
                                         <SendedPost item={sentPost} index={0}
                                             openshare={openshare}
                                             opencomment={opencomment}
                                             upvotepost={upvotepost} />
                                     </View>
-                                    <Text style={{ color: 'white', fontSize: 24, paddingLeft: 20, marginBottom: 10 }}>Suggestions</Text>
+                                    <Text style={{ color: 'white', fontSize: 24, paddingLeft: 20, marginBottom: 15 , fontFamily  : "Alata", }}>Suggestions</Text>
                                 </>
                             )
                         }}
