@@ -79,10 +79,10 @@ import MediaPost from "../SCREENS/MediaPost.js"
 import JobPostingPage from "../SCREENS/JobPosting.jsx"
 // import ReadMore1 from "../../SCREENS/trial-1.js";
 import AllPostsScreen from '../SCREENS/SavedPost.js'
-
-
-
-import  ViewSendedPost from '../SCREENS/JASH/View post/ViewSendedPost.jsx'
+import VerificationPendingScreen from '../SCREENS/InvestorVerify.js'
+import InvestorNotVerifiedScreen from '../SCREENS/NotVerified.js'
+import CertificatePortfolioPage from '../SCREENS/Certificates.js'
+import ViewSendedPost from '../SCREENS/JASH/View post/ViewSendedPost.jsx'
 
 
 const Stack = createNativeStackNavigator();
@@ -91,10 +91,11 @@ SystemUI.setBackgroundColorAsync("#16181a");
 import { enableFreeze } from "react-native-screens";
 import { enableScreens } from 'react-native-screens';
 import QuestionReply from "@/SCREENS/main-2/QuestionReply.js";
+
 import Settings from '../SCREENS/Settings.js'
 enableScreens();
 
-enableFreeze(true); 
+enableFreeze(true);
 
 // LogBox.ignoreLogs([
 //   // "VirtualizedLists should never be nested", // Example warning
@@ -119,14 +120,14 @@ enableFreeze(true);
 // export const Global = createContext("ok");
 
 export default function App() {
-  
+
 
   useEffect(() => {
     StatusBar.setBackgroundColor("#16181a");
     StatusBar.setBarStyle("light-content");
   }, []);
 
-  
+
 
   useFocusEffect(() => {
     StatusBar.setBackgroundColor("#16181a");
@@ -197,7 +198,7 @@ export default function App() {
           <Stack.Screen name="Blogpage" component={BlogPage} />
           <Stack.Screen name="Mediapage" component={MediaPost} />
           <Stack.Screen name="Jobpost" component={JobPostingPage} />
-          <Stack.Screen name="ApplicantsList" component={ApplicantsList}  />
+          <Stack.Screen name="ApplicantsList" component={ApplicantsList} />
           <Stack.Screen name="JobsPostedScreen" component={JobsPostedScreen} />
           <Stack.Screen name="Email" component={Email} />
 
@@ -226,8 +227,8 @@ export default function App() {
             component={Main2}
           />
 
-<Stack.Screen name="FP1" component={FP1} />
-<Stack.Screen name="FP2" component={FP2} />
+          <Stack.Screen name="FP1" component={FP1} />
+          <Stack.Screen name="FP2" component={FP2} />
 
           <Stack.Screen name="F1" component={F1} />
           <Stack.Screen name="Ct" component={Ct} />
@@ -244,9 +245,10 @@ export default function App() {
           <Stack.Screen name="StartsyCard" component={Startsy} />
           <Stack.Screen name="QuestionReply" component={QuestionReply} />
           <Stack.Screen name="PricePage" component={PricePage} />
+
           <Stack.Screen name="Settings" component={Settings} />
           {/* <Stack.Screen name="Settings" component={Settings} /> */}
-          
+
 
           <Stack.Screen
             name="KeyboardAvoidingComponent"
@@ -269,16 +271,24 @@ export default function App() {
           />
 
 
+
           {/* <Stack.Screen name="ViewSendedPost" component={ViewSendedPost}/> */}
 
 
 
+          <Stack.Screen name="settings" component={Settings} />
+
+
           {/* <Stack.Screen name="settings" component={Settings}/> */}
-          <Stack.Screen name="SavedPost" component={AllPostsScreen}/>
-        </Stack.Navigator>
-      )}
+          <Stack.Screen name="SavedPost" component={AllPostsScreen} />
+          <Stack.Screen name="VerificationPendingScreen" component={VerificationPendingScreen}/>
+          <Stack.Screen name="InvestorNotVerifiedScreen" component={InvestorNotVerifiedScreen} />
+          <Stack.Screen name="CertificatePortfolioPage" component={CertificatePortfolioPage} />
+          </Stack.Navigator >
+      )
+      }
       {/* </View> */}
-    </GlobalProvider>
+    </GlobalProvider >
     // </NavigationContainer>
   );
 }

@@ -28,7 +28,7 @@ const DeletedPost = () => {
             >
                 <Text style={{
                     color: '#ccc',
-                    fontSize: 20,
+                    fontSize: 16,
                     fontWeight: '400',
                     textAlign: 'center',
                 }}>

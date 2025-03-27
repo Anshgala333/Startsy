@@ -212,7 +212,7 @@ const ViewSendedPost = ({ openshare, opencomment }) => {
                         ListHeaderComponent={() => {
                             return (
                                 <>
-                                    <View style={{ borderBottomColor: 'grey', borderBottomWidth: 2, marginBottom: 20 }}>
+                                    <View>
                                         {
                                             sentPost.length == 0 ?
                                                <DeletedPost/>

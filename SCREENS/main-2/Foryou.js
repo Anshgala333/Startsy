@@ -141,6 +141,7 @@ const Foryou =
                 });
                 const data = await response.json();
 
+
                 var decode = jwtDecode(token)
                 var loggedinUserID = decode._id
 
@@ -339,8 +340,7 @@ const Foryou =
                 </Animated.View>
 
                 <View style={{ flex: 1, height: "100%", minHeight: 500 }}>
-                    <Tab.Navigator
-                        initialRouteName="Connections"
+                    <Tab.Navigator initialRouteName="Connections"
 
 
 

@@ -6,7 +6,7 @@ import s5 from "@/styles/s5.js";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Back from "@/components/back.js";
 import { url } from "../config.js"
-
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { SafeAreaView, ScrollView, View, Text, Button, BackHandler, TextInput, Image, StatusBar, Animated, Easing, KeyboardAvoidingView, Pressable, ActivityIndicator } from "react-native";
 import { useFocusEffect } from "expo-router";
 import { GlobalContext } from "@/Global/globalcontext.js";
@@ -83,13 +83,8 @@ const Signup1 = function ({ navigation, route }) {
             <ScrollView automaticallyAdjustContentInsets={true} automaticallyAdjustsScrollIndicatorInsets={true} style={{ flex: 1 }} >
 
                 <View style={signupstyles.row}>
-                    <Pressable style={signupstyles.back} onPress={() => {
-                        navigation.setParams({ type });
-                        navigation.goBack();
-                    }
-
-                    }>
-                        <Back />
+                   <Pressable onPress={() => navigation.goBack()}>
+                        <FontAwesome6 name="chevron-left" size={34} style={{ alignSelf: 'flex-start', marginLeft: 16 }} color="#00DF60" />
                     </Pressable>
                     <View style={signupstyles.top}>
                         <Image style={signupstyles.logo} source={require("../assets/images/logo.png")} />
