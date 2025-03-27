@@ -52,6 +52,7 @@ import ApplicantsList from "../SCREENS/JASH/ApplicantsList.jsx";
 import JobsPostedScreen from "../SCREENS/JASH/JobsPostedScreen.jsx";
 import Startsy from "../SCREENS/main-1/Startsy.js";
 import Email from "../SCREENS/email.js";
+import InvestorWaitingPage from "../SCREENS/main-2/InvestorWaitingPage.js"
 
 import Modal1 from "../SCREENS/Modal.js";
 import Wait from "../SCREENS/Wait.js";
@@ -196,6 +197,7 @@ export default function App() {
           <Stack.Screen name="ApplicantsList" component={ApplicantsList} />
           <Stack.Screen name="JobsPostedScreen" component={JobsPostedScreen} />
           <Stack.Screen name="Email" component={Email} />
+          <Stack.Screen name="InvestorWaitingPage" component={InvestorWaitingPage} />
 
           {/* <Stack.Screen name="Main1" component={Main1} /> */}
           {/* <Stack.Screen name="Main2" component={Main2} /> */}

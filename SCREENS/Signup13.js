@@ -155,7 +155,9 @@ const Signup13 = ({ navigation, route }) => {
 
         // Handle form submission
         // Make API call with the form data (including file and other inputs)
-        navigation.navigate("Main2");
+
+        // navigation.navigate("Main2");
+        navigation.navigate("InvestorWaitingPage");
         // navigation.navigate("Wait");
     };
 
@@ -232,7 +234,7 @@ const Signup13 = ({ navigation, route }) => {
                 console.log('Data saved successfully!');
                 navigation.reset({
                     index: 0,
-                    routes: [{ name: "Main2" }],
+                    routes: [{ name: "InvestorWaitingPage" }],
                 });
                 // navigation.navigate("Main2")
             } catch (error) {
