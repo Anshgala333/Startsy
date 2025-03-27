@@ -11,6 +11,8 @@ const Followerpage = ({ route }) => {
 
 
     console.log(people);
+    console.log(token);
+    
 
 
     const [suggestionarray, setsuggestionarray] = useState([])
@@ -103,7 +105,7 @@ const Followerpage = ({ route }) => {
     // console.log(people);
 
     function renderSuggestion({ item }) {
-        console.log(item);
+
         return (
             // <Text style={{color : "#fff"}}>hello</Text>
             <TouchableOpacity onPress={() => {

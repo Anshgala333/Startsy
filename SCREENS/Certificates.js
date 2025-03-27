@@ -6,6 +6,7 @@ import styles from "../styles/post.js";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { GlobalContext } from "@/Global/globalcontext.js";
 import { useNavigation } from "expo-router";
+import { url } from "@/config.js";
 
 const CertificatePortfolioPage = () => {
     // console.log("Certificate/Portfolio Page Re-render");
@@ -31,7 +32,7 @@ const CertificatePortfolioPage = () => {
         console.log('fetching');
         try {
 
-            const response = await fetch(`http://10.10.27.37:5002/test/getPortfolioAndCertifications`, {
+            const response = await fetch(`${url}/test/getPortfolioAndCertifications`, {
                 method: 'GET',
                 headers: {
                     "Content-Type": "application/json",

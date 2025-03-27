@@ -74,7 +74,7 @@ const RequestsScreen = () => {
                 }
             );
             const result = await response.json();
-            console.log(result.requestedFounders, "investor");
+            console.log(result, "investor");
 
             if (response.status == 200) {
                 var datatobesaved = Object.entries(result.requestedFounders.requestedFounders)
