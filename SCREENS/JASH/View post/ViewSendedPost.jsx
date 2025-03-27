@@ -1,6 +1,6 @@
-import { View, Text, StyleSheet, Pressable, Image, FlatList, RefreshControl, Vibration, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { View, Text, StyleSheet, Pressable, Image, FlatList, RefreshControl, Vibration, TouchableOpacity, ActivityIndicator ,Dimensions} from 'react-native'
 import React, { useCallback, useContext, useEffect, useRef, useState } from 'react'
-import { LinearGradient } from "expo-linear-gradient";
+
 import { jwtDecode } from 'jwt-decode';
 import { GlobalContext } from "@/Global/globalcontext.js";
 import { url } from '@/config';
@@ -13,8 +13,11 @@ import SuggestedPost from './SuggestedPost.jsx'
 import SendedPost from './SendedPost.jsx'
 import { useRoute } from "@react-navigation/native";
 
+import DeletedPost from './DeletedPost.jsx'
 
-const ViewSendedPost = ({  openshare, opencomment }) => {
+
+
+const ViewSendedPost = ({ openshare, opencomment }) => {
 
     const [skeletonLoading, setSkeletonLoading] = useState(false);
     const [refreshing, setRefresing] = useState(false);
@@ -23,14 +26,18 @@ const ViewSendedPost = ({  openshare, opencomment }) => {
     const route = useRoute()
     // console.log(route.params.id)
     const id = route.params.id;
+    // console.log(id);
 
-    
+
+
     const { globaldata, updateField } = useContext(GlobalContext);
 
     const token = globaldata.token;
 
 
     var decode = jwtDecode(token)
+    // console.log(token);
+
     var loggedinUserID = decode._id
 
 
@@ -38,10 +45,10 @@ const ViewSendedPost = ({  openshare, opencomment }) => {
 
     async function upvotepost(id, index, isSingle) {
         Vibration.vibrate(50)
-       
+
 
         if (!isSingle) {
-           
+
             var toset = !allPost[index].isliked
             var status = toset ? "like" : "unlike"
 
@@ -62,7 +69,7 @@ const ViewSendedPost = ({  openshare, opencomment }) => {
             var toset = !sentPost.isliked
             var status = toset ? "like" : "unlike"
             var increment = toset == true ? 1 : -1
-            
+
 
             setSentPost(prevSentPost => ({
                 ...prevSentPost,
@@ -83,7 +90,7 @@ const ViewSendedPost = ({  openshare, opencomment }) => {
                 },
             });
             const data = await response.json();
-            
+
             console.log(response.status);
 
         }
@@ -94,38 +101,46 @@ const ViewSendedPost = ({  openshare, opencomment }) => {
     }
 
 
-    const getSinglePost = async()=>{
+
+
+
+    const getSinglePost = async () => {
         setSkeletonLoading(true)
         try {
-            const response = await fetch(`${url}test/getOnePost/${route.params.id}`, {
+            const response = await fetch(`${url}test/getOnePost/${id}`, {
                 method: 'GET',
                 headers: {
                     "Authorization": `Bearer ${token}`,
                 },
             });
-            const {data} = await response.json();
+            const { data } = await response.json();
+            if (!data) {
+                // console.log("daaattaaaaaa", data);
+                setSentPost([]);
+            }
 
-            // console.log("daaattaaaaaa",data);
-            var data1 = data.map(e => {
+            else {
+                var data1 = data.map(e => {
 
-                var object = { ...e, isliked: e.likedBy.includes(loggedinUserID), Applied: e.communityPost ? e.communityPost.communityMembers.includes(loggedinUserID) : false, Jobapplied: e.jobPosts ? e.jobPosts.jobApplicants.includes(loggedinUserID) : false, itemlikedcount: e.likedBy.length }
-                return object
-            })
-            
-            setSentPost(data1[0]);
-            // console.log(data[0]);
-            // setAllPost(data.data)
-            // setSkeletonLoading(false)
+                    var object = { ...e, isliked: e.likedBy.includes(loggedinUserID), Applied: e.communityPost ? e.communityPost.communityMembers.includes(loggedinUserID) : false, Jobapplied: e.jobPosts ? e.jobPosts.jobApplicants.includes(loggedinUserID) : false, itemlikedcount: e.likedBy.length }
+                    return object
+                })
+
+                setSentPost(data1[0]);
+
+
+            }
+
         }
         catch (err) {
             console.log(err);
-            // setSkeletonLoading(false)
+
         }
     }
 
 
 
-   
+
 
     ///call this when page renders
     useEffect(() => {
@@ -137,7 +152,7 @@ const ViewSendedPost = ({  openshare, opencomment }) => {
 
     ///fetch all data
     const getpost = async () => {
-        
+
         try {
             // setSkeletonLoading(true)
             const response = await fetch(`${url}posts/getPosts`, {
@@ -147,7 +162,7 @@ const ViewSendedPost = ({  openshare, opencomment }) => {
                 },
             });
             const data = await response.json();
-           
+
 
             var decode = jwtDecode(token)
             var loggedinUserID = decode._id
@@ -164,12 +179,12 @@ const ViewSendedPost = ({  openshare, opencomment }) => {
 
                 setAllPost(data1);
 
-                
+
 
                 setSkeletonLoading(false);
-                
+
                 updateField("allpost", data1.reverse())
-            
+
             }
 
         }
@@ -198,10 +213,15 @@ const ViewSendedPost = ({  openshare, opencomment }) => {
                             return (
                                 <>
                                     <View style={{ borderBottomColor: 'grey', borderBottomWidth: 2, marginBottom: 20 }}>
-                                        <SendedPost item={sentPost} index={0}
-                                            openshare={openshare}
-                                            opencomment={opencomment}
-                                            upvotepost={upvotepost} />
+                                        {
+                                            sentPost.length == 0 ?
+                                               <DeletedPost/>
+                                                :
+                                                <SendedPost item={sentPost} index={0}
+                                                    openshare={openshare}
+                                                    opencomment={opencomment}
+                                                    upvotepost={upvotepost} />
+                                        }
                                     </View>
                                     <Text style={{ color: 'white', fontSize: 24, paddingLeft: 20, marginBottom: 10 }}>Suggestions</Text>
                                 </>

@@ -1113,7 +1113,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                                 {/* <Upvote width={decode.role == "Investor" ? 0 : 50} height={44} /> */}
                                 {decode.role == "CommunityMember" &&
                            <View style={styles1.ss}>
-                             {/* <MaterialCommunityIcons name="certificate-outline" size={24} color="#ccc" /> */}
+                             <MaterialCommunityIcons name="certificate-outline" size={24} color="#ccc" />
 
                               {instaurl != "" && <Pressable onPress={() => Linking.openURL(instaurl)} >
                                        <AntDesign name="instagram" style={styles.plus1} size={20} color="#bbbbbb" />
