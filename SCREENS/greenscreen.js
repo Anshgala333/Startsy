@@ -11,6 +11,9 @@ import { useFocusEffect } from "expo-router";
 // import  {Global}  from "../app/(tabs)/index.tsx";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { jwtDecode } from "jwt-decode";
+import { url } from "@/config.js";
+
+import { GlobalContext } from "@/Global/globalcontext.js";
 
 
 const Green = ({ navigation }) => {
@@ -49,20 +52,20 @@ const Green = ({ navigation }) => {
                 var decode = jwtDecode(temp)
                 // console.log(decode);
 
-            //  console.log();
-            //  console.log(decode.exp * 1000 , "exp ");
-            //  console.log(new Date(decode.exp) , "new dtae ");
-             
-            //  console.log(Date.now());
-             
-                if(decode.exp*1000 < Date.now()) {
+                //  console.log();
+                //  console.log(decode.exp * 1000 , "exp ");
+                //  console.log(new Date(decode.exp) , "new dtae ");
+
+                //  console.log(Date.now());
+
+                if (decode.exp * 1000 < Date.now()) {
                     // console.log("expired");
-                    
-                   setstate("");
-                   return
-                    
+
+                    setstate("");
+                    return
+
                 }
-                
+
 
                 if (decode.status == false) {
                     setstate("")
@@ -90,15 +93,73 @@ const Green = ({ navigation }) => {
         getToken();
     }, []);
 
-    useEffect(() => {
-        if (state == "Investor" && animationover) {
-            navigation.navigate("Main2")
-        }
-        else if ((state == "Founder" || state == "CommunityMember" || state == "Job seeker") && animationover) {
-            // navigation.navigate("Main2")
-            navigation.replace("Main2")
+    const { globaldata, updateField } = useContext(GlobalContext);
 
+
+    useEffect(() => {
+
+        async function f1(params) {
+
+            temp = await AsyncStorage.getItem("accessToken");
+            console.log(temp, "app khulte vakt toke hai ya nai");
+            var decode = jwtDecode(temp)
+            console.log(decode);
+
+
+            if (state == "Investor" && animationover) {
+                if (decode.isInvestorVerified) {
+                    navigation.navigate("Main2")
+                    return
+                }
+                console.log("recahed here");
+                var data
+                try {
+                    const response = await fetch(`${url}test/getInvestorStatus`, {
+                        method: 'GET',
+                        headers: {
+                            "Authorization": `Bearer ${falsetoken}`,
+                        },
+                    })
+                    data = await response.json()
+                    console.log(data.token);
+                    console.log(data);
+                    if (data.message.isInvestorVerified == true) {
+                        navigation.navigate("Main2")
+                    }
+                    else if(data.message.investorRejected == true){
+                        navigation.navigate("InvestorNotVerifiedScreen")
+
+                    }
+                    else  {
+                        navigation.navigate("InvestorWaitingPage")
+                    }
+                 
+
+
+                }
+                catch (e) {
+                    console.log(e);
+                }
+                finally {
+                    try {
+                        console.log(data.token , "okkkkkkkkkkkkkkkkkkk");
+                        
+                        await AsyncStorage.setItem('accessToken', data.token);
+                        updateField("token", data.token);
+
+                        console.log('Data saved successfully!');
+                    } catch (error) {
+                        console.error('Error saving data:', error);
+                    }
+                }
+            }
+            else if ((state == "Founder" || state == "CommunityMember" || state == "Job seeker") && animationover) {
+                // navigation.navigate("Main2")
+                navigation.replace("Main2")
+
+            }
         }
+        f1()
 
     }, [state, animationover])
 

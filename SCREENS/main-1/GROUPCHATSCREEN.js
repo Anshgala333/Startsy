@@ -552,7 +552,7 @@ const Chat1 = ({ navigation, route }) => {
                             </View>
                             <View style={styles.d2}>
                                 <Text numberOfLines={1} ellipsizeMode="tail" allowFontScaling={false} style={styles.userid}>{item.communityName}</Text>
-                                <Text allowFontScaling={false} style={styles.username}>{item.communityName}</Text>
+                                <Text allowFontScaling={false} style={[styles.username,]} ellipsizeMode="tail" numberOfLines={1}>{item.communityDescription}</Text>
                             </View>
                         </View>
                     </Pressable>

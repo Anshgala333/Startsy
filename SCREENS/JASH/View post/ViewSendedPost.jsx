@@ -217,7 +217,6 @@ const ViewSendedPost = ({ openshare, opencomment }) => {
                         ListHeaderComponent={() => {
                             return (
                                 <>
-
                                     <View>
                                         {
                                             sentPost.length == 0 ?

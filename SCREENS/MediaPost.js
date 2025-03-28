@@ -18,7 +18,7 @@ const MediaPost = ({ route }) => {
     const navigation = useNavigation();
 
 
-    const [isPostPrivate, setIsPostPrivate] = useState(false);
+    const [isPrivate, setIsPrivate] = useState(false);
 
 
     const post3 = async () => {
@@ -51,6 +51,7 @@ const MediaPost = ({ route }) => {
         }
         finaldata.append("caption", c2);
         finaldata.append("aspectRatio", aspectRatio);
+        finaldata.append("isPrivate", isPrivate);
 
         try {
             if (type == "images") {
@@ -135,10 +136,10 @@ const MediaPost = ({ route }) => {
 
             <View style={{ color: 'white', display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10 }}>
                 <Checkbox
-                    status={isPostPrivate ? "checked" : "unchecked"}
+                    status={isPrivate ? "checked" : "unchecked"}
                     onPress={() => {
-                        setIsPostPrivate(!isPostPrivate)
-                        if(!isPostPrivate){
+                        setIsPrivate(!isPrivate)
+                        if(!isPrivate){
                             ToastAndroid.showWithGravityAndOffset(
                                 `Your post will only be visible to your connections`,
                                 ToastAndroid.LONG,

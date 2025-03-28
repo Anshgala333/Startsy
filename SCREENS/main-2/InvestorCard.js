@@ -150,6 +150,8 @@ const InvestorCard = ({ route }) => {
 
         // console.log(item, "render card ka item");
 
+        // if(item.)
+
 
 
 

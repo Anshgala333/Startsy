@@ -953,7 +953,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
         try {
             // setskeletonloading(true)
             const response = await fetch(
-                `http://10.10.27.37:5002/${route}`,
+                `${url}${route}`,
                 {
                     method: "GET",
                     headers: {

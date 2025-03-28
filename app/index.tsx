@@ -87,8 +87,6 @@ import InvestorNotVerifiedScreen from '../SCREENS/NotVerified.js'
 import CertificatePortfolioPage from '../SCREENS/Certificates.js'
 import ViewSendedPost from '../SCREENS/JASH/View post/ViewSendedPost.jsx'
 
-
-
 const Stack = createNativeStackNavigator();
 SystemUI.setBackgroundColorAsync("#16181a");
 

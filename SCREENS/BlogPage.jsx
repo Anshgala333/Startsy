@@ -21,7 +21,7 @@ const BlogPage = () => {
   const [buttonText, setButtonText] = useState("Post blog");    //submit button text
   const maxLength = 1000;                                  ///length count for description
 
-  const [isPostPrivate,setIsPostPrivate]=useState(false);
+  const [isPrivate,setIsPrivate]=useState(false);
 
 
   const postBlog = async () => {
@@ -40,6 +40,7 @@ const BlogPage = () => {
     const finaldata = {
       "content": blog,
     };
+    finaldata['isPrivate'] = isPrivate
 
     try {
       const response = await fetch(`${url}posts/createPost/${postType}`, {
@@ -104,10 +105,10 @@ const BlogPage = () => {
 
               <View style={{ color: 'white', display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10 }}>
                 <Checkbox
-                  status={isPostPrivate ? "checked" : "unchecked"}
+                  status={isPrivate ? "checked" : "unchecked"}
                   onPress={() => {
-                    setIsPostPrivate(!isPostPrivate)
-                    if (!isPostPrivate) {
+                    setIsPrivate(!isPrivate)
+                    if (!isPrivate) {
                       ToastAndroid.showWithGravityAndOffset(
                         `Your post will only be visible to your connections`,
                       

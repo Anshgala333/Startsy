@@ -1,33 +1,39 @@
 import React, { Component, useEffect, useState } from 'react'
 import { FlatList, SafeAreaView, Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native'
 import { url } from '../config.js'
+import { jwtDecode } from 'jwt-decode';
 const Followerpage = ({ route }) => {
-    
 
 
 
 
-    var { people,token } = route.params;
+
+    var { people, token } = route.params;
 
 
-    console.log(people);
-    console.log(token);
-    
+    // console.log(people);
+    // console.log(token);
+
+    const decoded = jwtDecode(token)
+
+    const id = decoded._id
+
+
 
 
     const [suggestionarray, setsuggestionarray] = useState([])
 
 
 
-    useEffect(()=>{
+    useEffect(() => {
         setsuggestionarray(people);
-    },[people])
+    }, [people])
 
 
 
     async function sendfollowrequest(stat, id) {
-    
-    
+
+
         if (stat == "Connected" || stat == "Request Sent") {
 
             // setconnecteddata("Follow")
@@ -70,7 +76,7 @@ const Followerpage = ({ route }) => {
         );
 
         // console.log(suggestionarray);
-        
+
 
 
 
@@ -129,16 +135,20 @@ const Followerpage = ({ route }) => {
                         <Text allowFontScaling={false} style={styles.message}>{item.role == "CommunityMember" ? "Member" : item.role}</Text>
                     </View>
 
-                    <TouchableOpacity
-                        onPress={() => { sendfollowrequest(item.status, item._id) }}
-                        style={item.status != "Connect" ? styles.sendbtn1 : styles.sendbtn}>
+                    {
+                        item._id != id ?
+                            <TouchableOpacity
+                                onPress={() => { sendfollowrequest(item.status, item._id) }}
+                                style={item.status != "Connect" ? styles.sendbtn1 : styles.sendbtn}>
 
-                        {item.status == "Connect" && <Text style={{ color: "#16181a", fontFamily: "Alata", alignItems: "center", textAlign: "center", marginTop: -2, fontSize: 14, }}>{item.status}</Text>}
+                                {item.status == "Connect" && <Text style={{ color: "#16181a", fontFamily: "Alata", alignItems: "center", textAlign: "center", marginTop: -2, fontSize: 14, }}>{item.status}</Text>}
 
-                        {item.status == "Request Sent" && <Text style={{ color: "#ccc", fontFamily: "Alata", alignItems: "center", textAlign: "center", marginTop: -2, fontSize: 14, }}>{item.status}</Text>}
+                                {item.status == "Request Sent" && <Text style={{ color: "#ccc", fontFamily: "Alata", alignItems: "center", textAlign: "center", marginTop: -2, fontSize: 14, }}>{item.status}</Text>}
 
-                        {item.status=="Connected" && <Text style={{ color: "#ccc", fontFamily: "Alata", alignItems: "center", textAlign: "center", marginTop: -2, fontSize: 14, }}>Connected</Text>}
-                    </TouchableOpacity>
+                                {item.status == "Connected" && <Text style={{ color: "#ccc", fontFamily: "Alata", alignItems: "center", textAlign: "center", marginTop: -2, fontSize: 14, }}>Connected</Text>}
+                            </TouchableOpacity> :
+                            null
+                    }
                     {/* <Text allowFontScaling={false} style={styles.time}> "today"}</Text> */}
                 </View>
             </TouchableOpacity>

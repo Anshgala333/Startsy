@@ -234,9 +234,13 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
             if (decoded.isInvestorVerified == true) {
               navigation.navigate("Main2")
             }
-            else if(decoded.isInvestorVerified == false){
+            else if(decoded.investorRejected == true){
+              navigation.navigate("InvestorNotVerifiedScreen")
+
+          }
+          else  {
               navigation.navigate("InvestorWaitingPage")
-            }
+          }
           }
           else {
             navigation.navigate("Main2");

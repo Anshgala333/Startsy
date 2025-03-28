@@ -54,7 +54,7 @@ const GroudDetailsScreen = ({ route }) => {
     const updateGroupDetail = async () => {
 
 
-        // console.log(typeof rec1.current === "string");
+        
         const data = {
             communityName: typeof rec1.current === "string"? rec1.current : groupName,
             communityDescription: typeof rec2.current === "string"? rec2.current : groupDescription ,
