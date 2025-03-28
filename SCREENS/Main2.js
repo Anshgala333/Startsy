@@ -14,7 +14,8 @@ import {
     TouchableOpacity,
     KeyboardAvoidingView,
     Vibration,
-    ToastAndroid
+    ToastAndroid,
+    TextInput
 } from "react-native";
 import RBSheet from 'react-native-raw-bottom-sheet';
 import BottomSheet1 from "./Bottomsheet1.js"
@@ -64,6 +65,7 @@ import Followerpage from "../SCREENS/Followerpage.js"
 import { jwtDecode } from "jwt-decode";
 import JobsPostedScreen from "./JASH/JobsPostedScreen.jsx";
 import ApplicantsList from "./JASH/ApplicantsList.jsx";
+import CommentBottomSheet from "../SCREENS/JASH/comment-bottom-sheet/CommentBottomSheet.jsx";
 
 
 
@@ -84,7 +86,7 @@ const Main2 = ({ navigation, route }) => {
     const [token, setToken] = useState("");
     const [currpage, setcurrpage] = useState(false);
     const { globaldata } = useContext(GlobalContext);
-    const[userProfilePhoto,setProfilePhoto]=useState(null);
+    const [userProfilePhoto, setProfilePhoto] = useState(null);
 
     useEffect(() => {
         async function getToken() {
@@ -124,13 +126,13 @@ const Main2 = ({ navigation, route }) => {
                     }
                 );
                 const result = await response.json();
-                console.log("okskasxksdidbibd",result);
+                console.log("okskasxksdidbibd", result);
                 setProfilePhoto(result.data)
             } catch (err) {
                 console.log(err);
             }
         }
-        if(token != ""){
+        if (token != "") {
             fetchProfilePhoto()
         }
     }, [])
@@ -198,7 +200,7 @@ const Main2 = ({ navigation, route }) => {
         extrapolate: "clamp",
     });
 
-    const bottomSheetRef5 = useRef(null);
+    const commentRef = useRef(null);
     const mainpagebottomsheet = useRef();
     const [showBottomSheet, setShowBottomSheet] = useState(false);
 
@@ -227,6 +229,8 @@ const Main2 = ({ navigation, route }) => {
     const bottomSheetRef4 = useRef(null);
     const bottomSheetRef6 = useRef(null);
     const [openBottomSheet6, setOpenBottomSheet6] = useState(false);
+
+    const [openCommentBottomSheet, setOpenCommentBottomSheet] = useState(false);
 
     const [type, settype] = useState("");
     const [err1, seterr1] = useState(false);
@@ -278,8 +282,8 @@ const Main2 = ({ navigation, route }) => {
     const [list, setlist] = useState(false);
     const [emptycomment, setemptycomment] = useState(false);
     const flatListRef = useRef(null);
-    const [allcomments, setallcomments] = useState([]);
-    const [commenttext, setcommenttext] = useState("");
+    const [allComments, setAllComments] = useState([]);
+    const [commentText, setCommentText] = useState("");
     const [c2, setc2] = useState("");
     const [aspect, setaspect] = useState("");
     const [newaspect, setnewaspect] = useState("");
@@ -291,7 +295,11 @@ const Main2 = ({ navigation, route }) => {
 
     useFocusEffect(useCallback(() => {
         setOpenBottomSheet6(false);
-        setTimeout(() => setOpenBottomSheet6(true), 100)
+        setOpenCommentBottomSheet(false);
+        setTimeout(() => {
+            setOpenBottomSheet6(true)
+            setOpenCommentBottomSheet(true);
+        }, 100)
     }, []))
 
     const role = [
@@ -477,7 +485,8 @@ const Main2 = ({ navigation, route }) => {
         setcomment(true);
         setOpen(true)
 
-        bottomSheetRef5.current?.open();
+        commentRef.current?.expand();
+        // console.log(id);
         // bottomSheetRef5.current?.expand();
         setpostid(id);
 
@@ -489,7 +498,8 @@ const Main2 = ({ navigation, route }) => {
                 },
             });
             const data = await response.json();
-            setallcomments(data.data);
+            // console.log("cswvwiuqgu",data.data);
+            setAllComments(data.data);
             if (data.data.length == 0) {
                 setemptycomment(true);
             } else {
@@ -520,7 +530,7 @@ const Main2 = ({ navigation, route }) => {
 
     async function docomment() {
         setuploadingcomment(true);
-        if (commenttext.trim() == "") {
+        if (commentText.trim() == "") {
             setuploadingcomment(false);
             return
         }
@@ -528,7 +538,7 @@ const Main2 = ({ navigation, route }) => {
         try {
             const response = await fetch(`${url}posts/createComment/${postid}`, {
                 method: 'POST',
-                body: JSON.stringify({ comment: commenttext }),
+                body: JSON.stringify({ comment: commentText }),
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`,
@@ -538,10 +548,10 @@ const Main2 = ({ navigation, route }) => {
 
 
             setemptycomment(false);
-            setcommenttext("");
+            setCommentText("");
 
             var object = {
-                comment: commenttext,
+                comment: commentText,
                 createdAt: new Date(),
                 userId: {
                     profilePhoto: data.profilePhoto,
@@ -550,9 +560,9 @@ const Main2 = ({ navigation, route }) => {
             };
 
 
-            var newarray = [...allcomments];
+            var newarray = [...allComments];
             newarray.unshift(object);
-            setallcomments(newarray);
+            setAllComments(newarray);
 
             const scrollToTop = () => {
                 flatListRef.current?.scrollToOffset({ offset: 0, animated: false });
@@ -660,7 +670,7 @@ const Main2 = ({ navigation, route }) => {
         bottomSheetRef2.current?.close();
         bottomSheetRef3.current?.close();
         bottomSheetRef4.current?.close();
-        bottomSheetRef5.current?.close();
+        commentRef.current?.close();
     }
 
     useEffect(() => {
@@ -671,14 +681,14 @@ const Main2 = ({ navigation, route }) => {
     const [loggedinrole, setloggedinrole] = useState("")
 
 
-      const showToastWithGravity = (message) => {
+    const showToastWithGravity = (message) => {
         ToastAndroid.showWithGravityAndOffset(
-          `${message}`,
-          ToastAndroid.SHORT,
-          ToastAndroid.TOP,
-          100, 100
+            `${message}`,
+            ToastAndroid.SHORT,
+            ToastAndroid.TOP,
+            100, 100
         );
-      };
+    };
 
     async function finalsubmit() {
         // console.log(SelectedItems);
@@ -686,8 +696,8 @@ const Main2 = ({ navigation, route }) => {
         setsendingpost(true)
         var array = Array.from(SelectedItems)
 
-       
-        
+
+
 
 
         try {
@@ -878,7 +888,7 @@ const Main2 = ({ navigation, route }) => {
                         />
                         <Tab.Screen
                             name="Startsy"
-                            children={(props) => <Foryou ansh={ansh} setOpen4={setOpen4} one={one} setone={setone} keyboardOffset={keyboardOffset} commentinput={commentinput} setk={setk} ansh1={ansh1} setansh1={setansh1} two={two} three={three} four={four} five={five} bottomSheetRef5={bottomSheetRef5} bottomSheetRef1={bottomSheetRef1} bottomSheetRef2={bottomSheetRef2} bottomSheetRef3={bottomSheetRef3} bottomSheetRef4={bottomSheetRef4} type={type} settype={settype} setImage={setImage} uri={uri} openBottomSheet3={openBottomSheet3} scroll={updatescroll} token={token} mainpagebottomsheet={mainpagebottomsheet} opencomment={opencomment} visible={visible} setVisible={setVisible} newaspect={newaspect} setnewaspect={setnewaspect} openshare={openshare} />}
+                            children={(props) => <Foryou ansh={ansh} setOpen4={setOpen4} one={one} setone={setone} keyboardOffset={keyboardOffset} commentinput={commentinput} setk={setk} ansh1={ansh1} setansh1={setansh1} two={two} three={three} four={four} five={five} bottomSheetRef5={commentRef} bottomSheetRef1={bottomSheetRef1} bottomSheetRef2={bottomSheetRef2} bottomSheetRef3={bottomSheetRef3} bottomSheetRef4={bottomSheetRef4} type={type} settype={settype} setImage={setImage} uri={uri} openBottomSheet3={openBottomSheet3} scroll={updatescroll} token={token} mainpagebottomsheet={mainpagebottomsheet} opencomment={opencomment} visible={visible} setVisible={setVisible} newaspect={newaspect} setnewaspect={setnewaspect} openshare={openshare} />}
                             options={{
                                 keyboardBehavior: true,
                                 freezeOnBlur: true,
@@ -903,8 +913,8 @@ const Main2 = ({ navigation, route }) => {
                                 tabBarIcon: ({ focused }) => (
 
                                     <>
-                                        {!focused && <Image style={{ width: 40, height: 40 , marginTop : -5 }} source={require("../assets/images/logogray1.png")} />}
-                                        {focused && <Image style={{ width: 40, height: 40 , marginTop : -5}} source={require("../assets/images/logo.png")} />}
+                                        {!focused && <Image style={{ width: 40, height: 40, marginTop: -5 }} source={require("../assets/images/logogray1.png")} />}
+                                        {focused && <Image style={{ width: 40, height: 40, marginTop: -5 }} source={require("../assets/images/logo.png")} />}
                                     </>
                                 ),
                             }}
@@ -936,14 +946,14 @@ const Main2 = ({ navigation, route }) => {
                                 tabBarIcon: ({ focused }) => (
                                     <View style={{ marginTop: -4, marginLeft: -2 }}>
                                         {
-                                            userProfilePhoto ==null ?
-                                            <FontAwesome6 name="circle-user" size={30} color={focused ? "#00DE62" : "#7A7B7C"} />
-                                            :
-                                            <Image source={{uri:(userProfilePhoto)}} width={30} height={30} style={{borderRadius:50,borderColor:"#00de62",borderWidth:focused?1:0}}/>
+                                            userProfilePhoto == null ?
+                                                <FontAwesome6 name="circle-user" size={30} color={focused ? "#00DE62" : "#7A7B7C"} />
+                                                :
+                                                <Image source={{ uri: (userProfilePhoto) }} width={30} height={30} style={{ borderRadius: 50, borderColor: "#00de62", borderWidth: focused ? 1 : 0 }} />
                                         }
                                     </View>
                                 ),
-                                
+
                             }}
                         />
                         <Tab.Screen
@@ -1104,18 +1114,51 @@ const Main2 = ({ navigation, route }) => {
 
 
 
-
+                {/* 
                 <RB
                     open={open}
                     setOpen={setOpen}
                     allcomments={allcomments}
                     comments={comments}
-                    bottomSheetRef5={bottomSheetRef5}
+                    bottomSheetRef5={commentRef}
                     docomment={docomment}
                     uploadingcomment={uploadingcomment}
                     setallcomments={setallcomments}
+                    backdropComponent={renderBackdrop}
                     setcommenttext={setcommenttext}
-                    commenttext={commenttext} />
+                    backgroundStyle={{ backgroundColor: '#1A1D1F', borderRadius: 30 }}
+                    commenttext={commenttext} /> */}
+
+                {
+                    openCommentBottomSheet && (
+                        <CommentBottomSheet
+                            nestedScrollEnabled={true}
+                            backdropComponent={renderBackdrop}
+                            enableDynamicSizing={false}
+                            index={-1}
+
+                            comments={comments}
+                            docomment={docomment}
+                            uploadingcomment={uploadingcomment}
+                            setAllComments={setAllComments}
+                            setcommenttext={setCommentText}
+                            commenttext={commentText}
+                            allcomments={allComments}
+
+                            contentContainerStyle={{ zIndex: 1000000, elevation: 20000000, height: 100 }}
+                            enablePanDownToClose
+                            backgroundStyle={{ backgroundColor: '#1A1D1F', borderRadius: 30 }}
+                            handleIndicatorStyle={{ backgroundColor: '#00de62' }}
+                            commentRef={commentRef}
+
+
+                        />
+                    )
+                }
+
+
+
+
 
             </KeyboardAvoidingView>
         </GestureHandlerRootView>

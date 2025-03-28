@@ -1,4 +1,6 @@
 
+
+
 // 4.4 last of community
 import React, { useState, useRef, useEffect, useContext } from "react";
 import {
@@ -28,22 +30,18 @@ import { useFocusEffect } from "expo-router";
 import { GlobalContext } from "@/Global/globalcontext.js";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { url } from "../config.js"
+import { OtpInput } from "react-native-otp-entry";
 
 const Signup13 = ({ navigation, route }) => {
-    const { form, image , selectedOption } = route.params;
+    const { form, image, selectedOption } = route.params;
     console.log(selectedOption);
-    
-    // const form = ""
-
-    // const [final, setFormData] = useState(new FormData());
-    // useFocusEffect(
-    //     React.useCallback(() => {
-    //         // Reset FormData to avoid duplication
-    //         setFormData(new FormData());
-    //     }, [])
-    // );
-
-
+    // .........................................................................................
+    const [verifyOtpVisible, setVerifyOtpVisible] = useState(false); // To control OTP input visibility
+    const [isOtpLoading, setIsOtpLoading] = useState(false);
+    const [isOtpVerified, setIsOtpVerified] = useState(false); // To show/hide loading indicator for OTP verification
+    const [otp, setOtp] = useState("");
+    const [otpSent, setOtpSent] = useState(false);
+    // .........................................................................................................
     const [token, settoken] = useState("")
     const [loading, setloading] = useState("")
     const [role1, setrole] = useState("")
@@ -55,7 +53,7 @@ const Signup13 = ({ navigation, route }) => {
     const [open1, setOpen1] = useState(false);
 
     useEffect(() => {
-        console.log(globaldata, "global data");
+        // console.log(globaldata, "global data");
         settoken(globaldata.token)
     }, [])
 
@@ -71,6 +69,55 @@ const Signup13 = ({ navigation, route }) => {
         // console.log("Selected Value:", value1); // Optional: Log the selected value
         setrole(value1); // Update state with the selected value
     };
+
+    const handleSendOtp = async () => {
+
+        if ((!domainemail || !emailRegex.test(domainemail))) {
+            setErrors((prevErrors) => ({
+                ...prevErrors,
+                domainEmailError: "* Enter a valid email",  // Error message for invalid email
+            }));
+            return; // Exit if email is invalid
+        } else {
+            // Reset the email error message if valid
+            setErrors((prevErrors) => ({
+                ...prevErrors,
+                domainEmailError: "",
+            }));
+        }
+
+        console.log('email is valid')
+
+        // If email is valid, proceed with sending OTP
+        setIsOtpLoading(true);
+
+        try {
+            // Call your API to send OTP here
+            const response = await fetch(`${url}api/sendOtp`, {
+                method: 'POST',
+                body: JSON.stringify({ email: domainemail }),
+                headers: {
+                    "Content-Type": "application/json",
+                    accept: "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+            });
+
+            const data = await response.json();
+            console.log(data);
+
+            // Handle any further success logic here
+            setVerifyOtpVisible(true);
+            setOtpSent(true);  // OTP has been sent
+            setIsOtpVerified(false);  // Reset OTP verification status
+        } catch (error) {
+            console.error("Error sending OTP:", error);
+        } finally {
+            setIsOtpLoading(false);
+        }
+    };
+
+    // .............................................................................................................................
 
     var role = [
         { label: "Angel Investor", value: "Angel Investor" },
@@ -155,9 +202,7 @@ const Signup13 = ({ navigation, route }) => {
 
         // Handle form submission
         // Make API call with the form data (including file and other inputs)
-
-        // navigation.navigate("Main2");
-        navigation.navigate("InvestorWaitingPage");
+        navigation.navigate("Main2");
         // navigation.navigate("Wait");
     };
 
@@ -269,6 +314,50 @@ const Signup13 = ({ navigation, route }) => {
         }
     };
     <StatusBar backgroundColor="#16181a" barStyle={"light-content"} />
+    // .......................................................................
+    async function check(params) {
+        // setotploading(true)
+        setIsOtpLoading(true);
+        try {
+            const response = await fetch(`${url}api/verifyOtp`, {
+                method: 'POST',
+                body: JSON.stringify({ email: domainemail, otp: otp }),
+                headers: {
+                    "Content-Type": "application/json",
+                    accept: "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+            });
+            const data = await response.json();
+            console.log(data);
+
+            // setloading(false)
+            // console.log(data);
+            // console.log(response.status);
+            if (response.status === 400) {
+                // setmessage("* OTP is incorrect")
+                setIsOtpVerified(false);
+            }
+            else if (response.status === 200) {
+                setIsOtpVerified(true);
+                // console.log("success");
+                // seterror(false);
+
+                // navigation.navigate("Signup5", { type, id, useremail  , email })
+
+            }
+        }
+        catch (err) {
+            // setloading(false)
+            console.log(err);
+
+        }
+        finally {
+            // setotploading(false)
+            setIsOtpLoading(false);
+        }
+    }
+    // ...................................................................................
 
     return (
         < SafeAreaView style={[signup3styles.container, { position: "relative" }]} >
@@ -291,12 +380,10 @@ const Signup13 = ({ navigation, route }) => {
 
 
                         {/* bottom */}
+                        {/* ............................................................... */}
                         <View style={styles.bottom}>
-
-
                             <Text allowFontScaling={false} style={styles.t1}>Authenticity Verification </Text>
-                            {/* <Drop borderwidth={3} borderColor={"#16181a"} items={role} onValueChange={handlerole} open={open1} setOpen={t1} /> */}
-                            {/* {errors.roleError && <Text style={styles.errorText}>please select a valid type</Text>} */}
+
                             <TextInput
                                 allowFontScaling={false}
                                 placeholder="LinkedIN URL*"
@@ -306,6 +393,7 @@ const Signup13 = ({ navigation, route }) => {
                                 onChangeText={(text) => { setlinkedinurl(text) }}
                             />
                             {errors.linkedinUrlError && (<Text style={styles.errorText}>{errors.linkedinUrlError}</Text>)}
+
                             {(role1 == "Angel Investor" || role1 == "Institutional Investor") && <TextInput
                                 allowFontScaling={false}
                                 placeholder="Website URL / Angel list url"
@@ -318,15 +406,82 @@ const Signup13 = ({ navigation, route }) => {
                             {errors.websiteUrlError &&
                                 <Text style={styles.errorText}>{errors.websiteUrlError}</Text>}
 
-                            {role1 == "Venture Capitalist" && <TextInput
-                                allowFontScaling={false}
-                                placeholder="Official Domain Email"
-                                placeholderTextColor="#B8B8B8"
-                                style={styles.input}
-                                value={domainemail}
-                                onChangeText={(text) => { setdomainemail(text) }}
-                            />}
-                            {errors.domainEmailError && <Text style={styles.errorText}>{errors.domainEmailError}</Text>}
+                            {role1 == "Venture Capitalist" && (
+                                <>
+                                    <TextInput
+                                        allowFontScaling={false}
+                                        placeholder="Official Domain Email"
+                                        placeholderTextColor="#B8B8B8"
+                                        style={styles.input}
+                                        value={domainemail}
+                                        onChangeText={(text) => { setdomainemail(text) }}
+                                    />
+                                    {errors.domainEmailError && <Text style={styles.errorText}>{errors.domainEmailError}</Text>}
+
+                                    {/* Verify OTP Button (Only for Venture Capitalist) */}
+                                    {!otpSent && domainemail && !isOtpVerified && (
+                                        // <Pressable
+                                        //     style={styles.verifyOtpButton} onPress={handleSendOtp}
+                                        // >
+                                        //     <Text style={styles.verifyOtpText}>Send OTP</Text>
+                                        // </Pressable>
+
+                                        <Pressable style={styles.verifyOtpButton1} onPress={handleSendOtp} >
+                                        {otpSent ? (
+                                            <ActivityIndicator size={24} color="#16181a" />
+                                        ) : (
+                                            <Text style={styles.verifyOtpText}>Send OTP</Text>
+                                        )}
+                                    </Pressable>
+                                        
+                                    )}
+                                </>
+                            )}
+
+                            {/* OTP Input Fields */}
+                            {verifyOtpVisible && otpSent && role1 === "Venture Capitalist" && (
+                                <View style={styles.otpContainer}>
+                                    <OtpInput
+                                        numberOfDigits={4}
+                                        focusColor="#00de62"
+                                        autoFocus={false}
+                                        hideStick={true}
+                                        placeholder="****"
+                                        blurOnFilled={true}
+                                        disabled={false}
+                                        type="numeric"
+                                        secureTextEntry={false}
+                                        focusStickBlinkingDuration={500}
+                                        onFocus={() => console.log("Focused")}
+                                        onBlur={() => console.log("Blurred")}
+                                        onTextChange={(text) => setOtp(text)}
+                                        onFilled={(text) => console.log(`OTP is ${text}`)}
+                                        textInputProps={{
+                                            accessibilityLabel: "One-Time Password",
+                                        }}
+                                        theme={{
+                                            containerStyle: { width: "80%", marginHorizontal: "auto" },
+                                            pinCodeContainerStyle: styles.pinCodeContainer,
+                                            pinCodeTextStyle: { color: "#bbbbbb" },
+                                            focusStickStyle: styles.focusStick,
+                                            focusedPinCodeContainerStyle: styles.activePinCodeContainer,
+                                            placeholderTextStyle: { color: "#bbbbbb" },
+                                            filledPinCodeContainerStyle: styles.filledPinCodeContainer,
+                                            disabledPinCodeContainerStyle: styles.disabledPinCodeContainer,
+                                        }}
+                                    />
+
+                                    {/* Verify OTP Button */}
+                                    <Pressable style={styles.verifyOtpButton1} onPress={() => check()} >
+                                        {isOtpLoading ? (
+                                            <ActivityIndicator size={24} color="#16181a" />
+                                        ) : (
+                                            <Text style={styles.verifyOtpText}>Verify OTP</Text>
+                                        )}
+                                    </Pressable>
+                                </View>
+                            )}
+
 
                             <TextInput
                                 allowFontScaling={false}
@@ -336,31 +491,44 @@ const Signup13 = ({ navigation, route }) => {
                                 value={panCard}
                                 onChangeText={(text) => { setpanCard(text) }}
                             />
-
                             {errors.panCardError && <Text style={styles.errorText}>{errors.panCardError}</Text>}
+                        </View>
+                        {/* ......................................................... */}
 
-                            {/* <Text allowFontScaling={false} style={styles.t11}>Verification document upload</Text>
-                            <Pressable style={styles.upload} onPress={openFilePicker}>
-                                <Text allowFontScaling={false} style={styles.nexttext}>Upload</Text>
-                            </Pressable>
-                            {errors.fileError && <Text style={styles.errorText1}>{errors.fileError}</Text>} */}
+                        <View style={styles.icons}>
+                            <Pressable onPress={() => {
 
+                                navigation.goBack();
+                            }}><FontAwesome6 name="chevron-left" size={45} color="#00DF60" /></Pressable>
 
-                            <View style={styles.icons}>
-                                <Pressable onPress={() => {
-
-                                    navigation.goBack();
-                                }}><FontAwesome6 name="chevron-left" size={45} color="#00DF60" /></Pressable>
-                                <Pressable style={styles.btn} onPress={() => { finalsubmit() }}>
+                            {/* <Pressable style={[styles.btn,{ opacity: isOtpVerified ? 1 : 0.5 }]} onPress={() => { finalsubmit() }}>
 
                                     {loading && <ActivityIndicator size={24} color="#16181a" />}
                                     {!loading && <Text allowFontScaling={false} style={styles.nexttext}>Submit</Text>
                                     }
+                                </Pressable> */}
+
+
+
+                            {role1 !== "Venture Capitalist" && (
+                                <Pressable
+                                    style={styles.btn}
+                                    onPress={finalsubmit} // Submit button is always enabled for other roles
+                                >
+                                    <Text style={styles.nexttext}>Submit</Text>
                                 </Pressable>
-                            </View>
+                            )}
 
-
-
+                            {/* For Venture Capitalist, only show Submit button if OTP is verified */}
+                            {role1 === "Venture Capitalist" && (
+                                <Pressable
+                                    style={[styles.btn, { opacity: isOtpVerified ? 1 : 0 }]}  // Disable button if OTP not verified
+                                    onPress={() => isOtpVerified && finalsubmit()}  // Only call finalSubmit if OTP is verified
+                                    disabled={!isOtpVerified}  // Disable button if OTP not verified
+                                >
+                                    <Text style={styles.nexttext}>Submit</Text>
+                                </Pressable>
+                            )}
                         </View>
 
                     </View>
@@ -429,7 +597,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         width: "92%",
-        position : "absolute",
+        position: "absolute",
         marginHorizontal: "auto",
         // marginTop: scalingfactor * 30,
         // position: "absolute",
@@ -522,8 +690,80 @@ const styles = StyleSheet.create({
         color: "#E65858",
         fontSize: 12,
         fontFamily: "Roboto",
-    }
+    },
+    // ....................................................
+
+    verifyOtpButton: {
+        backgroundColor: '#ccc',
+        borderRadius: 30,
+        paddingVertical: 10,
+        paddingHorizontal: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 4,
+        marginBottom: 10,
+        width: 130,
+        alignSelf: "center"
+    },
+    verifyOtpButton1: {
+        backgroundColor: '#ccc',
+        borderRadius: 30,
+        paddingVertical: 10,
+        paddingHorizontal: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 20,
+        marginBottom: 10,
+        width: 130,
+        alignSelf: "center"
+    },
+    // Text inside the OTP verification button
+    verifyOtpText: {
+        fontSize: 16,
+        fontFamily: "Alata",
+        color: '#24272A',
+    },
+
+    otpContainer: {
+        alignItems: 'center',
+        marginTop: 10,
+    },
+
+    otpInput: {
+        width: '80%',
+        marginTop: 10,
+    },
 
 
+    codeInputField: {
+        width: 50,
+        height: 50,
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: '#B8B8B8',
+        fontSize: 18,
+        textAlign: 'center',
+    },
+
+    codeInputHighlight: {
+        borderColor: '#00DE62',
+    },
+
+
+    submitButton: {
+        backgroundColor: '#16181a',
+        paddingVertical: 15,
+        paddingHorizontal: 50,
+        borderRadius: 8,
+        marginTop: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+
+    submitButtonText: {
+        color: '#fff',
+        fontSize: 18,
+    },
 
 })

@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useMemo } from 'react';
 import {
     View,
     Button,
@@ -16,11 +16,17 @@ import {
 import RBSheet from 'react-native-raw-bottom-sheet';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { InteractionManager } from "react-native";
+import BottomSheet, { BottomSheetView, BottomSheetScrollView, BottomSheetTextInput, BottomSheetFlatList, BottomSheetBackdrop } from '@gorhom/bottom-sheet';
+// import Animated from 'react-native-reanimated';
+// import Ionicons from '@expo/vector-icons/Ionicons';
 
-export default function RB({ allcomments, open, setOpen, comments, bottomSheetRef5, docomment, uploadingcomment, setcommenttext, setallcomments, commenttext }) {
+
+
+
+
+export default function RB({ allcomments, open, setOpen, comments, renderBackdrop, backgroundStyle, bottomSheetRef5, docomment, uploadingcomment, setcommenttext, setallcomments, commenttext }) {
     const refRBSheet = useRef();
     const [max, setmax] = useState(500)
-    const screenHeight = Dimensions.get('window').height; // Get screen height
     const [sheetHeight, setSheetHeight] = useState(screenHeight * 0.7);
     useEffect(() => {
         const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
@@ -39,6 +45,9 @@ export default function RB({ allcomments, open, setOpen, comments, bottomSheetRe
         };
     }, []);
 
+    const snapPoints5 = useMemo(() => ["70%"], []);
+    const screenHeight = Dimensions.get('window').height; // Get screen height
+
     const inputRef = useRef(null);
     const [focusedOnce, setFocusedOnce] = useState(false);
 
@@ -53,97 +62,99 @@ export default function RB({ allcomments, open, setOpen, comments, bottomSheetRe
     return (
 
         <KeyboardAvoidingView
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+>
+    <Animated.View
+
+        style={[styles.container, { flex: open ? 1 : 0 , zIndex : 100000 , elevation:10000 }]}
         >
-            <Animated.View
+        {/* <Button title="OPEN BOTTOM SHEET" onPress={() => bottomSheetRef5.current.open()} /> */}
 
-                style={[styles.container, { flex: open ? 1 : 0 , zIndex : 100000 , elevation:10000 }]}
-                >
-                {/* <Button title="OPEN BOTTOM SHEET" onPress={() => bottomSheetRef5.current.open()} /> */}
+        {/* <KeyboardAvoidingView style={{ flex: 1, }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 10}> */}
 
-                {/* <KeyboardAvoidingView style={{ flex: 1, }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 10}> */}
+        {/* <Animated.View> */}
+        <RBSheet
 
-                {/* <Animated.View> */}
-                <RBSheet
+            ref={bottomSheetRef5}
+            style={{ backgroundColor: "#16181a" }}
+            height={sheetHeight}
+            // height={200}
+            openDuration={300}
+            closeDuration={200}
+            closeOnDragDown={true}
+            closeOnPressMask={true}
+            draggable={true}
+            onClose={() => setOpen(false)}
+            closeOnPressBack={true}
+            customModalProps={{
+                animationType: 'fade',
+                statusBarTranslucent: true,
+            }}
+            customStyles={{
+                // wrapper: {
+                //     backgroundColor: 'rgba(0,0,0,0.5)',
+                // },
+                container: {
+                    backgroundColor: '#16181a',
+                    borderTopLeftRadius: 25,
+                    borderTopRightRadius: 25,
+                    padding: 10,
+                    paddingHorizontal: 0,
+                    paddingVertical: 10,
+                    paddingBottom: 0,
+                    margin: 0
+                },
+            }}
+        >
 
-                    ref={bottomSheetRef5}
-                    style={{ backgroundColor: "#16181a" }}
-                    height={sheetHeight}
-                    // height={200}
-                    openDuration={300}
-                    closeDuration={200}
-                    closeOnDragDown={true}
-                    closeOnPressMask={true}
-                    draggable={true}
-                    onClose={() => setOpen(false)}
-                    closeOnPressBack={true}
-                    customModalProps={{
-                        animationType: 'fade',
-                        statusBarTranslucent: true,
+            <Pressable onPress={() => {
+                // console.log("openin");
+                inputRef.current?.focus()
+
+            }}>
+                <Text style={styles.title}>Comments</Text>
+
+            </Pressable>
+            {allcomments.length == 0 && <Text style={styles.no}>No comments yet</Text>}
+
+            <FlatList
+                style={{ flexGrow: 0.98, backgroundColor: "#16181a" }}
+                data={allcomments}
+                renderItem={comments}
+                scrollEnabled={true}
+                contentContainerStyle={{ flexGrow: 1, padding: 10, }}
+            />
+
+
+            <Animated.View style={{ position: "relative" }}>
+                <TextInput
+                    ref={inputRef}
+                    onFocus={() => {
+
+                        InteractionManager.runAfterInteractions(() => {
+                            inputRef.current?.focus();
+                        });
                     }}
-                    customStyles={{
-                        // wrapper: {
-                        //     backgroundColor: 'rgba(0,0,0,0.5)',
-                        // },
-                        container: {
-                            backgroundColor: '#16181a',
-                            borderTopLeftRadius: 25,
-                            borderTopRightRadius: 25,
-                            padding: 10,
-                            paddingHorizontal: 0,
-                            paddingVertical: 10,
-                            paddingBottom: 0,
-                            margin: 0
-                        },
-                    }}
-                >
-
-                    <Pressable onPress={() => {
-                        // console.log("openin");
-                        inputRef.current?.focus()
-
-                    }}>
-                        <Text style={styles.title}>Comments</Text>
-
-                    </Pressable>
-                    {allcomments.length == 0 && <Text style={styles.no}>No comments yet</Text>}
-
-                    <FlatList
-                        style={{ flexGrow: 0.98, backgroundColor: "#16181a" }}
-                        data={allcomments}
-                        renderItem={comments}
-                        scrollEnabled={true}
-                        contentContainerStyle={{ flexGrow: 1, padding: 10, }}
-                    />
-                   
-
-                    <Animated.View style={{ position: "relative" }}>
-                        <TextInput
-                            ref={inputRef}
-                            onFocus={() => {
-
-                                InteractionManager.runAfterInteractions(() => {
-                                    inputRef.current?.focus();
-                                });
-                            }}
-                            // onblur={() => setmax(500)}
-                            style={styles.input}
-                            placeholder="Type here..."
-                            placeholderTextColor="#bbb"
-                            value={commenttext}
-                            onChangeText={text => setcommenttext(text)}
-                        />
-                        <Pressable onPress={docomment} style={styles.send}>
-                            {uploadingcomment && <ActivityIndicator size={24} color="#828282" />}
-                            {!uploadingcomment && <Ionicons name="send" size={24} color="#828282" />}
-                        </Pressable>
-                    </Animated.View>
-                </RBSheet >
-                {/* </Animated.View> */}
-                {/* </KeyboardAvoidingView> */}
+                    // onblur={() => setmax(500)}
+                    style={styles.input}
+                    placeholder="Type here..."
+                    placeholderTextColor="#bbb"
+                    value={commenttext}
+                    onChangeText={text => setcommenttext(text)}
+                />
+                <Pressable onPress={docomment} style={styles.send}>
+                    {uploadingcomment && <ActivityIndicator size={24} color="#828282" />}
+                    {!uploadingcomment && <Ionicons name="send" size={24} color="#828282" />}
+                </Pressable>
             </Animated.View>
+        </RBSheet >
+        {/* </Animated.View> */}
+        {/* </KeyboardAvoidingView> */}
+    </Animated.View>
 
-        </KeyboardAvoidingView >
+</KeyboardAvoidingView >
+
+       
     );
 }
 
@@ -213,3 +224,7 @@ const styles = StyleSheet.create({
         bottom: 0,
     },
 });
+
+
+
+

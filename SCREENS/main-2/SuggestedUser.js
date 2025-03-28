@@ -192,9 +192,7 @@ const User = memo(({ handleTabChange, token , navigation , suggestionarray , set
 
     function renderSuggestion({ item }) {
 
-        // console.log('====================================');
-        console.log("render3");
-        // console.log('====================================');
+
         if (item.role == "Admin") return
         if (item._id == loggedinuserid) return
         return (

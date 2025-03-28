@@ -21,7 +21,7 @@ const InvestorCard = ({ route }) => {
     const [loading, setloading] = useState(true);
     const [refreshing, setRefreshing] = useState(false);
     const [refreshing11, setRefreshing11] = useState(false);
-    console.log("request screen of ofunder ");
+    // console.log("request screen of ofunder ");
     const animatedValues = useRef({})
     async function getData() {
         setloading(true);
@@ -37,7 +37,11 @@ const InvestorCard = ({ route }) => {
                 }
             );
             const result = await response.json();
-            console.log(result);
+            const {data}=result
+
+            const filteredData = data.filter((e)=>e.investor!= null)
+            // console.log(result ,"okkkkkkkkkkkkkkk");
+
 
 
            
@@ -57,10 +61,10 @@ const InvestorCard = ({ route }) => {
                     // console.log(item["id"]);
                     return item
                 })
-                console.log(array.length, "yeh hai arraya");
+                // console.log(array.length, "yeh hai arraya");
 
 
-                const uniqueData = array.filter((item, index, self) =>
+                const uniqueData = filteredData.filter((item, index, self) =>
                     self.findIndex(innerItem => innerItem.investor._id === item.investor._id) === index
                 );
 
@@ -89,8 +93,8 @@ const InvestorCard = ({ route }) => {
 
     useEffect(() => {
         if (items && items.length > 0) {
-            items.forEach(item => console.log(item.id)
-            )
+            // items.forEach(item => console.log(item.id)
+            // )
 
             // console.log("hiiiiiiiiiiiii");
 
@@ -144,7 +148,9 @@ const InvestorCard = ({ route }) => {
 
     function rendercard({ item, index }) {
 
-        console.log(item, "render card ka item");
+        // console.log(item, "render card ka item");
+
+        // if(item.)
 
 
 
@@ -155,20 +161,20 @@ const InvestorCard = ({ route }) => {
 
             if (!animatedValues.current[id]) return;
 
-            console.log(direction);
+            // console.log(direction);
 
 
 
             if (direction == "left") {
                 const id = item.investor._id;
-                console.log(id);
+                // console.log(id);
 
                 console.log(`${url}founder/acceptRequest/${id}`);
 
 
                 async function makesubmit1() {
 
-                    console.log("left wala ");
+                    // console.log("left wala ");
 
 
                     try {
@@ -179,7 +185,7 @@ const InvestorCard = ({ route }) => {
                             }
                         })
                         const data = await response.json();
-                        console.log(data);
+                        // console.log(data);
 
                     }
                     catch (err) {
@@ -193,7 +199,7 @@ const InvestorCard = ({ route }) => {
 
             else if (direction == "right") {
 
-                console.log("hutt");
+                // console.log("hutt");
 
                 const id = item.investor._id;
                 async function makesubmit() {
@@ -206,7 +212,7 @@ const InvestorCard = ({ route }) => {
                             }
                         })
                         const data = await response.json();
-                        console.log(data);
+                        // console.log(data);
 
                     }
                     catch (err) {

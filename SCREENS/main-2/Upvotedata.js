@@ -151,7 +151,7 @@ function Upvotedata({ route }) {
                 investorUpvotes: result.data.investorUpvotes
             }
 
-            console.log(object, "object");
+            // console.log(object, "object");
             setstatistic(object);
 
         } catch (err) {
@@ -421,8 +421,8 @@ function Upvotedata({ route }) {
 
         else {
 
-            console.log(item);
-            console.log(item.postId, "okkkkkkkkkkkkkkkk");
+            // console.log(item);
+            // console.log(item.postId, "okkkkkkkkkkkkkkkk");
 
             return (
 

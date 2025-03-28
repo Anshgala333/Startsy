@@ -62,7 +62,7 @@ const GroudDetailsScreen = ({ route }) => {
             communityName: rec1.current.__internalInstanceHandle ? groupName : rec1.current,
             communityDescription: rec2.current.__internalInstanceHandle ? groupDescription : rec2.current,
         }
-        console.log(data);
+
 
 
 
@@ -76,14 +76,14 @@ const GroudDetailsScreen = ({ route }) => {
                 },
                 body: JSON.stringify(data),
             });
-            const data1 = await response.json();
-            // console.log(response.status);
-            // console.log(data1);
+            
 
 
 
             if (response.status == 200) {
                 showToastWithGravity(`Group detail updated successfully`)
+                const data1 = await response.json();
+                console.log(data1);
             }
         } catch (error) {
             console.log(error);
@@ -165,13 +165,13 @@ const GroudDetailsScreen = ({ route }) => {
                 });
                 const data = await response.json();
 
-                var rec1 = data.data.filter((item) => item.id == communityAdmin)
-                var rec2 = data.data.filter((item) => item.id != communityAdmin)
+                var admin = data.data.filter((item) => item.id == communityAdmin)
+                var otherUsers = data.data.filter((item) => item.id != communityAdmin)
 
-                var rec3 = [...rec1, ...rec2];
+                var allUsers = [...admin, ...otherUsers];
 
 
-                setData(rec3)
+                setData(allUsers)
             } catch (err) {
                 console.log(err);
             }
