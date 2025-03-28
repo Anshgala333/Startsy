@@ -171,7 +171,7 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
   const handlelogin = async (navigation) => {
 
     // console.log("login route called");
-    
+
 
 
     setemailerror(false)
@@ -199,7 +199,7 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
       identifier: email,
       password: password,
     }
-    
+
 
 
     try {
@@ -228,9 +228,15 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
         try {
           const token = data.accessToken;
           const decoded = jwtDecode(token);
-          // console.log(decoded);
+          console.log(decoded);
           if (decoded.role == "Investor") {
-            navigation.navigate("Main2")
+            
+            if (decoded.isInvestorVerified == true) {
+              navigation.navigate("Main2")
+            }
+            else if(decoded.isInvestorVerified == false){
+              navigation.navigate("InvestorWaitingPage")
+            }
           }
           else {
             navigation.navigate("Main2");
@@ -510,7 +516,7 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
 
 
     <ScrollView
-      style={[{ minHeight: 2000 , marginTop : tree ? -75 : 0  }]}
+      style={[{ minHeight: 2000, marginTop: tree ? -75 : 0 }]}
       ref={scrollContainer}>
 
       <Animated.View style={[{ backgroundColor: "#16181a", width: "100%", height: "100%", flex: 1 }, animatedtop1]}>

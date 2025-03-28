@@ -32,7 +32,7 @@ const CertificatePortfolioPage = () => {
         console.log('fetching');
         try {
 
-            const response = await fetch(`${url}/test/getPortfolioAndCertifications`, {
+            const response = await fetch(`${url}test/getPortfolioAndCertifications`, {
                 method: 'GET',
                 headers: {
                     "Content-Type": "application/json",

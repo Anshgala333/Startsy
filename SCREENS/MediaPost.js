@@ -1,4 +1,4 @@
-import { View, Text, Vibration } from 'react-native'
+import { View, Text, Vibration, ToastAndroid } from 'react-native'
 import React, { useContext, useState } from 'react'
 // import { Button, Image } from 'react-native-web'
 import { Pressable, Image, TextInput, StyleSheet, Dimensions, ActivityIndicator } from 'react-native'
@@ -8,12 +8,17 @@ import B3 from "../assets/icons/b3.js"
 import { GlobalContext } from "@/Global/globalcontext.js";
 import { url } from '../config.js'
 import { useNavigation } from 'expo-router';
+import { Checkbox } from "react-native-paper";
+
 
 const MediaPost = ({ route }) => {
 
     const data = useContext(GlobalContext);
     const token = data.globaldata.token;
     const navigation = useNavigation();
+
+
+    const [isPostPrivate, setIsPostPrivate] = useState(false);
 
 
     const post3 = async () => {
@@ -127,6 +132,27 @@ const MediaPost = ({ route }) => {
 
             {err7 && <Text style={styles.error}> *please enter this field</Text>}
 
+
+            <View style={{ color: 'white', display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10 }}>
+                <Checkbox
+                    status={isPostPrivate ? "checked" : "unchecked"}
+                    onPress={() => {
+                        setIsPostPrivate(!isPostPrivate)
+                        if(!isPostPrivate){
+                            ToastAndroid.showWithGravityAndOffset(
+                                `Your post will only be visible to your connections`,
+                                ToastAndroid.LONG,
+                                ToastAndroid.TOP,
+                                100, 100
+                            );
+                        }
+                    }}
+                    uncheckedColor='#ccc'
+                    color='#00de62'
+                />
+                <Text style={{ color: '#ccc' }}>Private</Text>
+            </View>
+
             <Pressable onPress={post3} style={styles.post}>
                 {!p3u && <Text style={styles.buttonText}>{p3text}</Text>}
                 {p3u && <ActivityIndicator size={24} color="#16181a" />}
@@ -197,7 +223,7 @@ const styles = StyleSheet.create({
     error: {
         color: "#E65858",
         fontSize: 12,
-        marginTop : -10,
-        marginLeft : 10
+        marginTop: -10,
+        marginLeft: 10
     }
 })

@@ -28,7 +28,7 @@ import { GlobalContext } from "@/Global/globalcontext.js";
 import { jwtDecode } from "jwt-decode";
 
 
-const User = memo(({ handleTabChange, token , navigation }) => {
+const User = memo(({ handleTabChange, token , navigation , suggestionarray , setsuggestionarray }) => {
 
     const scrollPosition = useRef(0);
     const listRef = useRef(null);
@@ -36,7 +36,7 @@ const User = memo(({ handleTabChange, token , navigation }) => {
     const handleScroll = (event) => {
         scrollPosition.current = event.nativeEvent.contentOffset.y;
     };
-    const [suggestionarray, setsuggestionarray] = useState([])
+    // const [suggestionarray, setsuggestionarray] = useState([])
     const [refreshing1, setRefreshing1] = useState(false)
 
     useEffect(() => {
@@ -239,6 +239,13 @@ const User = memo(({ handleTabChange, token , navigation }) => {
             handleTabChange("users")
         })
     )
+
+    useEffect(()=>{
+        console.log("suggestion array changes");
+        console.log(suggestionarray.length);
+        
+        
+    } , [suggestionarray])
     return (
 
 
@@ -270,6 +277,9 @@ const User = memo(({ handleTabChange, token , navigation }) => {
                             setRefreshing1(true)
                             // Vibration.vibrate(200)
                             searchUser()
+                            setTimeout(() => {
+                                setRefreshing1(false)
+                            }, 2000);
 
                         }} refreshing={refreshing1} />
                 }

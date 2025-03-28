@@ -24,6 +24,7 @@ import Signup10 from "../SCREENS/Signup10.js";
 import Signup11 from "../SCREENS/Signup11.js";
 import Signup12 from "../SCREENS/signup12.js";
 import Signup13 from "../SCREENS/Signup13.js";
+import SelectInvestor from "../SCREENS/SelectInvestorType.js";
 import Main1 from "../SCREENS/Main1.js";
 import Main2 from "../SCREENS/Main2.js";
 import Chat from "../SCREENS/main-1/CHATSCREEN.js";
@@ -49,8 +50,9 @@ import Skeleton1 from "../SCREENS/main-2/skeleton.js";
 import GroudDetailsScreen from "../SCREENS/JASH/GroupDetailsScreen.js";
 import ApplicantsList from "../SCREENS/JASH/ApplicantsList.jsx";
 import JobsPostedScreen from "../SCREENS/JASH/JobsPostedScreen.jsx";
-import Startsy from "../SCREENS/main-1/Startsy.js"
+import Startsy from "../SCREENS/main-1/Startsy.js";
 import Email from "../SCREENS/email.js";
+import InvestorWaitingPage from "../SCREENS/main-2/InvestorWaitingPage.js"
 
 import Modal1 from "../SCREENS/Modal.js";
 import Wait from "../SCREENS/Wait.js";
@@ -73,11 +75,12 @@ import { GlobalProvider } from "../Global/globalcontext.js";
 import { LogBox } from "react-native";
 import { StatusBar, Platform } from "react-native";
 import { useFocusEffect } from "expo-router";
-import CommunityPage from "../SCREENS/CommunityPage.jsx"
-import BlogPage from "../SCREENS/BlogPage.jsx"
-import MediaPost from "../SCREENS/MediaPost.js"
-import JobPostingPage from "../SCREENS/JobPosting.jsx"
+import CommunityPage from "../SCREENS/CommunityPage.jsx";
+import BlogPage from "../SCREENS/BlogPage.jsx";
+import MediaPost from "../SCREENS/MediaPost.js";
+import JobPostingPage from "../SCREENS/JobPosting.jsx";
 // import ReadMore1 from "../../SCREENS/trial-1.js";
+
 import AllPostsScreen from '../SCREENS/SavedPost.js'
 import VerificationPendingScreen from '../SCREENS/InvestorVerify.js'
 import InvestorNotVerifiedScreen from '../SCREENS/NotVerified.js'
@@ -85,14 +88,14 @@ import CertificatePortfolioPage from '../SCREENS/Certificates.js'
 import ViewSendedPost from '../SCREENS/JASH/View post/ViewSendedPost.jsx'
 
 
+
 const Stack = createNativeStackNavigator();
 SystemUI.setBackgroundColorAsync("#16181a");
 
 import { enableFreeze } from "react-native-screens";
-import { enableScreens } from 'react-native-screens';
+import { enableScreens } from "react-native-screens";
 import QuestionReply from "@/SCREENS/main-2/QuestionReply.js";
-
-import Settings from '../SCREENS/Settings.js'
+import Settings from "../SCREENS/Settings.js";
 enableScreens();
 
 enableFreeze(true);
@@ -121,14 +124,12 @@ enableFreeze(true);
 
 export default function App() {
 
-
   useEffect(() => {
     StatusBar.setBackgroundColor("#16181a");
     StatusBar.setBarStyle("light-content");
   }, []);
 
-
-
+  
   useFocusEffect(() => {
     StatusBar.setBackgroundColor("#16181a");
     StatusBar.setBarStyle("light-content");
@@ -188,6 +189,7 @@ export default function App() {
           <Stack.Screen name="Signup11" component={Signup11} />
           <Stack.Screen name="Signup12" component={Signup12} />
           <Stack.Screen name="Signup13" component={Signup13} />
+          <Stack.Screen name="SelectInvestor" component={SelectInvestor} />
           <Stack.Screen name="Wait" component={Wait} />
           {/* <Stack.Screen name="Connectionscreen" component={ConnectionsScreen} /> */}
           <Stack.Screen name="Chat" component={Chat} />
@@ -201,6 +203,7 @@ export default function App() {
           <Stack.Screen name="ApplicantsList" component={ApplicantsList} />
           <Stack.Screen name="JobsPostedScreen" component={JobsPostedScreen} />
           <Stack.Screen name="Email" component={Email} />
+          <Stack.Screen name="InvestorWaitingPage" component={InvestorWaitingPage} />
 
           {/* <Stack.Screen name="Main1" component={Main1} /> */}
           {/* <Stack.Screen name="Main2" component={Main2} /> */}
@@ -241,14 +244,14 @@ export default function App() {
           <Stack.Screen name="Logout" component={Logout} />
           <Stack.Screen name="Test1" component={Test1} />
           <Stack.Screen name="Editcommunity" component={Editcommunity} />
-          <Stack.Screen name="GroupDescriptionPage" component={GroudDetailsScreen} />
+          <Stack.Screen
+            name="GroupDescriptionPage"
+            component={GroudDetailsScreen}
+          />
           <Stack.Screen name="StartsyCard" component={Startsy} />
           <Stack.Screen name="QuestionReply" component={QuestionReply} />
           <Stack.Screen name="PricePage" component={PricePage} />
-
           <Stack.Screen name="Settings" component={Settings} />
-          {/* <Stack.Screen name="Settings" component={Settings} /> */}
-
 
           <Stack.Screen
             name="KeyboardAvoidingComponent"
@@ -270,16 +273,10 @@ export default function App() {
             component={Singleprofilepage}
           />
 
-
-
           {/* <Stack.Screen name="ViewSendedPost" component={ViewSendedPost}/> */}
 
-
-
-          <Stack.Screen name="settings" component={Settings} />
-
-
           {/* <Stack.Screen name="settings" component={Settings}/> */}
+
           <Stack.Screen name="SavedPost" component={AllPostsScreen} />
           <Stack.Screen name="VerificationPendingScreen" component={VerificationPendingScreen}/>
           <Stack.Screen name="InvestorNotVerifiedScreen" component={InvestorNotVerifiedScreen} />
@@ -287,8 +284,9 @@ export default function App() {
           </Stack.Navigator >
       )
       }
+
       {/* </View> */}
-    </GlobalProvider >
+    </GlobalProvider>
     // </NavigationContainer>
   );
 }

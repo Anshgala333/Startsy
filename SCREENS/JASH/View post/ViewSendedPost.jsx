@@ -106,6 +106,9 @@ const ViewSendedPost = ({ openshare, opencomment }) => {
 
     const getSinglePost = async () => {
         setSkeletonLoading(true)
+        console.log(route.params);
+        console.log(route.params.id);
+        
         try {
             const response = await fetch(`${url}test/getOnePost/${id}`, {
                 method: 'GET',
@@ -119,6 +122,7 @@ const ViewSendedPost = ({ openshare, opencomment }) => {
                 setSentPost([]);
             }
 
+
             else {
                 var data1 = data.map(e => {
 
@@ -130,6 +134,7 @@ const ViewSendedPost = ({ openshare, opencomment }) => {
 
 
             }
+
 
         }
         catch (err) {
@@ -212,6 +217,7 @@ const ViewSendedPost = ({ openshare, opencomment }) => {
                         ListHeaderComponent={() => {
                             return (
                                 <>
+
                                     <View>
                                         {
                                             sentPost.length == 0 ?
@@ -222,8 +228,9 @@ const ViewSendedPost = ({ openshare, opencomment }) => {
                                                     opencomment={opencomment}
                                                     upvotepost={upvotepost} />
                                         }
+
                                     </View>
-                                    <Text style={{ color: 'white', fontSize: 24, paddingLeft: 20, marginBottom: 10 }}>Suggestions</Text>
+                                    <Text style={{ color: 'white', fontSize: 24, paddingLeft: 20, marginBottom: 15 , fontFamily  : "Alata", }}>Suggestions</Text>
                                 </>
                             )
                         }}

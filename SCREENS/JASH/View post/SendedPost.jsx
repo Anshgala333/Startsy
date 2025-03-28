@@ -30,7 +30,7 @@ const SendedPost = ({ item, opencomment, openshare ,upvotepost,index}) => {
 
     return (
         <View >
-            <Text style={{ color: '#00de62', fontSize: 40, paddingLeft: 20, marginBottom: 20, fontFamily : "Roboto" }}>Startsy</Text>
+            <Text style={styles.header1}>Startsy</Text>
             <Pressable>
                 <LinearGradient
                     colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}

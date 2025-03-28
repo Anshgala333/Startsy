@@ -240,10 +240,11 @@ const styles = StyleSheet.create({
         width: 130,
         // padding : 10,
         paddingHorizontal: 10,
-        height: 40,
+        height: 42,
         // marginRight  : 20,
         marginBottom: 8,
         marginTop: 10,
+        paddingTop : 3,
         // width : 100,
         // alignSelf: "flex-end",
         justifyContent: "center",
@@ -670,6 +671,15 @@ const styles = StyleSheet.create({
         fontSize : 18,
         verticalAlign : "top",
         paddingBottom : 5,
+    },
+    header1 : {
+        fontSize: 35,
+        fontWeight: "bold",
+        color: "#00DE62",
+        marginBottom: 12,
+        fontFamily: "myanmar",
+        color: "#00DE62",
+        paddingLeft: 15
     }
 
 });

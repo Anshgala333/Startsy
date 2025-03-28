@@ -30,7 +30,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { url } from "../config.js"
 
 const Signup13 = ({ navigation, route }) => {
-    const { form, image } = route.params;
+    const { form, image , selectedOption } = route.params;
+    console.log(selectedOption);
+    
     // const form = ""
 
     // const [final, setFormData] = useState(new FormData());
@@ -46,6 +48,9 @@ const Signup13 = ({ navigation, route }) => {
     const [loading, setloading] = useState("")
     const [role1, setrole] = useState("")
     const { globaldata, updateField } = useContext(GlobalContext);
+    useEffect(() => {
+        setrole(selectedOption)
+    }, [selectedOption])
 
     const [open1, setOpen1] = useState(false);
 
@@ -100,7 +105,7 @@ const Signup13 = ({ navigation, route }) => {
         let isValid = true;
         const newErrors = {};
 
-        if(role1 == ""){
+        if (role1 == "") {
             newErrors.roleError = "* Please select a valid type";
             isValid = false;
             return
@@ -133,10 +138,10 @@ const Signup13 = ({ navigation, route }) => {
         // }
 
         // Validate File Upload
-        if ((!file) && (role1 == "Family Offices" || role1 == "New Investor")) {
-            newErrors.fileError = "* Please upload a valid document.";
-            isValid = false;
-        }
+        // if ((!file) && (role1 == "Family Offices" || role1 == "New Investor")) {
+        //     newErrors.fileError = "* Please upload a valid document.";
+        //     isValid = false;
+        // }
 
         setErrors(newErrors);
         return isValid;
@@ -150,7 +155,9 @@ const Signup13 = ({ navigation, route }) => {
 
         // Handle form submission
         // Make API call with the form data (including file and other inputs)
-        navigation.navigate("Main2");
+
+        // navigation.navigate("Main2");
+        navigation.navigate("InvestorWaitingPage");
         // navigation.navigate("Wait");
     };
 
@@ -227,7 +234,7 @@ const Signup13 = ({ navigation, route }) => {
                 console.log('Data saved successfully!');
                 navigation.reset({
                     index: 0,
-                    routes: [{ name: "Main2" }],
+                    routes: [{ name: "InvestorWaitingPage" }],
                 });
                 // navigation.navigate("Main2")
             } catch (error) {
@@ -288,37 +295,37 @@ const Signup13 = ({ navigation, route }) => {
 
 
                             <Text allowFontScaling={false} style={styles.t1}>Authenticity Verification </Text>
-                            <Drop borderwidth={3} borderColor={"#16181a"} items={role} onValueChange={handlerole} open={open1} setOpen={t1} />
-                            {errors.roleError && <Text style={styles.errorText}>please select a valid type</Text>}
+                            {/* <Drop borderwidth={3} borderColor={"#16181a"} items={role} onValueChange={handlerole} open={open1} setOpen={t1} /> */}
+                            {/* {errors.roleError && <Text style={styles.errorText}>please select a valid type</Text>} */}
                             <TextInput
                                 allowFontScaling={false}
                                 placeholder="LinkedIN URL*"
                                 placeholderTextColor="#B8B8B8"
-                                style={[styles.input, { marginTop: 20 , paddingRight : 10 }]}
+                                style={[styles.input, { marginTop: 20, paddingRight: 10 }]}
                                 value={linkedinurl}
                                 onChangeText={(text) => { setlinkedinurl(text) }}
                             />
                             {errors.linkedinUrlError && (<Text style={styles.errorText}>{errors.linkedinUrlError}</Text>)}
-                            <TextInput
+                            {(role1 == "Angel Investor" || role1 == "Institutional Investor") && <TextInput
                                 allowFontScaling={false}
                                 placeholder="Website URL / Angel list url"
                                 placeholderTextColor="#B8B8B8"
                                 style={styles.input}
                                 value={websiteurl}
                                 onChangeText={(text) => { setwebsiteurl(text) }}
-                            />
+                            />}
 
                             {errors.websiteUrlError &&
                                 <Text style={styles.errorText}>{errors.websiteUrlError}</Text>}
 
-                            <TextInput
+                            {role1 == "Venture Capitalist" && <TextInput
                                 allowFontScaling={false}
                                 placeholder="Official Domain Email"
                                 placeholderTextColor="#B8B8B8"
                                 style={styles.input}
                                 value={domainemail}
                                 onChangeText={(text) => { setdomainemail(text) }}
-                            />
+                            />}
                             {errors.domainEmailError && <Text style={styles.errorText}>{errors.domainEmailError}</Text>}
 
                             <TextInput
@@ -332,11 +339,11 @@ const Signup13 = ({ navigation, route }) => {
 
                             {errors.panCardError && <Text style={styles.errorText}>{errors.panCardError}</Text>}
 
-                            <Text allowFontScaling={false} style={styles.t11}>Verification document upload</Text>
+                            {/* <Text allowFontScaling={false} style={styles.t11}>Verification document upload</Text>
                             <Pressable style={styles.upload} onPress={openFilePicker}>
                                 <Text allowFontScaling={false} style={styles.nexttext}>Upload</Text>
                             </Pressable>
-                            {errors.fileError && <Text style={styles.errorText1}>{errors.fileError}</Text>}
+                            {errors.fileError && <Text style={styles.errorText1}>{errors.fileError}</Text>} */}
 
 
                             <View style={styles.icons}>
@@ -404,7 +411,7 @@ const styles = StyleSheet.create({
     },
     bottom: {
         width: "100%",
-        // height: height*0.85,
+        height: height * 0.85,
         backgroundColor: "#24272A",
         // backgroundColor: "red",
         borderTopLeftRadius: 70,
@@ -414,7 +421,7 @@ const styles = StyleSheet.create({
         alignContent: "center",
         padding: scalingfactor * 20,
         paddingTop: scalingfactor * 40,
-        backgroundColor : "rgba(33, 34, 35, 0.5)",
+        backgroundColor: "rgba(33, 34, 35, 0.5)",
 
     },
     icons: {
@@ -422,10 +429,11 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         width: "92%",
+        position : "absolute",
         marginHorizontal: "auto",
         // marginTop: scalingfactor * 30,
         // position: "absolute",
-        bottom: 0,
+        bottom: 50,
         alignSelf: "center",
         marginTop: 100
     }

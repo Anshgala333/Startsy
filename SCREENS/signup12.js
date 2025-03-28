@@ -67,7 +67,8 @@ const Signup12 = ({ navigation, route }) => {
         final.append("preferredSector", sector);
         final.append("investmentRange", sliderrange);
 
-        navigation.navigate("Signup13", { form: final, image });
+        // navigation.navigate("Signup13", { form: final, image });
+        navigation.navigate("SelectInvestor", { form: final, image });
     };
 
 

@@ -54,17 +54,11 @@ const GroudDetailsScreen = ({ route }) => {
     const updateGroupDetail = async () => {
 
 
-
-
-
-
+        // console.log(typeof rec1.current === "string");
         const data = {
-            communityName: rec1.current.__internalInstanceHandle ? groupName : rec1.current,
-            communityDescription: rec2.current.__internalInstanceHandle ? groupDescription : rec2.current,
+            communityName: typeof rec1.current === "string"? rec1.current : groupName,
+            communityDescription: typeof rec2.current === "string"? rec2.current : groupDescription ,
         }
-
-
-
 
 
         try {
@@ -77,8 +71,6 @@ const GroudDetailsScreen = ({ route }) => {
                 body: JSON.stringify(data),
             });
             
-
-
 
             if (response.status == 200) {
                 showToastWithGravity(`Group detail updated successfully`)
@@ -150,9 +142,9 @@ const GroudDetailsScreen = ({ route }) => {
     }
 
 
+    var decode = jwtDecode(token)
     useEffect(() => {
 
-        var decode = jwtDecode(token)
         async function getData() {
             try {
                 const response = await fetch(`${url}api/getCommunityMemberProfile`, {
@@ -375,12 +367,12 @@ const GroudDetailsScreen = ({ route }) => {
                         </View>
                     </View>
 
-                    <TouchableOpacity
+                    {item.id != decode._id && <TouchableOpacity
                         // onPress={() => { sendfollowrequest(item.status, item._id) }}
                         style={item.status != "Connect" ? styles.sendbtn1 : styles.sendbtn}>
                         <Text style={item.status != "Connect" ? styles.sendbtnText1 : styles.sendbtnText}>
                             {item.status}</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity>}
                 </View>
             </TouchableOpacity>
         )

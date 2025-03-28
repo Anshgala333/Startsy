@@ -235,8 +235,8 @@ const Community = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
                                 }} style={styles.next1} >
                                     <View allowFontScaling={false} style={styles.nexttext}>
                                         {/* <Text style={{marginTop : -10 , alignSelf : "flex-start"}}></Text> */}
-                                        <Text style={{fontSize: scalingfactor * 16,}}>Chat</Text>
-                                        <View style={{  paddingLeft: 3,justifyContent:'center', }}>
+                                        <Text style={{fontSize: scalingfactor * 16, fontFamily : "Alata"}}>Chat</Text>
+                                        <View style={{  paddingLeft: 3,justifyContent:'center', paddingTop : 3 }}>
                                             <MaterialCommunityIcons name="message-text-outline" size={20} color="#000" />
                                         </View>
                                     </View>

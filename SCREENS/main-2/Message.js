@@ -4,9 +4,11 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import { NavigationContainer, useFocusEffect } from "@react-navigation/native";
 import { Pressable } from "react-native";
 import ConnectionsScreen from "../main-1/connection.js"
+import SeperateInvestor from "../main-1/SeperateInvestor.js"
 import Communities from "../main-2/Communities.js"
 import { useNavigation } from "expo-router";
 import Search from "../../assets/icons/Search.js";
+import { jwtDecode } from "jwt-decode";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -81,6 +83,8 @@ const ChatScreen = ({ token, mainpagebottomsheet, closeall, k, setk }) => {
         }, [])
     )
 
+    var decode = jwtDecode(token)
+
 
 
 
@@ -114,9 +118,9 @@ const ChatScreen = ({ token, mainpagebottomsheet, closeall, k, setk }) => {
 
             {/* <NavigationContainer> */}
             <Tab.Navigator
-                
+
                 screenOptions={({ route }) => ({
-                    
+
 
 
                     tabBarStyle: {
@@ -140,7 +144,7 @@ const ChatScreen = ({ token, mainpagebottomsheet, closeall, k, setk }) => {
                     // component={ConnectionsScreen}
                     children={(props) => <ConnectionsScreen setk={setk} inputref={inputref} navigation={navigation} token={token} search={search} />}
                     options={{
-                        
+
                         tabBarLabel: ({ focused }) => (
                             <View>
                                 <Text allowFontScaling={false} style={[
@@ -155,6 +159,32 @@ const ChatScreen = ({ token, mainpagebottomsheet, closeall, k, setk }) => {
 
                     }}
                 />
+
+                {decode.role == "Founder" &&
+
+                    <Tab.Screen
+                        name="InvestorConnection"
+                        // component={ConnectionsScreen}
+                        children={(props) => <SeperateInvestor setk={setk} inputref={inputref} navigation={navigation} token={token} search={search} />}
+                        options={{
+
+                            tabBarLabel: ({ focused }) => (
+                                <View>
+                                    <Text allowFontScaling={false} style={[
+                                        styles.tabbarpill, {
+                                            color: focused ? "#00DE62" : "#808080",
+                                            borderColor: focused ? "#00DE62" : "#808080",
+                                        }
+                                    ]}> Investors
+                                    </Text>
+                                </View>
+                            ),
+
+                        }}
+                    />
+                }
+
+
                 <Tab.Screen
 
                     name="Communities"
@@ -289,9 +319,9 @@ const styles = StyleSheet.create({
         // borderWidth: 1,
         // borderRadius: 30,
 
-        fontSize: 16,
+        fontSize: 14,
         fontFamily: "Alata",
-       
+
     },
     search: {
         position: "absolute",

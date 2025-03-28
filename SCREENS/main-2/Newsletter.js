@@ -403,36 +403,48 @@ const NewsLetter = React.memo(
         // }
 
 
-     
-     
 
+
+        async function searchUser(text) {
+
+            // console.log("user search");
+            console.log(text, "from function");
+
+            var final = text ? `@${text}` : `showAllUser`
+            console.log(final);
+            console.log(final);
+            console.log(final);
+            // return
+
+            try {
+                const response = await fetch(`${url}api/getUserNameSuggestions/${final}`, {
+                    method: 'GET',
+                    headers: {
+                        accept: "application/json",
+                        "Authorization": `Bearer ${token}`,
+                    },
+                });
+                const data = await response.json();
+                console.log(data.length);
+                var filterUser = data.data.filter(e => e._id != loggedinuserid)
+                console.log(filterUser.length, "habibi");
+
+                // console.log("reacehd gere");
+
+
+
+
+                setsuggestionarray(filterUser)
+
+            }
+            catch (err) {
+                console.log(err);
+
+            }
+        }
 
         useEffect(() => {
-            async function searchUser() {
 
-                // console.log("user search");
-                var final = `showAllUser`
-                try {
-                    const response = await fetch(`${url}api/getUserNameSuggestions/${final}`, {
-                        method: 'GET',
-                        headers: {
-                            accept: "application/json",
-                            "Authorization": `Bearer ${token}`,
-                        },
-                    });
-                    const data = await response.json();
-                    // console.log(data);
-                    var filterUser = data.data.filter(e => e._id != loggedinuserid)
-
-
-                    setsuggestionarray(filterUser)
-
-                }
-                catch (err) {
-                    console.log(err);
-
-                }
-            }
             searchUser()
         }, [token])
         const inputref = useRef(null)
@@ -687,7 +699,9 @@ const NewsLetter = React.memo(
 
 
             if (selectedword == "users") {
-                searchUser(text)
+                console.log(text1);
+
+                searchUser(text1)
             }
 
         }
@@ -697,7 +711,7 @@ const NewsLetter = React.memo(
 
         function handleTabChange(selected) {
             setselectedword(selected)
-            // console.log(selected);
+            console.log(selected);
 
         }
 
@@ -719,25 +733,25 @@ const NewsLetter = React.memo(
         //     async function sendfollowrequest(stat, id) {
 
         //         // if (stat) return
-    
+
         //         console.log(stat);
         //         console.log(stat);
         //         console.log(stat);
         //         console.log(stat);
         //         console.log(stat);
-    
+
         //         if (stat == "Connected" || stat == "Request Sent") {
-                    
+
         //             // setconnecteddata("Follow")
-    
-    
+
+
         //             async function makesubmit() {
         //                 setsuggestionarray((prevArray) =>
         //                     prevArray.map((e) =>
         //                         e._id === id ? { ...e, status: "Connect" } : e
         //                     )
         //                 );
-    
+
         //                 try {
         //                     const response = await fetch(`${url}founder/rejectRequest/${id}`, {
         //                         method: 'POST',
@@ -747,31 +761,31 @@ const NewsLetter = React.memo(
         //                     })
         //                     const data = await response.json();
         //                     console.log(data);
-                            
-    
-    
+
+
+
         //                 }
         //                 catch (err) {
         //                     console.log(err);
-    
+
         //                 }
         //             }
         //             makesubmit()
         //             return
         //         }
-    
-               
+
+
         //         setsuggestionarray((prevArray) =>
         //             prevArray.map((e) =>
         //                 e._id === id ? { ...e, status: "Request Sent" } : e
         //             )
         //         );
-                
-    
-    
+
+
+
         //         // console.log(id);
         //         try {
-    
+
         //             const response = await fetch(`${url}connections/followUser/${id}`, {
         //                 method: 'POST',
         //                 body: "",
@@ -784,24 +798,24 @@ const NewsLetter = React.memo(
         //             const data = await response.json();
         //             console.log(data);
         //             // console.log(response.status);
-    
+
         //             // setfollowstatus("request sent")
         //             // setconnecteddata("Request sent")
-    
+
         //         }
         //         catch (err) {
         //             console.log(err);
-    
+
         //         }
-    
+
         //     }
-    
+
 
 
         //     function renderSuggestion({ item }) {
 
         //         // console.log('====================================');
-        //         console.log("render3");
+        //         console.log("3");
         //         // console.log('====================================');
         //         if (item.role == "Admin") return
         //         if (item._id == loggedinuserid) return
@@ -816,25 +830,25 @@ const NewsLetter = React.memo(
         //                         style={styles.avatar} /> */}
         //                     {!item.profilePhoto && <Image style={styles.avatar} source={require("../../assets/images/blank.png")} />}
         //                     {item.profilePhoto && <Image style={styles.avatar} source={{ uri: item.profilePhoto }} />}
-    
-    
-    
-    
+
+
+
+
         //                     <View style={styles.textContainer}>
         //                         <Text numberOfLines={1}
-    
+
         //                             allowFontScaling={false} style={styles.username}>{item.userName}</Text>
         //                         <Text allowFontScaling={false} style={styles.message}>{item.role == "CommunityMember" ? "Member" : item.role}</Text>
         //                     </View>
-    
+
         //                     <TouchableOpacity
         //                         onPress={() => { sendfollowrequest(item.status, item._id) }}
         //                         style={item.status != "Connect" ? styles.sendbtn1 : styles.sendbtn}>
-    
+
         //                         {item.status == "Connect" && <Text style={{ color: "#16181a", fontFamily: "Alata", alignItems: "center", textAlign: "center", marginTop: -2, fontSize: 14, }}>{item.status}</Text>}
-    
+
         //                         {item.status == "Request Sent" && <Text style={{ color: "#ccc", fontFamily: "Alata", alignItems: "center", textAlign: "center", marginTop: -2, fontSize: 14, }}>{item.status}</Text>}
-    
+
         //                         {item.status == "Connected" && <Text style={{ color: "#ccc", fontFamily: "Alata", alignItems: "center", textAlign: "center", marginTop: -2, fontSize: 14, }}>{item.status}</Text>}
         //                     </TouchableOpacity>
         //                     {/* <Text allowFontScaling={false} style={styles.time}> "today"}</Text> */}
@@ -978,7 +992,7 @@ const NewsLetter = React.memo(
 
                             name="Job"
                             // component={User}
-                            children={(props) => <User handleTabChange={handleTabChange} token={token} navigation={navigation} />}
+                            children={(props) => <User handleTabChange={handleTabChange} token={token} navigation={navigation} suggestionarray={suggestionarray} setsuggestionarray={setsuggestionarray} />}
 
 
                             options={{
