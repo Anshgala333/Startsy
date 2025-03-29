@@ -10,9 +10,11 @@ import { url } from "@/config.js";
 import { GlobalContext } from "@/Global/globalcontext.js";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { useFocusEffect } from "expo-router";
+import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 
 
-const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation }) => {
+
+const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation,onReportCallBack }) => {
 
     console.log("job re render");
 
@@ -103,7 +105,7 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation })
                             style={styles.box}
                             start={{ x: 0, y: 0 }}
                             end={{ x: 0, y: 1 }} >
-                            <View style={styles.top} >
+                            <View style={[styles.top,{flexDirection:'row',alignItems:'center',paddingRight:20}]} >
                                 <TouchableOpacity
                                     onPress={() => { navigation.navigate("Singleuserpage", { token: token, id: item.user_id._id, page: "Startsy" }) }}
                                     style={{ display: "flex", flexDirection: "row", width: "100%" }}>
@@ -116,6 +118,11 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation })
                                     </View>
 
                                 </TouchableOpacity>
+                                <View>
+                                <TouchableOpacity onPress={() => onReportCallBack(item.user_id._id,true)}>
+                                        <SimpleLineIcons name="options-vertical" size={20} color="#ccc" />
+                                    </TouchableOpacity>
+                                </View>
                             </View>
                             <View style={styles.divider}></View>
                             <View style={styles.lower}>

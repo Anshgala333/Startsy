@@ -16,25 +16,33 @@ import { Skeleton } from 'moti/skeleton';
 import { MotiView } from 'moti';
 import { jwtDecode } from "jwt-decode";
 
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
-const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, navigation, getpost, skeleton, setskeletonloading }) => {
+
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import Octicons from '@expo/vector-icons/Octicons';
+import AntDesign from '@expo/vector-icons/AntDesign';
+import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
+
+
+
+
+const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, navigation, getpost, skeleton, setskeletonloading, onReportCallBack }) => {
 
 
     const [refreshing11, setRefreshing11] = useState(false)
     const [savedPosts, setSavedPosts] = useState({});
     const [isSaved, setIsSaved] = useState(false);
 
-    
-      const showToastWithGravity = (message) => {
+
+    const showToastWithGravity = (message) => {
         ToastAndroid.showWithGravityAndOffset(
-          `${message}`,
-          ToastAndroid.SHORT,
-          ToastAndroid.TOP,
-          100, 100
+            `${message}`,
+            ToastAndroid.SHORT,
+            ToastAndroid.TOP,
+            100, 100
         );
-      };
-    
+    };
+
 
 
 
@@ -88,8 +96,8 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
     }
 
 
-        //setIsSaved(!isSaved);
-  
+    //setIsSaved(!isSaved);
+
 
     // ........................................................................................
     // console.log("scroll re render");
@@ -229,7 +237,7 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                 end={{ x: 0, y: 1 }} >
 
                                 {/* <View onTouchStart={closebottomsheet} style={styles.box}> */}
-                                <View style={styles.top} >
+                                <View style={[styles.top, { paddingRight: 10 }]} >
                                     <Pressable
                                         onPress={() => {
                                             // console.log(decode.role);
@@ -252,13 +260,13 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                         </View>
 
                                         <View style={{
-                                            flexDirection: "row",
+                                            // flexDirection: "row",
                                             justifyContent: "center",    // Center horizontally
-                                            alignItems: "center",        // Center vertically
-                                            right : 20,
-                                            top : 0
+                                            alignItems: "flex-start",
+                                            // backgroundColor:'red'       // Center vertically
+
                                         }}>
-                                            <TouchableOpacity style={{ paddingRight: 0 }} onPress={() => toggleSavePost(item._id, index)}>
+                                            {/* <TouchableOpacity style={{ paddingRight: 0 }} onPress={() => toggleSavePost(item._id, index)}>
                                                 {item.issaved ? (
                                                     <MaterialIcons name="bookmark-border" size={30} color="#ccc" />
                                                 ) : (
@@ -269,6 +277,10 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
 
                                                     />
                                                 )}
+                                            </TouchableOpacity> */}
+
+                                            <TouchableOpacity onPress={() => onReportCallBack(item._id,true)}>
+                                                <SimpleLineIcons name="options-vertical" size={20} color="#ccc" />
                                             </TouchableOpacity>
                                         </View>
                                     </Pressable>

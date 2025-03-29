@@ -28,7 +28,7 @@ import { url } from "../../config.js"
 import { jwtDecode } from "jwt-decode";
 import Startsy from "../main-1/Startsy.js";
 const Foryou =
-    ({ scroll, settype, token, mainpagebottomsheet, opencomment, openshare, visible, setVisible, setnewaspect, setImage }) => {
+    ({ scroll, settype, token, mainpagebottomsheet, opencomment, openshare, visible, setVisible, setnewaspect, setImage,onReportCallBack }) => {
 
         // console.log("for you re render");
 
@@ -382,7 +382,7 @@ const Foryou =
                                     setActiveTab(route.name); // ✅ Updates state when tab is pressed
                                 },
                             })}
-                            children={(props) => <Scroll allpost={allpost} scroll={scroll} setallpost={setallpost} opencomment={opencomment} openshare={openshare} getpost={getpost} scrollY={scrollY} navigation={navigation} setskeletonloading={setskeletonloading} skeleton={skeleton} />}
+                            children={(props) => <Scroll allpost={allpost} scroll={scroll} setallpost={setallpost} opencomment={opencomment} openshare={openshare} getpost={getpost} scrollY={scrollY} navigation={navigation} setskeletonloading={setskeletonloading} skeleton={skeleton} onReportCallBack={onReportCallBack} />}
                             options={{
                                 lazy: false,
                                 unmountOnBlur: false,
@@ -438,7 +438,7 @@ const Foryou =
 
                             name="Forums"
                             // component={Test2}
-                            children={(props) => <Community allpost={allpost} setallpost={setallpost} getpost={getpost} scrollY={scrollY} navigation={navigation} />}
+                            children={(props) => <Community allpost={allpost} setallpost={setallpost} getpost={getpost} scrollY={scrollY} navigation={navigation} onReportCallBack={onReportCallBack} />}
                             options={{
                                 unmountOnBlur: false,
                                 freezeOnBlur: true,
@@ -465,7 +465,7 @@ const Foryou =
 
                             name="Job"
                             // component={Test3}
-                            children={(props) => <JobpostPage allpost={allpost} setallpost={setallpost} getpost={getpost} scrollY={scrollY} navigation={navigation} />}
+                            children={(props) => <JobpostPage allpost={allpost} setallpost={setallpost} getpost={getpost} scrollY={scrollY} navigation={navigation} onReportCallBack={onReportCallBack} />}
                             options={{
                                 unmountOnBlur: false,
                                 freezeOnBlur: true,

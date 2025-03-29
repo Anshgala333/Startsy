@@ -70,6 +70,8 @@ import CommentBottomSheet from "../SCREENS/JASH/comment-bottom-sheet/CommentBott
 
 
 import ViewSendedPost from "./JASH/View post/ViewSendedPost.jsx";
+import ReportBottomSheet from '../SCREENS/JASH/bottom-sheet/reportBottomSheet.jsx'
+
 
 configureReanimatedLogger({
     level: ReanimatedLogLevel.warn,
@@ -203,6 +205,12 @@ const Main2 = ({ navigation, route }) => {
     const commentRef = useRef(null);
     const mainpagebottomsheet = useRef();
     const [showBottomSheet, setShowBottomSheet] = useState(false);
+    const [showReportBottomSheet, setShowReportBottomSheet] = useState(false);
+
+
+    const reportBottomSheetRef = useRef(null);
+    const [reportId, setReportId] = useState(0);
+    const [reportPost,setReportPost] = useState(false);
 
 
     const commentinput = useRef(null);
@@ -211,7 +219,12 @@ const Main2 = ({ navigation, route }) => {
 
     useFocusEffect(useCallback(() => {
         setShowBottomSheet(false);
-        setTimeout(() => { setShowBottomSheet(true) }, 100)
+        setShowReportBottomSheet(false);
+        setTimeout(() => {
+            setShowBottomSheet(true)
+            setShowReportBottomSheet(true);
+
+        }, 100)
     }, []))
 
 
@@ -524,6 +537,16 @@ const Main2 = ({ navigation, route }) => {
         setpeopledata(final1)
         bottomSheetRef6.current?.expand();
 
+    }
+
+    async function onReport(id,isPost) {
+        // console.log(id);
+
+        if(isPost !=  null){
+            setReportPost(true);
+        }
+        setReportId(id);
+        reportBottomSheetRef.current?.expand();
     }
 
 
@@ -888,7 +911,7 @@ const Main2 = ({ navigation, route }) => {
                         />
                         <Tab.Screen
                             name="Startsy"
-                            children={(props) => <Foryou ansh={ansh} setOpen4={setOpen4} one={one} setone={setone} keyboardOffset={keyboardOffset} commentinput={commentinput} setk={setk} ansh1={ansh1} setansh1={setansh1} two={two} three={three} four={four} five={five} bottomSheetRef5={commentRef} bottomSheetRef1={bottomSheetRef1} bottomSheetRef2={bottomSheetRef2} bottomSheetRef3={bottomSheetRef3} bottomSheetRef4={bottomSheetRef4} type={type} settype={settype} setImage={setImage} uri={uri} openBottomSheet3={openBottomSheet3} scroll={updatescroll} token={token} mainpagebottomsheet={mainpagebottomsheet} opencomment={opencomment} visible={visible} setVisible={setVisible} newaspect={newaspect} setnewaspect={setnewaspect} openshare={openshare} />}
+                            children={(props) => <Foryou ansh={ansh} setOpen4={setOpen4} one={one} setone={setone} keyboardOffset={keyboardOffset} commentinput={commentinput} setk={setk} ansh1={ansh1} setansh1={setansh1} two={two} three={three} four={four} five={five} bottomSheetRef5={commentRef} bottomSheetRef1={bottomSheetRef1} bottomSheetRef2={bottomSheetRef2} bottomSheetRef3={bottomSheetRef3} bottomSheetRef4={bottomSheetRef4} type={type} settype={settype} setImage={setImage} uri={uri} openBottomSheet3={openBottomSheet3} scroll={updatescroll} token={token} mainpagebottomsheet={mainpagebottomsheet} opencomment={opencomment} visible={visible} setVisible={setVisible} newaspect={newaspect} setnewaspect={setnewaspect} openshare={openshare} onReportCallBack={onReport} />}
                             options={{
                                 keyboardBehavior: true,
                                 freezeOnBlur: true,
@@ -969,7 +992,7 @@ const Main2 = ({ navigation, route }) => {
                         />
                         <Tab.Screen
                             name="Singleuserpage"
-                            children={() => <Singleprofilepage navigation={navigation} openshare={openshare} />}
+                            children={() => <Singleprofilepage navigation={navigation} openshare={openshare} onReportCallBack={onReport} />}
                             options={{
                                 tabBarItemStyle: { display: 'none' },
                                 tabBarButton: () => null,
@@ -1034,6 +1057,18 @@ const Main2 = ({ navigation, route }) => {
                     >
                         <BottomSheetContent />
                     </BottomSheet>)
+                    }
+
+
+                    {
+                        showReportBottomSheet && (
+                            <ReportBottomSheet
+                                reportPost = {reportPost}
+                                reportId={reportId}
+                                reportBottomSheetRef={reportBottomSheetRef}
+                                renderBackdrop={renderBackdrop}
+                            />
+                        )
                     }
 
                 </View>

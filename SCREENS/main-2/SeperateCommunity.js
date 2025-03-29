@@ -11,6 +11,7 @@ import { GlobalContext } from "@/Global/globalcontext.js";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { useFocusEffect } from "expo-router";
 import { Dimensions } from "react-native";
+import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 
 const { height, width } = Dimensions.get("window")
 
@@ -21,7 +22,7 @@ var b = height / 800;
 const scalingfactor = Math.sqrt(a * b)
 
 
-const Community = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
+const Community = ({ allpost, setallpost, getpost, scrollY, navigation ,onReportCallBack}) => {
 
     console.log("community re render");
 
@@ -199,7 +200,7 @@ const Community = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
                             style={styles.box}
                             start={{ x: 0, y: 0 }}
                             end={{ x: 0, y: 1 }} >
-                            <View style={styles.top} >
+                            <View style={[styles.top,{flexDirection:'row',alignItems:'center',paddingRight:20}]} >
                                 <TouchableOpacity
                                     onPress={() => { navigation.navigate("Singleuserpage", { token: token, id: item.user_id._id, page: "Startsy" }) }}
                                     style={{ display: "flex", flexDirection: "row", width: "100%" }}>
@@ -211,6 +212,11 @@ const Community = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
                                         </View>
                                     </View>
                                 </TouchableOpacity>
+                                <View style={{}}>
+                                    <TouchableOpacity onPress={() => onReportCallBack(item.user_id._id,true)}>
+                                        <SimpleLineIcons name="options-vertical" size={20} color="#ccc" />
+                                    </TouchableOpacity>
+                                </View>
                             </View>
                             <View style={styles.divider}></View>
                             <View style={styles.lower}>
@@ -235,8 +241,8 @@ const Community = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
                                 }} style={styles.next1} >
                                     <View allowFontScaling={false} style={styles.nexttext}>
                                         {/* <Text style={{marginTop : -10 , alignSelf : "flex-start"}}></Text> */}
-                                        <Text style={{fontSize: scalingfactor * 16, fontFamily : "Alata"}}>Chat</Text>
-                                        <View style={{  paddingLeft: 3,justifyContent:'center', paddingTop : 3 }}>
+                                        <Text style={{ fontSize: scalingfactor * 16, fontFamily: "Alata" }}>Chat</Text>
+                                        <View style={{ paddingLeft: 3, justifyContent: 'center', paddingTop: 3 }}>
                                             <MaterialCommunityIcons name="message-text-outline" size={20} color="#000" />
                                         </View>
                                     </View>
@@ -252,7 +258,7 @@ const Community = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "#16181a", minHeight: 500 }}>
-           
+
             <FlatList
                 showsVerticalScrollIndicator={false}
                 // style={main.scroll1}
@@ -300,7 +306,7 @@ const Community = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
 
 
 
-           
+
 
 
         </SafeAreaView>
