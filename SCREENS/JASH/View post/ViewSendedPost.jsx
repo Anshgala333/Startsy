@@ -229,7 +229,7 @@ const ViewSendedPost = ({ openshare, opencomment }) => {
                                         }
 
                                     </View>
-                                    <Text style={{ color: 'white', fontSize: 24, paddingLeft: 20, marginBottom: 15 , fontFamily  : "Alata", }}>Suggestions</Text>
+                                    <Text style={{ color: '#777', fontSize: 20, paddingLeft: 20, marginBottom: 15 , fontFamily  : "Alata", marginTop : -15 }}>Suggestions</Text>
                                 </>
                             )
                         }}

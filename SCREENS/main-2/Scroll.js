@@ -236,6 +236,7 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
 
                                             if (decode.role == "Investor") {
                                                 // console.log("qpqpqp");
+                                                return;
                                                 if (item.user_id.role == "Founder") return
                                                 else navigation.navigate("Singleuserpage", { token: token, id: item.user_id._id, page: "Startsy" })
                                             }

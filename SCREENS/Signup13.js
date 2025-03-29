@@ -15,6 +15,7 @@ import {
     StyleSheet,
     Dimensions,
     StatusBar,
+    ToastAndroid,
     TouchableWithoutFeedback,
     ActivityIndicator
 
@@ -41,10 +42,12 @@ const Signup13 = ({ navigation, route }) => {
     const [isOtpVerified, setIsOtpVerified] = useState(false); // To show/hide loading indicator for OTP verification
     const [otp, setOtp] = useState("");
     const [otpSent, setOtpSent] = useState(false);
+    const [sendotpStatus, setSendOtpStatus] = useState(false);
     // .........................................................................................................
     const [token, settoken] = useState("")
     const [loading, setloading] = useState("")
     const [role1, setrole] = useState("")
+    const [VerificationText, setVerificationText] = useState("Verify OTP")
     const { globaldata, updateField } = useContext(GlobalContext);
     useEffect(() => {
         setrole(selectedOption)
@@ -85,6 +88,7 @@ const Signup13 = ({ navigation, route }) => {
                 domainEmailError: "",
             }));
         }
+        setSendOtpStatus(true)
 
         console.log('email is valid')
 
@@ -114,6 +118,7 @@ const Signup13 = ({ navigation, route }) => {
             console.error("Error sending OTP:", error);
         } finally {
             setIsOtpLoading(false);
+            setSendOtpStatus(false)
         }
     };
 
@@ -293,6 +298,15 @@ const Signup13 = ({ navigation, route }) => {
 
     }
 
+    const showToastWithGravity = (message) => {
+        ToastAndroid.showWithGravityAndOffset(
+          `${message}`,
+          ToastAndroid.LONG,
+          ToastAndroid.TOP,
+          100, 100
+        );
+      };
+
     const openFilePicker = async () => {
         try {
             const result = await DocumentPicker.getDocumentAsync({
@@ -336,10 +350,13 @@ const Signup13 = ({ navigation, route }) => {
             // console.log(response.status);
             if (response.status === 400) {
                 // setmessage("* OTP is incorrect")
+                showToastWithGravity("OTP is invalid")
                 setIsOtpVerified(false);
+
             }
             else if (response.status === 200) {
                 setIsOtpVerified(true);
+                setVerificationText("Verified")
                 // console.log("success");
                 // seterror(false);
 
@@ -410,7 +427,7 @@ const Signup13 = ({ navigation, route }) => {
                                 <>
                                     <TextInput
                                         allowFontScaling={false}
-                                        placeholder="Official Domain Email"
+                                        placeholder="Official Domain Email *"
                                         placeholderTextColor="#B8B8B8"
                                         style={styles.input}
                                         value={domainemail}
@@ -426,8 +443,8 @@ const Signup13 = ({ navigation, route }) => {
                                         //     <Text style={styles.verifyOtpText}>Send OTP</Text>
                                         // </Pressable>
 
-                                        <Pressable style={styles.verifyOtpButton1} onPress={handleSendOtp} >
-                                        {otpSent ? (
+                                        <Pressable style={styles.verifyOtpButton1 } onPress={handleSendOtp} >
+                                        {sendotpStatus ? (
                                             <ActivityIndicator size={24} color="#16181a" />
                                         ) : (
                                             <Text style={styles.verifyOtpText}>Send OTP</Text>
@@ -472,18 +489,18 @@ const Signup13 = ({ navigation, route }) => {
                                     />
 
                                     {/* Verify OTP Button */}
-                                    <Pressable style={styles.verifyOtpButton1} onPress={() => check()} >
+                                    <Pressable style={styles.verifyOtpButton11} onPress={() => check()} >
                                         {isOtpLoading ? (
                                             <ActivityIndicator size={24} color="#16181a" />
                                         ) : (
-                                            <Text style={styles.verifyOtpText}>Verify OTP</Text>
+                                            <Text style={styles.verifyOtpText}>{VerificationText}</Text>
                                         )}
                                     </Pressable>
                                 </View>
                             )}
 
 
-                            <TextInput
+                            {/* <TextInput
                                 allowFontScaling={false}
                                 placeholder="Pan Number"
                                 placeholderTextColor="#B8B8B8"
@@ -491,7 +508,7 @@ const Signup13 = ({ navigation, route }) => {
                                 value={panCard}
                                 onChangeText={(text) => { setpanCard(text) }}
                             />
-                            {errors.panCardError && <Text style={styles.errorText}>{errors.panCardError}</Text>}
+                            {errors.panCardError && <Text style={styles.errorText}>{errors.panCardError}</Text>} */}
                         </View>
                         {/* ......................................................... */}
 
@@ -706,7 +723,19 @@ const styles = StyleSheet.create({
         alignSelf: "center"
     },
     verifyOtpButton1: {
-        backgroundColor: '#ccc',
+        backgroundColor: '#00de62',
+        borderRadius: 30,
+        paddingVertical: 10,
+        paddingHorizontal: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 12,
+        marginBottom: 10,
+        width: 130,
+        alignSelf: "center"
+    },
+    verifyOtpButton11: {
+        backgroundColor: '#00de62',
         borderRadius: 30,
         paddingVertical: 10,
         paddingHorizontal: 10,
@@ -720,6 +749,7 @@ const styles = StyleSheet.create({
     // Text inside the OTP verification button
     verifyOtpText: {
         fontSize: 16,
+        marginTop : -2,
         fontFamily: "Alata",
         color: '#24272A',
     },

@@ -11,6 +11,7 @@ import { GlobalContext } from "@/Global/globalcontext.js";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { useFocusEffect } from "expo-router";
 import { Dimensions } from "react-native";
+import { jwtDecode } from "jwt-decode";
 
 const { height, width } = Dimensions.get("window")
 
@@ -113,6 +114,9 @@ const Community = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
 
     }, []))
 
+    var decode = jwtDecode(token)
+    
+
 
 
 
@@ -201,7 +205,10 @@ const Community = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
                             end={{ x: 0, y: 1 }} >
                             <View style={styles.top} >
                                 <TouchableOpacity
-                                    onPress={() => { navigation.navigate("Singleuserpage", { token: token, id: item.user_id._id, page: "Startsy" }) }}
+                                    onPress={() => {
+                                        if(decode.role == "Investor")return
+                                        navigation.navigate("Singleuserpage", { token: token, id: item.user_id._id, page: "Startsy" })
+                                    }}
                                     style={{ display: "flex", flexDirection: "row", width: "100%" }}>
                                     <View style={{ display: "flex", flexDirection: "row", width: "100%" }}>
                                         <Image style={styles.userimg} source={{ uri: item.user_id.profilePhoto }} />
@@ -235,8 +242,8 @@ const Community = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
                                 }} style={styles.next1} >
                                     <View allowFontScaling={false} style={styles.nexttext}>
                                         {/* <Text style={{marginTop : -10 , alignSelf : "flex-start"}}></Text> */}
-                                        <Text style={{fontSize: scalingfactor * 16, fontFamily : "Alata"}}>Chat</Text>
-                                        <View style={{  paddingLeft: 3,justifyContent:'center', paddingTop : 3 }}>
+                                        <Text style={{ fontSize: scalingfactor * 16, fontFamily: "Alata" }}>Chat</Text>
+                                        <View style={{ paddingLeft: 3, justifyContent: 'center', paddingTop: 3 }}>
                                             <MaterialCommunityIcons name="message-text-outline" size={20} color="#000" />
                                         </View>
                                     </View>
@@ -252,7 +259,7 @@ const Community = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "#16181a", minHeight: 500 }}>
-           
+
             <FlatList
                 showsVerticalScrollIndicator={false}
                 // style={main.scroll1}
@@ -300,7 +307,7 @@ const Community = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
 
 
 
-           
+
 
 
         </SafeAreaView>

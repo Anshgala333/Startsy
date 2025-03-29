@@ -371,7 +371,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
             const data = await response.json();
 
             console.log(data.profileCompletion, "completion ka data");
-            // console.log(data);
+            console.log(data);
             
 
 
@@ -385,6 +385,12 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
 
             setuserdata(data.data)
             setprofilecompletion(data.profileCompletion)
+
+            var rec1 = data.data.portfolio.filter((e) => e.name != "")
+            var rec2 = data.data.certification.filter((e) => e.name != "")
+            var combined = [...rec1, ...rec2]
+            setCertficate(combined)
+
             // console.log(data.data.hiddenInfo.socialProof);
 
             // var instaurl = data.data.hiddenInfo.socialProof[0].url
@@ -480,6 +486,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
     const [image, setImage] = useState("")
     const [followstatus, setfollowstatus] = useState("Follow")
     const [email, setemail] = useState("")
+    const [certficatesAndPortfolio, setCertficate] = useState("")
 
     const CustomAlert = ({ visible, onClose }) => {
         const fadeAnim = useRef(new Animated.Value(0)).current; // Persistent animated value
@@ -1122,12 +1129,15 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                         
                             <View style={{ transform: [{ scale: 1.1 }], marginRight: 0 }} >
                                 {/* <Upvote width={decode.role == "Investor" ? 0 : 50} height={44} /> */}
-                                {decode.role == "CommunityMember" && 
+                                {(decode.role == "CommunityMember" || decode.role == "Job seeker") && 
                            <View style={styles1.ss}>
                             
-                             <TouchableOpacity onPress={()=>navigation.navigate("CertificatePortfolioPage")}>
-                                <MaterialCommunityIcons name="certificate-outline" size={24} color="#ccc" />
-                             </TouchableOpacity>
+                            
+                             {certficatesAndPortfolio.length > 0 &&
+                              <TouchableOpacity onPress={()=>navigation.navigate("CertificatePortfolioPage")}>
+                              <MaterialCommunityIcons name="certificate-outline" size={24} color="#ccc" />
+                           </TouchableOpacity>
+                             }
                              
                               {instaurl != "" && <Pressable onPress={() => Linking.openURL(instaurl)} >
                                        <AntDesign name="instagram" style={styles.plus1} size={20} color="#bbbbbb" />
@@ -1191,11 +1201,11 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                         }
 
 
-                        {decode.role == "CommunityMember" && userdata.tagline != ""&&
+                        {(decode.role == "CommunityMember" || decode.role == "Job seeker") && userdata.tagline != ""&&
                             <Text style={styles1.goal}>{userdata.tagline}</Text>
                         }
 
-                        {decode.role == "CommunityMember" && userdata.skills != "" &&
+                        {(decode.role == "CommunityMember"  || decode.role == "Job seeker") && userdata.skills != "" &&
                             <Text style={styles1.fund}>{userdata.skills}</Text>
                         }
                         
@@ -1944,7 +1954,8 @@ const styles1 = StyleSheet.create({
         color: "#D9D9D9",
         paddingHorizontal: 5,
         marginVertical: 12,
-        marginBottom: 5
+        marginBottom: 5,
+        // marginTop  : 0
 
     },
     fund: {

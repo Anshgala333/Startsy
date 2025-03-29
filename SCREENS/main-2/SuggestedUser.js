@@ -39,9 +39,9 @@ const User = memo(({ handleTabChange, token , navigation , suggestionarray , set
     // const [suggestionarray, setsuggestionarray] = useState([])
     const [refreshing1, setRefreshing1] = useState(false)
 
+    var decode = jwtDecode(token)
     useEffect(() => {
         if (token) {
-            var decode = jwtDecode(token)
             console.log(decode);
             setloggedin(decode._id)
         }
@@ -80,7 +80,8 @@ const User = memo(({ handleTabChange, token , navigation , suggestionarray , set
     async function searchUser() {
 
         // console.log("user search");
-        var final = `@${text1}`
+        // var final = `@${text1}`
+        var final = `showAllUser`
         // var final = `@c`
         try {
             const response = await fetch(`${url}api/getUserNameSuggestions/${final}`, {
@@ -91,7 +92,7 @@ const User = memo(({ handleTabChange, token , navigation , suggestionarray , set
                 },
             });
             const data = await response.json();
-            console.log(data.data);
+            console.log(data);
             var filterUser = data.data.filter(e => e._id != loggedinuserid)
 
             setsuggestionarray(filterUser)
@@ -195,6 +196,9 @@ const User = memo(({ handleTabChange, token , navigation , suggestionarray , set
 
         if (item.role == "Admin") return
         if (item._id == loggedinuserid) return
+        console.log(decode.role);
+        
+        // if(decode.role == "Investor" && item.role != "Investor") return
         return (
             // <Text style={{color : "#fff"}}>hello</Text>
             <TouchableOpacity onPress={() => {

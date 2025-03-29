@@ -1,5 +1,5 @@
 import React, { useContext, useState, useRef, memo, useCallback } from "react";
-import { FlatList, Text, Touchable, TouchableOpacity, Pressable, View, Vibration, Image, SafeAreaView, RefreshControl } from "react-native";
+import { FlatList, Text, Touchable, TouchableOpacity, Pressable, View, Vibration, Image, SafeAreaView, RefreshControl , ToastAndroid } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import styles from "../../styles/post.js"
@@ -10,6 +10,7 @@ import { url } from "@/config.js";
 import { GlobalContext } from "@/Global/globalcontext.js";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { useFocusEffect } from "expo-router";
+import { jwtDecode } from "jwt-decode";
 
 
 const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation }) => {
@@ -30,6 +31,15 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation })
     const data = useContext(GlobalContext)
     var token = data.globaldata.token
 
+    const showToastWithGravity = (message) => {
+        ToastAndroid.showWithGravityAndOffset(
+          `${message}`,
+          ToastAndroid.LONG,
+          ToastAndroid.TOP,
+          100, 100
+        );
+      };
+
 
 
     async function applyjob(id, index) {
@@ -38,6 +48,13 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation })
         if (allpost[index].Jobapplied) {
             return
         }
+        var decode = jwtDecode(token)
+        if(decode.role ==  "CommunityMember"){
+            showToastWithGravity("Switch to Job Seeker role to apply for jobs")
+            return
+            
+        }
+
         Vibration.vibrate(100)
 
 

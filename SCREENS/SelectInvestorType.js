@@ -128,15 +128,15 @@ const SelectInvestor = ({ navigation, route }) => {
                         height: 15,
                         borderRadius: 10,
                         borderWidth: 2,
-                        borderColor: selected ? "#000" : "#ccc",
+                        borderColor: selected ? "#16181a" : "#ccc",
                         alignItems: "center",
                         marginTop: 4,
                         justifyContent: "center",
-                        backgroundColor: selected ? "#000" : "transparent",
+                        backgroundColor: selected ? "#16181a" : "transparent",
                         marginRight: 10,
                     }}
                 >
-                    {selected && <View style={{ width: 10, height: 10, borderRadius: 5, backgroundColor: "green" }} />}
+                    {selected && <View style={{ width: 10, height: 10, borderRadius: 5, backgroundColor: "#16181a" }} />}
                 </View>
 
                 {/* Label */}

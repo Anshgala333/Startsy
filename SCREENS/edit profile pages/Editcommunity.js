@@ -180,7 +180,7 @@ const Editcommunity = ({ navigation }) => {
 
     async function getdata() {
         try {
-            const response = await fetch(`http://10.10.27.37:5002/api/getProfileDetailsForEditProfile`, {
+            const response = await fetch(`${url}api/getProfileDetailsForEditProfile`, {
                 method: 'GET',
                 headers: {
                     accept: "application/json",

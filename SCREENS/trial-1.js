@@ -8,6 +8,7 @@ const { height } = Dimensions.get("window");
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { useFocusEffect, useNavigation } from "expo-router";
 import { url } from "@/config.js";
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
 import Up from "../assets/icons/up.js"
 // import { useSharedValue, useAnimatedStyle, withTiming } from "react-native-reanimated";
@@ -82,7 +83,6 @@ const ReadMore1 = function ({ attop, setattop, animatedtop, animatedValue, Gener
     if (type == "JobSeeker") {
       console.log("okk job");
       
-
       try {
 
         const response = await fetch(`${url}api/updateToJobSeeker`, {
@@ -96,6 +96,7 @@ const ReadMore1 = function ({ attop, setattop, animatedtop, animatedValue, Gener
         console.log(data);
         if (response.status == 200) {
           scrolltozero()
+
           if (attop == false) {
             setattop(true)
             return true; // This prevents the default back action
@@ -140,7 +141,9 @@ const ReadMore1 = function ({ attop, setattop, animatedtop, animatedValue, Gener
         scrolltozero()
         setattop(true)
       }}>
-        <Ionicons name="arrow-back-circle-outline" size={50} color="#00DE62" />
+        {/* <Ionicons name="arrow-back-circle-outline" size={50} color="#00DE62" /> */}
+        <FontAwesome6 name="chevron-left" size={34}  color="#00DF60" />
+
 
       </Pressable>
 
@@ -159,7 +162,7 @@ const ReadMore1 = function ({ attop, setattop, animatedtop, animatedValue, Gener
         <View style={readmorestyles.bottom}>
           <Text style={readmorestyles.para} allowFontScaling={false}>
 
-            You can switch your profile once to either Investor, Founder, Job Seeker, or Mentor while keeping your community engagement intact. This one-time switch unlocks tailored features specific to your chosen role while preserving your existing interactions and connections.
+            You can switch your profile to either Investor, Founder or Job seeker while keeping your community engagement intact. This one-time switch unlocks tailored features specific to your chosen role while preserving your existing interactions and connections.
           </Text>
           <Text ref={elementRef} ></Text>
 

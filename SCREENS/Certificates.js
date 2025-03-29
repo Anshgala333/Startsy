@@ -15,13 +15,13 @@ const CertificatePortfolioPage = () => {
     const [refreshing, setRefreshing] = useState(false);
     // const [data, setData] = useState([]);
 
-    const [allUrls,setAllUrls] = useState([]);
+    const [allUrls, setAllUrls] = useState([]);
 
     const navigation = useNavigation();
 
     const { globaldata, updateField } = useContext(GlobalContext);
-    
-        const token = globaldata.token;
+
+    const token = globaldata.token;
 
 
     useEffect(() => {
@@ -40,18 +40,23 @@ const CertificatePortfolioPage = () => {
                 },
             });
             const responsedData = await response.json();
-            // console.log(responsedData);
+            console.log(responsedData);
             const { certification, portfolio } = responsedData;
-            // console.log(certification,"cevcickqe");
-            // console.log(portfolio,"poortfolioo");
+            console.log(portfolio);
+
+            var rec1 = certification.filter((e) => e.name != "")
+            var rec2 = portfolio.filter((e) => e.name != "")
 
 
-            const finalData = [...certification,...portfolio];
+            console.log(rec2, "poortfolioo");
+
+
+            const finalData = [...rec1, ...rec2];
 
             // console.log(finalData);
             setAllUrls(finalData);
-            
-            
+
+
 
             // setData(responsedData);
         }
@@ -91,20 +96,17 @@ const CertificatePortfolioPage = () => {
     }, []);
 
     const RenderItem = ({ item }) => {
-        console.log("renderitem item",item)
+        console.log("renderitem item", item)
         return (
-            <TouchableOpacity 
-            
+            <TouchableOpacity
+
                 onPress={() => Linking.openURL(item.url)}
-            
+
             >
 
-                <LinearGradient
-                    colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}
-                    locations={[0, 1]}
-                    style={[styles.box, { paddingVertical: 15, paddingHorizontal: 20, borderRadius: 12 }]}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 0, y: 1 }}>
+                <View
+                    style={[styles.box, { paddingVertical: 15, paddingHorizontal: 20, borderRadius: 12 , backgroundColor : "transparent" , borderColor : "#777" , borderWidth : 1 , width : "92%" }]}
+                >
 
                     <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
                         <View style={{ flex: 1, alignItems: "flex-start", paddingRight: 10 }}>
@@ -121,7 +123,7 @@ const CertificatePortfolioPage = () => {
                             )}
                         </View>
                     </View>
-                </LinearGradient>
+                </View>
             </TouchableOpacity>
 
 
@@ -134,6 +136,7 @@ const CertificatePortfolioPage = () => {
             <Pressable onPress={() => navigation.goBack()}>
                 <FontAwesome6 name="chevron-left" size={34} style={{ alignSelf: 'flex-start', marginLeft: 16, marginTop: 10 }} color="#00DF60" />
             </Pressable>
+            {allUrls.length == 0 && <Text style={{ textAlign: "center", marginTop: 300, color: "gray", fontSize: 18 }}>No certifications Yet</Text>}
             <FlatList
                 showsVerticalScrollIndicator={false}
                 initialNumToRender={5}
@@ -141,7 +144,7 @@ const CertificatePortfolioPage = () => {
                 maxToRenderPerBatch={5}
                 keyExtractor={(item, index) => item._id}
                 data={allUrls}
-                renderItem={({item})=><RenderItem item={item}/>}
+                renderItem={({ item }) => <RenderItem item={item} />}
                 contentContainerStyle={{ paddingTop: 40, paddingBottom: 100 }}
                 onScroll={(e) => {
                     if (scrollY && typeof scrollY.setValue === "function") {

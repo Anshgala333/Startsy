@@ -69,7 +69,6 @@ const Green = ({ navigation }) => {
 
                 if (decode.status == false) {
                     setstate("")
-
                     // console.log("unauthorized user hai yeh");
 
                     setshowtoast(true)
@@ -97,17 +96,21 @@ const Green = ({ navigation }) => {
 
 
     useEffect(() => {
+        console.log("outside");
 
         async function f1(params) {
+
+            console.log("insider");
+            
 
             temp = await AsyncStorage.getItem("accessToken");
             console.log(temp, "app khulte vakt toke hai ya nai");
             var decode = jwtDecode(temp)
-            console.log(decode);
+            console.log(decode , "pppp");
 
 
             if (state == "Investor" && animationover) {
-                if (decode.isInvestorVerified) {
+                if (decode.isInvestorVerified == true) {
                     navigation.navigate("Main2")
                     return
                 }
@@ -117,7 +120,7 @@ const Green = ({ navigation }) => {
                     const response = await fetch(`${url}test/getInvestorStatus`, {
                         method: 'GET',
                         headers: {
-                            "Authorization": `Bearer ${falsetoken}`,
+                            "Authorization": `Bearer ${temp}`,
                         },
                     })
                     data = await response.json()

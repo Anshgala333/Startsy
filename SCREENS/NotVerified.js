@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { View, Text, Image, Pressable, StyleSheet, Dimensions } from "react-native";
+import React, { useContext , useState } from "react";
+import { View, Text, Image, Pressable, StyleSheet, Dimensions , ActivityIndicator } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import logo from "../assets/images/logofinal.png"; // Ensure the path is correct
 import { url } from "@/config";
@@ -9,8 +9,12 @@ import { GlobalContext } from "@/Global/globalcontext";
 
 const InvestorNotVerifiedScreen = () => {
   const navigation = useNavigation();
-    const { globaldata, updateField } = useContext(GlobalContext);
-  
+  const { globaldata, updateField } = useContext(GlobalContext);
+
+
+  const [loading , setLoading] = useState(false)
+
+
 
   async function handleContinue() {
 
@@ -18,6 +22,7 @@ const InvestorNotVerifiedScreen = () => {
     var token = await AsyncStorage.getItem("accessToken")
     console.log(token);
 
+    setLoading(true)
     try {
       const response = await fetch(`${url}test/convertInvestorToCommunity`, {
         method: 'GET',
@@ -43,6 +48,9 @@ const InvestorNotVerifiedScreen = () => {
     catch (error) {
       console.log(error)
     }
+    finally{
+      setLoading(false)
+    }
   }
 
   return (
@@ -53,12 +61,13 @@ const InvestorNotVerifiedScreen = () => {
 
 
         <Text style={styles.message}>
-          Unfortunately, your verification was not approved.
+          Unfortunately, your verification was not approved. Try adding more details or switch to different role.
         </Text>
 
 
         <Pressable style={styles.button} onPress={() => handleContinue()}>
-          <Text style={styles.buttonText}>Continue</Text>
+          {loading && <ActivityIndicator size={24} color="#16181a" />}
+          {!loading && <Text style={styles.buttonText}>Continue</Text>}
         </Pressable>
       </View>
     </View>
@@ -93,13 +102,13 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   button: {
-    backgroundColor: "#ccc",
+    backgroundColor: "#00de62",
     paddingVertical: 12,
     paddingHorizontal: 40,
-    borderRadius: 8,
-    elevation: 3, // Android shadow
-    shadowColor: "#00DE62", // iOS shadow
-    shadowOffset: { width: 0, height: 2 },
+    borderRadius: 20,
+    // elevation: 3, // Android shadow
+    // shadowColor: "#00DE62", // iOS shadow
+    // shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 3,
   },
@@ -107,7 +116,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: "Alata",
     color: "#16181A",
-    fontWeight: "bold",
+    marginTop: -2,
+    // fontWeight: "bold",
     textAlign: "center",
   },
 });

@@ -745,7 +745,7 @@ const header = function () {
             <Image style={styles1.img2} source={{ uri: userdata.user_id.profilePhoto }} />
           </View>
           <View style={styles1.upvote}>
-            {decode.role == "CommunityMember" &&
+            {(decode.role == "CommunityMember"  || decode.role == "Job seeker") &&
               <View style={styles1.ss}>
                 {/* <MaterialCommunityIcons name="certificate-outline" size={24} color="#ccc" /> */}
 
@@ -808,11 +808,11 @@ const header = function () {
           }
 
 
-          {userdata.user_id.role == "CommunityMember" && userdata.tagline != "" &&
+          {(userdata.user_id.role == "CommunityMember" || userdata.user_id.role == "Job seeker" ) && userdata.tagline != "" &&
             <Text style={styles1.goal}>{userdata.tagline}</Text>
           }
 
-          {userdata.user_id.role == "CommunityMember" && userdata.skills != "" &&
+          {(userdata.user_id.role == "CommunityMember" || userdata.user_id.role == "Job seeker") && userdata.skills != "" &&
             <Text style={styles1.fund}>{userdata.skills}</Text>
           }
 

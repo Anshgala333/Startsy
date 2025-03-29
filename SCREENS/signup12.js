@@ -332,7 +332,7 @@ const Signup12 = ({ navigation, route }) => {
                                 minimumValue={0}
                                 maximumValue={10000000}
                                 value={sliderrange}
-                                step={1000}
+                                step={100000}
                                 minimumTrackTintColor="#00DE62"
                                 maximumTrackTintColor="#00DE62"
                                 // step={100}

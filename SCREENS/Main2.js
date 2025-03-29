@@ -647,7 +647,7 @@ const Main2 = ({ navigation, route }) => {
                     </View>
                     <Text style={styles.bottomsheettext}>Media</Text>
                 </Pressable>
-                {loggedinrole != "Investor" && <Pressable style={styles.iconButton} onPress={openBottomSheet4}>
+                {(loggedinrole != "Investor" && loggedinrole!= "Job seeker" ) && <Pressable style={styles.iconButton} onPress={openBottomSheet4}>
                     <View style={[styles.ic, { flex: 1, width: "100%", alignSelf: "center" }]}>
                         <B4 />
                     </View>
