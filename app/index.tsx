@@ -87,8 +87,6 @@ import InvestorNotVerifiedScreen from '../SCREENS/NotVerified.js'
 import CertificatePortfolioPage from '../SCREENS/Certificates.js'
 import ViewSendedPost from '../SCREENS/JASH/View post/ViewSendedPost.jsx'
 
-// import ViewSendedPost from "../SCREENS/JASH/View post/ViewSendedPost.jsx";
-
 const Stack = createNativeStackNavigator();
 SystemUI.setBackgroundColorAsync("#16181a");
 
@@ -276,6 +274,7 @@ export default function App() {
           {/* <Stack.Screen name="ViewSendedPost" component={ViewSendedPost}/> */}
 
           {/* <Stack.Screen name="settings" component={Settings}/> */}
+
           <Stack.Screen name="SavedPost" component={AllPostsScreen} />
           <Stack.Screen name="VerificationPendingScreen" component={VerificationPendingScreen}/>
           <Stack.Screen name="InvestorNotVerifiedScreen" component={InvestorNotVerifiedScreen} />
@@ -283,6 +282,7 @@ export default function App() {
           </Stack.Navigator >
       )
       }
+
       {/* </View> */}
     </GlobalProvider>
     // </NavigationContainer>

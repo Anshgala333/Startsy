@@ -27,6 +27,10 @@ import Community from "./SeperateCommunity.js"
 import { url } from "../../config.js"
 import { jwtDecode } from "jwt-decode";
 import Startsy from "../main-1/Startsy.js";
+// import Constants from "expo-constants";
+
+// const appVersion = Constants.manifest.version; // For classic builds
+// console.log("App Version:", appVersion);
 const Foryou =
     ({ scroll, settype, token, mainpagebottomsheet, opencomment, openshare, visible, setVisible, setnewaspect, setImage }) => {
 
@@ -324,7 +328,7 @@ const Foryou =
 
                 }}>
                     <Text allowFontScaling={false} style={main.headertext}>Startsy</Text>
-                    {/* <Text allowFontScaling={false} style={main.headertext}> <Text>App Version: {Application.nativeApplicationVersion}</Text></Text> */}
+                    {/* <Text allowFontScaling={false} style={main.headertext}> <Text>App Version: {JSON.stringify(Application)}</Text></Text> */}
                     
                     {/* {loggedinRole == "Investor" && <Pressable
                         onPress={() => {

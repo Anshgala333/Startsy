@@ -54,17 +54,11 @@ const GroudDetailsScreen = ({ route }) => {
     const updateGroupDetail = async () => {
 
 
-
-
-
-
+        
         const data = {
-            communityName: rec1.current.__internalInstanceHandle ? groupName : rec1.current,
-            communityDescription: rec2.current.__internalInstanceHandle ? groupDescription : rec2.current,
+            communityName: typeof rec1.current === "string"? rec1.current : groupName,
+            communityDescription: typeof rec2.current === "string"? rec2.current : groupDescription ,
         }
-
-
-
 
 
         try {
@@ -77,8 +71,6 @@ const GroudDetailsScreen = ({ route }) => {
                 body: JSON.stringify(data),
             });
             
-
-
 
             if (response.status == 200) {
                 showToastWithGravity(`Group detail updated successfully`)

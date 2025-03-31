@@ -949,7 +949,7 @@ const Main2 = ({ navigation, route }) => {
                                             userProfilePhoto == null ?
                                                 <FontAwesome6 name="circle-user" size={30} color={focused ? "#00DE62" : "#7A7B7C"} />
                                                 :
-                                                <Image source={{ uri: (userProfilePhoto) }} width={30} height={30} style={{ borderRadius: 50, borderColor: "#00de62", borderWidth: focused ? 1 : 0 }} />
+                                                <Image source={{ uri: (userProfilePhoto) }} width={26} height={26} style={{ borderRadius: 50, borderColor: "#00de62", borderWidth: focused ? 1 : 0 }} />
                                         }
                                     </View>
                                 ),

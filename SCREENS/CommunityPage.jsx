@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
-import { View, Text, TextInput, Pressable, ScrollView, ActivityIndicator, Vibration, Image, StyleSheet, Platform } from "react-native";
+import { View, Text, TextInput, Pressable, ScrollView, ActivityIndicator, Vibration, Image, StyleSheet, Platform, ToastAndroid } from "react-native";
 import { GlobalContext } from "@/Global/globalcontext.js";
 import { url } from '../config.js'
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -10,6 +10,7 @@ import styles from '../styles/CommunityStyles.jsx'
 import B1 from "@/assets/icons/b1.js";
 import * as ImagePicker from 'expo-image-picker';
 import Profile from "../assets/icons/profile.js"
+import { Checkbox } from "react-native-paper";
 
 
 
@@ -32,6 +33,7 @@ const CommunityPage = () => {
 
 
   const [image, setImage] = useState("xyz");
+  const[isPrivate,setIsPrivate]=useState(false);
 
   const fileupload = async () => {
 
@@ -114,6 +116,7 @@ const CommunityPage = () => {
     final.append("communityDescription", description)
     // final.append("communityRules", onValueChange)
     final.append("communityRules", "No rules")
+    final.append("isPrivate", isPrivate)
     if (image != "xyz") {
       final.append("groupPhoto", {
         uri: image,
@@ -242,6 +245,26 @@ const CommunityPage = () => {
 
 
           </View>
+
+          <View style={{ color: 'white', display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10 }}>
+                <Checkbox
+                    status={isPrivate ? "checked" : "unchecked"}
+                    onPress={() => {
+                        setIsPrivate(!isPrivate)
+                        if(!isPrivate){
+                            ToastAndroid.showWithGravityAndOffset(
+                                `Your post will only be visible to your connections`,
+                                ToastAndroid.LONG,
+                                ToastAndroid.TOP,
+                                100, 100
+                            );
+                        }
+                    }}
+                    uncheckedColor='#ccc'
+                    color='#00de62'
+                />
+                <Text style={{ color: '#ccc' }}>Private</Text>
+            </View>
 
           {/* Rule drop down field */}
           <View style={{ marginTop: 10 }}>
