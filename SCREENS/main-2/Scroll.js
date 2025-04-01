@@ -16,25 +16,33 @@ import { Skeleton } from 'moti/skeleton';
 import { MotiView } from 'moti';
 import { jwtDecode } from "jwt-decode";
 
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
-const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, navigation, getpost, skeleton, setskeletonloading }) => {
+
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import Octicons from '@expo/vector-icons/Octicons';
+import AntDesign from '@expo/vector-icons/AntDesign';
+import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
+
+
+
+
+const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, navigation, getpost, skeleton, setskeletonloading, onReportCallBack }) => {
 
 
     const [refreshing11, setRefreshing11] = useState(false)
     const [savedPosts, setSavedPosts] = useState({});
     const [isSaved, setIsSaved] = useState(false);
 
-    
-      const showToastWithGravity = (message) => {
+
+    const showToastWithGravity = (message) => {
         ToastAndroid.showWithGravityAndOffset(
-          `${message}`,
-          ToastAndroid.SHORT,
-          ToastAndroid.TOP,
-          100, 100
+            `${message}`,
+            ToastAndroid.SHORT,
+            ToastAndroid.TOP,
+            100, 100
         );
-      };
-    
+    };
+
 
 
 
@@ -88,8 +96,8 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
     }
 
 
-        //setIsSaved(!isSaved);
-  
+    //setIsSaved(!isSaved);
+
 
     // ........................................................................................
     // console.log("scroll re render");
@@ -229,7 +237,7 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                 end={{ x: 0, y: 1 }} >
 
                                 {/* <View onTouchStart={closebottomsheet} style={styles.box}> */}
-                                <View style={styles.top} >
+                                <View style={[styles.top, { paddingRight: 10, width: "100%" }]} >
                                     <Pressable
                                         onPress={() => {
                                             // console.log(decode.role);
@@ -245,7 +253,7 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                             }
 
                                         }}
-                                        style={{ display: "flex", flexDirection: "row", width: "100%" }}>
+                                        style={{ display: "flex", flexDirection: "row", width: "90%",  }}>
                                         <Image style={styles.userimg} source={{ uri: item.user_id.profilePhoto }} />
                                         <View style={styles.userdetail}>
                                             <Text allowFontScaling={false} style={styles.u1}>{item.user_id.userName}</Text>
@@ -253,13 +261,13 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                         </View>
 
                                         <View style={{
-                                            flexDirection: "row",
+                                            // flexDirection: "row",
                                             justifyContent: "center",    // Center horizontally
-                                            alignItems: "center",        // Center vertically
-                                            right : 20,
-                                            top : 0
+                                            alignItems: "flex-start",
+                                            // backgroundColor:'red'       // Center vertically
+
                                         }}>
-                                            <TouchableOpacity style={{ paddingRight: 0 }} onPress={() => toggleSavePost(item._id, index)}>
+                                            {/* <TouchableOpacity style={{ paddingRight: 0 }} onPress={() => toggleSavePost(item._id, index)}>
                                                 {item.issaved ? (
                                                     <MaterialIcons name="bookmark-border" size={30} color="#ccc" />
                                                 ) : (
@@ -270,9 +278,14 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
 
                                                     />
                                                 )}
-                                            </TouchableOpacity>
+                                            </TouchableOpacity> */}
+
+
                                         </View>
                                     </Pressable>
+                                    <TouchableOpacity style={{position : "absolute" , top : 15 , right : 15}} onPress={() => onReportCallBack(item._id, true)}>
+                                        <SimpleLineIcons name="options-vertical" size={20} color="#ccc" />
+                                    </TouchableOpacity>
                                 </View>
 
                                 {item.type == "textBlog" && <View style={styles.divider}></View>}
@@ -299,16 +312,28 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                             {/* {item.likedBy.includes(loggedinUserID) && <Upvote width={36} height={36} style={{ marginHorizontal: 0 }} selected={true} />} */}
                                             {/* {!item.likedBy.includes(loggedinUserID)   && <Upvote width={36} height={36} style={{ marginLeft: 5, marginRight: -5 }} />} */}
 
-                                            {!item.isliked && <Upvote width={36} height={36} style={{ marginLeft: 5, marginRight: -5 }} />}
-                                            {item.isliked && <Upvote width={36} height={36} style={{ marginLeft: 5, marginRight: -5 }} selected={true} />}
+                                            {!item.isliked && <Upvote width={30} height={30} style={{ marginLeft: 5, marginRight: -5 }} />}
+                                            {item.isliked && <Upvote width={30} height={30} style={{ marginLeft: 5, marginRight: -5 }} selected={true} />}
                                         </TouchableOpacity>
                                         <Text style={{ left: 0, top: 13, color: "#ccc" }}>{item.itemlikedcount}</Text>
                                         <Pressable onPress={() => {
                                             Vibration.vibrate(20)
                                             opencomment(item._id)
                                         }}>
-                                            <FontAwesome style={{ marginLeft: 4 }} name="comment-o" size={30} color="#ccc" />
+                                            <FontAwesome style={{ marginLeft: 4, marginTop: 5 }} name="comment-o" size={24} color="#ccc" />
                                         </Pressable>
+                                        <TouchableOpacity style={{ paddingRight: 0, marginTop: 5 }} onPress={() => toggleSavePost(item._id, index)}>
+                                            {item.issaved ? (
+                                                <MaterialIcons name="bookmark-border" size={26} color="#ccc" />
+                                            ) : (
+                                                <MaterialCommunityIcons
+                                                    name="bookmark"
+                                                    size={30}
+                                                    color="#ccc"             // Gray when unsaved
+
+                                                />
+                                            )}
+                                        </TouchableOpacity>
                                     </View>
                                     {/* ............................................................................................ */}
 

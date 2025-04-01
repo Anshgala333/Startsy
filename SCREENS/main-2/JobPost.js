@@ -1,5 +1,5 @@
 import React, { useContext, useState, useRef, memo, useCallback } from "react";
-import { FlatList, Text, Touchable, TouchableOpacity, Pressable, View, Vibration, Image, SafeAreaView, RefreshControl , ToastAndroid } from "react-native";
+import { FlatList, Text, Touchable, TouchableOpacity, Pressable, View, Vibration, Image, SafeAreaView, RefreshControl, ToastAndroid } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import styles from "../../styles/post.js"
@@ -10,10 +10,12 @@ import { url } from "@/config.js";
 import { GlobalContext } from "@/Global/globalcontext.js";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { useFocusEffect } from "expo-router";
+import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 import { jwtDecode } from "jwt-decode";
 
 
-const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation }) => {
+
+const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation, onReportCallBack }) => {
 
     console.log("job re render");
 
@@ -33,12 +35,12 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation })
 
     const showToastWithGravity = (message) => {
         ToastAndroid.showWithGravityAndOffset(
-          `${message}`,
-          ToastAndroid.LONG,
-          ToastAndroid.TOP,
-          100, 100
+            `${message}`,
+            ToastAndroid.LONG,
+            ToastAndroid.TOP,
+            100, 100
         );
-      };
+    };
 
 
 
@@ -47,12 +49,14 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation })
 
         if (allpost[index].Jobapplied) {
             return
+
+
         }
         var decode = jwtDecode(token)
-        if(decode.role ==  "CommunityMember"){
+        if (decode.role == "CommunityMember") {
             showToastWithGravity("Switch to Job Seeker role to apply for jobs")
             return
-            
+
         }
 
         Vibration.vibrate(100)
@@ -109,8 +113,8 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation })
                 return
             }
             else {
-                console.log(item.jobPosts?.amount );
-                
+                console.log(item.jobPosts?.amount);
+
 
                 if (item.type == "jobPost") {
                     return (
@@ -120,10 +124,10 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation })
                             style={styles.box}
                             start={{ x: 0, y: 0 }}
                             end={{ x: 0, y: 1 }} >
-                            <View style={styles.top} >
+                            <View style={[styles.top, { flexDirection: 'row', alignItems: 'center', paddingRight: 20, width: "100%" }]} >
                                 <TouchableOpacity
                                     onPress={() => { navigation.navigate("Singleuserpage", { token: token, id: item.user_id._id, page: "Startsy" }) }}
-                                    style={{ display: "flex", flexDirection: "row", width: "100%" }}>
+                                    style={{ display: "flex", flexDirection: "row", width: "90%", }}>
                                     <View style={{ display: "flex", flexDirection: "row", width: "100%" }}>
                                         <Image style={styles.userimg} source={{ uri: item.user_id.profilePhoto }} />
                                         <View style={styles.userdetail}>
@@ -133,7 +137,13 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation })
                                     </View>
 
                                 </TouchableOpacity>
+                                <View>
+
+                                </View>
                             </View>
+                            <TouchableOpacity style={{ position: "absolute", top: 25, right: 15 }} onPress={() => onReportCallBack(item._id, true)}>
+                                <SimpleLineIcons name="options-vertical" size={20} color="#ccc" />
+                            </TouchableOpacity>
                             <View style={styles.divider}></View>
                             <View style={styles.lower}>
                                 <Text style={styles.com1}>Role: {item.jobPosts.role}</Text>
@@ -141,7 +151,7 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation })
                                 <Text style={styles.com2}><Text style={styles.desc1}>Job description: </Text>{item.jobPosts.description}</Text>
                                 <Text allowFontScaling={false} style={styles.u8}><Text style={{ color: "#828282" }}>Duration: {item.jobPosts.duration}</Text></Text>
                                 <Text allowFontScaling={false} style={styles.u8}><Text style={{ color: "#828282" }}>Payment mode: {item.jobPosts.pay} </Text> </Text>
-                                {  item.jobPosts.amount != "" && <Text allowFontScaling={false} style={styles.u8}><Text style={{ color: "#828282" }}></Text>Amount: {item.jobPosts.amount} </Text>}
+                                {item.jobPosts.amount != "" && <Text allowFontScaling={false} style={styles.u8}><Text style={{ color: "#828282" }}></Text>Amount: {item.jobPosts.amount} </Text>}
 
                                 <TouchableOpacity onPress={() => { applyjob(item._id, index) }} style={[!item.Jobapplied ? styles.job : styles.job,]} >
                                     <Text allowFontScaling={false} style={!item.Jobapplied ? styles.nexttext : styles.nexttext}>{item.Jobapplied ? 'Applied' : "Apply"}</Text>
@@ -164,7 +174,7 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation })
             <FlatList
                 ListHeaderComponent={() => {
                     return (
-                        <Pressable onPress={()=>navigation.navigate("Jobposted", { token: token })} style={styles.Jobbtn}>
+                        <Pressable onPress={() => navigation.navigate("Jobposted", { token: token })} style={styles.Jobbtn}>
                             <Text style={styles.jobbtntext}>View your job posts</Text>
                         </Pressable>
                     )

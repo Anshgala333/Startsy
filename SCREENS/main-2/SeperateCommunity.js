@@ -11,6 +11,7 @@ import { GlobalContext } from "@/Global/globalcontext.js";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { useFocusEffect } from "expo-router";
 import { Dimensions } from "react-native";
+import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 import { jwtDecode } from "jwt-decode";
 
 const { height, width } = Dimensions.get("window")
@@ -22,7 +23,7 @@ var b = height / 800;
 const scalingfactor = Math.sqrt(a * b)
 
 
-const Community = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
+const Community = ({ allpost, setallpost, getpost, scrollY, navigation ,onReportCallBack}) => {
 
     console.log("community re render");
 
@@ -203,13 +204,13 @@ const Community = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
                             style={styles.box}
                             start={{ x: 0, y: 0 }}
                             end={{ x: 0, y: 1 }} >
-                            <View style={styles.top} >
+                            <View style={[styles.top,{flexDirection:'row',alignItems:'center',paddingRight:20 , width : "100%"}]} >
                                 <TouchableOpacity
                                     onPress={() => {
                                         if(decode.role == "Investor")return
                                         navigation.navigate("Singleuserpage", { token: token, id: item.user_id._id, page: "Startsy" })
                                     }}
-                                    style={{ display: "flex", flexDirection: "row", width: "100%" }}>
+                                    style={{ display: "flex", flexDirection: "row", width: "90%"  }}>
                                     <View style={{ display: "flex", flexDirection: "row", width: "100%" }}>
                                         <Image style={styles.userimg} source={{ uri: item.user_id.profilePhoto }} />
                                         <View style={styles.userdetail}>
@@ -218,6 +219,11 @@ const Community = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
                                         </View>
                                     </View>
                                 </TouchableOpacity>
+                                <View style={{right : 15, position : "absolute"}}>
+                                    <TouchableOpacity onPress={() => onReportCallBack(item._id,true)}>
+                                        <SimpleLineIcons name="options-vertical" size={20} color="#ccc" />
+                                    </TouchableOpacity>
+                                </View>
                             </View>
                             <View style={styles.divider}></View>
                             <View style={styles.lower}>
@@ -267,7 +273,7 @@ const Community = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
                 windowSize={10}
                 maxToRenderPerBatch={5}
                 scrollEventThrottle={0}
-                keyExtractor={(item, index) => { return index }}
+                keyExtractor={(item, index) => { return item._id }}
                 removeClippedSubview={false}
                 data={allpost}
                 renderItem={renderItem}

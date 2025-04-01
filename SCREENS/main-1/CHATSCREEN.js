@@ -70,22 +70,41 @@ const Chat = ({ route }) => {
             // profilePhoto  : ""
         }
         socket.emit("privateMessage", finaldata)
-        setdata((data) => [...data, { message: newtext, senderId: id, updatedAt: new Date() }])
+        setdata((data) => [{ message: newtext, senderId: id, updatedAt: new Date() }, ...data])
         // setdata([...data, { message: newtext, senderId: id, updatedAt: new Date() }])
+        // if (flatListRef.current) {
 
+        //     console.log("scroll karne wala hu");
 
-        setTimeout(() => {
-            if (flatListRef.current) {
-                flatListRef.current.scrollToOffset({
-                    offset: (data.length + 1) * 700,
-                    animated: false,
-                });
-                // flatListRef.current.scrollToEnd({ animated: false });
-                // flatListRef.current.scrollToEnd({ animated: false });
-                // flatListRef.current.scrollToEnd({ animated: false });
+        //     flatListRef.current.scrollToOffset({
+        //         offset: data.length * 200,
+        //         animated: true,
+        //     });
 
-            }
-        }, 1000);
+        // }
+        // if (flatListRef.current) {
+
+        //     console.log("scroll karne wala hu");
+
+        //     flatListRef.current.scrollToOffset({
+        //         offset: data.length * 200,
+        //         animated: true,
+        //     });
+
+        // }
+
+        // setTimeout(() => {
+        //     if (flatListRef.current) {
+        //         flatListRef.current.scrollToOffset({
+        //             offset: (data.length + 1) * 700,
+        //             animated: false,
+        //         });
+        //         // flatListRef.current.scrollToEnd({ animated: false });
+        //         // flatListRef.current.scrollToEnd({ animated: false });
+        //         // flatListRef.current.scrollToEnd({ animated: false });
+
+        //     }
+        // }, 1000);
         setnewtext("")
 
 
@@ -121,15 +140,16 @@ const Chat = ({ route }) => {
 
 
     useEffect(() => {
-        setdata(messages)
+        var temp = messages.toReversed()
+        setdata(temp)
         setTimeout(() => {
             // Ensure we are only scrolling when new messages are added
-            InteractionManager.runAfterInteractions(() => {
-                flatListRef.current?.scrollToOffset({
-                    offset: messages.length * 100,  // Adjust to actual item height
-                    animated: false,
-                });
-            });
+            // InteractionManager.runAfterInteractions(() => {
+            //     flatListRef.current?.scrollToOffset({
+            //         offset: messages.length * 100,  // Adjust to actual item height
+            //         animated: false,
+            //     });
+            // });
         }, 500);
     }, []);  // This runs only on mount
 
@@ -146,10 +166,10 @@ const Chat = ({ route }) => {
                     // console.log('====================================');
                     // console.log(messages.length);
                     // console.log('====================================');
-                    flatListRef.current?.scrollToOffset({
-                        offset: messages.length * 100,  // Adjust to actual item height
-                        animated: false,
-                    });
+                    // flatListRef.current?.scrollToOffset({
+                    //     offset: messages.length * 100,  // Adjust to actual item height
+                    //     animated: false,
+                    // });
                 });
             }, 500);
         }, [messages])
@@ -179,7 +199,6 @@ const Chat = ({ route }) => {
 
 
         if (socket) {
-
             const finaldata = {
                 senderId: id,
                 receiverId: jisuserkosendkarnahaiuskiid,
@@ -188,9 +207,24 @@ const Chat = ({ route }) => {
             socket.emit("registerUser", finaldata)
             console.log("i am connection socke url, ", url);
             // Listen for incoming private messages
-            socket.on("privateMessage", (data) => {
-                console.log(data);
-                setdata((prevMessages) => [...prevMessages, data]);
+            socket.on("privateMessage", (data1) => {
+                console.log(data1);
+                setdata((prevMessages) => [data1, ...prevMessages]);
+                function scroll() {
+
+                    // if (flatListRef.current) {
+                    //     console.log("scroll karne wala hu dusre mobile me");
+                    //     flatListRef.current.scrollToOffset({
+                    //         offset: data.length * 200,
+                    //         animated: true,
+                    //     });
+                    //     // flatListRef.current?.scrollToEnd({ animated: true });
+
+                    // }
+
+                }
+                scroll()
+
             });
         }
     }, [socket]);
@@ -280,10 +314,51 @@ const Chat = ({ route }) => {
     }
 
 
+    // function renderdategap(date, index) {
+    //     if (index > 0) {
+    //         var date1 = new Date(data[index - 1].updatedAt)
+    //         var date2 = new Date(date)
+    //         const messageDate1 = date1.toLocaleDateString("en-US", {
+    //             day: "2-digit",
+    //             month: "long",
+    //             year: "numeric",
+    //         });
+    //         const messageDate2 = date2.toLocaleDateString("en-US", {
+    //             day: "2-digit",
+    //             month: "long",
+    //             year: "numeric",
+    //         });
+
+    //         if (messageDate1 != messageDate2) {
+    //             return (
+    //                 <View style={{ justifyContent: "center", textAlign: "center", marginVertical: 10, marginBottom: 20, padding: 10, width: "auto", margin: "auto", borderRadius: 10, }}>
+    //                     <Text style={{ textAlign: "center", backgroundColor: "#363535", padding: 5, paddingHorizontal: 10, borderRadius: 10, color: "#bbbbbb" }}>{messageDate2}</Text>
+    //                 </View>
+    //             )
+    //         }
+
+    //     }
+    //     else if (index == 0) {
+    //         var date1 = new Date(date)
+    //         const messageDate1 = date1.toLocaleDateString("en-US", {
+    //             day: "2-digit",
+    //             month: "long",
+    //             year: "numeric",
+    //         });
+    //         return (
+    //             <View style={{ justifyContent: "center", textAlign: "center", marginVertical: 10, marginBottom: 20, padding: 10, width: "auto", margin: "auto", borderRadius: 10, }}>
+    //                 <Text style={{ textAlign: "center", backgroundColor: "#363535", padding: 5, paddingHorizontal: 10, borderRadius: 10, color: "#bbbbbb" }}>{messageDate1}</Text>
+    //             </View>
+    //         )
+    //     }
+    // }
+    // const renderItem = ({ item, index }) => {};
+
     function renderdategap(date, index) {
-        if (index > 0) {
-            var date1 = new Date(data[index - 1].updatedAt)
-            var date2 = new Date(date)
+        if (index < data.length - 1) {  // Now checking the next message instead of the previous one
+            var date1 = new Date(data[index + 1].updatedAt);
+            var date2 = new Date(date);
+
             const messageDate1 = date1.toLocaleDateString("en-US", {
                 day: "2-digit",
                 month: "long",
@@ -295,47 +370,89 @@ const Chat = ({ route }) => {
                 year: "numeric",
             });
 
-            if (messageDate1 != messageDate2) {
+            if (messageDate1 !== messageDate2) {
                 return (
-                    <View style={{ justifyContent: "center", textAlign: "center", marginVertical: 10, marginBottom: 20, padding: 10, width: "auto", margin: "auto", borderRadius: 10, }}>
-                        <Text style={{ textAlign: "center", backgroundColor: "#363535", padding: 5, paddingHorizontal: 10, borderRadius: 10, color: "#bbbbbb" }}>{messageDate2}</Text>
+                    <View style={{
+                        justifyContent: "center",
+                        textAlign: "center",
+                        marginVertical: 10,
+                        marginBottom: 20,
+                        padding: 10,
+                        width: "auto",
+                        margin: "auto",
+                        borderRadius: 10
+                    }}>
+                        <Text style={{
+                            textAlign: "center",
+                            backgroundColor: "#363535",
+                            padding: 5,
+                            paddingHorizontal: 10,
+                            borderRadius: 10,
+                            color: "#bbbbbb"
+                        }}>
+                            {messageDate2}
+                        </Text>
                     </View>
-                )
+                );
             }
-
-        }
-        else if (index == 0) {
-            var date1 = new Date(date)
+        } else if (index === data.length - 1) {  // The first message in the original order is now the last
+            var date1 = new Date(date);
             const messageDate1 = date1.toLocaleDateString("en-US", {
                 day: "2-digit",
                 month: "long",
                 year: "numeric",
             });
+
             return (
-                <View style={{ justifyContent: "center", textAlign: "center", marginVertical: 10, marginBottom: 20, padding: 10, width: "auto", margin: "auto", borderRadius: 10, }}>
-                    <Text style={{ textAlign: "center", backgroundColor: "#363535", padding: 5, paddingHorizontal: 10, borderRadius: 10, color: "#bbbbbb" }}>{messageDate1}</Text>
+                <View style={{
+                    justifyContent: "center",
+                    textAlign: "center",
+                    marginVertical: 10,
+                    marginBottom: 20,
+                    padding: 10,
+                    width: "auto",
+                    margin: "auto",
+                    borderRadius: 10
+                }}>
+                    <Text style={{
+                        textAlign: "center",
+                        backgroundColor: "#363535",
+                        padding: 5,
+                        paddingHorizontal: 10,
+                        borderRadius: 10,
+                        color: "#bbbbbb"
+                    }}>
+                        {messageDate1}
+                    </Text>
                 </View>
-            )
+            );
         }
     }
-    // const renderItem = ({ item, index }) => {};
 
     const renderItem = React.useMemo(
         () => ({ item, index }) => {
             const dataLength = data.length;
             // console.log(dataLength);
+            console.log(index);
+
 
             return (
                 <>
-                    {renderdategap(item.updatedAt, index)}
 
                     {typeof item.message == "string" && <TouchableOpacity onLongPress={() => {
                         console.log("long pressed");
 
                     }}>
                         <View style={{ display: "flex", flex: 1 }}>
-                            {index < dataLength - 1 && item.senderId != data[index + 1].senderId && <Image style={item.senderId == jisuserkosendkarnahaiuskiid ? styles.pfpleft : styles.pfpright} source={{ uri: item.senderId == jisuserkosendkarnahaiuskiid ? photo2 : photo1 }} />}
-                            {index == dataLength - 1 && <Image style={item.senderId == jisuserkosendkarnahaiuskiid ? styles.pfpleft : styles.pfpright} source={{ uri: item.senderId == jisuserkosendkarnahaiuskiid ? photo2 : photo1 }} />}
+                            {/* {index < dataLength - 1 && item.senderId != data[index + 1].senderId && <Image style={item.senderId == jisuserkosendkarnahaiuskiid ? styles.pfpleft : styles.pfpright} source={{ uri: item.senderId == jisuserkosendkarnahaiuskiid ? photo2 : photo1 }} />} */}
+
+                            {index > 0 && item.senderId != data[index - 1].senderId && (
+                                <Image
+                                    style={item.senderId == jisuserkosendkarnahaiuskiid ? styles.pfpleft : styles.pfpright}
+                                    source={{ uri: item.senderId == jisuserkosendkarnahaiuskiid ? photo2 : photo1 }}
+                                />
+                            )}
+                            {index == 0 && <Image style={item.senderId == jisuserkosendkarnahaiuskiid ? styles.pfpleft : styles.pfpright} source={{ uri: item.senderId == jisuserkosendkarnahaiuskiid ? photo2 : photo1 }} />}
 
 
 
@@ -425,6 +542,10 @@ const Chat = ({ route }) => {
                         </View>
                     }
 
+                    {renderdategap(item.updatedAt, index)}
+
+
+
 
 
 
@@ -483,7 +604,7 @@ const Chat = ({ route }) => {
             console.log("marking read");
             var decode = jwtDecode(token)
             console.log(decode);
-            
+
             var object = {
                 senderId: decode._id,
                 receiverId: jisuserkosendkarnahaiuskiid,
@@ -491,8 +612,8 @@ const Chat = ({ route }) => {
 
             console.log(object);
             console.log(`${url}test/markAsRead`);
-            
-            
+
+
             try {
                 const response = await fetch(`${url}test/markAsRead`,
                     {
@@ -502,7 +623,7 @@ const Chat = ({ route }) => {
                             "Content-Type": "application/json",
                             'Accept': 'application/json',
                             'Authorization': `Bearer ${token}`
-                          }
+                        }
                     }
                 );
                 const result = await response.json();
@@ -541,7 +662,7 @@ const Chat = ({ route }) => {
 
 
                 <View style={[styles.header]}>
-                    <Pressable style={{paddingLeft : 10 , paddingTop : 7}} onPress={() => { navigation.goBack() }}>
+                    <Pressable style={{ paddingLeft: 10, paddingTop: 7 }} onPress={() => { navigation.goBack() }}>
                         {/* <Ionicons name="arrow-back-circle-outline" size={40} color="#00DE62" /> */}
                         <FontAwesome6 name="chevron-left" size={25} color="#00DF60" />
                     </Pressable>
@@ -565,7 +686,7 @@ const Chat = ({ route }) => {
                 <FlatList
                     // style={{height : 600}}
                     data={data}
-                    // inverted={true}
+                    inverted={true}
                     removeClippedSubview={false}
                     initialNumToRender={20}  // Only load 20 items initially
                     maxToRenderPerBatch={10}  // Render only 10 items per batch
@@ -580,6 +701,8 @@ const Chat = ({ route }) => {
 
                     getItemLayout={(data, index) => ({ length: 100, offset: 100 * index, index })}
                     contentContainerStyle={styles.messagesContainer}
+                    onContentSizeChange={() => flatListRef.current?.scrollToOffset({ offset: 0, animated: false })}
+                    onLayout={() => flatListRef.current?.scrollToOffset({ offset: 0, animated: false })}
                 />
 
                 {/* <FlatList
@@ -724,7 +847,7 @@ const styles = StyleSheet.create({
     userid: {
         fontFamily: "Alata",
         fontSize: 20,
-        paddingTop : 8,
+        paddingTop: 8,
         color: "#00DE62",
         alignSelf: "flex-start",
 
@@ -748,7 +871,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#16181a",
         // left: 0,
         padding: 10,
-        paddingTop : 0,
+        paddingTop: 0,
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
@@ -884,7 +1007,7 @@ const styles = StyleSheet.create({
         bottom: 25,
     },
 
-    messagesContainer: { flexGrow: 1, padding: 10, paddingBottom: 0, minHeight: 400 },
+    // messagesContainer: { flexGrow: 1, padding: 10, paddingBottom: 0, minHeight: 400 },
 
     box: {
         width: width * 0.70,

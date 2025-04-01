@@ -85,13 +85,15 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
         else if (decoded.role == "Investor") {
             route = "investor/getInvestorChatUserList"
         }
-        else if (decoded.role == "CommunityMember") {
+        else {
             // console.log("fuck");
 
             route = "founder/getFounderChatUserList"
 
         }
         // else if()
+        console.log( `${url}${route}`);
+        
 
         setloading(true); // Start loading before fetching data
         if (token) {

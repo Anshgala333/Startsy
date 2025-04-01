@@ -22,7 +22,6 @@ const Chat1 = ({ navigation, route }) => {
     const { item, messages, token } = route.params;
 
 
-    console.log(item, "params");
 
     const { extra } = route.params;
 
@@ -49,7 +48,7 @@ const Chat1 = ({ navigation, route }) => {
                     }
                 );
                 const result = await response.json();
-                console.log(result.data);
+                // console.log(result.data);
                 setloggedInUserProfilePhoto(result.data)
             } catch (err) {
                 console.log(err);
@@ -62,25 +61,11 @@ const Chat1 = ({ navigation, route }) => {
     function sendmessage() {
 
 
-        // console.log("hiiii");
-
 
         if (newtext == "") {
             return
         }
-        // if (inputRef.current) {
-        //     inputRef.current.focus();
-        // }
 
-
-
-        // console.log(messages);
-
-        // const finaldata = {
-        //     senderId: id,
-        //     receiverId: jisuserkosendkarnahaiuskiid,
-        //     message: newtext
-        // }
 
         const finaldata = {
             groupId: item._id,
@@ -92,12 +77,12 @@ const Chat1 = ({ navigation, route }) => {
         // console.log(data, "data ");
 
         socket.emit("groupMessage", finaldata)
-        setdata([...data, {
+        setdata([{
             message: newtext, senderId: {
                 _id: id,
                 profilePhoto: loggedInUserProfilePhoto
             }
-        }])
+        }, ...data])
 
 
 
@@ -106,10 +91,10 @@ const Chat1 = ({ navigation, route }) => {
 
             console.log("scroll karne wala hu");
 
-            flatListRef.current.scrollToOffset({
-                offset: data.length * 100,
-                animated: true,
-            });
+            // flatListRef.current.scrollToOffset({
+            //     offset: data.length * 100,
+            //     animated: true,
+            // });
         }
         setnewtext("")
 
@@ -159,8 +144,6 @@ const Chat1 = ({ navigation, route }) => {
             StatusBar.setBarStyle("light-content");
         };
         console.log(messages);
-        console.log(messages);
-
 
         setdata(messages)
         setStatusBar();
@@ -168,17 +151,17 @@ const Chat1 = ({ navigation, route }) => {
             setStatusBar()
         }, 0);
 
-        if (messages && flatListRef.current) {
-            setTimeout(() => {
-                // Ensure we are only scrolling when new messages are added
-                InteractionManager.runAfterInteractions(() => {
-                    flatListRef.current.scrollToOffset({
-                        offset: messages.length * 100,  // Adjust to actual item height
-                        animated: false,
-                    });
-                });
-            }, 100);
-        }
+        // if (messages && flatListRef.current) {
+        //     setTimeout(() => {
+        //         // Ensure we are only scrolling when new messages are added
+        //         InteractionManager.runAfterInteractions(() => {
+        //             flatListRef.current.scrollToOffset({
+        //                 offset: messages.length * 100,  // Adjust to actual item height
+        //                 animated: true,
+        //             });
+        //         });
+        //     }, 100);
+        // }
 
 
 
@@ -234,25 +217,22 @@ const Chat1 = ({ navigation, route }) => {
             socket.on("groupMessage", ({ data1, pfp }) => {
 
                 console.log("groupmessage backend se aaya hai", data1);
-                if (data1.senderId == id) return
-
-
-
+                if (data1.senderId._id == id) return
                 // console.log(data);
 
-                setdata((prev) => [...prev, data1])
+                setdata((prev) => [data1, ...prev])
 
-                function scroll() {
-                    if (flatListRef.current) {
-                        console.log("scroll karne wala hu dusre mobile me");
-                        flatListRef.current.scrollToOffset({
-                            offset: data.length * 100,
-                            animated: true,
-                        });
-                    }
+                // function scroll() {
+                //     if (flatListRef.current) {
+                //         console.log("scroll karne wala hu dusre mobile me");
+                //         flatListRef.current.scrollToOffset({
+                //             offset: data.length * 100,
+                //             animated: true,
+                //         });
+                //     }
 
-                }
-                scroll()
+                // }
+                // scroll()
 
                 // setdata((prevMessages) => [...prevMessages, data]);
             });
@@ -339,10 +319,11 @@ const Chat1 = ({ navigation, route }) => {
 
         else return (
             <View style={{ display: "flex", flex: 1, width: "100%" }}>
+                {/* index > 0 && item.senderId != data[index - 1].senderId &&  */}
+                {index > 0 && item.senderId?._id != data[index - 1].senderId?._id &&
+                    <Image style={item.senderId._id != id ? styles.pfpleft : styles.pfpright} source={{ uri: item.senderId.profilePhoto }} />}
 
-                {index < (dataLength - 1) && item.senderId?._id != data[index + 1].senderId?._id && <Image style={item.senderId._id != id ? styles.pfpleft : styles.pfpright} source={{ uri: item.senderId.profilePhoto }} />}
-
-                {index == dataLength - 1 && <Image style={item.senderId._id != id ? styles.pfpleft : styles.pfpright} source={{ uri: item.senderId.profilePhoto }} />}
+                {index == 0 && <Image style={item.senderId._id != id ? styles.pfpleft : styles.pfpright} source={{ uri: item.senderId.profilePhoto }} />}
 
 
                 <View style={[
@@ -533,7 +514,7 @@ const Chat1 = ({ navigation, route }) => {
 
 
                 <View style={[styles.header]}>
-                    <Pressable style={{paddingLeft : 10 , paddingTop : 7}} onPress={() => { navigation.goBack() }}>
+                    <Pressable style={{ paddingLeft: 10, paddingTop: 7 }} onPress={() => { navigation.goBack() }}>
                         {/* <Ionicons name="arrow-back-circle-outline" size={36} color="#00DE62" /> */}
                         <FontAwesome6 name="chevron-left" size={25} color="#00DF60" />
 
@@ -545,7 +526,7 @@ const Chat1 = ({ navigation, route }) => {
                         <View style={styles.details}>
                             <View style={styles.userimg}>
                                 {(item.groupPhoto == undefined || item.groupPhoto == "") && <B1 color={"#ccc"} />}
-                                {item.groupPhoto && <Image style={{ width: 44, height: 44, borderRadius: 30 , marginRight : 10 }} source={{ uri: item.groupPhoto }} />}
+                                {item.groupPhoto && <Image style={{ width: 44, height: 44, borderRadius: 30, marginRight: 10 }} source={{ uri: item.groupPhoto }} />}
                                 {/* <B1 color={"#ccc"} /> */}
                             </View>
                             <View style={styles.d2}>
@@ -560,6 +541,7 @@ const Chat1 = ({ navigation, route }) => {
                 <FlatList
                     // style={{height : 600}}
                     data={data}
+                    inverted={true}
                     removeClippedSubview={false}
                     initialNumToRender={20}  // Only load 20 items initially
                     maxToRenderPerBatch={10}  // Render only 10 items per batch

@@ -57,19 +57,14 @@ import InvestorWaitingPage from "../SCREENS/main-2/InvestorWaitingPage.js"
 import Modal1 from "../SCREENS/Modal.js";
 import Wait from "../SCREENS/Wait.js";
 import Editcommunity from "../SCREENS/edit profile pages/Editcommunity.js";
-// import drop from "../../SCREENS/dropdown.js"
-// import Login1 from "../../SCREENS/logintrial.js";
 import F1 from "../SCREENS/test.js";
-// import F2 from "../SCREENS/F2.js";
 import KeyboardAvoidingComponent from "../SCREENS/Keyboard.js";
 import Blur from "../SCREENS/blur.js"; // trial blur page
 import { useEffect, createContext } from "react";
 import { ActivityIndicator, View, Text, StyleSheet } from "react-native";
-// import { setNavigationBarColorAsync } from 'expo-navigation-bar';
 import useLoadFonts from "../hooks/useLoadFonts.js";
 import { setBackgroundColorAsync } from "expo-system-ui";
 import * as SystemUI from "expo-system-ui";
-// import { StatusBar } from 'expo-status-bar';
 import { GlobalProvider } from "../Global/globalcontext.js";
 // import style from "../"
 import { LogBox } from "react-native";
@@ -98,27 +93,27 @@ enableScreens();
 
 enableFreeze(true);
 
-// LogBox.ignoreLogs([
-//   // "VirtualizedLists should never be nested", // Example warning
-//   'Warning: Each child in a list should have a unique "key" prop.',
-//   "VirtualizedList: Encountered an error while measuring a list's offset from its containing VirtualizedList.",
-// ]);
+LogBox.ignoreLogs([
+  // "VirtualizedLists should never be nested", // Example warning
+  'Warning: Each child in a list should have a unique "key" prop.',
+  "VirtualizedList: Encountered an error while measuring a list's offset from its containing VirtualizedList.",
+]);
 
-// const originalConsoleWarn = console.warn;
-// console.warn = (message, ...args) => {
-//   if (
-//     // message.includes("VirtualizedLists should never be nested") || // Suppress specific warning
-//     message.includes('Each child in a list should have a unique "key" prop.') ||
-//     message.includes('Non-serializable') ||
-//     message.includes(
-//       "Encountered an error while measuring a list's offset from its containing VirtualizedList."
-//     ) // Another specific warning
-//   ) {
-//     return; // Block these warnings
-//   }
-//   originalConsoleWarn(message, ...args); // Allow other warnings
-// };
-// export const Global = createContext("ok");
+const originalConsoleWarn = console.warn;
+console.warn = (message, ...args) => {
+  if (
+    // message.includes("VirtualizedLists should never be nested") || // Suppress specific warning
+    message.includes('Each child in a list should have a unique "key" prop.') ||
+    message.includes('Non-serializable') ||
+    message.includes(
+      "Encountered an error while measuring a list's offset from its containing VirtualizedList."
+    ) // Another specific warning
+  ) {
+    return; // Block these warnings
+  }
+  originalConsoleWarn(message, ...args); // Allow other warnings
+};
+export const Global = createContext("ok");
 
 export default function App() {
 
