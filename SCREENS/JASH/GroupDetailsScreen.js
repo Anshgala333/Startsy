@@ -54,10 +54,10 @@ const GroudDetailsScreen = ({ route }) => {
     const updateGroupDetail = async () => {
 
 
-        
+
         const data = {
-            communityName: typeof rec1.current === "string"? rec1.current : groupName,
-            communityDescription: typeof rec2.current === "string"? rec2.current : groupDescription ,
+            communityName: typeof rec1.current === "string" ? rec1.current : groupName,
+            communityDescription: typeof rec2.current === "string" ? rec2.current : groupDescription,
         }
 
 
@@ -70,7 +70,7 @@ const GroudDetailsScreen = ({ route }) => {
                 },
                 body: JSON.stringify(data),
             });
-            
+
 
             if (response.status == 200) {
                 showToastWithGravity(`Group detail updated successfully`)
@@ -164,6 +164,9 @@ const GroudDetailsScreen = ({ route }) => {
 
 
                 setData(allUsers)
+
+                // console.log("all users",allUsers);
+                
             } catch (err) {
                 console.log(err);
             }
@@ -241,18 +244,58 @@ const GroudDetailsScreen = ({ route }) => {
 
     async function sendfollowrequest(stat, id) {
 
-        if (stat) return
-
-        setData(data.map((e) => {
-            if (e._id == id) {
-                return { ...e, status: "Request Sent" }
-            }
-            else return e
-
-        }))
-
 
         console.log(id);
+        
+       
+
+
+        if (stat == "Connected" || stat == "Request Sent") {
+
+           
+
+
+            async function makesubmit() {
+                setData((prevArray) =>
+                    prevArray.map((e) =>
+                        e.id === id ? { ...e, status: "Connect" } : e
+                    )
+                );
+
+                try {
+                    const response = await fetch(`${url}founder/rejectRequest/${id}`, {
+                        method: 'POST',
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        }
+                    })
+                    const data = await response.json();
+                    console.log(data);
+
+
+
+                }
+                catch (err) {
+                    console.log(err);
+
+                }
+            }
+
+
+            makesubmit()
+            return
+        }
+
+
+        setData((prevArray) =>
+            prevArray.map((e) =>
+                e.id === id ? { ...e, status: "Request Sent" } : e
+            )
+        );
+
+
+
+        // console.log(id);
         try {
 
             const response = await fetch(`${url}connections/followUser/${id}`, {
@@ -266,7 +309,7 @@ const GroudDetailsScreen = ({ route }) => {
             });
             const data = await response.json();
             console.log(data);
-
+    
 
         }
         catch (err) {
@@ -276,7 +319,7 @@ const GroudDetailsScreen = ({ route }) => {
 
     }
 
-    // var [image  , setImage] = useState("")
+
 
 
     useEffect(() => {
@@ -368,7 +411,7 @@ const GroudDetailsScreen = ({ route }) => {
                     </View>
 
                     {item.id != decode._id && <TouchableOpacity
-                        // onPress={() => { sendfollowrequest(item.status, item._id) }}
+                        onPress={() => { sendfollowrequest(item.status, item.id) }}
                         style={item.status != "Connect" ? styles.sendbtn1 : styles.sendbtn}>
                         <Text style={item.status != "Connect" ? styles.sendbtnText1 : styles.sendbtnText}>
                             {item.status}</Text>
