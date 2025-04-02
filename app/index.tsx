@@ -74,6 +74,7 @@ import CommunityPage from "../SCREENS/CommunityPage.jsx";
 import BlogPage from "../SCREENS/BlogPage.jsx";
 import MediaPost from "../SCREENS/MediaPost.js";
 import JobPostingPage from "../SCREENS/JobPosting.jsx";
+import TermsAndConditions from '../SCREENS/JASH/terms-condition/TermsAndCondition.jsx'
 // import ReadMore1 from "../../SCREENS/trial-1.js";
 
 import AllPostsScreen from '../SCREENS/SavedPost.js'
@@ -274,6 +275,7 @@ export default function App() {
           <Stack.Screen name="VerificationPendingScreen" component={VerificationPendingScreen}/>
           <Stack.Screen name="InvestorNotVerifiedScreen" component={InvestorNotVerifiedScreen} />
           <Stack.Screen name="CertificatePortfolioPage" component={CertificatePortfolioPage} />
+          <Stack.Screen name="TermsAndConditions" component={TermsAndConditions} />
           </Stack.Navigator >
       )
       }

@@ -1,6 +1,7 @@
 
 // 3.4 second last of freelancer
 import React, { useState, useRef, useEffect, useContext } from "react";
+import * as Linking from 'expo-linking'
 import {
 
     SafeAreaView,
@@ -18,7 +19,10 @@ import {
     FlatList,
     TouchableWithoutFeedback,
     KeyboardAvoidingView,
-    ActivityIndicator
+    ActivityIndicator,
+    Touchable,
+    TouchableOpacity,
+
 } from "react-native";
 // import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -60,9 +64,9 @@ const Signup7 = ({ navigation, route }) => {
 
     const { type } = route.params || "Founder";
 
-    const { form, image } = route.params;
+    // const { form, image } = route.params;
     console.log('====================================');
-    console.log(form);
+    // console.log(form);
     console.log('====================================');
 
     const [InstagramUrl, setInstagramUrl] = useState("")
@@ -206,7 +210,7 @@ const Signup7 = ({ navigation, route }) => {
     async function finalsubmit() {
 
         console.log("route called");
-        
+
 
         for (var i = 0; i < certificate.length; i++) {
 
@@ -296,13 +300,13 @@ const Signup7 = ({ navigation, route }) => {
 
             })
         }
-        else{
-           
-            
+        else {
+
+
             console.log("no image");
             var defaulImage = await loadDefaultImage();
-            console.log(defaulImage , "okkkkkkkkkkkkk");
-            
+            console.log(defaulImage, "okkkkkkkkkkkkk");
+
 
             final.append("profilePhoto", {
                 uri: defaulImage,
@@ -312,7 +316,7 @@ const Signup7 = ({ navigation, route }) => {
             })
 
             // return
-            
+
         }
 
 
@@ -351,7 +355,7 @@ const Signup7 = ({ navigation, route }) => {
 
 
         console.log(final);
-        
+
 
         try {
             const response = await fetch(`${url}api/communityMemberInfo`, {
@@ -580,6 +584,17 @@ const Signup7 = ({ navigation, route }) => {
                                     onChangeText={(text) => { setLinkedinURl(text) }}
                                 />
                             </View>
+                            <View style={{ color:'#ccc',justifyContent:'center',alignItems:'center' ,marginVertical:20}}>
+                                <Text style={{ color:'#ccc' ,marginBottom:2,fontFamily:'Alata'}}>
+                                    By clicking on submit
+                                    I agree to all
+                                </Text>
+                                <TouchableOpacity  onPress={()=>navigation.navigate('TermsAndConditions')}>
+                                    <Text style={{ color:'#00de62' ,textDecorationLine:'underline',fontFamily:'Alata', }}>
+                                        Terms & Conditions
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>
                             <View style={styles.icons} nestedScrollEnabled={true}>
                                 <Pressable onPress={() => {
                                     navigation.goBack()
@@ -785,14 +800,14 @@ const styles = StyleSheet.create({
         top: 2,
         zIndex: 100
     },
-     plus2: {
+    plus2: {
         position: "absolute",
         left: 0,
         top: 12,
         zIndex: 100
     },
-    
-    
+
+
     minus: {
         position: "absolute",
         right: 45,
