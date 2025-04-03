@@ -151,14 +151,8 @@ const Foryou =
                 var decode = jwtDecode(token)
                 var loggedinUserID = decode._id
 
-
-
                 var data1 = data.data.map(e => {
-
-
                     var object = { ...e, isliked: e.likedBy.includes(loggedinUserID), Applied: e.communityPost ? e.communityPost.communityMembers.includes(loggedinUserID) : false, Jobapplied: e.jobPosts ? e.jobPosts.jobApplicants.includes(loggedinUserID) : false, itemlikedcount: e.likedBy.length , issaved : !data.bookmarks.includes(e._id) }
-
-
                     return object
                 })
 
@@ -188,6 +182,7 @@ const Foryou =
         }, [token])
 
         const openBottomSheet = () => {
+
             mainpagebottomsheet.current?.expand();
             
         }
@@ -278,7 +273,7 @@ const Foryou =
             }
 
             const result = await ImagePicker.launchImageLibraryAsync({
-                mediaTypes: ImagePicker.MediaTypeOptions.All,
+                mediaTypes: ImagePicker.MediaTypeOptions.Images,
                 allowsEditing: true,
                 aspect: aspect,
                 quality: 1,

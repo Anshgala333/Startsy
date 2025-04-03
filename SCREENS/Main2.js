@@ -92,6 +92,17 @@ const Main2 = ({ navigation, route }) => {
 
     useEffect(() => {
         async function getToken() {
+            console.log("thsi");
+
+            if (globaldata.token) {
+                setToken(globaldata.token);
+            }
+        }
+        getToken();
+    }, [globaldata])
+
+    useEffect(() => {
+        async function getToken() {
             const temp = await AsyncStorage.getItem("accessToken");
             setToken(temp);
         }
@@ -1064,7 +1075,7 @@ const Main2 = ({ navigation, route }) => {
                         showReportBottomSheet && (
                             <ReportBottomSheet
                                 token={token}
-                                
+
                                 reportPost={reportPost}
                                 reportId={reportId}
                                 reportBottomSheetRef={reportBottomSheetRef}

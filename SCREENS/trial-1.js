@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { Text, View, Dimensions, StatusBar, Pressable, Image, SafeAreaView, BackHandler, ScrollView, Animated } from "react-native";
 import { BlurView } from "expo-blur";
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -11,6 +11,8 @@ import { url } from "@/config.js";
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
 import Up from "../assets/icons/up.js"
+import { GlobalContext } from "@/Global/globalcontext.js";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 // import { useSharedValue, useAnimatedStyle, withTiming } from "react-native-reanimated";
 
 
@@ -63,6 +65,9 @@ const ReadMore1 = function ({ attop, setattop, animatedtop, animatedValue, Gener
 
   };
 
+   const { globaldata, updateField } = useContext(GlobalContext);
+  
+
   const scrolltozero = () => {
     console.log("fucntin called");
 
@@ -96,7 +101,9 @@ const ReadMore1 = function ({ attop, setattop, animatedtop, animatedValue, Gener
         console.log(data);
         if (response.status == 200) {
           scrolltozero()
-
+          console.log(data.token);
+          updateField("token", data.token);
+          await AsyncStorage.setItem('accessToken', data.token);
           if (attop == false) {
             setattop(true)
             return true; // This prevents the default back action

@@ -373,15 +373,46 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
             });
             const data = await response.json();
 
-            console.log(data.profileCompletion, "completion ka data");
-            console.log(data);
+            // console.log(data.profileCompletion, "completion ka data");
+            // console.log(data);
+
+            console.log("this funvtion ran");
+            
+
+
+            
+                const f2 = new Set()
+                const tree = data.data.chatUsers.filter((e) => {
+                    if (f2.has(e._id)) {
+                    return false
+                    }
+                    else {
+                    f2.add(e._id)
+                    return true
+                    }
+                })
+              
+      // return
+
+
+      setinvestorarray(tree.filter((e) => e.role == "Investor"))
+      setnoninvestor(tree.filter((e) => e.role != "Investor"))
+
+      var recorde1= tree.filter((e) => e.role == "Investor")
+      var recorde2= tree.filter((e) => e.role != "Investor")
+
+      console.log(recorde1.length);
+      console.log(recorde2.length);
+      
+
+
             
 
 
             // console.log(data.data.chatUsers, "poiuytr");
 
-            setinvestorarray(data.data?.chatUsers.filter((e) => e.role == "Investor"))
-            setnoninvestor(data.data?.chatUsers.filter((e) => e.role != "Investor"))
+            // setinvestorarray(data.data?.chatUsers.filter((e) => e.role == "Investor"))
+            // setnoninvestor(data.data?.chatUsers.filter((e) => e.role != "Investor"))
 
             setGeneralModelId(data.data._id)
             setemail(data.data.email)
@@ -405,6 +436,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
             setyturl(data.data.hiddenInfo.socialProof[2].url)
             
 
+console.log(data.data.posts.length);
 
 
             if (true) {
@@ -636,8 +668,6 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
 
             // console.log("hi");
             // console.log(postid);
-
-
         }
 
 
@@ -963,7 +993,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
         else if (decoded.role == "Investor") {
             route = "investor/getInvestorChatUserList"
         }
-        else if (decoded.role == "CommunityMember") {
+        else {
             // console.log("fuck");
 
             route = "founder/getFounderChatUserList"
@@ -1253,7 +1283,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                                 ))}
 
 
-                                <Text style={styles1.t6}>{userdata.investorConnections} investor connections</Text>
+                                <Text style={styles1.t6}>{investor.length} investor connections</Text>
                             </View>}
                             <TouchableOpacity onPress={() => {
                                 // console.log("users page");
@@ -1275,7 +1305,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                                     </View>
                                 ))}
 
-                                <Text style={styles1.t6}>{length1(userdata.chatUsers)} connections</Text>
+                                <Text style={styles1.t6}>{noninvestor.length} connections</Text>
                             </TouchableOpacity>
                         </View>
 
@@ -1386,7 +1416,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
 
     const render = ({ item, index }) => (
 
-        < View key={index} style={{ flex: 1, minHeight: minHeight, backgroundColor: "#16181a" }} >
+        < View key={index} style={{ flex: 1, backgroundColor: "#16181a" }} >
 
             {!userdata && <ActivityIndicator size={24} color="#ccc" />}
             {userdata && <Header />}
