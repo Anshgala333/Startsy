@@ -11,6 +11,7 @@ import B1 from "@/assets/icons/b1.js";
 import * as ImagePicker from 'expo-image-picker';
 import Profile from "../assets/icons/profile.js"
 import { Checkbox } from "react-native-paper";
+import { color } from "framer-motion";
 
 
 
@@ -189,15 +190,12 @@ const CommunityPage = () => {
 
       <View style={styles.container} >
 
-        {/* <Text style={styles.tittle}>Upload Community</Text> */}
-        {/* image for community */}
-        {/* <View style={{marginVertical : 10 , marginBottom : 10}}><B1/></View> */}
 
 
 
-        <Pressable onPress={fileupload} style={{ marginTop: 20 }}>
+        <Pressable onPress={fileupload} style={{ marginTop: 40 }}>
           {image != "xyz" ? (
-            <Image style={styles.img} source={{ uri: image }} />
+            <Image style={styles.img} source={{ uri: image }}  />
           ) : (
             // <Image style={styles.img1} source={require("../assets/images/User_light.png")} />
             <Profile />
@@ -228,7 +226,7 @@ const CommunityPage = () => {
 
           {/* Description field */}
           <View style={{ marginTop: 10 }}>
-            <Text style={styles.label}>Description :</Text>
+            <Text style={styles.label}>Forum Description :</Text>
             <TextInput
               style={styles.textArea}
               value={description}

@@ -33,6 +33,7 @@ import Settings from "../SCREENS/Settings.js"
 
 import BottomSheet, { BottomSheetView, BottomSheetScrollView, BottomSheetTextInput, BottomSheetDraggableView, BottomSheetFlatList, BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { LinearGradient } from 'react-native-svg';
 
 // import dotenv from 'dotenv/config'
 
@@ -586,32 +587,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                     <Animated.View style={[styles1.overlay, { opacity: fadeAnim }]}>
                         <TouchableWithoutFeedback>
                             <View style={styles1.alertBox}>
-                               {/* <ScrollView style={{}}>
-                               <Text style={styles1.title}>Delete Post</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <View style={{ display: "flex", flexDirection: "row", gap: 10 }}>
-
-                                    
-                                    
-                                </View>
-                               </ScrollView> */}
+                       
                             </View>
                         </TouchableWithoutFeedback>
                     </Animated.View>
@@ -652,7 +628,13 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
 
         if (item.type == "photo" || item.type == "textBlog" || item.type == "video") {
             return (
-                <View key={index} style={styles.box}>
+                // <View key={index} style={styles.box}>
+                    <LinearGradient
+                                                    colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}
+                                                    locations={[0, 1]}
+                                                    style={styles.box}
+                                                    start={{ x: 0, y: 0 }}
+                                                    end={{ x: 0, y: 1 }} >
                     <View style={[styles.top, { marginBottom: 0 }]} >
                         <View
                             // onPress={() => { navigation.navigate("Singleuserpage", { token: token, id: item.user_id._id, page: "Startsy" }) }}
@@ -694,39 +676,52 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                     }
                     {item.type == "textBlog" && <Text style={styles.blogtext}>{item.content}</Text>}
 
-                    <View style={styles.iconcontainer}>
-                        <View style={styles.icon2}>
-                            <Pressable onPress={() => { upvotepost(item._id, index) }}>
-                                {!item.isliked && <Upvote width={36} height={36} style={{ marginHorizontal: 5 }} />}
-                                {item.isliked && <Upvote width={36} height={36} style={{ marginHorizontal: 5 }} selected={true} />}
-                            </Pressable>
+                        <View style={styles.iconcontainer}>
 
-                            <Text style={{ left: -10, top: 13, color: "#ccc" }}>{item.likedBy.length}</Text>
-                            <Pressable style={{ marginLeft: -5 }} onPress={() => {
-                                Vibration.vibrate(20)
-                                opencomment(item._id)
-                            }}><FontAwesome name="comment-o" size={30} color="#ccc" /></Pressable>
-                        </View>
-                        <TouchableOpacity
-                            onPress={() => {
-                                Vibration.vibrate(20)
-                                openshare(item._id)
-                            }}
-                        >
-                            <Share style={{ marginTop: 5, marginRight: 10, right: 0 }} />
-                        </TouchableOpacity>
+                                    <View style={styles.icon2}>
 
 
-                    </View>
-                    <View style={styles.lower}>
-                        {item.type != "textBlog" && <Text allowFontScaling={false} style={styles.u3}>{item.caption != undefined ? item.caption : "caption"} </Text>}
-                        <Pressable onPress={() => { opencomment(item._id) }} allowFontScaling={false} style={styles.u4}>
-                            <Text style={styles.u4}>View {item.postComments.length} comments</Text>
-                        </Pressable>
+                                        <View style={{flexDirection:'row',gap:6,marginRight:4}}>
+                                            <TouchableOpacity onPress={() => { upvotepost(item._id, index) }}>
+                                          
+                                                {!item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5, marginTop: 6 }} />}
+                                                {item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5, marginTop: 6 }} selected={true} />}
+                                            </TouchableOpacity>
+                                            <Text style={{  left: 0, color: "#ccc" ,fontFamily:'Roboto',top:5}}>{item.likedBy.length}</Text>
+                                        </View>
 
-                    </View>
 
-                </View>
+                                        <Pressable onPress={() => {
+                                            Vibration.vibrate(20)
+                                            opencomment(item._id)
+                                            
+                                        }}
+                                        >
+                                            <FontAwesome style={{ marginLeft: 4, marginRight:7}} name="comment-o" size={27} color="#ccc" />
+                                        </Pressable>
+
+                                        <Pressable onPress={() => {
+                                            Vibration.vibrate(20)
+                                            openshare(item._id)
+                                        }}>
+                                            <Share style={{ marginTop: 5, marginRight: 10, right: 0 }} />
+                                        </Pressable>
+
+
+                                    </View>
+
+
+                                </View>
+
+                                <View style={styles.lower}>
+                                    {item.type != "textBlog" && <Text allowFontScaling={false} style={styles.u3}>{item.caption != undefined ? item.caption : "caption"} </Text>}
+                                    <Pressable onPress={() => { opencomment(item._id) }} allowFontScaling={false} style={styles.u4}>
+                                        <Text style={styles.u4}>View {item.postComments.length} comments</Text>
+                                    </Pressable>
+                               </View>
+                               </LinearGradient>
+
+                // </View>
             )
         }
         else if (item.type == "communityPost") {

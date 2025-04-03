@@ -267,18 +267,7 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                             // backgroundColor:'red'       // Center vertically
 
                                         }}>
-                                            {/* <TouchableOpacity style={{ paddingRight: 0 }} onPress={() => toggleSavePost(item._id, index)}>
-                                                {item.issaved ? (
-                                                    <MaterialIcons name="bookmark-border" size={30} color="#ccc" />
-                                                ) : (
-                                                    <MaterialCommunityIcons
-                                                        name="bookmark"
-                                                        size={30}
-                                                        color="#ccc"             // Gray when unsaved
 
-                                                    />
-                                                )}
-                                            </TouchableOpacity> */}
 
 
                                         </View>
@@ -304,33 +293,41 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                 }
 
                                 {item.type == "textBlog" && <Text style={styles.blogtext}>{item.content}</Text>}
-                         
+
 
                                 <View style={styles.iconcontainer}>
+
                                     <View style={styles.icon2}>
-                                        <View style={{flexDirection:'row',gap:6,marginRight:4,}}>
+
+
+                                        <View style={{ flexDirection: 'row', gap: 6, marginRight: 4, }}>
                                             <TouchableOpacity onPress={() => { upvotepost(item._id, index) }}>
-                                          
+
                                                 {!item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5, marginTop: 6 }} />}
                                                 {item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5, marginTop: 6 }} selected={true} />}
                                             </TouchableOpacity>
-                                            <Text style={{ left: 0, top: 13, color: "#ccc" }}>{item.itemlikedcount}</Text>
+                                            <Text style={{ left: 0, color: "#ccc", fontFamily: 'Roboto',top:13 }}>{item.itemlikedcount}</Text>
                                         </View>
+
+
                                         <Pressable onPress={() => {
                                             Vibration.vibrate(20)
                                             opencomment(item._id)
-                                            
+
                                         }}
-                                        // styles={{marginRight:4}}
                                         >
-                                            <FontAwesome style={{ marginLeft: 4, marginRight:7}} name="comment-o" size={27} color="#ccc" />
+                                            <FontAwesome style={{ marginLeft: 4, marginRight: 12 }} name="comment-o" size={27} color="#ccc" />
                                         </Pressable>
+
+
                                         <Pressable onPress={() => {
                                             Vibration.vibrate(20)
                                             openshare(item._id)
                                         }}>
                                             <Share style={{ marginTop: 5, marginRight: 10, right: 0 }} />
                                         </Pressable>
+
+
                                     </View>
 
 
