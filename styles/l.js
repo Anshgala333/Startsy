@@ -96,16 +96,16 @@ const styles = StyleSheet.create({
     input: {
         // height: height * 0.045, // Responsive height
         backgroundColor: "transparent",
-        margin: height * 0.016,
+        margin: height * 0.012,
         marginTop: 0,
         borderBottomWidth: 1,
         borderBottomColor: "white",
-        fontSize: scalingfactor*17, // Responsive font size
+        fontSize: scalingfactor*18, // Responsive font size
         color: "white",
         // paddingBottom: height * 0.012,
         width: "95%",
         paddingBottom : 10 ,
-        marginBottom : 20,
+        marginBottom : 30,
         fontFamily: "Alata",
         // lineHeight : scalingfactor * 18
     },
@@ -115,19 +115,19 @@ const styles = StyleSheet.create({
         // backgroundColor : "red",
         width : "75%",
        
-        fontSize: scalingfactor*17, // Responsive font size
+        fontSize: scalingfactor*18, // Responsive font size
         margin: height * 0.011,
         marginTop: -2,
         color: "white",
-        paddingBottom : 5 ,
+        paddingBottom : 0 ,
         // paddingBottom: height * 0.012,
         fontFamily: "Alata",
         // lineHeight : scalingfactor * 20
-
+        //marginBottom:40,
     },
     label: {
-        margin : scalingfactor * 10,
-        marginTop: scalingfactor * 10,
+       margin : scalingfactor * -40,
+        //marginTop: scalingfactor * 10,
         marginBottom: -4,
         color: "white",
         fontSize: scalingfactor* 16, // Responsive font size
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
         shadowColor: "black",
         shadowOpacity: 0.6,
         textAlign: "center",
-        marginTop: height * 0.02,
+        marginTop: height * 0.04,
         justifyContent: "center",
         alignItems: "center",
         // borderColor: "black",
@@ -206,7 +206,9 @@ const styles = StyleSheet.create({
     },
     p: {
         textAlign: "center",
-        marginVertical: height * 0.012,
+        // position:"absolute",
+        // bottom:0,
+        marginVertical: height * 0.016,
         fontSize: width * 0.042,
         fontFamily: "Alata"
     },
@@ -304,6 +306,13 @@ const styles = StyleSheet.create({
         fontFamily : "Roboto",
 
     },
+    lastLine : {
+        position  : "absolute",
+        bottom : 0,
+        alignSelf : "center"
+        // marginHorizontal : "auto"
+
+    }
 });
 
 export default styles;

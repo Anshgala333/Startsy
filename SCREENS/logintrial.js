@@ -325,7 +325,7 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
     if (initial) {
       const timer1 = setTimeout(() => {
         Animated.timing(heightAnim, {
-          toValue: height * 0.4,
+          toValue: height * 0.5,
           duration: 400,
           useNativeDriver: false,
           easing: Easing.elastic(0.5),
@@ -345,7 +345,7 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
     if (initial) {
       const timer = setTimeout(() => {
         Animated.timing(bottomanim, {
-          toValue: height * 0.6,
+          toValue: height * 0.5,
           duration: 400,
           useNativeDriver: false,
           easing: Easing.elastic(0.5)
@@ -383,13 +383,13 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
     // setForm1Visible(true)
     setTimeout(() => {
       Animated.timing(heightAnim, {
-        toValue: height * 0.4,
+        toValue: height * 0.5,
         duration: 300,
         useNativeDriver: false,
         easing: Easing.inOut(Easing.ease),
       }).start();
       Animated.timing(bottomanim, {
-        toValue: height * 0.6,
+        toValue: height * 0.5,
         duration: 300,
         useNativeDriver: false,
         easing: Easing.inOut(Easing.ease),
@@ -570,7 +570,7 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
 
           {wrongcredential && <Text style={styles.error1}>Invalid credentials</Text>}
 
-          {isForm1Visible && (<View><Text allowFontScaling={false} style={styles.label}>Email / Username</Text>
+          {isForm1Visible && (<View style={{flex:1 , paddingTop : 20}}><Text allowFontScaling={false} style={styles.label}></Text>
             <Pressable
               onPress={() => {
                 // console.log('====================================');
@@ -581,9 +581,10 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
             >
               <TextInput allowFontScaling={false}
                 placeholderTextColor="#828282"
+                
                 style={styles.input}
                 ref={emailInput}
-                placeholder="xyz@gmail.com"
+                placeholder="Email / Username"
                 value={email}
                 onFocus={() => {
                   scrollContainer.current?.scrollTo({ y: 100, animate: true });
@@ -618,16 +619,16 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
               {!loading && <Text allowFontScaling={false} style={[styles.login]}>Login </Text>}
               {loading && <ActivityIndicator size={24} color="#fff" />}
             </Pressable>
-            <Text allowFontScaling={false} style={[styles.white, styles.p]}>Or continue with </Text>
+            {/* <Text allowFontScaling={false} style={[styles.white, styles.p]}>Or continue with </Text>
             <Pressable onPress={() => { showToastWithGravity("This functionality is yet to come!") }} style={styles.googlebutton}>
               <Image
                 source={require("../assets/images/google.png")}
                 style={styles.googleIcon}
               />
               <Text allowFontScaling={false} style={[styles.gray, styles.google]}>Google</Text>
-            </Pressable>
+            </Pressable> */}
 
-            <Text allowFontScaling={false} style={[styles.gray, styles.p]}>
+            <Text allowFontScaling={false} style={[styles.gray, styles.p , styles.lastLine]}>
               Don't have account? <Text style={styles.green} onPress={() => {
                 // setForm1Visible(false)  commented
                 // animation2() commented
