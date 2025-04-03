@@ -194,10 +194,16 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
     // }
 
     setloading(true)
+    var ExistingToken = await AsyncStorage.getItem("notificationToken")
+    console.log(ExistingToken);
+
+    // return
 
     var final = {
       identifier: email,
       password: password,
+      notificationToken: ExistingToken
+
     }
 
 
@@ -216,8 +222,6 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
       console.log(data);
       if (response.status === 200) {
         updateField("token", data.accessToken);
-
-
         try {
           await AsyncStorage.setItem('accessToken', data.accessToken);
           // console.log('Data saved successfully!');
@@ -230,17 +234,17 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
           const decoded = jwtDecode(token);
           console.log(decoded);
           if (decoded.role == "Investor") {
-            
+
             if (decoded.isInvestorVerified == true) {
               navigation.navigate("Main2")
             }
-            else if(decoded.investorRejected == true){
+            else if (decoded.investorRejected == true) {
               navigation.navigate("InvestorNotVerifiedScreen")
 
-          }
-          else  {
+            }
+            else {
               navigation.navigate("InvestorWaitingPage")
-          }
+            }
           }
           else {
             navigation.navigate("Main2");
@@ -614,7 +618,7 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
               {!loading && <Text allowFontScaling={false} style={[styles.login]}>Login </Text>}
               {loading && <ActivityIndicator size={24} color="#fff" />}
             </Pressable>
-            <Text allowFontScaling={false} style={[styles.white, styles.p]}>Or continue with</Text>
+            <Text allowFontScaling={false} style={[styles.white, styles.p]}>Or continue with </Text>
             <Pressable onPress={() => { showToastWithGravity("This functionality is yet to come!") }} style={styles.googlebutton}>
               <Image
                 source={require("../assets/images/google.png")}

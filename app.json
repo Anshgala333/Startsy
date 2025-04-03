@@ -7,10 +7,10 @@
     "icon": "./assets/images/logo.png",
     "scheme": "myapp",
     "resizeMode": "contain",
-    "backgroundColor" : "#16181a",
+    "backgroundColor": "#16181a",
     "userInterfaceStyle": "dark",
     "splash": {
-      "image": "./assets/images/logofinal.png", 
+      "image": "./assets/images/logofinal.png",
       "resizeMode": "contain",
       "backgroundColor": "#16181a"
     },
@@ -19,8 +19,9 @@
       "bundleIdentifier": "com.rspytech.startsy"
     },
     "android": {
-      "softwareKeyboardLayoutMode": "adjustResize",
-
+      "useNextNotificationsApi": true,
+      "googleServicesFile": "./google-services.json",
+      "softwareKeyboardLayoutMode": "resize",
       "androidStatusBar": {
         "backgroundColor": "#16181A",
         "translucent": false
@@ -28,13 +29,11 @@
       "permissions": [
         "ACCESS_NETWORK_STATE",
         "INTERNET"
-      
       ],
-
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/logofinal.png",
         "backgroundColor": "#16181a",
-        "resizeMode" : "contain"
+        "resizeMode": "contain"
       },
       "package": "com.rspytech.startsy"
     },
@@ -51,16 +50,20 @@
     "experiments": {
       "typedRoutes": true
     },
-    "extra": {
-      "eas": {
-        "projectId": "104869d6-a4db-4041-8b76-8deb8d1a34c5"
-      }
-    },
     "runtimeVersion": {
       "policy": "appVersion"
     },
     "updates": {
       "url": "https://u.expo.dev/104869d6-a4db-4041-8b76-8deb8d1a34c5"
+    },
+    "owner": "ansh333",
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "104869d6-a4db-4041-8b76-8deb8d1a34c5"
+      }
     }
   }
 }

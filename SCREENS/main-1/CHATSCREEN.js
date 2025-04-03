@@ -953,7 +953,8 @@ const styles = StyleSheet.create({
     , sent: {
         alignItems: "flex-end",
         justifyContent: "center",
-        marginVertical: 5
+        marginVertical: 5,
+        marginRight : 5,
     }
     , received: {
         alignItems: "flex-start",
@@ -994,7 +995,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         width: 25,
         height: 25,
-        right: -5,
+        right: 0,
         borderRadius: 100,
         bottom: 10,
     },
@@ -1002,7 +1003,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         width: 25,
         height: 25,
-        right: 0,
+        right: 20,
         borderRadius: 100,
         bottom: 25,
     },

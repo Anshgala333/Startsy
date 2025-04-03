@@ -77,12 +77,15 @@ const Chat1 = ({ navigation, route }) => {
         // console.log(data, "data ");
 
         socket.emit("groupMessage", finaldata)
-        setdata([{
-            message: newtext, senderId: {
-                _id: id,
-                profilePhoto: loggedInUserProfilePhoto
-            }
-        }, ...data])
+        setdata([
+            {
+                message: newtext, senderId: {
+                    _id: id,
+                    profilePhoto: loggedInUserProfilePhoto
+                }
+            },
+            ...data]
+        )
 
 
 
@@ -144,8 +147,8 @@ const Chat1 = ({ navigation, route }) => {
             StatusBar.setBarStyle("light-content");
         };
         console.log(messages);
-
-        setdata(messages)
+        var temp = messages.toReversed()
+        setdata(temp)
         setStatusBar();
         setTimeout(() => {
             setStatusBar()
@@ -217,6 +220,7 @@ const Chat1 = ({ navigation, route }) => {
             socket.on("groupMessage", ({ data1, pfp }) => {
 
                 console.log("groupmessage backend se aaya hai", data1);
+
                 if (data1.senderId._id == id) return
                 // console.log(data);
 

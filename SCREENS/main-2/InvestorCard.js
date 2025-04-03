@@ -40,7 +40,7 @@ const InvestorCard = ({ route }) => {
             const {data}=result
 
             const filteredData = data.filter((e)=>e.investor!= null)
-            // console.log(result ,"okkkkkkkkkkkkkkk");
+            console.log(result ,"okkkkkkkkkkkkkkk");
 
 
 
@@ -185,7 +185,7 @@ const InvestorCard = ({ route }) => {
                             }
                         })
                         const data = await response.json();
-                        // console.log(data);
+                        console.log(data);
 
                     }
                     catch (err) {

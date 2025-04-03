@@ -1,4 +1,5 @@
-import * as React from "react";
+import React, { useState, useRef } from "react";
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as SplashScreen from "expo-splash-screen";
 import { DarkTheme, NavigationContainer } from "@react-navigation/native";
@@ -7,15 +8,12 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Green from "../SCREENS/greenscreen.js"; //page 1
 import Login1 from "../SCREENS/logintrial.js"; // login page
 import ReadMore1 from "../SCREENS/trial-1.js"; // read more page
-import { SafeAreaView } from "react-native";
+import { Alert, Button, Pressable, SafeAreaView } from "react-native";
 import Signup1 from "../SCREENS/signup-1.js";
 import Signup2 from "../SCREENS/signup2.js";
 import Signup3 from "../SCREENS/signup3.js";
 import Signup4 from "../SCREENS/signup4.js";
 import Signup5 from "../SCREENS/signup5.js";
-import Line from "../SCREENS/line.js";
-import Line2 from "../SCREENS/line2.js";
-import Line3 from "../SCREENS/line3.js";
 import Signup6 from "../SCREENS/signup6.js";
 import Signup7 from "../SCREENS/signup7.js";
 import Signup8 from "../SCREENS/signup8.js";
@@ -29,8 +27,6 @@ import Main1 from "../SCREENS/Main1.js";
 import Main2 from "../SCREENS/Main2.js";
 import Chat from "../SCREENS/main-1/CHATSCREEN.js";
 import Chat1 from "../SCREENS/main-1/GROUPCHATSCREEN.js";
-import ChatScreen from "../SCREENS/main-1/Message.js";
-import ConnectionsScreen from "../SCREENS/main-1/connection.js";
 import Card from "../SCREENS/main-1/Card.js";
 import Ct from "../SCREENS/main-1/Ct.js";
 import OK from "../SCREENS/bottom.js";
@@ -52,8 +48,7 @@ import ApplicantsList from "../SCREENS/JASH/ApplicantsList.jsx";
 import JobsPostedScreen from "../SCREENS/JASH/JobsPostedScreen.jsx";
 import Startsy from "../SCREENS/main-1/Startsy.js";
 import Email from "../SCREENS/email.js";
-import InvestorWaitingPage from "../SCREENS/main-2/InvestorWaitingPage.js"
-
+import InvestorWaitingPage from "../SCREENS/main-2/InvestorWaitingPage.js";
 import Modal1 from "../SCREENS/Modal.js";
 import Wait from "../SCREENS/Wait.js";
 import Editcommunity from "../SCREENS/edit profile pages/Editcommunity.js";
@@ -66,7 +61,6 @@ import useLoadFonts from "../hooks/useLoadFonts.js";
 import { setBackgroundColorAsync } from "expo-system-ui";
 import * as SystemUI from "expo-system-ui";
 import { GlobalProvider } from "../Global/globalcontext.js";
-// import style from "../"
 import { LogBox } from "react-native";
 import { StatusBar, Platform } from "react-native";
 import { useFocusEffect } from "expo-router";
@@ -74,24 +68,44 @@ import CommunityPage from "../SCREENS/CommunityPage.jsx";
 import BlogPage from "../SCREENS/BlogPage.jsx";
 import MediaPost from "../SCREENS/MediaPost.js";
 import JobPostingPage from "../SCREENS/JobPosting.jsx";
-// import ReadMore1 from "../../SCREENS/trial-1.js";
-
-import AllPostsScreen from '../SCREENS/SavedPost.js'
-import VerificationPendingScreen from '../SCREENS/InvestorVerify.js'
-import InvestorNotVerifiedScreen from '../SCREENS/NotVerified.js'
-import CertificatePortfolioPage from '../SCREENS/Certificates.js'
-import ViewSendedPost from '../SCREENS/JASH/View post/ViewSendedPost.jsx'
+import AllPostsScreen from "../SCREENS/SavedPost.js";
+import VerificationPendingScreen from "../SCREENS/InvestorVerify.js";
+import InvestorNotVerifiedScreen from "../SCREENS/NotVerified.js";
+import CertificatePortfolioPage from "../SCREENS/Certificates.js";
+import * as Notifications from "expo-notifications";
+import * as Device from "expo-device";
+import Constants from "expo-constants";
+import { url } from "@/config.js";
 
 const Stack = createNativeStackNavigator();
 SystemUI.setBackgroundColorAsync("#16181a");
 
+
+Notifications.addNotificationReceivedListener(notification => {
+  // Handle the notification when received
+  console.log('Notification received:', notification);
+});
+
+Notifications.addNotificationResponseReceivedListener(response => {
+  // Handle response when the user taps on the notification
+  console.log('Notification tapped:', response);
+});
 import { enableFreeze } from "react-native-screens";
 import { enableScreens } from "react-native-screens";
 import QuestionReply from "@/SCREENS/main-2/QuestionReply.js";
 import Settings from "../SCREENS/Settings.js";
+
 enableScreens();
 
 enableFreeze(true);
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
 
 LogBox.ignoreLogs([
   // "VirtualizedLists should never be nested", // Example warning
@@ -104,7 +118,7 @@ console.warn = (message, ...args) => {
   if (
     // message.includes("VirtualizedLists should never be nested") || // Suppress specific warning
     message.includes('Each child in a list should have a unique "key" prop.') ||
-    message.includes('Non-serializable') ||
+    message.includes("Non-serializable") ||
     message.includes(
       "Encountered an error while measuring a list's offset from its containing VirtualizedList."
     ) // Another specific warning
@@ -113,16 +127,55 @@ console.warn = (message, ...args) => {
   }
   originalConsoleWarn(message, ...args); // Allow other warnings
 };
+
 export const Global = createContext("ok");
 
 export default function App() {
+  const [expoPushToken, setExpoPushToken] = useState("");
+  const [channels, setChannels] = useState<Notifications.NotificationChannel[]>(
+    []
+  );
+  const [notification, setNotification] = useState<
+    Notifications.Notification | undefined
+  >(undefined);
+  const notificationListener = useRef<Notifications.EventSubscription>();
+  const responseListener = useRef<Notifications.EventSubscription>();
+
+  useEffect(() => {
+    registerForPushNotificationsAsync().then(
+      (token) => token && setExpoPushToken(token)
+    );
+
+    if (Platform.OS === "android") {
+      Notifications.getNotificationChannelsAsync().then((value) =>
+        setChannels(value ?? [])
+      );
+    }
+    notificationListener.current =
+      Notifications.addNotificationReceivedListener((notification) => {
+        setNotification(notification);
+      });
+
+    responseListener.current =
+      Notifications.addNotificationResponseReceivedListener((response) => {
+        console.log(response);
+      });
+
+    return () => {
+      notificationListener.current &&
+        Notifications.removeNotificationSubscription(
+          notificationListener.current
+        );
+      responseListener.current &&
+        Notifications.removeNotificationSubscription(responseListener.current);
+    };
+  }, []);
 
   useEffect(() => {
     StatusBar.setBackgroundColor("#16181a");
     StatusBar.setBarStyle("light-content");
   }, []);
 
-  
   useFocusEffect(() => {
     StatusBar.setBackgroundColor("#16181a");
     StatusBar.setBarStyle("light-content");
@@ -131,8 +184,6 @@ export default function App() {
   const fontsLoaded = useLoadFonts();
   const [appisready, setappisready] = React.useState(false);
 
-  // if (!fontsLoaded) {
-  // }
   useEffect(() => {
     if (fontsLoaded) {
       SplashScreen.hideAsync();
@@ -141,9 +192,13 @@ export default function App() {
   }, [fontsLoaded]);
 
   return (
-    // <NavigationContainer theme={DarkTheme} >
     <GlobalProvider>
-      {/* <View style={styles.container}> */}
+      {/* <Pressable
+        style={{ position: "absolute", top: 100, left: 100 , zIndex : 10000000 }}
+        onPress={async () => {
+          await schedulePushNotification();
+        }}
+      /> */}
       <StatusBar backgroundColor="#16181a" barStyle={"light-content"} />
       {appisready && (
         <Stack.Navigator
@@ -184,7 +239,6 @@ export default function App() {
           <Stack.Screen name="Signup13" component={Signup13} />
           <Stack.Screen name="SelectInvestor" component={SelectInvestor} />
           <Stack.Screen name="Wait" component={Wait} />
-          {/* <Stack.Screen name="Connectionscreen" component={ConnectionsScreen} /> */}
           <Stack.Screen name="Chat" component={Chat} />
           <Stack.Screen name="Chat1" component={Chat1} />
           <Stack.Screen name="Modal1" component={Modal1} />
@@ -196,10 +250,10 @@ export default function App() {
           <Stack.Screen name="ApplicantsList" component={ApplicantsList} />
           <Stack.Screen name="JobsPostedScreen" component={JobsPostedScreen} />
           <Stack.Screen name="Email" component={Email} />
-          <Stack.Screen name="InvestorWaitingPage" component={InvestorWaitingPage} />
-
-          {/* <Stack.Screen name="Main1" component={Main1} /> */}
-          {/* <Stack.Screen name="Main2" component={Main2} /> */}
+          <Stack.Screen
+            name="InvestorWaitingPage"
+            component={InvestorWaitingPage}
+          />
           <Stack.Screen name="Login2" component={Login2} />
           <Stack.Screen
             name="Card"
@@ -225,7 +279,6 @@ export default function App() {
 
           <Stack.Screen name="FP1" component={FP1} />
           <Stack.Screen name="FP2" component={FP2} />
-
           <Stack.Screen name="F1" component={F1} />
           <Stack.Screen name="Ct" component={Ct} />
           <Stack.Screen name="OK" component={OK} />
@@ -271,16 +324,21 @@ export default function App() {
           {/* <Stack.Screen name="settings" component={Settings}/> */}
 
           <Stack.Screen name="SavedPost" component={AllPostsScreen} />
-          <Stack.Screen name="VerificationPendingScreen" component={VerificationPendingScreen}/>
-          <Stack.Screen name="InvestorNotVerifiedScreen" component={InvestorNotVerifiedScreen} />
-          <Stack.Screen name="CertificatePortfolioPage" component={CertificatePortfolioPage} />
-          </Stack.Navigator >
-      )
-      }
-
-      {/* </View> */}
+          <Stack.Screen
+            name="VerificationPendingScreen"
+            component={VerificationPendingScreen}
+          />
+          <Stack.Screen
+            name="InvestorNotVerifiedScreen"
+            component={InvestorNotVerifiedScreen}
+          />
+          <Stack.Screen
+            name="CertificatePortfolioPage"
+            component={CertificatePortfolioPage}
+          />
+        </Stack.Navigator>
+      )}
     </GlobalProvider>
-    // </NavigationContainer>
   );
 }
 
@@ -297,3 +355,136 @@ const styles = StyleSheet.create({
     backgroundColor: "#16181a", // Set your desired background color here
   },
 });
+
+async function schedulePushNotification() {
+  console.log("hello ");
+
+  fetch("https://exp.host/--/api/v2/push/send", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      to: "ExponentPushToken[L8q1b6FpWnM27c_VPcVSBk]",
+      sound: "default",
+      title: "Yogesh sent you a message",
+      body: "dummy text",
+      data: { someData: "goes here" },
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+    .catch((error) => console.error("Error:", error));
+
+  // await Notifications.scheduleNotificationAsync({
+  //   content: {
+  //     title: "You've got mail! 📬",
+  //     body: 'hello world',
+  //     data: { data: 'goes here', test: { test1: 'more data' } },
+  //   },
+  //   trigger: {
+  //     seconds: 2,
+  //     repeats : false,
+  //   },
+  // });
+}
+
+async function registerForPushNotificationsAsync() {
+  let token;
+
+  if (Platform.OS === "android") {
+    await Notifications.setNotificationChannelAsync("myNotificationChannel", {
+      name: "A channel is needed for the permissions prompt to appear",
+      importance: Notifications.AndroidImportance.MAX,
+      vibrationPattern: [0, 250, 250, 250],
+      lightColor: "#FF231F7C",
+    });
+  }
+
+  if (Device.isDevice) {
+    console.log("first");
+    const { status: existingStatus } =
+      await Notifications.getPermissionsAsync();
+    let finalStatus = existingStatus;
+    if (existingStatus !== "granted") {
+      const { status } = await Notifications.requestPermissionsAsync();
+      finalStatus = status;
+    }
+    console.log("second");
+
+    if (finalStatus !== "granted") {
+      alert("Failed to get push token for push notification!");
+      return;
+    }
+    console.log("third");
+
+    try {
+      var notificationToken = await AsyncStorage.getItem("notificationToken");
+      console.log(notificationToken, "notificationToken from async storage");
+
+      if (!notificationToken) {
+        try {
+          console.log("forth");
+
+          const projectId =
+            Constants?.expoConfig?.extra?.eas?.projectId ??
+            Constants?.easConfig?.projectId;
+          if (!projectId) {
+            throw new Error("Project ID not found");
+          }
+          token = (
+            await Notifications.getExpoPushTokenAsync({
+              projectId,
+            })
+          ).data;
+          console.log(token);
+
+          var ifUserIsLoggedIn = await AsyncStorage.getItem("accessToken")
+          if(ifUserIsLoggedIn) {
+            try{
+              var response = await fetch(`${url}api/updateNotificationToken` , {
+                method: "POST",
+                body: JSON.stringify({
+                  notificationToken: token,
+                }),
+                headers: {
+                  "Content-Type": "application/json",
+                  accept: "application/json",
+                  "Authorization": `Bearer ${ifUserIsLoggedIn}`,
+              },
+              })
+              var data = await response.json()
+
+              console.log(data.json());
+              
+            }
+            catch(e){
+              console.log(e);   
+            }
+
+          }
+          try {
+
+            await AsyncStorage.setItem("notificationToken", token);
+            console.log("Notification token saved to AsyncStorage:");
+          } catch (e) {
+            console.log(e);
+          }
+        } catch (e) {
+          token = `${e}`;
+        }
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+    // Learn more about projectId:
+    // https://docs.expo.dev/push-notifications/push-notifications-setup/#configure-projectid
+    // EAS projectId is used here.
+  } else {
+    alert("Must use physical device for Push Notifications");
+  }
+
+  return token;
+}
