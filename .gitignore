@@ -10,7 +10,7 @@ npm-debug.*
 *.orig.*
 web-build/
 google-services.json
-startsy-91f87-firebase-adminsdk-fbsvc-6ca1281d8e.json
+
 
 # macOS
 .DS_Store
