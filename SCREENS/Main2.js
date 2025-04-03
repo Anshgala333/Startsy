@@ -1102,7 +1102,7 @@ const Main2 = ({ navigation, route }) => {
 
                             }
                             }>
-                                <Text style={styles.comment}>Share</Text>
+                                <Text style={{ textAlign: 'center', color: '#ccc', fontFamily: 'Alata', fontSize: 16 }}>Share</Text>
                             </Pressable>
 
 

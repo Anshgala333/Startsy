@@ -66,10 +66,10 @@ const JobPostingPage = () => {
       setDescriptionError(true);
       jobError = true;
     }
-    if (onDurationValueChange == "") {
-      setDurationError(true)
-      jobError = true;
-    }
+    // if (onDurationValueChange == "") {
+    //   setDurationError(true)
+    //   jobError = true;
+    // }
     if (onPaymentMethodChange == "") {
       setPaymentError(true);
       jobError = true;
@@ -87,8 +87,8 @@ const JobPostingPage = () => {
     const finaldata = {
       "role": roleName,
       "description": description,
-      "duration": onDurationValueChange,
-      "pay": onPaymentMethodChange,
+      // "duration": onDurationValueChange,
+      // "pay": onPaymentMethodChange,
       "amount": paymentAmount
     };
 
@@ -160,7 +160,7 @@ const JobPostingPage = () => {
           {/* Community name field */}
           <View style={{ flex: 3 }}>
             <TextInput
-              placeholderTextColor="#ccc"
+              placeholderTextColor="gray"
               style={styles.input}
               placeholder="Role"
               value={roleName}
@@ -192,53 +192,19 @@ const JobPostingPage = () => {
 
             </View>
 
-            {/* Duration drop down field */}
-            <View style={{ marginTop: 10 }}>
-              <Text style={styles.label}>Duration</Text>
-              <Drop
-                borderwidth={1}
-                items={durationValues}
-                edit={true}
-                onValueChange={setOnDurationValueChange}
-                open={openDurationDrop} setOpen={setOpenDurationDrop}
-                width="100%" search={false}
-                placeholder={"Select a duration"}
-              />
-
-              {/* show error when duration field is empty */}
-              {durationError && <Text style={styles.errorStyle}>*Rule is required</Text>}
-
-            </View>
-            <View style={{ marginTop: 20 }}>
-              <Text style={styles.label}>Payment method</Text>
-              <Drop
-                borderwidth={1}
-
-                items={payValues}
-                onValueChange={setOnPaymentMethodChange}
-                open={openPayValuesDrop} setOpen={setOpenPayValuesDrop}
-                width="100%" search={false}
-                placeholder={"Select a payment method"}
-              />
-
-              {/* show error when payment method field is empty */}
-              {paymentError && <Text style={styles.errorStyle}>*Rule is required</Text>}
-
-            </View>
-
-            {/* enter amount field */}
-            <View style={{ marginTop: 20 }}>
+       
+            <View >
               <TextInput
-                placeholderTextColor="#ccc"
                 style={styles.input}
                 maxLength={15}
-                placeholder="Enter amount or %"
+                placeholder="Offering (₹ or %)"
+                placeholderTextColor={"gray"}
                 value={paymentAmount}
                 onChangeText={setPaymentAmount}
               />
             </View>
 
-            {/* show submit button */}
+    
             <Pressable onPress={post} style={styles.button}>
 
               {/* show loading if pressed on post button */}
@@ -262,3 +228,40 @@ const JobPostingPage = () => {
 };
 
 export default JobPostingPage;
+
+
+
+
+
+// <View style={{ marginTop: 10 }}>
+//               <Text style={styles.label}>Duration</Text>
+//               <Drop
+//                 borderwidth={1}
+//                 items={durationValues}
+//                 edit={true}
+//                 onValueChange={setOnDurationValueChange}
+//                 open={openDurationDrop} setOpen={setOpenDurationDrop}
+//                 width="100%" search={false}
+//                 placeholder={"Select a duration"}
+//               />
+
+//               {/* show error when duration field is empty */}
+//               {durationError && <Text style={styles.errorStyle}>*Rule is required</Text>}
+
+//             </View>
+//             <View style={{ marginTop: 20 }}>
+//               <Text style={styles.label}>Payment method</Text>
+//               <Drop
+//                 borderwidth={1}
+
+//                 items={payValues}
+//                 onValueChange={setOnPaymentMethodChange}
+//                 open={openPayValuesDrop} setOpen={setOpenPayValuesDrop}
+//                 width="100%" search={false}
+//                 placeholder={"Select a payment method"}
+//               />
+
+//               {/* show error when payment method field is empty */}
+//               {paymentError && <Text style={styles.errorStyle}>*Rule is required</Text>}
+
+//             </View>

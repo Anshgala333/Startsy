@@ -124,15 +124,17 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         width: "95%",
         marginHorizontal: "auto",
-        marginTop: 10
+        marginTop: 10,
+        alignItems:'center'
     }
     , icon2: {
         display: "flex",
         flexDirection: "row",
+        alignItems:'center',
         // justifyContent : "space-between",
         // width : "90%",
         // marginHorizontal : "auto"
-        gap: 5
+        gap: 3
     },
     com1: {
         fontFamily: "Alata",

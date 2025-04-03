@@ -230,17 +230,17 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
           const decoded = jwtDecode(token);
           console.log(decoded);
           if (decoded.role == "Investor") {
-            
+
             if (decoded.isInvestorVerified == true) {
               navigation.navigate("Main2")
             }
-            else if(decoded.investorRejected == true){
+            else if (decoded.investorRejected == true) {
               navigation.navigate("InvestorNotVerifiedScreen")
 
-          }
-          else  {
+            }
+            else {
               navigation.navigate("InvestorWaitingPage")
-          }
+            }
           }
           else {
             navigation.navigate("Main2");
@@ -566,72 +566,81 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
 
           {wrongcredential && <Text style={styles.error1}>Invalid credentials</Text>}
 
-          {isForm1Visible && (<View><Text allowFontScaling={false} style={styles.label}>Email / Username</Text>
-            <Pressable
-              onPress={() => {
-                // console.log('====================================');
-                // console.log("scroll");
-                scrollContainer.current?.scrollTo({ y: 100, animate: true })
-                // console.log('====================================');
-              }}
-            >
-              <TextInput allowFontScaling={false}
-                placeholderTextColor="#828282"
-                style={styles.input}
-                ref={emailInput}
-                placeholder="xyz@gmail.com"
-                value={email}
-                onFocus={() => {
-                  scrollContainer.current?.scrollTo({ y: 100, animate: true });
+          {isForm1Visible && (
+            <View>
+
+              <Pressable
+                onPress={() => {
+
+                  scrollContainer.current?.scrollTo({ y: 100, animate: true })
+
                 }}
-                autoComplete="email"
-                onChangeText={(text) => { setemail(text) }}
+              >
+                {/* <View style={styles.passwordcontainer}> */}
+                <TextInput allowFontScaling={false}
+                  placeholderTextColor="#828282"
+                  style={styles.input}
+                  ref={emailInput}
 
-              />
-            </Pressable>
-            {emailerror && <Text style={styles.error}>Please enter email address</Text>}
-            <View style={styles.passwordcontainer}>
-              <TextInput allowFontScaling={false}
-                placeholderTextColor="#828282"
-                style={styles.input2}
-                placeholder="Password"
-                value={password}
-                autoComplete="password"
-                onChangeText={(text) => { setpassword(text) }}
-                secureTextEntry={true}
-              />
+                  placeholder="Email / Username"
+                  value={email}
+                  onFocus={() => {
+                    scrollContainer.current?.scrollTo({ y: 100, animate: true });
+                  }}
+                  autoComplete="email"
+                  onChangeText={(text) => { setemail(text) }}
 
-              <Pressable onPress={() => navigation.navigate("FP1")} style={styles.forgot}>
-                <Text allowFontScaling={false} style={[styles.white, styles.forgottext]}>Forgot ?</Text>
+                />
+                {/* </View> */}
               </Pressable>
-            </View>
-            {passworderror && <Text style={styles.error}>Please enter password</Text>}
-            {passworderror1 && <Text style={styles.error}>Password must be at least 8 characters long, contain one uppercase letter, one lowercase letter, and one number.</Text>}
+              {
+                emailerror &&
+                <Text style={styles.error}>Please enter email address</Text>
+              }
+              <View style={styles.passwordcontainer}>
+                <TextInput
+                  
+                  allowFontScaling={false}
+                  placeholderTextColor="#828282"
+                  style={styles.input2}
+                  placeholder="Password"
+                  value={password}
+                  autoComplete="password"
+                  onChangeText={(text) => { setpassword(text) }}
+                  secureTextEntry={true}
+                />
 
-            <Pressable style={styles.loginbutton} onPress={() => {
-              handlelogin(navigation)
-            }}>
-              {!loading && <Text allowFontScaling={false} style={[styles.login]}>Login </Text>}
-              {loading && <ActivityIndicator size={24} color="#fff" />}
-            </Pressable>
-            <Text allowFontScaling={false} style={[styles.white, styles.p]}>Or continue with</Text>
-            <Pressable onPress={() => { showToastWithGravity("This functionality is yet to come!") }} style={styles.googlebutton}>
-              <Image
-                source={require("../assets/images/google.png")}
-                style={styles.googleIcon}
-              />
-              <Text allowFontScaling={false} style={[styles.gray, styles.google]}>Google</Text>
-            </Pressable>
+                <Pressable onPress={() => navigation.navigate("FP1")} style={styles.forgot}>
+                  <Text allowFontScaling={false} style={[styles.white, styles.forgottext]}>Forgot ?</Text>
+                </Pressable>
+              </View>
+              {passworderror && <Text style={styles.error}>Please enter password</Text>}
+              {passworderror1 && <Text style={styles.error}>Password must be at least 8 characters long, contain one uppercase letter, one lowercase letter, and one number.</Text>}
 
-            <Text allowFontScaling={false} style={[styles.gray, styles.p]}>
-              Don't have account? <Text style={styles.green} onPress={() => {
-                // setForm1Visible(false)  commented
-                // animation2() commented
-                showsignuppage("CommunityMember", navigation)
+              <Pressable style={styles.loginbutton} onPress={() => {
+                handlelogin(navigation)
+              }}>
+                {!loading && <Text allowFontScaling={false} style={[styles.login]}>Login </Text>}
+                {loading && <ActivityIndicator size={24} color="#fff" />}
+              </Pressable>
+              <Text allowFontScaling={false} style={[styles.white, styles.p]}>Or continue with</Text>
+              <Pressable onPress={() => { showToastWithGravity("This functionality is yet to come!") }} style={styles.googlebutton}>
+                <Image
+                  source={require("../assets/images/google.png")}
+                  style={styles.googleIcon}
+                />
+                <Text allowFontScaling={false} style={[styles.gray, styles.google]}>Google</Text>
+              </Pressable>
 
-              }}>Create now</Text>
-            </Text>
-          </View>)}
+              <Text allowFontScaling={false} style={[styles.gray, styles.p]}>
+                Don't have account? <Text style={styles.green} onPress={() => {
+                  // setForm1Visible(false)  commented
+                  // animation2() commented
+                  showsignuppage("CommunityMember", navigation)
+
+                }}>Create now</Text>
+              </Text>
+            </View>)}
 
           {!isForm1Visible && (
 

@@ -109,23 +109,14 @@ const MediaPost = ({ route }) => {
             </View>
             <View style={{ position: "relative" }}>
                 {type == "photo" && <Image style={[styles.img, { aspectRatio: aspectRatio }]} source={{ uri: uri }} />}
-                {/* {type == "video" && (
-                    <Video
-                        style={[styles.img, { aspectRatio: 1 / 1 }]}
-                        source={{ uri: uri }}
-                        useNativeControls
-                        resizeMode="contain"
-                        isLooping
-                        shouldPlay
-                    />
-                )} */}
+
             </View>
             {/* {err6 && <Text style={styles.error}> *please enter this field</Text>} */}
 
             <TextInput
                 allowFontScaling={false}
                 placeholder="Caption"
-                placeholderTextColor="#B8B8B8"
+                placeholderTextColor="gray"
                 style={styles.input}
                 value={c2}
                 onChangeText={(text) => { setc2(text) }}
@@ -134,12 +125,12 @@ const MediaPost = ({ route }) => {
             {err7 && <Text style={styles.error}> *please enter this field</Text>}
 
 
-            <View style={{ color: 'white', display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10 }}>
+            <View style={{ color: 'red', display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, }}>
                 <Checkbox
                     status={isPrivate ? "checked" : "unchecked"}
                     onPress={() => {
                         setIsPrivate(!isPrivate)
-                        if(!isPrivate){
+                        if (!isPrivate) {
                             ToastAndroid.showWithGravityAndOffset(
                                 `Your post will only be visible to your connections`,
                                 ToastAndroid.LONG,
@@ -151,12 +142,16 @@ const MediaPost = ({ route }) => {
                     uncheckedColor='#ccc'
                     color='#00de62'
                 />
-                <Text style={{ color: '#ccc' }}>Private</Text>
+                <Text style={{ color: 'gray', fontFamily: 'Roboto' }}>Private</Text>
             </View>
 
-            <Pressable onPress={post3} style={styles.post}>
-                {!p3u && <Text style={styles.buttonText}>{p3text}</Text>}
-                {p3u && <ActivityIndicator size={24} color="#16181a" />}
+            <Pressable onPress={post3} style={styles.button}>
+                {p3u ?
+
+                    <ActivityIndicator size={24} color="#16181a" />
+
+                    : <Text style={styles.buttonText}>Post</Text>
+                }
             </Pressable>
         </View>
     )
@@ -183,12 +178,14 @@ const styles = StyleSheet.create({
         // borderRadius : 20,
         paddingLeft: 10,
         borderBottomColor: "#ccc",
-        fontSize: 20, // Responsive font size
+        fontSize: 18, // Responsive font size
         color: "#B8B8B8",
         paddingBottom: 5,
         width: "92%",
         marginHorizontal: "auto",
-        marginBottom: 25,
+        marginBottom: 20,
+        fontFamily: "Roboto",
+
     },
 
     post: {
@@ -209,10 +206,12 @@ const styles = StyleSheet.create({
         height: 42,
         width: 180,
         justifyContent: "center",
-        margin: "auto",
+        // margin: "auto",
         alignSelf: "center",
-        marginVertical: 40,
+        // marginVertical: 30,
         textAlign: "center",
+        marginVertical: 25,
+
     },
     buttonText: {
         textAlign: "center",

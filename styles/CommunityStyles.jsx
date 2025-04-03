@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 
     t1: {
         textAlign: 'center',
-        color: "#ccc",
+        color: "gray",
         fontFamily: "Roboto",
         fontSize:   16,
         marginTop: 5,
@@ -45,20 +45,25 @@ const styles = StyleSheet.create({
         fontSize: 16,
         paddingVertical: 5,
         marginBottom: 10,
+        fontFamily: "Roboto"
     },
     label: {
-        color: "#ccc",
-        fontSize: 16,
+        color: "gray",
+        fontSize: 18,
         marginBottom: 5,
+        fontFamily: "Roboto",
+        marginLeft:5
     },
     textArea: {
         height: 150,
         borderWidth: 1,
         borderColor: "gray",
         borderRadius: 12,
-        color: "white",
+        color: "#ccc",
         padding: 10,
         textAlignVertical: "top",
+        fontSize:18,
+        fontFamily:'Roboto'
     },
     picker: {
         backgroundColor: "#333",
@@ -76,15 +81,14 @@ const styles = StyleSheet.create({
     } , 
     button: {
         backgroundColor: "#00DE62",
-        borderRadius: 20,
-        height: 40,
-        width: 110,
+        borderRadius: 25,
+        height: 42,
+        width: 180,
         justifyContent: "center",
-        margin: "auto",
+        // margin: "auto",
         alignSelf: "center",
-        marginVertical: 40,
+        marginVertical: 25,
         textAlign: "center",
-        marginBottom : 300
     },
     buttonText: {
         textAlign: "center",
@@ -95,7 +99,7 @@ const styles = StyleSheet.create({
     },
 
     descriptionLength: {
-        color: "#ccc",
+        color: "#666",
         textAlign: 'right',
         position: 'relative',
         bottom: 25,
