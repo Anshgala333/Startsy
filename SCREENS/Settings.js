@@ -10,6 +10,7 @@ import * as IntentLauncher from "expo-intent-launcher";
 import * as Updates from "expo-updates";
 import * as MediaLibrary from 'expo-media-library';
 import { url } from "@/config.js";
+import RatingPage from "../SCREENS/BetaRating.js";
 const Settings = ({ navigation, route }) => {
 
   var { token, tabnavigation } = route.params
@@ -150,43 +151,59 @@ const Settings = ({ navigation, route }) => {
       <Text allowFontScaling={false} style={styles.headerText}>Settings</Text>
       <View style={styles.bottom}>
 
-        <TouchableOpacity style={styles.option} onPress={() => downloadAPK()}>
-          {/* <Icon name="bookmark-outline" size={24} color="#00DE62" /> */}
-          <MaterialIcons name="update" size={24} color="#00de62" />
-          <Text style={styles.optionText}>Update</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.option} onPress={() => {
-          console.log(editprofilepage);
+        <View>
+          <TouchableOpacity style={styles.option} onPress={() => downloadAPK()}>
+            {/* <Icon name="bookmark-outline" size={24} color="#00DE62" /> */}
+            <MaterialIcons name="update" size={24} color="#00de62" />
+            <Text style={styles.optionText}>Update</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.option} onPress={() => {
+            console.log(editprofilepage);
 
-          navigation.navigate(editprofilepage)
-        }}>
-          <Icon name="account-edit" size={24} color="#00DE62" />
-          <Text style={styles.optionText}>Edit Profile</Text>
-        </TouchableOpacity>
+            navigation.navigate(editprofilepage)
+          }}>
+            <Icon name="account-edit" size={24} color="#00DE62" />
+            <Text style={styles.optionText}>Edit Profile</Text>
+          </TouchableOpacity>
 
 
-        <TouchableOpacity style={styles.option} onPress={() => navigation.navigate("SavedPost", { tabnavigation })}>
-          <Icon name="bookmark-outline" size={24} color="#00DE62" />
-          <Text style={styles.optionText}>Saved Posts</Text>
-        </TouchableOpacity>
+          <TouchableOpacity style={styles.option} onPress={() => navigation.navigate("SavedPost", { tabnavigation })}>
+            <Icon name="bookmark-outline" size={24} color="#00DE62" />
+            <Text style={styles.optionText}>Saved Posts</Text>
+          </TouchableOpacity>
 
-        {/* <TouchableOpacity style={styles.option} onPress={() => alert("Switch Account")}>
+          {/* <TouchableOpacity style={styles.option} onPress={() => alert("Switch Account")}>
           <Icon name="account-switch" size={24} color="#00DE62" />
           <Text style={styles.optionText}>Switch Account</Text>
         </TouchableOpacity>  */}
 
-        <TouchableOpacity style={styles.option} onPress={() => Logout()}>
-          <Icon name="logout" size={24} color="#00DE62" />
-          <Text style={[styles.optionText, { color: "#ccc" }]}>Logout</Text>
-        </TouchableOpacity>
+          <TouchableOpacity style={styles.option} onPress={() => navigation.navigate("RatingPage")}>
+            <MaterialIcons name="feedback" size={24} color="#00de62" />
+            <Text style={[styles.optionText, { color: "#ccc" }]}>Beta Feedback</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.option} onPress={() => Logout()}>
+            <Icon name="logout" size={24} color="#00DE62" />
+            <Text style={[styles.optionText, { color: "#ccc" }]}>Logout</Text>
+          </TouchableOpacity>
+
+        </View>
+
+        <View style={styles.footer}>
+           <Text style={styles.devtext1}> Beta Version 7</Text> 
+           <Text style={styles.devtext}>  Developed by RSPY Tech Pvt Ltd</Text>
+        </View>
       </View>
     </View>
+
+
   );
 };
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#16181A",
+    position: "relative"
   },
   top: {
     width: "100%",
@@ -210,7 +227,9 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#16181a",
     padding: 20,
-    paddingTop : 0
+    paddingTop: 0,
+    flex:1,
+    justifyContent:'space-between'
   },
   option: {
     flexDirection: "row",
@@ -233,7 +252,25 @@ const styles = StyleSheet.create({
     fontFamily: "myanmar",
     color: "#00DE62",
     paddingLeft: 15
-},
+  },
+
+  devtext: {
+    // textAlign:"right",
+    color: "#ccc",
+    alignSelf: "center",
+    bottom: 0,
+    fontFamily:"Roboto",
+    fontSize:12
+  },
+
+  devtext1:{
+    // textAlign:"right",
+    color: "#94A3B8",
+    alignSelf: "center",
+    bottom: 0,
+    fontFamily:"Roboto",
+    fontSize:16,
+  }
 });
 
 export default Settings;

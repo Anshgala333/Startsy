@@ -31,10 +31,41 @@ const Signup1 = function ({ navigation, route }) {
 
 
     async function checkusername() {
+
+       
+
+        
         // console.log(username, "username");
         setloading(true)
         if (username == "" || username.trim().length == 0) {
             setmessage('* username required')
+            seterror(true)
+            setloading(false)
+            return
+        }
+        // console.log(username[0].charCodeAt(0));
+
+        
+        if(/[A-Z]/.test(username)){
+            
+            
+            setmessage("* username should be in smaller case")
+            seterror(true)
+            setloading(false)
+            return
+        }  
+        
+        // console.log( /^(?![._])[A-Za-z0-9._]*(?<![._])$/.test(username));
+        if(username[0]==" " || username[username.length-1]===" "){
+            setmessage('* invalid username')
+            seterror(true)
+            setloading(false)
+            return
+        }
+        
+
+        if(!(/^(?![._])[A-Za-z0-9._]*(?<![._])$/.test(username))){
+            setmessage("*Usernames may include letters, numbers, '.', and '_', but cannot start or end with them.")
             seterror(true)
             setloading(false)
             return

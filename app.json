@@ -19,6 +19,10 @@
       "bundleIdentifier": "com.rspytech.startsy"
     },
     "android": {
+      "notification": {
+        "icon": "./assets/images/logofinal.png",
+        "color": "#FF5733"
+    },
       "useNextNotificationsApi": true,
       "googleServicesFile": "./google-services.json",
       "softwareKeyboardLayoutMode": "resize",

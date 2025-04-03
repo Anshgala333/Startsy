@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet, Image, FlatList, BackHandler, Pressable } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, Image, FlatList, BackHandler, Pressable,Linking } from 'react-native'
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 // import data from '../../GroupDetails/Data'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'

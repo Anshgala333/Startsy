@@ -113,11 +113,11 @@ const User = memo(({ handleTabChange, token , navigation , suggestionarray , set
 
         // if (stat) return
 
-        console.log(stat);
-        console.log(stat);
-        console.log(stat);
-        console.log(stat);
-        console.log(stat);
+        // console.log(stat);
+        // console.log(stat);
+        // console.log(stat);
+        // console.log(stat);
+        // console.log(stat);
 
         if (stat == "Connected" || stat == "Request Sent") {
 

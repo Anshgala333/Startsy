@@ -144,6 +144,8 @@ const Foryou =
                     },
                 });
                 const data = await response.json();
+                console.log(data);
+                
 
 
                 var decode = jwtDecode(token)

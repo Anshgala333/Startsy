@@ -76,6 +76,8 @@ import * as Notifications from "expo-notifications";
 import * as Device from "expo-device";
 import Constants from "expo-constants";
 import { url } from "@/config.js";
+import RatingPage from "@/SCREENS/BetaRating.js";
+import TermsAndConditions from "../SCREENS/JASH/terms-condition/TermsAndCondition.jsx";
 
 const Stack = createNativeStackNavigator();
 SystemUI.setBackgroundColorAsync("#16181a");
@@ -102,8 +104,8 @@ enableFreeze(true);
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
-    shouldPlaySound: false,
-    shouldSetBadge: false,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
   }),
 });
 
@@ -324,20 +326,16 @@ export default function App() {
           {/* <Stack.Screen name="settings" component={Settings}/> */}
 
           <Stack.Screen name="SavedPost" component={AllPostsScreen} />
-          <Stack.Screen
-            name="VerificationPendingScreen"
-            component={VerificationPendingScreen}
-          />
-          <Stack.Screen
-            name="InvestorNotVerifiedScreen"
-            component={InvestorNotVerifiedScreen}
-          />
-          <Stack.Screen
-            name="CertificatePortfolioPage"
-            component={CertificatePortfolioPage}
-          />
-        </Stack.Navigator>
-      )}
+          <Stack.Screen name="VerificationPendingScreen" component={VerificationPendingScreen}/>
+          <Stack.Screen name="InvestorNotVerifiedScreen" component={InvestorNotVerifiedScreen} />
+          <Stack.Screen name="CertificatePortfolioPage" component={CertificatePortfolioPage} />
+          <Stack.Screen name="TermsAndConditions" component={TermsAndConditions} />
+          <Stack.Screen name="RatingPage" component={RatingPage} />
+          </Stack.Navigator >
+      )
+      }
+
+      {/* </View> */}
     </GlobalProvider>
   );
 }
@@ -396,9 +394,9 @@ async function registerForPushNotificationsAsync() {
   if (Platform.OS === "android") {
     await Notifications.setNotificationChannelAsync("myNotificationChannel", {
       name: "A channel is needed for the permissions prompt to appear",
-      importance: Notifications.AndroidImportance.MAX,
+      importance: Notifications.AndroidImportance.HIGH,
       vibrationPattern: [0, 250, 250, 250],
-      lightColor: "#FF231F7C",
+      lightColor: "red",
     });
   }
 
