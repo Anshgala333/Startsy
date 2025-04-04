@@ -443,8 +443,8 @@ const styles = StyleSheet.create({
         width: "100%"
     },
     avatar: {
-        width: 50,
-        height: 50,
+        width: 45,
+        height: 45,
         marginTop: 5,
 
         borderRadius: 25,
@@ -456,18 +456,20 @@ const styles = StyleSheet.create({
         // backgroundColor : "red",
         // width : 100
     },
-    username: {
-        fontSize: 22,
-        color: "#00DE62",
-        fontFamily: "Alata",
-        alignSelf: "flex-start",
-        marginTop: -5,
-        marginBottom: 5
-    },
+    // username: {
+    //     fontSize: 18,
+    //     color: "#00DE62",
+    //     fontFamily: "Alata",
+    //     alignSelf: "flex-start",
+    //     marginTop: -5,
+    //     marginBottom: 5
+    // },
     message: {
         fontSize: 14,
-        color: "#B8B8B8",
+        color: "gray",
         marginTop: -3,
+        fontFamily:'Roboto',
+        paddingRight:60
     },
     bold: {
         fontSize: 14,
@@ -483,7 +485,7 @@ const styles = StyleSheet.create({
         top: 15,
         textAlign: "right",
         // backgroundColor : "red",
-        color: "#B8B8B8",
+        color: "#666",
         fontFamily: "Roboto",
     },
     boldtime: {
@@ -542,7 +544,7 @@ const styles = StyleSheet.create({
     username: {
         color: '#E9E9E9',
         fontWeight: '600',
-        fontSize: 22,
+        fontSize: 18,
         fontFamily: "Alata",
         marginBottom: 3,
         marginTop: -2,
@@ -553,8 +555,8 @@ const styles = StyleSheet.create({
     date: {
         color: '#a1a1a1',
         fontSize: 14,
-
-        alignSelf: "center"
+        alignSelf: "center",
+        fontFamily:'Roboto'
     },
     title: {
         color: '#B8B8B8',

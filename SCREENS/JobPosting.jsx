@@ -54,6 +54,10 @@ const JobPostingPage = () => {
 
     let jobError = false;
 
+    // console.log("here");
+
+    
+
 
 
 
@@ -66,14 +70,19 @@ const JobPostingPage = () => {
       setDescriptionError(true);
       jobError = true;
     }
+
     // if (onDurationValueChange == "") {
     //   setDurationError(true)
     //   jobError = true;
     // }
-    if (onPaymentMethodChange == "") {
-      setPaymentError(true);
-      jobError = true;
-    }
+
+
+    // if (onPaymentMethodChange == "") {
+    //   console.log(onPaymentMethodChange);
+      
+    //   setPaymentError(true);
+    //   jobError = true;
+    // }
 
     if (jobError == true) {
 
@@ -122,10 +131,10 @@ const JobPostingPage = () => {
       // mainpagebottomsheet.current?.close();
       setRoleError(false);
       setDescriptionError(false);
-      setDurationError(false);
+      // setDurationError(false);
       setPaymentError(false);
-      setOnDurationValueChange("")
-      setOnPaymentMethodChange(" ")
+      // setOnDurationValueChange("")
+      // setOnPaymentMethodChange(" ")
     } catch (err) {
       console.error("Error:", err);
     } finally {
@@ -174,7 +183,7 @@ const JobPostingPage = () => {
 
             {/* Description field */}
             <View style={{ marginTop: 10 }}>
-              <Text style={styles.label}>Description :</Text>
+              <Text style={styles.label}>Job Description :</Text>
               <TextInput
                 style={styles.textArea}
                 value={description}

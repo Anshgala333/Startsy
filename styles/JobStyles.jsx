@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     input: {
         borderBottomWidth: 1,
         borderBottomColor: "#888",
-        color: "gray",
+        color: "#ccc",
         fontSize: 18,
         paddingVertical: 5,
         marginBottom: 10,

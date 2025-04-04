@@ -27,8 +27,8 @@ const styles = StyleSheet.create({
 
     img: {
         margin: "auto",
-        width: 113,
-        height: 113,
+        width: 100,
+        height: 80,
         borderRadius: 100,
         marginBottom : 10
     },
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: "gray",
         color: "#ccc",
-        fontSize: 16,
+        fontSize: 18,
         paddingVertical: 5,
         marginBottom: 10,
         fontFamily: "Roboto"

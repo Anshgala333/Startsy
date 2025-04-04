@@ -62,19 +62,14 @@ const JobsPostedScreen = ({ route, navigation }) => {
 
 
 
-  // useLayoutEffect(() => {
-  //   navigation.setOptions({
-  //     headerTitle: () => <Text style={styles.headerTitle}>Manage Posts</Text>,
-  //     // headerStyle: styles.headerStyle,
-  //   });
-  // }, [navigation]);
+
 
   const Button = ({ onPress, isDisabled, title }) => (
     <TouchableOpacity
       style={[styles.button, { backgroundColor: isDisabled ? 'transparent' : 'transparent' }]}
       onPress={onPress}
     >
-      <Text style={[styles.buttonText, { color: isDisabled ? '#ddd' : '#ccc' }]}>{title}</Text>
+      <Text style={[styles.buttonText, { color: isDisabled ? '#ddd' : '#ccc',fontFamily:'Roboto' }]}>{title}</Text>
     </TouchableOpacity>
   );
   function time(time) {
@@ -110,20 +105,15 @@ const JobsPostedScreen = ({ route, navigation }) => {
   const renderItem = ({ item }) => (
     <View style={styles.post}>
       <Text style={styles.jobTitle}>{item.jobPosts.role}</Text>
-      <Text style={styles.company}>{item.jobPosts.duration}</Text>
+      {/* <Text style={styles.company}>{item.jobPosts.duration}</Text> */}
 
-      <Text style={styles.status}>
+      {/* <Text style={styles.status}>
         {time(item.jobPosts.updatedAt)}
-      </Text>
+      </Text> */}
       {/* <Text style={styles.stats}>{item.jobPosts.jobApplicants.length} applicants</Text> */}
-      <Text style={styles.jobType}>{item.jobPosts.pay}</Text>
+      {/* <Text style={styles.jobType}>{item.jobPosts.pay}</Text> */}
 
-      {/* <View>
-        <Text style={styles.descriptionTitle}>Job Description</Text>
-        <Text style={styles.descriptionText} numberOfLines={2} ellipsizeMode="tail">
-          {item.jobPosts.description}
-        </Text>
-      </View> */}
+  
 
       <View style={styles.buttonContainer}>
         <Button onPress={() => navigation.navigate('ApplicantsList', { Applicants: item.jobPosts?.jobApplicants, token: token, navigation: navigation })} isDisabled={false} title={`${item.jobPosts.jobApplicants.length} Applicants`} />
@@ -184,12 +174,13 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
   },
   jobTitle: {
-    color: "#999",
+    color: "#ccc",
     fontSize: 28,
     marginBottom: 10,
-    marginTop : 10,
+    // marginTop : 10,
     // color: '#fff',
     marginBottom: 4,
+    fontFamily: "Alata",
   },
   company: {
     fontSize: 14,
@@ -198,11 +189,12 @@ const styles = StyleSheet.create({
   },
   status: {
     fontSize: 11,
-    color: '#ccc',
+    color: 'gray',
     marginBottom: 4,
     position: "absolute",
     right: 10,
-    top: 15
+    top: 15,
+    fontFamily: "Roboto",
   },
   active: {
     color: '#00de62',
@@ -235,6 +227,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 12,
+    paddingHorizontal:10
   },
   button: {
     paddingVertical: 12,

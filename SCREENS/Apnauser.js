@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback, useMemo, memo } from 'react';
+import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { View, Animated, Text, Image, ToastAndroid, Easing, FlatList, StatusBar,Linking, RefreshControl, ActivityIndicator, StyleSheet, BackHandler, SafeAreaView, ScrollView, Pressable, Dimensions, TouchableOpacity, Modal, TouchableWithoutFeedback, TextInput, Vibration } from "react-native";
 import Entypo from '@expo/vector-icons/Entypo';
 import EvilIcons from '@expo/vector-icons/EvilIcons';
@@ -28,12 +28,13 @@ import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import Octicons from '@expo/vector-icons/Octicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import AntDesign from '@expo/vector-icons/AntDesign';
-import { LinearGradient } from "expo-linear-gradient";
 
 import Settings from "../SCREENS/Settings.js"
 
 import BottomSheet, { BottomSheetView, BottomSheetScrollView, BottomSheetTextInput, BottomSheetDraggableView, BottomSheetFlatList, BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { LinearGradient } from 'expo-linear-gradient';
+// import { LinearGradient } from 'react-native-svg';
 
 // import dotenv from 'dotenv/config'
 
@@ -42,8 +43,6 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) => {
     // dotenv.config()
     var mypage = true
-    console.log("profile page");
-    
     const navigation = useNavigation()
 
     const flatListRef = useRef(null);
@@ -373,46 +372,15 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
             });
             const data = await response.json();
 
-            // console.log(data.profileCompletion, "completion ka data");
-            // console.log(data);
-
-            console.log("this funvtion ran");
-            
-
-
-            
-                const f2 = new Set()
-                const tree = data.data.chatUsers.filter((e) => {
-                    if (f2.has(e._id)) {
-                    return false
-                    }
-                    else {
-                    f2.add(e._id)
-                    return true
-                    }
-                })
-              
-      // return
-
-
-      setinvestorarray(tree.filter((e) => e.role == "Investor"))
-      setnoninvestor(tree.filter((e) => e.role != "Investor"))
-
-      var recorde1= tree.filter((e) => e.role == "Investor")
-      var recorde2= tree.filter((e) => e.role != "Investor")
-
-      console.log(recorde1.length);
-      console.log(recorde2.length);
-      
-
-
+            console.log(data.profileCompletion, "completion ka data");
+            console.log(data);
             
 
 
             // console.log(data.data.chatUsers, "poiuytr");
 
-            // setinvestorarray(data.data?.chatUsers.filter((e) => e.role == "Investor"))
-            // setnoninvestor(data.data?.chatUsers.filter((e) => e.role != "Investor"))
+            setinvestorarray(data.data?.chatUsers.filter((e) => e.role == "Investor"))
+            setnoninvestor(data.data?.chatUsers.filter((e) => e.role != "Investor"))
 
             setGeneralModelId(data.data._id)
             setemail(data.data.email)
@@ -436,7 +404,6 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
             setyturl(data.data.hiddenInfo.socialProof[2].url)
             
 
-console.log(data.data.posts.length);
 
 
             if (true) {
@@ -621,32 +588,7 @@ console.log(data.data.posts.length);
                     <Animated.View style={[styles1.overlay, { opacity: fadeAnim }]}>
                         <TouchableWithoutFeedback>
                             <View style={styles1.alertBox}>
-                               {/* <ScrollView style={{}}>
-                               <Text style={styles1.title}>Delete Post</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <Text style={styles1.message}>Click confirm to delete.</Text>
-                                <View style={{ display: "flex", flexDirection: "row", gap: 10 }}>
-
-                                    
-                                    
-                                </View>
-                               </ScrollView> */}
+                       
                             </View>
                         </TouchableWithoutFeedback>
                     </Animated.View>
@@ -668,6 +610,8 @@ console.log(data.data.posts.length);
 
             // console.log("hi");
             // console.log(postid);
+
+
         }
 
 
@@ -685,98 +629,105 @@ console.log(data.data.posts.length);
 
         if (item.type == "photo" || item.type == "textBlog" || item.type == "video") {
             return (
+                // <View key={index} style={styles.box}>
+                    <LinearGradient
+                                                    colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}
+                                                    locations={[0, 1]}
+                                                    style={styles.box}
+                                                    start={{ x: 0, y: 0 }}
+                                                    end={{ x: 0, y: 1 }} >
+                    <View style={[styles.top, { marginBottom: 0 }]} >
+                        <View
+                            // onPress={() => { navigation.navigate("Singleuserpage", { token: token, id: item.user_id._id, page: "Startsy" }) }}
+                            style={{ display: "flex", flexDirection: "row", width: "100%" }}>
+                            <Image style={styles.userimg} source={{ uri: userdata.user_id.profilePhoto }} />
+                            <View style={styles.userdetail}>
+                                <Text allowFontScaling={false} style={styles.u1}>{userdata.user_id.userName == "" ? decode.userName : decode.userName}</Text>
+                                <Text allowFontScaling={false} style={styles.u2}>{userdata.user_id.role == "CommunityMember" ? "Member" : userdata.user_id.role}</Text>
+                            </View>
+                            <Pressable style={styles1.minus} onPress={() => {
+                                Vibration.vibrate(20)
+                                deletepost(item._id)
+                            }}>
+                                {/* <FontAwesome6 name="trash" style={styles1.minus} size={22} color="#00DE62" /> */}
+                                {/* <Feather name="trash-2" style={styles1.minus} size={22} color="#00DE62" /> */}
 
-                  <LinearGradient
-                    colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}
-                    locations={[0, 1]}
-                    style={styles.box}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 0, y: 1 }} >
-                            <View style={[styles.top, { marginBottom: 0 }]} >
-                                <View
-                                    // onPress={() => { navigation.navigate("Singleuserpage", { token: token, id: item.user_id._id, page: "Startsy" }) }}
-                                    style={{ display: "flex", flexDirection: "row", width: "100%" }}>
-                                    <Image style={styles.userimg} source={{ uri: userdata.user_id.profilePhoto }} />
-                                    <View style={styles.userdetail}>
-                                        <Text allowFontScaling={false} style={styles.u1}>{userdata.user_id.userName == "" ? decode.userName : decode.userName}</Text>
-                                        <Text allowFontScaling={false} style={styles.u2}>{userdata.user_id.role == "CommunityMember" ? "Member" : userdata.user_id.role}</Text>
+                                {/* <Text>click me</Text> */}
+                                {/* <Pressable style={styles1.minus}><Delete /></Pressable> */}
+                                <Delete />
+
+                            </Pressable>
+                        </View>
+                    </View>
+
+                    {item.type == "textBlog" && <View style={styles.divider}></View>}
+
+                    {item.type == "photo" && <Image style={[styles.template, { aspectRatio: item.aspectRatio ? item.aspectRatio : 1 / 1 }]} source={{ uri: item.mediaUrl }} />}
+                    {item.type == "video" &&
+                        <Video
+                            ref={ref => videoRefs.current[item._id] = ref}
+                            style={styles.template}
+                            source={{ uri: item.mediaUrl }}
+                            useNativeControls // Enables native playback controls
+                            resizeMode="contain" // Adjusts video to fit within the view
+                            isLooping // Loops the video
+                            shouldPlay={isVideoPlaying}
+                        />
+
+                    }
+                    {item.type == "textBlog" && <Text style={styles.blogtext}>{item.content}</Text>}
+
+                        <View style={styles.iconcontainer}>
+
+                                    <View style={styles.icon2}>
+
+
+                                        <View style={{flexDirection:'row',gap:6,marginRight:4}}>
+                                            <TouchableOpacity onPress={() => { upvotepost(item._id, index) }}>
+                                          
+                                                {!item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5, marginTop: 6 }} />}
+                                                {item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5, marginTop: 6 }} selected={true} />}
+                                            </TouchableOpacity>
+                                            <Text style={{  left: 0, color: "#ccc" ,fontFamily:'Roboto',top:5}}>{item.likedBy.length}</Text>
+                                        </View>
+
+
+                                        <Pressable onPress={() => {
+                                            Vibration.vibrate(20)
+                                            opencomment(item._id)
+                                            
+                                        }}
+                                        >
+                                            <FontAwesome style={{ marginLeft: 4, marginRight:7}} name="comment-o" size={27} color="#ccc" />
+                                        </Pressable>
+
+                                        <Pressable onPress={() => {
+                                            Vibration.vibrate(20)
+                                            openshare(item._id)
+                                        }}>
+                                            <Share style={{ marginTop: 5, marginRight: 10, right: 0 }} />
+                                        </Pressable>
+
+
                                     </View>
-                                    <Pressable style={styles1.minus} onPress={() => {
-                                        Vibration.vibrate(20)
-                                        deletepost(item._id)
-                                    }}>
-                                        {/* <FontAwesome6 name="trash" style={styles1.minus} size={22} color="#00DE62" /> */}
-                                        {/* <Feather name="trash-2" style={styles1.minus} size={22} color="#00DE62" /> */}
 
-                                        {/* <Text>click me</Text> */}
-                                        {/* <Pressable style={styles1.minus}><Delete /></Pressable> */}
-                                        <Delete />
 
-                                    </Pressable>
                                 </View>
-                            </View>
 
-                            {item.type == "textBlog" && <View style={styles.divider}></View>}
-
-                            {item.type == "photo" && <Image style={[styles.template, { aspectRatio: item.aspectRatio ? item.aspectRatio : 1 / 1 }]} source={{ uri: item.mediaUrl }} />}
-                            {item.type == "video" &&
-                                <Video
-                                    ref={ref => videoRefs.current[item._id] = ref}
-                                    style={styles.template}
-                                    source={{ uri: item.mediaUrl }}
-                                    useNativeControls // Enables native playback controls
-                                    resizeMode="contain" // Adjusts video to fit within the view
-                                    isLooping // Loops the video
-                                    shouldPlay={isVideoPlaying}
-                                />
-
-                            }
-                            {item.type == "textBlog" && <Text style={styles.blogtext}>{item.content}</Text>}
-
-                            <View style={styles.iconcontainer}>
-                                <View style={styles.icon2}>
-                                    <Pressable onPress={() => { upvotepost(item._id, index) }}>
-                                        {!item.isliked && <Upvote width={36} height={36} style={{ marginHorizontal: 5 }} />}
-                                        {item.isliked && <Upvote width={36} height={36} style={{ marginHorizontal: 5 }} selected={true} />}
+                                <View style={styles.lower}>
+                                    {item.type != "textBlog" && <Text allowFontScaling={false} style={styles.u3}>{item.caption != undefined ? item.caption : "caption"} </Text>}
+                                    <Pressable onPress={() => { opencomment(item._id) }} allowFontScaling={false} style={styles.u4}>
+                                        <Text style={styles.u4}>View {item.postComments.length} comments</Text>
                                     </Pressable>
+                               </View>
+                               </LinearGradient>
 
-                                    <Text style={{ left: -10, top: 13, color: "#ccc" }}>{item.likedBy.length}</Text>
-                                    <Pressable style={{ marginLeft: -5 }} onPress={() => {
-                                        Vibration.vibrate(20)
-                                        opencomment(item._id)
-                                    }}><FontAwesome name="comment-o" size={30} color="#ccc" /></Pressable>
-                                </View>
-                                <TouchableOpacity
-                                    onPress={() => {
-                                        Vibration.vibrate(20)
-                                        openshare(item._id)
-                                    }}
-                                >
-                                    <Share style={{ marginTop: 5, marginRight: 10, right: 0 }} />
-                                </TouchableOpacity>
-
-
-                            </View>
-                            <View style={styles.lower}>
-                                {item.type != "textBlog" && <Text allowFontScaling={false} style={styles.u3}>{item.caption != undefined ? item.caption : "caption"} </Text>}
-                                <Pressable onPress={() => { opencomment(item._id) }} allowFontScaling={false} style={styles.u4}>
-                                    <Text style={styles.u4}>View {item.postComments.length} comments</Text>
-                                </Pressable>
-
-                            </View>
-
-                </LinearGradient>
+                // </View>
             )
         }
         else if (item.type == "communityPost") {
             return (
-
-                <LinearGradient
-                colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}
-                locations={[0, 1]}
-                style={styles.box}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 0, y: 1 }} >
+                <View key={index} style={styles.box}>
 
                     <View style={styles.top} >
                         <View
@@ -814,7 +765,7 @@ console.log(data.data.posts.length);
                         </Pressable>
                     </View>
 
-                </LinearGradient>
+                </View>
             )
         }
         else if (item.type == "jobPost") {
@@ -993,7 +944,7 @@ console.log(data.data.posts.length);
         else if (decoded.role == "Investor") {
             route = "investor/getInvestorChatUserList"
         }
-        else {
+        else if (decoded.role == "CommunityMember") {
             // console.log("fuck");
 
             route = "founder/getFounderChatUserList"
@@ -1283,7 +1234,7 @@ console.log(data.data.posts.length);
                                 ))}
 
 
-                                <Text style={styles1.t6}>{investor.length} investor connections</Text>
+                                <Text style={styles1.t6}>{userdata.investorConnections} investor connections</Text>
                             </View>}
                             <TouchableOpacity onPress={() => {
                                 // console.log("users page");
@@ -1305,7 +1256,7 @@ console.log(data.data.posts.length);
                                     </View>
                                 ))}
 
-                                <Text style={styles1.t6}>{noninvestor.length} connections</Text>
+                                <Text style={styles1.t6}>{length1(userdata.chatUsers)} connections</Text>
                             </TouchableOpacity>
                         </View>
 
@@ -1526,7 +1477,33 @@ console.log(data.data.posts.length);
 
 
 
-  
+    const loadMorePosts = () => {
+        // console.log(tabIndex);
+
+        if (isLoading) return;
+        if (tabIndex == 0) return;
+        // console.log('====================================');
+        // console.log("new post will come qlwijwei ");
+        // console.log('====================================');
+
+        setIsLoading(true);
+        setTimeout(() => {
+            const newPosts = Array.from(
+                { length: 10 },
+                (_, i) => `Post ${posts.length + i + 1}`
+            );
+            setPosts((prevPosts) => [...prevPosts, ...newPosts]);
+            setIsLoading(false);
+            // setMinHeight(minHeight + 300)
+
+            // console.log('====================================');
+            // console.log(posts);
+            // console.log(minHeight);
+
+            // console.log('====================================');
+            setMinHeight(minHeight + 300); // Adjust minHeight for new posts
+        }, 2000); // Simulate API delay
+    };
 
 
     const renderBackdrop = (props) => (
@@ -1544,6 +1521,37 @@ console.log(data.data.posts.length);
 
 
 
+    async function deletepost(postid) {
+
+       
+        // try {
+        //     const response = await fetch(`${url}posts/deletepost/${postid}`, {
+        //         method: 'POST',
+        //         body: "",
+        //         headers: {
+        //             accept: "application/json",
+        //             "Authorization": `Bearer ${token}`,
+        //         },
+        //     });
+        //     const data = await response.json();
+        //     console.log(data);
+        //     // var array = posts.map((e)=>{
+        //     //     console.log(e);
+
+        //     //     if(e._id != id){
+        //     //         return e
+        //     //     }
+        //     // })
+        //     // var array = posts.splice(posts.indexOf(postid) , 1)
+        //     // setPosts(array)
+
+        // }
+        // catch (err) {
+        //     console.log(err);
+
+        // }
+
+    }
 
     const [status1, setstatus] = useState(false)
 
@@ -1809,8 +1817,7 @@ console.log(data.data.posts.length);
 
 }
 
-
-export default memo(Apnauser)
+export default Apnauser
 
 const { width, height } = Dimensions.get("window");
 
