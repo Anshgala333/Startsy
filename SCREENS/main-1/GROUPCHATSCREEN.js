@@ -215,6 +215,8 @@ const Chat1 = ({ navigation, route }) => {
 
             socket.emit("joinGroup", finaldata)
 
+            // socket.emit("registerUser", finaldata)
+
             // console.log("i am connection socke url, ", url);
             // Listen for incoming private messages
             socket.on("groupMessage", ({ data1, pfp }) => {

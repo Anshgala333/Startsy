@@ -33,7 +33,7 @@ const CommunityPage = () => {
 
 
   const [image, setImage] = useState("xyz");
-  const[isPrivate,setIsPrivate]=useState(false);
+  const [isPrivate, setIsPrivate] = useState(false);
 
   const fileupload = async () => {
 
@@ -195,7 +195,7 @@ const CommunityPage = () => {
 
 
 
-        <Pressable onPress={fileupload}>
+        <Pressable onPress={fileupload} style={{ marginTop: 20 }}>
           {image != "xyz" ? (
             <Image style={styles.img} source={{ uri: image }} />
           ) : (
@@ -204,13 +204,13 @@ const CommunityPage = () => {
           )}
         </Pressable>
 
-        <Text style={styles.t1}>Upload a profile picture</Text>
+        <Text style={styles.t1}>Upload a forum icon</Text>
 
 
         <View style={{ flex: 1, marginTop: 20 }}>
           {/* Community name field */}
           <TextInput
-            placeholderTextColor="#ccc"
+            placeholderTextColor="gray"
             style={styles.input}
             placeholder="Forum Name"
             value={communityname}
@@ -246,25 +246,25 @@ const CommunityPage = () => {
 
           </View>
 
-          <View style={{ color: 'white', display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10 }}>
-                <Checkbox
-                    status={isPrivate ? "checked" : "unchecked"}
-                    onPress={() => {
-                        setIsPrivate(!isPrivate)
-                        if(!isPrivate){
-                            ToastAndroid.showWithGravityAndOffset(
-                                `Your post will only be visible to your connections`,
-                                ToastAndroid.LONG,
-                                ToastAndroid.TOP,
-                                100, 100
-                            );
-                        }
-                    }}
-                    uncheckedColor='#ccc'
-                    color='#00de62'
-                />
-                <Text style={{ color: '#ccc' }}>Private</Text>
-            </View>
+          <View style={{ color: 'white', display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', }}>
+            <Checkbox
+              status={isPrivate ? "checked" : "unchecked"}
+              onPress={() => {
+                setIsPrivate(!isPrivate)
+                if (!isPrivate) {
+                  ToastAndroid.showWithGravityAndOffset(
+                    `Your post will only be visible to your connections`,
+                    ToastAndroid.LONG,
+                    ToastAndroid.TOP,
+                    100, 100
+                  );
+                }
+              }}
+              uncheckedColor='#ccc'
+              color='#00de62'
+            />
+            <Text style={{ color: 'gray', fontFamily: 'Roboto' }}>Private</Text>
+          </View>
 
           {/* Rule drop down field */}
           <View style={{ marginTop: 10 }}>

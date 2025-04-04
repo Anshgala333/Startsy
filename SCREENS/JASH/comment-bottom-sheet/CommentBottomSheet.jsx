@@ -39,7 +39,7 @@ const CommentBottomSheet = ({ commentRef, backdropComponent, allcomments, commen
             // commentRef.current?.snapToIndex(1);
 
         }}>
-            <Text style={styles.title}>Comments</Text>
+            <Text style={{ textAlign: 'center', color: '#ccc', fontFamily: 'Alata', fontSize: 16 }}>Comments</Text>
 
         </Pressable>
 

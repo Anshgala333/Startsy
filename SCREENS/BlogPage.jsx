@@ -21,7 +21,7 @@ const BlogPage = () => {
   const [buttonText, setButtonText] = useState("Post blog");    //submit button text
   const maxLength = 1000;                                  ///length count for description
 
-  const [isPrivate,setIsPrivate]=useState(false);
+  const [isPrivate, setIsPrivate] = useState(false);
 
 
   const postBlog = async () => {
@@ -74,7 +74,7 @@ const BlogPage = () => {
     }
   };
 
-  
+
 
   return (
     <GestureHandlerRootView style={{ flex: 1, backgroundColor: '#16181a' }}>
@@ -103,7 +103,7 @@ const BlogPage = () => {
               />
               <Text style={styles.descriptionLength}>{blog.length}/{maxLength} </Text>
 
-              <View style={{ color: 'white', display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10 }}>
+              <View style={{ color: 'white', display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', }}>
                 <Checkbox
                   status={isPrivate ? "checked" : "unchecked"}
                   onPress={() => {
@@ -111,7 +111,7 @@ const BlogPage = () => {
                     if (!isPrivate) {
                       ToastAndroid.showWithGravityAndOffset(
                         `Your post will only be visible to your connections`,
-                      
+
                         ToastAndroid.LONG,
                         ToastAndroid.TOP,
                         ToastAndroid.CENTER,
@@ -122,7 +122,7 @@ const BlogPage = () => {
                   uncheckedColor='#ccc'
                   color='#00de62'
                 />
-                <Text style={{ color: '#ccc' }}>Private</Text>
+                <Text style={{ color: 'gray' }}>Private</Text>
               </View>
 
 
@@ -142,7 +142,7 @@ const BlogPage = () => {
 
                 <ActivityIndicator size={24} color="#16181a" />
 
-                : <Text style={styles.buttonText}>{buttonText}</Text>
+                : <Text style={styles.buttonText}>Post</Text>
               }
 
             </Pressable>

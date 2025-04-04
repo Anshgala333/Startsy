@@ -2,7 +2,7 @@ import * as React from "react";
 import Svg, { Path } from "react-native-svg";
 import { View, StyleSheet } from "react-native";
 
-const Share = ({ width = 32, height = 32, color = "#ccc", ...props }) => (
+const Share = ({ width = 30, height = 30, color = "#ccc", ...props }) => (
   <View style={styles.container}>
   <Svg
     xmlns="http://www.w3.org/2000/svg"

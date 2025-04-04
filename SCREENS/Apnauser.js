@@ -1416,7 +1416,7 @@ console.log(data.data.posts.length);
 
     const render = ({ item, index }) => (
 
-        < View key={index} style={{ flex: 1, backgroundColor: "#16181a" }} >
+        < View key={index} style={{ flex: 1, minHeight: minHeight, backgroundColor: "#16181a" }} >
 
             {!userdata && <ActivityIndicator size={24} color="#ccc" />}
             {userdata && <Header />}

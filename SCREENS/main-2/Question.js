@@ -370,9 +370,10 @@ const styles1 = StyleSheet.create({
     },
     totalRepliesText: {
         alignItems: 'center',
-        fontSize: 12,
+        fontSize: 11,
         paddingTop: 5,
-        color: 'gray'
+        color: 'gray',
+        fontFamily:'Roboto'
 
     },
     userNameStyle: {
@@ -398,8 +399,9 @@ const styles1 = StyleSheet.create({
         position: "absolute",
         right: 0,
         top: 10,
-        fontSize: 9,
-        color: "gray"
+        fontSize: 11,
+        color: "gray",
+        fontFamily:'Roboto'
     },
     divider: {
         width: "120%",

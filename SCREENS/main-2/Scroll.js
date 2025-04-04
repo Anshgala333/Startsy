@@ -253,7 +253,7 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                             }
 
                                         }}
-                                        style={{ display: "flex", flexDirection: "row", width: "90%",  }}>
+                                        style={{ display: "flex", flexDirection: "row", width: "90%", }}>
                                         <Image style={styles.userimg} source={{ uri: item.user_id.profilePhoto }} />
                                         <View style={styles.userdetail}>
                                             <Text allowFontScaling={false} style={styles.u1}>{item.user_id.userName}</Text>
@@ -283,7 +283,7 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
 
                                         </View>
                                     </Pressable>
-                                    <TouchableOpacity style={{position : "absolute" , top : 15 , right : 15}} onPress={() => onReportCallBack(item._id, true)}>
+                                    <TouchableOpacity style={{ position: "absolute", top: 15, right: 15 }} onPress={() => onReportCallBack(item._id, true)}>
                                         <SimpleLineIcons name="options-vertical" size={20} color="#ccc" />
                                     </TouchableOpacity>
                                 </View>
@@ -304,52 +304,50 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                 }
 
                                 {item.type == "textBlog" && <Text style={styles.blogtext}>{item.content}</Text>}
-                                {/* {item.type == "textBlog" &&  <View style={[styles.divider , {marginTop : 7}]}></View>} */}
+                         
 
                                 <View style={styles.iconcontainer}>
                                     <View style={styles.icon2}>
-                                        <TouchableOpacity onPress={() => { upvotepost(item._id, index) }}>
-                                            {/* {item.likedBy.includes(loggedinUserID) && <Upvote width={36} height={36} style={{ marginHorizontal: 0 }} selected={true} />} */}
-                                            {/* {!item.likedBy.includes(loggedinUserID)   && <Upvote width={36} height={36} style={{ marginLeft: 5, marginRight: -5 }} />} */}
-
-                                            {!item.isliked && <Upvote width={30} height={30} style={{ marginLeft: 5, marginRight: -5 }} />}
-                                            {item.isliked && <Upvote width={30} height={30} style={{ marginLeft: 5, marginRight: -5 }} selected={true} />}
-                                        </TouchableOpacity>
-                                        <Text style={{ left: 0, top: 13, color: "#ccc" }}>{item.itemlikedcount}</Text>
+                                        <View style={{flexDirection:'row',gap:6,marginRight:4,}}>
+                                            <TouchableOpacity onPress={() => { upvotepost(item._id, index) }}>
+                                          
+                                                {!item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5, marginTop: 6 }} />}
+                                                {item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5, marginTop: 6 }} selected={true} />}
+                                            </TouchableOpacity>
+                                            <Text style={{ left: 0, top: 13, color: "#ccc" }}>{item.itemlikedcount}</Text>
+                                        </View>
                                         <Pressable onPress={() => {
                                             Vibration.vibrate(20)
                                             opencomment(item._id)
-                                        }}>
-                                            <FontAwesome style={{ marginLeft: 4, marginTop: 5 }} name="comment-o" size={24} color="#ccc" />
+                                            
+                                        }}
+                                        // styles={{marginRight:4}}
+                                        >
+                                            <FontAwesome style={{ marginLeft: 4, marginRight:7}} name="comment-o" size={27} color="#ccc" />
                                         </Pressable>
-                                        <TouchableOpacity style={{ paddingRight: 0, marginTop: 5 }} onPress={() => toggleSavePost(item._id, index)}>
-                                            {item.issaved ? (
-                                                <MaterialIcons name="bookmark-border" size={26} color="#ccc" />
-                                            ) : (
-                                                <MaterialCommunityIcons
-                                                    name="bookmark"
-                                                    size={30}
-                                                    color="#ccc"             // Gray when unsaved
-
-                                                />
-                                            )}
-                                        </TouchableOpacity>
+                                        <Pressable onPress={() => {
+                                            Vibration.vibrate(20)
+                                            openshare(item._id)
+                                        }}>
+                                            <Share style={{ marginTop: 5, marginRight: 10, right: 0 }} />
+                                        </Pressable>
                                     </View>
-                                    {/* ............................................................................................ */}
 
 
 
+                                    <TouchableOpacity style={{ paddingRight: 0, paddingRight: 8 }} onPress={() => toggleSavePost(item._id, index)}>
+                                        {item.issaved ? (
+                                            <MaterialIcons name="bookmark-border" size={32} color="#ccc" />
+                                        ) : (
+                                            <MaterialCommunityIcons
+                                                name="bookmark"
+                                                size={32}
+                                                color="#ccc"             // Gray when unsaved
 
+                                            />
+                                        )}
+                                    </TouchableOpacity>
 
-                                    {/* ............................................................................................ */}
-
-
-                                    <Pressable onPress={() => {
-                                        Vibration.vibrate(20)
-                                        openshare(item._id)
-                                    }}>
-                                        <Share style={{ marginTop: 5, marginRight: 10, right: 0 }} />
-                                    </Pressable>
 
 
                                 </View>

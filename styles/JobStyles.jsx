@@ -22,17 +22,19 @@ const styles = StyleSheet.create({
     input: {
         borderBottomWidth: 1,
         borderBottomColor: "#888",
-        color: "#ccc",
-        fontSize: 20,
+        color: "gray",
+        fontSize: 18,
         paddingVertical: 5,
         marginBottom: 10,
+        fontFamily:'Roboto'
         
     },
     label: {
-        color: "#ccc",
-        fontSize: 16,
+        color: "gray",
+        fontSize: 18,
         marginBottom: 5,
         marginLeft : 5,
+        fontFamily:'Roboto'
     },
     textArea: {
         height: 150,
@@ -40,9 +42,10 @@ const styles = StyleSheet.create({
         borderColor: "gray",
         borderRadius: 20,
         color: "#ccc",
-        fontSize : 20,
+        fontSize : 18,
         padding: 10,
         textAlignVertical: "top",
+        fontFamily:'Roboto',
     },
     picker: {
         backgroundColor: "#333",
@@ -55,9 +58,9 @@ const styles = StyleSheet.create({
         height: 42,
         width: 180,
         justifyContent: "center",
-        margin: "auto",
+        // margin: "auto",
         alignSelf: "center",
-        marginVertical: 40,
+        marginVertical: 25,
         textAlign: "center",
     },
     buttonText: {
@@ -69,7 +72,7 @@ const styles = StyleSheet.create({
     },
 
     descriptionLength: {
-        color: "#ccc",
+        color: "#666",
         textAlign: 'right',
         position: 'relative',
         bottom: 25,

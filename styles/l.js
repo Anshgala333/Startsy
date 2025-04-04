@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
         color: "white",
         // paddingBottom: height * 0.012,
         width: "95%",
-        paddingBottom : 10 ,
+        // paddingBottom : 10 ,
         marginBottom : 20,
         fontFamily: "Alata",
         // lineHeight : scalingfactor * 18

@@ -82,15 +82,14 @@ import TermsAndConditions from "../SCREENS/JASH/terms-condition/TermsAndConditio
 const Stack = createNativeStackNavigator();
 SystemUI.setBackgroundColorAsync("#16181a");
 
-
-Notifications.addNotificationReceivedListener(notification => {
+Notifications.addNotificationReceivedListener((notification) => {
   // Handle the notification when received
-  console.log('Notification received:', notification);
+  console.log("Notification received:", notification);
 });
 
-Notifications.addNotificationResponseReceivedListener(response => {
+Notifications.addNotificationResponseReceivedListener((response) => {
   // Handle response when the user taps on the notification
-  console.log('Notification tapped:', response);
+  console.log("Notification tapped:", response);
 });
 import { enableFreeze } from "react-native-screens";
 import { enableScreens } from "react-native-screens";
@@ -140,8 +139,36 @@ export default function App() {
   const [notification, setNotification] = useState<
     Notifications.Notification | undefined
   >(undefined);
-  const notificationListener = useRef<Notifications.EventSubscription>();
+  // const notificationListener = useRef();
+  const notificationListener = useRef<Notifications.Subscription | null>(null);
   const responseListener = useRef<Notifications.EventSubscription>();
+
+  // useEffect(() => {
+  //   // ✅ Listen for notifications when the app is open
+  //   notificationListener.current =
+  //     Notifications.addNotificationReceivedListener(async (notification) => {
+  //       const { title, body } = notification.request.content;
+
+  //       // ✅ Show a local notification
+  //       await Notifications.scheduleNotificationAsync({
+  //         content: {
+  //           title: title,
+  //           body: body,
+  //           sound: "default",
+  //         },
+  //         trigger: null, // Shows immediately
+  //       });
+  //     });
+
+  //   return () => {
+  //     if (notificationListener.current) {
+  //       Notifications.removeNotificationSubscription(notificationListener.current);
+  //       notificationListener.current = null; // Reset after removing
+  //     }
+  //   };
+  // }, []);
+
+  // const notificationListener = useRef();
 
   useEffect(() => {
     registerForPushNotificationsAsync().then(
@@ -326,14 +353,25 @@ export default function App() {
           {/* <Stack.Screen name="settings" component={Settings}/> */}
 
           <Stack.Screen name="SavedPost" component={AllPostsScreen} />
-          <Stack.Screen name="VerificationPendingScreen" component={VerificationPendingScreen}/>
-          <Stack.Screen name="InvestorNotVerifiedScreen" component={InvestorNotVerifiedScreen} />
-          <Stack.Screen name="CertificatePortfolioPage" component={CertificatePortfolioPage} />
-          <Stack.Screen name="TermsAndConditions" component={TermsAndConditions} />
+          <Stack.Screen
+            name="VerificationPendingScreen"
+            component={VerificationPendingScreen}
+          />
+          <Stack.Screen
+            name="InvestorNotVerifiedScreen"
+            component={InvestorNotVerifiedScreen}
+          />
+          <Stack.Screen
+            name="CertificatePortfolioPage"
+            component={CertificatePortfolioPage}
+          />
+          <Stack.Screen
+            name="TermsAndConditions"
+            component={TermsAndConditions}
+          />
           <Stack.Screen name="RatingPage" component={RatingPage} />
-          </Stack.Navigator >
-      )
-      }
+        </Stack.Navigator>
+      )}
 
       {/* </View> */}
     </GlobalProvider>
@@ -438,10 +476,10 @@ async function registerForPushNotificationsAsync() {
           ).data;
           console.log(token);
 
-          var ifUserIsLoggedIn = await AsyncStorage.getItem("accessToken")
-          if(ifUserIsLoggedIn) {
-            try{
-              var response = await fetch(`${url}api/updateNotificationToken` , {
+          var ifUserIsLoggedIn = await AsyncStorage.getItem("accessToken");
+          if (ifUserIsLoggedIn) {
+            try {
+              var response = await fetch(`${url}api/updateNotificationToken`, {
                 method: "POST",
                 body: JSON.stringify({
                   notificationToken: token,
@@ -449,21 +487,17 @@ async function registerForPushNotificationsAsync() {
                 headers: {
                   "Content-Type": "application/json",
                   accept: "application/json",
-                  "Authorization": `Bearer ${ifUserIsLoggedIn}`,
-              },
-              })
-              var data = await response.json()
+                  Authorization: `Bearer ${ifUserIsLoggedIn}`,
+                },
+              });
+              var data = await response.json();
 
               console.log(data.json());
-              
+            } catch (e) {
+              console.log(e);
             }
-            catch(e){
-              console.log(e);   
-            }
-
           }
           try {
-
             await AsyncStorage.setItem("notificationToken", token);
             console.log("Notification token saved to AsyncStorage:");
           } catch (e) {
