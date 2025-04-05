@@ -19,11 +19,7 @@ import Entypo from '@expo/vector-icons/Entypo';
 
 const LoginPage = function ({ navigation, route }) {
 
-    // const navigation = useNavigation()
 
-
-
-    // Set status bar style and background color when the screen is focused
     useFocusEffect(() => {
         StatusBar.setBackgroundColor("#16181a")
         StatusBar.setBarStyle("light-content")
@@ -79,7 +75,7 @@ const LoginPage = function ({ navigation, route }) {
         var ExistingToken = await AsyncStorage.getItem("notificationToken")
         console.log(ExistingToken);
 
-        // return
+    
 
 
         var final = {
@@ -92,8 +88,7 @@ const LoginPage = function ({ navigation, route }) {
 
 
 
-        // Alert.alert(`${url}api/authenticate`)
-        // Alert.alert(JSON.stringify(final))
+      
         try {
             const response = await fetch(`${url}api/authenticate`, {
                 method: 'POST',
@@ -173,6 +168,7 @@ const LoginPage = function ({ navigation, route }) {
 
 
     }
+    
 
     useEffect(() => {
         // Handle hardware back button press

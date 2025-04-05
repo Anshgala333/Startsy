@@ -1,17 +1,21 @@
 import { View, Text, Pressable, TextInput, StyleSheet } from 'react-native'
-import React, { useMemo, useRef } from 'react'
+import React, { useMemo, useRef, useState } from 'react'
 
 import BottomSheet, { BottomSheetView, BottomSheetScrollView, BottomSheetTextInput, BottomSheetFlatList, BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import Animated from 'react-native-reanimated';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { ActivityIndicator } from 'react-native-paper';
+import { SafeAreaView } from 'react-native-safe-area-context';
 // import {  } from 'react-native-gesture-handler';
 
 const CommentBottomSheet = ({ commentRef, backdropComponent, allcomments, comments , docomment, uploadingcomment, setcommenttext, commenttext,backgroundStyle }) => {
 
     const snapPoints5 = useMemo(() => ["70%",], []);
 
+
     // console.log(allcomments);
+
+    const [ inFocus,setInFocus]=useState(false)
 
 
 
@@ -27,13 +31,15 @@ const CommentBottomSheet = ({ commentRef, backdropComponent, allcomments, commen
         backdropComponent={backdropComponent}
         enableDynamicSizing={false}
         snapPoints={snapPoints5}
+      
         index={-1}
         // initialSnapIndex={0}
         // handleStyle={{display : "none"}}
         // contentContainerStyle={{ zIndex: 1000000, elevation: 20000000, height: 100 }}
     >
 
-        <Pressable onPress={() => {
+
+       <Pressable onPress={() => {
             // console.log("openin");
             inputRef.current?.focus()
             // commentRef.current?.snapToIndex(1);
@@ -56,11 +62,16 @@ const CommentBottomSheet = ({ commentRef, backdropComponent, allcomments, commen
         <Animated.View style={{ position: "relative" }}>
             <TextInput
                 ref={inputRef}
-                onFocus={() => {
-
-                    // snapPoints5 = ['100']
+               onPress={()=>{
+                inputRef.current?.focus()
+               }}
+                onPressIn={()=>{
                     inputRef.current?.focus();
-
+                }}
+                onBlur={()=>{
+                   
+                    inputRef.current?.blur()
+                    setInFocus(false)
                 }}
                 // onblur={() => setmax(500)}
                 style={styles.input}
@@ -69,11 +80,12 @@ const CommentBottomSheet = ({ commentRef, backdropComponent, allcomments, commen
                 value={commenttext}
                 onChangeText={text => setcommenttext(text)}
             />
-            <Pressable onPress={docomment} style={styles.send}>
+            <Pressable onPress={docomment} style={[styles.send,{}]}>
                 {uploadingcomment && <ActivityIndicator size={24} color="#828282" />}
                 {!uploadingcomment && <Ionicons name="send" size={24} color="#828282" />}
             </Pressable>
         </Animated.View>
+       
     </BottomSheet>
     )
 }
@@ -106,7 +118,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         color: "#828282",
         fontSize: 18,
-        marginBottom: 25
+        marginBottom: 10
 
     },
     send: {
