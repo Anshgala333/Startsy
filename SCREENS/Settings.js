@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { jwtDecode } from "jwt-decode";
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Platform, ToastAndroid, Image, BackHandler, Alert, Linking } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Platform, ToastAndroid, Image, BackHandler, Alert, Pressable,Linking } from "react-native";
 import { List, Avatar, Divider } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
@@ -10,6 +10,7 @@ import * as IntentLauncher from "expo-intent-launcher";
 import * as Updates from "expo-updates";
 import * as MediaLibrary from 'expo-media-library';
 import { url } from "@/config.js";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import RatingPage from "../SCREENS/BetaRating.js";
 const Settings = ({ navigation, route }) => {
 
@@ -148,7 +149,12 @@ const Settings = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
+      <View  style={styles.headerRow}>
+      <Pressable onPress={() => navigation.goBack()}>
+        <FontAwesome6 name="chevron-left" size={28} style={{ alignSelf: 'flex-start', marginLeft: 6 }} color="#00DF60" />
+      </Pressable>
       <Text allowFontScaling={false} style={styles.headerText}>Settings</Text>
+      </View>
       <View style={styles.bottom}>
 
         <View>
@@ -190,8 +196,8 @@ const Settings = ({ navigation, route }) => {
         </View>
 
         <View style={styles.footer}>
-           <Text style={styles.devtext1}> Beta Version 7</Text> 
-           <Text style={styles.devtext}>  Developed by RSPY Tech Pvt Ltd</Text>
+          <Text style={styles.devtext1}> Beta Version 7</Text>
+          <Text style={styles.devtext}>  Developed by RSPY Tech Pvt Ltd</Text>
         </View>
       </View>
     </View>
@@ -205,6 +211,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#16181A",
     position: "relative"
   },
+  headerRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    //paddingVertical: 15,
+  },
+  
   top: {
     width: "100%",
     height: 120,
@@ -219,6 +232,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ccc",
     overflow: "hidden",
   },
+  
   img2: {
     width: "100%",
     height: "100%",
@@ -228,8 +242,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#16181a",
     padding: 20,
     paddingTop: 0,
-    flex:1,
-    justifyContent:'space-between'
+    flex: 1,
+    justifyContent: 'space-between'
   },
   option: {
     flexDirection: "row",
@@ -251,7 +265,7 @@ const styles = StyleSheet.create({
     // marginBottom: 12,
     fontFamily: "myanmar",
     color: "#00DE62",
-    paddingLeft: 15
+    paddingLeft: 10
   },
 
   devtext: {
@@ -259,17 +273,17 @@ const styles = StyleSheet.create({
     color: "#ccc",
     alignSelf: "center",
     bottom: 0,
-    fontFamily:"Roboto",
-    fontSize:12
+    fontFamily: "Roboto",
+    fontSize: 12
   },
 
-  devtext1:{
+  devtext1: {
     // textAlign:"right",
     color: "#94A3B8",
     alignSelf: "center",
     bottom: 0,
-    fontFamily:"Roboto",
-    fontSize:16,
+    fontFamily: "Roboto",
+    fontSize: 16,
   }
 });
 

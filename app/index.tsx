@@ -234,7 +234,7 @@ export default function App() {
       <StatusBar backgroundColor="#16181a" barStyle={"light-content"} />
       {appisready && (
         <Stack.Navigator
-          initialRouteName="Signup5"
+          initialRouteName="Green"
           screenOptions={{
             headerStyle: {
               backgroundColor: "#16181a",
