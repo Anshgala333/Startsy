@@ -51,7 +51,7 @@ const SeperateInvestor = ({ search, token, setk, inputref }) => {
         if (token) {
             var decode = jwtDecode(token)
             console.log(decode._id);
-            
+
             setLoggedInUserId(decode._id)
         }
     }, [token])
@@ -68,9 +68,9 @@ const SeperateInvestor = ({ search, token, setk, inputref }) => {
     const [loading, setloading] = useState(false)
 
     useFocusEffect(
-        useCallback(()=>{
+        useCallback(() => {
             fetchData()
-        } , [])
+        }, [])
     )
 
     const fetchData = async () => {
@@ -109,11 +109,11 @@ const SeperateInvestor = ({ search, token, setk, inputref }) => {
                 );
                 const result = await response.json();
 
-               var rec1 = result.filter((e)=>e.user.role == "Investor")
-            //    console.log(rec1 , "plj");
-               
-                
-                
+                var rec1 = result.filter((e) => e.user.role == "Investor")
+                //    console.log(rec1 , "plj");
+
+
+
 
 
                 const uniqueData = rec1.filter((item, index, self) =>
@@ -302,6 +302,13 @@ const SeperateInvestor = ({ search, token, setk, inputref }) => {
                                             {item.lastMessage?.message || "No chats yet"}
                                         </Text>
                                     }
+                                    {item.lastMessage == null && <Text
+                                        numberOfLines={1}
+                                        ellipsizeMode="tail"
+                                        allowFontScaling={false}
+                                        style={styles.message}>
+                                        No chats yet
+                                    </Text>}
 
 
                                     {item.lastMessage && typeof item.lastMessage.message == "object" &&
@@ -313,7 +320,7 @@ const SeperateInvestor = ({ search, token, setk, inputref }) => {
                                 </View>
                                 <Text
                                     allowFontScaling={false}
-                                    style={item.lastMessage && !item.lastMessage.isRead && item.lastMessage.senderId != loggedinuserid  ? styles.boldtime : styles.time}>
+                                    style={item.lastMessage && !item.lastMessage.isRead && item.lastMessage.senderId != loggedinuserid ? styles.boldtime : styles.time}>
                                     {item.lastMessage ? time(item.lastMessage.createdAt) : "today"}</Text>
 
                                 {item.lastMessage && item.lastMessage.isRead == false && item.lastMessage.senderId != loggedinuserid && <Text style={{ marginTop: 25, marginRight: 10, width: 8, height: 8, backgroundColor: "#00de62", borderRadius: 30 }}></Text>}
@@ -438,8 +445,8 @@ const styles = StyleSheet.create({
         width: "100%"
     },
     avatar: {
-        width: 50,
-        height: 50,
+        width: 45,
+        height: 45,
         marginTop: 5,
 
         borderRadius: 25,
@@ -451,18 +458,13 @@ const styles = StyleSheet.create({
         // backgroundColor : "red",
         // width : 100
     },
-    username: {
-        fontSize: 22,
-        color: "#00DE62",
-        fontFamily: "Alata",
-        alignSelf: "flex-start",
-        marginTop: -5,
-        marginBottom: 5
-    },
+
     message: {
         fontSize: 14,
-        color: "#B8B8B8",
+        color: "gray",
         marginTop: -3,
+        fontFamily: 'Roboto',
+        paddingRight: 60
     },
     bold: {
         fontSize: 14,
@@ -478,7 +480,7 @@ const styles = StyleSheet.create({
         top: 15,
         textAlign: "right",
         // backgroundColor : "red",
-        color: "#B8B8B8",
+        color: "#666",
         fontFamily: "Roboto",
     },
     boldtime: {
@@ -491,6 +493,7 @@ const styles = StyleSheet.create({
         // backgroundColor : "red",
         color: "#00de62",
         fontFamily: "Roboto",
+        paddingRight: 60
     },
     placeholderText: {
         color: "#B8B8B8",
@@ -537,7 +540,7 @@ const styles = StyleSheet.create({
     username: {
         color: '#E9E9E9',
         fontWeight: '600',
-        fontSize: 22,
+        fontSize: 18,
         fontFamily: "Alata",
         marginBottom: 3,
         marginTop: -2,

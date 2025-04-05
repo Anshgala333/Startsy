@@ -15,10 +15,10 @@ const scalingfactor = Math.sqrt(a * b)
 const s5 = StyleSheet.create({
     t1: {
         textAlign: 'center',
-        color: "#94A3B8",
+        color: "#828282",
         fontFamily: "Roboto",
-        fontSize: scalingfactor * 16,
-        marginTop: 5,
+        fontSize: 12,
+        marginTop: 70,
         // zIndex : 100,
         // backgroundColor : "red"
     }
@@ -28,21 +28,18 @@ const s5 = StyleSheet.create({
         // backgroundColor: "red",
         margin: height * 0.016,
         marginTop: 0,
-        borderBottomWidth: 3,
+        borderBottomWidth: 1,
         // borderRadius : 20,
         paddingLeft: scalingfactor * 10,
-        borderBottomColor: "#16181A",
+        borderBottomColor: "#ccc",
         fontSize:  20, // Responsive font size
-        color: "#B8B8B8",
+        color: "#ccc",
         // paddingBottom: scalingfactor * 5,
         width: "92%",
-
         paddingBottom : 8,
-        // fontFamily: "Roboto",
+        fontFamily: "Alata",
         fontWeight: '0',
-        // lineHeight: scalingfactor * 18,
         marginTop: scalingfactor * 10,
-        // marginBottom : 10
     },
 
     bottom: {
@@ -51,13 +48,15 @@ const s5 = StyleSheet.create({
         flex: 1,
         backgroundColor: "#24272A",
         backgroundColor : "rgba(33, 34, 35, 0.5)",
-
-        // backgroundColor: "red",
+        // backgroundColor: "yellow",
         borderTopLeftRadius: 70,
+        height : height * 0.85,
         alignContent: "center",
         padding: scalingfactor * 20,
         paddingBottom : 0,
-        paddingTop: scalingfactor * 25
+        paddingTop: scalingfactor * 25,
+
+        
     }, icons: {
         display: "flex",
         flexDirection: "row",
@@ -65,12 +64,12 @@ const s5 = StyleSheet.create({
         width: "100%",
         margin: "auto",
         paddingHorizontal : "4%",
-        // position: "absolute",
-        // bottom: 0,
+        position: "absolute",
         margin : "auto",
+        bottom: 30,
         // backgroundColor : "#24272A",
-        paddingBottom : 50,
-        marginTop : 40
+        // paddingBottom : 50,
+        // marginTop : 80
 
     }, dropdown: {
         position: "absolute",

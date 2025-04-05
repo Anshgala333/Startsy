@@ -197,7 +197,7 @@ const ChatScreen = ({ token, mainpagebottomsheet, closeall, k, setk }) => {
                                     color: focused ? "#00DE62" : "#808080",
                                     borderColor: focused ? "#00DE62" : "#808080",
                                 }
-                            ]}> Communities
+                            ]}> Forums
                             </Text>
                         ),
 
@@ -241,8 +241,8 @@ const styles = StyleSheet.create({
         marginBottom: 6,
     },
     searchInput: {
-        height: 45,
-        borderColor: "#828282",
+        height: 50,
+        borderColor: "#ccc",
         borderWidth: 1,
         borderRadius: 30,
         paddingHorizontal: 15,
@@ -319,7 +319,7 @@ const styles = StyleSheet.create({
         // borderWidth: 1,
         // borderRadius: 30,
 
-        fontSize: 14,
+        fontSize: 16,
         fontFamily: "Alata",
 
     },

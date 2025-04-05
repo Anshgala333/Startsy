@@ -61,13 +61,13 @@ const Signup2 = function ({ navigation, route }) {
 
 
             // console.log(data);
-            
+
             await AsyncStorage.setItem('accessToken', data.accessToken);
             // console.log("token stored successfully");
-            
-            
+
+
             if (type === "Investor") {
-                navigation.navigate("Signup4", { type ,username, password});
+                navigation.navigate("Signup4", { type, username, password });
             } else {
                 navigation.navigate("Email", { type, username, password });
                 // navigation.navigate("Signup5", { type, username, password });
@@ -88,7 +88,7 @@ const Signup2 = function ({ navigation, route }) {
         <KeyboardAvoidingView style={signupstyles.container} behavior="padding" keyboardVerticalOffset={0}>
             <ScrollView>
                 <View style={signupstyles.row}>
-                <Pressable onPress={() => navigation.goBack()}>
+                    <Pressable onPress={() => navigation.goBack()}>
                         <FontAwesome6 name="chevron-left" size={34} style={{ alignSelf: 'flex-start', marginLeft: 16 }} color="#00DF60" />
                     </Pressable>
                     <View style={signupstyles.top}>
@@ -101,24 +101,31 @@ const Signup2 = function ({ navigation, route }) {
                         <TextInput
                             allowFontScaling={false}
                             placeholder="Password"
-                            placeholderTextColor="#B8B8B8"
+                            placeholderTextColor="#828282"
                             style={signupstyles.input}
                             value={password}
                             secureTextEntry={true}
-                            onChangeText={(text) => { setPassword(text) }}
+                            onChangeText={(text) => {
+                                setPasswordError("")
+                                setConfirmPasswordError("")
+                                setPassword(text)
+                            }}
                         />
                         {passwordError ? (
-                            <Text style={ signupstyles.error }>{passwordError}</Text>
+                            <Text style={signupstyles.error}>{passwordError}</Text>
                         ) : null}
 
                         <TextInput
                             allowFontScaling={false}
                             placeholder="Confirm password"
-                            placeholderTextColor="#B8B8B8"
+                            placeholderTextColor="#828282"
                             style={signupstyles.input2}
                             secureTextEntry={true}
                             value={confirmPassword}
-                            onChangeText={(text) => { setConfirmPassword(text) }}
+                            onChangeText={(text) => { 
+                                setPasswordError("")
+                                setConfirmPasswordError("")
+                                setConfirmPassword(text) }}
                         />
                         {confirmPasswordError ? (
                             <Text style={signupstyles.error}>{confirmPasswordError}</Text>
@@ -128,7 +135,7 @@ const Signup2 = function ({ navigation, route }) {
                             {!loading ? (
                                 <Text allowFontScaling={false} style={signupstyles.nexttext}>Next</Text>
                             ) : (
-                                <ActivityIndicator size={24} color="#000" />
+                                <ActivityIndicator style={{marginTop:7}} size={24} color="#000" />
                             )}
                         </Pressable>
                     </View>

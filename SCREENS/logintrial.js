@@ -4,8 +4,8 @@ import * as React from "react";
 import { useState, useEffect, useRef, useContext } from "react";
 import styles from "../styles/l.js"
 // import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, BackHandler, Text, Pressable, ActivityIndicator, TextInput, Keyboard, View, Image, StyleSheet, Dimensions, StatusBar, Animated, Easing, Platform, KeyboardAvoidingView, ScrollView, Alert, ToastAndroid } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { SafeAreaView, BackHandler, Text, Pressable, ActivityIndicator, TextInput, Keyboard, View, Image, StyleSheet, Dimensions, StatusBar, Animated, Easing, Platform, KeyboardAvoidingView, ScrollView, Alert, ToastAndroid, TouchableOpacity } from "react-native";
+// import { TouchableOpacity } from "react-native-gesture-handler";
 import ReadMore1 from "./trial-1.js";
 import { useFonts } from 'expo-font';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -18,7 +18,7 @@ import { jwtDecode } from "jwt-decode";
 import { GlobalContext } from "@/Global/globalcontext.js";
 import { url } from "../config.js"
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-
+import LottieView from "lottie-react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 
@@ -108,14 +108,14 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
     setTimeout(() => {
       Animated.timing(heightAnim, {
         // toValue: height * 0.42,
-        toValue: height * 0.42,
+        toValue: height * 0.6,
         duration: (first == undefined) ? 300 : 0,
         useNativeDriver: false,
       }).start();
 
       Animated.timing(bottomanim, {
         // toValue: height * 0.68,
-        toValue: height * 0.58,
+        toValue: height * 0.4,
         duration: (first == undefined) ? 300 : 0,
         useNativeDriver: false,
 
@@ -215,12 +215,11 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
-          // 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.6312.86 Safari/537.36'
+
         }
       });
       const data = await response.json();
       console.log(data);
-      // Alert.alert(JSON.stringify(data))
       if (response.status === 200) {
         updateField("token", data.accessToken);
         try {
@@ -263,7 +262,6 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
     }
     catch (err) {
       console.log(err);
-      // Alert.alert(JSON.stringify(err))
 
     }
     finally {
@@ -278,7 +276,9 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
 
   const heightAnim = useRef(new Animated.Value(height)).current;
   const bottomanim = useRef(new Animated.Value(0)).current;
-  const flexanim = useRef(new Animated.Value(0.8)).current;
+  const flexanim = useRef(new Animated.Value(0.5)).current;
+
+  const opacityAnim = useRef(new Animated.Value(0)).current;
 
   const animatedValue = useRef(new Animated.Value(0)).current;
   useEffect(() => {
@@ -327,10 +327,20 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
     if (initial) {
       const timer1 = setTimeout(() => {
         Animated.timing(heightAnim, {
-          toValue: height * 0.4,
+          toValue: height * 0.6,
           duration: 400,
           useNativeDriver: false,
           easing: Easing.elastic(0.5),
+        }).start();
+      }, 3000);
+
+      const timer2 = setTimeout(() => {
+        Animated.timing(opacityAnim, {
+          toValue: 1,
+          duration: 3000,
+          useNativeDriver: true,
+          // useNativeDriver: false,
+          easing: Easing.ease
         }).start();
       }, 3000);
 
@@ -347,7 +357,7 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
     if (initial) {
       const timer = setTimeout(() => {
         Animated.timing(bottomanim, {
-          toValue: height * 0.6,
+          toValue: height * 0.4,
           duration: 400,
           useNativeDriver: false,
           easing: Easing.elastic(0.5)
@@ -366,7 +376,7 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
     if (initial == true && first == "") {
       const timer = setTimeout(() => {
         Animated.timing(flexanim, {
-          toValue: 0.9,
+          toValue: 0.5,
           duration: 300,
           useNativeDriver: false,
           easing: Easing.elastic(1)
@@ -385,13 +395,13 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
     // setForm1Visible(true)
     setTimeout(() => {
       Animated.timing(heightAnim, {
-        toValue: height * 0.4,
+        toValue: height * 0.6,
         duration: 300,
         useNativeDriver: false,
         easing: Easing.inOut(Easing.ease),
       }).start();
       Animated.timing(bottomanim, {
-        toValue: height * 0.6,
+        toValue: height * 0.4,
         duration: 300,
         useNativeDriver: false,
         easing: Easing.inOut(Easing.ease),
@@ -455,11 +465,12 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
 
         ]).start();
       }, 3100)
+
     }
   }, [initial]);
 
   function showsignuppage(type, navigation) {
-    // console.log(type);
+    console.log(type);
     navigation.navigate("Signup1", { type: type });
 
   }
@@ -531,6 +542,19 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
 
       <Animated.View style={[{ backgroundColor: "#16181a", width: "100%", height: "100%", flex: 1 }, animatedtop1]}>
         {/* <Toast /> */}
+        <Animated.View
+          style={{
+            opacity: opacityAnim,
+            // transform: [{ scale: opacityAnim }]
+          }}
+        >
+          <LottieView
+            source={require("../assets/icons/Animation - 1743765657437.json")}
+            autoPlay={true}
+            loop
+            style={styles.animation}
+          />
+        </Animated.View>
         {!isForm1Visible && (
           <Pressable style={[styles.back, { zIndex: (attop) ? 1 : 0 }]} onPress={() => {
             setForm1Visible(true);
@@ -553,6 +577,7 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
           ]}>
             <Animated.Image style={[styles.logo, initial ? styles.initial : styles.updated, { flex: flexanim }]}
               source={require("../assets/images/logo.png")} />
+            {/* <Text>okkkkkkkkkk</Text> */}
           </Animated.View>
         </Animated.View>
         {/* -------------------------------------- top part ------------------------------------------ */}
@@ -570,83 +595,103 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
 
         <Animated.View style={[styles.bottom, { height: bottomanim }]} >
 
-          {wrongcredential && <Text style={styles.error1}>Invalid credentials</Text>}
+          {/* <Text style={styles.welcome1}>Step into the Startup world</Text> */}
 
-          {isForm1Visible && (
-            <View>
+          {isForm1Visible && (<View style={{ flex: 1, paddingTop: 0, marginTop: -10, alignContent: "center" }}>
+            <Text allowFontScaling={false} style={styles.label}></Text>
+            <Pressable
+              onPress={() => {
+                // console.log('====================================');
+                // console.log("scroll");
+                scrollContainer.current?.scrollTo({ y: 100, animate: true })
+                // console.log('====================================');
+              }}
+            >
+              {/* <TextInput allowFontScaling={false}
+      placeholderTextColor="#828282"
+      
+      style={styles.input}
+      ref={emailInput}
+      placeholder="Email / Username"
+      value={email}
+      onFocus={() => {
+        scrollContainer.current?.scrollTo({ y: 100, animate: true });
+      }}
+      autoComplete="email"
+      onChangeText={(text) => { setemail(text) }}
 
-              <Pressable
-                onPress={() => {
+    /> */}
+            </Pressable>
 
-                  scrollContainer.current?.scrollTo({ y: 100, animate: true })
+            {/* {emailerror && <Text style={styles.error}>Please enter email address*</Text>} */}
+            {/* <View style={styles.passwordcontainer}>
+    <TextInput allowFontScaling={false}
+      placeholderTextColor="#828282"
+      style={styles.input2}
+      placeholder="Password"
+      value={password}
+      autoComplete="password"
+      onChangeText={(text) => { setpassword(text) }}
+      secureTextEntry={true}
+    />
 
-                }}
-              >
-                {/* <View style={styles.passwordcontainer}> */}
-                <TextInput allowFontScaling={false}
-                  placeholderTextColor="#828282"
-                  style={styles.input}
-                  ref={emailInput}
+    <Pressable onPress={() => navigation.navigate("FP1")} style={styles.forgot}>
+      <Text allowFontScaling={false} style={[styles.white, styles.forgottext]}>Forgot ?</Text>
+    </Pressable>
+  </View> */}
+            {/* {passworderror && <Text style={styles.error}>Please enter password*</Text>}
+  {passworderror1 && <Text style={styles.error}>Password must be at least 8 characters long, contain one uppercase letter, one lowercase letter, and one number.</Text>} */}
 
-                  placeholder="Email / Username"
-                  value={email}
-                  onFocus={() => {
-                    scrollContainer.current?.scrollTo({ y: 100, animate: true });
-                  }}
-                  autoComplete="email"
-                  onChangeText={(text) => { setemail(text) }}
+            <Pressable style={styles.loginbutton} onPress={() => {
+              handlelogin(navigation)
+              navigation.navigate("LoginPage", { navigation: navigation })
+            }}>
+              {!loading && <Text allowFontScaling={false} style={[styles.login]}>Log in </Text>}
+              {loading && <ActivityIndicator size={24} color="#16181a" />}
+            </Pressable>
 
-                />
-                {/* </View> */}
-              </Pressable>
-              {
-                emailerror &&
-                <Text style={styles.error}>Please enter email address</Text>
-              }
-              <View style={styles.passwordcontainer}>
-                <TextInput
+            <View style={styles.divider}>
+              <Text style={styles.or}>or</Text>
+            </View>
 
-                  allowFontScaling={false}
-                  placeholderTextColor="#828282"
-                  style={styles.input2}
-                  placeholder="Password"
-                  value={password}
-                  autoComplete="password"
-                  onChangeText={(text) => { setpassword(text) }}
-                  secureTextEntry={true}
-                />
+            <Pressable style={[styles.loginbutton, { marginTop: 10 }]} onPress={() => {
+              showsignuppage("CommunityMember", navigation)
+            }}>
+              {!loading && <Text allowFontScaling={false} style={[styles.login]}>Create account </Text>}
+              {loading && <ActivityIndicator size={24} color="#16181a" />}
+            </Pressable>
 
-                <Pressable onPress={() => navigation.navigate("FP1")} style={styles.forgot}>
-                  <Text allowFontScaling={false} style={[styles.white, styles.forgottext]}>Forgot ?</Text>
-                </Pressable>
-              </View>
-              {passworderror && <Text style={styles.error}>Please enter password</Text>}
-              {passworderror1 && <Text style={styles.error}>Password must be at least 8 characters long, contain one uppercase letter, one lowercase letter, and one number.</Text>}
+            {wrongcredential && <Text style={styles.error1}>Invalid credentials</Text>}
 
-              <Pressable style={styles.loginbutton} onPress={() => {
-                handlelogin(navigation)
-              }}>
-                {!loading && <Text allowFontScaling={false} style={[styles.login]}>Login </Text>}
-                {loading && <ActivityIndicator size={24} color="#fff" />}
-              </Pressable>
-              <Text allowFontScaling={false} style={[styles.white, styles.p]}>Or continue </Text>
-              <Pressable onPress={() => { showToastWithGravity("This functionality is yet to come!") }} style={styles.googlebutton}>
-                <Image
-                  source={require("../assets/images/google.png")}
-                  style={styles.googleIcon}
-                />
-                <Text allowFontScaling={false} style={[styles.gray, styles.google]}>Google</Text>
-              </Pressable>
+            {/* <Text allowFontScaling={false} style={[styles.white, styles.p]}>Or continue with </Text>
+  <Pressable onPress={() => { showToastWithGravity("This functionality is yet to come!") }} style={styles.googlebutton}>
+    <Image
+      source={require("../assets/images/google.png")}
+      style={styles.googleIcon}
+    />
+    <Text allowFontScaling={false} style={[styles.gray, styles.google]}>Google</Text>
+  </Pressable> */}
 
-              <Text allowFontScaling={false} style={[styles.gray, styles.p]}>
-                Don't have account? <Text style={styles.green} onPress={() => {
-                  // setForm1Visible(false)  commented
-                  // animation2() commented
-                  showsignuppage("CommunityMember", navigation)
-
-                }}>Create now</Text>
+            <View style={{ color: '#ccc', justifyContent: 'center', alignItems: 'center', marginVertical: 0, bottom: 0, marginTop: 50 }}>
+              <Text style={{ color: '#ccc', marginBottom: 2, fontFamily: 'Alata', fontSize: 12 }}>
+                By signing up, you agree to our
               </Text>
-            </View>)}
+              <TouchableOpacity onPress={() => navigation.navigate('TermsAndConditions')}>
+                <Text style={{ color: '#00de62', textDecorationLine: 'underline', fontFamily: 'Alata', fontSize: 12, }}>
+                  Terms & Conditions
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+            {/* <Text allowFontScaling={false} style={[styles.gray, styles.p, styles.lastLine]}>
+    Don't have account? <Text style={styles.green} onPress={() => {
+      // setForm1Visible(false)  commented
+      // animation2() commented
+      showsignuppage("CommunityMember", navigation)
+
+    }}>Create now</Text>
+  </Text> */}
+          </View>)}
 
           {!isForm1Visible && (
 

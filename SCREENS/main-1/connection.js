@@ -51,7 +51,7 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
         if (token) {
             var decode = jwtDecode(token)
             console.log(decode._id);
-            
+
             setLoggedInUserId(decode._id)
         }
     }, [token])
@@ -68,9 +68,9 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
     const [loading, setloading] = useState(false)
 
     useFocusEffect(
-        useCallback(()=>{
+        useCallback(() => {
             fetchData()
-        } , [])
+        }, [])
     )
 
     const fetchData = async () => {
@@ -92,8 +92,8 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
 
         }
         // else if()
-        console.log( `${url}${route}`);
-        
+        console.log(`${url}${route}`);
+
 
         setloading(true); // Start loading before fetching data
         if (token) {
@@ -111,10 +111,10 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
                 );
                 const result = await response.json();
 
-                if(decoded.role == "Founder"){
+                if (decoded.role == "Founder") {
                     var rec1 = result.filter(e => e.user.role != "Investor")
                 }
-                else{
+                else {
                     var rec1 = result
                 }
 
@@ -284,6 +284,8 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
 
                 />}
                 renderItem={({ item }) => {
+                    console.log(item.lastMessage, "ooo");
+
 
                     return (
                         <TouchableOpacity onPress={() => {
@@ -307,6 +309,13 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
                                             {item.lastMessage?.message || "No chats yet"}
                                         </Text>
                                     }
+                                    {item.lastMessage == null && <Text
+                                        numberOfLines={1}
+                                        ellipsizeMode="tail"
+                                        allowFontScaling={false}
+                                        style={styles.message}>
+                                        No chats yet
+                                    </Text>}
 
 
                                     {item.lastMessage && typeof item.lastMessage.message == "object" &&
@@ -318,7 +327,7 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
                                 </View>
                                 <Text
                                     allowFontScaling={false}
-                                    style={item.lastMessage && !item.lastMessage.isRead && item.lastMessage.senderId != loggedinuserid  ? styles.boldtime : styles.time}>
+                                    style={item.lastMessage && !item.lastMessage.isRead && item.lastMessage.senderId != loggedinuserid ? styles.boldtime : styles.time}>
                                     {item.lastMessage ? time(item.lastMessage.createdAt) : "today"}</Text>
 
                                 {item.lastMessage && item.lastMessage.isRead == false && item.lastMessage.senderId != loggedinuserid && <Text style={{ marginTop: 25, marginRight: 10, width: 8, height: 8, backgroundColor: "#00de62", borderRadius: 30 }}></Text>}
@@ -468,8 +477,8 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: "gray",
         marginTop: -3,
-        fontFamily:'Roboto',
-        paddingRight:60
+        fontFamily: 'Roboto',
+        paddingRight: 60
     },
     bold: {
         fontSize: 14,
@@ -556,7 +565,7 @@ const styles = StyleSheet.create({
         color: '#a1a1a1',
         fontSize: 14,
         alignSelf: "center",
-        fontFamily:'Roboto'
+        fontFamily: 'Roboto'
     },
     title: {
         color: '#B8B8B8',

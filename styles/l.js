@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
         padding: height * 0.03,
         paddingTop: height * 0.06,
         alignSelf: "flex-end",
-        backgroundColor : "rgba(33, 34, 35, 0.5)",
+        backgroundColor : "rgba(33, 34, 35, 1)",
         height: 0,
         // display : "none"
 
@@ -83,51 +83,58 @@ const styles = StyleSheet.create({
 
     },
     initial: {
-        width: width * 0.65,
-        height: width * 0.65
+        width: width * 0.5,
+        height: width * 0.5
     },
     updated: {
         // flex : 0.8,
         // height : Math.min(width*0.6 , 300),
         // aspectRatio: 1
-        width: width * 0.65,
-        height: width * 0.65
+        width: width * 0.5,
+        height: width * 0.5
     },
     input: {
-        // height: height * 0.045, // Responsive height
         backgroundColor: "transparent",
-        margin: height * 0.016,
+        margin: height * 0.012,
         marginTop: 0,
-        borderBottomWidth: 1,
-        borderBottomColor: "white",
-        fontSize: scalingfactor*17, // Responsive font size
-        color: "white",
-        // paddingBottom: height * 0.012,
-        width: "95%",
-        // paddingBottom : 10 ,
         marginBottom : 20,
+        borderBottomWidth: 1,
+        borderBottomColor: "#ccc",
+        fontSize: scalingfactor*18, // Responsive font size
+        color: "white",
+        width: "95%",
+        paddingBottom : 10 ,
         fontFamily: "Alata",
-        // lineHeight : scalingfactor * 18
     },
+    animation: {
+        position : "absolute",
+        left : -20,
+        top : -400,
+        opacity : 1,
+
+        
+        width: width*3, 
+        height:width*3, 
+      },
     input2: {
         // height: 30, // Responsive height
         backgroundColor: "transparent",
         // backgroundColor : "red",
         width : "75%",
        
-        fontSize: scalingfactor*17, // Responsive font size
+        fontSize: scalingfactor*18, // Responsive font size
         margin: height * 0.011,
-        marginTop: -2,
+        marginLeft : 2,
+        marginTop: 0,
+        marginBottom : 5,
         color: "white",
-        paddingBottom : 5 ,
-        // paddingBottom: height * 0.012,
+        paddingBottom : 0 ,
         fontFamily: "Alata",
-        // lineHeight : scalingfactor * 20
-
+        
     },
     label: {
-        margin : scalingfactor * 10,
-        marginTop: scalingfactor * 10,
+       margin : scalingfactor * -40,
+        //marginTop: scalingfactor * 10,
         marginBottom: -4,
         color: "white",
         fontSize: scalingfactor* 16, // Responsive font size
@@ -139,7 +146,7 @@ const styles = StyleSheet.create({
         // marginTop: 20,
         position: "relative",
         // backgroundColor : "red",
-        borderBottomColor : "white",
+        borderBottomColor : "#ccc",
         borderBottomWidth : 1,
         width : "95%",
         marginHorizontal : "auto"
@@ -165,22 +172,46 @@ const styles = StyleSheet.create({
     },
     loginbutton: {
         margin: "auto",
-        // height: height * 0.07, // Responsive height
-        width: "100%",
-        height : scalingfactor* 50,
+        width: "80%",
+        height : 40,
         // paddingVertical: height * 0.018, // Responsive height
-        backgroundColor: "#333",
+        backgroundColor: "#ccc",
         marginVertical: height * 0.014,
         borderRadius: 20,
         shadowColor: "black",
         shadowOpacity: 0.6,
         textAlign: "center",
-        marginTop: height * 0.02,
+        marginTop: height * 0.04,
         justifyContent: "center",
         alignItems: "center",
         // borderColor: "black",
         // borderWidth: 1,
         fontFamily: "Alata"
+    },
+    divider : {
+        width : "80%",
+        marginHorizontal : "auto",
+        marginVertical : 10,
+        height : 0.5,
+        backgroundColor : "gray",
+        
+    },
+    or:{
+        color : "#ccc",
+        top : -10,
+        fontFamily : "Roboto",
+        paddingHorizontal : 8,
+        borderRadius :20,
+        backgroundColor : "rgba(33, 34, 35, 1)",
+        alignSelf : "center",
+        position : "absolute",
+    },
+    welcome1 : {
+        fontFamily: "Alata",
+        color : "#ccc",
+        // alignSelf : "center",
+        textAlign : "left",
+        fontSize : 25,
 
     },
     gray: {
@@ -195,10 +226,10 @@ const styles = StyleSheet.create({
         fontFamily: "Alata"
     },
     login: {
-        fontSize: scalingfactor*19, // Responsive font size
+        fontSize: scalingfactor*18, // Responsive font size
         fontWeight: "500",
         fontFamily: "Alata",
-        color : "white",
+        color : "#16181a",
         alignSelf : "center",
         marginTop : -4
         // lineHeight : 16.4
@@ -206,7 +237,9 @@ const styles = StyleSheet.create({
     },
     p: {
         textAlign: "center",
-        marginVertical: height * 0.012,
+        // position:"absolute",
+        // bottom:0,
+        marginVertical: height * 0.016,
         fontSize: width * 0.042,
         fontFamily: "Alata"
     },
@@ -280,20 +313,21 @@ const styles = StyleSheet.create({
     },
     error : {
         marginVertical :0,
-        marginTop  :0,
+        marginTop  :5,
         textAlign : "left",
+        marginTop  :-15,
         // backgroundColor : "red",
         width  : "92%",
         marginHorizontal : "auto",
         // color : "red",
         color : "#E65858",
-        fontSize : 15,
+        fontSize : 10,
         fontFamily : "Roboto",
 
     },
     error1 : {
         marginVertical :0,
-        marginTop  :0,
+        marginTop  :10,
         textAlign : "center",
         // backgroundColor : "red",
         width  : "92%",
@@ -304,6 +338,13 @@ const styles = StyleSheet.create({
         fontFamily : "Roboto",
 
     },
+    lastLine : {
+        position  : "absolute",
+        bottom : 0,
+        alignSelf : "center"
+        // marginHorizontal : "auto"
+
+    }
 });
 
 export default styles;

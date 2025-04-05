@@ -698,11 +698,12 @@ const Chat = ({ route }) => {
                     renderItem={renderItem}
                     keyExtractor={(item, index) => item._id}
                     // onContentSizeChange={() => flatListRef.current?.scrollToEnd({ animated: true })}
+                    style={{paddingLeft : 4 , paddingRight : 4}}
 
                     getItemLayout={(data, index) => ({ length: 100, offset: 100 * index, index })}
                     contentContainerStyle={styles.messagesContainer}
-                    onContentSizeChange={() => flatListRef.current?.scrollToOffset({ offset: 0, animated: false })}
-                    onLayout={() => flatListRef.current?.scrollToOffset({ offset: 0, animated: false })}
+                    // onContentSizeChange={() => flatListRef.current?.scrollToOffset({ offset: 0, animated: false })}
+                    // onLayout={() => flatListRef.current?.scrollToOffset({ offset: 0, animated: false })}
                 />
 
                 {/* <FlatList
@@ -939,7 +940,7 @@ const styles = StyleSheet.create({
         maxWidth: width * 0.6,
         borderColor: "#ccc",
         // fontWeight: "bold",
-        borderWidth: 2,
+        borderWidth: 1,
         // backgroundColor : "red",
         borderRadius: 20,
         borderBottomLeftRadius: 2,

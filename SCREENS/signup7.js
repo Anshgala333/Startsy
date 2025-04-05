@@ -65,9 +65,7 @@ const Signup7 = ({ navigation, route }) => {
     const { type } = route.params || "Founder";
 
     const { form, image } = route.params;
-    console.log('====================================');
     // console.log(form);
-    console.log('====================================');
 
     const [InstagramUrl, setInstagramUrl] = useState("")
     const [YTURL, setYTURL] = useState("")
@@ -442,7 +440,7 @@ const Signup7 = ({ navigation, route }) => {
                             <TextInput
                                 allowFontScaling={false}
                                 placeholder="Type"
-                                placeholderTextColor="#B8B8B8"
+                                placeholderTextColor="#828282"
                                 style={styles.input}
                                 value={tagline}
                                 onChangeText={(text) => { settagline(text) }}
@@ -453,7 +451,7 @@ const Signup7 = ({ navigation, route }) => {
                             <TextInput
                                 allowFontScaling={false}
                                 placeholder="Write any Top 3"
-                                placeholderTextColor="#B8B8B8"
+                                placeholderTextColor="#828282"
                                 style={styles.input}
                                 value={skills}
                                 onChangeText={(text) => { setskills(text) }}
@@ -463,16 +461,16 @@ const Signup7 = ({ navigation, route }) => {
                             <Text style={[styles.t2, { marginBottom: 20 }]}>List your highest degree achieved, which helps to establish your academic background and qualifications.</Text>
 
                             {/* <ScrollView style={{height : 200} }> */}
-                            <Drop borderwidth={3} borderColor={"#16181a"} items={education} open={open} setOpen={setOpen} onValueChange={(value) => { seteducation(value) }} nestedScrollEnabled={true} />
+                            <Drop search={false} bb={1} borderColor={"#ccc"} width={"97%"} items={education} open={open} setOpen={setOpen} onValueChange={(value) => { seteducation(value) }} nestedScrollEnabled={true} />
                             {/* </ScrollView> */}
 
-                            <Text style={[styles.t1, { marginTop: 30 }]}>Certification</Text>
+                            <Text style={[styles.t1, { marginTop: 25 }]}>Certification</Text>
 
 
                             {certificate.map((certificate, index) => (
                                 <View key={certificate.id} style={styles.certificate}>
                                     <Pressable onPress={addcertificate}>
-                                        <Entypo style={styles.plus} name="plus" size={24} color="#00DE62" />
+                                        <Entypo style={styles.plus} name="plus" size={24} color="#ccc" />
                                     </Pressable>
                                     {index > 0 && <Pressable onPress={() => { deletecertificate(index) }}>
                                         <FontAwesome6 name="trash" style={styles.minus} size={15} color="#00DE62" />
@@ -481,7 +479,7 @@ const Signup7 = ({ navigation, route }) => {
                                     <TextInput
                                         allowFontScaling={false}
                                         placeholder="Certification name"
-                                        placeholderTextColor="#B8B8B8"
+                                        placeholderTextColor="#828282"
                                         style={[styles.input, { marginTop: 20, backgroundColor: "transparent" }]}
                                         value={certificate.cname}
                                         onChangeText={(text) => { handlecertificatechange(certificate.id, "cname", text) }}
@@ -490,7 +488,7 @@ const Signup7 = ({ navigation, route }) => {
                                     <TextInput
                                         allowFontScaling={false}
                                         placeholder="URL"
-                                        placeholderTextColor="#B8B8B8"
+                                        placeholderTextColor="#828282"
                                         style={styles.input}
                                         value={certificate.curl}
                                         onChangeText={(text) => { handlecertificatechange(certificate.id, "curl", text) }}
@@ -502,11 +500,11 @@ const Signup7 = ({ navigation, route }) => {
                             ))}
 
 
-                            <Text style={[styles.t1, { marginTop: 30 }]}>Portfolio</Text>
+                            <Text style={[styles.t1, { marginTop: 25 }]}>Portfolio</Text>
                             {portfolio1.map((items, index) => (
                                 <View style={styles.certificate} key={items.id}>
                                     <Pressable onPress={addportfolio}>
-                                        <Entypo style={styles.plus} name="plus" size={24} color="#00DE62" />
+                                        <Entypo style={styles.plus} name="plus" size={24} color="#ccc" />
                                     </Pressable>
                                     {index > 0 && <Pressable onPress={() => { deleteportfolio(index) }}>
                                         <FontAwesome6 name="trash" style={styles.minus} size={15} color="#00DE62" />
@@ -514,7 +512,7 @@ const Signup7 = ({ navigation, route }) => {
                                     <TextInput
                                         allowFontScaling={false}
                                         placeholder="URL"
-                                        placeholderTextColor="#B8B8B8"
+                                        placeholderTextColor="#828282"
                                         style={[styles.input, { marginTop: 20, backgroundColor: "transparent" }]}
                                         onChangeText={(text) => { handleurlchange(items.id, "url", text) }}
 
@@ -523,7 +521,7 @@ const Signup7 = ({ navigation, route }) => {
                                     <TextInput
                                         allowFontScaling={false}
                                         placeholder="Portfolio name"
-                                        placeholderTextColor="#B8B8B8"
+                                        placeholderTextColor="#828282"
                                         style={styles.input}
                                         onChangeText={(text) => { handleurlchange(items.id, "name", text) }}
 
@@ -533,13 +531,10 @@ const Signup7 = ({ navigation, route }) => {
                                 </View>
                             ))}
 
-                            <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 0 }]}>Instagram</Text>
-
-
-
+                            <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 0 , marginTop : 25 }]}>Instagram</Text>
                             <View style={styles.v2} >
                                 <Pressable onPress={addurl}>
-                                    <AntDesign name="instagram" style={styles.plus2} size={24} color="#bbbbbb" />
+                                    <AntDesign name="instagram" style={styles.plus2} size={24} color="#828282" />
                                     {/* <Entypo style={styles.plus1} name="plus" size={24} color="#00DE62" /> */}
                                 </Pressable>
 
@@ -548,18 +543,18 @@ const Signup7 = ({ navigation, route }) => {
                                     allowFontScaling={false}
                                     placeholder="URL"
                                     numberOfLines={1}
-                                    placeholderTextColor="#B8B8B8"
+                                    placeholderTextColor="#828282"
                                     style={styles.inputss}
                                     value={InstagramUrl}
                                     onChangeText={(text) => { setInstagramUrl(text) }}
                                 />
                             </View>
-                            <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 0 }]}>YouTube</Text>
+                            <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 0 , marginTop : 10 }]}>YouTube</Text>
 
                             <View style={styles.v2} >
                                 <Pressable onPress={addurl}>
                                     {/* <Feather name="youtube" style={styles.plus1} size={24} color="#bbbbbb" /> */}
-                                    <AntDesign name="youtube" style={styles.plus2} size={24} color="#bbbbbb" />
+                                    <AntDesign name="youtube" style={styles.plus2} size={24} color="#828282" />
                                     {/* <Entypo style={styles.plus1} name="plus" size={24} color="#00DE62" /> */}
                                 </Pressable>
 
@@ -568,17 +563,17 @@ const Signup7 = ({ navigation, route }) => {
                                     allowFontScaling={false}
                                     placeholder="URL"
                                     numberOfLines={1}
-                                    placeholderTextColor="#B8B8B8"
+                                    placeholderTextColor="#828282"
                                     style={styles.inputss}
                                     value={YTURL}
                                     onChangeText={(text) => { setYTURL(text) }}
                                 />
                             </View>
-                            <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 0 }]}>LinkedIn</Text>
+                            <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 0  , marginTop:10}]}>LinkedIn</Text>
 
                             <View style={styles.v2} >
                                 <Pressable onPress={addurl}>
-                                    <AntDesign name="linkedin-square" style={styles.plus2} size={24} color="#bbbbbb" />
+                                    <AntDesign name="linkedin-square" style={styles.plus2} size={24} color="#828282" />
                                     {/* <Entypo style={styles.plus1} name="plus" size={24} color="#00DE62" /> */}
                                 </Pressable>
 
@@ -587,13 +582,13 @@ const Signup7 = ({ navigation, route }) => {
                                     allowFontScaling={false}
                                     placeholder="URL"
                                     numberOfLines={1}
-                                    placeholderTextColor="#B8B8B8"
+                                    placeholderTextColor="#828282"
                                     style={styles.inputss}
                                     value={LinkedinURl}
                                     onChangeText={(text) => { setLinkedinURl(text) }}
                                 />
                             </View>
-                            <View style={{ color:'#ccc',justifyContent:'center',alignItems:'center' ,marginVertical:20}}>
+                            {/* <View style={{ color:'#ccc',justifyContent:'center',alignItems:'center' ,marginVertical:20}}>
                                 <Text style={{ color:'#ccc' ,marginBottom:2,fontFamily:'Alata'}}>
                                     By clicking on submit
                                     I agree to all
@@ -603,12 +598,14 @@ const Signup7 = ({ navigation, route }) => {
                                         Terms & Conditions
                                     </Text>
                                 </TouchableOpacity>
-                            </View>
+                            </View> */}
                             <View style={styles.icons} nestedScrollEnabled={true}>
-                                <Pressable onPress={() => {
+                                <Pressable
+                                style={{marginTop : 5}}
+                                 onPress={() => {
                                     navigation.goBack()
                                     // console.log(certificate);
-                                }}><FontAwesome6 name="chevron-left" size={40} color="#00DF60" /></Pressable>
+                                }}><FontAwesome6 name="chevron-left" size={30} color="#00DF60"  /></Pressable>
 
                                 <Pressable style={styles.btn} onPress={() => { finalsubmit() }}>
                                     {loading && <ActivityIndicator size={24} color="#16181a" />}
@@ -645,9 +642,9 @@ const styles = StyleSheet.create({
     t1: {
         textAlign: 'Left',
         marginLeft: 10,
-        color: "#D9D9D9",
+        color: "#ccc",
         fontFamily: 'Alata',
-        fontSize: scalingfactor * 27,
+        fontSize: 24,
         marginBottom: scalingfactor * 3,
         zIndex: 100,
         // pointerEvents: "none",
@@ -656,15 +653,15 @@ const styles = StyleSheet.create({
     },
     t2: {
         textAlign: 'Left',
-        color: "#94A3B8",
+        color: "#828282",
         fontFamily: 'Roboto',
-        fontSize: scalingfactor * 14,
+        fontSize: 12,
         // zIndex: -1,
         marginBottom: scalingfactor * 8,
         width: "85%",
         // fontweight : 0,
         alignSelf: "center",
-        lineHeight: scalingfactor * 20
+        // lineHeight: scalingfactor * 20
     },
     bottom: {
         width: "100%",
@@ -685,7 +682,7 @@ const styles = StyleSheet.create({
 
     btn: {
         width: 168,
-        height: 48,
+        height: 40,
         // height : scalingfactor*48,
         backgroundColor: "#00DF60",
         // padding: scalingfactor * 12,
@@ -706,7 +703,7 @@ const styles = StyleSheet.create({
     }, nexttext: {
         color: "#24272A",
         fontFamily: "Alata",
-        fontSize: scalingfactor * 22,
+        fontSize: 20,
         textAlign: "center",
         // lineHeight : 16
         marginTop: -4
@@ -716,14 +713,14 @@ const styles = StyleSheet.create({
         backgroundColor: "transparent",
         margin: height * 0.016,
         marginTop: 0,
-        borderBottomWidth: 3,
+        borderBottomWidth: 1,
         paddingLeft: scalingfactor * 10,
-        borderBottomColor: "#16181A",
-        fontSize: scalingfactor * 20,
+        borderBottomColor: "#ccc",
+        fontSize:  20,
         color: "#B8B8B8",
         paddingBottom: scalingfactor * 5,
         width: "92%",
-        // fontFamily: "Roboto",
+        fontFamily: "Alata",
         // lineHeight: scalingfactor * 18,
         marginBottom: scalingfactor * 25
     },
@@ -731,15 +728,12 @@ const styles = StyleSheet.create({
         backgroundColor: "transparent",
         margin: height * 0.016,
         marginTop: 0,
-        // borderBottomWidth: 3,
-        paddingLeft: scalingfactor * 30,
-        // borderBottomColor: "#16181A",
+        paddingLeft: scalingfactor * 25,
         fontSize: scalingfactor * 20,
-        color: "#B8B8B8",
+        color: "#ccc",
         paddingBottom: scalingfactor * 5,
         width: "92%",
-        // fontFamily: "Roboto",
-        // lineHeight: scalingfactor * 18,
+        fontFamily: "Alata",
         marginBottom: scalingfactor * 2
     },
     v1: {
@@ -752,9 +746,9 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
     v2: {
-        borderBottomWidth: 3,
-        borderBottomColor: "#16181A",
-        width: "90%",
+        borderBottomWidth: 1,
+        borderBottomColor: "#ccc",
+        width: "94%",
         margin: "auto",
         //    backgroundColor :"red",
         paddingBottom: 0,
@@ -792,8 +786,8 @@ const styles = StyleSheet.create({
         margin: "auto",
         width: "92%",
         backgroundColor: "transparent",
-        borderWidth: 3,
-        borderColor: "#16181A",
+        borderWidth: 1,
+        borderColor: "#ccc",
         borderRadius: 10,
         position: "relative"
     },

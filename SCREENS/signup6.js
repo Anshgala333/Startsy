@@ -261,27 +261,27 @@ const Signup6 = ({ navigation, route }) => {
                             <Text allowFontScaling={false} style={styles.t1}>Community Participation</Text>
                             <Text allowFontScaling={false} style={styles.t2}>Specify your role within the community to help tailor your experience.</Text>
                             {/* <TouchableWithoutFeedback onPress={handleOutsideTouch}>  */}
-                            <Drop borderwidth={3} borderColor={"#16181a"} items={role} onValueChange={handlerole} open={open1} setOpen={t1} />
+                            <Drop bb={1} search={false} pccolor={"#828282"} width={"98%"}  borderColor={"#ccc"} items={role} onValueChange={handlerole} open={open1} setOpen={t1} />
                             {/* </TouchableWithoutFeedback> */}
 
 
-                            <Text allowFontScaling={false} style={[styles.t1, { marginTop: scalingfactor * 18 }]}>Area of Interest</Text>
+                            <Text allowFontScaling={false} style={[styles.t1, { marginTop:  32 }]}>Area of Interest</Text>
                             <Text allowFontScaling={false} style={styles.t2}>Indicate the specific fields or topics you are passionate about within the startup ecosystem.</Text>
-                            <Drop borderwidth={3} borderColor={"#16181a"}  items={areaofinterestlist} onValueChange={handleinterest} open={open2} setOpen={t2} />
+                            <Drop bb={1} pccolor={"#828282"} width={"98%"}  borderColor={"#ccc"}  items={areaofinterestlist} onValueChange={handleinterest} open={open2} setOpen={t2} />
 
 
-                            <Text allowFontScaling={false} style={[styles.t1, { marginTop: scalingfactor * 18 }]}>Content Preference</Text>
+                            <Text allowFontScaling={false} style={[styles.t1, { marginTop: 32 }]}>Content Preference</Text>
                             <Text allowFontScaling={false} style={styles.t2}>Choose the types of content you want to see most in your feed.</Text>
-                            <Drop borderwidth={3} borderColor={"#16181a"}  items={contentPreferences} onValueChange={handleprefference} open={open3} setOpen={t3} up={true} />
+                            <Drop search={false} bb={1} pccolor={"#828282"} width={"98%"}  borderColor={"#ccc"}  items={contentPreferences} onValueChange={handleprefference} open={open3} setOpen={t3} up={true} />
 
 
                             <View style={styles.icons}>
                                 <Pressable onPress={() => {
                                     navigation.goBack();
-                                }}><FontAwesome6 name="chevron-left" size={45} color="#00DF60" /></Pressable>
+                                }}><FontAwesome6 name="chevron-left" size={35} color="#00DF60" /></Pressable>
                                 <Pressable onPress={() => {
                                     nextpage()
-                                }}><FontAwesome6 name="chevron-right" size={45} color="#00DF60" /></Pressable>
+                                }}><FontAwesome6 name="chevron-right" size={35} color="#00DF60" /></Pressable>
 
 
                                 {/* <Pressable style={styles.btn} onPress={() => { finalsubmit() }}>
@@ -311,21 +311,22 @@ const styles = StyleSheet.create({
     t1: {
         textAlign: 'Left',
         marginLeft: 10,
-        color: "#D9D9D9",
+        color: "#ccc",
         fontFamily: 'Alata',
-        fontSize: scalingfactor * 27,
-        marginBottom: scalingfactor * 3,
+        fontSize: 24,
+        marginBottom: scalingfactor * 5,
+        // marginTop : ,
     },
     t2: {
         textAlign: 'Left',
-        color: "#94A3B8",
+        color: "#828282",
         fontFamily: 'Roboto',
-        fontSize: scalingfactor * 13,
+        fontSize: scalingfactor * 12,
 
-        marginBottom: scalingfactor * 8,
+        marginBottom: -2,
         width: "85%",
         alignSelf: "center",
-        lineHeight: scalingfactor * 16
+        // lineHeight: scalingfactor * 16
     },
     bottom: {
         width: "100%",

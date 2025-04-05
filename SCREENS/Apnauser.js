@@ -629,13 +629,12 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
 
         if (item.type == "photo" || item.type == "textBlog" || item.type == "video") {
             return (
-                // <View key={index} style={styles.box}>
                     <LinearGradient
-                                                    colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}
-                                                    locations={[0, 1]}
-                                                    style={styles.box}
-                                                    start={{ x: 0, y: 0 }}
-                                                    end={{ x: 0, y: 1 }} >
+                        colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}
+                        locations={[0, 1]}
+                        style={styles.box}
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 0, y: 1 }} >
                     <View style={[styles.top, { marginBottom: 0 }]} >
                         <View
                             // onPress={() => { navigation.navigate("Singleuserpage", { token: token, id: item.user_id._id, page: "Startsy" }) }}
@@ -720,9 +719,8 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                                         <Text style={styles.u4}>View {item.postComments.length} comments</Text>
                                     </Pressable>
                                </View>
-                               </LinearGradient>
+                    </LinearGradient>
 
-                // </View>
             )
         }
         else if (item.type == "communityPost") {

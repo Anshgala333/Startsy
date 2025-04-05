@@ -974,7 +974,7 @@ const NewsLetter = React.memo(
                                     <View>
                                         <Text allowFontScaling={false} style={[
                                             styles.tabbarpill, {
-                                                fontSize: 18,
+                                                fontSize: 16,
                                                 fontFamily: "Alata",
                                                 color: focused ? "#00DE62" : "#808080",
                                                 borderColor: focused ? "#00DE62" : "#808080",
@@ -1004,7 +1004,7 @@ const NewsLetter = React.memo(
                                 tabBarLabel: ({ focused }) => (
                                     <Text allowFontScaling={false} style={[
                                         styles.tabbarpill, {
-                                            fontSize: 18,
+                                            fontSize: 16,
                                             fontFamily: "Alata",
                                             color: focused ? "#00DE62" : "#808080",
                                             borderColor: focused ? "#00DE62" : "#808080",
@@ -1214,7 +1214,7 @@ const styles = StyleSheet.create({
     },
     searchInput: {
         height: 50,
-        borderColor: "#828282",
+        borderColor: "#ccc",
         borderWidth: 1,
         borderRadius: 30,
         paddingHorizontal: 15,
@@ -1224,7 +1224,7 @@ const styles = StyleSheet.create({
     },
     divider: {
         width: width,
-        height: 3,
+        height: 1,
         marginTop: 5,
         backgroundColor: "#24272A"
     },

@@ -103,10 +103,11 @@ const ChangePassword2 = ({navigation , route  }) => {
             paddingHorizontal: 20,
         },
         t1: {
-            color: "#ffffff",
+            color: "#ccc",
             fontSize: 24,
+            fontFamily: "Alata",
             textAlign: "center",
-            marginTop: 5,
+            marginTop: 20,
         },
         t11: {
             color: "#ffffff",
@@ -116,15 +117,15 @@ const ChangePassword2 = ({navigation , route  }) => {
         },
         t2: {
             color: "#94A3B8",
-            fontSize: 15,
+            fontSize: 12,
             textAlign: "center",
             marginTop: 10,
         },
         input: {
             margin: height * 0.016,
             marginTop: 35,
-            borderBottomWidth: 3,
-            borderBottomColor: "#AEAFAF",
+            borderBottomWidth: 1,
+            borderBottomColor: "#ccc",
             fontSize: scalingFactor * 20,
             color: "#B8B8B8",
             fontFamily: "Alata",
@@ -141,7 +142,7 @@ const ChangePassword2 = ({navigation , route  }) => {
         },
         btn: {
             borderRadius: 20,
-            height: 45,
+            height: 40,
             justifyContent: "center",
             alignItems: "center",
             width: "70%",
@@ -150,21 +151,23 @@ const ChangePassword2 = ({navigation , route  }) => {
             backgroundColor: "#00DF60",
         },
         btntext: {
-            color: "#24272A",
-            fontSize: 22,
+            color: "#16181a",
+            fontSize: 20,
+            marginTop  : -3,
+            fontFamily: "Alata",
         },
     });
 
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar backgroundColor="#16181a" barStyle={"light-content"} />
-            <Text allowFontScaling={false} style={styles.headerText}>Profile</Text>
+            {/* <Text allowFontScaling={false} style={styles.headerText}>Profile</Text> */}
             <Text style={styles.t1}>Create a password</Text>
             <Text style={styles.t2}>Use a strong password</Text>
             <TextInput
                 allowFontScaling={false}
                 placeholder="Password"
-                placeholderTextColor="#B8B8B8"
+                placeholderTextColor="#828282"
                 style={styles.input}
                 value={password}
                 secureTextEntry={true}
@@ -174,7 +177,7 @@ const ChangePassword2 = ({navigation , route  }) => {
             <TextInput
                 allowFontScaling={false}
                 placeholder="Confirm password"
-                placeholderTextColor="#B8B8B8"
+                placeholderTextColor="#828282"
                 style={styles.input}
                 value={confirmPassword}
                 secureTextEntry={true}
