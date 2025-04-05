@@ -145,9 +145,9 @@ const styles = StyleSheet.create({
         marginHorizontal : "auto"
     },
     forgot: {
-        position: "absolute",
+        // position: "",
         right: 10,
-        top: "20%",
+        // top: "20%",
         color: "white",
         fontFamily: "Alata"
 

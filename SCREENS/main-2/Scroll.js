@@ -105,37 +105,7 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
 
 
 
-    // useEffect(() => {
-    //     console.log("allpost re render os scroll page 1");
-    // }, [allpost])
-    // useEffect(() => {
-    //     console.log("setallpost re render of scroll page");
-    // }, [setallpost])
-    // useEffect(() => {
-    //     console.log("opencomment re render of scroll page");
-    // }, [opencomment])
-
-    // useEffect(() => {
-    //     console.log("openshare re render of scroll page");
-    // }, [openshare])
-    // useEffect(() => {
-    //     console.log("getpost re render of scroll page of scroll page");
-    // }, [getpost])
-    // useEffect(() => {
-    //     console.log("scrollY re render of scroll page of page 1");
-    // }, [scrollY])
-    // useEffect(() => {
-    //     console.log("scroll okkkkk re render of scroll page");
-    // }, [scroll])
-    // useEffect(() => {
-    //     console.log("navigation re render of scroll page");
-    // }, [navigation])
-
-    // useFocusEffect(useCallback(() => {
-    //     console.log("focused ");
-    //     scrollY.setValue(0)
-
-    // }, []))
+  
 
 
 
@@ -297,18 +267,20 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
 
                                 <View style={styles.iconcontainer}>
 
-                                    <View style={styles.icon2}>
+                                    <View style={[styles.icon2,]}>
 
 
-                                        <View style={{ flexDirection: 'row', gap: 6, marginRight: 4, }}>
+                                        <View style={{ flexDirection: 'row', gap: 7, marginRight: 4,alignItems:'center' }}>
                                             <TouchableOpacity onPress={() => { upvotepost(item._id, index) }}>
 
                                                 {!item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5, marginTop: 6 }} />}
                                                 {item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5, marginTop: 6 }} selected={true} />}
                                             </TouchableOpacity>
-                                            <Text style={{ left: 0, color: "#ccc", fontFamily: 'Roboto',top:13 }}>{item.itemlikedcount}</Text>
+                                            <Text style={{  color: "#ccc", fontFamily: 'Roboto',fontSize:16,top:3 }}>{item.itemlikedcount}</Text>
                                         </View>
 
+
+                                        {/* comment */}
 
                                         <Pressable onPress={() => {
                                             Vibration.vibrate(20)
@@ -316,15 +288,17 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
 
                                         }}
                                         >
-                                            <FontAwesome style={{ marginLeft: 4, marginRight: 12 }} name="comment-o" size={27} color="#ccc" />
+                                            <FontAwesome name="comment-o" size={27} color="#ccc" />
                                         </Pressable>
 
+
+                                        {/* share */}
 
                                         <Pressable onPress={() => {
                                             Vibration.vibrate(20)
                                             openshare(item._id)
                                         }}>
-                                            <Share style={{ marginTop: 5, marginRight: 10, right: 0 }} />
+                                            <Share style={{top:3}}/>
                                         </Pressable>
 
 
@@ -348,6 +322,8 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
 
 
                                 </View>
+
+
                                 <View style={styles.lower}>
                                     {item.type != "textBlog" && <Text allowFontScaling={false} style={styles.u3}>{item.caption != undefined ? item.caption : "caption"} </Text>}
                                     <Pressable onPress={() => { opencomment(item._id) }} allowFontScaling={false} style={styles.u4}>

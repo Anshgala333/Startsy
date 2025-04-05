@@ -128,13 +128,14 @@ const styles = StyleSheet.create({
         alignItems:'center'
     }
     , icon2: {
-        display: "flex",
+        
         flexDirection: "row",
         alignItems:'center',
-        // justifyContent : "space-between",
+        justifyContent : "center",
         // width : "90%",
         // marginHorizontal : "auto"
-        gap: 3
+        // backgroundColor:'red',
+        gap: 8
     },
     com1: {
         fontFamily: "Alata",

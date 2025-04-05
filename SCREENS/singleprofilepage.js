@@ -26,6 +26,7 @@ import { useStoreRootState } from 'expo-router/build/global-state/router-store.j
 
 
 import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
+import { LinearGradient } from 'expo-linear-gradient';
 
 
 const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
@@ -47,23 +48,7 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
   const snapPoints5 = useMemo(() => ["50%", "100%"], []);
 
 
-  // console.log(id);
-  // console.log(token);
-  // console.log(page);
-  // console.log(item);
-  // console.log(messages);
-  // console.log(mypage);
 
-
-
-
-  // useEffect(()=>{
-
-  //   console.log("newww single proile called");
-
-  //   setuserdata(null)
-  //   setposts(null)
-  // } , [token , props])
 
   const Spacer = ({ height = 16 }) => <View style={{ height }} />;
 
@@ -259,7 +244,10 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
         },
       });
       const data = await response.json();
-      console.log(data.data.chatUsers, "datadatdatdatdtadtad");
+      // console.log(data.data.chatUsers, "datadatdatdatdtadtad");
+
+      // console.log(data);
+
 
 
 
@@ -431,7 +419,12 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
     }
     if (item.type == "photo" || item.type == "textBlog" || item.type == "video") {
       return (
-        <View style={styles.box}>
+        <LinearGradient
+                colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}
+                locations={[0, 1]}
+                style={styles.box}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 0, y: 1 }} >
           <View style={styles.top} >
             <Pressable
               onPress={() => { navigation.navigate("Singleuserpage", { token: token, id: item.user_id._id, page: "Startsy" }) }}
@@ -459,22 +452,59 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
           {item.type == "textBlog" && <Text style={styles.blogtext}>{item.content}</Text>}
 
           <View style={styles.iconcontainer}>
-            <View style={styles.icon2}>
-              <Pressable onPress={() => { upvotepost(item._id, index) }}>
-                {!item.isliked && <Upvote width={36} height={36} style={{ marginHorizontal: 5 }} />}
-                {item.isliked && <Upvote width={36} height={36} style={{ marginHorizontal: 5 }} selected={true} />}
+
+            <View style={[styles.icon2,]}>
+
+
+              <View style={{ flexDirection: 'row', gap: 7, marginRight: 4, alignItems: 'center' }}>
+                <TouchableOpacity onPress={() => { upvotepost(item._id, index) }}>
+
+                  {!item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5, marginTop: 6 }} />}
+                  {item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5, marginTop: 6 }} selected={true} />}
+                </TouchableOpacity>
+                <Text style={{ color: "#ccc", fontFamily: 'Roboto', fontSize: 16, top: 3 }}>{item.likedBy?.length}</Text>
+              </View>
+
+
+              {/* comment */}
+
+              <Pressable onPress={() => {
+                Vibration.vibrate(20)
+                opencomment(item._id)
+
+              }}
+              >
+                <FontAwesome name="comment-o" size={27} color="#ccc" />
               </Pressable>
-              <Text style={{ left: -10, top: 13, color: "#ccc" }}>{item.likedBy?.length}</Text>
-              <Pressable onPress={() => { opencomment(item._id) }}><FontAwesome name="comment-o" size={30} color="#ccc" /></Pressable>
-            </View>
-            <TouchableOpacity
-              onPress={() => {
+
+
+              {/* share */}
+
+              <Pressable onPress={() => {
                 Vibration.vibrate(20)
                 openshare(item._id)
-              }}
-            >
-              <Share style={{ marginTop: 5, marginRight: 10, right: 0 }} />
-            </TouchableOpacity>
+              }}>
+                <Share style={{ top: 3 }} />
+              </Pressable>
+
+
+            </View>
+
+
+            {/* 
+<TouchableOpacity style={{ paddingRight: 0, paddingRight: 8 }} onPress={() => toggleSavePost(item._id, index)}>
+    {!item.isSaved? (
+        <MaterialIcons name="bookmark-border" size={32} color="#ccc" />
+    ) : (
+        <MaterialCommunityIcons
+            name="bookmark"
+            size={32}
+            color="#ccc"             // Gray when unsaved
+
+        />
+    )}
+</TouchableOpacity> */}
+
 
 
           </View>
@@ -486,12 +516,17 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
 
           </View>
 
-        </View>
+        </LinearGradient>
       )
     }
     else if (item.type == "communityPost") {
       return (
-        <View style={styles.box}>
+        <LinearGradient
+                colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}
+                locations={[0, 1]}
+                style={styles.box}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 0, y: 1 }} >
           {/* <Text>{JSON.stringify(item)}</Text> */}
 
           <View style={styles.top} >
@@ -518,12 +553,17 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
             </Pressable>
           </View>
 
-        </View>
+        </LinearGradient>
       )
     }
     else if (item.type == "jobPost") {
       return (
-        <View style={styles.box}>
+        <LinearGradient
+        colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}
+        locations={[0, 1]}
+        style={styles.box}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0, y: 1 }} >
           <View style={styles.top} >
 
             <Pressable
@@ -556,7 +596,7 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
             </Pressable>
           </View>
 
-        </View>
+        </LinearGradient>
       )
     }
   };
@@ -816,13 +856,13 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
             }
 
 
-          {(userdata.user_id.role == "CommunityMember" || userdata.user_id.role == "Job seeker" ) && userdata.tagline != "" &&
-            <Text style={styles1.goal}>{userdata.tagline}</Text>
-          }
+            {(userdata.user_id.role == "CommunityMember" || userdata.user_id.role == "Job seeker") && userdata.tagline != "" &&
+              <Text style={styles1.goal}>{userdata.tagline}</Text>
+            }
 
-          {(userdata.user_id.role == "CommunityMember" || userdata.user_id.role == "Job seeker") && userdata.skills != "" &&
-            <Text style={styles1.fund}>{userdata.skills}</Text>
-          }
+            {(userdata.user_id.role == "CommunityMember" || userdata.user_id.role == "Job seeker") && userdata.skills != "" &&
+              <Text style={styles1.fund}>{userdata.skills}</Text>
+            }
 
 
 
@@ -1339,7 +1379,7 @@ const styles1 = StyleSheet.create({
     backgroundColor: "#16181A",
     paddingHorizontal: 15,
     paddingVertical: 10,
-    alignItems:'center'
+    alignItems: 'center'
   },
   username: {
     fontFamily: "myanmar",
@@ -1461,7 +1501,7 @@ const styles1 = StyleSheet.create({
     paddingHorizontal: 5,
     marginVertical: 12,
     marginBottom: 5,
-    marginTop :10,
+    marginTop: 10,
 
   },
   fund: {
@@ -1470,7 +1510,7 @@ const styles1 = StyleSheet.create({
     color: "#00DE62",
     paddingHorizontal: 5,
     marginVertical: 0,
-    marginTop : 10
+    marginTop: 10
 
   },
   connectionContainer: {

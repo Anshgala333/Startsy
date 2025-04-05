@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Pressable, Image, FlatList, RefreshControl, Vibration, TouchableOpacity, ActivityIndicator ,Dimensions} from 'react-native'
+import { View, Text, StyleSheet, Pressable, Image, FlatList, RefreshControl, Vibration, TouchableOpacity, ActivityIndicator, Dimensions } from 'react-native'
 import React, { useCallback, useContext, useEffect, useRef, useState } from 'react'
 
 import { jwtDecode } from 'jwt-decode';
@@ -14,6 +14,7 @@ import SendedPost from './SendedPost.jsx'
 import { useRoute } from "@react-navigation/native";
 
 import DeletedPost from './DeletedPost.jsx'
+import { ToastAndroid } from 'react-native';
 
 
 
@@ -21,27 +22,101 @@ const ViewSendedPost = ({ openshare, opencomment }) => {
 
     const [skeletonLoading, setSkeletonLoading] = useState(false);
     const [refreshing, setRefresing] = useState(false);
-    const [allPost, setAllPost] = useState([]);
+    const [allPosts, setAllPosts] = useState([]);
+    const [bookmarks, setBookmarks] = useState([])
     const [sentPost, setSentPost] = useState({});
     const route = useRoute()
-    // console.log(route.params.id)
+
     const id = route.params.id;
-    // console.log(id);
 
-
-
+    
+    
+    
+    
     const { globaldata, updateField } = useContext(GlobalContext);
-
+    
     const token = globaldata.token;
-
-
+    
+    
     var decode = jwtDecode(token)
-    // console.log(token);
-
+    
+    
     var loggedinUserID = decode._id
+    
+    const showToastWithGravity = (message) => {
+           ToastAndroid.showWithGravityAndOffset(
+               `${message}`,
+               ToastAndroid.SHORT,
+               ToastAndroid.TOP,
+               100, 100
+           );
+       };
+
+    const toggleSavePost = async (id, index,isSingle) => {
+    
+
+        // console.log("book");
+        if(isSingle){
+            setSentPost(prev => {
+                return {
+                    ...prev,
+                    isSaved:!prev.isSaved
+                }
+                
+
+            });
+            var toset = sentPost.isSaved
+        }
+        else{
+            // console.log("here");
+            
+            setAllPosts(prevPosts =>
+                prevPosts.map((e, i) => {
+                    if (i === index) {
+                        return { ...e, isSaved: !e.isSaved };
+                    }
+                    return e;
+                })
+            );
+            var toset = allPosts[index].isSaved
+            // console.log(toset);
+            
+        }
 
 
-    // console.log(id);
+
+        var status = toset ? "remove" : "add"
+        var message = toset ? "Unsaved" : "Saved"
+        showToastWithGravity(`Post ${message} successfully`)
+
+        try {
+            console.log("here");
+            
+            const response = await fetch(`${url}test/savePost/${id}/${status}`, {
+                method: 'POST',
+                body: "",
+                headers: {
+                    "Content-Type": "application/json",
+                    accept: "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+            });
+            const data = await response.json();
+          
+            
+        
+            Vibration.vibrate(20)
+
+        }
+        catch (err) {
+            console.log(err);
+
+        }
+
+
+    }
+
+
 
     async function upvotepost(id, index, isSingle) {
         Vibration.vibrate(50)
@@ -49,12 +124,12 @@ const ViewSendedPost = ({ openshare, opencomment }) => {
 
         if (!isSingle) {
 
-            var toset = !allPost[index].isliked
+            var toset = !allPosts[index].isliked
             var status = toset ? "like" : "unlike"
 
             var increment = toset == true ? 1 : -1
 
-            setAllPost(prevPosts =>
+            setAllPosts(prevPosts =>
                 prevPosts.map((e, i) => {
                     if (i === index) {
                         return { ...e, isliked: toset, itemlikedcount: e.itemlikedcount + increment };
@@ -93,6 +168,7 @@ const ViewSendedPost = ({ openshare, opencomment }) => {
 
             console.log(response.status);
 
+
         }
         catch (err) {
             console.log(err);
@@ -106,9 +182,8 @@ const ViewSendedPost = ({ openshare, opencomment }) => {
 
     const getSinglePost = async () => {
         setSkeletonLoading(true)
-        console.log(route.params);
-        console.log(route.params.id);
-        
+
+
         try {
             const response = await fetch(`${url}test/getOnePost/${id}`, {
                 method: 'GET',
@@ -116,9 +191,20 @@ const ViewSendedPost = ({ openshare, opencomment }) => {
                     "Authorization": `Bearer ${token}`,
                 },
             });
-            const { data } = await response.json();
+            const responsedData = await response.json();
+      
+
+
+            const data = responsedData.data
+            const bookmarks = responsedData.bookmarks
+
+
+
+
+
+
             if (!data) {
-                // console.log("daaattaaaaaa", data);
+
                 setSentPost([]);
             }
 
@@ -126,7 +212,12 @@ const ViewSendedPost = ({ openshare, opencomment }) => {
             else {
                 var data1 = data.map(e => {
 
-                    var object = { ...e, isliked: e.likedBy.includes(loggedinUserID), Applied: e.communityPost ? e.communityPost.communityMembers.includes(loggedinUserID) : false, Jobapplied: e.jobPosts ? e.jobPosts.jobApplicants.includes(loggedinUserID) : false, itemlikedcount: e.likedBy.length }
+                    var object = {
+                        ...e, isliked: e.likedBy.includes(loggedinUserID),
+                        Applied: e.communityPost ? e.communityPost.communityMembers.includes(loggedinUserID) : false,
+                        Jobapplied: e.jobPosts ? e.jobPosts.jobApplicants.includes(loggedinUserID) : false, itemlikedcount: e.likedBy.length,
+                        isSaved: bookmarks.includes(e._id)
+                    }
                     return object
                 })
 
@@ -144,10 +235,7 @@ const ViewSendedPost = ({ openshare, opencomment }) => {
     }
 
 
-
-
-
-    ///call this when page renders
+    ///call sis when page renders
     useEffect(() => {
         getSinglePost();
         getpost();
@@ -169,20 +257,30 @@ const ViewSendedPost = ({ openshare, opencomment }) => {
             const data = await response.json();
 
 
+            const { bookmarks } = data;
+
+            setBookmarks(bookmarks);
+
+
+
             var decode = jwtDecode(token)
             var loggedinUserID = decode._id
 
 
             var data1 = data.data.map(e => {
 
-                var object = { ...e, isliked: e.likedBy.includes(loggedinUserID), Applied: e.communityPost ? e.communityPost.communityMembers.includes(loggedinUserID) : false, Jobapplied: e.jobPosts ? e.jobPosts.jobApplicants.includes(loggedinUserID) : false, itemlikedcount: e.likedBy.length }
+                var object = {
+                    ...e, isliked: e.likedBy.includes(loggedinUserID), Applied: e.communityPost ? e.communityPost.communityMembers.includes(loggedinUserID) : false, Jobapplied: e.jobPosts ? e.jobPosts.jobApplicants.includes(loggedinUserID) : false,
+                    itemlikedcount: e.likedBy.length,
+                    isSaved: bookmarks.includes(e._id)
+                }
                 return object
             })
 
 
             if (data.data.length > 0) {
 
-                setAllPost(data1);
+                setAllPosts(data1);
 
 
 
@@ -220,24 +318,28 @@ const ViewSendedPost = ({ openshare, opencomment }) => {
                                     <View>
                                         {
                                             sentPost.length == 0 ?
-                                               <DeletedPost/>
+                                                <DeletedPost />
                                                 :
                                                 <SendedPost item={sentPost} index={0}
                                                     openshare={openshare}
+                                                    toggleSavePost={toggleSavePost}
                                                     opencomment={opencomment}
                                                     upvotepost={upvotepost} />
                                         }
 
                                     </View>
-                                    <Text style={{ color: '#777', fontSize: 20, paddingLeft: 20, marginBottom: 15 , fontFamily  : "Alata", marginTop : -15 }}>Suggestions</Text>
+                                    <Text style={{ color: '#777', fontSize: 20, paddingLeft: 20, marginBottom: 15, fontFamily: "Alata", marginTop: -15 }}>Suggestions</Text>
                                 </>
                             )
                         }}
                         scrollEventThrottle={16}
-                        data={allPost}
+                        data={allPosts}
                         renderItem={({ item, index }) => {
                             return (
-                                <SuggestedPost item={item} index={index} id={id}
+                                <SuggestedPost
+                                    bookmarks={bookmarks}
+                                    toggleSavePost = {toggleSavePost}
+                                    item={item} index={index} id={id}
                                     opencomment={opencomment}
                                     openshare={openshare} upvotepost={upvotepost} />
                             );

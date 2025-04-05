@@ -616,12 +616,15 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
                   secureTextEntry={true}
                 />
 
-                <Pressable onPress={() => navigation.navigate("FP1")} style={styles.forgot}>
-                  <Text allowFontScaling={false} style={[styles.white, styles.forgottext]}>Forgot ?</Text>
-                </Pressable>
+
               </View>
+              
               {passworderror && <Text style={styles.error}>Please enter password</Text>}
               {passworderror1 && <Text style={styles.error}>Password must be at least 8 characters long, contain one uppercase letter, one lowercase letter, and one number.</Text>}
+
+              <Pressable onPress={() => navigation.navigate("FP1")} style={styles.forgot}>
+                <Text allowFontScaling={false} style={[styles.white, styles.forgottext]}>Forgot ?</Text>
+              </Pressable>
 
               <Pressable style={styles.loginbutton} onPress={() => {
                 handlelogin(navigation)
