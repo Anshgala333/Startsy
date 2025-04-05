@@ -9,6 +9,9 @@ import Green from "../SCREENS/greenscreen.js"; //page 1
 import Login1 from "../SCREENS/logintrial.js"; // login page
 import ReadMore1 from "../SCREENS/trial-1.js"; // read more page
 import { Alert, Button, Pressable, SafeAreaView } from "react-native";
+
+import LoginPage from "../SCREENS/LoginPage.js";
+import Date1 from "../SCREENS/Date.js";
 import Signup1 from "../SCREENS/signup-1.js";
 import Signup2 from "../SCREENS/signup2.js";
 import Signup3 from "../SCREENS/signup3.js";
@@ -253,6 +256,7 @@ export default function App() {
           />
           {/* <Stack.Screen name="ReadMore1" component={ReadMore1} /> */}
 
+          <Stack.Screen name="LoginPage" component={LoginPage} />
           <Stack.Screen name="Signup1" component={Signup1} />
           <Stack.Screen name="Signup2" component={Signup2} />
           <Stack.Screen name="Signup3" component={Signup3} />
@@ -327,6 +331,7 @@ export default function App() {
           <Stack.Screen name="QuestionReply" component={QuestionReply} />
           <Stack.Screen name="PricePage" component={PricePage} />
           <Stack.Screen name="Settings" component={Settings} />
+          <Stack.Screen name="Date" component={Date1} />
 
           <Stack.Screen
             name="KeyboardAvoidingComponent"

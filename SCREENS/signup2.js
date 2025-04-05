@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SafeAreaView, View, Text, TextInput, Image, StatusBar, KeyboardAvoidingView, Pressable, ActivityIndicator, ScrollView } from "react-native";
+import { SafeAreaView, View, Text, TextInput, Image, StatusBar, KeyboardAvoidingView, Pressable, ActivityIndicator, ScrollView, TouchableOpacity } from "react-native";
 import { useFocusEffect } from "expo-router";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import signupstyles from "../styles/signup1styles.js";
@@ -7,6 +7,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import Back from "../components/back.js";
 import { url } from "../config.js";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import { Entypo } from "@expo/vector-icons";
 const Signup2 = function ({ navigation, route }) {
     const { type, username } = route.params;
     const [loading, setLoading] = useState(false);
@@ -14,6 +15,8 @@ const Signup2 = function ({ navigation, route }) {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const [confirmPasswordError, setConfirmPasswordError] = useState("");
+    const [showPassword, setShowPassword] = useState(true);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(true);
 
     const validatePassword = () => {
         // Validate password: At least 8 characters, 1 lowercase, 1 uppercase, and 1 number
@@ -61,13 +64,13 @@ const Signup2 = function ({ navigation, route }) {
 
 
             // console.log(data);
-            
+
             await AsyncStorage.setItem('accessToken', data.accessToken);
             // console.log("token stored successfully");
-            
-            
+
+
             if (type === "Investor") {
-                navigation.navigate("Signup4", { type ,username, password});
+                navigation.navigate("Signup4", { type, username, password });
             } else {
                 navigation.navigate("Email", { type, username, password });
                 // navigation.navigate("Signup5", { type, username, password });
@@ -88,7 +91,7 @@ const Signup2 = function ({ navigation, route }) {
         <KeyboardAvoidingView style={signupstyles.container} behavior="padding" keyboardVerticalOffset={0}>
             <ScrollView>
                 <View style={signupstyles.row}>
-                <Pressable onPress={() => navigation.goBack()}>
+                    <Pressable onPress={() => navigation.goBack()}>
                         <FontAwesome6 name="chevron-left" size={34} style={{ alignSelf: 'flex-start', marginLeft: 16 }} color="#00DF60" />
                     </Pressable>
                     <View style={signupstyles.top}>
@@ -98,28 +101,60 @@ const Signup2 = function ({ navigation, route }) {
                         <Text allowFontScaling={false} style={signupstyles.t1}>Create a password</Text>
                         <Text allowFontScaling={false} style={signupstyles.t2}>Use a strong password</Text>
 
-                        <TextInput
-                            allowFontScaling={false}
-                            placeholder="Password"
-                            placeholderTextColor="#B8B8B8"
-                            style={signupstyles.input}
-                            value={password}
-                            secureTextEntry={true}
-                            onChangeText={(text) => { setPassword(text) }}
-                        />
+                        <View style={{ width: '92%', padding: 0, borderBottomWidth: 1, borderBottomColor: '#ccc', }}>
+                            <TextInput
+                                allowFontScaling={false}
+                                placeholder="Password"
+                                placeholderTextColor="#828282"
+                                style={signupstyles.input}
+                                value={password}
+                                secureTextEntry={showPassword}
+                                onChangeText={(text) => {
+                                    setPasswordError("")
+                                    setConfirmPasswordError("")
+                                    setPassword(text)
+                                }}
+                            />
+                            <TouchableOpacity style={{ position: 'absolute', marginRight: 10, right: 0, bottom: 0, marginBottom: 10 }}
+                                onPress={() => setShowPassword(prev => !prev)}
+                            >
+                                {showPassword ?
+                                    <Entypo name="eye-with-line" size={24} color="#828282" />
+                                    :
+                                    <Entypo name="eye" size={24} color="#828282" />
+
+                                }
+                            </TouchableOpacity>
+                        </View>
                         {passwordError ? (
-                            <Text style={ signupstyles.error }>{passwordError}</Text>
+                            <Text style={signupstyles.error}>{passwordError}</Text>
                         ) : null}
 
-                        <TextInput
-                            allowFontScaling={false}
-                            placeholder="Confirm password"
-                            placeholderTextColor="#B8B8B8"
-                            style={signupstyles.input2}
-                            secureTextEntry={true}
-                            value={confirmPassword}
-                            onChangeText={(text) => { setConfirmPassword(text) }}
-                        />
+                        <View style={{ width: '92%', padding: 0, borderBottomWidth: 1, borderBottomColor: '#ccc',marginTop:20 }}>
+                            <TextInput
+                                allowFontScaling={false}
+                                placeholder="Confirm Password"
+                                placeholderTextColor="#828282"
+                                style={signupstyles.input}
+                                value={confirmPassword}
+                                secureTextEntry={showConfirmPassword}
+                                onChangeText={(text) => {
+                                    setPasswordError("")
+                                    setConfirmPasswordError("")
+                                    setConfirmPassword(text)
+                                }}
+                            />
+                            <TouchableOpacity style={{ position: 'absolute', marginRight: 10, right: 0, bottom: 0, marginBottom: 10 }}
+                                onPress={() => setShowConfirmPassword(prev => !prev)}
+                            >
+                                {showConfirmPassword ?
+                                    <Entypo name="eye-with-line" size={24} color="#828282" />
+                                    :
+                                    <Entypo name="eye" size={24} color="#828282" />
+
+                                }
+                            </TouchableOpacity>
+                        </View>
                         {confirmPasswordError ? (
                             <Text style={signupstyles.error}>{confirmPasswordError}</Text>
                         ) : null}
@@ -128,7 +163,7 @@ const Signup2 = function ({ navigation, route }) {
                             {!loading ? (
                                 <Text allowFontScaling={false} style={signupstyles.nexttext}>Next</Text>
                             ) : (
-                                <ActivityIndicator size={24} color="#000" />
+                                <ActivityIndicator style={{ marginTop: 7 }} size={24} color="#000" />
                             )}
                         </Pressable>
                     </View>

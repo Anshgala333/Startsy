@@ -19,6 +19,7 @@ const Email = ({ navigation, route }) => {
     const [step, setStep] = useState(1);  // Step 1: Email, Step 2: OTP
     const [token, setToken] = useState("");
     const [otploading, setotploading] = useState(false);
+    const [otperror, setotperror] = useState(false);
 
 
     const { type, id, useremail } = route.params
@@ -52,7 +53,7 @@ const Email = ({ navigation, route }) => {
     // Handle sending OTP
     const handleSendOtp = async () => {
         if (!email || !validateEmail()) {
-            setMessage("* Enter a valid email");
+            setMessage("Enter a valid email *");
             setError(true);
             return;
         }
@@ -138,6 +139,7 @@ const Email = ({ navigation, route }) => {
             if (response.status === 400) {
                 // setmessage("* OTP is incorrect")
                 // seterror(true)
+                setotperror(true)
             }
             else if (response.status === 200) {
                 // console.log("success");
@@ -176,7 +178,7 @@ const Email = ({ navigation, route }) => {
                             navigation.goBack();
                         }
                         }}>
-                        <FontAwesome6 name="chevron-left" size={34} style={{ alignSelf: 'flex-start', marginLeft: 16 }} color="#00DF60" />
+                        {/* <FontAwesome6 name="chevron-left" size={34} style={{ alignSelf: 'flex-start', marginLeft: 16 }} color="#00DF60" /> */}
                     </Pressable>
                     <View style={signupstyles.top}>
                         <Image style={signupstyles.logo} source={require("../assets/images/logo.png")} />
@@ -187,11 +189,11 @@ const Email = ({ navigation, route }) => {
                             <>
                                 <Text style={signupstyles.t1}>Enter Your Email</Text>
                                 {!error && <Text style={signupstyles.t2}>You won't be able to change this later.</Text>}
-                                {error && <Text style={signupstyles.error}>{message}</Text>}
+                                {error && <Text style={[signupstyles.error , {textAlign : "center"}]}>{message}</Text>}
 
                                 <TextInput
-                                    placeholder="Email"
-                                    placeholderTextColor="#B8B8B8"
+                                    placeholder="xyz@gmail.com"
+                                    placeholderTextColor="#828282"
                                     style={s5.input}
                                     value={email}
                                     onChangeText={(text) => {
@@ -202,7 +204,7 @@ const Email = ({ navigation, route }) => {
 
                                 <Pressable style={signupstyles.next} onPress={handleSendOtp}>
                                     {loading ? (
-                                        <ActivityIndicator size={24} color="#16181a" />
+                                        <ActivityIndicator style={{marginTop:7}} size={24} color="#16181a" />
                                     ) : (
                                         <Text style={signupstyles.nexttext}>Send OTP</Text>
                                     )}
@@ -213,7 +215,7 @@ const Email = ({ navigation, route }) => {
                                 <Text style={signupstyles.t1}>Enter OTP</Text>
                                 <Text style={signupstyles.t2}>
                                     We sent a code to{'\n'}
-                                    <Text style={{ fontWeight: "bold" }}>{email}</Text> , <Text style={{ fontWeight: "bold" }}>check spam</Text>
+                                    <Text style={{ fontWeight: "bold" }}>{email}</Text> <Text style={{ fontWeight: "bold" }}></Text>
                                     
                                 </Text>
                                 {/* <Text style={signupstyles.t2}>Check spam *</Text> */}
@@ -250,11 +252,12 @@ const Email = ({ navigation, route }) => {
                                         disabledPinCodeContainerStyle: s5.disabledPinCodeContainer,
                                     }}
                                 />
+                                {otperror && <Text style={[signupstyles.error , {marginTop : 25 , fontSize : 15}]}>Invalid OTP</Text>}
 
                                 {/* ✅ "Verify OTP" Button */}
                                 <Pressable style={signupstyles.next} onPress={() => check()}>
                                     {!otploading && <Text style={signupstyles.nexttext}>Verify OTP</Text>}
-                                    {otploading &&  <ActivityIndicator size={24} color="#16181a" />}
+                                    {otploading &&  <ActivityIndicator style={{marginTop :7}} size={24} color="#16181a" />}
                                 </Pressable>
                             </>
                         )}

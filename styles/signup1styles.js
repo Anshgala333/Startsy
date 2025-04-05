@@ -56,33 +56,47 @@ const signupstyles = StyleSheet.create({
         // justifyContent: "center",
         alignContent: "center",
         alignItems: "center",
-        backgroundColor : "rgba(33, 34, 35, 0.5)",
+        backgroundColor: "rgba(33, 34, 35, 0.5)",
 
     },
-    error : {
-        marginVertical :15,
-        marginTop  :0,
-        textAlign : "center",
+    error: {
+        marginVertical: 15,
+        marginTop: 0,
+        textAlign: "center",
         // backgroundColor : "red",
-        width  : "85%",
-        marginHorizontal : "auto",
-        color : "#E65858",
-        fontSize : 15,
-        fontFamily : "Roboto",
+        width: "85%",
+        marginHorizontal: "auto",
+        color: "#E65858",
+        textAlign : "center",
+        fontSize: 12,
+        fontFamily: "Roboto",
+
+    },
+    invalid: {
+        marginVertical: 15,
+        marginTop: -15,
+        textAlign: "center",
+        // backgroundColor : "red",
+        width: "85%",
+        marginHorizontal: "auto",
+        color: "#E65858",
+        textAlign : "center",
+        fontSize: 12,
+        fontFamily: "Roboto",
 
     },
     t1: {
         fontFamily: "Alata",
-        fontSize: scalingfactor * 24,
-        color: "white",
+        fontSize: 24,
+        color: "#ccc",
         textAlign: "center",
         marginBottom: scalingfactor * 8,
 
     },
     t2: {
         fontFamily: "Roboto",
-        fontSize: scalingfactor * 12,
-        color: "#94A3B8",
+        fontSize:  12,
+        color: "#828282",
         textAlign: "center",
         marginBottom: scalingfactor * 30,
 
@@ -91,52 +105,53 @@ const signupstyles = StyleSheet.create({
     input: {
         // height: height * 0.045, // Responsive height
         backgroundColor: "transparent",
-        margin: height * 0.016,
+        // margin: height * 0.016,
         marginTop: 0,
-        borderBottomWidth: 3,
+        // borderBottomWidth: 1,
         // borderRadius : 20,
         paddingLeft: scalingfactor * 10,
-        borderBottomColor: "#16181A",
+        // borderBottomColor: "#ccc",
         fontSize: scalingfactor * 20, // Responsive font size
         color: "#B8B8B8",
-        paddingBottom: scalingfactor * 10,
+        // paddingBottom: scalingfactor * 10,
         width: "92%",
         fontFamily: "Alata",
-        // lineHeight: scalingfactor * 18,
-        
+
     },
     input2: {
         backgroundColor: "transparent",
         margin: height * 0.016,
         marginTop: 0,
-        borderBottomWidth: 3,
+        borderBottomWidth: 1,
         // borderRadius : 20,
         paddingLeft: scalingfactor * 10,
-        borderBottomColor: "#16181A",
+        borderBottomColor: "#ccc",
         fontSize: scalingfactor * 20, // Responsive font size
         color: "#B8B8B8",
         paddingBottom: scalingfactor * 10,
         width: "92%",
-        marginTop : 15,
+        marginTop: 10,
         fontFamily: "Alata",
     },
     next: {
         backgroundColor: "#00DF60",
-        width: "92%",
-        padding: 10,
+        width: "80%",
+        // padding: 10,
         marginVertical: height * 0.018,
         borderRadius: 20,
         margin: "auto",
-        marginTop: scalingfactor * 20,
-        minHeight : 45
+        marginTop: scalingfactor * 30,
+        height: 40
     },
     nexttext: {
         color: "#24272A",
         fontFamily: "Alata",
-        fontSize: scalingfactor * 24,
+        fontSize: scalingfactor * 18,
         textAlign: "center",
+        alignSelf: "center",
+        // verticalAlign : "middle",
         // lineHeight : 16
-        marginTop: -4
+        marginTop: 4
 
     },
     back: {

@@ -5,7 +5,7 @@ const Profile = (props) => (
   <View style={[styles.container]} >
     <Svg xmlns="http://www.w3.org/2000/svg"   width={120} height={120} fill="none">
       <Path
-        stroke="#ccc"
+        stroke="#828282"
         strokeLinecap="round"
         strokeWidth={3}
         d="M88.911 99.227c-1.912-5.278-6.126-9.942-11.987-13.27-5.862-3.326-13.044-5.129-20.432-5.129-7.388 0-14.57 1.803-20.431 5.13-5.862 3.327-10.076 7.99-11.988 13.27"
@@ -13,7 +13,7 @@ const Profile = (props) => (
       <Ellipse
         cx={56.492}
         cy={56.096}
-        stroke="#ccc"
+        stroke="#828282"
         strokeLinecap="round"
         strokeWidth={3}
         rx={16.781}
@@ -24,7 +24,7 @@ const Profile = (props) => (
         cy={57.122}
         r={54.997}
         stroke="#ccc"
-        strokeWidth={3}
+        strokeWidth={2}
       />
     </Svg>
   </View>

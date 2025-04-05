@@ -550,6 +550,7 @@ function Upvotedata({ route }) {
         }
         return (
             <>
+                <View style={styles.divider}></View>
                 <Text style={styles.t11}>Investor Suggestions</Text>
                 <FlatList
                     horizontal={true}
@@ -823,7 +824,7 @@ const styles = StyleSheet.create({
     },
     divider: {
         width: width,
-        height: 3,
+        height: 1,
         marginTop: 5,
         backgroundColor: "#24272A"
     },
@@ -1111,7 +1112,7 @@ const styles = StyleSheet.create({
     t11: {
         textAlign: "left",
         color: "#B8B8B8",
-        fontFamily: "Roboto",
+        fontFamily: "Alata",
         fontSize: 22,
         paddingLeft: 20,
         // margin: "auto",

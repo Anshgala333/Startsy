@@ -3,6 +3,7 @@ import React, { useEffect, useContext, useState } from "react";
 import { Pressable, TextInput } from "react-native";
 import { GlobalContext } from "@/Global/globalcontext";
 import { View, Text, ActivityIndicator, BackHandler, StyleSheet, Image, StatusBar, TouchableOpacity, Dimensions, SafeAreaView, ScrollView } from "react-native";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 import { url } from "../config.js";
 const FP1 = ({ navigation }) => {
@@ -83,18 +84,25 @@ const FP1 = ({ navigation }) => {
             <StatusBar backgroundColor="#16181a" barStyle={"light-content"} />
             {/* Header Section */}
             {/* <Text allowFontScaling={false} style={styles.headerText}>Profile</Text> */}
+            <Pressable onPress={() => {
+                console.log("hi");
+                navigation.goBack()  
+            }}>
+                <FontAwesome6 name="chevron-left" size={34}
+                    style={{ alignSelf: 'flex-start', marginLeft: 16, marginTop: 20, position: "relative" }} color="#00DF60" />
+            </Pressable>
 
-            <Text style={styles.t1}>Current password</Text>
+            {/* <Text style={styles.t1}>Forgot password</Text> */}
             <TextInput
                 allowFontScaling={false}
-                placeholder="Enter your email id"
-                placeholderTextColor="#B8B8B8"
+                placeholder="Enter your email ID"
+                placeholderTextColor="#828282"
                 style={styles.input}
                 value={password}
                 onChangeText={(text) => { setpassword(text) }}
             />
             {error && <Text style={styles.err}>{message}</Text>}
-            <Text style={styles.t2}>Forgot password</Text>
+            {/* <Text style={styles.t2}>Forgot password</Text> */}
             <Pressable onPress={check} style={styles.btn}>
 
                 {loading && <ActivityIndicator size={24} color="#16181a" />}
@@ -143,19 +151,21 @@ const styles = StyleSheet.create({
     },
     t1: {
         fontFamily: "Alata",
-        color: "#ffffff",
+        color: "#ccc",
         fontSize: 24,
         textAlign: "center",
-        marginTop: 5
+        // position : "absolute",
+        marginTop: -30,
     }
     , input: {
         backgroundColor: "transparent",
         margin: height * 0.016,
-        marginTop: 40,
-        borderBottomWidth: 3,
+        marginTop: 20,
+        fontFamily: "Alata",
+        borderBottomWidth: 1,
         // borderRadius : 20,
         paddingLeft: scalingfactor * 10,
-        borderBottomColor: "#AEAFAF",
+        borderBottomColor: "#ccc",
         fontSize: scalingfactor * 20, // Responsive font size
         color: "#B8B8B8",
         paddingBottom: scalingfactor * 7,
@@ -168,7 +178,7 @@ const styles = StyleSheet.create({
     },
     btn: {
         borderRadius: 20,
-        height: 45,
+        height: 40,
         justifyContent: "center",
         alignItems: "center",
         width: "70%",
@@ -178,13 +188,14 @@ const styles = StyleSheet.create({
     },
     btntext: {
         fontFamily: "Alata",
-        color: "#24272A",
-        fontSize: 22,
+        color: "#16181a",
+        fontSize: 20,
         marginTop: -5
     },
     err: {
         color: "#E65858",
         width: "90%",
+        fontFamily: "Roboto",
         marginHorizontal: "auto",
         marginTop: -5,
         fontSize: 12,

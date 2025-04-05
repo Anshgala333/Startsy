@@ -558,6 +558,7 @@ const Chat1 = ({ navigation, route }) => {
                     ref={flatListRef}
                     renderItem={renderItem}
                     keyExtractor={(item, index) => item._id}
+                    style={{paddingLeft : 4 , paddingRight : 4}}
                     // onContentSizeChange={() => flatListRef.current?.scrollToEnd({ animated: true })}
 
                     getItemLayout={(data, index) => ({ length: 100, offset: 100 * index, index })}
@@ -792,7 +793,7 @@ const styles = StyleSheet.create({
         maxWidth: width * 0.6,
         borderColor: "#ccc",
         fontWeight: "bold",
-        borderWidth: 2,
+        borderWidth: 1,
         // backgroundColor : "red",
         borderRadius: 20,
         borderBottomLeftRadius: 2,

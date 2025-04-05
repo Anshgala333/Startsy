@@ -67,7 +67,9 @@ const Signup5 = ({ navigation, route }) => {
     }, []);
 
 
-    const { type, id, useremail , email } = route.params
+    // const { type, id, useremail , email } = route.params
+    const { type, id, useremail , email } = {"type" : 1 , "id" : 2 , "useremail" : 3 , "email" :4}
+
     // console.log(route.params);
     // console.log('====================================');
     // console.log(type);
@@ -77,7 +79,7 @@ const Signup5 = ({ navigation, route }) => {
     const [date, setDate] = useState(new Date());
     const [show, setShow] = useState(false);
     const [skip, setSkip] = useState(false);
-    const [filtereddate, setfiltereddate] = useState("Enter your DOB");
+    const [filtereddate, setfiltereddate] = useState("");
 
     const [fullname, setfullname] = useState("")
     // const [email, setemail] = useState("")
@@ -521,6 +523,7 @@ const Signup5 = ({ navigation, route }) => {
         }
         else setSkip(false)
     }
+    const {height} = Dimensions.get("window")
 
     return (
 
@@ -528,8 +531,7 @@ const Signup5 = ({ navigation, route }) => {
         // <TouchableWithoutFeedback onPress={()=>{
         //     setOpen(false)
         // }}>
-        <SafeAreaView
-            style={{ flex: 1, backgroundColor: "#16181a" }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: "#16181a" }}>
             <ScrollView nestedScrollEnabled={true} style={[{ flex: 1, backgroundColor: "#16181a", paddingBottom: 0, paddingBottom: 0 }, signup3styles.container]}>
                 {/* <KeyboardAwareScrollView enableOnAndroid={true} extraHeight={0} extraScrollHeight={0} enableAutomaticScroll={true} style={signup3styles.container}> */}
                 {/* <ScrollView style={signup3styles.row}> */}
@@ -551,7 +553,9 @@ const Signup5 = ({ navigation, route }) => {
 
                 {/* Bottom Section */}
                 <ScrollView nestedScrollEnabled={true} style={s5.bottom}>
-                    <View style={{ paddingBottom: 10, flex: 1, borderTopLeftRadius: 100 }}>
+                    <View
+                     style={{ paddingBottom: 10, borderTopLeftRadius: 100 , paddingTop : 70 , height : height * 0.84 , }}>
+
                         <Pressable onPress={fileupload}>
                             {image != "xyz" ? (
                                 <Image style={styles.img} source={{ uri: image }} />
@@ -562,12 +566,12 @@ const Signup5 = ({ navigation, route }) => {
                         </Pressable>
                         <Text style={s5.t1}>Upload a profile picture </Text>
                         {errors.image && <Text style={[styles.errorText, { textAlign: "center" }]}>{errors.image}</Text>}
-                        <View style={{ marginTop: 30 }}>
+                        <View style={{ marginTop: 20 , flex : 1 }}>
                             <TextInput
                                 allowFontScaling={false}
                                 placeholder="Full name *"
-                                placeholderTextColor="#B8B8B8"
-                                style={s5.input}
+                                placeholderTextColor="#828282"
+                                style={[s5.input , {paddingLeft : 3 , marginBottom : 14}]}
                                 value={fullname}
                                 onChangeText={(text) => {
                                     check()
@@ -621,7 +625,7 @@ const Signup5 = ({ navigation, route }) => {
                                         </Pressable>
                                     </View> */}
 
-                            <Drop bb={3} borderColor={"#16181a"} bradius={0} items={country1} pccolor={"#ccc"} width={"94%"} open={open} placeholder={country} setOpen={setOpen} onValueChange={(e) => {
+                            <Drop bb={1} borderColor={"#ccc"} bradius={0} items={country1} pccolor={"#828282"} width={"97%"} open={open} placeholder={country} setOpen={setOpen} onValueChange={(e) => {
                                 check()
                                 setcountry(e)
                             }} nestedScrollEnabled={true} extra={true} />
@@ -634,8 +638,9 @@ const Signup5 = ({ navigation, route }) => {
 
                                 allowFontScaling={false}
                                 placeholder="Phone number *"
-                                placeholderTextColor="#B8B8B8"
-                                style={[s5.input, { marginTop: 14 }]}
+                                placeholderTextColor="#828282"
+
+                                style={[s5.input, { marginTop: 12 , paddingLeft : 3 , marginBottom : 14}]}
                                 value={number}
                                 onChangeText={(text) => {
                                     check()
@@ -655,9 +660,9 @@ const Signup5 = ({ navigation, route }) => {
                                     readOnly={true}
 
                                     allowFontScaling={false}
-                                    placeholder="Age (Years)"
-                                    placeholderTextColor="#B8B8B8"
-                                    style={[s5.input, { marginBottom: 10, marginTop: 0 }]}
+                                    placeholder="Enter your DOB "
+                                    placeholderTextColor="#828282"
+                                    style={[s5.input, { marginBottom: 14, marginTop: 0 , paddingLeft : 5 }]}
                                     value={filtereddate}
                                     onChangeText={(text) => {
                                         check()
@@ -677,7 +682,7 @@ const Signup5 = ({ navigation, route }) => {
                                 value={gender}
                                 onChangeText={(text) => { setgender(text) }}
                             /> */}
-                            <Drop bb={3} borderColor={"#16181a"} bradius={0} pccolor={"#ccc"} width={"94%"} up={true} placeholder={gender} items={genderlist} open={open11} setOpen={setOpen11}
+                            <Drop bb={1} borderColor={"#ccc"} bradius={0} pccolor={"#828282"} width={"97%"} up={true} placeholder={gender} items={genderlist} open={open11} setOpen={setOpen11}
                                 onValueChange={(e) => {
                                     check()
                                     setgender(e)
@@ -688,24 +693,21 @@ const Signup5 = ({ navigation, route }) => {
                             <View style={s5.icons}>
                                 <Pressable onPress={() => {
                                     // BackHandler.exitApp()
-
                                     // navigation.goBack()
 
-                                }}><FontAwesome6 name="chevron-left" size={40} color="#00DF60" /></Pressable>
+                                }}><FontAwesome6 name="chevron-left" size={30} color="#00DF60" /></Pressable>
                                 {skip && <Pressable style={s5.btn} onPress={() => { handleSubmit() }}>
                                     <Text allowFontScaling={false} style={styles.nexttext}>Skip</Text>
                                     {/* <FontAwesome6 name="chevron-right" size={40} color="#00DF60" /> */}
                                 </Pressable>}
                                 {!skip && <Pressable onPress={() => { handleSubmit() }}>
                                     {/* <Text allowFontScaling={false} style={styles.nexttext}>Skip</Text> */}
-                                    <FontAwesome6 name="chevron-right" size={40} color="#00DF60" />
+                                    <FontAwesome6 name="chevron-right" size={30} color="#00DF60" />
                                 </Pressable>}
 
                             </View>
 
                         </View>
-
-
                     </View>
 
                 </ScrollView>
@@ -751,13 +753,16 @@ const styles = StyleSheet.create({
     },
     img: {
         margin: "auto",
-        width: 113,
-        height: 113,
+        // width: 113,
+        // height: 113,
+        resizeMode : "cover",
+        // marginTop : 0,
+        // marginBottom :-100,
         borderRadius: 100
     },
     errorText: {
         color: "#E65858",
-        // fontFamily: "Roboto",
+        fontFamily: "Roboto",
         fontSize: 12,
         marginTop: -8,
         width: "92%",

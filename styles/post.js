@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     divider: {
         width: "110%",
         marginLeft: -20,
-        height: 3,
+        height: 1,
         marginTop: 5,
         marginBottom: 20,
         backgroundColor: "#24272A"

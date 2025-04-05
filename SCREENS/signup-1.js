@@ -111,7 +111,7 @@ const Signup1 = function ({ navigation, route }) {
 
         // Render the signup screen UI
         <KeyboardAvoidingView style={signupstyles.container} behavior="padding" keyboardVerticalOffset={-100} >
-            <ScrollView automaticallyAdjustContentInsets={true} automaticallyAdjustsScrollIndicatorInsets={true} style={{ flex: 1 }} >
+            <ScrollView automaticallyAdjustContentInsets={true} automaticallyAdjustsScrollIndicatorInsets={true} style={{ flex: 1 , maxHeight : "100%" }} >
 
                 <View style={signupstyles.row}>
                    <Pressable onPress={() => navigation.goBack()}>
@@ -131,7 +131,7 @@ const Signup1 = function ({ navigation, route }) {
                         <TextInput
                             allowFontScaling={false}
                             placeholder="Username"
-                            placeholderTextColor="#B8B8B8"
+                            placeholderTextColor="#828282"
                             style={s5.input}
                             value={username}
                             onChangeText={(text) => {
@@ -141,7 +141,7 @@ const Signup1 = function ({ navigation, route }) {
                         />
 
                         <Pressable style={signupstyles.next} onPress={() => { checkusername() }}>
-                            {loading && <ActivityIndicator size={24} color="#16181a" />}
+                            {loading && <ActivityIndicator  style={{ marginTop: 7 }} size={24} color="#16181a" />}
                             {!loading && <Text allowFontScaling={false} style={signupstyles.nexttext}>Next</Text>}
                         </Pressable>
                     </View>

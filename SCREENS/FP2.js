@@ -47,6 +47,7 @@ const FP2 = ({ navigation, route }) => {
       return
     }
 
+    setloading(true)
     try {
       const response = await fetch(`${url}api/verifyOtp`, {
         method: 'POST',
@@ -59,7 +60,7 @@ const FP2 = ({ navigation, route }) => {
       });
       const data = await response.json();
       // setloading(false)
-      // console.log(data);
+      console.log(data);
       // console.log(response.status);
       if (response.status === 400) {
         setmessage("* OTP is incorrect")
@@ -77,6 +78,9 @@ const FP2 = ({ navigation, route }) => {
       console.log(err);
 
     }
+    finally {
+      setloading(false)
+    }
   }
 
   return (
@@ -87,6 +91,8 @@ const FP2 = ({ navigation, route }) => {
       {/* <Text allowFontScaling={false} style={styles.headerText}>Profile</Text> */}
 
       <Text style={styles.t1}>Enter OTP</Text>
+      {!error && <Text style={styles.t2}>Check your email</Text>}
+      {error && <Text style={[styles.t2 , {color : "#E65858"}]}>{message}</Text>}
       {/* <TextInput
         allowFontScaling={false}
         placeholder="Enter your email id"
@@ -127,7 +133,7 @@ const FP2 = ({ navigation, route }) => {
           disabledPinCodeContainerStyle: styles.disabledPinCodeContainer,
         }}
       />
-      {error && <Text style={styles.err}>{message}</Text>}
+      {/* {error && <Text style={styles.err}>{message}</Text>} */}
       {/* <Text style={styles.t2}>Forgot password</Text> */}
       <Pressable onPress={check} style={styles.btn}>
 
@@ -171,18 +177,19 @@ const styles = StyleSheet.create({
   },
   t2: {
     fontFamily: "Roboto",
-    color: "#94A3B8",
-    fontSize: 15,
+    color: "#828282",
+    fontSize: 12,
     textAlign: "center",
-    marginTop: -5
+    marginTop: 5,
+    marginBottom : 30
   },
   t1: {
     fontFamily: "Alata",
-    color: "#ffffff",
+    color: "#ccc",
     fontSize: 24,
     textAlign: "center",
     marginTop: 5,
-    marginBottom: 30
+    // marginBottom: 30
   }
   , input: {
     backgroundColor: "transparent",
@@ -204,7 +211,7 @@ const styles = StyleSheet.create({
   },
   btn: {
     borderRadius: 20,
-    height: 45,
+    height: 40,
     justifyContent: "center",
     alignItems: "center",
     width: "70%",
@@ -214,8 +221,8 @@ const styles = StyleSheet.create({
   },
   btntext: {
     fontFamily: "Alata",
-    color: "#24272A",
-    fontSize: 22,
+    color: "#16181a",
+    fontSize: 20,
     marginTop: -5
   },
   err: {
@@ -223,7 +230,7 @@ const styles = StyleSheet.create({
     width: "90%",
     marginHorizontal: "auto",
     marginTop: 20,
-    fontSize: 14,
+    fontSize: 12,
     textAlign: "center",
     // marginLeft : 40,
     marginBottom: 25

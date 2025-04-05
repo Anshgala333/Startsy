@@ -802,7 +802,10 @@ const Main2 = ({ navigation, route }) => {
                             ellipsizeMode="tail"
                             allowFontScaling={false} style={styles.message}>{item.user.userName}</Text>
                     </View>
-                    <TouchableOpacity onPress={() => { handleshareselection(item.user._id, index) }} style={item.isSelected ? styles1.sendbtn1 : styles1.sendbtn}><Text style={item.isSelected ? styles1.sendbtnText1 : styles1.sendbtnText}>{item.isSelected ? "Selected" : "Send"}</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={() => { handleshareselection(item.user._id, index) }
+                    } style={item.isSelected ? styles1.sendbtn1 : styles1.sendbtn}>
+                        <Text style={item.isSelected ? styles1.sendbtnText1 : styles1.sendbtnText}>{item.isSelected ? "Selected" : "Send"}</Text>
+                    </TouchableOpacity>
                 </View>
             </TouchableOpacity>
         )
@@ -1265,17 +1268,19 @@ const styles1 = StyleSheet.create({
 
     sendbtn: {
         backgroundColor: "#ccc",
-        paddingHorizontal: 18,
+        // paddingHorizontal: 18,
         paddingVertical: 6,
         borderRadius: 8,
         borderWidth: 2,
         borderColor: "#ccc",
+        width: 80,
 
     },
 
     sendbtnText: {
         fontSize: 14,
         color: "#333",
+        textAlign: "center",
         fontFamily: "Alata"
 
 
@@ -1285,7 +1290,8 @@ const styles1 = StyleSheet.create({
         backgroundColor: "#16181a",
         borderWidth: 2,
         borderColor: "#ccc",
-        paddingHorizontal: 12,
+        // paddingHorizontal: 12,
+        width: 80,
         paddingVertical: 6,
         borderRadius: 8,
 
@@ -1294,16 +1300,23 @@ const styles1 = StyleSheet.create({
     sendbtnText1: {
         fontSize: 14,
         color: "#ccc",
+        textAlign: "center",
         fontFamily: "Alata"
 
     },
     confirm: {
-        position: "absolute", bottom: 30, margin: "auto", paddingVertical: 12, backgroundColor: "#999", alignSelf: "center",
+        position: "absolute",
+        bottom: 30, 
+        margin: "auto",
+        height : 45,
+        backgroundColor: "#999",
+         alignSelf: "center",
         borderRadius: 12,
-        width: "75%"
+        width: "60%"
     },
     confirmText: {
-        fontSize: 25,
+        fontSize: 20,
+        marginTop : 4,
         fontFamily: "Alata",
         textAlign: "center",
     },

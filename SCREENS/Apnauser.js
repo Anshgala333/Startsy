@@ -629,13 +629,13 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
 
         if (item.type == "photo" || item.type == "textBlog" || item.type == "video") {
             return (
-     
+
                     <LinearGradient
-                                                    colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}
-                                                    locations={[0, 1]}
-                                                    style={styles.box}
-                                                    start={{ x: 0, y: 0 }}
-                                                    end={{ x: 0, y: 1 }} >
+                        colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}
+                        locations={[0, 1]}
+                        style={styles.box}
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 0, y: 1 }} >
                     <View style={[styles.top, { marginBottom: 0 }]} >
                         <View
                             // onPress={() => { navigation.navigate("Singleuserpage", { token: token, id: item.user_id._id, page: "Startsy" }) }}
@@ -726,7 +726,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                                         <Text style={styles.u4}>View {item.postComments.length} comments</Text>
                                     </Pressable>
                                </View>
-                               </LinearGradient>
+                    </LinearGradient>
 
             )
         }
@@ -1003,31 +1003,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
 
 
 
-            // const uniqueData = result.filter((item, index, self) =>
-            //     self.findIndex(innerItem => innerItem.user.userName === item.user.userName) === index
-            // );
-
-
-            // const sortedData = uniqueData.sort((a, b) => {
-            //     if (a.lastMessage === null && b.lastMessage === null) return 0;
-            //     if (a.lastMessage === null) return 1;
-            //     if (b.lastMessage === null) return -1;
-
-            //     const dateA = new Date(a.lastMessage.createdAt);
-            //     const dateB = new Date(b.lastMessage.createdAt);
-            //     return dateB - dateA; // Sort in descending order of time
-            // });
-
-            // // console.log(result.data, "investor");
-            // // console.log(result.data.messages.length, "investor");
-
-            // if (response.status === 200) {
-            //     // You can update the data state here if needed
-            //     // setData(result); // Example, you can handle the response data
-            //     setData(sortedData)
-            //     setfiltereddata(sortedData)
-            //     // setdata1(result)
-            // }
+        
         } catch (err) {
             console.log(err);
         } finally {
