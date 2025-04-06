@@ -421,15 +421,10 @@ function Upvotedata({ route }) {
 
         else {
 
-            // console.log(item);
-            // console.log(item.postId, "okkkkkkkkkkkkkkkk");
-
+          
             return (
 
-                // <TouchableOpacity onPress={()=>{
-                //     // console.log(item.postId._id)
-                //     navigation.navigate("ViewSendedPost",{id:item.postId._id})
-                // }}>
+             
 
 
                 <View style={styles.box1}>

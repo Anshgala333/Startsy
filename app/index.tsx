@@ -234,14 +234,13 @@ export default function App() {
       <StatusBar backgroundColor="#16181a" barStyle={"light-content"} />
       {appisready && (
         <Stack.Navigator
-          initialRouteName="Signup5"
+          initialRouteName="Green"
           screenOptions={{
             headerStyle: {
               backgroundColor: "#16181a",
             },
             // cardStyle: {backgroundColor: "red"},
             keyboardHandlingEnabled: false,
-
             headerShown: false,
             animation: "slide_from_right",
           }}
@@ -254,7 +253,6 @@ export default function App() {
             }}
             component={Login1}
           />
-          {/* <Stack.Screen name="ReadMore1" component={ReadMore1} /> */}
 
           <Stack.Screen name="LoginPage" component={LoginPage} />
           <Stack.Screen name="Signup1" component={Signup1} />

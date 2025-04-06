@@ -141,13 +141,8 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
 
 
                 if (response.status === 200) {
-
                     setData(sortedData)
                     setfiltereddata(sortedData)
-
-
-
-
                 }
             } catch (err) {
                 console.log(err);
@@ -177,9 +172,9 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
 
         async function getData() {
             try {
-                console.log(token, "function ke under wala");
+                // console.log(token, "function ke under wala");
 
-                console.log(`${url}investor/recommendation/getFounderProfile`);
+                // console.log(`${url}investor/recommendation/getFounderProfile`);
 
                 const response = await fetch(
                     `${url}chats/getMessage/individual/${id}`,
@@ -284,7 +279,7 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
 
                 />}
                 renderItem={({ item }) => {
-                    console.log(item.lastMessage, "ooo");
+                    // console.log(item.lastMessage, "ooo");
 
 
                     return (

@@ -1,32 +1,18 @@
 import React, { useEffect } from "react";
 import { Pressable, ScrollView, StatusBar } from "react-native";
-import { View, Text, StyleSheet, Image, FlatList, TextInput, Dimensions,BackHandler, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image, FlatList, TextInput, Dimensions, BackHandler, TouchableOpacity } from "react-native";
 import Share from "../../assets/icons/share.js"
 import Upvote from "../../assets/icons/upvote.js"
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 const NewsletterPage = ({ navigation, route }) => {
 
-    // const {item} = route.params
 
-    console.log(route.params);
+
+
 
     const { item } = route.params
 
-
-
-    // const item =
-    // {
-    //     id: "1",
-    //     title: "We fight for climate change, says a new startup called climatex.",
-    //     author: "raz.shhh",
-    //     role: "Founder",
-    //     time: "4 mins ago",
-    //     content:
-    //         "lorem ipsum dolor sit amet, con orem ipsum dolor sit amet, con orem ipsum dolor sit amet, con orem ipsum dolor sit amet, con orem ipsum dolor sit amet, con orem ipsum dolor sit amet, con orem ipsum dolor sit amet, con",
-    //     image: require("../../assets/images/template.png"), // Replace with your image asset
-    //     profile: require("../../assets/images/p2.png"), // Replace with your profile asset
-    // }
 
 
     useEffect(() => {
@@ -35,13 +21,8 @@ const NewsletterPage = ({ navigation, route }) => {
     }, [])
 
     function time(time) {
-        // console.log('====================================');
-        // console.log(time);
+       
         var data1 = new Date(time)
-        // console.log('====================================');
-        // console.log(data1);
-        // console.log('====================================');
-        // console.log('====================================');
         var seconds = Math.floor((new Date() - data1) / 1000);
 
         var interval = seconds / 31536000;
@@ -118,7 +99,7 @@ const NewsletterPage = ({ navigation, route }) => {
                             <Text style={styles.authorName}>
                                 {item.taggedUserName}
                             </Text>
-                            <Text style={styles.role}>{item.taggedUser.role}</Text>
+                            <Text style={styles.role}>{item.taggedUser.role == "CommunityMember" ? "Member" : item.taggedUser.role}</Text>
                         </View>
                         <Text style={styles.time}>{time(item.taggedUser.createdAt)}</Text>
                     </View>
@@ -176,7 +157,7 @@ const styles = StyleSheet.create({
         padding: 10,
         flex: 1,
         minHeight: height,
-        paddingBottom : 50
+        paddingBottom: 50
     },
     postImage: {
         width: width,

@@ -12,9 +12,9 @@ export default styles = StyleSheet.create({
     t1: {
         textAlign: 'Left',
         marginLeft: 10,
-        color: "#D9D9D9",
+        color: "#ccc",
         fontFamily: 'Alata',
-        fontSize: scalingfactor * 24,
+        fontSize: 24,
         // backgroundColor : "red",
         width: "97%",
         marginBottom: scalingfactor * 3,
@@ -27,9 +27,9 @@ export default styles = StyleSheet.create({
     },
     t2: {
         textAlign: 'Left',
-        color: "#94A3B8",
+        color: "#828282",
         fontFamily: 'Roboto',
-        fontSize: scalingfactor * 13,
+        fontSize: scalingfactor * 12,
 
         marginBottom: scalingfactor * 8,
         width: "85%",

@@ -942,9 +942,8 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
         else if (decoded.role == "Investor") {
             route = "investor/getInvestorChatUserList"
         }
-        else if (decoded.role == "CommunityMember") {
+        else  {
             // console.log("fuck");
-
             route = "founder/getFounderChatUserList"
 
         }
@@ -1214,7 +1213,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                         {userdata.hiddenInfo?.stageOfStartup != undefined && <Text style={styles1.fund}>{userdata.hiddenInfo.stageOfStartup}</Text>} */}
 
                         <View style={styles1.main}>
-                            {decode.role != "Investor" && decode.role != "CommunityMember" && <View style={styles1.connectionContainer}>
+                            {decode.role != "Investor" && decode.role != "CommunityMember" && decode.role != "Job seeker" && <View style={styles1.connectionContainer}>
 
 
                                 {Array(3).fill(null).map((_, index) => (
@@ -1448,8 +1447,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
     const videoRefs = useRef({});
     const onViewableItemsChanged = useCallback(({ viewableItems }) => {
         setViewableItems(viewableItems);
-
-        // Update play state for videos based on visibility
+        
         const updatedVideoStates = {};
         viewableItems.forEach(viewableItem => {
             if (viewableItem.isViewable) {
@@ -1470,7 +1468,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
 
 
     const viewabilityConfig = {
-        viewAreaCoveragePercentThreshold: 80, // Item is considered viewable if 50% is visible
+        viewAreaCoveragePercentThreshold: 80, 
     };
 
 
@@ -1480,9 +1478,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
 
         if (isLoading) return;
         if (tabIndex == 0) return;
-        // console.log('====================================');
-        // console.log("new post will come qlwijwei ");
-        // console.log('====================================');
+       
 
         setIsLoading(true);
         setTimeout(() => {
@@ -1492,14 +1488,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
             );
             setPosts((prevPosts) => [...prevPosts, ...newPosts]);
             setIsLoading(false);
-            // setMinHeight(minHeight + 300)
-
-            // console.log('====================================');
-            // console.log(posts);
-            // console.log(minHeight);
-
-            // console.log('====================================');
-            setMinHeight(minHeight + 300); // Adjust minHeight for new posts
+            setMinHeight(minHeight + 300);
         }, 2000); // Simulate API delay
     };
 

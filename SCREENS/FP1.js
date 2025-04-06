@@ -54,7 +54,7 @@ const FP1 = ({ navigation }) => {
             });
             const data = await response.json();
             // setloading(false)
-            // console.log(data);
+            console.log(data);
             // console.log(response.status);
             if (response.status === 400) {
                 // setmessage("* entered password does not match with your current password")

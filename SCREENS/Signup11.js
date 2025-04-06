@@ -342,16 +342,16 @@ const Signup11 = ({ navigation, route }) => {
                         {teammember.map((we, index) => (
                             <View key={we.id} style={styles.certificate}>
                                 <Pressable onPress={addteammember}>
-                                    <Entypo style={styles.plus} name="plus" size={24} color="#00DE62" />
+                                    <Entypo style={styles.plus} name="plus" size={24} color="#ccc" />
                                 </Pressable>
                                 {index > 0 && <Pressable onPress={() => { deleteteammember(index) }}>
-                                    <FontAwesome6 name="trash" style={styles.minus} size={15} color="#00DE62" />
+                                    <FontAwesome6 name="trash" style={styles.minus} size={15} color="#ccc" />
                                 </Pressable>}
 
                                 <TextInput
                                     allowFontScaling={false}
                                     placeholder="@Username"
-                                    placeholderTextColor="#B8B8B8"
+                                    placeholderTextColor="#828282"
                                     style={[styles.input, { marginTop: 20, backgroundColor: "transparent" }]}
                                     value={we.username}
                                     onChangeText={(text) => {
@@ -364,7 +364,7 @@ const Signup11 = ({ navigation, route }) => {
                                 <TextInput
                                     allowFontScaling={false}
                                     placeholder="Name"
-                                    placeholderTextColor="#B8B8B8"
+                                    placeholderTextColor="#828282"
                                     style={styles.input}
                                     value={we.name}
                                     onChangeText={(text) => { handleworkchange(we.id, "name", text) }}
@@ -374,7 +374,7 @@ const Signup11 = ({ navigation, route }) => {
                                 <TextInput
                                     allowFontScaling={false}
                                     placeholder="Role"
-                                    placeholderTextColor="#B8B8B8"
+                                    placeholderTextColor="#828282"
                                     style={styles.input}
                                     value={we.role}
                                     onChangeText={(text) => { handleworkchange(we.id, "role", text) }}
@@ -385,10 +385,11 @@ const Signup11 = ({ navigation, route }) => {
                             </View>
                         ))}
                         <View style={styles.icons} nestedScrollEnabled={true}>
-                            <Pressable onPress={() => {
+                            <Pressable style={{marginTop : 6}} 
+                             onPress={() => {
                                 navigation.goBack()
                                 // console.log(workexperience);
-                            }}><FontAwesome6 name="chevron-left" size={40} color="#00DF60" /></Pressable>
+                            }}><FontAwesome6 name="chevron-left" size={30} color="#00DF60" /></Pressable>
                             <Pressable style={styles.btn} onPress={() => { finalsubmit() }}>
                                 {loading && <ActivityIndicator size={24} color="#16181a" />}
                                 {!loading && <Text allowFontScaling={false} style={styles.nexttext}>Submit</Text>}
@@ -418,7 +419,7 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         color: "#D9D9D9",
         fontFamily: 'Alata',
-        fontSize: scalingfactor * 27,
+        fontSize: 24,
         marginBottom: scalingfactor * 3,
         zIndex: 100,
         // pointerEvents: "none",
@@ -427,7 +428,7 @@ const styles = StyleSheet.create({
     },
     t2: {
         textAlign: 'Left',
-        color: "#94A3B8",
+        color: "#828282",
         fontFamily: 'Roboto',
         fontSize: scalingfactor * 13,
         zIndex: -1,
@@ -458,8 +459,8 @@ const styles = StyleSheet.create({
     }
     ,
     btn: {
-        width: 168,
-        height: 48,
+        width: 140,
+        height: 40,
         backgroundColor: "#00DF60",
 
         borderRadius: 20,
@@ -477,7 +478,7 @@ const styles = StyleSheet.create({
     }, nexttext: {
         color: "#24272A",
         fontFamily: "Alata",
-        fontSize: scalingfactor * 22,
+        fontSize:  20,
         textAlign: "center",
         // lineHeight : 16
         marginTop: -4
@@ -487,14 +488,14 @@ const styles = StyleSheet.create({
         backgroundColor: "transparent",
         margin: scalingfactor * 12,
         marginTop: 0,
-        borderBottomWidth: 3,
+        borderBottomWidth: 1,
         paddingLeft: scalingfactor * 10,
-        borderBottomColor: "#16181A",
-        fontSize: scalingfactor * 18,
-        color: "#B8B8B8",
+        borderBottomColor: "#ccc",
+        fontSize:  20,
+        color: "#828282",
         paddingBottom: scalingfactor * 4,
         width: "92%",
-        // fontFamily: "Roboto",
+        fontFamily: "Alata",
         // lineHeight: scalingfactor * 12,
         marginBottom: scalingfactor * 20
     }
@@ -515,8 +516,8 @@ const styles = StyleSheet.create({
         margin: "auto",
         width: "92%",
         backgroundColor: "transparent",
-        borderWidth: 3,
-        borderColor: "#16181A",
+        borderWidth: 1,
+        borderColor: "#ccc",
         borderRadius: 10,
         position: "relative"
     },

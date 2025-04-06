@@ -826,11 +826,11 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
 
 
 
-
+{/* {<Text>{JSON.stringify(userdata.user_id.role)}</Text>} */}
 
 
             <View style={styles1.main}>
-              {userdata.user_id.role != "Investor" && userdata.user_id.role != "CommunityMember" && <View style={styles1.connectionContainer}>
+              {userdata.user_id.role != "Investor" && userdata.user_id.role != "CommunityMember" && userdata.user_id.role != "Job seeker" && <View style={styles1.connectionContainer}>
 
 
                 {Array(3).fill(null).map((_, index) => (

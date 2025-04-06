@@ -301,7 +301,7 @@ const Signup12 = ({ navigation, route }) => {
 
                             <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 10, marginTop: 25 }]}>Preferred startup stage <Text style={{fontSize:15 ,color: "#94A3B8"}}>*</Text></Text>
                             <Text allowFontScaling={false} style={[styles.t2, { marginBottom: 15 }]}>Indicate the stages of development at which you prefer to invest.</Text>
-                            <Drop borderwidth={3} borderColor={"#16181a"} items={stage} onValueChange={(value) => { setsetstartupstage(value) }} setOpen={setOpen2} open={open2} nestedScrollEnabled={true} />
+                            <Drop borderwidth={0} bb={1} width={"97%"} borderColor={"#ccc"} items={stage} onValueChange={(value) => { setsetstartupstage(value) }} setOpen={setOpen2} open={open2} nestedScrollEnabled={true} />
                             {errors.startupStage && (
                                 <Text style={signup3styles.errorText}>{errors.startupStage}</Text>
                             )}
@@ -309,7 +309,7 @@ const Signup12 = ({ navigation, route }) => {
                             <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 10, marginTop: 25 }]}>Preferred startup sector <Text style={{fontSize:15 ,color: "#94A3B8"}}>*</Text></Text>
                             <Text allowFontScaling={false} style={[styles.t2, { marginBottom: 15 }]}>This distinction helps founders understand the scope and nature of your investment interests, ensuring that you receive opportunities that align with your strategic preferences and expertise.
                             </Text>
-                            <Drop borderwidth={3} borderColor={"#16181a"} items={sectorlist} onValueChange={(value) => { setsector(value) }} setOpen={setOpen3} open={open3} nestedScrollEnabled={true} />
+                            <Drop borderwidth={0} bb={1} width={"97%"} borderColor={"#ccc"} items={sectorlist} onValueChange={(value) => { setsector(value) }} setOpen={setOpen3} open={open3} nestedScrollEnabled={true} />
                             {errors.sector && (
                                 <Text style={signup3styles.errorText}>{errors.sector}</Text>
                             )}
@@ -356,8 +356,8 @@ const Signup12 = ({ navigation, route }) => {
 
 
                             <View style={styles.icons}>
-                                <Pressable style={{ marginTop: 5 }} onPress={() => { navigation.goBack() }}><FontAwesome6 name="chevron-left" size={40} color="#00DF60" /></Pressable>
-                                <Pressable onPress={() => { nextPage() }}><FontAwesome6 name="chevron-right" size={40} color="#00DF60" /></Pressable>
+                                <Pressable style={{ marginTop: 5 }} onPress={() => { navigation.goBack() }}><FontAwesome6 name="chevron-left" size={30} color="#00DF60" /></Pressable>
+                                <Pressable onPress={() => { nextPage() }}><FontAwesome6 name="chevron-right" size={30} color="#00DF60" /></Pressable>
 
                             </View>
 
@@ -383,9 +383,9 @@ const styles = StyleSheet.create({
     t1: {
         textAlign: 'Left',
         marginLeft: 10,
-        color: "#D9D9D9",
+        color: "#ccc",
         fontFamily: 'Alata',
-        fontSize: scalingfactor * 24,
+        fontSize: 24,
         // backgroundColor : "red",
         width: "97%",
         marginBottom: scalingfactor * 3,
@@ -396,9 +396,9 @@ const styles = StyleSheet.create({
     },
     t2: {
         textAlign: 'Left',
-        color: "#94A3B8",
+        color: "#828282",
         fontFamily: 'Roboto',
-        fontSize: scalingfactor * 13,
+        fontSize: 12,
 
         marginBottom: scalingfactor * 8,
         width: "85%",
@@ -427,14 +427,14 @@ const styles = StyleSheet.create({
         backgroundColor: "transparent",
         margin: height * 0.016,
         marginTop: 0,
-        borderWidth: 3,
+        borderWidth: 1,
         borderRadius: 20,
-        borderColor: "#16181A",
+        borderColor: "#ccc",
         fontSize: scalingfactor * 20,
-        color: "#B8B8B8",
+        color: "#ccc",
         paddingBottom: scalingfactor * 5,
         width: "92%",
-        fontFamily: "Roboto",
+        fontFamily: "Alata",
         lineHeight: scalingfactor * 18,
         marginBottom: scalingfactor * 25,
         height: 190,
@@ -450,18 +450,18 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         width: "92%",
         margin: "auto",
-        marginTop: 30,
+        marginTop: 40,
         marginBottom: 30
     },
 
     btn: {
         width: "92%",
-        height: 48,
+        height: 40,
         margin: "auto",
         backgroundColor: "transparent",
         borderRadius: 20,
-        borderWidth: 3,
-        borderColor: "#16181A",
+        borderWidth: 1,
+        borderColor: "#ccc",
         borderRadius: 10,
         marginBottom: 10,
         justifyContent: 'center',
@@ -473,8 +473,8 @@ const styles = StyleSheet.create({
         margin: "auto",
         backgroundColor: "transparent",
         borderRadius: 20,
-        borderWidth: 3,
-        borderColor: "#16181A",
+        borderWidth: 1,
+        borderColor: "#ccc",
         borderRadius: 20,
         marginBottom: 0,
         marginTop: 10,

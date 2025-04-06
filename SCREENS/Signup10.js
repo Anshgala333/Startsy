@@ -292,7 +292,7 @@ const Signup10 = ({ navigation, route }) => {
                             <TextInput
                                 allowFontScaling={false}
                                 placeholder="Name *"
-                                placeholderTextColor="#B8B8B8"
+                                placeholderTextColor="#828282"
                                 style={styles.input11}
                                 value={name}
                                 onChangeText={(text) => { setname(text) }}
@@ -301,7 +301,7 @@ const Signup10 = ({ navigation, route }) => {
                             <TextInput
                                 allowFontScaling={false}
                                 placeholder="One liner for your startup *"
-                                placeholderTextColor="#B8B8B8"
+                                placeholderTextColor="#828282"
                                 style={styles.input11}
                                 value={goal}
                                 onChangeText={(text) => { setgoal(text) }}
@@ -316,7 +316,7 @@ const Signup10 = ({ navigation, route }) => {
                                 <TextInput
                                     allowFontScaling={false}
                                     placeholder=""
-                                    placeholderTextColor="#B8B8B8"
+                                    placeholderTextColor="#828282"
                                     style={styles.input}
                                     maxLength={1000}
                                     multiline={true}
@@ -331,14 +331,14 @@ const Signup10 = ({ navigation, route }) => {
                             </View>
 
                             <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 10 }]}>Startup sector <Text style={{fontSize:15 ,color: "#94A3B8"}}>*</Text></Text>
-                            <Text allowFontScaling={false} style={[styles.t2, { marginBottom: 15 }]}>Define your startup’s focus: horizontal sectors serve multiple industries, while vertical sectors target a specific niche.</Text>
-                            <Drop borderwidth={3} borderColor={"#16181a"} items={ss} onValueChange={(value) => { setstartupsector(value) }} setOpen={setOpen1} open={open1} nestedScrollEnabled={true} />
+                            <Text allowFontScaling={false} style={[styles.t2, { marginBottom: 10 }]}>Define your startup’s focus: horizontal sectors serve multiple industries, while vertical sectors target a specific niche.</Text>
+                            <Drop  borderwidth={0} bb={1} borderColor={"#ccc"} width={"97%"} items={ss} onValueChange={(value) => { setstartupsector(value) }} setOpen={setOpen1} open={open1} nestedScrollEnabled={true} />
                             {sserror && <Text style={styles.err1}>* please select a sector </Text>}
 
 
                             <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 10, marginTop: 25 }]}>Startup stage <Text style={{fontSize:15 ,color: "#94A3B8"}}>*</Text></Text>
                             <Text allowFontScaling={false} style={[styles.t2, { marginBottom: 15 }]}>Identify where your startup is in its journey—whether you’re in ideation, have a prototype, or are generating revenue.</Text>
-                            <Drop borderwidth={3} borderColor={"#16181a"} items={stage} onValueChange={(value) => { setsetstartupstage(value) }} setOpen={setOpen2} open={open2} nestedScrollEnabled={true} />
+                            <Drop borderwidth={0} bb={1} borderColor={"#ccc"} width={"97%"}  items={stage} onValueChange={(value) => { setsetstartupstage(value) }} setOpen={setOpen2} open={open2} nestedScrollEnabled={true} />
                             {stageerror && <Text style={styles.err1}>* please select your startup stage </Text>}
 
 
@@ -396,7 +396,7 @@ const Signup10 = ({ navigation, route }) => {
 
                                         allowFontScaling={false}
                                         placeholder="URL"
-                                        placeholderTextColor="#B8B8B8"
+                                        placeholderTextColor="#828282"
                                         style={styles.input1}
                                         value={items.url}
                                         onChangeText={(text) => { handleurlchange(items.id, "url", text) }}
@@ -409,7 +409,7 @@ const Signup10 = ({ navigation, route }) => {
 
                             <View style={styles.v1} >
                                 <Pressable onPress={addurl}>
-                                    <AntDesign name="instagram" style={styles.plus1} size={24} color="#bbbbbb" />
+                                    <AntDesign name="instagram" style={styles.plus1} size={24} color="#828282" />
                                     {/* <Entypo style={styles.plus1} name="plus" size={24} color="#00DE62" /> */}
                                 </Pressable>
 
@@ -418,7 +418,7 @@ const Signup10 = ({ navigation, route }) => {
                                     allowFontScaling={false}
                                     placeholder="URL"
                                     numberOfLines={1}
-                                    placeholderTextColor="#B8B8B8"
+                                    placeholderTextColor="#828282"
                                     style={styles.input1}
                                     value={InstagramUrl}
                                     onChangeText={(text) => { setInstagramUrl(text) }}
@@ -429,16 +429,15 @@ const Signup10 = ({ navigation, route }) => {
                             <View style={styles.v1} >
                                 <Pressable onPress={addurl}>
                                     {/* <Feather name="youtube" style={styles.plus1} size={24} color="#bbbbbb" /> */}
-                                    <AntDesign name="youtube" style={styles.plus1} size={24} color="#bbbbbb" />
+                                    <AntDesign name="youtube" style={styles.plus1} size={24} color="#828282" />
                                     {/* <Entypo style={styles.plus1} name="plus" size={24} color="#00DE62" /> */}
                                 </Pressable>
 
                                 <TextInput
-
                                     allowFontScaling={false}
                                     placeholder="URL"
                                     numberOfLines={1}
-                                    placeholderTextColor="#B8B8B8"
+                                    placeholderTextColor="#828282"
                                     style={styles.input1}
                                     value={YTURL}
                                     onChangeText={(text) => { setYTURL(text) }}
@@ -448,7 +447,7 @@ const Signup10 = ({ navigation, route }) => {
 
                             <View style={styles.v1} >
                                 <Pressable onPress={addurl}>
-                                    <AntDesign name="linkedin-square" style={styles.plus1} size={24} color="#bbbbbb" />
+                                    <AntDesign name="linkedin-square" style={styles.plus1} size={24} color="#828282" />
                                     {/* <Entypo style={styles.plus1} name="plus" size={24} color="#00DE62" /> */}
                                 </Pressable>
 
@@ -457,7 +456,7 @@ const Signup10 = ({ navigation, route }) => {
                                     allowFontScaling={false}
                                     placeholder="URL"
                                     numberOfLines={1}
-                                    placeholderTextColor="#B8B8B8"
+                                    placeholderTextColor="#828282"
                                     style={styles.input1}
                                     value={LinkedinURl}
                                     onChangeText={(text) => { setLinkedinURl(text) }}
@@ -470,8 +469,8 @@ const Signup10 = ({ navigation, route }) => {
 
 
                             <View style={styles.icons}>
-                                <Pressable style={{ marginTop: 5 }} onPress={() => { navigation.goBack() }}><FontAwesome6 name="chevron-left" size={40} color="#00DF60" /></Pressable>
-                                <Pressable onPress={() => { nextpage(navigation, type) }}><FontAwesome6 name="chevron-right" size={40} color="#00DF60" /></Pressable>
+                                <Pressable style={{ marginTop: 5 }} onPress={() => { navigation.goBack() }}><FontAwesome6 name="chevron-left" size={30} color="#00DF60" /></Pressable>
+                                <Pressable onPress={() => { nextpage(navigation, type) }}><FontAwesome6 name="chevron-right" size={30} color="#00DF60" /></Pressable>
 
                             </View>
 
@@ -497,9 +496,9 @@ const styles = StyleSheet.create({
     t1: {
         textAlign: 'Left',
         marginLeft: 10,
-        color: "#D9D9D9",
+        color: "#ccc",
         fontFamily: 'Alata',
-        fontSize: scalingfactor * 24,
+        fontSize:  24,
         // backgroundColor : "red",
         width: "97%",
         marginBottom: scalingfactor * 3,
@@ -510,10 +509,9 @@ const styles = StyleSheet.create({
     },
     t2: {
         textAlign: 'Left',
-        color: "#94A3B8",
+        color: "#828282",
         fontFamily: 'Roboto',
-        fontSize: scalingfactor * 13,
-
+        fontSize: scalingfactor * 12,
         marginBottom: scalingfactor * 8,
         width: "85%",
         alignSelf: "center",
@@ -539,11 +537,11 @@ const styles = StyleSheet.create({
         backgroundColor: "transparent",
         margin: height * 0.016,
         marginTop: 0,
-        borderWidth: 3,
+        borderWidth: 1,
         borderRadius: 20,
-        borderColor: "#16181A",
+        borderColor: "#ccc",
         fontSize: scalingfactor * 20,
-        color: "#B8B8B8",
+        color: "#828282",
         paddingBottom: scalingfactor * 5,
         width: "92%",
         fontFamily: "Roboto",
@@ -572,8 +570,8 @@ const styles = StyleSheet.create({
         margin: "auto",
         backgroundColor: "transparent",
         borderRadius: 20,
-        borderWidth: 3,
-        borderColor: "#16181A",
+        borderWidth: 1,
+        borderColor: "#ccc",
         borderRadius: 10,
         marginBottom: 15,
 
@@ -610,9 +608,8 @@ const styles = StyleSheet.create({
     , input1: {
         margin: height * 0.016,
         marginTop: 0,
-
         fontSize: scalingfactor * 20,
-        color: "#B8B8B8",
+        color: "#ccc",
         paddingBottom: scalingfactor * 0,
         width: "90%",
         marginLeft: 0,
@@ -626,14 +623,14 @@ const styles = StyleSheet.create({
         backgroundColor: "transparent",
         margin: height * 0.016,
         marginTop: 0,
-        borderBottomWidth: 3,
+        borderBottomWidth: 1,
         paddingLeft: scalingfactor * 10,
-        borderBottomColor: "#16181A",
+        borderBottomColor: "#ccc",
         fontSize: scalingfactor * 20,
-        color: "#B8B8B8",
+        color: "#ccc",
         paddingBottom: scalingfactor * 5,
         width: "92%",
-        // fontFamily: "Roboto",
+        fontFamily: "Alata",
         // lineHeight: scalingfactor * 18,
         marginBottom: scalingfactor * 25
 
@@ -641,10 +638,10 @@ const styles = StyleSheet.create({
     des: {
         width: "92%",
         paddingLeft: scalingfactor * 10,
-        fontFamily: "Roboto",
+        fontFamily: "Alata",
         textAlign: "left",
-        fontSize: scalingfactor * 20,
-        color: "#B8B8B8",
+        fontSize: 20,
+        color: "#828282",
         alignSelf: "center",
     }, box: {
         // position: "absolute",
@@ -689,8 +686,8 @@ const styles = StyleSheet.create({
         zIndex: 100
     },
     v1: {
-        borderBottomWidth: 3,
-        borderBottomColor: "#16181A",
+        borderBottomWidth: 1,
+        borderBottomColor: "#ccc",
         width: "90%",
         margin: "auto",
         //    backgroundColor :"red",
@@ -707,7 +704,7 @@ const styles = StyleSheet.create({
         width: "90%",
         marginHorizontal: "auto",
         color: "#E65858",
-        fontSize: 12,
+        fontSize: 10,
         fontFamily: "Roboto",
     },
     err1: {

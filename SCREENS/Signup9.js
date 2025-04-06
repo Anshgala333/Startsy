@@ -238,14 +238,14 @@ const Signup9 = ({ navigation, route }) => {
                             <TextInput
                                 allowFontScaling={false}
                                 placeholder="Write any Top 3"
-                                placeholderTextColor="#B8B8B8"
+                                placeholderTextColor="#828282"
                                 style={styles.input}
                                 value={skills}
                                 onChangeText={(text) => { setskills(text) }}
                             />
-                            <Text style={[styles.t1, { marginBottom: 5 }]}>Education <Text style={{fontSize:15 ,color: "#94A3B8"}}>*</Text></Text>
-                            <Text style={[styles.t2, { marginBottom: 20 }]}>List your highest degree achieved, which helps to establish your academic background and qualifications.</Text>
-                            <Drop borderwidth={3}  borderColor={"#16181a"} 
+                            <Text style={[styles.t1, { marginBottom: 5 }]}>Education <Text style={{fontSize:14 ,color: "#94A3B8"}}>*</Text></Text>
+                            <Text style={[styles.t2, { marginBottom: 15 }]}>List your highest degree achieved, which helps to establish your academic background and qualifications.</Text>
+                            <Drop search={false} borderwidth={0} bb={1} width={"97%"}   borderColor={"#ccc"} 
                              items={education} open={open} setOpen={setOpen} onValueChange={(value) => {
                                 seteduerror(false)
                                 seteducation(value)}} nestedScrollEnabled={true} />
@@ -266,18 +266,18 @@ const Signup9 = ({ navigation, route }) => {
                             {workexperience.map((we, index) => (
                                 <View key={we.id} style={styles.certificate}>
                                     <Pressable onPress={addworkexperience}>
-                                        <Entypo style={styles.plus} name="plus" size={24} color="#00DE62" />
+                                        <Entypo style={styles.plus} name="plus" size={24} color="#ccc" />
 
-                                        {/* <Entypo style={styles.minus} name="plus" size={24} color="#00DE62" /> */}
+                                        {/* <Entypo style={styles.minus} name="plus" size={24} color="#ccc" /> */}
                                     </Pressable>
                                     {index > 0 && <Pressable onPress={() => { deleteworkexperience(index) }}>
-                                        <FontAwesome6 name="trash" style={styles.minus} size={15} color="#00DE62" />
+                                        <FontAwesome6 name="trash" style={styles.minus} size={15} color="#ccc" />
                                     </Pressable>}
 
                                     <TextInput
                                         allowFontScaling={false}
                                         placeholder="Company / Oragnisation"
-                                        placeholderTextColor="#B8B8B8"
+                                        placeholderTextColor="#828282"
                                         style={[styles.input, { marginTop: 20, backgroundColor: "transparent" }]}
                                         value={we.name}
                                         onChangeText={(text) => { handleworkchange(we.id, "name", text) }}
@@ -286,7 +286,7 @@ const Signup9 = ({ navigation, route }) => {
                                     <TextInput
                                         allowFontScaling={false}
                                         placeholder="Role"
-                                        placeholderTextColor="#B8B8B8"
+                                        placeholderTextColor="#828282"
                                         style={[styles.input , {marginTop : -3}]}
                                         value={we.role}
                                         onChangeText={(text) => { handleworkchange(we.id, "role", text) }}
@@ -296,7 +296,7 @@ const Signup9 = ({ navigation, route }) => {
                                     <TextInput
                                         allowFontScaling={false}
                                         placeholder="Year"
-                                        placeholderTextColor="#B8B8B8"
+                                        placeholderTextColor="#828282"
                                         style={[styles.input , {marginTop : -3}]}
                                         value={we.year}
                                         onChangeText={(text) => { handleworkchange(we.id, "year", text) }}
@@ -311,8 +311,8 @@ const Signup9 = ({ navigation, route }) => {
                                 <Pressable onPress={() => {
                                     navigation.goBack()
                                     // console.log(workexperience);
-                                }}><FontAwesome6 name="chevron-left" size={40} color="#00DF60" /></Pressable>
-                                <Pressable onPress={() => { nextpage(navigation, type) }}><FontAwesome6 name="chevron-right" size={40} color="#00DF60" /></Pressable>
+                                }}><FontAwesome6 name="chevron-left" size={30} color="#00DF60" /></Pressable>
+                                <Pressable onPress={() => { nextpage(navigation, type) }}><FontAwesome6 name="chevron-right" size={30} color="#00DF60" /></Pressable>
                             </View>
 
                         </View>
@@ -337,9 +337,9 @@ const styles = StyleSheet.create({
     t1: {
         textAlign: 'Left',
         marginLeft: 10,
-        color: "#D9D9D9",
+        color: "#ccc",
         fontFamily: 'Alata',
-        fontSize: scalingfactor * 27,
+        fontSize:  24,
         marginBottom: scalingfactor * 3,
         zIndex: 100,
         // pointerEvents: "none",
@@ -348,9 +348,9 @@ const styles = StyleSheet.create({
     },
     t2: {
         textAlign: 'Left',
-        color: "#94A3B8",
-        // fontFamily: 'Roboto',
-        fontSize: scalingfactor * 13,
+        color: "#828282",
+        fontFamily: 'Roboto',
+        fontSize: 12,
         zIndex: 100,
         marginBottom: scalingfactor * 8,
         width: "85%",
@@ -409,14 +409,14 @@ const styles = StyleSheet.create({
         backgroundColor: "transparent",
         margin: height * 0.016,
         marginTop: 0,
-        borderBottomWidth: 3,
+        borderBottomWidth: 1,
         paddingLeft: scalingfactor * 10,
-        borderBottomColor: "#16181A",
+        borderBottomColor: "#ccc",
         fontSize: scalingfactor * 20,
-        color: "#B8B8B8",
+        color: "#ccc",
         paddingBottom: scalingfactor * 5,
         width: "92%",
-        // fontFamily: "Roboto",
+        fontFamily: "Alata",
         // lineHeight: scalingfactor * 18,
         marginBottom: scalingfactor * 20
     }
@@ -426,7 +426,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         width: "92%",
         margin: "auto",
-        marginTop: 20,
+        marginTop: 40,
         marginBottom: 30
     },
     certificate: {
@@ -436,8 +436,8 @@ const styles = StyleSheet.create({
         margin: "auto",
         width: "92%",
         backgroundColor: "transparent",
-        borderWidth: 3,
-        borderColor: "#16181A",
+        borderWidth: 1,
+        borderColor: "#ccc",
         borderRadius: 10,
         position: "relative"
     },
@@ -455,14 +455,14 @@ const styles = StyleSheet.create({
     },
     err: {
         marginVertical: 0,
-        marginTop: -20,
+        marginTop: -15,
         marginBottom: 10,
         textAlign: "left",
         // backgroundColor : "red",
         width: "90%",
         marginHorizontal: "auto",
         color: "#E65858",
-        fontSize: 12,
+        fontSize: 10,
         fontFamily: "Roboto",
     },
     err1: {

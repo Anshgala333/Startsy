@@ -20,6 +20,8 @@ const signupstyles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#16181a",
+        minHeight : height,
+        
         justifyContent: "center",
         alignContent: "center",
     },
