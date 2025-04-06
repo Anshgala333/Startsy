@@ -1148,7 +1148,7 @@ const Main2 = ({ navigation, route }) => {
                                     <>
                                         {SelectedItems.size > 0 && (<TouchableOpacity onPress={finalsubmit} style={styles1.confirm}>
                                             {!sendingpost && <Text style={styles1.confirmText}>Confirm</Text>}
-                                            {sendingpost && <ActivityIndicator size={24} color="#16181a" />}
+                                            {sendingpost && <ActivityIndicator  style={{ marginTop: 9 }} size={24} color="#16181a" />}
                                         </TouchableOpacity>)}
                                     </>
 

@@ -21,27 +21,32 @@ const RatingPage = ({ navigation }) => {
     };
 
     const handleSubmit = async () => {
-        
-        if(rating==0){
+
+        if (rating == 0) {
             Alert.alert("Please select a rating");
             return;
         }
         console.log(rating);
-        
+        var object = {
+            ratingText: description,
+            ratingStars: rating,
+            version : "v7"
+        }
+
         try {
-            
-            const response = await  fetch(`${url}test/ratingsController`, {
+
+            const response = await fetch(`${url}test/ratingsController`, {
                 method: 'POST',
-                body: JSON.stringify({ ratingText: description,ratingStars:rating }),
+                body: JSON.stringify(object),
                 headers: {
-        
+
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`,
                 },
             });
             const data = await response.json();
-         
-            
+
+
             console.log(data);
 
         }
@@ -49,7 +54,7 @@ const RatingPage = ({ navigation }) => {
             console.log(err);
 
         }
-       
+
     };
 
     return (

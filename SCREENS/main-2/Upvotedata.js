@@ -213,6 +213,8 @@ function Upvotedata({ route }) {
                 var array = result.data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
                 // var array = result.data.reverse()
                 setSubNotification(array);
+                console.log(array);
+                
             }
 
 
