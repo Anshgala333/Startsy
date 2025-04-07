@@ -67,8 +67,8 @@ const Signup5 = ({ navigation, route }) => {
     }, []);
 
 
-    const { type, id, useremail , email } = route.params
-    // const { type, id, useremail , email } = {"type" : 1 , "id" : 2 , "useremail" : 3 , "email" :4}
+    // const { type, id, useremail , email } = route.params
+    const { type, id, useremail , email } = {"type" : 1 , "id" : 2 , "useremail" : 3 , "email" :4}
 
     // console.log(route.params);
     // console.log('====================================');
