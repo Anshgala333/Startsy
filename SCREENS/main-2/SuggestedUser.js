@@ -196,7 +196,7 @@ const User = memo(({ handleTabChange, token , navigation , suggestionarray , set
 
         if (item.role == "Admin") return
         if (item._id == loggedinuserid) return
-        console.log(decode.role);
+        // console.log(decode.role);
         
         // if(decode.role == "Investor" && item.role != "Investor") return
         return (
@@ -211,12 +211,8 @@ const User = memo(({ handleTabChange, token , navigation , suggestionarray , set
                     {!item.profilePhoto && <Image style={styles.avatar} source={require("../../assets/images/blank.png")} />}
                     {item.profilePhoto && <Image style={styles.avatar} source={{ uri: item.profilePhoto }} />}
 
-
-
-
                     <View style={styles.textContainer}>
                         <Text numberOfLines={1}
-
                             allowFontScaling={false} style={styles.username}>{item.userName}</Text>
                         <Text allowFontScaling={false} style={styles.message}>{item.role == "CommunityMember" ? "Member" : item.role}</Text>
                     </View>
@@ -245,8 +241,9 @@ const User = memo(({ handleTabChange, token , navigation , suggestionarray , set
     )
 
     useEffect(()=>{
-        console.log("suggestion array changes");
-        console.log(suggestionarray.length);
+        
+        // console.log("suggestion array changes");
+        // console.log(suggestionarray.length);
         
         
     } , [suggestionarray])

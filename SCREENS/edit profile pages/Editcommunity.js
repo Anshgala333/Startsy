@@ -691,7 +691,7 @@ const Editcommunity = ({ navigation }) => {
                             onTouchStart={handleOutsideTouch}
                             allowFontScaling={false}
                             placeholder="Full Name"
-                            placeholderTextColor="#B8B8B8"
+                            placeholderTextColor="#828282"
                             style={styles1.input}
                             value={fullName}
                             onChangeText={(text) => { setfullname(text) }}
@@ -701,20 +701,20 @@ const Editcommunity = ({ navigation }) => {
                         {/* <TextInput
                         allowFontScaling={false}
                         placeholder="Email address"
-                        placeholderTextColor="#B8B8B8"
+                        placeholderTextColor="#828282"
                         style={[styles1.input, { marginBottom: 18 }]}
                     // value={username}
                     // onChangeText={(text) => { setusername(text) }}
                     /> */}
 
-                        <Drop bl={0} bt={0} borderwidth={0} bb={1} pccolor={"#B8B8B8"}
+                        <Drop bl={0} bt={0} borderColor={"#ccc"} borderwidth={0} bb={1} pccolor={"#828282"}
                             items={country1} placeholder={country} width={"94%"} onValueChange={handlerole} open={open1} setOpen={t1} extra={true} edit />
                         {errors.country && <Text style={styles1.errnew}>{errors.country}</Text>}
 
                         <TextInput
                             allowFontScaling={false}
                             placeholder="Phone number"
-                            placeholderTextColor="#B8B8B8"
+                            placeholderTextColor="#828282"
                             style={[styles1.input, { marginTop: 28 }]}
                             value={contactInfo}
                             onChangeText={(text) => { setcontactInfo(text) }}
@@ -731,7 +731,7 @@ const Editcommunity = ({ navigation }) => {
                             {/* <Text allowFontScaling={false} style={styles.t1}>Community Participation</Text> */}
                             {/* <Text allowFontScaling={false} style={styles.t2}>Specify your role within the community to help tailor your experience.</Text> */}
                             {/* <TouchableWithoutFeedback onPress={handleOutsideTouch}>  */}
-                            {/* <Drop width={"96%"}   borderwidth={0} bb={1} pccolor={"#B8B8B8"}
+                            {/* <Drop width={"96%"}   borderwidth={0} bb={1} pccolor={"#828282"}
                              items={role} placeholder={role1} onValueChange={handlerole1} open={open4} setOpen={t4} /> */}
                             {/* </TouchableWithoutFeedback> */}
                             {errors.role1 && <Text style={styles1.errnew}>{errors.role1}</Text>}
@@ -740,14 +740,14 @@ const Editcommunity = ({ navigation }) => {
 
                             <Text allowFontScaling={false} style={[styles.t1, { marginTop: scalingfactor * 18 }]}>Area of Interest</Text>
                             <Text allowFontScaling={false} style={styles.t2}>Indicate the specific fields or topics you are passionate about within the startup ecosystem.</Text>
-                            <Drop width={"96%"} borderwidth={0} bb={1} pccolor={"#B8B8B8"}
+                            <Drop width={"96%"} borderwidth={0} bb={1} borderColor={"#ccc"} pccolor={"#828282"}
                                 items={a1} placeholder={interest} onValueChange={handleinterest} open={open2} setOpen={t2} />
                             {errors.role2 && <Text style={styles1.errnew}>{errors.role2}</Text>}
 
 
                             {/* <Text allowFontScaling={false} style={[styles.t1, { marginTop: scalingfactor * 18 }]}>Content Preference</Text> */}
                             {/* <Text allowFontScaling={false} style={styles.t2}>Choose the types of content you want to see most in your feed.</Text> */}
-                            {/* <Drop width={"96%"}   borderwidth={0} bb={1} pccolor={"#B8B8B8"}
+                            {/* <Drop width={"96%"}   borderwidth={0} bb={1} pccolor={"#828282"}
                              items={contentPreferences} placeholder={preferences} onValueChange={handleprefference} open={open3} setOpen={t3} /> */}
                             {errors.role3 && <Text style={styles1.errnew}>{errors.role3}</Text>}
 
@@ -758,7 +758,7 @@ const Editcommunity = ({ navigation }) => {
                             <TextInput
                                 allowFontScaling={false}
                                 placeholder="Bio"
-                                placeholderTextColor="#B8B8B8"
+                                placeholderTextColor="#828282"
                                 style={styles1.input}
                                 value={tagline}
                                 onChangeText={(text) => { settagline(text) }}
@@ -769,7 +769,7 @@ const Editcommunity = ({ navigation }) => {
                             <TextInput
                                 allowFontScaling={false}
                                 placeholder="Write any Top 3"
-                                placeholderTextColor="#B8B8B8"
+                                placeholderTextColor="#828282"
                                 style={styles1.input}
                                 value={skills}
                                 onChangeText={(text) => { setskills(text) }}
@@ -777,7 +777,7 @@ const Editcommunity = ({ navigation }) => {
 
                             <Text style={styles.t1}>Education</Text>
                             <Text style={[styles.t2, { marginBottom: 20 }]}>List your highest degree achieved, which helps to establish your academic background and qualifications.</Text>
-                            <Drop width={"96%"} borderwidth={0} bb={1} pccolor={"#B8B8B8"}
+                            <Drop width={"96%"} borderwidth={0} borderColor={"#ccc"} bb={1} pccolor={"#828282"}
                                 items={education} placeholder={education1} open={open5} setOpen={setOpen5} onValueChange={(value) => { seteducation(value) }} nestedScrollEnabled={true} />
                             {/* </ScrollView> */}
                             {errors.role4 && <Text style={styles1.errnew}>{errors.role4}</Text>}
@@ -787,17 +787,17 @@ const Editcommunity = ({ navigation }) => {
                             {certificate.map((certificate, index) => (
                                 <View key={certificate.id} style={styles1.certificate}>
                                     <Pressable onPress={addcertificate}>
-                                        <Entypo style={styles1.plus} name="plus" size={24} color="#00DE62" />
+                                        <Entypo style={styles1.plus} name="plus" size={24} color="#ccc" />
                                     </Pressable>
 
                                     {index > 0 && <Pressable onPress={() => { deletecertificate1(index) }}>
-                                        <FontAwesome6 name="trash" style={styles1.minus} size={15} color="#00DE62" />
+                                        <FontAwesome6 name="trash" style={styles1.minus} size={15} color="#ccc" />
                                     </Pressable>}
 
                                     <TextInput
                                         allowFontScaling={false}
                                         placeholder="Certification name"
-                                        placeholderTextColor="#B8B8B8"
+                                        placeholderTextColor="#828282"
                                         style={[styles1.input, { marginTop: 20, backgroundColor: "transparent" }]}
                                         value={certificate.cname}
                                         onChangeText={(text) => { handlecertificatechange(certificate.id, "cname", text) }}
@@ -807,7 +807,7 @@ const Editcommunity = ({ navigation }) => {
                                     <TextInput
                                         allowFontScaling={false}
                                         placeholder="URL"
-                                        placeholderTextColor="#B8B8B8"
+                                        placeholderTextColor="#828282"
                                         style={styles1.input}
                                         value={certificate.curl}
                                         onChangeText={(text) => { handlecertificatechange(certificate.id, "curl", text) }}
@@ -837,7 +837,7 @@ const Editcommunity = ({ navigation }) => {
                                         allowFontScaling={false}
                                         placeholder="URL"
                                         value={items.url}
-                                        placeholderTextColor="#B8B8B8"
+                                        placeholderTextColor="#828282"
                                         style={[styles1.input1, styles1.small]}
                                         onChangeText={(text) => { handleurlchange(items.id, "url", text) }}
 
@@ -850,17 +850,17 @@ const Editcommunity = ({ navigation }) => {
                             {portfolio1.map((items, index) => (
                                 <View style={styles1.certificate} key={items.id}>
                                     <Pressable onPress={addportfolio}>
-                                        <Entypo style={styles1.plus} name="plus" size={24} color="#00DE62" />
+                                        <Entypo style={styles1.plus} name="plus" size={24} color="#ccc" />
                                     </Pressable>
                                     {index > 0 && <Pressable onPress={() => { deleteportfolio(index) }}>
-                                        <FontAwesome6 name="trash" style={styles1.minus} size={15} color="#00DE62" />
+                                        <FontAwesome6 name="trash" style={styles1.minus} size={15} color="#ccc" />
                                     </Pressable>}
                                     <TextInput
                                         allowFontScaling={false}
                                         placeholder="URL"
                                         value={items.url}
                                         // value={items.name}
-                                        placeholderTextColor="#B8B8B8"
+                                        placeholderTextColor="#828282"
                                         style={[styles1.input, { marginTop: 20, backgroundColor: "transparent"  }]}
                                         onChangeText={(text) => { handleurlchange(items.id, "url", text) }}
 
@@ -870,7 +870,7 @@ const Editcommunity = ({ navigation }) => {
                                         allowFontScaling={false}
                                         placeholder="Portfolio name"
                                         value={items.name}
-                                        placeholderTextColor="#B8B8B8"
+                                        placeholderTextColor="#828282"
                                         style={styles1.input}
                                         onChangeText={(text) => { handleurlchange(items.id, "name", text) }}
 
@@ -881,31 +881,30 @@ const Editcommunity = ({ navigation }) => {
                             ))}
 
 
-                            <Text allowFontScaling={false} style={[styles.t1, { marginTop: 10 }]}>Instagram</Text>
+                            <Text allowFontScaling={false} style={[styles.t1, { marginTop: 20 }]}>Instagram</Text>
 
                             <View style={styles1.v1} >
                                 {/* <Pressable onPress={addurl}> */}
-                                <AntDesign name="instagram" style={styles1.plusss} size={24} color="#bbbbbb" />
+                                <AntDesign name="instagram" style={styles1.plusss} size={24} color="#828282" />
                                 {/* <Entypo style={styles.plus1} name="plus" size={24} color="#00DE62" /> */}
                                 {/* </Pressable> */}
 
                                 <TextInput
-
                                     allowFontScaling={false}
                                     placeholder="URL"
                                     numberOfLines={1}
-                                    placeholderTextColor="#B8B8B8"
+                                    placeholderTextColor="#828282"
                                     style={styles1.inputss}
                                     value={InstagramUrl}
                                     onChangeText={(text) => { setInstagramUrl(text) }}
                                 />
                             </View>
-                            <Text allowFontScaling={false} style={[styles.t1, { marginTop: 15 }]}>YouTube</Text>
+                            <Text allowFontScaling={false} style={[styles.t1, { marginTop: 20 }]}>YouTube</Text>
 
                             <View style={styles1.v1} >
                                 {/* <Pressable onPress={addurl}> */}
                                 {/* <Feather name="youtube" style={styles.plus1} size={24} color="#bbbbbb" /> */}
-                                <AntDesign name="youtube" style={styles1.plusss} size={24} color="#bbbbbb" />
+                                <AntDesign name="youtube" style={styles1.plusss} size={24} color="#828282" />
                                 {/* <Entypo style={styles.plus1} name="plus" size={24} color="#00DE62" /> */}
                                 {/* </Pressable> */}
 
@@ -914,17 +913,17 @@ const Editcommunity = ({ navigation }) => {
                                     allowFontScaling={false}
                                     placeholder="URL"
                                     numberOfLines={1}
-                                    placeholderTextColor="#B8B8B8"
+                                    placeholderTextColor="#828282"
                                     style={styles1.inputss}
                                     value={YTURL}
                                     onChangeText={(text) => { setYTURL(text) }}
                                 />
                             </View>
-                            <Text allowFontScaling={false} style={[styles.t1, { marginTop: 10 }]}>LinkedIn</Text>
+                            <Text allowFontScaling={false} style={[styles.t1, { marginTop: 20 }]}>LinkedIn</Text>
 
                             <View style={styles1.v1} >
                                 {/* <Pressable onPress={addurl}> */}
-                                <AntDesign name="linkedin-square" style={styles1.plusss} size={24} color="#bbbbbb" />
+                                <AntDesign name="linkedin-square" style={styles1.plusss} size={24} color="#828282" />
                                 {/* <Entypo style={styles.plus1} name="plus" size={24} color="#00DE62" /> */}
                                 {/* </Pressable> */}
 
@@ -933,7 +932,7 @@ const Editcommunity = ({ navigation }) => {
                                     allowFontScaling={false}
                                     placeholder="URL"
                                     numberOfLines={1}
-                                    placeholderTextColor="#B8B8B8"
+                                    placeholderTextColor="#828282"
                                     style={styles1.inputss}
                                     value={LinkedinURl}
                                     onChangeText={(text) => { setLinkedinURl(text) }}
@@ -951,7 +950,7 @@ const Editcommunity = ({ navigation }) => {
 
 
                         <View onTouchStart={handleOutsideTouch} s style={styles1.icons}>
-                            <Pressable onPress={() => { navigation.goBack() }} style={{ alignSelf: "center" }}><FontAwesome6 name="chevron-left" size={40} color="#00DF60" /></Pressable>
+                            <Pressable onPress={() => { navigation.goBack() }} style={{ alignSelf: "center" }}><FontAwesome6 name="chevron-left" size={30} color="#00DF60" /></Pressable>
                             <Pressable onPress={savedata} style={styles1.btn}>
                                 {loading && <ActivityIndicator size={24} color="#16181a" />}
                                 {!loading && <Text allowFontScaling={false} style={styles1.nexttext}>Save</Text>}
@@ -995,26 +994,26 @@ const styles1 = StyleSheet.create({
     },
     headertext: {
         color: "#00DE62",
-        fontSize: scalingfactor * 35,
+        fontSize: scalingfactor * 30,
         fontFamily: "myanmar",
         fontWeight: "bold",
         paddingTop: 5,
         paddingHorizontal: 20,
     },
     edit: {
-        color: "#B8B8B8",
+        color: "#ccc",
         fontFamily: "Alata",
         textAlign: "center",
-        fontSize: 20,
+        fontSize: 24,
         marginBottom: 20
 
 
     },
     t2: {
-        color: "#94A3B8",
+        color: "#828282",
         // fontFamily: "Roboto",
         textAlign: "center",
-        fontSize: 14,
+        fontSize: 12,
         marginBottom: 5,
         marginTop: 10
     },
@@ -1025,15 +1024,18 @@ const styles1 = StyleSheet.create({
         borderBottomWidth: 1,
         // borderRadius : 20,
         paddingLeft: scalingfactor * 0,
-        borderBottomColor: "gray",
+        borderBottomColor: "#ccc",
         fontSize: scalingfactor * 20, // Responsive font size
-        color: "#B8B8B8",
+        color: "#ccc",
         paddingBottom: scalingfactor * 7,
         width: "89%",
         marginHorizontal: "auto",
         // fontFamily: "Roboto",
         // lineHeight: scalingfactor * 18,
         marginBottom: scalingfactor * 15,
+        borderBottomWidth: 1,
+        borderBottomColor: "#ccc",
+        fontFamily : "Alata"
         // borderRadius : 20
     },
     input1: {
@@ -1054,6 +1056,9 @@ const styles1 = StyleSheet.create({
         marginBottom: scalingfactor * 15,
         // backgroundColor : "red"
         // borderRadius : 20
+        borderBottomWidth: 1,
+        borderBottomColor: "#ccc",
+         fontFamily : "Alata"
     },
 
     small: {
@@ -1077,8 +1082,8 @@ const styles1 = StyleSheet.create({
     }
     ,
     btn: {
-        width: 120,
-        height: 48,
+        width: 100,
+        height: 40,
         // height : scalingfactor*48,
         backgroundColor: "#00DF60",
         // padding: scalingfactor * 12,
@@ -1099,7 +1104,7 @@ const styles1 = StyleSheet.create({
     }, nexttext: {
         color: "#24272A",
         fontFamily: "Alata",
-        fontSize: scalingfactor * 24,
+        fontSize: 20,
         textAlign: "center",
         // lineHeight : 16
         marginTop: -4
@@ -1135,7 +1140,7 @@ const styles1 = StyleSheet.create({
         fontFamily: "Alata",
         textAlign: "center",
         marginLeft: -1,
-        marginTop: -3
+        marginTop: -4
     },
 
     certificate: {
@@ -1174,9 +1179,11 @@ const styles1 = StyleSheet.create({
         borderBottomColor: "#ccc",
         width: "90%",
         margin: "auto",
+        // paddingBottom : 0,
         //    backgroundColor :"red",
         paddingBottom: 0,
-        marginTop: 10
+        marginTop: 10,
+        // marginBottom : -30,
     },
 
     minus1: {
@@ -1227,9 +1234,8 @@ const styles1 = StyleSheet.create({
         marginTop: 0,
         paddingLeft: 20,
 
-
         fontSize: scalingfactor * 20,
-        color: "#B8B8B8",
+        color: "#ccc",
         // paddingBottom: scalingfactor * 0,
         width: "90%",
         marginLeft: 0,
@@ -1245,8 +1251,8 @@ const styles1 = StyleSheet.create({
         margin: "auto",
         width: "92%",
         backgroundColor: "transparent",
-        borderWidth: 3,
-        borderColor: "#666",
+        borderWidth: 1,
+        borderColor: "#828282",
         borderRadius: 10,
         position: "relative"
     }

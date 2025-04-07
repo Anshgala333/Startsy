@@ -516,7 +516,7 @@ const Signup13 = ({ navigation, route }) => {
                             <Pressable onPress={() => {
 
                                 navigation.goBack();
-                            }}><FontAwesome6 name="chevron-left" size={45} color="#00DF60" /></Pressable>
+                            }}><FontAwesome6 name="chevron-left" size={35} color="#00DF60" /></Pressable>
 
                             {/* <Pressable style={[styles.btn,{ opacity: isOtpVerified ? 1 : 0.5 }]} onPress={() => { finalsubmit() }}>
 
@@ -614,6 +614,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         width: "92%",
+        paddingHorizontal : 20,
         position: "absolute",
         marginHorizontal: "auto",
         // marginTop: scalingfactor * 30,
@@ -676,12 +677,12 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         height: 47,
         width: "92%",
-        borderWidth: 3,
-        borderColor: "#16181A",
+        borderWidth: 1,
+        borderColor: "#ccc",
         marginTop: 10,
         paddingLeft: 20,
         color: "#B8B8B8",
-        // fontFamily: "Alata",
+        fontFamily: "Alata",
         fontSize: scalingfactor * 16,
         marginBottom: scalingfactor * 16
     },
@@ -694,7 +695,7 @@ const styles = StyleSheet.create({
         width: "85%",
         marginHorizontal: "auto",
         color: "#E65858",
-        fontSize: 12,
+        fontSize: 10,
         fontFamily: "Roboto",
     },
     errorText1: {

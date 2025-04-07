@@ -213,6 +213,8 @@ function Upvotedata({ route }) {
                 var array = result.data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
                 // var array = result.data.reverse()
                 setSubNotification(array);
+                console.log(array);
+                
             }
 
 
@@ -421,15 +423,10 @@ function Upvotedata({ route }) {
 
         else {
 
-            // console.log(item);
-            // console.log(item.postId, "okkkkkkkkkkkkkkkk");
-
+          
             return (
 
-                // <TouchableOpacity onPress={()=>{
-                //     // console.log(item.postId._id)
-                //     navigation.navigate("ViewSendedPost",{id:item.postId._id})
-                // }}>
+             
 
 
                 <View style={styles.box1}>

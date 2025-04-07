@@ -12,7 +12,7 @@ import {
 import Back from "@/components/back.js";
 import { url } from "@/config";
 import { GlobalContext } from "@/Global/globalcontext";
-
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 
 const { width } = Dimensions.get("window")
@@ -76,20 +76,18 @@ const AllPostsScreen = ({ navigation, route }) => {
     <View style={styles.container}>
 
       <View style={styles.header}>
+        <View style={styles.headerSide}>
+          <Pressable onPress={() => navigation.goBack()}>
+            <FontAwesome6 name="chevron-left" size={34} style={styles.backIcon} color="#00DF60" />
+          </Pressable>
+        </View>
 
-        <Pressable
-          style={styles.back}
-          onPress={() => {
-            navigation.goBack();
-          }}
-        >
-          <Back />
-        </Pressable>
+        <View style={styles.headerCenter}>
+          <Text style={styles.title}>Saved Posts</Text>
+        </View>
 
-
-        <Text style={styles.title}>Saved Posts</Text>
+        <View style={styles.headerSide} /> {/* For symmetrical spacing */}
       </View>
-
       {
 
 
@@ -111,7 +109,7 @@ const AllPostsScreen = ({ navigation, route }) => {
                   // console.log(item._id);
                   return (
                     <Pressable
-                      onPress={() => { tabnavigation.navigate("ViewSendedPost",{id:item._id})}} style={styles.gridItem} >
+                      onPress={() => { tabnavigation.navigate("ViewSendedPost", { id: item._id }) }} style={styles.gridItem} >
                       <View >
                         <Image source={{ uri: item.mediaUrl }} style={styles.image} />
                       </View>
@@ -135,26 +133,50 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#16181A",
   },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center", // Centers the title horizontally
-    paddingVertical: 15,
-    paddingHorizontal: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: "#24272A",
-  },
-  back: {
-    position: "absolute",
-    left: 0, // Keeps the back button on the left
-    padding: 10,
-  },
+  // header: {
+  //   flexDirection: "row",
+  //   alignItems: "center",
+  //   justifyContent: "center", // Centers the title horizontally
+  //   paddingVertical: 15,
+  //   paddingHorizontal: 20,
+  //   borderBottomWidth: 1,
+  //   borderBottomColor: "#24272A",
+  // },
+  // back: {
+  //   position: "absolute",
+  //   left: 0, // Keeps the back button on the left
+  //   padding: 10,
+  // },
   title: {
     fontSize: 20,
     color: "#E9E9E9",
     fontFamily: "Alata",
     textAlign: "center",
   },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: "#24272A",
+  },
+  
+  headerSide: {
+    width: 40, // same width as the icon button area
+    alignItems: "flex-start",
+    justifyContent: "center",
+  },
+  
+  headerCenter: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  
+ 
+  
   gridItem: {
     flex: 1 / 3, // Distributes space equally in the row
     aspectRatio: 1, // Ensures perfect squares

@@ -193,8 +193,8 @@ const SelectInvestor = ({ navigation, route }) => {
 
 
                         <View style={styles.icons}>
-                            <Pressable style={{ marginTop: 5 }} onPress={() => { navigation.goBack() }}><FontAwesome6 name="chevron-left" size={40} color="#00DF60" /></Pressable>
-                            <Pressable onPress={() => { nextPage() }}><FontAwesome6 name="chevron-right" size={40} color="#00DF60" /></Pressable>
+                            <Pressable style={{ marginTop: 5 }} onPress={() => { navigation.goBack() }}><FontAwesome6 name="chevron-left" size={30} color="#00DF60" /></Pressable>
+                            <Pressable onPress={() => { nextPage() }}><FontAwesome6 name="chevron-right" size={30} color="#00DF60" /></Pressable>
 
                         </View>
 
@@ -219,9 +219,9 @@ const styles = StyleSheet.create({
     t1: {
         textAlign: 'Left',
         marginLeft: 10,
-        color: "#D9D9D9",
+        color: "#ccc",
         fontFamily: 'Alata',
-        fontSize: scalingfactor * 24,
+        fontSize:  24,
         // backgroundColor : "red",
         width: "97%",
         marginBottom: scalingfactor * 3,
@@ -230,17 +230,7 @@ const styles = StyleSheet.create({
         width: 30,
         height: 30
     },
-    t2: {
-        textAlign: 'Left',
-        color: "#94A3B8",
-        fontFamily: 'Roboto',
-        fontSize: scalingfactor * 13,
-
-        marginBottom: scalingfactor * 8,
-        width: "85%",
-        alignSelf: "center",
-        lineHeight: scalingfactor * 16
-    },
+   
     bottom: {
         width: "100%",
         height: height*0.85,

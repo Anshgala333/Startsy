@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
         padding: height * 0.03,
         paddingTop: height * 0.06,
         alignSelf: "flex-end",
-        backgroundColor : "rgba(33, 34, 35, 1)",
+        backgroundColor : "rgba(33, 34, 35, 0.5)",
         height: 0,
         // display : "none"
 
@@ -83,39 +83,32 @@ const styles = StyleSheet.create({
 
     },
     initial: {
-        width: width * 0.5,
-        height: width * 0.5
+        width: width * 0.65,
+        height: width * 0.65
     },
     updated: {
         // flex : 0.8,
         // height : Math.min(width*0.6 , 300),
         // aspectRatio: 1
-        width: width * 0.5,
-        height: width * 0.5
+        width: width * 0.65,
+        height: width * 0.65
     },
     input: {
+        // height: height * 0.045, // Responsive height
         backgroundColor: "transparent",
         margin: height * 0.012,
         marginTop: 0,
-        marginBottom : 20,
         borderBottomWidth: 1,
-        borderBottomColor: "#ccc",
+        borderBottomColor: "white",
         fontSize: scalingfactor*18, // Responsive font size
         color: "white",
+        // paddingBottom: height * 0.012,
         width: "95%",
         paddingBottom : 10 ,
+        marginBottom : 30,
         fontFamily: "Alata",
+        // lineHeight : scalingfactor * 18
     },
-    animation: {
-        position : "absolute",
-        left : -20,
-        top : -400,
-        opacity : 1,
-
-        
-        width: width*3, 
-        height:width*3, 
-      },
     input2: {
         // height: 30, // Responsive height
         backgroundColor: "transparent",
@@ -124,13 +117,13 @@ const styles = StyleSheet.create({
        
         fontSize: scalingfactor*18, // Responsive font size
         margin: height * 0.011,
-        marginLeft : 2,
-        marginTop: 0,
-        marginBottom : 5,
+        marginTop: -2,
         color: "white",
         paddingBottom : 0 ,
+        // paddingBottom: height * 0.012,
         fontFamily: "Alata",
-        
+        // lineHeight : scalingfactor * 20
+        //marginBottom:40,
     },
     label: {
        margin : scalingfactor * -40,
@@ -146,7 +139,7 @@ const styles = StyleSheet.create({
         // marginTop: 20,
         position: "relative",
         // backgroundColor : "red",
-        borderBottomColor : "#ccc",
+        borderBottomColor : "white",
         borderBottomWidth : 1,
         width : "95%",
         marginHorizontal : "auto",
@@ -182,10 +175,11 @@ const styles = StyleSheet.create({
     },
     loginbutton: {
         margin: "auto",
-        width: "80%",
-        height : 40,
+        // height: height * 0.07, // Responsive height
+        width: "100%",
+        height : scalingfactor* 50,
         // paddingVertical: height * 0.018, // Responsive height
-        backgroundColor: "#ccc",
+        backgroundColor: "#333",
         marginVertical: height * 0.014,
         borderRadius: 20,
         shadowColor: "black",
@@ -197,31 +191,6 @@ const styles = StyleSheet.create({
         // borderColor: "black",
         // borderWidth: 1,
         fontFamily: "Alata"
-    },
-    divider : {
-        width : "80%",
-        marginHorizontal : "auto",
-        marginVertical : 10,
-        height : 0.5,
-        backgroundColor : "gray",
-        
-    },
-    or:{
-        color : "#ccc",
-        top : -10,
-        fontFamily : "Roboto",
-        paddingHorizontal : 8,
-        borderRadius :20,
-        backgroundColor : "rgba(33, 34, 35, 1)",
-        alignSelf : "center",
-        position : "absolute",
-    },
-    welcome1 : {
-        fontFamily: "Alata",
-        color : "#ccc",
-        // alignSelf : "center",
-        textAlign : "left",
-        fontSize : 25,
 
     },
     gray: {
@@ -236,10 +205,10 @@ const styles = StyleSheet.create({
         fontFamily: "Alata"
     },
     login: {
-        fontSize: scalingfactor*18, // Responsive font size
+        fontSize: scalingfactor*19, // Responsive font size
         fontWeight: "500",
         fontFamily: "Alata",
-        color : "#16181a",
+        color : "white",
         alignSelf : "center",
         marginTop : -4
         // lineHeight : 16.4
@@ -323,21 +292,20 @@ const styles = StyleSheet.create({
     },
     error : {
         marginVertical :0,
-        marginTop  :5,
+        marginTop  :0,
         textAlign : "left",
-        marginTop  :-15,
         // backgroundColor : "red",
         width  : "92%",
         marginHorizontal : "auto",
         // color : "red",
         color : "#E65858",
-        fontSize : 10,
+        fontSize : 15,
         fontFamily : "Roboto",
 
     },
     error1 : {
         marginVertical :0,
-        marginTop  :10,
+        marginTop  :0,
         textAlign : "center",
         // backgroundColor : "red",
         width  : "92%",

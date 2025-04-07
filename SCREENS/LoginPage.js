@@ -1,6 +1,8 @@
 
 import React, { useContext } from "react";
 import { useState, useEffect, useRef } from "react";
+import { useFocusEffect } from "expo-router";
+
 import signupstyles from "../styles/signup1styles.js";
 import s5 from "@/styles/s5.js";
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -8,7 +10,7 @@ import Back from "@/components/back.js";
 import { url } from "../config.js"
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { SafeAreaView, ScrollView, View, Text, Button, BackHandler, TextInput, Image, StatusBar, Animated, Easing, KeyboardAvoidingView, Pressable, ActivityIndicator, Dimensions, Alert, TouchableOpacity } from "react-native";
-import { useFocusEffect, useNavigation } from "expo-router";
+import {  useNavigation } from "expo-router";
 import { GlobalContext } from "@/Global/globalcontext.js";
 
 import styles from "../styles/l.js"
@@ -181,7 +183,12 @@ const LoginPage = function ({ navigation, route }) {
         return () => backHandler.remove();
     }, [])
 
-    const { height } = Dimensions.get("window")
+    const [height , setHeight] = useState("")
+
+    useFocusEffect(() => {
+        const { height } = Dimensions.get("window")
+        setHeight(height)
+    })
 
 
 
@@ -190,7 +197,7 @@ const LoginPage = function ({ navigation, route }) {
 
         // Render the signup screen UI
         <KeyboardAvoidingView style={signupstyles.container} behavior="padding" keyboardVerticalOffset={-100} >
-            <ScrollView automaticallyAdjustContentInsets={true} automaticallyAdjustsScrollIndicatorInsets={true} style={{ flex: 1, maxHeight: "100%" }} >
+            <ScrollView automaticallyAdjustContentInsets={true} automaticallyAdjustsScrollIndicatorInsets={true} style={{  minHeight : height }} >
 
                 <View style={signupstyles.row}>
                     <Pressable onPress={() => navigation.goBack()}>
@@ -201,7 +208,7 @@ const LoginPage = function ({ navigation, route }) {
                     </View>
 
 
-                    <View style={[signupstyles.bottom, { height: height * 0.7 }]}>
+                    <View style={[signupstyles.bottom, { height: height*0.7 }]}>
                         <Text allowFontScaling={false} style={[signupstyles.t1, { marginTop: -15, marginBottom: -20 }]}>Welcome Back !</Text>
                         {!error && <Text allowFontScaling={false} style={signupstyles.t2}></Text>}
                         {wrongcredential && <Text style={signupstyles.invalid}>Invalid credentials</Text>}

@@ -173,7 +173,7 @@ const signup3styles = StyleSheet.create({
         width  : "92%",
         marginHorizontal : "auto",
         color : "#E65858",
-        fontSize : 15,
+        fontSize : 12,
         fontFamily : "Roboto",
         marginTop : 5
     }

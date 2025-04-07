@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, Pressable, ScrollView } from 'react-native';
+import { View, Text, ToastAndroid, TextInput, TouchableOpacity, Alert, StyleSheet, Pressable, ScrollView, ActivityIndicator } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons'; // Importing star icons
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { GlobalContext } from '@/Global/globalcontext';
@@ -20,28 +20,43 @@ const RatingPage = ({ navigation }) => {
         setRating(prevRating => (prevRating === star ? 0 : star));
     };
 
+    const showToastWithGravity = (message) => {
+        ToastAndroid.showWithGravityAndOffset(
+            `${message}`,
+            ToastAndroid.SHORT,
+            ToastAndroid.TOP,
+            100, 100
+        );
+    };
+
     const handleSubmit = async () => {
-        
-        if(rating==0){
+
+        if (rating == 0) {
             Alert.alert("Please select a rating");
             return;
         }
         console.log(rating);
-        
+        var object = {
+            ratingText: description,
+            ratingStars: rating,
+            version : "v7"
+        }
+        setLoading(true)
+
         try {
-            
-            const response = await  fetch(`${url}test/ratingsController`, {
+
+            const response = await fetch(`${url}test/ratingsController`, {
                 method: 'POST',
-                body: JSON.stringify({ ratingText: description,ratingStars:rating }),
+                body: JSON.stringify(object),
                 headers: {
-        
+
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`,
                 },
             });
             const data = await response.json();
-         
-            
+            showToastWithGravity(`Thank You ! `)
+
             console.log(data);
 
         }
@@ -49,7 +64,13 @@ const RatingPage = ({ navigation }) => {
             console.log(err);
 
         }
-       
+        finally{
+            setLoading(false);
+            setTimeout(() => {
+                navigation.goBack()
+            }, 1000);
+        }
+
     };
 
     return (
@@ -63,7 +84,7 @@ const RatingPage = ({ navigation }) => {
 
                     <Text style={styles.heading}>Rate Us</Text>
 
-                    {/* ⭐ Star Rating */}
+
                     <View style={styles.starContainer}>
                         {[1, 2, 3, 4, 5].map((star) => (
                             <TouchableOpacity key={star} onPress={() => handleStarPress(star)}>
@@ -77,7 +98,7 @@ const RatingPage = ({ navigation }) => {
                         ))}
                     </View>
 
-                    {/* ✍ Description Box */}
+
                     <View style={{ marginTop: 10, width: '90%' }}>
                         <TextInput
                             style={styles.textArea}
@@ -95,10 +116,16 @@ const RatingPage = ({ navigation }) => {
                     </View>
 
 
-                    {/* 🚀 Submit Button */}
-                    <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-                        <Text style={styles.submitText}>Submit</Text>
+                    <TouchableOpacity style={styles.submitButton} onPress={handleSubmit} disabled={loading}>
+                        {
+                            loading ? (
+                                <ActivityIndicator color="#16181a" />
+                            ) : (
+                                <Text style={styles.submitText}>Submit</Text>
+                            )
+                        }
                     </TouchableOpacity>
+
                 </View>
             </View>
         </ScrollView>

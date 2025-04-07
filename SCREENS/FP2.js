@@ -46,6 +46,10 @@ const FP2 = ({ navigation, route }) => {
       seterror(true)
       return
     }
+    // console.log(email);
+    // console.log(otp);
+    
+    
 
     setloading(true)
     try {

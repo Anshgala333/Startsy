@@ -30,19 +30,14 @@ const Chat = ({ route }) => {
 
 
 
-    // console.log(photo1);
-    // console.log(photo2);
+    console.log(photo1);
+    console.log(photo2);
 
 
 
     const btn11 = useRef(null)
     const [keyboardOffset, setKeyboardOffset] = useState(new Animated.Value(0));
 
-    // useFocusEffect(
-    //     useCallback(()=>{
-
-    //     } , [])
-    // )
 
 
 
@@ -56,9 +51,6 @@ const Chat = ({ route }) => {
         if (newtext == "") {
             return
         }
-
-
-
 
         // console.log(messages);
 
@@ -208,7 +200,7 @@ const Chat = ({ route }) => {
             console.log("i am connection socke url, ", url);
             // Listen for incoming private messages
             socket.on("privateMessage", (data1) => {
-                console.log(data1);
+                // console.log(data1);
                 setdata((prevMessages) => [data1, ...prevMessages]);
                 function scroll() {
 
@@ -239,43 +231,6 @@ const Chat = ({ route }) => {
         Linking.openURL(url);
     };
 
-    // const renderItem = ({ item, index }) => {
-
-    //     const renderMessage = (message) => {
-    //         const parts = message.split(urlRegex);
-
-    //         return parts.map((part, index) => {
-    //             if (part.match(urlRegex)) {
-    //                 return (
-
-    //                     <Text onPress={() => handlePress(part)} style={{ color: '#000', alignSelf: "flex-start", paddingTop: 0, fontSize: 16, fontWeight: "bold", textDecorationLine: 'underline' }}>
-    //                         {part}
-    //                     </Text>
-
-    //                 );
-    //             }
-    //             return <Text style={{ backgroundColor: "", marginTop: -10 }} key={index}>{part}</Text>;
-    //         });
-    //     };
-
-
-
-    //     const dataLength = data.length;
-    //     return (
-    //         <View style={{ display: "flex", flex: 1, width: "100%" }}>
-    //             {index < dataLength - 1 && item.senderId != data[index + 1].senderId && <Image style={item.senderId == jisuserkosendkarnahaiuskiid ? styles.pfpleft : styles.pfpright} source={{ uri: item.senderId == jisuserkosendkarnahaiuskiid ? photo2 : photo1 }} />}
-
-    //             {index == dataLength - 1 && <Image style={item.senderId == jisuserkosendkarnahaiuskiid ? styles.pfpleft : styles.pfpright} source={{ uri: item.senderId == jisuserkosendkarnahaiuskiid ? photo2 : photo1 }} />}
-    //             <View style={[styles.message,
-    //             (item.senderId == jisuserkosendkarnahaiuskiid) ? styles.received : styles.sent
-    //             ]}>
-    //                 <Text allowFontScaling={false} style={[(item.senderId != jisuserkosendkarnahaiuskiid) ? styles.senttext : styles.receivedtext]}>
-    //                     {renderMessage(item.message)}
-    //                 </Text>
-    //             </View>
-    //         </View>
-    //     );
-    // };
 
 
 
@@ -314,45 +269,6 @@ const Chat = ({ route }) => {
     }
 
 
-    // function renderdategap(date, index) {
-    //     if (index > 0) {
-    //         var date1 = new Date(data[index - 1].updatedAt)
-    //         var date2 = new Date(date)
-    //         const messageDate1 = date1.toLocaleDateString("en-US", {
-    //             day: "2-digit",
-    //             month: "long",
-    //             year: "numeric",
-    //         });
-    //         const messageDate2 = date2.toLocaleDateString("en-US", {
-    //             day: "2-digit",
-    //             month: "long",
-    //             year: "numeric",
-    //         });
-
-    //         if (messageDate1 != messageDate2) {
-    //             return (
-    //                 <View style={{ justifyContent: "center", textAlign: "center", marginVertical: 10, marginBottom: 20, padding: 10, width: "auto", margin: "auto", borderRadius: 10, }}>
-    //                     <Text style={{ textAlign: "center", backgroundColor: "#363535", padding: 5, paddingHorizontal: 10, borderRadius: 10, color: "#bbbbbb" }}>{messageDate2}</Text>
-    //                 </View>
-    //             )
-    //         }
-
-    //     }
-    //     else if (index == 0) {
-    //         var date1 = new Date(date)
-    //         const messageDate1 = date1.toLocaleDateString("en-US", {
-    //             day: "2-digit",
-    //             month: "long",
-    //             year: "numeric",
-    //         });
-    //         return (
-    //             <View style={{ justifyContent: "center", textAlign: "center", marginVertical: 10, marginBottom: 20, padding: 10, width: "auto", margin: "auto", borderRadius: 10, }}>
-    //                 <Text style={{ textAlign: "center", backgroundColor: "#363535", padding: 5, paddingHorizontal: 10, borderRadius: 10, color: "#bbbbbb" }}>{messageDate1}</Text>
-    //             </View>
-    //         )
-    //     }
-    // }
-    // const renderItem = ({ item, index }) => {};
 
     function renderdategap(date, index) {
         if (index < data.length - 1) {  // Now checking the next message instead of the previous one
@@ -433,7 +349,7 @@ const Chat = ({ route }) => {
         () => ({ item, index }) => {
             const dataLength = data.length;
             // console.log(dataLength);
-            console.log(index);
+            // console.log(index);
 
 
             return (
@@ -706,12 +622,7 @@ const Chat = ({ route }) => {
                     // onLayout={() => flatListRef.current?.scrollToOffset({ offset: 0, animated: false })}
                 />
 
-                {/* <FlatList
-                        data={data}
-                        keyExtractor={(item) => item._id}
-                        renderItem={({ item }) => <Text style={styles.message}>ok</Text>}
-                        contentContainerStyle={styles.messagesContainer}
-                    /> */}
+               
 
 
 
