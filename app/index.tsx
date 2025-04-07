@@ -82,6 +82,10 @@ import { url } from "@/config.js";
 import RatingPage from "@/SCREENS/BetaRating.js";
 import TermsAndConditions from "../SCREENS/JASH/terms-condition/TermsAndCondition.jsx";
 
+import JobApplyScreen from '../SCREENS/JASH/Jobs/JobApplyScreen.jsx'
+import JobApplicantCard from '../SCREENS/JASH/Jobs/JobApplicantCard.jsx'
+
+
 const Stack = createNativeStackNavigator();
 SystemUI.setBackgroundColorAsync("#16181a");
 
@@ -234,7 +238,7 @@ export default function App() {
       <StatusBar backgroundColor="#16181a" barStyle={"light-content"} />
       {appisready && (
         <Stack.Navigator
-          initialRouteName="Green"
+          initialRouteName="JobApplicantCard"
           screenOptions={{
             headerStyle: {
               backgroundColor: "#16181a",
@@ -295,6 +299,7 @@ export default function App() {
           />
           <Stack.Screen
             name="Main1"
+
             options={{
               animation: "none",
             }}
@@ -373,6 +378,8 @@ export default function App() {
             component={TermsAndConditions}
           />
           <Stack.Screen name="RatingPage" component={RatingPage} />
+          <Stack.Screen name = 'JobApply' component={JobApplyScreen}/>
+          <Stack.Screen name = 'JobApplicantCard' component={JobApplicantCard}/>
         </Stack.Navigator>
       )}
 

@@ -420,11 +420,11 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
     if (item.type == "photo" || item.type == "textBlog" || item.type == "video") {
       return (
         <LinearGradient
-                colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}
-                locations={[0, 1]}
-                style={styles.box}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 0, y: 1 }} >
+          colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}
+          locations={[0, 1]}
+          style={styles.box}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 0, y: 1 }} >
           <View style={styles.top} >
             <Pressable
               onPress={() => { navigation.navigate("Singleuserpage", { token: token, id: item.user_id._id, page: "Startsy" }) }}
@@ -435,6 +435,9 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
                 <Text allowFontScaling={false} style={styles.u2}>{userdata.user_id.role == "CommunityMember" ? "Member" : userdata.user_id.role}</Text>
               </View>
             </Pressable>
+            <TouchableOpacity style={{ position: "absolute", top: 15, right: 15 }} onPress={() => onReportCallBack(item._id, true)}>
+              <SimpleLineIcons name="options-vertical" size={20} color="#ccc" />
+            </TouchableOpacity>
           </View>
           {item.type == "photo" && <Image style={[styles.template, { aspectRatio: item.aspectRatio ? item.aspectRatio : 1 / 1 }]} source={{ uri: item.mediaUrl }} />}
           {item.type == "video" &&
@@ -522,11 +525,11 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
     else if (item.type == "communityPost") {
       return (
         <LinearGradient
-                colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}
-                locations={[0, 1]}
-                style={styles.box}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 0, y: 1 }} >
+          colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}
+          locations={[0, 1]}
+          style={styles.box}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 0, y: 1 }} >
           {/* <Text>{JSON.stringify(item)}</Text> */}
 
           <View style={styles.top} >
@@ -541,6 +544,9 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
                 </View>
               </View>
             </Pressable>
+            <TouchableOpacity style={{ position: "absolute", top: 15, right: 15 }} onPress={() => onReportCallBack(item._id, true)}>
+              <SimpleLineIcons name="options-vertical" size={20} color="#ccc" />
+            </TouchableOpacity>
           </View>
           <View style={styles.lower}>
             <Text style={styles.com1}>{item.communityPost.communityName}</Text>
@@ -559,11 +565,11 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
     else if (item.type == "jobPost") {
       return (
         <LinearGradient
-        colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}
-        locations={[0, 1]}
-        style={styles.box}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 0, y: 1 }} >
+          colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}
+          locations={[0, 1]}
+          style={styles.box}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 0, y: 1 }} >
           <View style={styles.top} >
 
             <Pressable
@@ -578,6 +584,10 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
               </View>
 
             </Pressable>
+
+            <TouchableOpacity style={{ position: "absolute", top: 15, right: 15 }} onPress={() => onReportCallBack(item._id, true)}>
+              <SimpleLineIcons name="options-vertical" size={20} color="#ccc" />
+            </TouchableOpacity>
           </View>
           <View style={styles.lower}>
             <Text style={styles.com1}>Role: {item.jobPosts.role}</Text>
@@ -866,7 +876,7 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
 
 
 
-{/* {<Text>{JSON.stringify(userdata.user_id.role)}</Text>} */}
+            {/* {<Text>{JSON.stringify(userdata.user_id.role)}</Text>} */}
 
 
             <View style={styles1.main}>

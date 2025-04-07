@@ -104,6 +104,96 @@ const ApplicantsList = ({ route , navigation }) => {
     const snapPoints7 = useMemo(() => ['30%'], []);
 
 
+    const renderItem =(item)=>{
+        return (
+            <LinearGradient
+                  style={styles.card}
+                  colors={["rgba(36, 39, 42 , 0.4)", "rgba(22, 24, 26 , 0.6)"]}
+                  locations={[0, 1]}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 0, y: 1 }}
+                >
+                  <View style={styles.header}>
+                    <Pressable
+                      onPress={() => {
+                        navigation.navigate("Singleuserpage", {
+                          token: token,
+                          id: item.investor._id,
+                          page: "bell",
+                        });
+                      }}
+                      style={{ display: "flex", flexDirection: "row", width: "70%" }}
+                    >
+                      <Image source={{ uri: item.investor.profilePhoto }} style={styles.image} />
+            
+                      <AutoSizeText
+                        numberOfLines={1}
+                        fontSize={26}
+                        mode={ResizeTextMode.max_lines}
+                        ellipsizeMode="tail"
+                        style={styles.role}
+                      >
+                        {item.investor.roleId.user_id.role === "CommunityMember"
+                          ? "Member"
+                          : item.investor.roleId.user_id.role}
+                      </AutoSizeText>
+                    </Pressable>
+            
+                    <Text style={styles.date}>{time(item.requestDate)}</Text>
+                  </View>
+            
+                  <AutoSizeText
+                    numberOfLines={1}
+                    fontSize={26}
+                    mode={ResizeTextMode.max_lines}
+                    ellipsizeMode="tail"
+                    style={styles.name}
+                  >
+                    {item.investor.roleId.fullName}
+                  </AutoSizeText>
+            
+                  {item.investor.role === "Investor" && (
+                    <>
+                      <Text style={styles.info}>
+                        Investing experience - {item.investor.roleId.previousExperience} years
+                      </Text>
+                      <Text style={styles.info1}>
+                        Investing Capacity - {item.investor.roleId.investmentRange}
+                      </Text>
+                    </>
+                  )}
+            
+                  {item.investor.role === "Founder" && (
+                    <>
+                      <Text style={styles.info}>
+                        Stage of Startup - {item.investor.roleId.hiddenInfo.stageOfStartup}
+                      </Text>
+                      <Text style={styles.info1}>
+                        Startup Sector - {item.investor.roleId.hiddenInfo.sector}
+                      </Text>
+                    </>
+                  )}
+            
+                  {item.investor.role === "CommunityMember" && item.investor.roleId.skills !== "" && (
+                    <Text style={styles.info}>{item.investor.roleId.skills}</Text>
+                  )}
+            
+                  {item.investor.role === "CommunityMember" && item.investor.roleId.tagline !== "" && (
+                    <Text style={styles.info}>{item.investor.roleId.tagline}</Text>
+                  )}
+            
+                  <View style={styles.actions}>
+                    <Pressable onPress={() => moveItem(item.id, "left", item)} style={styles.buttonAccept}>
+                      <Text style={styles.buttonText}>Accept</Text>
+                    </Pressable>
+                    <Pressable onPress={() => moveItem(item.id, "right", item)} style={styles.buttonAccept}>
+                      <Text style={styles.buttonText}>Reject</Text>
+                    </Pressable>
+                  </View>
+                </LinearGradient>
+        );
+    }
+
 
 
     const OpenBottomSheet = () => (
@@ -162,6 +252,7 @@ const ApplicantsList = ({ route , navigation }) => {
         </GestureHandlerRootView>
     )
 }
+
 
 
 

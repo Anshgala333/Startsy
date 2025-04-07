@@ -220,6 +220,7 @@ const LoginPage = function ({ navigation, route }) {
                             // ref={emailInput}
                             placeholder="Email / Username"
                             value={email}
+                            autoCapitalize="none"
                             onChangeText={(text) => { setemail(text) }}
                             // onFocus={() => {
                             //     scrollContainer.current?.scrollTo({ y: 100, animate: true });
