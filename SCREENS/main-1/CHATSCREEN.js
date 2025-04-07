@@ -396,9 +396,18 @@ const Chat = ({ route }) => {
                     {typeof item.message == "object" &&
                         <View style={[styles.message, (item.senderId == jisuserkosendkarnahaiuskiid) ? styles.received : styles.sent]}>
 
-                            {index < dataLength - 1 && item.senderId != data[index + 1].senderId && <Image style={item.senderId == jisuserkosendkarnahaiuskiid ? styles.pfpleft1 : styles.pfpright1} source={{ uri: item.senderId == jisuserkosendkarnahaiuskiid ? photo2 : photo1 }} />}
+                            {/* {index < dataLength - 1 && item.senderId != data[index + 1].senderId && <Image style={item.senderId == jisuserkosendkarnahaiuskiid ? styles.pfpleft1 : styles.pfpright1} source={{ uri: item.senderId == jisuserkosendkarnahaiuskiid ? photo2 : photo1 }} />} */}
 
-                            {index == dataLength - 1 && <Image style={item.senderId == jisuserkosendkarnahaiuskiid ? styles.pfpleft1 : styles.pfpright1} source={{ uri: item.senderId == jisuserkosendkarnahaiuskiid ? photo2 : photo1 }} />}
+                            {/* {index == dataLength - 1 && <Image style={item.senderId == jisuserkosendkarnahaiuskiid ? styles.pfpleft1 : styles.pfpright1} source={{ uri: item.senderId == jisuserkosendkarnahaiuskiid ? photo2 : photo1 }} />} */}
+
+                            {index > 0 && item.senderId != data[index - 1].senderId && (
+                                <Image
+                                    style={item.senderId == jisuserkosendkarnahaiuskiid ? styles.pfpleft1 : styles.pfpright1}
+                                    source={{ uri: item.senderId == jisuserkosendkarnahaiuskiid ? photo2 : photo1 }}
+                                />
+                            )}
+                            {index == 0 && <Image style={item.senderId == jisuserkosendkarnahaiuskiid ? styles.pfpleft1 : styles.pfpright1} source={{ uri: item.senderId == jisuserkosendkarnahaiuskiid ? photo2 : photo1 }} />}
+
                             <TouchableOpacity onPress={() => tabnavigation.navigate("ViewSendedPost", { id: item.message.postShared })}>
 
                                 <View style={[styles.box, {
@@ -909,13 +918,13 @@ const styles = StyleSheet.create({
         height: 25,
         right: 0,
         borderRadius: 100,
-        bottom: 10,
+        bottom:10,
     },
     pfpright1: {
         position: "absolute",
         width: 25,
         height: 25,
-        right: 20,
+        right: -3,
         borderRadius: 100,
         bottom: 25,
     },

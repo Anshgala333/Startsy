@@ -107,15 +107,15 @@ const signupstyles = StyleSheet.create({
     input: {
         // height: height * 0.045, // Responsive height
         backgroundColor: "transparent",
-        margin: height * 0.016,
+        // margin: height * 0.016,
         marginTop: 0,
-        borderBottomWidth: 1,
+        // borderBottomWidth: 1,
         // borderRadius : 20,
         paddingLeft: scalingfactor * 10,
-        borderBottomColor: "#ccc",
+        // borderBottomColor: "#ccc",
         fontSize: scalingfactor * 20, // Responsive font size
         color: "#B8B8B8",
-        paddingBottom: scalingfactor * 10,
+        // paddingBottom: scalingfactor * 10,
         width: "92%",
         fontFamily: "Alata",
 

@@ -9,14 +9,11 @@ import Upvote from '@/assets/icons/upvote';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Share from "@/assets/icons/share.js";
 import styles from "../../../styles/post.js"
+import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 
-const SendedPost = ({ item, opencomment, openshare ,upvotepost,index}) => {
+const SendedPost = ({ item, opencomment, openshare, upvotepost, index ,toggleSavePost}) => {
 
 
-
-    // console.log(item,"single hu mai")
-
-    // console.log("item",item);
     if (!item.user_id) return
     const lastTap = useRef(null);
     const handleDoubleTap = (id, index) => {
@@ -83,26 +80,59 @@ const SendedPost = ({ item, opencomment, openshare ,upvotepost,index}) => {
                     {/* {item.type == "textBlog" &&  <View style={[styles.divider , {marginTop : 7}]}></View>} */}
 
                     <View style={styles.iconcontainer}>
-                        <View style={styles.icon2}>
-                            <TouchableOpacity onPress={() => { upvotepost(item._id, index,true) }}>
-                                {/* {item.likedBy.includes(loggedinUserID) && <Upvote width={36} height={36} style={{ marginHorizontal: 0 }} selected={true} />} */}
-                                {/* {!item.likedBy.includes(loggedinUserID)   && <Upvote width={36} height={36} style={{ marginLeft: 5, marginRight: -5 }} />} */}
 
-                                {!item.isliked && <Upvote width={36} height={36} style={{ marginLeft: 5, marginRight: -5 }} />}
-                                {item.isliked && <Upvote width={36} height={36} style={{ marginLeft: 5, marginRight: -5 }} selected={true} />}
-                            </TouchableOpacity>
-                            <Text style={{ left: 0, top: 13, color: "#ccc" }}>{item.itemlikedcount}</Text>
+                        <View style={[styles.icon2,]}>
+
+
+                            <View style={{ flexDirection: 'row', gap: 7, marginRight: 4, alignItems: 'center' }}>
+                                <TouchableOpacity onPress={() => { upvotepost(item._id, index) }}>
+
+                                    {!item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5, marginTop: 6 }} />}
+                                    {item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5, marginTop: 6 }} selected={true} />}
+                                </TouchableOpacity>
+                                <Text style={{ color: "#ccc", fontFamily: 'Roboto', fontSize: 16, top: 3 }}>{item.itemlikedcount}</Text>
+                            </View>
+
+
+                            {/* comment */}
+
                             <Pressable onPress={() => {
                                 Vibration.vibrate(20)
                                 opencomment(item._id)
-                            }}>
-                                <FontAwesome style={{ marginLeft: 4 }} name="comment-o" size={30} color="#ccc" />
+
+                            }}
+                            >
+                                <FontAwesome name="comment-o" size={27} color="#ccc" />
                             </Pressable>
+
+
+                            {/* share */}
+
+                            <Pressable onPress={() => {
+                                Vibration.vibrate(20)
+                                openshare(item._id)
+                            }}>
+                                <Share style={{ top: 3 }} />
+                            </Pressable>
+
+
                         </View>
-                        <Pressable onPress={() => {
-                            Vibration.vibrate(20)
-                            openshare(item._id)
-                        }}><Share style={{ marginTop: 5, marginRight: 10, right: 0 }} /></Pressable>
+
+
+
+                        <TouchableOpacity style={{ paddingRight: 0, paddingRight: 8 }} onPress={() => toggleSavePost(item._id, index,true)}>
+                            {!item.isSaved ? (
+                                <MaterialIcons name="bookmark-border" size={32} color="#ccc" />
+                            ) : (
+                                <MaterialCommunityIcons
+                                    name="bookmark"
+                                    size={32}
+                                    color="#ccc"             // Gray when unsaved
+
+                                />
+                            )}
+                        </TouchableOpacity>
+
 
 
                     </View>

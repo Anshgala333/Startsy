@@ -34,6 +34,7 @@ import Settings from "../SCREENS/Settings.js"
 import BottomSheet, { BottomSheetView, BottomSheetScrollView, BottomSheetTextInput, BottomSheetDraggableView, BottomSheetFlatList, BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { LinearGradient } from 'expo-linear-gradient';
+import Line from './line.js';
 // import { LinearGradient } from 'react-native-svg';
 
 // import dotenv from 'dotenv/config'
@@ -620,8 +621,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
         const isVideoPlaying = videoStates[item._id] || false;
 
         function currency(pay) {
-            // console.log(pay);
-            // console.log(typeof pay);
+          
             pay = Number(pay);
             return pay.toLocaleString("en-IN")
         }
@@ -629,6 +629,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
 
         if (item.type == "photo" || item.type == "textBlog" || item.type == "video") {
             return (
+
                     <LinearGradient
                         colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}
                         locations={[0, 1]}
@@ -648,11 +649,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                                 Vibration.vibrate(20)
                                 deletepost(item._id)
                             }}>
-                                {/* <FontAwesome6 name="trash" style={styles1.minus} size={22} color="#00DE62" /> */}
-                                {/* <Feather name="trash-2" style={styles1.minus} size={22} color="#00DE62" /> */}
-
-                                {/* <Text>click me</Text> */}
-                                {/* <Pressable style={styles1.minus}><Delete /></Pressable> */}
+                                
                                 <Delete />
 
                             </Pressable>
@@ -676,39 +673,49 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                     }
                     {item.type == "textBlog" && <Text style={styles.blogtext}>{item.content}</Text>}
 
-                        <View style={styles.iconcontainer}>
+                                <View style={styles.iconcontainer}>
 
-                                    <View style={styles.icon2}>
+                                    <View style={[styles.icon2,]}>
 
 
-                                        <View style={{flexDirection:'row',gap:6,marginRight:4}}>
+                                        <View style={{ flexDirection: 'row', gap: 7, marginRight: 4, alignItems: 'center' }}>
                                             <TouchableOpacity onPress={() => { upvotepost(item._id, index) }}>
-                                          
+
                                                 {!item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5, marginTop: 6 }} />}
                                                 {item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5, marginTop: 6 }} selected={true} />}
                                             </TouchableOpacity>
-                                            <Text style={{  left: 0, color: "#ccc" ,fontFamily:'Roboto',top:5}}>{item.likedBy.length}</Text>
+                                            <Text style={{ color: "#ccc", fontFamily: 'Roboto', fontSize: 16, top: 3 }}>{item.likedBy.length}</Text>
                                         </View>
 
+
+                                        {/* comment */}
 
                                         <Pressable onPress={() => {
                                             Vibration.vibrate(20)
                                             opencomment(item._id)
-                                            
+
                                         }}
                                         >
-                                            <FontAwesome style={{ marginLeft: 4, marginRight:7}} name="comment-o" size={27} color="#ccc" />
+                                            <FontAwesome name="comment-o" size={27} color="#ccc" />
                                         </Pressable>
+
+
+                                        {/* share */}
 
                                         <Pressable onPress={() => {
                                             Vibration.vibrate(20)
                                             openshare(item._id)
                                         }}>
-                                            <Share style={{ marginTop: 5, marginRight: 10, right: 0 }} />
+                                            <Share style={{ top: 3 }} />
                                         </Pressable>
 
 
                                     </View>
+
+
+
+
+
 
 
                                 </View>
@@ -725,7 +732,13 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
         }
         else if (item.type == "communityPost") {
             return (
-                <View key={index} style={styles.box}>
+                <LinearGradient
+                                                    colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}
+                                                    locations={[0, 1]}
+                                                    style={styles.box}
+                                                    start={{ x: 0, y: 0 }}
+                                                    end={{ x: 0, y: 1 }} >
+              
 
                     <View style={styles.top} >
                         <View
@@ -763,12 +776,17 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                         </Pressable>
                     </View>
 
-                </View>
+                </LinearGradient>
             )
         }
         else if (item.type == "jobPost") {
             return (
-                <View key={index} style={styles.box}>
+                <LinearGradient
+                                                    colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}
+                                                    locations={[0, 1]}
+                                                    style={styles.box}
+                                                    start={{ x: 0, y: 0 }}
+                                                    end={{ x: 0, y: 1 }} >
                     <View style={styles.top} >
 
                         <View
@@ -809,7 +827,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                         </Pressable>
                     </View>
 
-                </View>
+                </LinearGradient>
             )
         }
     };
@@ -984,31 +1002,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
 
 
 
-            // const uniqueData = result.filter((item, index, self) =>
-            //     self.findIndex(innerItem => innerItem.user.userName === item.user.userName) === index
-            // );
-
-
-            // const sortedData = uniqueData.sort((a, b) => {
-            //     if (a.lastMessage === null && b.lastMessage === null) return 0;
-            //     if (a.lastMessage === null) return 1;
-            //     if (b.lastMessage === null) return -1;
-
-            //     const dateA = new Date(a.lastMessage.createdAt);
-            //     const dateB = new Date(b.lastMessage.createdAt);
-            //     return dateB - dateA; // Sort in descending order of time
-            // });
-
-            // // console.log(result.data, "investor");
-            // // console.log(result.data.messages.length, "investor");
-
-            // if (response.status === 200) {
-            //     // You can update the data state here if needed
-            //     // setData(result); // Example, you can handle the response data
-            //     setData(sortedData)
-            //     setfiltereddata(sortedData)
-            //     // setdata1(result)
-            // }
+        
         } catch (err) {
             console.log(err);
         } finally {

@@ -661,6 +661,7 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
               {loading && <ActivityIndicator size={24} color="#16181a" />}
             </Pressable>
 
+
             {wrongcredential && <Text style={styles.error1}>Invalid credentials</Text>}
 
             {/* <Text allowFontScaling={false} style={[styles.white, styles.p]}>Or continue with </Text>
@@ -671,6 +672,7 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
     />
     <Text allowFontScaling={false} style={[styles.gray, styles.google]}>Google</Text>
   </Pressable> */}
+
 
             <View style={{ color: '#ccc', justifyContent: 'center', alignItems: 'center', marginVertical: 0, bottom: 0, marginTop: 50 }}>
               <Text style={{ color: '#ccc', marginBottom: 2, fontFamily: 'Alata', fontSize: 12 }}>

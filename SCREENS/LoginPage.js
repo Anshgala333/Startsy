@@ -9,21 +9,19 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import Back from "@/components/back.js";
 import { url } from "../config.js"
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
-import { SafeAreaView, ScrollView, View, Text, Button, BackHandler, TextInput, Image, StatusBar, Animated, Easing, KeyboardAvoidingView, Pressable, ActivityIndicator, Dimensions, Alert } from "react-native";
+import { SafeAreaView, ScrollView, View, Text, Button, BackHandler, TextInput, Image, StatusBar, Animated, Easing, KeyboardAvoidingView, Pressable, ActivityIndicator, Dimensions, Alert, TouchableOpacity } from "react-native";
 import {  useNavigation } from "expo-router";
 import { GlobalContext } from "@/Global/globalcontext.js";
 
 import styles from "../styles/l.js"
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { jwtDecode } from "jwt-decode";
+import Entypo from '@expo/vector-icons/Entypo';
+
 
 const LoginPage = function ({ navigation, route }) {
 
-    // const navigation = useNavigation()
 
-
-
-    // Set status bar style and background color when the screen is focused
     useFocusEffect(() => {
         StatusBar.setBackgroundColor("#16181a")
         StatusBar.setBarStyle("light-content")
@@ -43,6 +41,9 @@ const LoginPage = function ({ navigation, route }) {
     const [passworderror, setpassworderror] = useState(false)
     const [passworderror1, setpassworderror1] = useState(false)
     const [wrongcredential, setwrongcredential] = useState(false)
+
+
+    const [showPassword,setShowPassword]=useState(true);
 
 
     const { globaldata, updateField } = useContext(GlobalContext);
@@ -76,7 +77,7 @@ const LoginPage = function ({ navigation, route }) {
         var ExistingToken = await AsyncStorage.getItem("notificationToken")
         console.log(ExistingToken);
 
-        // return
+    
 
 
         var final = {
@@ -89,8 +90,7 @@ const LoginPage = function ({ navigation, route }) {
 
 
 
-        // Alert.alert(`${url}api/authenticate`)
-        // Alert.alert(JSON.stringify(final))
+      
         try {
             const response = await fetch(`${url}api/authenticate`, {
                 method: 'POST',
@@ -170,6 +170,7 @@ const LoginPage = function ({ navigation, route }) {
 
 
     }
+    
 
     useEffect(() => {
         // Handle hardware back button press
@@ -235,15 +236,29 @@ const LoginPage = function ({ navigation, route }) {
                                 value={password}
                                 autoComplete="password"
                                 onChangeText={(text) => { setpassword(text) }}
-                                secureTextEntry={true}
+                                secureTextEntry={showPassword}
                             />
 
-                            <Pressable onPress={() => navigation.navigate("FP1")} style={styles.forgot}>
-                                <Text allowFontScaling={false} style={[styles.white, styles.forgottext]}>Forgot ?</Text>
-                            </Pressable>
+
+                            <TouchableOpacity style={{ position: 'absolute', bottom: 0, right: 0, marginRight: 10, marginBottom: 5 }}
+                            onPress={()=>setShowPassword(prev=>!prev)}
+                            >
+                                {showPassword?
+                                    <Entypo name="eye-with-line" size={24} color="#828282" />
+                                    :
+                                    <Entypo name="eye" size={24} color="#828282" />
+
+                                }
+                            </TouchableOpacity>
+
                         </View>
                         {passworderror && <Text style={[styles.error, { marginTop: 5 }]}>Please enter password*</Text>}
                         {passworderror1 && <Text style={styles.error}>Password must be at least 8 characters long, contain one uppercase letter, one lowercase letter, and one number.</Text>}
+
+                        <Pressable onPress={() => navigation.navigate("FP1")} style={styles.forgot}>
+                            <Text allowFontScaling={false} style={[styles.white, styles.forgottext]}>Forgot Password ?</Text>
+                        </Pressable>
+
                         <Pressable style={signupstyles.next} onPress={() => { handlelogin() }}>
                             {loading && <ActivityIndicator style={{ marginTop: 7 }} size={24} color="#16181a" />}
                             {!loading && <Text allowFontScaling={false} style={signupstyles.nexttext}>Login</Text>}

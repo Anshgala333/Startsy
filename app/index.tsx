@@ -2,16 +2,14 @@ import React, { useState, useRef } from "react";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as SplashScreen from "expo-splash-screen";
-import { DarkTheme, NavigationContainer } from "@react-navigation/native";
-// import { createStackNavigator } from "@react-navigation/stack";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Green from "../SCREENS/greenscreen.js"; //page 1
 import Login1 from "../SCREENS/logintrial.js"; // login page
-import ReadMore1 from "../SCREENS/trial-1.js"; // read more page
-import { Alert, Button, Pressable, SafeAreaView } from "react-native";
 
 import LoginPage from "../SCREENS/LoginPage.js";
+
 import Date1 from "../SCREENS/Date.js";
+
 import Signup1 from "../SCREENS/signup-1.js";
 import Signup2 from "../SCREENS/signup2.js";
 import Signup3 from "../SCREENS/signup3.js";
@@ -24,26 +22,31 @@ import Signup9 from "../SCREENS/Signup9.js";
 import Signup10 from "../SCREENS/Signup10.js";
 import Signup11 from "../SCREENS/Signup11.js";
 import Signup12 from "../SCREENS/signup12.js";
-import Signup13 from "../SCREENS/Signup13.js";
 import SelectInvestor from "../SCREENS/SelectInvestorType.js";
+import Signup13 from "../SCREENS/Signup13.js";
+
+
 import Main1 from "../SCREENS/Main1.js";
 import Main2 from "../SCREENS/Main2.js";
+
 import Chat from "../SCREENS/main-1/CHATSCREEN.js";
 import Chat1 from "../SCREENS/main-1/GROUPCHATSCREEN.js";
 import Card from "../SCREENS/main-1/Card.js";
 import Ct from "../SCREENS/main-1/Ct.js";
 import OK from "../SCREENS/bottom.js";
+
 import ChangePassword1 from "../SCREENS/changePassword1.js";
 import ChangePassword2 from "../SCREENS/changePassword2.js";
 import EditInvestorInfo from "../SCREENS/edit profile pages/investor.js";
 import Founder1 from "../SCREENS/edit profile pages/founder-1.js";
 import Founder2 from "../SCREENS/edit profile pages/founder-2.js";
-import Singleprofilepage from "../SCREENS/singleprofilepage.js";
 import Logout from "../SCREENS/Logout.js";
-import Login2 from "../SCREENS/login2.js";
-import Test1 from "../SCREENS/test1.js";
 import FP1 from "../SCREENS/FP1.js";
 import FP2 from "../SCREENS/FP2.js";
+
+import Singleprofilepage from "../SCREENS/singleprofilepage.js";
+import Login2 from "../SCREENS/login2.js";
+import Test1 from "../SCREENS/test1.js";
 import PricePage from "../SCREENS/JASH/PricePage.js";
 import Skeleton1 from "../SCREENS/main-2/skeleton.js";
 import GroudDetailsScreen from "../SCREENS/JASH/GroupDetailsScreen.js";
@@ -56,10 +59,8 @@ import Modal1 from "../SCREENS/Modal.js";
 import Wait from "../SCREENS/Wait.js";
 import Editcommunity from "../SCREENS/edit profile pages/Editcommunity.js";
 import F1 from "../SCREENS/test.js";
-import KeyboardAvoidingComponent from "../SCREENS/Keyboard.js";
-import Blur from "../SCREENS/blur.js"; // trial blur page
 import { useEffect, createContext } from "react";
-import { ActivityIndicator, View, Text, StyleSheet } from "react-native";
+import {  StyleSheet } from "react-native";
 import useLoadFonts from "../hooks/useLoadFonts.js";
 import { setBackgroundColorAsync } from "expo-system-ui";
 import * as SystemUI from "expo-system-ui";
@@ -146,32 +147,7 @@ export default function App() {
   const notificationListener = useRef<Notifications.Subscription | null>(null);
   const responseListener = useRef<Notifications.EventSubscription>();
 
-  // useEffect(() => {
-  //   // ✅ Listen for notifications when the app is open
-  //   notificationListener.current =
-  //     Notifications.addNotificationReceivedListener(async (notification) => {
-  //       const { title, body } = notification.request.content;
-
-  //       // ✅ Show a local notification
-  //       await Notifications.scheduleNotificationAsync({
-  //         content: {
-  //           title: title,
-  //           body: body,
-  //           sound: "default",
-  //         },
-  //         trigger: null, // Shows immediately
-  //       });
-  //     });
-
-  //   return () => {
-  //     if (notificationListener.current) {
-  //       Notifications.removeNotificationSubscription(notificationListener.current);
-  //       notificationListener.current = null; // Reset after removing
-  //     }
-  //   };
-  // }, []);
-
-  // const notificationListener = useRef();
+  
 
   useEffect(() => {
     registerForPushNotificationsAsync().then(
@@ -225,12 +201,7 @@ export default function App() {
 
   return (
     <GlobalProvider>
-      {/* <Pressable
-        style={{ position: "absolute", top: 100, left: 100 , zIndex : 10000000 }}
-        onPress={async () => {
-          await schedulePushNotification();
-        }}
-      /> */}
+    
       <StatusBar backgroundColor="#16181a" barStyle={"light-content"} />
       {appisready && (
         <Stack.Navigator
@@ -331,20 +302,7 @@ export default function App() {
           <Stack.Screen name="Settings" component={Settings} />
           <Stack.Screen name="Date" component={Date1} />
 
-          <Stack.Screen
-            name="KeyboardAvoidingComponent"
-            component={KeyboardAvoidingComponent}
-            options={{
-              headerTitle: "Your Custom Title", // Custom title for the header
-              headerStyle: {
-                backgroundColor: "blue", // Custom background color
-              },
-              headerTintColor: "white", // Custom color for the title text
-              headerTitleStyle: {
-                fontWeight: "bold", // Make the title text bold
-              },
-            }}
-          />
+          
 
           <Stack.Screen
             name="Singleprofilepage"

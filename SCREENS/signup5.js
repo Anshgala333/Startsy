@@ -532,7 +532,7 @@ const Signup5 = ({ navigation, route }) => {
         //     setOpen(false)
         // }}>
         <SafeAreaView style={{ flex: 1, backgroundColor: "#16181a" }}>
-            <ScrollView nestedScrollEnabled={true} style={[{ flex: 1, backgroundColor: "#16181a", paddingBottom: 0, paddingBottom: 0 }, signup3styles.container]}>
+            <ScrollView nestedScrollEnabled={true} style={[{  flex :1,backgroundColor: "#16181a", paddingBottom: 0, paddingBottom: 0 }, signup3styles.container]}>
                 {/* <KeyboardAwareScrollView enableOnAndroid={true} extraHeight={0} extraScrollHeight={0} enableAutomaticScroll={true} style={signup3styles.container}> */}
                 {/* <ScrollView style={signup3styles.row}> */}
                 <Devi show={show} setShow={setShow} date={date} setDate={setDate} filtereddate={filtereddate} setfiltereddate={setfiltereddate} />
@@ -554,10 +554,11 @@ const Signup5 = ({ navigation, route }) => {
                 {/* Bottom Section */}
                 <ScrollView nestedScrollEnabled={true} style={s5.bottom}>
                     <View
-                     style={{ paddingBottom: 10, borderTopLeftRadius: 100 , paddingTop : 70 , height : height * 0.84 , }}>
+                     style={{ paddingBottom: 10, borderTopLeftRadius: 100 , paddingTop : 10 , height : height * 0.84 , }}>
 
-                        <Pressable onPress={fileupload}>
+                        <Pressable style={{width : "100%" , height  :130  , justifyContent : "center" , alignContent : "center"}} onPress={fileupload}>
                             {image != "xyz" ? (
+                                
                                 <Image style={styles.img} source={{ uri: image }} />
                             ) : (
                                 // <Image style={styles.img1} source={require("../assets/images/User_light.png")} />
@@ -640,7 +641,7 @@ const Signup5 = ({ navigation, route }) => {
                                 placeholder="Phone number *"
                                 placeholderTextColor="#828282"
 
-                                style={[s5.input, { marginTop: 12 , paddingLeft : 3 , marginBottom : 14}]}
+                                style={[s5.input, { marginTop: 16 , paddingLeft : 3 , marginBottom : 14}]}
                                 value={number}
                                 onChangeText={(text) => {
                                     check()
@@ -753,8 +754,11 @@ const styles = StyleSheet.create({
     },
     img: {
         margin: "auto",
-        // width: 113,
-        // height: 113,
+        width: 113,
+        height: 113,
+        marginHorizontal : "auto",
+        alignSelf : "center",
+
         resizeMode : "cover",
         // marginTop : 0,
         // marginBottom :-100,

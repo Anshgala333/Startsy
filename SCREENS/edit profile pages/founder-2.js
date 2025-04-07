@@ -544,7 +544,7 @@ const Founder2 = ({ navigation, route }) => {
                 <View style={{ width: width * 0.98, margin: "auto" }}>
                     {/* <Text style={styles1.edit}>Edit Profile</Text> */}
 
-                    <Text allowFontScaling={false} style={[styles.t1, { marginTop: 15, marginBottom: 0, paddingLeft: 12 }]}>About Startup/Organisation</Text>
+                    <Text allowFontScaling={false} style={[styles.t1, { marginTop: 0, marginBottom: 0, paddingLeft: 12 }]}>About Startup/Organisation</Text>
 
 
 
@@ -552,7 +552,7 @@ const Founder2 = ({ navigation, route }) => {
                         onTouchStart={handleOutsideTouch}
                         allowFontScaling={false}
                         placeholder="Name"
-                        placeholderTextColor="#B8B8B8"
+                        placeholderTextColor="#828282"
                         style={styles1.input}
                         value={nameOfStartup}
                         onChangeText={(text) => { setNameOfStartup(text) }}
@@ -562,7 +562,7 @@ const Founder2 = ({ navigation, route }) => {
                     <TextInput
                         allowFontScaling={false}
                         placeholder="Goal"
-                        placeholderTextColor="#B8B8B8"
+                        placeholderTextColor="#828282"
                         style={[styles1.input, { marginBottom: 20 }]}
                         value={goal}
                         onChangeText={(text) => { setGoal(text) }}
@@ -577,7 +577,7 @@ const Founder2 = ({ navigation, route }) => {
                         <TextInput
                             allowFontScaling={false}
                             placeholder=""
-                            placeholderTextColor="#B8B8B8"
+                            placeholderTextColor="#828282"
                             style={styles1.input11}
                             maxLength={1000}
                             multiline={true}
@@ -620,7 +620,7 @@ const Founder2 = ({ navigation, route }) => {
                         <Text onTouchStart={handleOutsideTouch} allowFontScaling={false} style={[styles.t1, { marginBottom: 10, marginTop: 25, paddingLeft: 7 }]}>Funding Status</Text>
                         <Text onTouchStart={handleOutsideTouch} allowFontScaling={false} style={[styles.t2, { marginBottom: 15 }]}>Indicate the amount of funding your startup has received so far. This information will only be visible to verified investors and helps them assess your startup's financial backing and growth potential.</Text>
 
-                        <Pressable onPress={() => { handleOutsideTouch() }} style={[styles.btn1, { backgroundColor: "#24272A", marginBottom: 10, width: 220, height: 52 }]}>
+                        <Pressable onPress={() => { handleOutsideTouch() }} style={[styles.btn1, {  marginBottom: 10, width: 220, height: 40 }]}>
                             <Text allowFontScaling={false} style={styles.nexttext}>{sliderrange.toLocaleString("en-IN")}</Text>
                         </Pressable>
 
@@ -677,7 +677,7 @@ const Founder2 = ({ navigation, route }) => {
 
                         <View style={styles1.v1} >
                             <Pressable onPress={addurl}>
-                                <AntDesign name="instagram" style={styles1.plus1} size={24} color="#bbbbbb" />
+                                <AntDesign name="instagram" style={styles1.plus1} size={24} color="#828282" />
                                 {/* <Entypo style={styles.plus1} name="plus" size={24} color="#00DE62" /> */}
                             </Pressable>
 
@@ -686,7 +686,7 @@ const Founder2 = ({ navigation, route }) => {
                                 allowFontScaling={false}
                                 placeholder="URL"
                                 numberOfLines={1}
-                                placeholderTextColor="#B8B8B8"
+                                placeholderTextColor="#828282"
                                 style={styles1.inputf}
                                 value={InstagramUrl}
                                 onChangeText={(text) => { setInstagramUrl(text) }}
@@ -697,7 +697,7 @@ const Founder2 = ({ navigation, route }) => {
                         <View style={styles1.v1} >
                             <Pressable onPress={addurl}>
                                 {/* <Feather name="youtube" style={styles.plus1} size={24} color="#bbbbbb" /> */}
-                                <AntDesign name="youtube" style={styles1.plus1} size={24} color="#bbbbbb" />
+                                <AntDesign name="youtube" style={styles1.plus1} size={24} color="#828282" />
                                 {/* <Entypo style={styles.plus1} name="plus" size={24} color="#00DE62" /> */}
                             </Pressable>
 
@@ -706,7 +706,7 @@ const Founder2 = ({ navigation, route }) => {
                                 allowFontScaling={false}
                                 placeholder="URL"
                                 numberOfLines={1}
-                                placeholderTextColor="#B8B8B8"
+                                placeholderTextColor="#828282"
                                 style={styles1.inputf}
                                 value={YTURL}
                                 onChangeText={(text) => { setYTURL(text) }}
@@ -716,7 +716,7 @@ const Founder2 = ({ navigation, route }) => {
 
                         <View style={styles1.v1} >
                             <Pressable onPress={addurl}>
-                                <AntDesign name="linkedin-square" style={styles1.plus1} size={24} color="#bbbbbb" />
+                                <AntDesign name="linkedin-square" style={styles1.plus1} size={24} color="#828282" />
                                 {/* <Entypo style={styles.plus1} name="plus" size={24} color="#00DE62" /> */}
                             </Pressable>
 
@@ -725,7 +725,7 @@ const Founder2 = ({ navigation, route }) => {
                                 allowFontScaling={false}
                                 placeholder="URL"
                                 numberOfLines={1}
-                                placeholderTextColor="#B8B8B8"
+                                placeholderTextColor="#828282"
                                 style={styles1.inputf}
                                 value={LinkedinURl}
                                 onChangeText={(text) => { setLinkedinURl(text) }}
@@ -738,17 +738,17 @@ const Founder2 = ({ navigation, route }) => {
                         {teammember.map((we, index) => (
                             <View key={we.id} style={styles1.certificate}>
                                 <Pressable onPress={addteammember}>
-                                    <Entypo style={styles1.plus} name="plus" size={24} color="#00DE62" />
+                                    <Entypo style={styles1.plus} name="plus" size={24} color="#ccc" />
                                 </Pressable>
 
                                 {index > 0 && <Pressable onPress={() => { deletecertificate(index) }}>
-                                    <FontAwesome6 name="trash" style={styles1.minus} size={15} color="#00DE62" />
+                                    <FontAwesome6 name="trash" style={styles1.minus} size={15} color="#ccc" />
                                 </Pressable>}
 
                                 <TextInput
                                     allowFontScaling={false}
                                     placeholder="@Username"
-                                    placeholderTextColor="#B8B8B8"
+                                    placeholderTextColor="#828282"
                                     style={[styles1.input1, { marginTop: 20, backgroundColor: "transparent" }]}
                                     value={we.username}
                                     onChangeText={(text) => { handleworkchange(we.id, "username", text) }}
@@ -758,7 +758,7 @@ const Founder2 = ({ navigation, route }) => {
                                 <TextInput
                                     allowFontScaling={false}
                                     placeholder="Name"
-                                    placeholderTextColor="#B8B8B8"
+                                    placeholderTextColor="#828282"
                                     style={styles1.input1}
                                     value={we.name}
                                     onChangeText={(text) => { handleworkchange(we.id, "name", text) }}
@@ -768,7 +768,7 @@ const Founder2 = ({ navigation, route }) => {
                                 <TextInput
                                     allowFontScaling={false}
                                     placeholder="Role"
-                                    placeholderTextColor="#B8B8B8"
+                                    placeholderTextColor="#828282"
                                     style={styles1.input1}
                                     value={we.role}
                                     onChangeText={(text) => { handleworkchange(we.id, "role", text) }}
@@ -792,7 +792,7 @@ const Founder2 = ({ navigation, route }) => {
 
 
                     <View onTouchStart={handleOutsideTouch} s style={styles1.icons}>
-                        <Pressable onPress={() => navigation.goBack()} style={{ alignSelf: "center" }}><FontAwesome6 name="chevron-left" size={40} color="#00DF60" /></Pressable>
+                        <Pressable onPress={() => navigation.goBack()} style={{ alignSelf: "center" }}><FontAwesome6 name="chevron-left" size={30} color="#00DF60" /></Pressable>
                         <Pressable onPress={savedata} style={styles1.btn}>
                             {loading && <ActivityIndicator size={24} color="#16181a" />}
                             {!loading && <Text allowFontScaling={false} style={styles1.nexttext}>Save</Text>}
@@ -836,11 +836,14 @@ const styles1 = StyleSheet.create({
     },
     headertext: {
         color: "#00DE62",
-        fontSize: scalingfactor * 35,
+        fontSize: 30,
         fontFamily: "myanmar",
         fontWeight: "bold",
         paddingTop: 5,
-        paddingHorizontal: 20,
+        // marginBottom :-10,
+        paddingHorizontal: 25,
+
+        
     },
     edit: {
         color: "#B8B8B8",
@@ -893,7 +896,7 @@ const styles1 = StyleSheet.create({
     ,
     btn: {
         width: 120,
-        height: 48,
+        height: 40,
         // height : scalingfactor*48,
         backgroundColor: "#00DF60",
         // padding: scalingfactor * 12,
@@ -914,7 +917,7 @@ const styles1 = StyleSheet.create({
     }, nexttext: {
         color: "#24272A",
         fontFamily: "Alata",
-        fontSize: scalingfactor * 24,
+        fontSize:  20,
         textAlign: "center",
         // lineHeight : 16
         marginTop: -4
@@ -932,10 +935,11 @@ const styles1 = StyleSheet.create({
         marginTop: 10,
         margin: "auto",
         width: "92%",
-        backgroundColor: "#24272A",
-        borderWidth: 3,
-        borderColor: "#16181A",
+        // backgroundColor: "#24272A",
+        borderWidth: 1,
+        borderColor: "#ccc",
         borderRadius: 10,
+        marginTop : 20,
         position: "relative"
     },
     plus: {
@@ -948,14 +952,14 @@ const styles1 = StyleSheet.create({
         backgroundColor: "transparent",
         margin: height * 0.016,
         marginTop: 0,
-        borderBottomWidth: 3,
+        borderBottomWidth: 1,
         paddingLeft: scalingfactor * 10,
-        borderBottomColor: "#16181A",
+        borderBottomColor: "#ccc",
         fontSize: scalingfactor * 20,
         color: "#B8B8B8",
         paddingBottom: scalingfactor * 5,
         width: "92%",
-        // fontFamily: "Roboto",
+        fontFamily: "Alata",
         // lineHeight: scalingfactor * 18,
         marginBottom: scalingfactor * 25
     },
@@ -1014,8 +1018,8 @@ const styles1 = StyleSheet.create({
         zIndex: 100
     },
     v1: {
-        borderBottomWidth: 2,
-        borderBottomColor: "#94A3B8",
+        borderBottomWidth: 1,
+        borderBottomColor: "#ccc",
         width: "90%",
 
         margin: "auto",
@@ -1048,7 +1052,7 @@ const styles1 = StyleSheet.create({
     minus: {
         position: "absolute",
         right: 45,
-        top: -3,
+        top: -2,
         zIndex: 100
     },
     minus1: {
