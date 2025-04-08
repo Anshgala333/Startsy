@@ -489,7 +489,7 @@ const Founder1 = ({ navigation }) => {
                         allowFontScaling={false}
                         placeholder="Full Name"
                         placeholderTextColor="#828282"
-                        style={styles1.input}
+                        style={[styles1.input, {width:"89%"}]}
                         value={fullName}
                         onChangeText={(text) => { setfullname(text) }}
                     />
@@ -503,14 +503,14 @@ const Founder1 = ({ navigation }) => {
                         value={email}
                         onChangeText={(text) => { setemail(text) }}
                     /> */}
-                    <Drop   borderwidth={0} bb={1} borderColor={"#ccc"}  pccolor={"#828282"}  items={country1} placeholder={country} width={"95%"} onValueChange={(value) => setcountry(value)} open={open1} setOpen={t1} extra={true} edit />
+                    <Drop   borderwidth={0} bb={1} borderColor={"#ccc"}  pccolor={"#828282"}  items={country1} placeholder={"India"} width={"93%"} onValueChange={(value) => setcountry(value)} open={open1} setOpen={t1} extra={true} edit />
                     {errors.country && <Text style={styles1.errnew}>{errors.country}</Text>}
 
                     <TextInput
                         allowFontScaling={false}
                         placeholder="Phone number"
                         placeholderTextColor="#828282"
-                        style={[styles1.input, { marginTop: 28 }]}
+                        style={[styles1.input, { marginTop: 16 , width:"89%"} ]}
                         value={phone}
                         onChangeText={(text) => { setphone(text) }}
                     />
@@ -528,18 +528,18 @@ const Founder1 = ({ navigation }) => {
 
                     <View style={{ width: width * 0.95, margin: "auto" }}>
 
-                        <Text allowFontScaling={false} style={[styles.t1, { marginTop: 15, marginBottom: -10, paddingLeft: 7 }]}>Area of Expertise / Interest</Text>
+                        <Text allowFontScaling={false} style={[styles.t1, { marginTop: 15, marginBottom: 0, paddingLeft: 7 }]}>Area of Expertise / Interest</Text>
                         <TextInput
                             allowFontScaling={false}
                             placeholder="Write any Top 3"
                             placeholderTextColor="#828282"
-                            style={[styles1.input, { marginTop: 25 }]}
+                            style={[styles1.input, { marginTop: 15 }]}
                             value={skills}
                             onChangeText={(text) => { setskills(text) }}
                         />
-                        <Text onTouchStart={handleOutsideTouch} allowFontScaling={false} style={[styles.t1, { marginTop: 25, marginBottom: 10, paddingLeft: 7 }]}>Education </Text>
+                        <Text onTouchStart={handleOutsideTouch} allowFontScaling={false} style={[styles.t1, { marginTop: 15, marginBottom: 10, paddingLeft: 7 }]}>Education </Text>
                         <Text onTouchStart={handleOutsideTouch} allowFontScaling={false} style={[styles.t2, { marginBottom: 15 }]}>List your highest degree achieved, which helps to establish your academic background and qualifications. </Text>
-                        <Drop bl={0} bt={0} borderwidth={0} bb={1} pccolor={"#828282"} width={"95%"} items={edulist} placeholder={education} onValueChange={(value) => { seteducation(value) }} setOpen={t2} open={open2} nestedScrollEnabled={true} />
+                        <Drop bl={0} bt={0} borderwidth={0} bb={1} borderColor={"#ccc"} pccolor={"#828282"} width={"95%"} items={edulist} placeholder={education} onValueChange={(value) => { seteducation(value) }} setOpen={t2} open={open2} nestedScrollEnabled={true} />
                         {errors.education && <Text style={styles1.errnew}>{errors.education}</Text>}
 
 
@@ -646,7 +646,7 @@ const styles1 = StyleSheet.create({
     },
     headertext: {
         color: "#00DE62",
-        fontSize: scalingfactor * 35,
+        fontSize: scalingfactor * 30,
         fontFamily: "myanmar",
         fontWeight: "bold",
         paddingTop: 5,
@@ -673,7 +673,6 @@ const styles1 = StyleSheet.create({
     input: {
         backgroundColor: "transparent",
         margin: height * 0.016,
-        // marginTop: 40,
         borderBottomWidth: 1,
         // borderRadius : 20,
         paddingLeft: scalingfactor * 3,
@@ -681,9 +680,9 @@ const styles1 = StyleSheet.create({
         fontSize: scalingfactor * 20, // Responsive font size
         color: "#ccc",
         paddingBottom: scalingfactor * 7,
-        width: "90%",
+        width: "92%",
         marginHorizontal: "auto",
-        // fontFamily: "Roboto",
+        fontFamily: "Alata",
         // lineHeight: scalingfactor * 18,
         marginBottom: scalingfactor * 15,
         // borderRadius : 20
@@ -756,7 +755,7 @@ const styles1 = StyleSheet.create({
         width: 182,
         height: 40,
         alignSelf: "center",
-        marginVertical: 12
+        marginVertical: 2
 
 
     },

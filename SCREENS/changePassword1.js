@@ -87,13 +87,13 @@ const ChangePassword1 = ({ navigation }) => {
             <TextInput
                 allowFontScaling={false}
                 placeholder="Password"
-                placeholderTextColor="#B8B8B8"
+                placeholderTextColor="#828282"
                 style={styles.input}
                 value={password}
                 onChangeText={(text) => { setpassword(text) }}
             />
             {error && <Text style={styles.err}>{message}</Text>}
-            <Text style={styles.t2}>Forgot password</Text>
+            <Text style={styles.t2}>Forgot password ?</Text>
             <Pressable onPress={check} style={styles.btn}>
                 {loading && <ActivityIndicator style={{ marginTop: -2 }} size={24} color="#16181a" />}
                 {!loading && <Text style={styles.btntext}>Next</Text>}
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
         // padding: 20,
     },
     headerText: {
-        fontSize: 35,
+        fontSize: 30,
         fontWeight: "bold",
         color: "#00DE62",
         marginBottom: 20,
@@ -134,14 +134,14 @@ const styles = StyleSheet.create({
     },
     t2: {
         // fontFamily: "Roboto",
-        color: "#94A3B8",
+        color: "#828282",
         fontSize: 15,
         textAlign: "center",
         marginTop: -5
     },
     t1: {
         fontFamily: "Alata",
-        color: "#ffffff",
+        color: "#ccc",
         fontSize: 24,
         textAlign: "center",
         marginTop: 5
@@ -150,12 +150,12 @@ const styles = StyleSheet.create({
         backgroundColor: "transparent",
         margin: height * 0.016,
         marginTop: 40,
-        borderBottomWidth: 3,
+        borderBottomWidth: 1,
         // borderRadius : 20,
         paddingLeft: scalingfactor * 10,
-        borderBottomColor: "#AEAFAF",
+        borderBottomColor: "#ccc",
         fontSize: scalingfactor * 20, // Responsive font size
-        color: "#B8B8B8",
+        color: "#ccc",
         paddingBottom: scalingfactor * 7,
         width: "90%",
         marginHorizontal: "auto",

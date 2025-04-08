@@ -605,15 +605,15 @@ const Founder2 = ({ navigation, route }) => {
                     <View style={{ width: width * 0.95, margin: "auto" }}>
 
 
-                        <Text onTouchStart={handleOutsideTouch} allowFontScaling={false} style={[styles.t1, { marginTop: 25, marginBottom: 10, paddingLeft: 7 }]}>Startup sector  </Text>
+                        <Text onTouchStart={handleOutsideTouch} allowFontScaling={false} style={[styles.t1, { marginTop: 15,marginBottom: 10, paddingLeft: 7 }]}>Startup sector  </Text>
                         <Text onTouchStart={handleOutsideTouch} allowFontScaling={false} style={[styles.t2, { marginBottom: 15 }]}>List your highest degree achieved, which helps to establish your academic background and qualifications. </Text>
-                        <Drop borderwidth={0} bb={1} pccolor={"#B8B8B8"}  width={"88%"} placeholder={sector} width1={"86%"} items={areaofinterestlist} onValueChange={(value) => { setSector(value) }} setOpen={t2} open={open2} nestedScrollEnabled={true} />
+                        <Drop borderwidth={0} bb={1} pccolor={"#828282"} borderColor={"#ccc"}  width={"92%"} placeholder={sector} width1={"86%"} items={areaofinterestlist} onValueChange={(value) => { setSector(value) }} setOpen={t2} open={open2} nestedScrollEnabled={true} />
                         {errors.sector && <Text style={styles1.errnew}>{errors.sector}</Text>}
 
 
                         <Text onTouchStart={handleOutsideTouch} allowFontScaling={false} style={[styles.t1, { marginBottom: 10, marginTop: 25, paddingLeft: 7 }]}>Startup stage  </Text>
                         <Text onTouchStart={handleOutsideTouch} allowFontScaling={false} style={[styles.t2, { marginBottom: 15 }]}>Detail any relevant industry experience, particularly if you’ve worked in a specific company or held roles that have prepared you for your current venture.</Text>
-                        <Drop borderwidth={0} bb={1} pccolor={"#B8B8B8"}  width={"88%"} placeholder={stageOfStartup} width1={"86%"} items={stage} onValueChange={(value) => setStageOfStartup(value)} open={open1} setOpen={t1} />
+                        <Drop borderwidth={0} bb={1} pccolor={"#828282"}   borderColor={"#ccc"} width={"92%"} placeholder={stageOfStartup} width1={"86%"} items={stage} onValueChange={(value) => setStageOfStartup(value)} open={open1} setOpen={t1} />
                         {errors.stage && <Text style={styles1.errnew}>{errors.stage}</Text>}
 
 
@@ -869,13 +869,13 @@ const styles1 = StyleSheet.create({
         borderBottomWidth: 1,
         // borderRadius : 20,
         paddingLeft: scalingfactor * 10,
-        borderBottomColor: "#AEAFAF",
+        borderBottomColor: "#ccc",
         fontSize: scalingfactor * 20, // Responsive font size
-        color: "#B8B8B8",
+        color: "#ccc",
         paddingBottom: scalingfactor * 7,
         width: "90%",
         marginHorizontal: "auto",
-        fontFamily: "Roboto",
+        fontFamily: "Alata",
         lineHeight: scalingfactor * 18,
         marginBottom: scalingfactor * 15,
         // borderRadius : 20
@@ -966,7 +966,7 @@ const styles1 = StyleSheet.create({
     t22: {
         textAlign: 'Left',
         color: "#94A3B8",
-        fontFamily: 'Roboto',
+        fontFamily: 'Alata',
         fontSize: scalingfactor * 13,
 
         marginBottom: scalingfactor * 8,
@@ -986,16 +986,16 @@ const styles1 = StyleSheet.create({
         backgroundColor: "transparent",
         margin: height * 0.016,
         marginTop: -2,
-        borderWidth: 2,
+        borderWidth: 1,
         borderRadius: 20,
-        borderColor: "#828282",
-        fontSize: scalingfactor * 20,
-        color: "#B8B8B8",
+        borderColor: "#ccc",
+        fontSize: scalingfactor * 18,
+        color: "#ccc",
         paddingBottom: scalingfactor * 5,
         width: "90%",
         margin: "auto",
-        // fontFamily: "Roboto",
-        // lineHeight: scalingfactor * 18,
+        fontFamily: "Roboto",
+        lineHeight: scalingfactor * 22,
         marginBottom: scalingfactor * 10,
         height: 220,
         marginTop: 10,

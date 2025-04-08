@@ -16,7 +16,7 @@ export default styles = StyleSheet.create({
         fontFamily: 'Alata',
         fontSize: 24,
         // backgroundColor : "red",
-        width: "97%",
+        width: "90%",
         marginBottom: scalingfactor * 3,
         pointerEvents: "none",
         zIndex : -1
