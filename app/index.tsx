@@ -25,7 +25,6 @@ import Signup12 from "../SCREENS/signup12.js";
 import SelectInvestor from "../SCREENS/SelectInvestorType.js";
 import Signup13 from "../SCREENS/Signup13.js";
 
-
 import Main1 from "../SCREENS/Main1.js";
 import Main2 from "../SCREENS/Main2.js";
 
@@ -60,7 +59,7 @@ import Wait from "../SCREENS/Wait.js";
 import Editcommunity from "../SCREENS/edit profile pages/Editcommunity.js";
 import F1 from "../SCREENS/test.js";
 import { useEffect, createContext } from "react";
-import {  StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import useLoadFonts from "../hooks/useLoadFonts.js";
 import { setBackgroundColorAsync } from "expo-system-ui";
 import * as SystemUI from "expo-system-ui";
@@ -147,8 +146,6 @@ export default function App() {
   const notificationListener = useRef<Notifications.Subscription | null>(null);
   const responseListener = useRef<Notifications.EventSubscription>();
 
-  
-
   useEffect(() => {
     registerForPushNotificationsAsync().then(
       (token) => token && setExpoPushToken(token)
@@ -201,7 +198,6 @@ export default function App() {
 
   return (
     <GlobalProvider>
-    
       <StatusBar backgroundColor="#16181a" barStyle={"light-content"} />
       {appisready && (
         <Stack.Navigator
@@ -226,7 +222,11 @@ export default function App() {
           />
 
           <Stack.Screen name="LoginPage" component={LoginPage} />
-          <Stack.Screen name="Signup1" component={Signup1} />
+          <Stack.Screen
+            name="Signup1"
+            getComponent={() => require("../SCREENS/signup-1.js").default}
+            // component={Signup1}
+          />
           <Stack.Screen name="Signup2" component={Signup2} />
           <Stack.Screen name="Signup3" component={Signup3} />
           <Stack.Screen name="Signup4" component={Signup4} />
@@ -301,8 +301,6 @@ export default function App() {
           <Stack.Screen name="PricePage" component={PricePage} />
           <Stack.Screen name="Settings" component={Settings} />
           <Stack.Screen name="Date" component={Date1} />
-
-          
 
           <Stack.Screen
             name="Singleprofilepage"

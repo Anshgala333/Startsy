@@ -144,18 +144,28 @@ const Foryou =
                     },
                 });
                 const data = await response.json();
-                console.log(data);
+                console.log(data[2] , "ullu 1");
                 
 
 
                 var decode = jwtDecode(token)
                 var loggedinUserID = decode._id
 
+                console.log("ullu2" , loggedinUserID);
+                
+
                 var data1 = data.data.map(e => {
+                    console.log(e);
+                    if(!e)return
+                    
                     var object = { ...e, isliked: e.likedBy.includes(loggedinUserID), Applied: e.communityPost ? e.communityPost.communityMembers.includes(loggedinUserID) : false, Jobapplied: e.jobPosts ? e.jobPosts.jobApplicants.includes(loggedinUserID) : false, itemlikedcount: e.likedBy.length , issaved : !data.bookmarks.includes(e._id) }
                     return object
                 })
+                console.log("recahed here");
+                
 
+                console.log(data1 , "ullu");
+                
 
                 if (data.data.length > 0) {
 

@@ -51,7 +51,7 @@ const LoginPage = function ({ navigation, route }) {
     const handlelogin = async () => {
 
         console.log("login route called");
-
+        Alert.alert(`${url}api/authenticate`)
 
 
         setemailerror(false)
@@ -88,11 +88,23 @@ const LoginPage = function ({ navigation, route }) {
         }
         console.log(final);
 
+        Alert.alert(`${url}api/authenticate`)
 
 
       
         try {
-            const response = await fetch(`${url}api/authenticate`, {
+            // const response =
+            //  await fetch(`${url}api/authenticate`, {
+            //     method: 'POST',
+            //     body: JSON.stringify(final),
+            //     headers: {
+            //         'Accept': 'application/json',
+            //         'Content-Type': 'application/json',
+
+            //     }
+            // });
+            const response =
+             await fetch(`https://afraid-ants-move.loca.lt/api/authenticate`, {
                 method: 'POST',
                 body: JSON.stringify(final),
                 headers: {
@@ -103,7 +115,7 @@ const LoginPage = function ({ navigation, route }) {
             });
             const data = await response.json();
             console.log(data);
-            // Alert.alert(JSON.stringify(data))
+            Alert.alert(JSON.stringify(data))
             if (response.status === 200) {
                 updateField("token", data.accessToken);
                 try {
@@ -157,7 +169,7 @@ const LoginPage = function ({ navigation, route }) {
 
         }
         catch (err) {
-            // Alert.alert(JSON.stringify(err))
+            Alert.alert(JSON.stringify(err))
             console.log(err);
 
         }
@@ -209,7 +221,7 @@ const LoginPage = function ({ navigation, route }) {
 
 
                     <View style={[signupstyles.bottom, { height: height*0.7 }]}>
-                        <Text allowFontScaling={false} style={[signupstyles.t1, { marginTop: -15, marginBottom: -20 }]}>Welcome Back !</Text>
+                        <Text allowFontScaling={false} style={[signupstyles.t1, { marginTop: -15, marginBottom: -20 }]}> Welcome Back !</Text>
                         {!error && <Text allowFontScaling={false} style={signupstyles.t2}></Text>}
                         {wrongcredential && <Text style={signupstyles.invalid}>Invalid credentials</Text>}
 
