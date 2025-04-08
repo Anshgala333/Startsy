@@ -5,18 +5,19 @@ import { useFocusEffect } from "expo-router";
 
 import signupstyles from "../styles/signup1styles.js";
 import s5 from "@/styles/s5.js";
-import Ionicons from '@expo/vector-icons/Ionicons';
+// import Ionicons from '@expo/vector-icons/Ionicons';
 import Back from "@/components/back.js";
 import { url } from "../config.js"
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { SafeAreaView, ScrollView, View, Text, Button, BackHandler, TextInput, Image, StatusBar, Animated, Easing, KeyboardAvoidingView, Pressable, ActivityIndicator, Dimensions, Alert, TouchableOpacity } from "react-native";
-import {  useNavigation } from "expo-router";
+import { useNavigation } from "expo-router";
 import { GlobalContext } from "@/Global/globalcontext.js";
 
 import styles from "../styles/l.js"
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { jwtDecode } from "jwt-decode";
 import Entypo from '@expo/vector-icons/Entypo';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 
 const LoginPage = function ({ navigation, route }) {
@@ -43,7 +44,7 @@ const LoginPage = function ({ navigation, route }) {
     const [wrongcredential, setwrongcredential] = useState(false)
 
 
-    const [showPassword,setShowPassword]=useState(true);
+    const [showPassword, setShowPassword] = useState(true);
 
 
     const { globaldata, updateField } = useContext(GlobalContext);
@@ -77,7 +78,7 @@ const LoginPage = function ({ navigation, route }) {
         var ExistingToken = await AsyncStorage.getItem("notificationToken")
         console.log(ExistingToken);
 
-    
+
 
 
         var final = {
@@ -90,7 +91,7 @@ const LoginPage = function ({ navigation, route }) {
 
 
 
-      
+
         try {
             const response = await fetch(`${url}api/authenticate`, {
                 method: 'POST',
@@ -170,7 +171,7 @@ const LoginPage = function ({ navigation, route }) {
 
 
     }
-    
+
 
     useEffect(() => {
         // Handle hardware back button press
@@ -183,7 +184,7 @@ const LoginPage = function ({ navigation, route }) {
         return () => backHandler.remove();
     }, [])
 
-    const [height , setHeight] = useState("")
+    const [height, setHeight] = useState("")
 
     useFocusEffect(() => {
         const { height } = Dimensions.get("window")
@@ -197,7 +198,7 @@ const LoginPage = function ({ navigation, route }) {
 
         // Render the signup screen UI
         <KeyboardAvoidingView style={signupstyles.container} behavior="padding" keyboardVerticalOffset={-100} >
-            <ScrollView automaticallyAdjustContentInsets={true} automaticallyAdjustsScrollIndicatorInsets={true} style={{  minHeight : height }} >
+            <ScrollView automaticallyAdjustContentInsets={true} automaticallyAdjustsScrollIndicatorInsets={true} style={{ minHeight: height }} >
 
                 <View style={signupstyles.row}>
                     <Pressable onPress={() => navigation.goBack()}>
@@ -208,7 +209,7 @@ const LoginPage = function ({ navigation, route }) {
                     </View>
 
 
-                    <View style={[signupstyles.bottom, { height: height*0.7 }]}>
+                    <View style={[signupstyles.bottom, { height: height * 0.7 }]}>
                         <Text allowFontScaling={false} style={[signupstyles.t1, { marginTop: -15, marginBottom: -20 }]}>Welcome Back !</Text>
                         {!error && <Text allowFontScaling={false} style={signupstyles.t2}></Text>}
                         {wrongcredential && <Text style={signupstyles.invalid}>Invalid credentials</Text>}
@@ -241,29 +242,30 @@ const LoginPage = function ({ navigation, route }) {
                             />
 
 
-                            <TouchableOpacity style={{ position: 'absolute', bottom: 0, right: 0, marginRight: 10, marginBottom: 5 }}
-                            onPress={()=>setShowPassword(prev=>!prev)}
+                            <TouchableOpacity style={{ position: 'absolute', bottom: 0, right: 0, marginRight: 10, marginBottom: 8 }}
+                                onPress={() => setShowPassword(prev => !prev)}
                             >
-                                {showPassword?
-                                    <Entypo name="eye-with-line" size={24} color="#828282" />
+                                {showPassword ?
+                                    <Ionicons name="eye-off-outline" size={24} color="#828282" />
                                     :
-                                    <Entypo name="eye" size={24} color="#828282" />
-
+                                    <Ionicons name="eye-outline" size={24} color="#828282" />
                                 }
                             </TouchableOpacity>
 
                         </View>
                         {passworderror && <Text style={[styles.error, { marginTop: 5 }]}>Please enter password*</Text>}
-                        {passworderror1 && <Text style={styles.error}>Password must be at least 8 characters long, contain one uppercase letter, one lowercase letter, and one number.</Text>}
+                        {passworderror1 && <Text style={[styles.error,{marginTop:5}]}>Password must be at least 8 characters long, contain one uppercase letter, one lowercase letter, and one number.</Text>}
 
                         <Pressable onPress={() => navigation.navigate("FP1")} style={styles.forgot}>
-                            <Text allowFontScaling={false} style={[styles.white, styles.forgottext]}>Forgot Password ?</Text>
+                            <Text allowFontScaling={false} style={[styles.white, styles.forgotText]}>Forgot Password ?</Text>
                         </Pressable>
 
-                        <Pressable style={signupstyles.next} onPress={() => { handlelogin() }}>
-                            {loading && <ActivityIndicator style={{ marginTop: 7 }} size={24} color="#16181a" />}
-                            {!loading && <Text allowFontScaling={false} style={signupstyles.nexttext}>Login</Text>}
-                        </Pressable>
+                        <View style={{ width: '100%', alignItems: 'center', justifyContent: 'center', marginTop: 15 }}>
+                            <Pressable style={signupstyles.next} onPress={() => { handlelogin() }}>
+                                {loading && <ActivityIndicator style={{ marginTop: 7 }} size={24} color="#16181a" />}
+                                {!loading && <Text allowFontScaling={false} style={signupstyles.nexttext}>Login</Text>}
+                            </Pressable>
+                        </View>
                     </View>
                 </View>
             </ScrollView>

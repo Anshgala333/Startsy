@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
         // width : "90%",
         // marginHorizontal : "auto"
         // backgroundColor:'red',
-        gap: 8
+        gap: 10
     },
     com1: {
         fontFamily: "Alata",

@@ -110,7 +110,7 @@ export default function CardsList({ navigation }) {
             </Text>
 
 
-            <View style={{ marginTop: 20, paddingHorizontal: 16 }}>
+            <View style={{ marginTop: 16, paddingHorizontal: 16,}}>
                 <MaterialCommunityIcons name="certificate" size={32} color="gray" />
             </View>
 
@@ -118,10 +118,11 @@ export default function CardsList({ navigation }) {
 
 
 
-            <View style={styles.actions}>
+            <View style={styles.contactView}>
                 <TouchableOpacity
                     // onPress={() => open(item.userName, item.email, item.contactInfo)}
-                    style={[styles.toggleFollow, { backgroundColor: item.followed ? "#ff5c5c" : "#ccc", }]}
+                   
+                    style={styles.contact}
                 >
                     <Text style={{ color: "#16181a", fontFamily: "Alata" }}>
                         Contact
@@ -210,7 +211,7 @@ const styles = StyleSheet.create({
         // textAlign: 'justify'
     },
 
-    actions: {
+    contactView: {
         flexDirection: 'row',
         justifyContent: 'flex-end',
         gap: 30,
@@ -224,19 +225,14 @@ const styles = StyleSheet.create({
         paddingVertical: 0,
         paddingHorizontal: 20,
         height: 41,
-        width: 117,
+        width: 150,
         borderWidth: 2,
         borderColor: "#B8B8B8",
         justifyContent: "center",
         alignItems: "center",
 
     },
-    buttonReject: {
-        backgroundColor: '#ff0000',
-        borderRadius: 8,
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-    },
+  
     buttonText: {
         fontSize: 18,
         color: '#00DE62',
@@ -268,11 +264,12 @@ const styles = StyleSheet.create({
         backgroundColor: "#24272A"
     },
 
-    toggleFollow: {
+    contact: {
 
         paddingVertical: 5,
         paddingHorizontal: 15,
         borderRadius: 5,
+        backgroundColor:'#ccc'
     },
 
 
