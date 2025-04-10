@@ -876,7 +876,7 @@ const styles1 = StyleSheet.create({
         width: "90%",
         marginHorizontal: "auto",
         fontFamily: "Roboto",
-        lineHeight: scalingfactor * 18,
+        // lineHeight: scalingfactor * 18,
         marginBottom: scalingfactor * 15,
         // borderRadius : 20
     },
