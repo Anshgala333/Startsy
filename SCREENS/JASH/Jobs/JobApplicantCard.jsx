@@ -41,10 +41,7 @@ Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, tur
 const token = "dummy_token";
 
 export default function CardsList({ navigation }) {
-    const moveItem = (id, direction, item) => {
-        console.log(`Moved ${id} to ${direction}`);
-    };
-
+    
     const renderCard = ({ item }) => (
         <LinearGradient
             style={styles.card}
