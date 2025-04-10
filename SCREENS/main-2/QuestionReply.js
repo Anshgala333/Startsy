@@ -223,7 +223,7 @@ const QuestionReply = ({ route }) => {
 
                 }
 
-            // style={{ backgroundColor: 'red' }}
+          
             />
 
             {
@@ -345,7 +345,7 @@ const styles = StyleSheet.create({
         color: '#ccc',
         fontSize: 16,
         verticalAlign: "middle"
-        , fontFamily: "Alata"
+        , fontFamily: "Roboto"
     },
     replyLine: {
         width: 1,
@@ -372,13 +372,14 @@ const styles = StyleSheet.create({
         // marginVertical: 10,
         color: "#ccc",
         fontSize: 13,
+        fontFamily:'Alata'
         // letterSpacing : 2
     },
     time: {
         position: "absolute",
         right: 20,
         top: 22,
-        color: "#ccc",
+        color: "#666",
         fontSize: 10
     },
     searchContainer: {

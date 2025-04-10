@@ -56,7 +56,7 @@ const ChangePassword2 = ({ navigation, route }) => {
             var object = isforgot ? { password: password, confirmPassword: confirmPassword, email: email } :
                 { newPassword: password, confirmPassword: confirmPassword }
 
-            console.log(object);
+            // console.log(object);
             // return
 
 

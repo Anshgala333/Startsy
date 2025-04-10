@@ -264,16 +264,6 @@ const Question = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
                         />
                     }
 
-
-
-
-                    // ListHeaderComponent={
-                    //     // join community button
-                    //     <View style={styles1.header}>
-                    //         <Button title="Add Item" onPress={addItem} />
-                    //         <Button title="Clear Items" onPress={clearItems} color="red" />
-                    //     </View>
-                    // }
                     renderItem={renderItem}
                 />
             </View>

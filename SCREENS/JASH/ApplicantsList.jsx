@@ -13,8 +13,9 @@ import { useFocusEffect } from 'expo-router';
 // import { navigate } from 'expo-router/build/global-state/routing.js';
 const ApplicantsList = ({ route , navigation }) => {
 
-    const { Applicants, token } = route.params
+    const { Applicants, token , jobId } = route.params
     console.log(Applicants, "target 1");
+    console.log(jobId, "target 1");
     const [data, setdata] = useState()
 
 
@@ -23,7 +24,7 @@ const ApplicantsList = ({ route , navigation }) => {
             try {
                 const response = await fetch(`${url}posts/getAppliedJobApplicants`, {
                     method: 'POST',
-                    body: JSON.stringify({ jobPostIds: Applicants }),
+                    body: JSON.stringify({ jobPostIds: Applicants , jobId : jobId }),
                     headers: {
                         "Content-Type": "application/json",
                         accept: "application/json",
