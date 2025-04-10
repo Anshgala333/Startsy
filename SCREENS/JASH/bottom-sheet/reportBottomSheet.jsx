@@ -94,7 +94,7 @@ const ReportBottomSheet = ({ reportBottomSheetRef, renderBackdrop, reportId, rep
                 </View>
 
                 <TextInput
-                    style={{ color: 'gray', borderBottomWidth: 1, borderBottomColor: '#ccc', marginBottom: 10, fontFamily: 'Roboto', color: '#ccc', fontSize: 16 }}
+                    style={styles.input}
                     value={reportReason}
                     placeholderTextColor="#666"
 
@@ -103,7 +103,7 @@ const ReportBottomSheet = ({ reportBottomSheetRef, renderBackdrop, reportId, rep
                 />
 
                 <TouchableOpacity
-                    style={styles.submitButtonStyle}
+                    style={styles.button}
                     onPress={() => {
                         setLoading(prev => !prev)
                         submitReport()
@@ -114,13 +114,13 @@ const ReportBottomSheet = ({ reportBottomSheetRef, renderBackdrop, reportId, rep
 
                     }}
                 >
-                    {
-                        loading ? (
-                            <ActivityIndicator size={24} color="black" />
-                        ) : (
-                            <Text style={{fontSize:18,fontFamily:'Alata',marginTop:-2}} >Submit</Text>
-                        )
+                    {loading ?
+
+                        <ActivityIndicator size={24} color="#16181a" />
+
+                        : <Text style={styles.buttonText}>Submit</Text>
                     }
+
                 </TouchableOpacity>
             </View>
         </BottomSheet>
@@ -152,7 +152,34 @@ const styles = StyleSheet.create({
         // borderColor: "black",
         // borderWidth: 1,
         fontFamily: "Alata"
-    }
+    },
+    input: {
+        borderBottomWidth: 1,
+        borderBottomColor: "gray",
+        color: "#ccc",
+        fontSize: 18,
+        paddingVertical: 5,
+        marginBottom: 10,
+        fontFamily: "Roboto"
+    },
+    button: {
+        backgroundColor: "#00DE62",
+        borderRadius: 25,
+        height: 42,
+        width: 180,
+        justifyContent: "center",
+        // margin: "auto",
+        alignSelf: "center",
+        marginVertical: 25,
+        textAlign: "center",
+    },
+    buttonText: {
+        textAlign: "center",
+        color: "#16181A",
+        fontFamily: "Alata",
+        fontSize: 20,
+        marginTop: -5
+    },
 })
 
 

@@ -267,14 +267,7 @@ const CommunityPage = () => {
           {/* Rule drop down field */}
           <View style={{ marginTop: 10 }}>
             {/* <Text style={styles.label}>Rules :</Text>
-            <Drop
-
-              items={items}
-              onValueChange={setOnValueChange}
-              open={open} setOpen={setOpen}
-              width="100%" search={false}
-              placeholder={"Select rule :"}
-            /> */}
+ 
 
             {/* show error is rule field is empty */}
             {error3 && <Text style={styles.errorStyle}>*Rule is required</Text>}

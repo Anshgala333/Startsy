@@ -18,7 +18,7 @@ const s5 = StyleSheet.create({
         color: "#828282",
         fontFamily: "Roboto",
         fontSize: 12,
-        marginTop: 70,
+        marginTop: 10,
         // zIndex : 100,
         // backgroundColor : "red"
     }
@@ -50,7 +50,7 @@ const s5 = StyleSheet.create({
         backgroundColor : "rgba(33, 34, 35, 0.5)",
         // backgroundColor: "yellow",
         borderTopLeftRadius: 70,
-        height : height * 0.85,
+        // height : height * 0.85,
         alignContent: "center",
         padding: scalingfactor * 20,
         paddingBottom : 0,

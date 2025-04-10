@@ -86,7 +86,7 @@ const AllPostsScreen = ({ navigation, route }) => {
           <Text style={styles.title}>Saved Posts</Text>
         </View>
 
-        <View style={styles.headerSide} /> {/* For symmetrical spacing */}
+        <View style={styles.headerSide} /> 
       </View>
       {
 
@@ -103,7 +103,7 @@ const AllPostsScreen = ({ navigation, route }) => {
               keyExtractor={(item) => item.id}
               renderItem={({ item }) => {
                 if (item.type == "textBlog") {
-                  return <></>
+                  return null
                 }
                 else {
                   // console.log(item._id);
@@ -162,21 +162,21 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "#24272A",
   },
-  
+
   headerSide: {
     width: 40, // same width as the icon button area
     alignItems: "flex-start",
     justifyContent: "center",
   },
-  
+
   headerCenter: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
-  
- 
-  
+
+
+
   gridItem: {
     flex: 1 / 3, // Distributes space equally in the row
     aspectRatio: 1, // Ensures perfect squares

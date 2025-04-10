@@ -1,17 +1,17 @@
 import React from "react";
 // import {  Dimensions } from "react-native";
-import { SafeAreaView, Text, Pressable, TextInput, View, Image, StyleSheet, Dimensions, StatusBar, Animated ,PixelRatio  } from "react-native";
-import { scale , moderateScale, verticalScale } from 'react-native-size-matters';
+import { SafeAreaView, Text, Pressable, TextInput, View, Image, StyleSheet, Dimensions, StatusBar, Animated, PixelRatio } from "react-native";
+import { scale, moderateScale, verticalScale } from 'react-native-size-matters';
 const { width, height } = Dimensions.get("window");
 // console.log(height);
 const ratio = PixelRatio.get();
-console.log(ratio , "ratio");
+console.log(ratio, "ratio");
 
-var a = width/360;
-var b = height/800;
+var a = width / 360;
+var b = height / 800;
 // console.log(a,b);
 
-const scalingfactor = Math.sqrt(a*b)
+const scalingfactor = Math.sqrt(a * b)
 
 // console.log(width);
 // console.log(height);
@@ -31,12 +31,20 @@ const styles = StyleSheet.create({
 
 
         flex: 1,
-        height : height,
+        height: height,
         backgroundColor: "#16181a",
         backgroundColor: "red",
         justifyContent: "center",
         alignContent: "center",
-      
+
+    },
+    animation: {
+        position: "absolute",
+        left: -20,
+        top: -400,
+        opacity: 1,
+        width: width * 3,
+        height: width * 3,
     },
     welcome: {
         color: "white",
@@ -68,7 +76,7 @@ const styles = StyleSheet.create({
         padding: height * 0.03,
         paddingTop: height * 0.06,
         alignSelf: "flex-end",
-        backgroundColor : "rgba(33, 34, 35, 0.5)",
+        backgroundColor: "rgba(33, 34, 35, 1)",
         height: 0,
         // display : "none"
 
@@ -100,7 +108,7 @@ const styles = StyleSheet.create({
    
         borderBottomWidth: 1,
         borderBottomColor: "white",
-        fontSize: scalingfactor*18, // Responsive font size
+        fontSize: scalingfactor * 18, // Responsive font size
         color: "white",
 
         width: "95%",
@@ -128,11 +136,11 @@ const styles = StyleSheet.create({
         //marginBottom:40,
     },
     label: {
-       margin : scalingfactor * -40,
+        margin: scalingfactor * -40,
         //marginTop: scalingfactor * 10,
         marginBottom: -4,
         color: "white",
-        fontSize: scalingfactor* 16, // Responsive font size
+        fontSize: scalingfactor * 16, // Responsive font size
         // marginBottom: height * 0.005,
         fontFamily: "Alata"
     },
@@ -184,10 +192,10 @@ const styles = StyleSheet.create({
     loginbutton: {
         margin: "auto",
         // height: height * 0.07, // Responsive height
-        width: "100%",
-        height : scalingfactor* 50,
+        width: "80%",
+        height:  40,
         // paddingVertical: height * 0.018, // Responsive height
-        backgroundColor: "#333",
+        backgroundColor: "#ccc",
         marginVertical: height * 0.014,
         borderRadius: 20,
         shadowColor: "black",
@@ -213,12 +221,12 @@ const styles = StyleSheet.create({
         fontFamily: "Alata"
     },
     login: {
-        fontSize: scalingfactor*19, // Responsive font size
+        fontSize: scalingfactor * 18, // Responsive font size
         fontWeight: "500",
         fontFamily: "Alata",
-        color : "white",
-        alignSelf : "center",
-        marginTop : -4
+        color: "#16181a",
+        alignSelf: "center",
+        marginTop: -4
         // lineHeight : 16.4
 
     },
@@ -245,14 +253,14 @@ const styles = StyleSheet.create({
         width: height * 0.0258,
         height: height * 0.0258,
         marginRight: 10,
-        marginTop : -2
+        marginTop: -2
     },
     google: {
         fontSize: width * 0.05, // Responsive font size
         fontWeight: "600",
         color: "gray",
-        marginTop : -5
-       
+        marginTop: -5
+
     },
     form1: {
         display: "none",
@@ -261,11 +269,11 @@ const styles = StyleSheet.create({
     btn4: {
         backgroundColor: "#00DF60",
         width: "92%",
-        height : scalingfactor*58,
+        height: scalingfactor * 58,
         // padding: height * 0.022,
         marginVertical: scalingfactor * 14,
         justifyContent: "center",
-        alignContent : "center",
+        alignContent: "center",
         borderRadius: 20,
         margin: "auto",
     },
@@ -277,10 +285,10 @@ const styles = StyleSheet.create({
         fontWeight: "600",
         // letterSpacing: 1.5,
         fontFamily: "Alata"
-        ,marginTop : -5
+        , marginTop: -5
     },
     newaccount: {
-        fontSize: scalingfactor*24, // Responsive font size
+        fontSize: scalingfactor * 24, // Responsive font size
         color: "white",
         marginBottom: width * 0.04,
         fontFamily: "Alata",
@@ -303,34 +311,52 @@ const styles = StyleSheet.create({
         marginTop  :6,
         textAlign : "left",
         // backgroundColor : "red",
-        width  : "92%",
-        marginHorizontal : "auto",
+        width: "92%",
+        marginHorizontal: "auto",
         // color : "red",
-        color : "#E65858",
-        fontSize : 15,
-        fontFamily : "Roboto",
+        color: "#E65858",
+        fontSize: 15,
+        fontFamily: "Roboto",
 
     },
-    error1 : {
-        marginVertical :0,
-        marginTop  :0,
-        textAlign : "center",
+    error1: {
+        marginVertical: 0,
+        marginTop: 0,
+        textAlign: "center",
         // backgroundColor : "red",
-        width  : "92%",
-        marginHorizontal : "auto",
+        width: "92%",
+        marginHorizontal: "auto",
         // color : "red",
-        color : "#E65858",
-        fontSize : 15,
-        fontFamily : "Roboto",
+        color: "#E65858",
+        fontSize: 15,
+        fontFamily: "Roboto",
 
     },
-    lastLine : {
-        position  : "absolute",
-        bottom : 0,
-        alignSelf : "center"
+    lastLine: {
+        position: "absolute",
+        bottom: 0,
+        alignSelf: "center"
         // marginHorizontal : "auto"
 
-    }
+    },
+    divider : {
+        width : "80%",
+        marginHorizontal : "auto",
+        marginVertical : 10,
+        height : 0.5,
+        backgroundColor : "gray",
+        
+    },
+    or:{
+        color : "#ccc",
+        top : -10,
+        fontFamily : "Roboto",
+        paddingHorizontal : 8,
+        borderRadius :20,
+        backgroundColor : "rgba(33, 34, 35, 1)",
+        alignSelf : "center",
+        position : "absolute",
+    },
 });
 
 export default styles;

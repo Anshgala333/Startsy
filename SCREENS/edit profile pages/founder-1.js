@@ -488,7 +488,7 @@ const Founder1 = ({ navigation }) => {
                         onTouchStart={handleOutsideTouch}
                         allowFontScaling={false}
                         placeholder="Full Name"
-                        placeholderTextColor="#B8B8B8"
+                        placeholderTextColor="#828282"
                         style={styles1.input}
                         value={fullName}
                         onChangeText={(text) => { setfullname(text) }}
@@ -498,18 +498,18 @@ const Founder1 = ({ navigation }) => {
                     {/* <TextInput
                         allowFontScaling={false}
                         placeholder="Email address"
-                        placeholderTextColor="#B8B8B8"
+                        placeholderTextColor="#828282"
                         style={[styles1.input, { marginBottom: 18 }]}
                         value={email}
                         onChangeText={(text) => { setemail(text) }}
                     /> */}
-                    <Drop  bl={0} bt={0} borderwidth={0} bb={1} pccolor={"#B8B8B8"}  items={country1} placeholder={country} width={"94%"} onValueChange={(value) => setcountry(value)} open={open1} setOpen={t1} extra={true} edit />
+                    <Drop   borderwidth={0} bb={1} borderColor={"#ccc"}  pccolor={"#828282"}  items={country1} placeholder={country} width={"95%"} onValueChange={(value) => setcountry(value)} open={open1} setOpen={t1} extra={true} edit />
                     {errors.country && <Text style={styles1.errnew}>{errors.country}</Text>}
 
                     <TextInput
                         allowFontScaling={false}
                         placeholder="Phone number"
-                        placeholderTextColor="#B8B8B8"
+                        placeholderTextColor="#828282"
                         style={[styles1.input, { marginTop: 28 }]}
                         value={phone}
                         onChangeText={(text) => { setphone(text) }}
@@ -532,14 +532,14 @@ const Founder1 = ({ navigation }) => {
                         <TextInput
                             allowFontScaling={false}
                             placeholder="Write any Top 3"
-                            placeholderTextColor="#B8B8B8"
+                            placeholderTextColor="#828282"
                             style={[styles1.input, { marginTop: 25 }]}
                             value={skills}
                             onChangeText={(text) => { setskills(text) }}
                         />
                         <Text onTouchStart={handleOutsideTouch} allowFontScaling={false} style={[styles.t1, { marginTop: 25, marginBottom: 10, paddingLeft: 7 }]}>Education </Text>
                         <Text onTouchStart={handleOutsideTouch} allowFontScaling={false} style={[styles.t2, { marginBottom: 15 }]}>List your highest degree achieved, which helps to establish your academic background and qualifications. </Text>
-                        <Drop bl={0} bt={0} borderwidth={0} bb={1} pccolor={"#B8B8B8"} width={"95%"} items={edulist} placeholder={education} onValueChange={(value) => { seteducation(value) }} setOpen={t2} open={open2} nestedScrollEnabled={true} />
+                        <Drop bl={0} bt={0} borderwidth={0} bb={1} pccolor={"#828282"} width={"95%"} items={edulist} placeholder={education} onValueChange={(value) => { seteducation(value) }} setOpen={t2} open={open2} nestedScrollEnabled={true} />
                         {errors.education && <Text style={styles1.errnew}>{errors.education}</Text>}
 
 
@@ -550,7 +550,7 @@ const Founder1 = ({ navigation }) => {
                         {workexperience.map((we, index) => (
                             <View onTouchStart={handleOutsideTouch} key={we.id} style={styles1.certificate}>
                                 <Pressable onPress={addworkexperience}>
-                                    <Entypo style={styles1.plus} name="plus" size={24} color="#00DE62" />
+                                    <Entypo style={styles1.plus} name="plus" size={24} color="#ccc" />
                                 </Pressable>
                                 {/* <Text>{JSON.stringify(we.company)}</Text>
                             <Text>{JSON.stringify(we.role)}</Text>
@@ -558,13 +558,13 @@ const Founder1 = ({ navigation }) => {
 
 
                                 {index > 0 && <Pressable onPress={() => { deletecertificate(index) }}>
-                                    <FontAwesome6 name="trash" style={styles1.minus} size={15} color="#00DE62" />
+                                    <FontAwesome6 name="trash" style={styles1.minus} size={15} color="#ccc" />
                                 </Pressable>}
 
                                 <TextInput
                                     allowFontScaling={false}
                                     placeholder="Company / Organisation"
-                                    placeholderTextColor="#B8B8B8"
+                                    placeholderTextColor="#828282"
                                     style={[styles1.input1, { marginTop: 20, backgroundColor: "transparent" }]}
                                     value={we.company}
                                     onChangeText={(text) => { handleworkchange(we.id, "name", text) }}
@@ -574,7 +574,7 @@ const Founder1 = ({ navigation }) => {
                                 <TextInput
                                     allowFontScaling={false}
                                     placeholder="Role"
-                                    placeholderTextColor="#B8B8B8"
+                                    placeholderTextColor="#828282"
                                     style={styles1.input1}
                                     value={we.role}
                                     onChangeText={(text) => { handleworkchange(we.id, "role", text) }}
@@ -584,7 +584,7 @@ const Founder1 = ({ navigation }) => {
                                 <TextInput
                                     allowFontScaling={false}
                                     placeholder="Year"
-                                    placeholderTextColor="#B8B8B8"
+                                    placeholderTextColor="#828282"
                                     style={styles1.input1}
                                     value={we.year?.toString()}
                                     onChangeText={(text) => { handleworkchange(we.id, "year", text) }}
@@ -604,8 +604,8 @@ const Founder1 = ({ navigation }) => {
 
 
                     <View onTouchStart={handleOutsideTouch} style={styles1.icons}>
-                        <Pressable onPress={() => { navigation.goBack() }} style={{ alignSelf: "center" }}><FontAwesome6 name="chevron-left" size={40} color="#00DF60" /></Pressable>
-                        <Pressable onPress={nextpage} style={{ alignSelf: "center" }}><FontAwesome6 name="chevron-right" size={40} color="#00DF60" /></Pressable>
+                        <Pressable onPress={() => { navigation.goBack() }} style={{ alignSelf: "center" }}><FontAwesome6 name="chevron-left" size={30} color="#00DF60" /></Pressable>
+                        <Pressable onPress={nextpage} style={{ alignSelf: "center" }}><FontAwesome6 name="chevron-right" size={30} color="#00DF60" /></Pressable>
 
                     </View>
 
@@ -654,7 +654,7 @@ const styles1 = StyleSheet.create({
         paddingHorizontal: 20,
     },
     edit: {
-        color: "#B8B8B8",
+        color: "#828282",
         fontFamily: "Alata",
         textAlign: "center",
         fontSize: 20,
@@ -663,7 +663,7 @@ const styles1 = StyleSheet.create({
 
     },
     t2: {
-        color: "#94A3B8",
+        color: "#828282",
         fontFamily: "Roboto",
         textAlign: "center",
         fontSize: 14,
@@ -677,9 +677,9 @@ const styles1 = StyleSheet.create({
         borderBottomWidth: 1,
         // borderRadius : 20,
         paddingLeft: scalingfactor * 3,
-        borderBottomColor: "#AEAFAF",
+        borderBottomColor: "#ccc",
         fontSize: scalingfactor * 20, // Responsive font size
-        color: "#B8B8B8",
+        color: "#ccc",
         paddingBottom: scalingfactor * 7,
         width: "90%",
         marginHorizontal: "auto",
@@ -715,9 +715,9 @@ const styles1 = StyleSheet.create({
         marginTop: 10,
         margin: "auto",
         width: "92%",
-        backgroundColor: "#24272A",
-        borderWidth: 3,
-        borderColor: "#16181A",
+        backgroundColor: "transparent",
+        borderWidth: 1,
+        borderColor: "#ccc",
         borderRadius: 10,
         position: "relative"
     },
@@ -731,14 +731,14 @@ const styles1 = StyleSheet.create({
         backgroundColor: "transparent",
         margin: height * 0.016,
         marginTop: 0,
-        borderBottomWidth: 3,
+        borderBottomWidth: 1,
         paddingLeft: scalingfactor * 10,
-        borderBottomColor: "#16181A",
+        borderBottomColor: "#ccc",
         fontSize: scalingfactor * 20,
-        color: "#B8B8B8",
+        color: "#ccc",
         paddingBottom: scalingfactor * 5,
         width: "92%",
-        // fontFamily: "Roboto",
+        fontFamily: "Alata",
         // lineHeight: scalingfactor * 18,
         marginBottom: scalingfactor * 25
     },

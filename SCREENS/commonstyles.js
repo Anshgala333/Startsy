@@ -98,12 +98,12 @@ export default styles = StyleSheet.create({
     },
     btn1 : {
         width: 173,
-        height: 48,
+        height: 40,
         margin: "auto",
         backgroundColor: "transparent",
         borderRadius: 20,
-        borderWidth: 3,
-        borderColor: "#16181A",
+        borderWidth: 1,
+        borderColor: "#ccc",
         borderRadius: 20,
         marginBottom: 0,
         marginTop: 10,
@@ -112,7 +112,7 @@ export default styles = StyleSheet.create({
      nexttext: {
         color: "#00DE62",
         fontFamily: "Alata",
-        fontSize: scalingfactor * 24,
+        fontSize: 20,
         textAlign: "center",
         marginTop: -4
 

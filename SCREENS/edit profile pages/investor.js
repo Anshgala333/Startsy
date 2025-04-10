@@ -467,7 +467,7 @@ const EditInvestorInfo = ({ navigation }) => {
                         onTouchStart={handleOutsideTouch}
                         allowFontScaling={false}
                         placeholder="Full Name"
-                        placeholderTextColor="#B8B8B8"
+                        placeholderTextColor="#828282"
                         style={styles1.input}
                         value={fullName}
                         onChangeText={(text) => { setfullname(text) }}
@@ -482,7 +482,7 @@ const EditInvestorInfo = ({ navigation }) => {
                     // value={username}
                     // onChangeText={(text) => { setusername(text) }}
                     /> */}
-                    <Drop borderColor={"#AEAFAF"} bb={1} bradius={0} bottomsheet={true} items={country1} placeholder={country} width={"93.5%"} onValueChange={handlerole} open={open1} setOpen={t1} extra={true} />
+                    <Drop width={"97%"} borderColor={"#ccc"} bb={1} bradius={0} bottomsheet={true} items={country1} placeholder={country} width={"93.5%"} onValueChange={handlerole} open={open1} setOpen={t1} extra={true} />
 
                     {/* <Drop items={country1} width={"95%"} open={open1} setOpen={t1} onValueChange={handlerole} nestedScrollEnabled={true} extra={true} /> */}
                     {errors.country && <Text style={styles1.errnew}>{errors.country}</Text>}
@@ -490,7 +490,7 @@ const EditInvestorInfo = ({ navigation }) => {
                     <TextInput
                         allowFontScaling={false}
                         placeholder="Phone number"
-                        placeholderTextColor="#B8B8B8"
+                        placeholderTextColor="#828282"
                         style={[styles1.input, { marginTop: 15 }]}
                         value={contactInfo}
                         onChangeText={(text) => { setcontactInfo(text) }}
@@ -501,7 +501,7 @@ const EditInvestorInfo = ({ navigation }) => {
 
 
                     <Text allowFontScaling={false} style={[styles.t1, { marginTop: 15, marginBottom: 20, paddingLeft: 7 }]}>Investing experience</Text>
-                    <Pressable onPress={() => { handleOutsideTouch() }} style={[styles.btn1, { marginTop: 0, backgroundColor: "#24272A" }]}>
+                    <Pressable onPress={() => { handleOutsideTouch() }} style={[styles.btn1, { marginTop: 0 }]}>
                         <Text allowFontScaling={false} style={styles.nexttext}>{sliderrange1.toLocaleString("en-IN")} {sliderrange1 > 1 ? "years" : "year"}</Text>
                     </Pressable>
                     <View style={[styles.box, { left: 20 }]}></View>
@@ -546,7 +546,7 @@ const EditInvestorInfo = ({ navigation }) => {
 
 
                         <Text allowFontScaling={false} style={[styles.t1, { marginTop: 20, marginBottom: 10, paddingLeft: 7 }]}>Investment capacity</Text>
-                        <Pressable onPress={() => { handleOutsideTouch() }} style={[styles.btn1, { backgroundColor: "#24272A", marginBottom: 10 }]}>
+                        <Pressable onPress={() => { handleOutsideTouch() }} style={[styles.btn1, {  marginBottom: 10 }]}>
                             <Text allowFontScaling={false} style={styles.nexttext}>{sliderrange.toLocaleString("en-IN")}</Text>
                         </Pressable>
 
@@ -579,7 +579,7 @@ const EditInvestorInfo = ({ navigation }) => {
 
 
                     <View onTouchStart={handleOutsideTouch} s style={styles1.icons}>
-                        <Pressable onPress={() => { navigation.goBack() }} style={{ alignSelf: "center" }}><FontAwesome6 name="chevron-left" size={40} color="#00DF60" /></Pressable>
+                        <Pressable onPress={() => { navigation.goBack() }} style={{ alignSelf: "center" }}><FontAwesome6 name="chevron-left" size={30} color="#00DF60" /></Pressable>
                         <Pressable onPress={savedata} style={styles1.btn}>
                             {loading && <ActivityIndicator size={24} color="#16181a" />}
                             {!loading && <Text allowFontScaling={false} style={styles1.nexttext}>Save</Text>}
@@ -622,7 +622,7 @@ const styles1 = StyleSheet.create({
     },
     headertext: {
         color: "#00DE62",
-        fontSize: scalingfactor * 35,
+        fontSize: 30,
         fontFamily: "myanmar",
         fontWeight: "bold",
         paddingTop: 5,
@@ -651,12 +651,12 @@ const styles1 = StyleSheet.create({
         // marginTop: 40,
         borderBottomWidth: 1,
         // borderRadius : 20,
-        paddingLeft: scalingfactor * 10,
+        paddingLeft: scalingfactor * 8,
         borderBottomColor: "#AEAFAF",
         fontSize: scalingfactor * 20, // Responsive font size
         color: "#B8B8B8",
         paddingBottom: scalingfactor * 7,
-        width: "90%",
+        width: "89%",
         marginHorizontal: "auto",
         // fontFamily: "Roboto",
         // lineHeight: scalingfactor * 18,
@@ -679,7 +679,7 @@ const styles1 = StyleSheet.create({
     ,
     btn: {
         width: 120,
-        height: 48,
+        height: 40,
         // height : scalingfactor*48,
         backgroundColor: "#00DF60",
         // padding: scalingfactor * 12,
@@ -700,7 +700,7 @@ const styles1 = StyleSheet.create({
     }, nexttext: {
         color: "#24272A",
         fontFamily: "Alata",
-        fontSize: scalingfactor * 24,
+        fontSize: 20,
         textAlign: "center",
         // lineHeight : 16
         marginTop: -4

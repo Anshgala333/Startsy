@@ -669,7 +669,7 @@ const styles = StyleSheet.create({
     },
     jobbtntext : {
         textAlign : "center",
-        color : "#ccc",
+        color : "#828282",
         fontFamily : "Alata",
         fontSize : 18,
         verticalAlign : "top",

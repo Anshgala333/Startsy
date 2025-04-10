@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Pressable, TextInput, TouchableOpacity } from "react-native";
+import { ActivityIndicator, Pressable, TextInput, TouchableOpacity } from "react-native";
 import { View, Text, StyleSheet, StatusBar, Dimensions, SafeAreaView } from "react-native";
 import { url } from "../config.js"
 import signupstyles from "@/styles/signup1styles.js";
@@ -21,6 +21,7 @@ const ChangePassword2 = ({ navigation, route }) => {
     const [error, seterror] = useState(false);
     const [showPassword, setShowPassword] = useState(true);
     const [showConfirmPassword, setShowConfirmPassword] = useState(true);
+    const [loading, setloading] = useState(false);
 
     const validatePassword = () => {
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
@@ -46,6 +47,7 @@ const ChangePassword2 = ({ navigation, route }) => {
             return; // Prevent submission if validation fails
         }
         // Proceed with saving the password
+        setloading(true)
         try {
    
             var route = isforgot ? "forgotPassword" : "changePassword"
@@ -85,6 +87,9 @@ const ChangePassword2 = ({ navigation, route }) => {
             console.log(err);
 
         }
+        finally{
+            setloading(false)
+        }
     };
 
     const { height, width } = Dimensions.get("window");
@@ -96,7 +101,7 @@ const ChangePassword2 = ({ navigation, route }) => {
         container: {
             flex: 1,
             backgroundColor: "#16181a",
-            alignItems:'center'
+            alignItems: 'center'
         },
         headerText: {
             fontSize: 35,
@@ -148,7 +153,7 @@ const ChangePassword2 = ({ navigation, route }) => {
             height: 40,
             justifyContent: "center",
             alignItems: "center",
-            width: "70%",
+            width: "50%",
             alignSelf: "center",
             marginVertical: 20,
             backgroundColor: "#00DF60",
@@ -168,7 +173,7 @@ const ChangePassword2 = ({ navigation, route }) => {
             <Text style={styles.t1}>Create a password</Text>
             <Text style={styles.t2}>Use a strong password</Text>
 
-            <View style={{ width: '92%', padding: 0, borderBottomWidth: 1, borderBottomColor: '#ccc',marginTop:20 }}>
+            <View style={{ width: '92%', padding: 0, borderBottomWidth: 1, borderBottomColor: '#ccc', marginTop: 20 }}>
                 <TextInput
                     allowFontScaling={false}
                     placeholder="Password"
@@ -225,7 +230,8 @@ const ChangePassword2 = ({ navigation, route }) => {
             {confirmPasswordError ? <Text style={styles.error}>{confirmPasswordError}</Text> : null}
             {success && <Text style={styles.t11}>password changes successfully</Text>}
             <Pressable onPress={handleSave} style={styles.btn}>
-                <Text style={styles.btntext}>Save</Text>
+                {loading && <ActivityIndicator style={{ marginTop: -2 }} size={24} color="#16181a" />}
+                {!loading && <Text style={styles.btntext}>Save</Text>}
             </Pressable>
         </SafeAreaView>
     );

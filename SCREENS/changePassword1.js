@@ -1,6 +1,6 @@
 import CustomButton from "@/components/button";
 import React, { useEffect, useContext, useState } from "react";
-import { Pressable, TextInput } from "react-native";
+import { ActivityIndicator, Pressable, TextInput } from "react-native";
 import { GlobalContext } from "@/Global/globalcontext";
 import { View, Text, BackHandler, StyleSheet, Image, StatusBar, TouchableOpacity, Dimensions, SafeAreaView, ScrollView } from "react-native";
 
@@ -9,6 +9,7 @@ const ChangePassword1 = ({ navigation }) => {
 
 
     const [token, setToken] = useState("");
+    const [loading, setloading] = useState("");
     const [message, setmessage] = useState("");
     const [password, setpassword] = useState("");
     const [error, seterror] = useState(false);
@@ -23,7 +24,7 @@ const ChangePassword1 = ({ navigation }) => {
     useEffect(() => {
         const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
             navigation.goBack();
-            
+
             return true; // This prevents the default back action
         });
 
@@ -38,11 +39,12 @@ const ChangePassword1 = ({ navigation }) => {
             seterror(true)
             return
         }
+        setloading(true)
 
         try {
             const response = await fetch(`${url}api/checkCurrentPassword`, {
                 method: 'POST',
-                body: JSON.stringify({password : password}),
+                body: JSON.stringify({ password: password }),
                 headers: {
                     "Content-Type": "application/json",
                     accept: "application/json",
@@ -60,14 +62,17 @@ const ChangePassword1 = ({ navigation }) => {
             else if (response.status === 200) {
                 // console.log("success");
                 seterror(false);
-                navigation.navigate("ChangePassword2" , {token , password ,isforgot : false})
-                
+                navigation.navigate("ChangePassword2", { token, password, isforgot: false })
+
             }
         }
         catch (err) {
             // setloading(false)
             console.log(err);
 
+        }
+        finally {
+            setloading(false)
         }
     }
 
@@ -90,7 +95,8 @@ const ChangePassword1 = ({ navigation }) => {
             {error && <Text style={styles.err}>{message}</Text>}
             <Text style={styles.t2}>Forgot password</Text>
             <Pressable onPress={check} style={styles.btn}>
-                <Text style={styles.btntext}>Next</Text>
+                {loading && <ActivityIndicator style={{ marginTop: -2 }} size={24} color="#16181a" />}
+                {!loading && <Text style={styles.btntext}>Next</Text>}
             </Pressable>
 
         </SafeAreaView>
@@ -160,10 +166,10 @@ const styles = StyleSheet.create({
     },
     btn: {
         borderRadius: 20,
-        height: 45,
+        height: 40,
         justifyContent: "center",
         alignItems: "center",
-        width: "70%",
+        width: "50%",
         marginHorizontal: "auto",
         marginVertical: 20,
         backgroundColor: "#00DF60"
@@ -171,7 +177,7 @@ const styles = StyleSheet.create({
     btntext: {
         fontFamily: "Alata",
         color: "#24272A",
-        fontSize: 22,
+        fontSize: 20,
         marginTop: -5
     },
     err: {

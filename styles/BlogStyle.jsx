@@ -49,9 +49,8 @@ const styles = StyleSheet.create({
         textAlign: "center",
         color: "#16181A",
         fontFamily: "Alata",
-        fontSize: 18,
-        marginTop: -5,
-        fontFamily:'Roboto',
+        fontSize: 20,
+        marginTop: -5
     },
     descriptionLength: {
         color: "#666",

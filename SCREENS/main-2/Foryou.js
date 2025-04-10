@@ -412,11 +412,12 @@ const Foryou =
                             })}
 
                             name="Q&A"
-                            // component={Test2}
+                            
                             children={(props) => <Question allpost={allpost} setallpost={setallpost} getpost={getpost} scrollY={scrollY} navigation={navigation} />}
                             options={{
                                 unmountOnBlur: false,
                                 freezeOnBlur: true,
+                                
                                 tabBarLabel: ({ focused }) => (
                                     <Text allowFontScaling={false} style={[
                                         styles1.tabbarpill, {
@@ -492,7 +493,7 @@ const Foryou =
                                 })}
 
                                 name="Cards"
-                                // component={Test3}
+                                // component={Test3}P
                                 children={(props) => <Startsy token={token} navigation={navigation} />}
                                 options={{
                                     // unmountOnBlur: false,
@@ -516,7 +517,7 @@ const Foryou =
                 </View>
 
                 <Animated.View style={[styles.add, { transform: [{ scale: scale }] }]}>
-                    {ActiveTab != "Cards" && <Pressable onPress={openBottomSheet} >
+                    {ActiveTab != "Cards" && ActiveTab != "Q&A"&& <Pressable onPress={openBottomSheet} >
                         <AntDesign name="pluscircle" size={50} color="#00de62" />
                     </Pressable>}
                 </Animated.View>
