@@ -14,29 +14,29 @@ const time = (dateStr) => {
     });
 };
 
-const dummyData = [
-    {
-        id: 1,
-        investor: {
-            _id: "user1",
-            profilePhoto: "https://randomuser.me/api/portraits/men/32.jpg",
-            role: "Founder",
-            roleId: {
-                fullName: "Aryan Patel",
-                user_id: { role: "Founder" },
-                hiddenInfo: {
-                    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra.`
-                }
-            }
-        },
-        requestDate: "2025-04-05T12:00:00Z"
-    }
+// const dummyData = [
+//     {
+//         id: 1,
+//         investor: {
+//             _id: "user1",
+//             profilePhoto: "https://randomuser.me/api/portraits/men/32.jpg",
+//             role: "Founder",
+//             roleId: {
+//                 fullName: "Aryan Patel",
+//                 user_id: { role: "Founder" },
+//                 hiddenInfo: {
+//                     description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+// Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+// Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+// Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+// Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra.`
+//                 }
+//             }
+//         },
+//         requestDate: "2025-04-05T12:00:00Z"
+//     }
 
-];
+// ];
 
 const token = "dummy_token";
 

@@ -39,7 +39,12 @@
         "backgroundColor": "#16181a",
         "resizeMode": "contain"
       },
-      "package": "com.rspytech.startsy"
+      "package": "com.rspytech.startsy",
+      "config": {
+          "usesCleartextTraffic": true
+      }
+
+      
     },
     "web": {
       "bundler": "metro",

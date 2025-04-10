@@ -51,13 +51,15 @@ const ChangePassword2 = ({ navigation, route }) => {
         try {
    
             var route = isforgot ? "forgotPassword" : "changePassword"
-            
-            
-            var object = isforgot ? { password: password , confirmPassword : confirmPassword ,email : email} :
-            { newPassword: password , confirmPassword : confirmPassword }
+            console.log(route);
 
-            
-            
+            var object = isforgot ? { password: password, confirmPassword: confirmPassword, email: email } :
+                { newPassword: password, confirmPassword: confirmPassword }
+
+            // console.log(object);
+            // return
+
+
             const response = await fetch(`${url}api/${route}`, {
                 method: 'POST',
                 body: JSON.stringify(object),

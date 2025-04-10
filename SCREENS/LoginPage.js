@@ -52,7 +52,7 @@ const LoginPage = function ({ navigation, route }) {
     const handlelogin = async () => {
 
         console.log("login route called");
-
+        Alert.alert(`${url}api/authenticate`)
 
 
         setemailerror(false)
@@ -89,11 +89,13 @@ const LoginPage = function ({ navigation, route }) {
         }
         console.log(final);
 
+        // Alert.alert(`${url}api/authenticate`)
 
 
 
         try {
-            const response = await fetch(`${url}api/authenticate`, {
+            const response =
+             await fetch(`${url}api/authenticate`, {
                 method: 'POST',
                 body: JSON.stringify(final),
                 headers: {
@@ -102,6 +104,16 @@ const LoginPage = function ({ navigation, route }) {
 
                 }
             });
+            // const response =
+            //  await fetch(`https://afraid-ants-move.loca.lt/api/authenticate`, {
+            //     method: 'POST',
+            //     body: JSON.stringify(final),
+            //     headers: {
+            //         'Accept': 'application/json',
+            //         'Content-Type': 'application/json',
+
+            //     }
+            // });
             const data = await response.json();
             console.log(data);
             // Alert.alert(JSON.stringify(data))
@@ -147,7 +159,7 @@ const LoginPage = function ({ navigation, route }) {
                     }
                 }
                 catch (err) {
-                    Alert.alert(JSON.stringify(data))
+                    // Alert.alert(JSON.stringify(data))
 
                 }
             }

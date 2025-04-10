@@ -44,9 +44,13 @@ const JobApplyScreen = () => {
         }))
 
         try {
+            const object = {
+                description: description,
+                resume : portfolioUrl
+            }
             const response = await fetch(`${url}posts/applyJobPost/${id}`, {
                 method: 'POST',
-                body: "",
+                body: JSON.stringify(object),
                 headers: {
                     "Content-Type": "application/json",
                     accept: "application/json",

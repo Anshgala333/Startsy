@@ -116,7 +116,7 @@ const JobsPostedScreen = ({ route, navigation }) => {
   
 
       <View style={styles.buttonContainer}>
-        <Button onPress={() => navigation.navigate('ApplicantsList', { Applicants: item.jobPosts?.jobApplicants, token: token, navigation: navigation })} isDisabled={false} title={`${item.jobPosts.jobApplicants.length} Applicants`} />
+        <Button onPress={() => navigation.navigate('ApplicantsList', { Applicants: item.jobPosts?.jobApplicants, jobId : item.jobPosts._id, token: token, navigation: navigation })} isDisabled={false} title={`${item.jobPosts.jobApplicants.length} Applicants`} />
         {/* <Button onPress={() => console.log('Disable Job Clicked')} isDisabled={true} title={'Disable Job'} /> */}
       </View>
     </View>

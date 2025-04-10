@@ -6,4 +6,9 @@ export const url = 'https://startsy.onrender.com/'
 // -- college
 // export const url = 'http://115.113.39.69:5002/'
 
+//startsy
+
+// export const url = 'http://startsy.in:5002/'
+
+
 
