@@ -82,6 +82,7 @@ import Constants from "expo-constants";
 import { url } from "@/config.js";
 import RatingPage from "@/SCREENS/BetaRating.js";
 import TermsAndConditions from "../SCREENS/JASH/terms-condition/TermsAndCondition.jsx";
+import InvestorCard from "@/SCREENS/main-2/InvestorCard.js";
 
 const Stack = createNativeStackNavigator();
 SystemUI.setBackgroundColorAsync("#16181a");
@@ -331,6 +332,7 @@ export default function App() {
             component={TermsAndConditions}
           />
           <Stack.Screen name="RatingPage" component={RatingPage} />
+          <Stack.Screen name ="AllRequests" component={InvestorCard}/>
         </Stack.Navigator>
       )}
 

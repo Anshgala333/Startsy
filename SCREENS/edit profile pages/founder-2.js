@@ -537,10 +537,21 @@ const Founder2 = ({ navigation, route }) => {
     return (
 
         <SafeAreaView style={{ flex: 1, backgroundColor: "#16181a" }}>
-            <ScrollView style={{ flex: 1 }}>
-                <Animated.View style={styles1.header}>
-                    <Text allowFontScaling={false} style={styles1.headertext}>Profile</Text>
-                </Animated.View>
+            <View style={styles1.header}>
+                    <View style={styles1.headerSide}>
+                        <Pressable onPress={() => navigation.goBack()}>
+                            <FontAwesome6 name="" size={34} style={styles1.backIcon} color="#00DF60" />
+                        </Pressable>
+                    </View>
+
+                    <View style={styles1.headerCenter}>
+                        <Text style={styles1.title}>Edit Profile</Text>
+                    </View>
+
+                    <View style={styles1.headerSide} />
+                </View>
+            <ScrollView style={{ flex: 1, paddingTop:20 }}>
+               
                 <View style={{ width: width * 0.98, margin: "auto" }}>
                     {/* <Text style={styles1.edit}>Edit Profile</Text> */}
 
@@ -820,31 +831,33 @@ var b = height / 800;
 
 const scalingfactor = Math.sqrt(a * b)
 const styles1 = StyleSheet.create({
-    header: {
-        height: 55,
-        textAlign: "left",
-        backgroundColor: "#16181a",
-        // backgroundColor : "transparent",
-        // position : "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        zIndex: 1000,
-        // backgroundColor : "red",
-
-
-    },
-    headertext: {
-        color: "#00DE62",
-        fontSize: 30,
-        fontFamily: "myanmar",
-        fontWeight: "bold",
-        paddingTop: 5,
-        // marginBottom :-10,
-        paddingHorizontal: 25,
-
-        
-    },
+    title: {
+        fontSize: 20,
+        color: "#E9E9E9",
+        fontFamily: "Alata",
+        textAlign: "center",
+      },
+      header: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        paddingVertical: 15,
+        paddingHorizontal: 20,
+        borderBottomWidth: 1,
+        borderBottomColor: "#24272A",
+      },
+    
+      headerSide: {
+        width: 40, // same width as the icon button area
+        alignItems: "flex-start",
+        justifyContent: "center",
+      },
+    
+      headerCenter: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+      },
     edit: {
         color: "#B8B8B8",
         fontFamily: "Alata",

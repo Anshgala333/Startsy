@@ -220,6 +220,7 @@ const Question = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
                         style={styles1.searchInput}
                         placeholder="Ask a question ?"
                         placeholderTextColor="#828282"
+        
                         onChangeText={(val) => Setblog(val)}
                         value={blog}
                     />
@@ -264,16 +265,6 @@ const Question = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
                         />
                     }
 
-
-
-
-                    // ListHeaderComponent={
-                    //     // join community button
-                    //     <View style={styles1.header}>
-                    //         <Button title="Add Item" onPress={addItem} />
-                    //         <Button title="Clear Items" onPress={clearItems} color="red" />
-                    //     </View>
-                    // }
                     renderItem={renderItem}
                 />
             </View>

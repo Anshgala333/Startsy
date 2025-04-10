@@ -159,7 +159,7 @@ const Foryou =
 
                 if (data.data.length > 0) {
 
-                    setallpost(data1)
+                    setallpost(data1.reverse())
                     updateField("allpost", data1.reverse())
                 }
 

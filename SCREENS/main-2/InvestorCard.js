@@ -6,15 +6,12 @@ import { Text, Animated, RefreshControl, StatusBar, View, Image, FlatList, Touch
 import { LinearGradient } from "expo-linear-gradient";
 import { url } from "../../config.js"
 import { AutoSizeText, ResizeTextMode } from 'react-native-auto-size-text';
-
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 const InvestorCard = ({ route }) => {
 
-    // console.log(route.params);
-    
 
-    var {token , navigation} = route.params
-
+    const { token, navigation } = route.params
 
     const [items, setItems] = useState([])
     const [animation, setanimation] = useState([]);
@@ -37,17 +34,11 @@ const InvestorCard = ({ route }) => {
                 }
             );
             const result = await response.json();
-            const {data}=result
+            const { data } = result
 
-            const filteredData = data.filter((e)=>e.investor!= null)
-            console.log(result ,"okkkkkkkkkkkkkkk");
+            const filteredData = data.filter((e) => e.investor != null)
+            console.log(result, "okkkkkkkkkkkkkkk");
 
-
-
-           
-
-
-          
 
             if (response.status == 200) {
 
@@ -280,6 +271,7 @@ const InvestorCard = ({ route }) => {
             //         opacity: animatedValues.current[item.id]?.opacity,
             //     },
             // ]}
+
             >
                 <LinearGradient
                     style={styles.card}
@@ -289,38 +281,52 @@ const InvestorCard = ({ route }) => {
                     end={{ x: 0, y: 1 }}
                 >
                     <View style={styles.header}>
+
                         <Pressable
                             onPress={() => { navigation.navigate("Singleuserpage", { token: token, id: item.investor._id, page: "bell" }) }}
-                            style={{ display: "flex", flexDirection: "row", width: "70%" }}
+                            style={{ width: 'auto', display: 'flex', flexDirection: 'row', gap: 10 }}
                         >
-                            <Image
-                                source={{ uri: item.investor.profilePhoto }}
-                                // source={require("../../assets/images/p2.png")}
-                                style={styles.image}
-                            />
+                            <View style={{ justifyContent: 'center' }}>
+                                <Image
+                                    source={{ uri: item.investor.profilePhoto }}
+                                    // source={require("../../assets/images/p2.png")}
+                                    style={styles.image}
+                                />
+                            </View>
                             {/* <Text style={styles.role}>{item.investor.roleId.user_id.role} </Text> */}
+                            <View style={{ alignItems: 'flex-start', }}>
 
-                            <AutoSizeText
-                                numberOfLines={1}
-                                fontSize={26}
-                                mode={ResizeTextMode.max_lines}
-                                ellipsizeMode='tail'
-                                style={styles.role}>{item.investor.roleId.user_id.role == "CommunityMember" ? "Member" : item.investor.roleId.user_id.role}
-                            </AutoSizeText>
+                                <AutoSizeText
+                                    numberOfLines={1}
+                                    fontSize={20}
+                                    mode={ResizeTextMode.max_lines}
+                                    ellipsizeMode='tail'
+                                    style={styles.name}>{item.investor.roleId.fullName}
+                                </AutoSizeText>
+
+                                <AutoSizeText
+                                    numberOfLines={1}
+                                    // fontSize={26}
+                                    mode={ResizeTextMode.max_lines}
+                                    ellipsizeMode='tail'
+                                    style={styles.role}>{item.investor.roleId.user_id.role == "CommunityMember" ? "Member" : item.investor.roleId.user_id.role}
+                                </AutoSizeText>
+                            </View>
+
                         </Pressable>
-                        {/* <Text style={styles.role}> role </Text> */}
-                        <Text style={styles.date}>{time(item.requestDate)}</Text>
-                        {/* <Text style={styles.date}>today</Text> */}
+
+
+                        <View style={{justifyContent:'center'}}>
+                            <Text style={styles.date}>{time(item.requestDate)}</Text>
+                            <Text style={styles.date}></Text>
+                        </View>
+
                     </View>
 
+                    <View style={styles.divider1}></View>
+
                     {/* <Text style={styles.name}>{item.investor.roleId.fullName}</Text> */}
-                    <AutoSizeText
-                        numberOfLines={1}
-                        fontSize={26}
-                        mode={ResizeTextMode.max_lines}
-                        ellipsizeMode='tail'
-                        style={styles.name}>{item.investor.roleId.fullName}
-                    </AutoSizeText>
+
                     {/* <Text style={styles.name}>Ansh Gala</Text> */}
 
                     {item.investor.role == "Investor" && <Text style={styles.info}>Investing experience - {item.investor.roleId.previousExperience} years</Text>}
@@ -335,7 +341,7 @@ const InvestorCard = ({ route }) => {
                         <Text style={styles.info}>{item.investor.roleId.tagline}</Text >}
 
 
-                    
+
 
 
 
@@ -354,7 +360,7 @@ const InvestorCard = ({ route }) => {
 
     function Header1() {
         return (
-            <View style={{flex : 1 }}>
+            <View style={{ flex: 1 }}>
                 <Text style={styles.no}>No new request found</Text>
             </View>
         )
@@ -372,17 +378,29 @@ const InvestorCard = ({ route }) => {
         <View
             // refreshControl={<RefreshControl progressViewOffset={0} refreshing={refreshing}/>
             style={{ flex: 1, backgroundColor: "#16181a" }}>
+            <View style={styles.topHeader}>
+                <View style={styles.headerSide}>
+                    <Pressable onPress={() => navigation.goBack()}>
+                        <FontAwesome6 name="chevron-left" size={25} style={styles.backIcon} color="#00DF60" />
+                    </Pressable>
+                </View>
 
+                <View style={styles.headerCenter}>
+                    <Text style={styles.title}>Requests</Text>
+                </View>
+
+                <View style={styles.headerSide} />
+            </View>
             <FlatList
                 ListHeaderComponent={header1}
 
                 refreshControl={<RefreshControl progressViewOffset={0} refreshing={refreshing}
-                progressBackgroundColor="#16181a"
-                colors={['#00de62']}
+                    progressBackgroundColor="#16181a"
+                    colors={['#00de62']}
                     onRefresh={() => {
                         // console.log("start");
                         // setRefreshing(true)
- Vibration.vibrate(200)
+                        Vibration.vibrate(200)
                         getData();
 
                         setTimeout(() => {
@@ -412,7 +430,7 @@ const styles = StyleSheet.create({
     card: {
         backgroundColor: '#1a1a1a',
         borderRadius: 20,
-        padding: 16,
+        // padding: 16,
         margin: 16,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 4 },
@@ -421,39 +439,53 @@ const styles = StyleSheet.create({
         elevation: 8,
 
     },
+    divider1: {
+        width: "100%",
+        // marginLeft: -20,
+        height: 1,
+        marginHorizontal: "auto",
+        // marginTop: 20,
+        // marginBottom: 20,
+        backgroundColor: "#24272A"
+      },
     header: {
         flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 8,
+        width: '100%',
+
+        padding: 8,
+
+        justifyContent: 'space-between'
+        // marginBottom: 8,
     },
     image: {
         width: 50,
         height: 50,
         borderRadius: 25,
-        marginRight: 12,
+        // marginRight: 12,
     },
     role: {
-        fontSize: 24,
-        color: '#E9E9E9',
-        flex: 1,
-        fontFamily: "Alata"
+        fontSize: 11,
+        color: '#00de62',
+        // flex: 1,
+        fontFamily: "Roboto"
     },
     date: {
-        fontSize: 12,
-        color: '#B8B8B8',
-        position : "absolute",
-        right :0,
-        top :20,
+        fontSize: 10,
+        color: '#666',
+        // position: "absolute",
+        right: 0,
+        // top: 10,
         fontFamily: "Roboto",
-        alignSelf: "center",
-        marginTop: -10 , 
+        // alignSelf: "center",
+        // marginTop: -10,
         // backgroundColor : "red"
     },
     name: {
-        fontSize: 32,
-        color: '#B8B8B8',
+        fontSize: 20,
+        color: '#ccc',
+        // width:'10%',
         // fontWeight: 'bold',
-        marginBottom: 8,
+        // marginBottom: 8,
         fontFamily: "Alata",
         // backgroundColor: "red"
     },
@@ -461,12 +493,14 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#D9D9D9',
         marginBottom: 4,
+        marginTop: 4,
         fontFamily: "Roboto"
     },
     info1: {
         fontSize: 16,
         color: '#00DE62',
         marginBottom: 4,
+        marginTop: 4,
         fontFamily: "Roboto"
     },
     actions: {
@@ -506,17 +540,43 @@ const styles = StyleSheet.create({
     no: {
         textAlign: "center",
         color: "#666",
-        alignSelf : "center",
-        justifyContent : "center",
+        alignSelf: "center",
+        justifyContent: "center",
         // position : "absolute",
         elevation: 100,
-        bottom : 0,
+        bottom: 0,
         // fontFamily: "Roboto",
         fontSize: 16,
         paddingTop: 300,
         alignSelf: "center",
-    }
+    },
+    title: {
+        fontSize: 20,
+        color: "#E9E9E9",
+        fontFamily: "Alata",
+        textAlign: "center",
+    },
+    topHeader: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        paddingVertical: 15,
+        paddingHorizontal: 20,
+        borderBottomWidth: 1,
+        borderBottomColor: "#24272A",
+    },
 
+    headerSide: {
+        width: 40, // same width as the icon button area
+        alignItems: "flex-start",
+        justifyContent: "center",
+    },
+
+    headerCenter: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+    },
 
 
 });

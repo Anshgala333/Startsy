@@ -39,7 +39,7 @@ const RatingPage = ({ navigation }) => {
         var object = {
             ratingText: description,
             ratingStars: rating,
-            version : "v7"
+            version: "v7"
         }
         setLoading(true)
 
@@ -64,7 +64,7 @@ const RatingPage = ({ navigation }) => {
             console.log(err);
 
         }
-        finally{
+        finally {
             setLoading(false);
             setTimeout(() => {
                 navigation.goBack()
@@ -75,10 +75,21 @@ const RatingPage = ({ navigation }) => {
 
     return (
         <ScrollView style={{ flex: 1, backgroundColor: "#16181A" }}>
+            <View style={styles.header}>
+                <View style={styles.headerSide}>
+                    <Pressable onPress={() => navigation.goBack()}>
+                        <FontAwesome6 name="chevron-left" size={25} style={styles.backIcon} color="#00DF60" />
+                    </Pressable>
+                </View>
+
+                <View style={styles.headerCenter}>
+                    <Text style={styles.title}>Feedback</Text>
+                </View>
+
+                <View style={styles.headerSide} />
+            </View>
             <View style={styles.container}>
-                <Pressable onPress={() => navigation.goBack()}>
-                    <FontAwesome6 name="chevron-left" size={28} style={{ alignSelf: 'flex-start', marginLeft: 6 }} color="#00DF60" />
-                </Pressable>
+
                 <View style={styles.box}>
 
 
@@ -137,6 +148,33 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#16181A',
         padding: 20,
+    },
+    title: {
+        fontSize: 20,
+        color: "#E9E9E9",
+        fontFamily: "Alata",
+        textAlign: "center",
+    },
+    header: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        paddingVertical: 15,
+        paddingHorizontal: 20,
+        borderBottomWidth: 1,
+        borderBottomColor: "#24272A",
+    },
+
+    headerSide: {
+        width: 40, // same width as the icon button area
+        alignItems: "flex-start",
+        justifyContent: "center",
+    },
+
+    headerCenter: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
     },
     box: {
         marginTop: "50%",
