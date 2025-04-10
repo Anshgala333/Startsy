@@ -141,8 +141,8 @@ const signupstyles = StyleSheet.create({
         // padding: 10,
         marginVertical: height * 0.018,
         borderRadius: 20,
-        margin: "auto",
-        marginTop: scalingfactor * 30,
+        // margin: "auto",
+        // marginTop: scalingfactor * 30,
         height: 40
     },
     nexttext: {

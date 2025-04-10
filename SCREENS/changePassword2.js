@@ -6,21 +6,12 @@ import signupstyles from "@/styles/signup1styles.js";
 import { Entypo } from "@expo/vector-icons";
 const ChangePassword2 = ({ navigation, route }) => {
 
-    const { token } = route.params;
+    const{token} = route.params;
     const isforgot = route.params.isforgot
     const email = route.params.email
     const epassword = route.params.password
 
-    console.log(isforgot, "params");
-
-
-
-
-
-
-
-
-
+    
 
     const [password, setPassword] = useState("");
     const [success, setsuccess] = useState("");
@@ -58,7 +49,7 @@ const ChangePassword2 = ({ navigation, route }) => {
         // Proceed with saving the password
         setloading(true)
         try {
-            console.log(isforgot);
+   
             var route = isforgot ? "forgotPassword" : "changePassword"
             console.log(route);
 
@@ -79,15 +70,13 @@ const ChangePassword2 = ({ navigation, route }) => {
                 },
             });
             const data = await response.json();
-            // setloading(false)
-            console.log(data);
-            // console.log(response.status);
+         
+
             if (response.status === 400) {
-                // setmessage("* entered password does not match with your current password")
-                // seterror(true)
+           
             }
             else if (response.status === 200) {
-                // console.log("success");
+         
                 seterror(false);
                 setsuccess(true)
                 navigation.navigate("Green");
@@ -96,7 +85,7 @@ const ChangePassword2 = ({ navigation, route }) => {
             }
         }
         catch (err) {
-            // setloading(false)
+
             console.log(err);
 
         }

@@ -39,7 +39,7 @@ const Green = ({ navigation }) => {
     useEffect(() => {
         async function getToken() {
             temp = await AsyncStorage.getItem("accessToken");
-            console.log(temp, "app khulte vakt toke hai ya nai");
+            // console.log(temp, "app khulte vakt toke hai ya nai");
 
             setfalsetoken(temp)
 

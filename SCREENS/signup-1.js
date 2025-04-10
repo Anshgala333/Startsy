@@ -132,6 +132,7 @@ const Signup1 = function ({ navigation, route }) {
                         <TextInput
                             allowFontScaling={false}
                             placeholder="Username"
+                            autoCapitalize="none"
                             placeholderTextColor="#828282"
                             style={s5.input}
                             value={username}

@@ -28,14 +28,14 @@ const BottomSheetContent = ({name , email , phone}) => {
         
              <View style={styles.listContainer} >
                 <AntDesign name="mobile1" size={30} color="white" />
-                <TouchableOpacity onPress={() => openDialer(9004262865)}>
+                <TouchableOpacity onPress={() => openDialer(phone)}>
                     <Text style={styles.textStyle}>{phone}</Text>
                 </TouchableOpacity>
             </View>
 
             <View style={styles.listContainer} >
                 <Entypo name="email" size={30} color="white" />
-                <TouchableOpacity onPress={() => openEmail('jash.devkar.1054@gmail.com')}>
+                <TouchableOpacity onPress={() => openEmail(email)}>
                     <Text style={styles.textStyle}>{email}</Text>
                 </TouchableOpacity>
             </View> 

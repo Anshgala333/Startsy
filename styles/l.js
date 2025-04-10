@@ -103,31 +103,33 @@ const styles = StyleSheet.create({
     },
     input: {
         // height: height * 0.045, // Responsive height
-        backgroundColor: "transparent",
-        margin: height * 0.012,
-        marginTop: 0,
+     
+        // margin: height * 0.012,
+   
         borderBottomWidth: 1,
         borderBottomColor: "white",
         fontSize: scalingfactor * 18, // Responsive font size
         color: "white",
-        // paddingBottom: height * 0.012,
+
         width: "95%",
-        paddingBottom: 10,
-        marginBottom: 30,
+        // paddingBottom : 10 ,
+        // marginBottom : 30,
         fontFamily: "Alata",
+        paddingBottom:8,
+        paddingLeft:8
         // lineHeight : scalingfactor * 18
     },
     input2: {
         // height: 30, // Responsive height
-        backgroundColor: "transparent",
+        // backgroundColor: "transparent",
         // backgroundColor : "red",
-        width: "75%",
-
-        fontSize: scalingfactor * 18, // Responsive font size
-        margin: height * 0.011,
-        marginTop: -2,
+        width : "75%",
+       
+        fontSize: scalingfactor*18, // Responsive font size
+        // margin: height * 0.011,
+        // marginTop: -2,
         color: "white",
-        paddingBottom: 0,
+        padding : 0 ,
         // paddingBottom: height * 0.012,
         fontFamily: "Alata",
         // lineHeight : scalingfactor * 20
@@ -146,24 +148,29 @@ const styles = StyleSheet.create({
         // height : "30%",
         // marginTop: 20,
         position: "relative",
+        padding:0,
         // backgroundColor : "red",
-        borderBottomColor: "white",
-        borderBottomWidth: 1,
-        width: "95%",
-        marginHorizontal: "auto",
-        flexDirection: 'row'
+        borderBottomColor : "white",
+        borderBottomWidth : 1,
+        width : "95%",
+        // marginHorizontal : "auto",
+        // flexDirection:'row',
+        // bottom:0
+        paddingBottom:8,
+        paddingStart:8,
+        marginTop : 30,
     },
     forgot: {
         // position: "",
-        // backgroundColor:'red',
-        width: '100%',
-        right: 10,
+        // backgroundColor:'blue',
+        width:'100%',
+        // right: 10,
         // top: "20%",
         color: "white",
         fontFamily: "Alata",
-        alignItems: 'flex-end',
-        marginHorizontal: 'auto',
-        marginTop: 8,
+        alignItems:'center',
+        marginHorizontal:'auto',
+        marginTop:16,
 
 
     },
@@ -173,13 +180,14 @@ const styles = StyleSheet.create({
         textAlign: "center",
         fontSize: width * 0.045, // Responsive font size
         fontFamily: "Alata"
-    }
-    , forgottext: {
-        fontSize: scalingfactor * 15,
+    },
+    forgotText: {
+        fontSize: scalingfactor*15,
         fontFamily: "Alata",
-        right: 0,
-        textAlign: 'right'
-
+        right:0,
+        color:'#828282'
+        // textAlign:'center'
+        
     },
     loginbutton: {
         margin: "auto",
@@ -298,10 +306,10 @@ const styles = StyleSheet.create({
         transform: [{ scale: 1.1 }],
         zIndex: 20
     },
-    error: {
-        marginVertical: 0,
-        marginTop: 0,
-        textAlign: "left",
+    error : {
+        marginVertical :0,
+        marginTop  :6,
+        textAlign : "left",
         // backgroundColor : "red",
         width: "92%",
         marginHorizontal: "auto",
