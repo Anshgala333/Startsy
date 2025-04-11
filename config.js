@@ -1,6 +1,6 @@
 // export const url = 'https://startsy.onrender.com/'
-// export const url = 'http://192.168.1.4:5002/'
-export const url = 'http://10.10.27.68:5002/'
+export const url = 'http://192.168.1.4:5002/'
+// export const url = 'http://10.10.27.68:5002/'
 
 
 // -- college
@@ -8,7 +8,7 @@ export const url = 'http://10.10.27.68:5002/'
 
 //startsy
 
-// export const url = 'http://startsy.in:5002/'
+// export const url = 'https://startsy.in:5002/'
 
 
 

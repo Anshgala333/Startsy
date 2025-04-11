@@ -43,12 +43,6 @@ const InvestorCard = ({ route }) => {
             console.log(result ,"okkkkkkkkkkkkkkk");
 
 
-
-           
-
-
-          
-
             if (response.status == 200) {
 
 
@@ -305,7 +299,7 @@ const InvestorCard = ({ route }) => {
                                 fontSize={26}
                                 mode={ResizeTextMode.max_lines}
                                 ellipsizeMode='tail'
-                                style={styles.role}>{item.investor.roleId.user_id.role == "CommunityMember" ? "Member" : item.investor.roleId.user_id.role}
+                                style={styles.role}>{item.investor.role == "CommunityMember" ? "Member" : item.investor.role}
                             </AutoSizeText>
                         </Pressable>
                         {/* <Text style={styles.role}> role </Text> */}
