@@ -58,103 +58,8 @@ const Notification = ({ token, mainpagebottomsheet, closeall }) => {
             backgroundColor: "#16181a"
         }}>
             <Text allowFontScaling={false} style={styles.headerText}>Notification</Text>
+            <Upvotedata token={token} navigation={navigation} />
             
-            {/* {decode.role != "Investor" && <Pressable
-                onPress={() => { showJobPage() }}
-
-                style={styles.job}>
-                <Text style={styles.jobtext}>job</Text>
-            </Pressable>} */}
-
-            <Tab.Navigator
-                initialRouteName="Requests"
-                screenOptions={({ route }) => ({
-                    animationEnabled: true,
-
-
-
-                    tabBarStyle: {
-                        backgroundColor: "#16181a",
-                        justifyContent: "space-between",
-                        display: "flex",
-                        width: width ,
-                        margin: "auto",
-                        borderBlockColor: "transparent",
-                        elevation: 0
-                    },
-
-
-                    tabBarIndicatorStyle: {
-                        backgroundColor: "#00DE62",
-                        height: 1,
-                    },
-
-                })}
-            >
-
-                <Tab.Screen
-
-                    name="Requests"
-                    component={Upvotedata}
-                    initialParams={{ token: token, navigation: navigation }}
-                    // children={() => <Upvotedata token={token} navigation={navigation} />}
-                    options={{
-                        freezeOnBlur: true,
-
-                        tabBarLabel: ({ focused }) => (
-                            <View >
-                                <View style={{ position: "absolute", left: -25, top: -2 }}>
-                                    {focused && <Upvote color="#00de62" />}
-                                    {!focused && <Upvote color="#B8B8B8" />}
-                                </View>
-                                <Text allowFontScaling={false} style={[
-                                    styles.tabbarpill, {
-                                        color: focused ? "#00DE62" : "#B8B8B8",
-                                        borderColor: focused ? "#00DE62" : "#24272A",
-                                        // backgroundColor: focused ? "#00DE62" : "transparent",
-                                    }
-                                ]}>
-                                    Upvote
-
-                                </Text>
-                            </View>
-                        ),
-
-                    }}
-                />
-                <Tab.Screen
-                    name="Connections"
-                    component={InvestorCard}
-                    initialParams={{ token: token, navigation: navigation }}
-                    // children={() => <InvestorCard token={token} navigation={navigation} />}
-
-                    options={{
-                        freezeOnBlur: true,
-
-                        tabBarLabel: ({ focused }) => (
-
-
-                            <View >
-                                <View style={{ position: "absolute", left: -25, top: -2 }}>
-                                    {focused && <Useradd />}
-                                    {!focused && <Useradd color="#B8B8B8" />}
-                                </View>
-                                <Text allowFontScaling={false} style={[
-                                    styles.tabbarpill, {
-                                        color: focused ? "#00DE62" : "#B8B8B8",
-                                        borderColor: focused ? "#00DE62" : "#24272A",
-                                        // backgroundColor: focused ? "#00DE62" : "transparent",
-                                    }
-                                ]}>
-                                    Request
-
-                                </Text>
-                            </View>
-                        ),
-
-                    }}
-                />
-            </Tab.Navigator>
         </View>
     )
 }
@@ -289,7 +194,7 @@ const styles = StyleSheet.create({
         // marginTop: -1
 
         fontSize: 16,
-        marginLeft : 10,
+        marginLeft: 10,
         fontFamily: "Alata",
 
     },
@@ -332,7 +237,7 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontWeight: "bold",
         color: "#00DE62",
-        marginBottom: 12,
+        marginBottom: 0,
         fontFamily: "myanmar",
         color: "#00DE62",
         paddingLeft: 15

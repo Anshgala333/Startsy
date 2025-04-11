@@ -81,6 +81,7 @@ import Constants from "expo-constants";
 import { url } from "@/config.js";
 import RatingPage from "@/SCREENS/BetaRating.js";
 import TermsAndConditions from "../SCREENS/JASH/terms-condition/TermsAndCondition.jsx";
+import InvestorCard from "@/SCREENS/main-2/InvestorCard.js";
 
 import JobApplyScreen from '../SCREENS/JASH/Jobs/JobApplyScreen.jsx'
 import JobApplicantCard from '../SCREENS/JASH/Jobs/JobApplicantCard.jsx'
@@ -336,6 +337,7 @@ export default function App() {
           <Stack.Screen name="RatingPage" component={RatingPage} />
           <Stack.Screen name = 'JobApply' component={JobApplyScreen}/>
           <Stack.Screen name = 'JobApplicantCard' component={JobApplicantCard}/>
+          <Stack.Screen name ="AllRequests" component={InvestorCard}/>
         </Stack.Navigator>
       )}
 

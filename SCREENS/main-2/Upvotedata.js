@@ -24,13 +24,18 @@ import styles1 from '@/styles/Alert2.js';
 
 
 
-function Upvotedata({ route }) {
+function Upvotedata(route) {
 
 
-    // console.log("up vote re render");
 
 
-    var { token, navigation } = route.params
+
+
+    let navigation = route.navigation;
+
+    let token = route.token
+
+    // var { token, navigation } = route.params
 
     const [refreshing, setRefreshing] = useState(false)
     const [data, setdata] = useState([])
@@ -214,7 +219,7 @@ function Upvotedata({ route }) {
                 // var array = result.data.reverse()
                 setSubNotification(array);
                 console.log(array);
-                
+
             }
 
 
@@ -423,10 +428,10 @@ function Upvotedata({ route }) {
 
         else {
 
-          
+
             return (
 
-             
+
 
 
                 <View style={styles.box1}>
@@ -517,14 +522,6 @@ function Upvotedata({ route }) {
                 // </TouchableOpacity>
 
 
-
-
-
-
-
-
-
-
             )
 
         }
@@ -557,6 +554,17 @@ function Upvotedata({ route }) {
                 // renderItem={() => <Text style={{ fontSize: 100 }}>okkk</Text>}
                 />
                 <View style={[styles.divider, { marginBottom: -10 }]}></View>
+                <Pressable style={styles.Jobbtn} onPress={() => {
+                    navigation.navigate('AllRequests', {
+                        token: token, navigation: navigation
+                    })
+                }
+
+
+                }>
+                    <Text style={styles.jobbtntext}>View your Requests</Text>
+
+                </Pressable>
 
 
 
@@ -732,6 +740,33 @@ const scalingfactor = Math.sqrt(a * b)
 
 
 const styles = StyleSheet.create({
+
+
+    Jobbtn: {
+        backgroundColor: "#16181a",
+        borderRadius: 30,
+        margin: "auto",
+        width: "93%",
+        paddingHorizontal: 10,
+        // height: 40,
+        paddingVertical: 10,
+        marginBottom: -8,
+        paddingTop: 8,
+        paddingBottom: 8,
+        marginTop: 25,
+        justifyContent: "center",
+        borderWidth: 1,
+        borderColor: "#ccc",
+        justifyContent: "flex-start",
+    },
+    jobbtntext: {
+        textAlign: "center",
+        color: "#828282",
+        fontFamily: "Alata",
+        fontSize: 18,
+        verticalAlign: "top",
+        paddingBottom: 5,
+    },
     card: {
         backgroundColor: '#1a1a1a',
         borderRadius: 20,
@@ -823,6 +858,7 @@ const styles = StyleSheet.create({
         width: width,
         height: 1,
         marginTop: 5,
+        // marginBottom:10,
         backgroundColor: "#24272A"
     },
     tabbarpill: {

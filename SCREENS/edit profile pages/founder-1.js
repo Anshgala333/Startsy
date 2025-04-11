@@ -465,10 +465,21 @@ const Founder1 = ({ navigation }) => {
     return (
 
         <SafeAreaView style={{ flex: 1, backgroundColor: "#16181a" }}>
-            <ScrollView style={{ flex: 1 }}>
-                <Animated.View style={styles1.header}>
-                    <Text allowFontScaling={false} style={styles1.headertext}>Edit Profile</Text>
-                </Animated.View>
+            <View style={styles1.header}>
+                    <View style={styles1.headerSide}>
+                        <Pressable onPress={() => navigation.goBack()}>
+                            <FontAwesome6 name="chevron-left" size={25} style={styles1.backIcon} color="#00DF60" />
+                        </Pressable>
+                    </View>
+
+                    <View style={styles1.headerCenter}>
+                        <Text style={styles1.title}>Edit Profile</Text>
+                    </View>
+
+                    <View style={styles1.headerSide} />
+                </View>
+            <ScrollView style={{ flex: 1,paddingTop:20 }}>
+                
                 <View style={{ width: width * 0.98, margin: "auto" }}>
                     {/* <Text style={styles1.edit}>Edit Profile</Text> */}
                     {/* <Profile /> */}
@@ -489,7 +500,7 @@ const Founder1 = ({ navigation }) => {
                         allowFontScaling={false}
                         placeholder="Full Name"
                         placeholderTextColor="#828282"
-                        style={styles1.input}
+                        style={[styles1.input, {width:"89%"}]}
                         value={fullName}
                         onChangeText={(text) => { setfullname(text) }}
                     />
@@ -503,14 +514,14 @@ const Founder1 = ({ navigation }) => {
                         value={email}
                         onChangeText={(text) => { setemail(text) }}
                     /> */}
-                    <Drop   borderwidth={0} bb={1} borderColor={"#ccc"}  pccolor={"#828282"}  items={country1} placeholder={country} width={"95%"} onValueChange={(value) => setcountry(value)} open={open1} setOpen={t1} extra={true} edit />
+                    <Drop   borderwidth={0} bb={1} borderColor={"#ccc"}  pccolor={"#828282"}  items={country1} placeholder={"India"} width={"93%"} onValueChange={(value) => setcountry(value)} open={open1} setOpen={t1} extra={true} edit />
                     {errors.country && <Text style={styles1.errnew}>{errors.country}</Text>}
 
                     <TextInput
                         allowFontScaling={false}
                         placeholder="Phone number"
                         placeholderTextColor="#828282"
-                        style={[styles1.input, { marginTop: 28 }]}
+                        style={[styles1.input, { marginTop: 16 , width:"89%"} ]}
                         value={phone}
                         onChangeText={(text) => { setphone(text) }}
                     />
@@ -528,18 +539,18 @@ const Founder1 = ({ navigation }) => {
 
                     <View style={{ width: width * 0.95, margin: "auto" }}>
 
-                        <Text allowFontScaling={false} style={[styles.t1, { marginTop: 15, marginBottom: -10, paddingLeft: 7 }]}>Area of Expertise / Interest</Text>
+                        <Text allowFontScaling={false} style={[styles.t1, { marginTop: 15, marginBottom: 0, paddingLeft: 7 }]}>Area of Expertise / Interest</Text>
                         <TextInput
                             allowFontScaling={false}
                             placeholder="Write any Top 3"
                             placeholderTextColor="#828282"
-                            style={[styles1.input, { marginTop: 25 }]}
+                            style={[styles1.input, { marginTop: 15 }]}
                             value={skills}
                             onChangeText={(text) => { setskills(text) }}
                         />
-                        <Text onTouchStart={handleOutsideTouch} allowFontScaling={false} style={[styles.t1, { marginTop: 25, marginBottom: 10, paddingLeft: 7 }]}>Education </Text>
+                        <Text onTouchStart={handleOutsideTouch} allowFontScaling={false} style={[styles.t1, { marginTop: 15, marginBottom: 10, paddingLeft: 7 }]}>Education </Text>
                         <Text onTouchStart={handleOutsideTouch} allowFontScaling={false} style={[styles.t2, { marginBottom: 15 }]}>List your highest degree achieved, which helps to establish your academic background and qualifications. </Text>
-                        <Drop bl={0} bt={0} borderwidth={0} bb={1} pccolor={"#828282"} width={"95%"} items={edulist} placeholder={education} onValueChange={(value) => { seteducation(value) }} setOpen={t2} open={open2} nestedScrollEnabled={true} />
+                        <Drop bl={0} bt={0} borderwidth={0} bb={1} borderColor={"#ccc"} pccolor={"#828282"} width={"95%"} items={edulist} placeholder={education} onValueChange={(value) => { seteducation(value) }} setOpen={t2} open={open2} nestedScrollEnabled={true} />
                         {errors.education && <Text style={styles1.errnew}>{errors.education}</Text>}
 
 
@@ -629,30 +640,33 @@ var b = height / 800;
 
 const scalingfactor = Math.sqrt(a * b)
 const styles1 = StyleSheet.create({
-    header: {
-        height: 55,
-        textAlign: "left",
-        backgroundColor: "#16181a",
-        // backgroundColor : "transparent",
-        // position : "absolute",
-        top: 0,
-        left: 0,
-        marginBottom : 15,
-        width: "100%",
-        zIndex: 1000,
-        // backgroundColor : "red",
-
-
-    },
-    headertext: {
-        color: "#00DE62",
-        fontSize: scalingfactor * 35,
-        fontFamily: "myanmar",
-        fontWeight: "bold",
-        paddingTop: 5,
-        // paddingBottom : 20,
+    title: {
+        fontSize: 20,
+        color: "#E9E9E9",
+        fontFamily: "Alata",
+        textAlign: "center",
+      },
+      header: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        paddingVertical: 15,
         paddingHorizontal: 20,
-    },
+        borderBottomWidth: 1,
+        borderBottomColor: "#24272A",
+      },
+    
+      headerSide: {
+        width: 40, // same width as the icon button area
+        alignItems: "flex-start",
+        justifyContent: "center",
+      },
+    
+      headerCenter: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+      },
     edit: {
         color: "#828282",
         fontFamily: "Alata",
@@ -673,7 +687,6 @@ const styles1 = StyleSheet.create({
     input: {
         backgroundColor: "transparent",
         margin: height * 0.016,
-        // marginTop: 40,
         borderBottomWidth: 1,
         // borderRadius : 20,
         paddingLeft: scalingfactor * 3,
@@ -681,9 +694,9 @@ const styles1 = StyleSheet.create({
         fontSize: scalingfactor * 20, // Responsive font size
         color: "#ccc",
         paddingBottom: scalingfactor * 7,
-        width: "90%",
+        width: "92%",
         marginHorizontal: "auto",
-        // fontFamily: "Roboto",
+        fontFamily: "Alata",
         // lineHeight: scalingfactor * 18,
         marginBottom: scalingfactor * 15,
         // borderRadius : 20
@@ -756,7 +769,7 @@ const styles1 = StyleSheet.create({
         width: 182,
         height: 40,
         alignSelf: "center",
-        marginVertical: 12
+        marginVertical: 2
 
 
     },

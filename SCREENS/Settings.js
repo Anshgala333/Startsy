@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { jwtDecode } from "jwt-decode";
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Platform, ToastAndroid, Image, BackHandler, Alert, Pressable,Linking } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Platform, ToastAndroid, Image, BackHandler, Alert, Pressable, Linking } from "react-native";
 import { List, Avatar, Divider } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
@@ -150,11 +150,11 @@ const Settings = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
-      <View  style={styles.headerRow}>
-      <Pressable onPress={() => navigation.goBack()}>
-        <FontAwesome6 name="chevron-left" size={25} style={{ alignSelf: 'flex-start', marginLeft: 6 , marginTop : -6 }} color="#00DF60" />
-      </Pressable>
-      <Text allowFontScaling={false} style={styles.headerText}>Settings</Text>
+      <View style={styles.headerRow}>
+        <Pressable onPress={() => navigation.goBack()}>
+          <FontAwesome6 name="chevron-left" size={25} style={{ alignSelf: 'flex-start', marginLeft: 6, marginTop: -6 }} color="#00DF60" />
+        </Pressable>
+        <Text allowFontScaling={false} style={styles.headerText}>Settings</Text>
       </View>
       <View style={styles.bottom}>
 
@@ -198,7 +198,7 @@ const Settings = ({ navigation, route }) => {
 
         <View style={styles.footer}>
           <Text style={styles.devtext1}> Beta Version 7</Text>
-          <Text style={styles.devtext}>  Developed by RSPY Tech Pvt Ltd</Text>
+          <Text style={styles.devtext}>  Developed by RSPY Tech Pvt. Ltd.</Text>
         </View>
       </View>
     </View>
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     //paddingVertical: 15,
   },
-  
+
   top: {
     width: "100%",
     height: 120,
@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ccc",
     overflow: "hidden",
   },
-  
+
   img2: {
     width: "100%",
     height: "100%",
@@ -267,7 +267,7 @@ const styles = StyleSheet.create({
     fontFamily: "myanmar",
     color: "#00DE62",
     paddingLeft: 10,
-    marginBottom : 10,
+    marginBottom: 10,
   },
 
   devtext: {
@@ -276,16 +276,18 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     bottom: 0,
     fontFamily: "Roboto",
-    fontSize: 12
+    fontSize: 10,
+    marginTop:2
   },
 
   devtext1: {
     // textAlign:"right",
-    color: "#94A3B8",
+    color: "#828282",
     alignSelf: "center",
     bottom: 0,
     fontFamily: "Roboto",
-    fontSize: 16,
+    fontSize: 12,
+    
   }
 });
 
