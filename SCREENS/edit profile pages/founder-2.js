@@ -372,9 +372,7 @@ const Founder2 = ({ navigation, route }) => {
         }
 
 
-        console.log('====================================');
-        console.log(final);
-        console.log('====================================');
+   
         setloading(true);
 
 
@@ -406,9 +404,7 @@ const Founder2 = ({ navigation, route }) => {
                 }
 
             }
-            console.log('====================================');
-            console.log(data);
-            console.log('====================================');
+       
 
         }
         catch (err) {
@@ -483,8 +479,7 @@ const Founder2 = ({ navigation, route }) => {
             console.log(existingdata.roleId.hiddenInfo.socialProof[2].url);
             
 
-            // console.log(existingdata.roleId.hiddenInfo.sector);
-            // console.log(existingdata.roleId.hiddenInfo.stageOfStartup);
+         
             console.log(+existingdata.roleId.hiddenInfo.fundingStatus , "bllll");
 
 
@@ -492,7 +487,6 @@ const Founder2 = ({ navigation, route }) => {
                 // setLinkedinURl(existingdata.roleId.hiddenInfo.socialProof["name"] )
             }
 
-            // setImage(existingdata.profilePhoto)
 
             setNameOfStartup(existingdata.roleId.nameOfStartup)
             setGoal(existingdata.roleId.goal)
@@ -537,10 +531,21 @@ const Founder2 = ({ navigation, route }) => {
     return (
 
         <SafeAreaView style={{ flex: 1, backgroundColor: "#16181a" }}>
-            <ScrollView style={{ flex: 1 }}>
-                <Animated.View style={styles1.header}>
-                    <Text allowFontScaling={false} style={styles1.headertext}>Profile</Text>
-                </Animated.View>
+            <View style={styles1.header}>
+                    <View style={styles1.headerSide}>
+                        <Pressable onPress={() => navigation.goBack()}>
+                            <FontAwesome6 name="" size={34} style={styles1.backIcon} color="#00DF60" />
+                        </Pressable>
+                    </View>
+
+                    <View style={styles1.headerCenter}>
+                        <Text style={styles1.title}>Edit Profile</Text>
+                    </View>
+
+                    <View style={styles1.headerSide} />
+                </View>
+            <ScrollView style={{ flex: 1, paddingTop:20 }}>
+               
                 <View style={{ width: width * 0.98, margin: "auto" }}>
                     {/* <Text style={styles1.edit}>Edit Profile</Text> */}
 
@@ -605,15 +610,15 @@ const Founder2 = ({ navigation, route }) => {
                     <View style={{ width: width * 0.95, margin: "auto" }}>
 
 
-                        <Text onTouchStart={handleOutsideTouch} allowFontScaling={false} style={[styles.t1, { marginTop: 25, marginBottom: 10, paddingLeft: 7 }]}>Startup sector  </Text>
+                        <Text onTouchStart={handleOutsideTouch} allowFontScaling={false} style={[styles.t1, { marginTop: 15,marginBottom: 10, paddingLeft: 7 }]}>Startup sector  </Text>
                         <Text onTouchStart={handleOutsideTouch} allowFontScaling={false} style={[styles.t2, { marginBottom: 15 }]}>List your highest degree achieved, which helps to establish your academic background and qualifications. </Text>
-                        <Drop borderwidth={0} bb={1} pccolor={"#B8B8B8"}  width={"88%"} placeholder={sector} width1={"86%"} items={areaofinterestlist} onValueChange={(value) => { setSector(value) }} setOpen={t2} open={open2} nestedScrollEnabled={true} />
+                        <Drop borderwidth={0} bb={1} pccolor={"#828282"} borderColor={"#ccc"}  width={"92%"} placeholder={sector} width1={"86%"} items={areaofinterestlist} onValueChange={(value) => { setSector(value) }} setOpen={t2} open={open2} nestedScrollEnabled={true} />
                         {errors.sector && <Text style={styles1.errnew}>{errors.sector}</Text>}
 
 
                         <Text onTouchStart={handleOutsideTouch} allowFontScaling={false} style={[styles.t1, { marginBottom: 10, marginTop: 25, paddingLeft: 7 }]}>Startup stage  </Text>
                         <Text onTouchStart={handleOutsideTouch} allowFontScaling={false} style={[styles.t2, { marginBottom: 15 }]}>Detail any relevant industry experience, particularly if you’ve worked in a specific company or held roles that have prepared you for your current venture.</Text>
-                        <Drop borderwidth={0} bb={1} pccolor={"#B8B8B8"}  width={"88%"} placeholder={stageOfStartup} width1={"86%"} items={stage} onValueChange={(value) => setStageOfStartup(value)} open={open1} setOpen={t1} />
+                        <Drop borderwidth={0} bb={1} pccolor={"#828282"}   borderColor={"#ccc"} width={"92%"} placeholder={stageOfStartup} width1={"86%"} items={stage} onValueChange={(value) => setStageOfStartup(value)} open={open1} setOpen={t1} />
                         {errors.stage && <Text style={styles1.errnew}>{errors.stage}</Text>}
 
 
@@ -820,31 +825,33 @@ var b = height / 800;
 
 const scalingfactor = Math.sqrt(a * b)
 const styles1 = StyleSheet.create({
-    header: {
-        height: 55,
-        textAlign: "left",
-        backgroundColor: "#16181a",
-        // backgroundColor : "transparent",
-        // position : "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        zIndex: 1000,
-        // backgroundColor : "red",
-
-
-    },
-    headertext: {
-        color: "#00DE62",
-        fontSize: 30,
-        fontFamily: "myanmar",
-        fontWeight: "bold",
-        paddingTop: 5,
-        // marginBottom :-10,
-        paddingHorizontal: 25,
-
-        
-    },
+    title: {
+        fontSize: 20,
+        color: "#E9E9E9",
+        fontFamily: "Alata",
+        textAlign: "center",
+      },
+      header: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        paddingVertical: 15,
+        paddingHorizontal: 20,
+        borderBottomWidth: 1,
+        borderBottomColor: "#24272A",
+      },
+    
+      headerSide: {
+        width: 40, // same width as the icon button area
+        alignItems: "flex-start",
+        justifyContent: "center",
+      },
+    
+      headerCenter: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+      },
     edit: {
         color: "#B8B8B8",
         fontFamily: "Alata",
@@ -869,9 +876,9 @@ const styles1 = StyleSheet.create({
         borderBottomWidth: 1,
         // borderRadius : 20,
         paddingLeft: scalingfactor * 10,
-        borderBottomColor: "#AEAFAF",
+        borderBottomColor: "#ccc",
         fontSize: scalingfactor * 20, // Responsive font size
-        color: "#B8B8B8",
+        color: "#ccc",
         paddingBottom: scalingfactor * 7,
         width: "90%",
         marginHorizontal: "auto",
@@ -966,7 +973,7 @@ const styles1 = StyleSheet.create({
     t22: {
         textAlign: 'Left',
         color: "#94A3B8",
-        fontFamily: 'Roboto',
+        fontFamily: 'Alata',
         fontSize: scalingfactor * 13,
 
         marginBottom: scalingfactor * 8,
@@ -986,16 +993,16 @@ const styles1 = StyleSheet.create({
         backgroundColor: "transparent",
         margin: height * 0.016,
         marginTop: -2,
-        borderWidth: 2,
+        borderWidth: 1,
         borderRadius: 20,
-        borderColor: "#828282",
-        fontSize: scalingfactor * 20,
-        color: "#B8B8B8",
+        borderColor: "#ccc",
+        fontSize: scalingfactor * 18,
+        color: "#ccc",
         paddingBottom: scalingfactor * 5,
         width: "90%",
         margin: "auto",
-        // fontFamily: "Roboto",
-        // lineHeight: scalingfactor * 18,
+        fontFamily: "Roboto",
+        lineHeight: scalingfactor * 22,
         marginBottom: scalingfactor * 10,
         height: 220,
         marginTop: 10,

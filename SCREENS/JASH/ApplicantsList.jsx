@@ -36,7 +36,7 @@ const ApplicantsList = ({ route, navigation }) => {
         const data = await response.json();
         
 
-        console.log("daaaaaaaaaaaaaattttaaaa",data.data);
+        // console.log("daaaaaaaaaaaaaattttaaaa",data.data);
         
 
 

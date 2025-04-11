@@ -78,7 +78,7 @@ const AllPostsScreen = ({ navigation, route }) => {
       <View style={styles.header}>
         <View style={styles.headerSide}>
           <Pressable onPress={() => navigation.goBack()}>
-            <FontAwesome6 name="chevron-left" size={34} style={styles.backIcon} color="#00DF60" />
+            <FontAwesome6 name="chevron-left" size={25} style={styles.backIcon} color="#00DF60" />
           </Pressable>
         </View>
 
@@ -86,7 +86,7 @@ const AllPostsScreen = ({ navigation, route }) => {
           <Text style={styles.title}>Saved Posts</Text>
         </View>
 
-        <View style={styles.headerSide} /> 
+        <View style={styles.headerSide} />
       </View>
       {
 
