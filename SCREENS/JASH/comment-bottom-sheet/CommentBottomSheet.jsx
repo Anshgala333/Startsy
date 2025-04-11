@@ -76,7 +76,7 @@ const CommentBottomSheet = ({ commentRef, backdropComponent, allcomments, commen
                 // onblur={() => setmax(500)}
                 style={styles.input}
                 placeholder="Type here..."
-                placeholderTextColor="#bbb"
+                placeholderTextColor="#828282"
                 value={commenttext}
                 onChangeText={text => setcommenttext(text)}
             />
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 30,
         paddingHorizontal: 15,
-        color: "#828282",
+        color: "#ccc",
         fontSize: 18,
         marginBottom: 10
 
