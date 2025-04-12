@@ -211,31 +211,7 @@ const Foryou = ({ scroll, token, openshare, mainpagebottomsheet, visible, setVis
 
 
 
-    // useEffect(() => {
-    //     // Listener for the hardware back button
-    //     const backAction = () => {
-    //         console.log(co);
-    //         console.log(co, "cooo");
 
-
-    //         if (co == true) {
-    //             bottomSheetRef5.current?.close();
-    //             setiscommentopen(false);
-    //             return true; // Prevent default behavior
-    //         }
-
-    //         else {
-    //             BackHandler.exitApp()
-    //         }
-    //     };
-
-    //     const backHandler = BackHandler.addEventListener(
-    //         'hardwareBackPress',
-    //         backAction
-    //     );
-
-    //     return () => backHandler.remove(); // Cleanup
-    // }, [co]);
 
     async function getpost() {
         setloading(true);
@@ -253,12 +229,7 @@ const Foryou = ({ scroll, token, openshare, mainpagebottomsheet, visible, setVis
             console.log(data);
 
 
-            // var data1 = data.data.map(e => {
-            //     var object = { ...e, isliked: false }
-            //     return object
 
-
-            // })
 
             var decode = jwtDecode(token)
             var loggedinUserID = decode._id
@@ -373,8 +344,7 @@ const Foryou = ({ scroll, token, openshare, mainpagebottomsheet, visible, setVis
 
 
     async function upvotepost(id, index) {
-        // console.log(id);
-        // console.log(index);
+
 
         var toset = !allpost[index].isliked
         console.log(toset);
@@ -410,7 +380,7 @@ const Foryou = ({ scroll, token, openshare, mainpagebottomsheet, visible, setVis
 
         }
         catch (err) {
-            // setloading(false)
+   
             console.log(err);
 
         }

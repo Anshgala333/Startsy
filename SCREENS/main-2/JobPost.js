@@ -17,13 +17,13 @@ import { jwtDecode } from "jwt-decode";
 
 const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation, onReportCallBack }) => {
 
-    // console.log("job re render");
+
 
     const [loading,setLoading]=useState(false);
 
 
     useFocusEffect(useCallback(() => {
-        console.log("focused ");
+      
         scrollY.setValue(0)
 
     }, []))
@@ -86,8 +86,7 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation, o
                 },
             });
             const data = await response.json();
-            console.log(data);
-            console.log(response.status);
+      
             if (response.status === 200) {
                 setallpost(allpost.map((e, i) => {
                     if (i == index) {
@@ -120,9 +119,6 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation, o
                 return
             }
             else {
-                console.log(item.jobPosts?.amount);
-
-
                 if (item.type == "jobPost") {
                     return (
                         <LinearGradient

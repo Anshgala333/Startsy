@@ -21,21 +21,14 @@ import styles1 from '@/styles/Alert2.js';
 
 
 
-
-
-
 function Upvotedata(route) {
-
-
-
-
 
 
     let navigation = route.navigation;
 
     let token = route.token
 
-    // var { token, navigation } = route.params
+
 
     const [refreshing, setRefreshing] = useState(false)
     const [data, setdata] = useState([])
@@ -72,35 +65,7 @@ function Upvotedata(route) {
 
         if (!visible) return null; // Prevent rendering when not visible
 
-        // async function deletepost1() {
-        //     console.log("Deleting post...");
-        //     if (idofposttobedeleetd != null) {
-        //         setisdeleting(true)
-        //         try {
-        //             const response = await fetch(`${url}posts/deletepost/${idofposttobedeleetd}`, {
-        //                 method: 'POST',
-        //                 body: "",
-        //                 headers: {
-        //                     accept: "application/json",
-        //                     "Authorization": `Bearer ${token}`,
-        //                 },
-        //             });
 
-        //             const data = await response.json();
-        //             console.log(data);
-
-        //             // Remove the post from the local state
-        //             const updatedPosts = posts.filter((post) => post._id !== idofposttobedeleetd);
-        //             setPosts(updatedPosts);
-        //             setVisible(false)
-        //         } catch (err) {
-        //             console.log(err);
-        //         }
-        //         finally {
-        //             setisdeleting(false)
-        //         }
-        //     }
-        // }
 
         return (
             <Modal transparent visible={visible} animationType="none" onRequestClose={() => onClose?.()}>
@@ -113,13 +78,7 @@ function Upvotedata(route) {
 
                                 <View style={{ display: "flex", flexDirection: "row", gap: 10 }}>
 
-                                    {/* <TouchableOpacity onPress={() => onClose?.()} style={styles1.button}>
-                                            <Text style={styles1.buttonText}>Cancel</Text>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity onPress={() => deletepost1()} style={styles1.button}>
-                                            {isdeleting && <ActivityIndicator size={24} color="#16181a" />}
-                                            {!isdeleting && <Text style={styles1.buttonText}>Confirm</Text>}
-                                        </TouchableOpacity> */}
+
                                 </View>
                             </View>
                         </TouchableWithoutFeedback>
@@ -169,7 +128,7 @@ function Upvotedata(route) {
     }
 
     useEffect(() => {
-        // getdata()
+
         getData1()
     }, [])
 
@@ -192,8 +151,6 @@ function Upvotedata(route) {
                 }
             );
             const result = await response.json();
-            // console.log(response.status);
-            // console.log(result);
 
 
 
@@ -209,10 +166,6 @@ function Upvotedata(route) {
                 normalArray.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
 
                 setnormal(normalArray)
-
-                // console.log(suggestion, "suggestion");
-                // console.log(normal)
-                // console.log(suggestion)
 
 
                 var array = result.data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
@@ -358,19 +311,19 @@ function Upvotedata(route) {
                             >
                                 {item.sendingUserId?.profilePhoto && <Image style={styles.topimage101} source={{ uri: item.sendingUserId?.profilePhoto }} />}
                                 {!item.sendingUserId?.profilePhoto && <Image style={styles.topimage101} source={require("../../assets/images/p2.png")} />}
-                                {/* <Image style={styles.topimage} source={require("../../assets/images/p2.png")} /> */}
+
 
                             </Pressable>
                             <View style={styles.bottominfo101}>
                                 <View style={{ display: "flex", flexDirection: "row" }}>
 
                                     <Pressable
-                                    // onPress={() => { navigation.navigate("Singleuserpage", { token: token, id: item.sendingUserId._id, page: "bell" }) }}
+
 
                                     >
                                         <View style={{ display: "flex", flexDirection: "row", marginTop: 10 }}>
                                             <Text style={styles.topu101}>
-                                                {/* {item.sendingUserId.userName}   */}
+
                                                 Investor
                                             </Text>
                                             <View style={styles.circle1}></View>
@@ -392,7 +345,7 @@ function Upvotedata(route) {
                                 </View>
 
 
-                                {/* <Text style={styles.sub2}>{item.notificationMessage}</Text> */}
+
                             </View>
                         </View>
 
@@ -414,8 +367,6 @@ function Upvotedata(route) {
                         </View>
                         <Text
                             numberOfLines={1}
-                            // fontSize={12}
-                            // mode={ResizeTextMode.max_lines}
                             ellipsizeMode='tail'
                             style={[styles.sub2, { width: "auto", maxWidth: 250 }]}>
                             {item.notificationMessage}
@@ -434,7 +385,7 @@ function Upvotedata(route) {
 
 
 
-                <View style={styles.box1}>
+                <TouchableOpacity style={styles.box1}>
 
 
                     <View style={styles.left}>
@@ -518,7 +469,7 @@ function Upvotedata(route) {
 
 
                     </View>
-                </View>
+                </TouchableOpacity>
                 // </TouchableOpacity>
 
 
@@ -554,17 +505,7 @@ function Upvotedata(route) {
                 // renderItem={() => <Text style={{ fontSize: 100 }}>okkk</Text>}
                 />
                 <View style={[styles.divider, { marginBottom: -10 }]}></View>
-                <Pressable style={styles.Jobbtn} onPress={() => {
-                    navigation.navigate('AllRequests', {
-                        token: token, navigation: navigation
-                    })
-                }
 
-
-                }>
-                    <Text style={styles.jobbtntext}>View your Requests</Text>
-
-                </Pressable>
 
 
 
@@ -645,18 +586,55 @@ function Upvotedata(route) {
                 {
                     (suggestion.length == 0 && normal.length == 0) ?
                         <View style={[styles.emptyListContainer]}>
+                            <Pressable style={styles.Jobbtn} onPress={() => {
+                                navigation.navigate('AllRequests', {
+                                    token: token, navigation: navigation
+                                })
+                            }
+
+                            }>
+                                <Text style={styles.jobbtntext}>View your Requests</Text>
+
+                            </Pressable>
                             <Text style={[styles.emptyListText, {}]}>No new notifications</Text>
                         </View>
                         :
                         (suggestion.length != 0 && normal.length == 0) ?
                             <View>
                                 <Suggestions />
+
+
+                                <Pressable style={styles.Jobbtn} onPress={() => {
+                                    navigation.navigate('AllRequests', {
+                                        token: token, navigation: navigation
+                                    })
+                                }
+
+                                }>
+                                    <Text style={styles.jobbtntext}>View your Requests</Text>
+
+                                </Pressable>
+
                                 <View style={[styles.emptyListContainer]}>
-                                    <Text style={[styles.emptyListText, { paddingTop: 200 }]}>No new notifications</Text>
+                                    <Text style={[styles.emptyListText, { paddingTop: 150 }]}>No new notifications</Text>
                                 </View>
                             </View>
                             :
-                            <Suggestions />
+                            <>
+
+                                <Suggestions />
+
+                                <Pressable style={styles.Jobbtn} onPress={() => {
+                                    navigation.navigate('AllRequests', {
+                                        token: token, navigation: navigation
+                                    })
+                                }
+
+                                }>
+                                    <Text style={styles.jobbtntext}>View your Requests</Text>
+
+                                </Pressable>
+                            </>
 
                 }
 
@@ -749,11 +727,11 @@ const styles = StyleSheet.create({
         width: "93%",
         paddingHorizontal: 10,
         // height: 40,
-        paddingVertical: 10,
-        marginBottom: -8,
+        // paddingVertical: 10,
+        marginBottom: 8,
         paddingTop: 8,
         paddingBottom: 8,
-        marginTop: 25,
+        marginTop: 5,
         justifyContent: "center",
         borderWidth: 1,
         borderColor: "#ccc",

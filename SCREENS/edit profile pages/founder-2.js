@@ -882,8 +882,8 @@ const styles1 = StyleSheet.create({
         paddingBottom: scalingfactor * 7,
         width: "90%",
         marginHorizontal: "auto",
-        fontFamily: "Roboto",
-        // lineHeight: scalingfactor * 18,
+        fontFamily: "Alata",
+        lineHeight: scalingfactor * 18,
         marginBottom: scalingfactor * 15,
         // borderRadius : 20
     },

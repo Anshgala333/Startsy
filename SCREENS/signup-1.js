@@ -82,7 +82,7 @@ const Signup1 = function ({ navigation, route }) {
         });
         const data = await response.json();
         // console.log(data);
-        Alert.alert(JSON.stringify(data))
+        // Alert.alert(JSON.stringify(data))
         if (response.status === 200) {
             navigation.navigate("Signup2", { username, type })
             // navigation.navigate("Signup2", { type, username })

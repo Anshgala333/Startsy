@@ -378,10 +378,21 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
             
 
 
-            // console.log(data.data.chatUsers, "poiuytr");
+            console.log(data.data.chatUsers, "poiuytr");
+            const f2 = new Set()
+            const tree101 = data.data.chatUsers.filter((e) => {
+              if (f2.has(e._id)) {
+                return false
+              }
+              else {
+                f2.add(e._id)
+                return true
+              }
+            })
+            console.log(tree101 , "ok");
 
-            setinvestorarray(data.data?.chatUsers.filter((e) => e.role == "Investor"))
-            setnoninvestor(data.data?.chatUsers.filter((e) => e.role != "Investor"))
+            setinvestorarray(tree101.filter((e) => e.role == "Investor"))
+            setnoninvestor(tree101.filter((e) => e.role != "Investor"))
 
             setGeneralModelId(data.data._id)
             setemail(data.data.email)
@@ -445,7 +456,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
 
         }
         catch (err) {
-            console.log(err);
+            console.log(err , "apk erro");
 
         }
     }
@@ -961,7 +972,6 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
             route = "investor/getInvestorChatUserList"
         }
         else  {
-            // console.log("fuck");
             route = "founder/getFounderChatUserList"
 
         }
@@ -1225,7 +1235,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                                 ))}
 
 
-                                <Text style={styles1.t6}>{userdata.investorConnections} investor connections</Text>
+                                <Text style={styles1.t6}>{investor.length} investor connections</Text>
                             </View>}
                             <TouchableOpacity onPress={() => {
                                 // console.log("users page");
@@ -1247,7 +1257,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                                     </View>
                                 ))}
 
-                                <Text style={styles1.t6}>{length1(userdata.chatUsers)} connections</Text>
+                                <Text style={styles1.t6}>{noninvestor.length} connections</Text>
                             </TouchableOpacity>
                         </View>
 
