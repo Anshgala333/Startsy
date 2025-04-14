@@ -141,7 +141,7 @@ const SuggestedPost = ({ item, index, opencomment, openshare, upvotepost, id, to
                             <MaterialCommunityIcons
                                 name="bookmark"
                                 size={32}
-                                color="#ccc"             // Gray when unsaved
+                                color="#ccc"           
 
                             />
                         )}

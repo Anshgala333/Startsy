@@ -465,20 +465,34 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
                   {!item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5, marginTop: 6 }} />}
                   {item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5, marginTop: 6 }} selected={true} />}
                 </TouchableOpacity>
-                <Text style={{ color: "#ccc", fontFamily: 'Roboto', fontSize: 16, top: 3 }}>{item.likedBy?.length}</Text>
+                <Text style={{ color: "#ccc", fontFamily: 'Roboto', fontSize: 14, top: 3 }}>{item.likedBy?.length}</Text>
               </View>
 
 
               {/* comment */}
 
-              <Pressable onPress={() => {
+              <View style={{ flexDirection: 'row', gap: 7, marginRight: 4, alignItems: 'center' }}>
+                <TouchableOpacity onPress={() => {
+                  Vibration.vibrate(20)
+                  opencomment(item._id)
+
+                }}
+                >
+                  <FontAwesome name="comment-o" size={28} color="#ccc" />
+
+                </TouchableOpacity>
+
+                <Text style={{ color: "#ccc", fontFamily: 'Roboto', fontSize: 16, top: 3 }}>{item.postComments.length}</Text>
+              </View>
+
+              {/* <Pressable onPress={() => {
                 Vibration.vibrate(20)
                 opencomment(item._id)
 
               }}
               >
                 <FontAwesome name="comment-o" size={27} color="#ccc" />
-              </Pressable>
+              </Pressable> */}
 
 
               {/* share */}
