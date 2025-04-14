@@ -268,19 +268,11 @@ function Upvotedata({ token }) {
 
         if (item.notificationType == "suggestion") {
             return (
-
-
-
-
-
                 <TouchableOpacity onPress={() => {
                     setVisible(true)
                     setentirecontent(item.notificationMessage)
                     Vibration.vibrate(10)
-
-
                 }}>
-
                     <LinearGradient
                         colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}
                         locations={[0, 1]}
@@ -375,20 +367,13 @@ function Upvotedata({ token }) {
 
 
         else {
-
-
             return (
-
-
                 <LinearGradient
                     colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}
                     locations={[0, 1]}
                     style={styles.box1}
                     start={{ x: 0, y: 0 }}
                     end={{ x: 0, y: 1 }} >
-
-
-
                     <View style={styles.left}>
 
 
@@ -535,7 +520,7 @@ function Upvotedata({ token }) {
                     renderItem={rendersub}
                 // renderItem={() => <Text style={{ fontSize: 100 }}>okkk</Text>}
                 />
-                <View style={[styles.divider, { marginBottom: -5 }]}></View>
+                <View style={[styles.divider, { marginBottom: -10 }]}></View>
 
 
 
