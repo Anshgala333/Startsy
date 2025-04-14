@@ -91,13 +91,12 @@ const Stack = createNativeStackNavigator();
 SystemUI.setBackgroundColorAsync("#16181a");
 
 Notifications.addNotificationReceivedListener((notification) => {
-  // Handle the notification when received
-  console.log("Notification received:", notification);
+
 });
 
 Notifications.addNotificationResponseReceivedListener((response) => {
   // Handle response when the user taps on the notification
-  console.log("Notification tapped:", response);
+  // console.log("Notification tapped:", response);
 });
 import { enableFreeze } from "react-native-screens";
 import { enableScreens } from "react-native-screens";
@@ -168,7 +167,7 @@ export default function App() {
 
     responseListener.current =
       Notifications.addNotificationResponseReceivedListener((response) => {
-        console.log(response);
+
       });
 
     return () => {
@@ -361,7 +360,7 @@ const styles = StyleSheet.create({
 });
 
 async function schedulePushNotification() {
-  console.log("hello ");
+
 
   fetch("https://exp.host/--/api/v2/push/send", {
     method: "POST",
@@ -407,7 +406,7 @@ async function registerForPushNotificationsAsync() {
   }
 
   if (Device.isDevice) {
-    console.log("first");
+  
     const { status: existingStatus } =
       await Notifications.getPermissionsAsync();
     let finalStatus = existingStatus;
@@ -415,21 +414,20 @@ async function registerForPushNotificationsAsync() {
       const { status } = await Notifications.requestPermissionsAsync();
       finalStatus = status;
     }
-    console.log("second");
-
+ 
     if (finalStatus !== "granted") {
       alert("Failed to get push token for push notification!");
       return;
     }
-    console.log("third");
+
 
     try {
       var notificationToken = await AsyncStorage.getItem("notificationToken");
-      console.log(notificationToken, "notificationToken from async storage");
+
 
       if (!notificationToken) {
         try {
-          console.log("forth");
+
 
           const projectId =
             Constants?.expoConfig?.extra?.eas?.projectId ??
@@ -442,7 +440,7 @@ async function registerForPushNotificationsAsync() {
               projectId,
             })
           ).data;
-          console.log(token);
+
 
           var ifUserIsLoggedIn = await AsyncStorage.getItem("accessToken");
           if (ifUserIsLoggedIn) {
@@ -460,14 +458,13 @@ async function registerForPushNotificationsAsync() {
               });
               var data = await response.json();
 
-              console.log(data.json());
             } catch (e) {
               console.log(e);
             }
           }
           try {
             await AsyncStorage.setItem("notificationToken", token);
-            console.log("Notification token saved to AsyncStorage:");
+
           } catch (e) {
             console.log(e);
           }

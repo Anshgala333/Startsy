@@ -11,7 +11,7 @@ import Share from "@/assets/icons/share.js";
 import styles from "../../../styles/post.js"
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 
-const SendedPost = ({ item, opencomment, openshare, upvotepost, index ,toggleSavePost}) => {
+const SendedPost = ({ item, opencomment, openshare, upvotepost, index, toggleSavePost }) => {
 
 
     if (!item.user_id) return
@@ -90,20 +90,35 @@ const SendedPost = ({ item, opencomment, openshare, upvotepost, index ,toggleSav
                                     {!item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5, marginTop: 6 }} />}
                                     {item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5, marginTop: 6 }} selected={true} />}
                                 </TouchableOpacity>
-                                <Text style={{ color: "#ccc", fontFamily: 'Roboto', fontSize: 16, top: 3 }}>{item.itemlikedcount}</Text>
+                                <Text style={{ color: "#ccc", fontFamily: 'Roboto', fontSize: 14, top: 3 }}>{item.itemlikedcount}</Text>
                             </View>
 
 
                             {/* comment */}
 
-                            <Pressable onPress={() => {
+
+                            <View style={{ flexDirection: 'row', gap: 7, marginRight: 4, alignItems: 'center' }}>
+                                <TouchableOpacity onPress={() => {
+                                    Vibration.vibrate(20)
+                                    opencomment(item._id)
+
+                                }}
+                                >
+                                    <FontAwesome name="comment-o" size={28} color="#ccc" />
+
+                                </TouchableOpacity>
+
+                                <Text style={{ color: "#ccc", fontFamily: 'Roboto', fontSize: 16, top: 3 }}>{item.postComments.length}</Text>
+                            </View>
+
+                            {/* <Pressable onPress={() => {
                                 Vibration.vibrate(20)
                                 opencomment(item._id)
 
                             }}
                             >
                                 <FontAwesome name="comment-o" size={27} color="#ccc" />
-                            </Pressable>
+                            </Pressable> */}
 
 
                             {/* share */}
@@ -120,7 +135,7 @@ const SendedPost = ({ item, opencomment, openshare, upvotepost, index ,toggleSav
 
 
 
-                        <TouchableOpacity style={{ paddingRight: 0, paddingRight: 8 }} onPress={() => toggleSavePost(item._id, index,true)}>
+                        <TouchableOpacity style={{ paddingRight: 0, paddingRight: 8 }} onPress={() => toggleSavePost(item._id, index, true)}>
                             {!item.isSaved ? (
                                 <MaterialIcons name="bookmark-border" size={32} color="#ccc" />
                             ) : (
@@ -139,7 +154,7 @@ const SendedPost = ({ item, opencomment, openshare, upvotepost, index ,toggleSav
                     <View style={styles.lower}>
                         {item.type != "textBlog" && <Text allowFontScaling={false} style={styles.u3}>{item.caption != undefined ? item.caption : "caption"} </Text>}
                         <Pressable onPress={() => { opencomment(item._id) }} allowFontScaling={false} style={styles.u4}>
-                            <Text style={styles.u4}>View {item.postComments.length} comments</Text>
+                            <Text style={styles.u4}>Lorem</Text>
                         </Pressable>
 
                     </View>

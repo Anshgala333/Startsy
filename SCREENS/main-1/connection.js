@@ -165,7 +165,7 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
 
 
     function gotochatscreen(item) {
-        // console.log(item.user._id);
+
 
         const id = item.user._id;
 

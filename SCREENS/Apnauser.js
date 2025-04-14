@@ -55,11 +55,6 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
 
 
 
-// console.log("profile page re");
-
-
-    // var id = process.env.API_URL
-    // console.log(id , "local id from env");
 
     const [attop, setattop] = useState(true);
 
@@ -177,7 +172,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
 
 
     var decode = jwtDecode(token)
-    // console.log(decode);
+
 
     var editprofilepage;
 
@@ -198,10 +193,9 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                 },
             });
             const data = await response.json();
-            // console.log(data);
+
             setemptycomment(false)
 
-            // console.log(response.status);
             setcommenttext("");
 
             var object = {
@@ -270,10 +264,8 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
 
         useFocusEffect(
             useCallback(() => {
-                // console.log("post");
-                // console.log(posts, "ok");
+                
 
-                // handleTabChange(1)
             })
         )
 
@@ -309,7 +301,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
 
 
     useEffect(() => {
-        // console.log(minHeight); // Log after state updates
+
     }, [minHeight]);
 
 
@@ -337,9 +329,6 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
         editprofilepage = "Editcommunity";
 
     }
-
-    // console.log(decode);
-    // console.log(decode._id);
 
     var id = decode._id
 
@@ -373,12 +362,8 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
             });
             const data = await response.json();
 
-            console.log(data.profileCompletion, "completion ka data");
-            console.log(data);
             
 
-
-            console.log(data.data.chatUsers, "poiuytr");
             const f2 = new Set()
             const tree101 = data.data.chatUsers.filter((e) => {
               if (f2.has(e._id)) {
@@ -405,11 +390,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
             var combined = [...rec1, ...rec2]
             setCertficate(combined)
 
-            // console.log(data.data.hiddenInfo.socialProof);
-
-            // var instaurl = data.data.hiddenInfo.socialProof[0].url
-            // var LinkedinURl = data.data.hiddenInfo.socialProof[1].url
-            // var yturl = data.data.hiddenInfo.socialProof[2].url
+            
 
             setinstaurl(data.data.hiddenInfo.socialProof[0].url)
             setlinkedInUrl(data.data.hiddenInfo.socialProof[1].url)
@@ -446,9 +427,6 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
 
             setImage(data.data.user_id.bannerImage)
 
-            // console.log(data.data);
-            // console.log(data.data.user_id.bannerImage);
-            // console.log(image);
 
 
 
@@ -479,23 +457,6 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
 
 
 
-
-    // useEffect(() => {
-    //     const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-    //         // console.log(page);
-
-    //         if (page == "Chat") {
-    //             navigation.navigate(page, { item, messages, token });
-    //         }
-    //         else {
-    //             navigation.navigate(page);
-    //         }
-
-    //         return true; // This prevents the default back action
-    //     });
-
-    //     return () => backHandler.remove();
-    // }, [page]);
 
     const [image, setImage] = useState("")
     const [followstatus, setfollowstatus] = useState("Follow")
@@ -695,20 +656,34 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                                                 {!item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5, marginTop: 6 }} />}
                                                 {item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5, marginTop: 6 }} selected={true} />}
                                             </TouchableOpacity>
-                                            <Text style={{ color: "#ccc", fontFamily: 'Roboto', fontSize: 16, top: 3 }}>{item.likedBy.length}</Text>
+                                            <Text style={{ color: "#ccc", fontFamily: 'Roboto', fontSize: 14, top: 3 }}>{item.likedBy.length}</Text>
                                         </View>
 
 
                                         {/* comment */}
 
-                                        <Pressable onPress={() => {
+                                        <View style={{ flexDirection: 'row', gap: 7, marginRight: 4, alignItems: 'center' }}>
+                                            <TouchableOpacity onPress={() => {
+                                                Vibration.vibrate(20)
+                                                opencomment(item._id)
+
+                                            }}
+                                            >
+                                                <FontAwesome name="comment-o" size={28} color="#ccc" />
+
+                                            </TouchableOpacity>
+
+                                            <Text style={{ color: "#ccc", fontFamily: 'Roboto', fontSize: 16, top: 3 }}>{item.postComments.length}</Text>
+                                        </View>
+
+                                        {/* <Pressable onPress={() => {
                                             Vibration.vibrate(20)
                                             opencomment(item._id)
 
                                         }}
                                         >
                                             <FontAwesome name="comment-o" size={27} color="#ccc" />
-                                        </Pressable>
+                                        </Pressable> */}
 
 
                                         {/* share */}
@@ -734,7 +709,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                                 <View style={styles.lower}>
                                     {item.type != "textBlog" && <Text allowFontScaling={false} style={styles.u3}>{item.caption != undefined ? item.caption : "caption"} </Text>}
                                     <Pressable onPress={() => { opencomment(item._id) }} allowFontScaling={false} style={styles.u4}>
-                                        <Text style={styles.u4}>View {item.postComments.length} comments</Text>
+                                        <Text style={styles.u4}>Lorem</Text>
                                     </Pressable>
                                </View>
                     </LinearGradient>
