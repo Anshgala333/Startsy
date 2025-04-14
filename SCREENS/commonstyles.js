@@ -34,7 +34,7 @@ export default styles = StyleSheet.create({
         marginBottom: scalingfactor * 8,
         width: "85%",
         alignSelf: "center",
-        lineHeight: scalingfactor * 16
+        // lineHeight: scalingfactor * 16
     },
     bottom: {
         width: "100%",
@@ -64,7 +64,7 @@ export default styles = StyleSheet.create({
         paddingBottom: scalingfactor * 5,
         width: "92%",
         fontFamily: "Roboto",
-        lineHeight: scalingfactor * 18,
+        // lineHeight: scalingfactor * 18,
         marginBottom: scalingfactor * 25,
         height: 190,
         marginTop: 10,
@@ -149,7 +149,7 @@ export default styles = StyleSheet.create({
         paddingBottom: scalingfactor * 5,
         width: "92%",
         fontFamily: "Roboto",
-        lineHeight: scalingfactor * 18,
+        // lineHeight: scalingfactor * 18,
         marginBottom: scalingfactor * 25
     },
     des: {

@@ -1,6 +1,3 @@
-
-
-
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { Text, Animated, RefreshControl, StatusBar, View, Image, FlatList, TouchableOpacity, SafeAreaView, StyleSheet, Dimensions, ScrollView, Pressable, Vibration } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -18,7 +15,7 @@ const InvestorCard = ({ route }) => {
     const [loading, setloading] = useState(true);
     const [refreshing, setRefreshing] = useState(false);
     const [refreshing11, setRefreshing11] = useState(false);
-    // console.log("request screen of ofunder ");
+
     const animatedValues = useRef({})
     async function getData() {
         setloading(true);
@@ -37,29 +34,28 @@ const InvestorCard = ({ route }) => {
             const { data } = result
 
             const filteredData = data.filter((e) => e.investor != null)
-            console.log(result, "okkkkkkkkkkkkkkk");
+   
 
 
             if (response.status == 200) {
 
 
                 var array = result.data.map((item, index) => {
-                    // console.log(item, index);
-                    // console.log(result.data.length, "shdkasuhdkshdkjshdkshkasjhfkhfkhfkasjfhksjfhk");
+                    
 
                     item["id"] = index + 1
 
                     // console.log(item["id"]);
                     return item
                 })
-                // console.log(array.length, "yeh hai arraya");
+               
 
 
                 const uniqueData = filteredData.filter((item, index, self) =>
                     self.findIndex(innerItem => innerItem.investor._id === item.investor._id) === index
                 );
 
-                // array = array.filter((item , index , array)=> array.indexOf(item) == index)
+               
                 setItems(uniqueData)
             }
 
@@ -84,10 +80,7 @@ const InvestorCard = ({ route }) => {
 
     useEffect(() => {
         if (items && items.length > 0) {
-            // items.forEach(item => console.log(item.id)
-            // )
 
-            // console.log("hiiiiiiiiiiiii");
 
             animatedValues.current = items.reduce((acc, item) => {
                 acc[item.id] = {
@@ -98,14 +91,12 @@ const InvestorCard = ({ route }) => {
                 return acc;
             }, {});
 
-            // console.log(animatedValues);
 
         }
     }, [items]);
 
     function time(time) {
-        // console.log('====================================');
-        // console.log(time);
+
         var data1 = new Date(time)
 
         var seconds = Math.floor((new Date() - data1) / 1000);
@@ -139,13 +130,6 @@ const InvestorCard = ({ route }) => {
 
     function rendercard({ item, index }) {
 
-        // console.log(item, "render card ka item");
-
-        // if(item.)
-
-
-
-
 
 
         const moveItem = (id, direction) => {
@@ -158,14 +142,13 @@ const InvestorCard = ({ route }) => {
 
             if (direction == "left") {
                 const id = item.investor._id;
-                // console.log(id);
+
 
                 console.log(`${url}founder/acceptRequest/${id}`);
 
 
                 async function makesubmit1() {
 
-                    // console.log("left wala ");
 
 
                     try {
@@ -190,7 +173,7 @@ const InvestorCard = ({ route }) => {
 
             else if (direction == "right") {
 
-                // console.log("hutt");
+               
 
                 const id = item.investor._id;
                 async function makesubmit() {
@@ -203,7 +186,7 @@ const InvestorCard = ({ route }) => {
                             }
                         })
                         const data = await response.json();
-                        // console.log(data);
+                        
 
                     }
                     catch (err) {
@@ -262,21 +245,14 @@ const InvestorCard = ({ route }) => {
 
         return (
             <Animated.View
-            // style={[
-            //     {
-            //         transform: [
-            //             { translateX: animatedValues.current[item.id]?.translateX },
-            //             { scaleY: animatedValues.current[item.id]?.scaleY },
-            //         ],
-            //         opacity: animatedValues.current[item.id]?.opacity,
-            //     },
-            // ]}
+
 
             >
                 <LinearGradient
                     style={styles.card}
-                    colors={["rgba(36, 39, 42 , 0.4)", "rgba(22, 24, 26 , 0.6)"]}
+                    colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}
                     locations={[0, 1]}
+
                     start={{ x: 0, y: 0 }}
                     end={{ x: 0, y: 1 }}
                 >
@@ -293,7 +269,7 @@ const InvestorCard = ({ route }) => {
                                     style={styles.image}
                                 />
                             </View>
-                            {/* <Text style={styles.role}>{item.investor.roleId.user_id.role} </Text> */}
+                            
                             <View style={{ alignItems: 'flex-start', }}>
 
                                 <AutoSizeText
@@ -309,14 +285,14 @@ const InvestorCard = ({ route }) => {
                                     // fontSize={26}
                                     mode={ResizeTextMode.max_lines}
                                     ellipsizeMode='tail'
-                                    style={styles.role}>{item.investor.roleId.user_id.role == "CommunityMember" ? "Member" : item.investor.roleId.user_id.role}
+                                    style={styles.role}>{item.investor.role == "CommunityMember" ? "Member" : item.investor.role}
                                 </AutoSizeText>
                             </View>
 
                         </Pressable>
 
 
-                        <View style={{justifyContent:'center'}}>
+                        <View style={{ justifyContent: 'center' }}>
                             <Text style={styles.date}>{time(item.requestDate)}</Text>
                             <Text style={styles.date}></Text>
                         </View>
@@ -325,20 +301,19 @@ const InvestorCard = ({ route }) => {
 
                     <View style={styles.divider1}></View>
 
-                    {/* <Text style={styles.name}>{item.investor.roleId.fullName}</Text> */}
+                    <View style={{ paddingHorizontal: 12 }}>
 
-                    {/* <Text style={styles.name}>Ansh Gala</Text> */}
+                        {item.investor.role == "Investor" && <Text style={styles.info}>Investing experience - {item.investor.roleId.previousExperience} years</Text>}
+                        {item.investor.role == "Investor" && <Text style={styles.info1}>Investing Capacity - {item.investor.roleId.investmentRange}</Text>}
 
-                    {item.investor.role == "Investor" && <Text style={styles.info}>Investing experience - {item.investor.roleId.previousExperience} years</Text>}
-                    {item.investor.role == "Investor" && <Text style={styles.info1}>Investing Capacity - {item.investor.roleId.investmentRange}</Text>}
+                        {item.investor.role == "Founder" && <Text style={styles.info}>Stage of Startup - {item.investor.roleId.hiddenInfo.stageOfStartup} </Text>}
+                        {item.investor.role == "Founder" && <Text style={styles.info1}>Startup Sector - {item.investor.roleId.hiddenInfo.sector}</Text>}
 
-                    {item.investor.role == "Founder" && <Text style={styles.info}>Stage of Startup - {item.investor.roleId.hiddenInfo.stageOfStartup} </Text>}
-                    {item.investor.role == "Founder" && <Text style={styles.info1}>Startup Sector - {item.investor.roleId.hiddenInfo.sector}</Text>}
-
-                    {(item.investor.role == "CommunityMember" && item.investor.roleId.skills != "") &&
-                        <Text style={styles.info}>{item.investor.roleId.skills}</Text >}
-                    {(item.investor.role == "CommunityMember" && item.investor.roleId.tagline != "") &&
-                        <Text style={styles.info}>{item.investor.roleId.tagline}</Text >}
+                        {(item.investor.role == "CommunityMember" && item.investor.roleId.skills != "") &&
+                            <Text style={styles.info}>{item.investor.roleId.skills}</Text >}
+                        {(item.investor.role == "CommunityMember" && item.investor.roleId.tagline != "") &&
+                            <Text style={styles.info}>{item.investor.roleId.tagline}</Text >}
+                    </View>
 
 
 
@@ -376,7 +351,7 @@ const InvestorCard = ({ route }) => {
     return (
 
         <View
-            // refreshControl={<RefreshControl progressViewOffset={0} refreshing={refreshing}/>
+            
             style={{ flex: 1, backgroundColor: "#16181a" }}>
             <View style={styles.topHeader}>
                 <View style={styles.headerSide}>
@@ -412,10 +387,9 @@ const InvestorCard = ({ route }) => {
                 style={{ flex: 1, backgroundColor: "#16181a", alignContent: "flex-start" }}
                 data={items}
                 renderItem={rendercard} // Correct integration
-            // keyExtractor={(item, index) => index.toString()} // Ensure keys are unique
             />
 
-            {/* <Text>hello</Text> */}
+     
         </View>
 
     );
@@ -430,14 +404,8 @@ const styles = StyleSheet.create({
     card: {
         backgroundColor: '#1a1a1a',
         borderRadius: 20,
-        // padding: 16,
         margin: 16,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.3,
-        shadowRadius: 5,
-        elevation: 8,
-
+     
     },
     divider1: {
         width: "100%",
@@ -447,12 +415,12 @@ const styles = StyleSheet.create({
         // marginTop: 20,
         // marginBottom: 20,
         backgroundColor: "#24272A"
-      },
+    },
     header: {
         flexDirection: 'row',
         width: '100%',
 
-        padding: 8,
+        padding: 12,
 
         justifyContent: 'space-between'
         // marginBottom: 8,
@@ -461,33 +429,26 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
         borderRadius: 25,
-        // marginRight: 12,
     },
     role: {
         fontSize: 11,
         color: '#00de62',
-        // flex: 1,
+
         fontFamily: "Roboto"
     },
     date: {
         fontSize: 10,
         color: '#666',
-        // position: "absolute",
+  
         right: 0,
-        // top: 10,
+
         fontFamily: "Roboto",
-        // alignSelf: "center",
-        // marginTop: -10,
-        // backgroundColor : "red"
+       
     },
     name: {
         fontSize: 20,
         color: '#ccc',
-        // width:'10%',
-        // fontWeight: 'bold',
-        // marginBottom: 8,
         fontFamily: "Alata",
-        // backgroundColor: "red"
     },
     info: {
         fontSize: 16,
@@ -508,6 +469,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         gap: 30,
         marginTop: 16,
+        marginBottom: 12
     },
     buttonAccept: {
         backgroundColor: 'transparent',

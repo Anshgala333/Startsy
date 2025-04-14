@@ -1,8 +1,9 @@
 import React, { Component, useEffect, useState } from 'react'
-import { FlatList, SafeAreaView, Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native'
-import { url } from '../config.js'
+import { FlatList, SafeAreaView, Text, View, TouchableOpacity, StyleSheet, navigation , Image,Pressable } from 'react-native'
+import { url } from '../config.js';
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { jwtDecode } from 'jwt-decode';
-const Followerpage = ({ route }) => {
+const Followerpage = ({ navigation ,route }) => {
 
 
 
@@ -26,8 +27,9 @@ const Followerpage = ({ route }) => {
 
 
     useEffect(() => {
-        setsuggestionarray(people);
-    }, [people])
+        const filteredPeople = people.filter(person => person.role !== "Investor");
+        setsuggestionarray(filteredPeople);
+    }, [people]);
 
 
 
@@ -158,13 +160,27 @@ const Followerpage = ({ route }) => {
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "#16181a" }}>
 
-            <View><Text allowFontScaling={false} style={styles.headerText}>Connections</Text></View>
+            <View style={styles.header}>
+                <View style={styles.headerSide}>
+                    <Pressable onPress={() => navigation.navigate("Apnauser")}>
+                        <FontAwesome6 name="chevron-left" size={25} style={styles.backIcon} color="#00DF60" />
+                    </Pressable>
+                </View>
+
+                <View style={styles.headerCenter}>
+                    <Text style={styles.title}>Connections</Text>
+                </View>
+
+                <View style={styles.headerSide} />
+            </View>
 
 
             <FlatList
                 data={suggestionarray}
                 renderItem={renderSuggestion}
-            />
+                contentContainerStyle={{ paddingBottom: 200 }} 
+            /> 
+             
         </SafeAreaView>
     )
 
@@ -176,26 +192,65 @@ export default Followerpage
 
 const styles = StyleSheet.create({
     listItem: {
+        
         flexDirection: "row",
         alignItems: "center",
         paddingVertical: 5,
-
+        // borderBottomWidth: 1,
+        borderRadius: 20,
+        // backgroundColor: "#24272A",
+        width: "99%",
         borderBottomWidth: 1,
         borderBottomColor: "#333",
-        alignSelf: "flex-start",
-        width: "92%",
-        width: "90%",
         marginVertical: 5,
-        paddingHorizontal: 10,
+        paddingBottom: 15,
+        paddingTop: 5,
+        paddingHorizontal: 20,
         marginHorizontal: "auto"
     },
     avatar: {
+        // width: 50,
+        // height: 52,
+        // paddingTop: 15,
+        // borderRadius: 25,
+        // marginRight: 10,
+        // marginTop: 0,
+
         width: 50,
         height: 52,
         paddingTop: 15,
         borderRadius: 25,
         marginRight: 15,
         marginTop: 0,
+
+    },
+    title: {
+        fontSize: 20,
+        color: "#E9E9E9",
+        fontFamily: "Alata",
+        textAlign: "center",
+    },
+    header: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        paddingVertical: 15,
+        paddingHorizontal: 20,
+        borderBottomWidth: 1,
+        borderBottomColor: "#24272A",
+        marginBottom:5
+    },
+
+    headerSide: {
+        width: 40, // same width as the icon button area
+        alignItems: "flex-start",
+        justifyContent: "center",
+    },
+
+    headerCenter: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
     },
     textContainer: {
         flex: 1,

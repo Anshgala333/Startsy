@@ -7,7 +7,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import Back from "@/components/back.js";
 import { url } from "../config.js"
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
-import { SafeAreaView, ScrollView, View, Text, Button, BackHandler, TextInput, Image, StatusBar, Animated, Easing, KeyboardAvoidingView, Pressable, ActivityIndicator } from "react-native";
+import { SafeAreaView, ScrollView, View, Text, Button, BackHandler, TextInput, Image, StatusBar, Animated, Easing, KeyboardAvoidingView, Pressable, ActivityIndicator, Alert } from "react-native";
 import { useFocusEffect } from "expo-router";
 import { GlobalContext } from "@/Global/globalcontext.js";
 
@@ -82,6 +82,7 @@ const Signup1 = function ({ navigation, route }) {
         });
         const data = await response.json();
         // console.log(data);
+        // Alert.alert(JSON.stringify(data))
         if (response.status === 200) {
             navigation.navigate("Signup2", { username, type })
             // navigation.navigate("Signup2", { type, username })
@@ -131,6 +132,7 @@ const Signup1 = function ({ navigation, route }) {
                         <TextInput
                             allowFontScaling={false}
                             placeholder="Username"
+                            autoCapitalize="none"
                             placeholderTextColor="#828282"
                             style={s5.input}
                             value={username}

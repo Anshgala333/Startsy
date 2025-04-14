@@ -1,21 +1,13 @@
 
-import { useFocusEffect } from "expo-router";
+import { useFocusEffect, useNavigation } from "expo-router";
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import { Text, StatusBar, View, Image, Modal, TouchableWithoutFeedback, Animated, FlatList, TouchableOpacity, SafeAreaView, StyleSheet, RefreshControl, Dimensions, ScrollView, Pressable, Vibration } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import Upvote from "../../assets/icons/upvote.js"
-import Useradd from "../../assets/icons/useradd.js"
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { LinearGradient } from "expo-linear-gradient";
+import { Text, View, Image, Modal, TouchableWithoutFeedback, Animated, FlatList, TouchableOpacity, StyleSheet, RefreshControl, Dimensions, ScrollView, Pressable, Vibration } from "react-native";
 import { url } from "../../config.js"
-import InvestorCard from "./InvestorCard.js"
 import { AutoSizeText, ResizeTextMode } from 'react-native-auto-size-text';
-import B2 from "@/assets/icons/b2.js";
 import { jwtDecode } from "jwt-decode";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 import { Skeleton } from 'moti/skeleton';
-import { MotiView } from 'moti';
 import styles1 from '@/styles/Alert2.js';
 
 
@@ -24,16 +16,12 @@ import styles1 from '@/styles/Alert2.js';
 
 
 
-function Upvotedata(route) {
+function Upvotedata({token }) {
 
 
 
 
-
-
-    let navigation = route.navigation;
-
-    let token = route.token
+    const navigation = useNavigation()
 
     // var { token, navigation } = route.params
 
@@ -72,35 +60,7 @@ function Upvotedata(route) {
 
         if (!visible) return null; // Prevent rendering when not visible
 
-        // async function deletepost1() {
-        //     console.log("Deleting post...");
-        //     if (idofposttobedeleetd != null) {
-        //         setisdeleting(true)
-        //         try {
-        //             const response = await fetch(`${url}posts/deletepost/${idofposttobedeleetd}`, {
-        //                 method: 'POST',
-        //                 body: "",
-        //                 headers: {
-        //                     accept: "application/json",
-        //                     "Authorization": `Bearer ${token}`,
-        //                 },
-        //             });
-
-        //             const data = await response.json();
-        //             console.log(data);
-
-        //             // Remove the post from the local state
-        //             const updatedPosts = posts.filter((post) => post._id !== idofposttobedeleetd);
-        //             setPosts(updatedPosts);
-        //             setVisible(false)
-        //         } catch (err) {
-        //             console.log(err);
-        //         }
-        //         finally {
-        //             setisdeleting(false)
-        //         }
-        //     }
-        // }
+    
 
         return (
             <Modal transparent visible={visible} animationType="none" onRequestClose={() => onClose?.()}>
@@ -132,44 +92,40 @@ function Upvotedata(route) {
 
 
 
-    async function getdata() {
-        try {
-            setskeletonloading(true)
-            const response = await fetch(
-                `${url}founder/getFounderProfileDetails`,
-                {
-                    method: "GET",
-                    headers: {
-                        accept: "application/json",
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
-            const result = await response.json();
-            console.log(response.status);
-            // console.log(result)
+    // async function getdata() {
+    //     try {
+    //         setskeletonloading(true)
+    //         const response = await fetch(
+    //             `${url}founder/getFounderProfileDetails`,
+    //             {
+    //                 method: "GET",
+    //                 headers: {
+    //                     accept: "application/json",
+    //                     Authorization: `Bearer ${token}`,
+    //                 },
+    //             }
+    //         );
+    //         const result = await response.json();
 
 
-            var object = {
-                totalUpvotes: result.data.totalUpvotes,
-                upvotesPerDay: result.data.upvotesPerDay,
-                investorUpvotes: result.data.investorUpvotes
-            }
+    //         var object = {
+    //             totalUpvotes: result.data.totalUpvotes,
+    //             upvotesPerDay: result.data.upvotesPerDay,
+    //             investorUpvotes: result.data.investorUpvotes
+    //         }
 
-            // console.log(object, "object");
-            setstatistic(object);
+    //         setstatistic(object);
 
-        } catch (err) {
-            console.log(err);
-        }
-        finally {
-            setskeletonloading(false)
-            setloading(false);
-        }
-    }
+    //     } catch (err) {
+    //         console.log(err);
+    //     }
+    //     finally {
+    //         setskeletonloading(false)
+    //         setloading(false);
+    //     }
+    // }
 
     useEffect(() => {
-        // getdata()
         getData1()
     }, [])
 
@@ -192,33 +148,18 @@ function Upvotedata(route) {
                 }
             );
             const result = await response.json();
-            // console.log(response.status);
-            // console.log(result);
-
-
 
 
             if (response.status != 404) {
-                // console.log(result.data, "top 3 data ajilffkhedskfh");
                 var suggestionArray = result.data.filter((e) => e.notificationType == "suggestion")
                 setsuggestion([...suggestionArray.reverse()])
-                // console.log(suggestion);
-
 
                 var normalArray = result.data.filter((e) => e.notificationType != "suggestion")
                 normalArray.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
 
                 setnormal(normalArray)
-
-                // console.log(suggestion, "suggestion");
-                // console.log(normal)
-                // console.log(suggestion)
-
-
                 var array = result.data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
-                // var array = result.data.reverse()
                 setSubNotification(array);
-                console.log(array);
 
             }
 
@@ -229,7 +170,6 @@ function Upvotedata(route) {
         }
         finally {
             setskeletonloading(false)
-
             setloading(false);
         }
     }
@@ -238,8 +178,6 @@ function Upvotedata(route) {
 
     function rendersub({ item }) {
 
-        // console.log(item);
-        // console.log(item.notificationType, "render sub");
 
         if (item.sendingUserId == null) return
 
@@ -260,15 +198,12 @@ function Upvotedata(route) {
                 });
                 const data = await response.json();
                 // setloading(false)
-                // console.log(data);
             }
             catch (err) {
 
             }
-            // console.log(item.sendingUserId._id);
 
 
-            console.log(message);
             var first = {
                 user: {
                     _id: item.sendingUserId._id,
@@ -284,7 +219,6 @@ function Upvotedata(route) {
 
             }
 
-            // console.log(item);
 
 
             navigation.navigate("Chat", { item: first, messages: [], token, navigation, extra });
@@ -337,7 +271,6 @@ function Upvotedata(route) {
                     setentirecontent(item.notificationMessage)
                     Vibration.vibrate(10)
 
-                    // console.log("heopen");
 
                 }}>
                     <View style={{
@@ -443,7 +376,6 @@ function Upvotedata(route) {
                         <Pressable
                             style={{ paddingTop: 10 }}
                         // onPress={() => {
-                        //     console.log("hello")
                         //     navigation.navigate("Singleuserpage", { token: token, id: item.sendingUserId._id, page: "bell" })
                         // }}
 
@@ -496,7 +428,6 @@ function Upvotedata(route) {
                         {item.notificationType == "upvotePost" && item.postId?.type == "photo" &&
 
                             <TouchableOpacity onPress={() => {
-                                // console.log(item.postId._id)
                                 navigation.navigate("ViewSendedPost", { id: item.postId._id })
                             }}>
                                 <Image style={styles.image1} source={{ uri: item.postId.mediaUrl }} />
@@ -506,7 +437,6 @@ function Upvotedata(route) {
                         {item.notificationType == "commentPost" &&
 
                             <TouchableOpacity onPress={() => {
-                                // console.log(item.postId._id)
                                 navigation.navigate("ViewSendedPost", { id: item.postId._id })
                             }}>
 
@@ -531,7 +461,6 @@ function Upvotedata(route) {
 
     function top100() {
 
-        console.log(decode.role);
 
 
         if (decode.role == "CommunityMember") {
@@ -694,10 +623,8 @@ function Upvotedata(route) {
                     progressBackgroundColor="#16181a"
                     colors={['#00de62']}
                     onRefresh={() => {
-                        console.log("start");
                         setRefreshing(true)
                         Vibration.vibrate(200)
-                        // getdata();
                         getData1()
                         setTimeout(() => {
                             setRefreshing(false);
@@ -730,7 +657,6 @@ export default Upvotedata
 const { height, width } = Dimensions.get("window");
 var a = width / 360;
 var b = height / 800;
-// console.log(a,b);
 
 const scalingfactor = Math.sqrt(a * b)
 

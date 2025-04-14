@@ -978,7 +978,7 @@ const styles1 = StyleSheet.create({
     },
     t22: {
         textAlign: 'Left',
-        color: "#94A3B8",
+        color: "#828282",
         fontFamily: 'Alata',
         fontSize: scalingfactor * 13,
 

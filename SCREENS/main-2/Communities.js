@@ -164,7 +164,7 @@ const Communities = ({ token, navigation }) => {
 
                     {[1, 2, 3, 4, 5, 6, 7, 8].map(e =>
 
-                        <View style={{ display: "flex", flexDirection: "row", gap: 5, marginBottom: 20 }}>
+                        <View key={e} style={{ display: "flex", flexDirection: "row", gap: 5, marginBottom: 20 }}>
                             <Skeleton
                                 // colorMode="dark"
                                 width={50}
@@ -209,8 +209,6 @@ const Communities = ({ token, navigation }) => {
                     refreshControl={<RefreshControl refreshing={refreshing}
                         progressBackgroundColor="#16181a"
                         colors={['#00de62']}
-
-                    
                         onRefresh={() => {
                             Vibration.vibrate(100)
                             getdata()
@@ -233,16 +231,11 @@ const Communities = ({ token, navigation }) => {
                         </>
                     }
                     data={filteredData}
-                    keyExtractor={(item, index) => index.toString()}
-                    // refreshControl={<RefreshControl refreshing={refreshing}
-                    //     onRefresh={getdata}
-
-                    // />}
+                    keyExtractor={(item, index) => item.community._id?.toString() || Math.random()}
                     renderItem={({ item }) => {
-                        // console.log(item);
 
                         return (
-                            <TouchableOpacity onPress={() => {
+                            <TouchableOpacity key={item._id} onPress={() => {
                                 gotochatscreen(item)
                             }}>
                                 <View style={styles.listItem}>

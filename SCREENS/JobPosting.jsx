@@ -1,6 +1,6 @@
 
 import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
-import { View, Text, TextInput, Pressable, ActivityIndicator, Vibration, Image, StyleSheet, Platform , ScrollView } from "react-native";
+import { View, Text, TextInput, Pressable, ActivityIndicator, Vibration, Image, StyleSheet, Platform, ScrollView } from "react-native";
 import { GlobalContext } from "@/Global/globalcontext.js";
 import { url } from '../config.js'
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -28,8 +28,8 @@ const JobPostingPage = () => {
   const [onPaymentMethodChange, setOnPaymentMethodChange] = useState("")   ///controller for rule section
   const maxLength = 1000;                                  ///length count for description
   const [openDurationDrop, setOpenDurationDrop] = useState(false);                 ///state for rule section
-  const [openPayValuesDrop, setOpenPayValuesDrop] = useState(false); 
-  const [paymentAmount,setPaymentAmount] = useState(0)                ///state for rule section
+  const [openPayValuesDrop, setOpenPayValuesDrop] = useState(false);
+  const [paymentAmount, setPaymentAmount] = useState(0)                ///state for rule section
 
 
   //items for drop down
@@ -56,7 +56,7 @@ const JobPostingPage = () => {
 
     // console.log("here");
 
-    
+
 
 
 
@@ -79,14 +79,14 @@ const JobPostingPage = () => {
 
     // if (onPaymentMethodChange == "") {
     //   console.log(onPaymentMethodChange);
-      
+
     //   setPaymentError(true);
     //   jobError = true;
     // }
 
     if (jobError == true) {
 
-      
+
       setLoading(false);
       return;
     }
@@ -101,8 +101,8 @@ const JobPostingPage = () => {
       "amount": paymentAmount
     };
 
-    
-    
+
+
     try {
       const response = await fetch(`${url}posts/createJobPost/${postType}`, {
         method: 'POST',
@@ -120,9 +120,9 @@ const JobPostingPage = () => {
       }
 
       const data = await response.json();
-     
 
-      if(response.status===201){
+
+      if (response.status === 201) {
         setButtonText("Posted");
         Vibration.vibrate(100);
         navigation.goBack();
@@ -201,7 +201,7 @@ const JobPostingPage = () => {
 
             </View>
 
-       
+
             <View >
               <TextInput
                 style={styles.input}
@@ -213,7 +213,7 @@ const JobPostingPage = () => {
               />
             </View>
 
-    
+
             <Pressable onPress={post} style={styles.button}>
 
               {/* show loading if pressed on post button */}

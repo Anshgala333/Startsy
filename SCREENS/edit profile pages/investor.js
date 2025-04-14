@@ -493,7 +493,7 @@ const EditInvestorInfo = ({ navigation }) => {
                     // value={username}
                     // onChangeText={(text) => { setusername(text) }}
                     /> */}
-                    <Drop width={"97%"} borderColor={"#ccc"} bb={1} bradius={0} bottomsheet={true} items={country1} placeholder={country} width={"93.5%"} onValueChange={handlerole} open={open1} setOpen={t1} extra={true} />
+                    <Drop width={"96%"} borderColor={"#ccc"} bb={1} pccolor={"#828282"} bradius={0} bottomsheet={true} items={country1} placeholder={"India"} width={"93.0%"} onValueChange={handlerole} open={open1} setOpen={t1} extra={true} />
 
                     {/* <Drop items={country1} width={"95%"} open={open1} setOpen={t1} onValueChange={handlerole} nestedScrollEnabled={true} extra={true} /> */}
                     {errors.country && <Text style={styles1.errnew}>{errors.country}</Text>}
@@ -558,7 +558,7 @@ const EditInvestorInfo = ({ navigation }) => {
 
                         <Text allowFontScaling={false} style={[styles.t1, { marginTop: 20, marginBottom: 10, paddingLeft: 7 }]}>Investment capacity</Text>
                         <Pressable onPress={() => { handleOutsideTouch() }} style={[styles.btn1, {  marginBottom: 10 }]}>
-                            <Text allowFontScaling={false} style={styles.nexttext}>{sliderrange.toLocaleString("en-IN")}</Text>
+                            <Text allowFontScaling={false} style={styles.nexttext}>{sliderrange.toLocaleString("en-IN")} </Text>
                         </Pressable>
 
                         {/* slider */}
@@ -575,7 +575,7 @@ const EditInvestorInfo = ({ navigation }) => {
                             minimumTrackTintColor="#00DE62"
                             maximumTrackTintColor="#00DE62"
                             thumbTintColor="#737373"
-
+                            thumbImage={require("../../assets/images/slider3.png")}
                             // step={100}
                             // thumbTintColor="#737373" // Color of the slider thumb
                             // trackImage={require("../assets/images/slider.png")}
@@ -668,13 +668,13 @@ const styles1 = StyleSheet.create({
         borderBottomWidth: 1,
         // borderRadius : 20,
         paddingLeft: scalingfactor * 8,
-        borderBottomColor: "#AEAFAF",
+        borderBottomColor: "#ccc",
         fontSize: scalingfactor * 20, // Responsive font size
         color: "#B8B8B8",
         paddingBottom: scalingfactor * 7,
         width: "89%",
         marginHorizontal: "auto",
-        // fontFamily: "Roboto",
+      fontFamily: "Alata",
         // lineHeight: scalingfactor * 18,
         marginBottom: scalingfactor * 15,
         // borderRadius : 20

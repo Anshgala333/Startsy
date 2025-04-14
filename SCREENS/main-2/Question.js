@@ -54,7 +54,6 @@ const Question = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
             "content": blog,
         };
 
-        console.log(finaldata);
         // return
         setUploading(true)
 
@@ -77,7 +76,6 @@ const Question = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
             }
 
             const data = await response.json();
-            console.log(data);
             const newQuestion = data.post
 
 
@@ -170,8 +168,6 @@ const Question = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
             }
             if (!item.content) return
             else if (item.type == "Question") {
-
-                console.log(item.content);
                 return (
                     <TouchableOpacity onPress={() => { navigation.navigate("QuestionReply", { data: item, token }) }}
                     >
@@ -179,8 +175,8 @@ const Question = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
                             style={styles1.item}
                         >
 
-                            <View style={{ flexDirection: 'row', gap: 10 }}>
-                                <Image source={require('../../assets/images/logo.png')} style={{ width: 30, height: 30, borderRadius: 20 }} />
+                            <View style={{ flexDirection: 'row', gap: 10,alignItems: "center" }}>
+                                <Image source={require('../../assets/images/incologo.png')}   style={{ width: 40, height: 40, borderRadius: 30  }} />
                                 <Text style={styles1.userNameStyle}>Anonymous</Text>
                                 <Text style={styles1.time}>{time(item.createdAt)}</Text>
                             </View>
@@ -244,7 +240,7 @@ const Question = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
                     showsVerticalScrollIndicator={false}
                     data={allpost}
                     contentContainerStyle={{ paddingBottom: 100 }}
-                    keyExtractor={(item) => item.id}
+                    keyExtractor={(item) => item._id}
 
                     refreshControl={
 
@@ -371,6 +367,7 @@ const styles1 = StyleSheet.create({
         // fontWeight: 'bold',
         color: '#ccc',
         fontSize: 18,
+        
         fontFamily: "Alata",
         verticalAlign: "middle"
     },
@@ -389,9 +386,10 @@ const styles1 = StyleSheet.create({
     time: {
         position: "absolute",
         right: 0,
-        top: 10,
+        top: 15,
         fontSize: 11,
         color: "gray",
+
         fontFamily:'Roboto'
     },
     divider: {

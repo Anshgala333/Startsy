@@ -268,7 +268,7 @@ const SeperateInvestor = ({ search, token, setk, inputref }) => {
                     </>
                 }
                 data={filtereddata}
-                keyExtractor={(item, index) => index.toString()}
+                keyExtractor={(item, index) => item.user?.username?.toString()}
                 refreshControl={<RefreshControl refreshing={refreshing}
                     progressBackgroundColor="#16181a"
                     colors={['#00de62']}
@@ -334,7 +334,7 @@ const SeperateInvestor = ({ search, token, setk, inputref }) => {
 
                 {[1, 2, 3, 4, 5, 6, 7, 8].map(e =>
 
-                    <View style={{ display: "flex", flexDirection: "row", gap: 5, marginBottom: 20 }}>
+                    <View key={e} style={{ display: "flex", flexDirection: "row", gap: 5, marginBottom: 20 }}>
                         <Skeleton
                             // colorMode="dark"
                             width={50}

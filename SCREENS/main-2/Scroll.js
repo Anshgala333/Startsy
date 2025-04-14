@@ -1,5 +1,5 @@
 import React, { useContext, useState, useRef, memo, useCallback, useEffect } from "react";
-import { FlatList, Text, Animated, Touchable, TouchableOpacity, ToastAndroid, Pressable, View, Vibration, Image, SafeAreaView, RefreshControl } from "react-native";
+import { FlatList, Text, Animated, Touchable, TouchableOpacity, ToastAndroid, Pressable, View, Vibration, SafeAreaView, RefreshControl } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import styles from "../../styles/post.js"
@@ -15,6 +15,7 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Skeleton } from 'moti/skeleton';
 import { MotiView } from 'moti';
 import { jwtDecode } from "jwt-decode";
+import { Image } from "expo-image"
 
 
 
@@ -82,8 +83,6 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                 },
             });
             const data = await response.json();
-            console.log(data);
-            console.log(response.status);
             Vibration.vibrate(20)
 
         }
@@ -105,7 +104,7 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
 
 
 
-  
+
 
 
 
@@ -189,7 +188,7 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
 
     const renderItem =
         ({ item, index }) => {
-            //console.log(item.user_id , "treeeeeeeeeeeeeeee");
+            // console.log(item.user_id.profilePhoto, "treeeeeeeeeeeeeeee");
             // const isVideoPlaying = videoStates[item._id] || false;
             if (item.user_id == null) {
                 return
@@ -224,7 +223,8 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
 
                                         }}
                                         style={{ display: "flex", flexDirection: "row", width: "90%", }}>
-                                        <Image style={styles.userimg} source={{ uri: item.user_id.profilePhoto }} />
+                                        <Image  placeholder="blurhash" blurhash= "LEHV6nWB2yk8pyo0adR*.7KCMdnj"
+                                            transition={100} style={styles.userimg} source={{ uri: item.user_id.profilePhoto }} />
                                         <View style={styles.userdetail}>
                                             <Text allowFontScaling={false} style={styles.u1}>{item.user_id.userName}</Text>
                                             <Text allowFontScaling={false} style={styles.u2}>{item.user_id.role == "CommunityMember" ? "Member" : item.user_id.role}</Text>
@@ -249,7 +249,7 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
 
                                 {item.type == "textBlog" && <View style={styles.divider}></View>}
 
-                                {item.type == "photo" && <Image style={[styles.template, { aspectRatio: item.aspectRatio ? item.aspectRatio : 1 / 1 }]} source={{ uri: item.mediaUrl }} />}
+                                {item.type == "photo" && <Image  placeholder="blurhash" blurhash= "LEHV6nWB2yk8pyo0adR*.7KCMdnj" transition={100} cachePolicy="immutable" style={[styles.template, { aspectRatio: item.aspectRatio ? item.aspectRatio : 1 / 1 }]} source={{ uri: item.mediaUrl }} />}
                                 {item.type == "video" &&
                                     <Video
                                         ref={ref => videoRefs.current[item._id] = ref}
@@ -270,13 +270,13 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                     <View style={[styles.icon2,]}>
 
 
-                                        <View style={{ flexDirection: 'row', gap: 7, marginRight: 4,alignItems:'center' }}>
+                                        <View style={{ flexDirection: 'row', gap: 7, marginRight: 4, alignItems: 'center' }}>
                                             <TouchableOpacity onPress={() => { upvotepost(item._id, index) }}>
 
                                                 {!item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5, marginTop: 6 }} />}
                                                 {item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5, marginTop: 6 }} selected={true} />}
                                             </TouchableOpacity>
-                                            <Text style={{  color: "#ccc", fontFamily: 'Roboto',fontSize:16,top:3 }}>{item.itemlikedcount}</Text>
+                                            <Text style={{ color: "#ccc", fontFamily: 'Roboto', fontSize: 16, top: 3 }}>{item.itemlikedcount}</Text>
                                         </View>
 
 
@@ -298,7 +298,7 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                             Vibration.vibrate(20)
                                             openshare(item._id)
                                         }}>
-                                            <Share style={{top:3}}/>
+                                            <Share style={{ top: 3 }} />
                                         </Pressable>
 
 

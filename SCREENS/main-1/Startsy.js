@@ -20,6 +20,9 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Idea from "../../assets/icons/idea1.js"
 import styles1 from '@/styles/Alert.js';
 
+import { BlurView } from 'expo-blur';
+
+
 
 const { height, width } = Dimensions.get("window")
 
@@ -68,7 +71,7 @@ export default function Startsy({ navigation, route, token }) {
             console.log(result.data);
 
 
-           
+
             if (result.data && result.data?.length > 0) {
                 var data1 = result.data.map((e) => {
 
@@ -84,7 +87,7 @@ export default function Startsy({ navigation, route, token }) {
                     var obj = { ...e, isliked: false, isThereTeam: isThereTeam }
                     return obj
                 })
-                console.log(data1.length , "suoer");
+                console.log(data1.length, "suoer");
                 setData(data1);
             }
 
@@ -137,7 +140,7 @@ export default function Startsy({ navigation, route, token }) {
     //         console.log(result.length);
 
     //         console.log("reached here");
-            
+
 
 
     //         if (result.data && result.data.length > 0) {
@@ -197,7 +200,7 @@ export default function Startsy({ navigation, route, token }) {
     }
 
     function renderCard(item, index) {
-        
+
         // console.log("render hu mai");
         // console.log('====================================');
         // console.log(item);
@@ -209,7 +212,7 @@ export default function Startsy({ navigation, route, token }) {
         //     return
         // }
 
-        
+        // ......................................................................
         return (
             <Pressable onPress={() => {
                 console.log("showing big");
@@ -225,101 +228,119 @@ export default function Startsy({ navigation, route, token }) {
                     end={{ x: 0, y: 1 }} >
 
                     {/* <View nestedScrollEnabled={true} bounces={false} > */}
-                        {/* Header Section */}
-                        <View style={styles.header}>
-                            <Image
-                                source={{ uri: item?.user_id.profilePhoto }}
-                                style={styles.profileImage}
-                            />
+                    {/* Header Section */}
+                    <View style={styles.header}>
+                        <Image
+                            source={{ uri: item?.user_id.profilePhoto }}
+                            style={styles.profileImage}
+                        />
 
-                            <AutoSizeText
-                                numberOfLines={1}
-                                fontSize={24}
-                                mode={ResizeTextMode.max_lines}
-                                ellipsizeMode='tail'
-                                style={styles.username}>{item.user_id.userName}
-                            </AutoSizeText>
-                            <View style={{
-                                position: "absolute",
-                                right: 10,
-                                display: "flex",
-                                flexDirection: "row",
-                                gap: 0
-                            }}>
-                                {/* <View ><Upvote color='#00de62' width={40} height={40} /></View> */}
-                                {/* <Text style={styles.followers}>{item.totalUpvotes}</Text> */}
-                            </View>
+                        <AutoSizeText
+                            numberOfLines={1}
+                            fontSize={24}
+                            mode={ResizeTextMode.max_lines}
+                            ellipsizeMode='tail'
+                            style={styles.username}>{item.user_id.userName}
+                        </AutoSizeText>
+                        <View style={{
+                            position: "absolute",
+                            right: 10,
+                            display: "flex",
+                            flexDirection: "row",
+                            gap: 0
+                        }}>
+                            {/* <View ><Upvote color='#00de62' width={40} height={40} /></View> */}
+                            {/* <Text style={styles.followers}>{item.totalUpvotes}</Text> */}
                         </View>
-                        <View style={styles.divider}></View>
+                    </View>
+                    <View style={styles.divider}></View>
 
 
-                        {/* Startup Info */}
-                        <Text style={styles.title}>{item.nameOfStartup}</Text>
-                        <Text style={styles.subtitle}>Revolutionizing startup ecosystem.</Text>
-                        <Text style={styles.status}>{item.hiddenInfo.stageOfStartup} - ₹ {getfund(item.hiddenInfo.fundingStatus)}</Text>
+                    {/* Startup Info */}
+                    <Text style={styles.title}>{item.nameOfStartup}</Text>
+                    <Text style={styles.subtitle}>Revolutionizing startup ecosystem.</Text>
+                    <Text style={styles.status}>{item.hiddenInfo.stageOfStartup} - ₹ {getfund(item.hiddenInfo.fundingStatus)}</Text>
 
 
-                        {/* Goal Section */}
-                        <Text style={styles.sectionHeader}>Goal: <Text style={styles.text}>
-                            {item.goal}
-                        </Text></Text>
+                    {/* Goal Section */}
+                    <Text style={styles.sectionHeader}>Goal: <Text style={styles.text}>
+                        {item.goal}
+                    </Text></Text>
 
 
-                        {/* Description Section */}
-                        <Text style={styles.sectionHeader}>Description:</Text>
-                        <Text style={styles.text}>
-                            {item.description}
-                        </Text>
+                    {/* Description Section */}
+                    <Text style={styles.sectionHeader}>Description:</Text>
+                    <Text style={styles.text}>
+                        {item.description.split(" ").slice(0, 46).join(" ")}
+                        {item.description.split(" ").length > 46 && (
+                            <Text style={{ color: "#00de62" }}> ...Read more</Text>
+                        )}
+                    </Text>
 
-                        {/* About Founder Section */}
-                        <Text style={styles.sectionHeader1}>About Founder</Text>
-                        <Text style={styles.text}><Text style={styles.keys}>Name :</Text> {item.fullName}</Text>
-                        <Text style={styles.text}><Text style={styles.keys}>Education :</Text>  {item.education}</Text>
-                        <Text style={styles.text}><Text style={styles.keys}>Skills :</Text> {item.skills}</Text>
-
-                        {/* Work Experience */}
-                        <Text style={styles.sectionHeader}> <Text style={styles.keys}>Work Experience :</Text> </Text>
-                        <View style={styles.workexp}>
-                            {item.previousWorkExperience && item.previousWorkExperience.map((work, index) => {
-                                return (
-                                    <View key={index} >
-                                        <Text style={styles.text1}>Company : {work.company}</Text>
-                                        <Text style={styles.text1}>Role : {work.role}</Text>
-                                        <Text style={styles.text1}>Year : {work.year}</Text>
-                                    </View>
-                                )
-                            })}
-                            <View style={styles.s2}>
-                                <Text style={styles.text1}>Company 2</Text>
-                                <Text style={styles.text1}>Role</Text>
-                                <Text style={styles.text1}>Year</Text>
-                            </View>
-                            <View style={styles.s2}>
-                                <Text style={styles.text1}>Company 3</Text>
-                                <Text style={styles.text1}>Role</Text>
-                                <Text style={styles.text1}>Year</Text>
-                            </View>
+                    {/* 
+                    <BlurView
+                        intensity={100}
+                        tint="dark"
+                        style={{
+                            ...StyleSheet.absoluteFillObject,
+                            borderTopLeftRadius: 12,
+                            borderTopRightRadius: 12,
+                            position: 'absolute', height: '300', zIndex: 10000, justifyContent: 'center', width: '110%', alignItems: 'center', top: '60%', 
+                        }}
+                    >
+                        <View style={{}} >
+                            <Text style={{color:'#00de62',fontFamily:'Alata',fontSize:18,elevation:4.0}}>Read more</Text>
                         </View>
+                    </BlurView> */}
 
 
-                        {/* About Team Section */}
-                        <Text style={styles.sectionHeader1}>About Team</Text>
+                    {/* <Text style={styles.sectionHeader1}>About Founder</Text>
+                    <Text style={styles.text}><Text style={styles.keys}>Name :</Text> {item.fullName}</Text>
+                    <Text style={styles.text}><Text style={styles.keys}>Education :</Text>  {item.education}</Text>
+                    <Text style={styles.text}><Text style={styles.keys}>Skills :</Text> {item.skills}</Text>
 
-
-
-                        {item.teamInfo && item.teamInfo?.map((work, index) => {
+                    
+                    <Text style={styles.sectionHeader}> <Text style={styles.keys}>Work Experience :</Text> </Text>
+                    <View style={styles.workexp}>
+                        {item.previousWorkExperience && item.previousWorkExperience.map((work, index) => {
                             return (
-                                <View style={styles.teamCard}>
-                                    <Text style={styles.username1}>{work.name}</Text>
-                                    <Text style={styles.text2}>{work.name}</Text>
-                                    <Text style={styles.text2}>{work.role}</Text>
+                                <View key={index} >
+                                    <Text style={styles.text1}>Company : {work.company}</Text>
+                                    <Text style={styles.text1}>Role : {work.role}</Text>
+                                    <Text style={styles.text1}>Year : {work.year}</Text>
                                 </View>
                             )
                         })}
+                        <View style={styles.s2}>
+                            <Text style={styles.text1}>Company 2</Text>
+                            <Text style={styles.text1}>Role</Text>
+                            <Text style={styles.text1}>Year</Text>
+                        </View>
+                        <View style={styles.s2}>
+                            <Text style={styles.text1}>Company 3</Text>
+                            <Text style={styles.text1}>Role</Text>
+                            <Text style={styles.text1}>Year</Text>
+                        </View>
+                    </View>
 
-                        {/* Footer */}
-                        <Text style={styles.footer}>startsy.com</Text>
-                    {/* </View> */}
+
+                    <Text style={styles.sectionHeader1}>About Team</Text>
+
+
+
+                    {item.teamInfo && item.teamInfo?.map((work, index) => {
+                        return (
+                            <View style={styles.teamCard}>
+                                <Text style={styles.username1}>{work.name}</Text>
+                                <Text style={styles.text2}>{work.name}</Text>
+                                <Text style={styles.text2}>{work.role}</Text>
+                            </View>
+                        )
+                    })}
+
+            
+                    <Text style={styles.footer}>startsy.com</Text> */}
+
 
 
                 </LinearGradient>
@@ -327,8 +348,7 @@ export default function Startsy({ navigation, route, token }) {
             </Pressable>
         )
     }
-
-
+    // ...................................................................
     function check() {
         if (swipeDistance < 50) {
             console.log("hi");
@@ -387,7 +407,7 @@ export default function Startsy({ navigation, route, token }) {
         const id = data[currentIndex].user_id._id
 
 
-        
+
 
 
     }
@@ -581,7 +601,7 @@ export default function Startsy({ navigation, route, token }) {
                         setRefreshing(true);
                         if (token) {
                             setloading(true)
-                            
+
                             getData();
                         }
                         setTimeout(() => {
@@ -639,6 +659,8 @@ export default function Startsy({ navigation, route, token }) {
                             setCardIndex(index)
                         }}
                     />
+
+
                     {/* {loading && <ActivityIndicator color={"#fff"} size={'large'} />} */}
 
                     <View style={styles.iconcontainer}>
@@ -936,3 +958,19 @@ const styles = StyleSheet.create({
         backgroundColor: "#24272A"
     },
 });
+
+
+
+// {async () => {
+//     console.log("start");
+//     Vibration.vibrate(200)
+//     setRefreshing(true);
+//     if (token) {
+//         setloading(true)
+
+//         getData();
+//     }
+//     setTimeout(() => {
+//         setRefreshing(false);
+//     }, 2000);
+// }}

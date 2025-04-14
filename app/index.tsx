@@ -10,45 +10,17 @@ import LoginPage from "../SCREENS/LoginPage.js";
 
 import Date1 from "../SCREENS/Date.js";
 
-import Signup1 from "../SCREENS/signup-1.js";
-import Signup2 from "../SCREENS/signup2.js";
-import Signup3 from "../SCREENS/signup3.js";
-import Signup4 from "../SCREENS/signup4.js";
-import Signup5 from "../SCREENS/signup5.js";
-import Signup6 from "../SCREENS/signup6.js";
-import Signup7 from "../SCREENS/signup7.js";
-import Signup8 from "../SCREENS/signup8.js";
-import Signup9 from "../SCREENS/Signup9.js";
-import Signup10 from "../SCREENS/Signup10.js";
-import Signup11 from "../SCREENS/Signup11.js";
-import Signup12 from "../SCREENS/signup12.js";
-import SelectInvestor from "../SCREENS/SelectInvestorType.js";
-import Signup13 from "../SCREENS/Signup13.js";
-
-
 import Main1 from "../SCREENS/Main1.js";
 import Main2 from "../SCREENS/Main2.js";
 
 import Chat from "../SCREENS/main-1/CHATSCREEN.js";
 import Chat1 from "../SCREENS/main-1/GROUPCHATSCREEN.js";
 import Card from "../SCREENS/main-1/Card.js";
-import Ct from "../SCREENS/main-1/Ct.js";
-import OK from "../SCREENS/bottom.js";
 
-import ChangePassword1 from "../SCREENS/changePassword1.js";
-import ChangePassword2 from "../SCREENS/changePassword2.js";
-import EditInvestorInfo from "../SCREENS/edit profile pages/investor.js";
-import Founder1 from "../SCREENS/edit profile pages/founder-1.js";
-import Founder2 from "../SCREENS/edit profile pages/founder-2.js";
-import Logout from "../SCREENS/Logout.js";
-import FP1 from "../SCREENS/FP1.js";
-import FP2 from "../SCREENS/FP2.js";
 
 import Singleprofilepage from "../SCREENS/singleprofilepage.js";
 import Login2 from "../SCREENS/login2.js";
-import Test1 from "../SCREENS/test1.js";
 import PricePage from "../SCREENS/JASH/PricePage.js";
-import Skeleton1 from "../SCREENS/main-2/skeleton.js";
 import GroudDetailsScreen from "../SCREENS/JASH/GroupDetailsScreen.js";
 import ApplicantsList from "../SCREENS/JASH/ApplicantsList.jsx";
 import JobsPostedScreen from "../SCREENS/JASH/JobsPostedScreen.jsx";
@@ -56,11 +28,8 @@ import Startsy from "../SCREENS/main-1/Startsy.js";
 import Email from "../SCREENS/email.js";
 import InvestorWaitingPage from "../SCREENS/main-2/InvestorWaitingPage.js";
 import Modal1 from "../SCREENS/Modal.js";
-import Wait from "../SCREENS/Wait.js";
-import Editcommunity from "../SCREENS/edit profile pages/Editcommunity.js";
-import F1 from "../SCREENS/test.js";
 import { useEffect, createContext } from "react";
-import {  StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import useLoadFonts from "../hooks/useLoadFonts.js";
 import { setBackgroundColorAsync } from "expo-system-ui";
 import * as SystemUI from "expo-system-ui";
@@ -72,24 +41,23 @@ import CommunityPage from "../SCREENS/CommunityPage.jsx";
 import BlogPage from "../SCREENS/BlogPage.jsx";
 import MediaPost from "../SCREENS/MediaPost.js";
 import JobPostingPage from "../SCREENS/JobPosting.jsx";
-import AllPostsScreen from "../SCREENS/SavedPost.js";
-import VerificationPendingScreen from "../SCREENS/InvestorVerify.js";
-import InvestorNotVerifiedScreen from "../SCREENS/NotVerified.js";
-import CertificatePortfolioPage from "../SCREENS/Certificates.js";
 import * as Notifications from "expo-notifications";
 import * as Device from "expo-device";
 import Constants from "expo-constants";
 import { url } from "@/config.js";
-import RatingPage from "@/SCREENS/BetaRating.js";
-import TermsAndConditions from "../SCREENS/JASH/terms-condition/TermsAndCondition.jsx";
 import InvestorCard from "@/SCREENS/main-2/InvestorCard.js";
+
+import JobApplyScreen from "../SCREENS/JASH/Jobs/JobApplyScreen.jsx";
+import JobApplicantCard from "../SCREENS/JASH/Jobs/JobApplicantCard.jsx";
+
+
+
 
 const Stack = createNativeStackNavigator();
 SystemUI.setBackgroundColorAsync("#16181a");
 
 Notifications.addNotificationReceivedListener((notification) => {
   // Handle the notification when received
-  console.log("Notification received:", notification);
 });
 
 Notifications.addNotificationResponseReceivedListener((response) => {
@@ -100,6 +68,13 @@ import { enableFreeze } from "react-native-screens";
 import { enableScreens } from "react-native-screens";
 import QuestionReply from "@/SCREENS/main-2/QuestionReply.js";
 import Settings from "../SCREENS/Settings.js";
+
+// if (__DEV__) {
+//   const whyDidYouRender = require('@welldone-software/why-did-you-render');
+//   whyDidYouRender(React, {
+//     trackAllPureComponents: true, // or fine-tune it
+//   });
+// }
 
 enableScreens();
 
@@ -117,6 +92,8 @@ LogBox.ignoreLogs([
   // "VirtualizedLists should never be nested", // Example warning
   'Warning: Each child in a list should have a unique "key" prop.',
   "VirtualizedList: Encountered an error while measuring a list's offset from its containing VirtualizedList.",
+  "Encountered an error while measuring a list's offset from its containing VirtualizedList.",
+  " Due to changes in Androids permission requirements, Expo Go can no longer provide full access to the media library. To test the full functionality of this module, you can create a development build. https://docs.expo.dev/develop/development-builds/create-a-build ",
 ]);
 
 const originalConsoleWarn = console.warn;
@@ -127,7 +104,9 @@ console.warn = (message, ...args) => {
     message.includes("Non-serializable") ||
     message.includes(
       "Encountered an error while measuring a list's offset from its containing VirtualizedList."
-    ) // Another specific warning
+    ) ||
+    message.includes("Due to changes in Androids permission requirements") ||
+    message.includes("expo-notifications:")
   ) {
     return; // Block these warnings
   }
@@ -147,8 +126,6 @@ export default function App() {
   // const notificationListener = useRef();
   const notificationListener = useRef<Notifications.Subscription | null>(null);
   const responseListener = useRef<Notifications.EventSubscription>();
-
-  
 
   useEffect(() => {
     registerForPushNotificationsAsync().then(
@@ -202,7 +179,6 @@ export default function App() {
 
   return (
     <GlobalProvider>
-    
       <StatusBar backgroundColor="#16181a" barStyle={"light-content"} />
       {appisready && (
         <Stack.Navigator
@@ -225,27 +201,73 @@ export default function App() {
             }}
             component={Login1}
           />
-
           <Stack.Screen name="LoginPage" component={LoginPage} />
-          <Stack.Screen name="Signup1" component={Signup1} />
-          <Stack.Screen name="Signup2" component={Signup2} />
-          <Stack.Screen name="Signup3" component={Signup3} />
-          <Stack.Screen name="Signup4" component={Signup4} />
-          <Stack.Screen name="Signup5" component={Signup5} />
-          <Stack.Screen name="Signup6" component={Signup6} />
-          <Stack.Screen name="Signup7" component={Signup7} />
-          <Stack.Screen name="Signup8" component={Signup8} />
-          <Stack.Screen name="Signup9" component={Signup9} />
-          <Stack.Screen name="Signup10" component={Signup10} />
-          <Stack.Screen name="Signup11" component={Signup11} />
-          <Stack.Screen name="Signup12" component={Signup12} />
-          <Stack.Screen name="Signup13" component={Signup13} />
-          <Stack.Screen name="SelectInvestor" component={SelectInvestor} />
-          <Stack.Screen name="Wait" component={Wait} />
+          <Stack.Screen
+            name="Signup1"
+            getComponent={() => require("../SCREENS/signup-1.js").default}
+          />
+          <Stack.Screen
+            name="Signup2"
+            getComponent={() => require("../SCREENS/signup2.js").default}
+          />
+          <Stack.Screen
+            name="Signup3"
+            getComponent={() => require("../SCREENS/signup3.js").default}
+          />
+          <Stack.Screen
+            name="Signup4"
+            getComponent={() => require("../SCREENS/signup4.js").default}
+          />
+          <Stack.Screen
+            name="Signup5"
+            getComponent={() => require("../SCREENS/signup5.js").default}
+          />
+          <Stack.Screen
+            name="Signup6"
+            getComponent={() => require("../SCREENS/signup6.js").default}
+          />
+          <Stack.Screen
+            name="Signup7"
+            getComponent={() => require("../SCREENS/signup7.js").default}
+          />
+          <Stack.Screen
+            name="Signup8"
+            getComponent={() => require("../SCREENS/signup8.js").default}
+          />
+          <Stack.Screen
+            name="Signup9"
+            getComponent={() => require("../SCREENS/Signup9.js").default}
+          />
+          <Stack.Screen
+            name="Signup10"
+            getComponent={() => require("../SCREENS/Signup10.js").default}
+          />
+          <Stack.Screen
+            name="Signup11"
+            getComponent={() => require("../SCREENS/Signup11.js").default}
+          />
+          <Stack.Screen
+            name="Signup12"
+            getComponent={() => require("../SCREENS/signup12.js").default}
+          />
+          <Stack.Screen
+            name="Signup13"
+            getComponent={() => require("../SCREENS/Signup13.js").default}
+          />
+          <Stack.Screen
+            name="SelectInvestor"
+            getComponent={() =>
+              require("../SCREENS/SelectInvestorType.js").default
+            }
+          />
+          <Stack.Screen
+            name="Wait"
+            getComponent={() => require("../SCREENS/Wait.js").default}
+          />
           <Stack.Screen name="Chat" component={Chat} />
           <Stack.Screen name="Chat1" component={Chat1} />
           <Stack.Screen name="Modal1" component={Modal1} />
-          <Stack.Screen name="Skeleton1" component={Skeleton1} />
+          {/* <Stack.Screen name="Skeleton1" component={Skeleton1} /> */}
           <Stack.Screen name="CommunityPage" component={CommunityPage} />
           <Stack.Screen name="Blogpage" component={BlogPage} />
           <Stack.Screen name="Mediapage" component={MediaPost} />
@@ -279,20 +301,65 @@ export default function App() {
             }}
             component={Main2}
           />
+        
 
-          <Stack.Screen name="FP1" component={FP1} />
-          <Stack.Screen name="FP2" component={FP2} />
-          <Stack.Screen name="F1" component={F1} />
-          <Stack.Screen name="Ct" component={Ct} />
-          <Stack.Screen name="OK" component={OK} />
-          <Stack.Screen name="ChangePassword1" component={ChangePassword1} />
-          <Stack.Screen name="ChangePassword2" component={ChangePassword2} />
-          <Stack.Screen name="EditInvestorInfo" component={EditInvestorInfo} />
-          <Stack.Screen name="Founder1" component={Founder1} />
-          <Stack.Screen name="Founder2" component={Founder2} />
-          <Stack.Screen name="Logout" component={Logout} />
-          <Stack.Screen name="Test1" component={Test1} />
-          <Stack.Screen name="Editcommunity" component={Editcommunity} />
+          <Stack.Screen
+            name="FP1"
+            getComponent={() => require("../SCREENS/FP1.js").default}
+          />
+          <Stack.Screen
+            name="FP2"
+            getComponent={() => require("../SCREENS/FP2.js").default}
+          />
+          <Stack.Screen
+            name="F1"
+            getComponent={() => require("../SCREENS/FP1.js").default}
+          />
+          <Stack.Screen
+            name="ChangePassword1"
+            getComponent={() =>
+              require("../SCREENS/changePassword1.js").default
+            }
+          />
+          <Stack.Screen
+            name="ChangePassword2"
+            getComponent={() =>
+              require("../SCREENS/changePassword2.js").default
+            }
+          />
+          <Stack.Screen
+            name="EditInvestorInfo"
+            getComponent={() =>
+              require("../SCREENS/edit profile pages/investor.js").default
+            }
+          />
+          <Stack.Screen
+            name="Founder1"
+            getComponent={() =>
+              require("../SCREENS/edit profile pages/founder-1.js").default
+            }
+          />
+          <Stack.Screen
+            name="Founder2"
+            getComponent={() =>
+              require("../SCREENS/edit profile pages/founder-2.js").default
+            }
+          />
+          <Stack.Screen
+            name="Logout"
+            getComponent={() => require("../SCREENS/Logout.js").default}
+          />
+          <Stack.Screen
+            name="Test1"
+            getComponent={() => require("../SCREENS/test1.js").default}
+          />
+          <Stack.Screen
+            name="Editcommunity"
+            getComponent={() =>
+              require("../SCREENS/edit profile pages/Editcommunity.js").default
+            }
+          />
+
           <Stack.Screen
             name="GroupDescriptionPage"
             component={GroudDetailsScreen}
@@ -303,36 +370,47 @@ export default function App() {
           <Stack.Screen name="Settings" component={Settings} />
           <Stack.Screen name="Date" component={Date1} />
 
-          
-
           <Stack.Screen
             name="Singleprofilepage"
             component={Singleprofilepage}
           />
 
-          {/* <Stack.Screen name="ViewSendedPost" component={ViewSendedPost}/> */}
-
-          {/* <Stack.Screen name="settings" component={Settings}/> */}
-
-          <Stack.Screen name="SavedPost" component={AllPostsScreen} />
+          <Stack.Screen
+            name="SavedPost"
+            getComponent={() => require("../SCREENS/SavedPost.js").default}
+          />
           <Stack.Screen
             name="VerificationPendingScreen"
-            component={VerificationPendingScreen}
+            getComponent={() =>
+              require("../SCREENS/InvestorVerify.js").default
+            }
           />
           <Stack.Screen
             name="InvestorNotVerifiedScreen"
-            component={InvestorNotVerifiedScreen}
+            getComponent={() =>
+              require("../SCREENS/NotVerified.js").default
+            }
           />
           <Stack.Screen
             name="CertificatePortfolioPage"
-            component={CertificatePortfolioPage}
+            getComponent={() =>
+              require("../SCREENS/Certificates.js").default
+            }
           />
           <Stack.Screen
             name="TermsAndConditions"
-            component={TermsAndConditions}
+            getComponent={() =>
+              require("../SCREENS/JASH/terms-condition/TermsAndCondition.jsx").default
+            }
           />
-          <Stack.Screen name="RatingPage" component={RatingPage} />
-          <Stack.Screen name ="AllRequests" component={InvestorCard}/>
+          <Stack.Screen
+            name="RatingPage"
+            getComponent={() => require("../SCREENS/BetaRating.js").default}
+          />
+
+          <Stack.Screen name="JobApply" component={JobApplyScreen} />
+          <Stack.Screen name="JobApplicantCard" component={JobApplicantCard} />
+          <Stack.Screen name="AllRequests" component={InvestorCard} />
         </Stack.Navigator>
       )}
 
@@ -402,7 +480,6 @@ async function registerForPushNotificationsAsync() {
   }
 
   if (Device.isDevice) {
-    console.log("first");
     const { status: existingStatus } =
       await Notifications.getPermissionsAsync();
     let finalStatus = existingStatus;
@@ -410,22 +487,17 @@ async function registerForPushNotificationsAsync() {
       const { status } = await Notifications.requestPermissionsAsync();
       finalStatus = status;
     }
-    console.log("second");
 
     if (finalStatus !== "granted") {
       alert("Failed to get push token for push notification!");
       return;
     }
-    console.log("third");
 
     try {
       var notificationToken = await AsyncStorage.getItem("notificationToken");
-      console.log(notificationToken, "notificationToken from async storage");
 
       if (!notificationToken) {
         try {
-          console.log("forth");
-
           const projectId =
             Constants?.expoConfig?.extra?.eas?.projectId ??
             Constants?.easConfig?.projectId;
@@ -437,7 +509,6 @@ async function registerForPushNotificationsAsync() {
               projectId,
             })
           ).data;
-          console.log(token);
 
           var ifUserIsLoggedIn = await AsyncStorage.getItem("accessToken");
           if (ifUserIsLoggedIn) {
@@ -454,18 +525,13 @@ async function registerForPushNotificationsAsync() {
                 },
               });
               var data = await response.json();
-
-              console.log(data.json());
             } catch (e) {
               console.log(e);
             }
           }
           try {
             await AsyncStorage.setItem("notificationToken", token);
-            console.log("Notification token saved to AsyncStorage:");
-          } catch (e) {
-            console.log(e);
-          }
+          } catch (e) {}
         } catch (e) {
           token = `${e}`;
         }

@@ -1,8 +1,5 @@
-import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
-import { View, Animated, Text, Image, ToastAndroid, Easing, FlatList, StatusBar,Linking, RefreshControl, ActivityIndicator, StyleSheet, BackHandler, SafeAreaView, ScrollView, Pressable, Dimensions, TouchableOpacity, Modal, TouchableWithoutFeedback, TextInput, Vibration } from "react-native";
-import Entypo from '@expo/vector-icons/Entypo';
-import EvilIcons from '@expo/vector-icons/EvilIcons';
-import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import React, { useEffect, useState, useRef, useCallback, useMemo, memo } from 'react';
+import { View, Animated, Text, ToastAndroid,Image, Easing, FlatList, StatusBar,Linking, RefreshControl, ActivityIndicator, StyleSheet, BackHandler, SafeAreaView, ScrollView, Pressable, Dimensions, TouchableOpacity, Modal, TouchableWithoutFeedback, TextInput, Vibration } from "react-native";
 import Banner from "../assets/icons/banner.js"
 import Upvote from '@/assets/icons/upvote';
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
@@ -28,44 +25,42 @@ import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import Octicons from '@expo/vector-icons/Octicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import AntDesign from '@expo/vector-icons/AntDesign';
-
+// import { Image } from 'expo-image';
 import Settings from "../SCREENS/Settings.js"
 
-import BottomSheet, { BottomSheetView, BottomSheetScrollView, BottomSheetTextInput, BottomSheetDraggableView, BottomSheetFlatList, BottomSheetBackdrop } from '@gorhom/bottom-sheet';
+import BottomSheet, { BottomSheetFlatList, BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { LinearGradient } from 'expo-linear-gradient';
-import Line from './line.js';
-// import { LinearGradient } from 'react-native-svg';
 
 // import dotenv from 'dotenv/config'
 
 
-
-const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) => {
+const Apnauser = ({ props, token, closeall, openshare }) => {
+    // console.log("apnauser re render");
+    
     // dotenv.config()
     var mypage = true
     const navigation = useNavigation()
 
     const flatListRef = useRef(null);
     const [commenttext, setcommenttext] = useState("")
+    const [keepSwitchMoreReady,setkeepSwitchMoreReady] = useState(false)
     const [uploadingcomment, setuploadingcomment] = useState(false)
     const Spacer = ({ height = 16 }) => <View style={{ height }} />;
 
+    useEffect(()=>{
+        setTimeout(() => {
+            setkeepSwitchMoreReady(true)
+        }, 300);
+    },[])
+   
 
 
-
-
-// console.log("profile page re");
-
-
-    // var id = process.env.API_URL
-    // console.log(id , "local id from env");
 
     const [attop, setattop] = useState(true);
 
     const animatedValue = useRef(new Animated.Value(0)).current;
     useEffect(() => {
-
         Animated.timing(animatedValue, {
             toValue: attop ? height + 10 : -10, // Move to 100 if attop is true, else move to 0
             //   duration: (moverfirst == undefined) ? 300 : 0,
@@ -78,8 +73,6 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
     const animatedtop = {
         top: animatedValue, // Bind animated value to top
     };
-
-
 
     const animatedValue1 = useRef(new Animated.Value(0)).current;
     const animatedtop1 = {
@@ -108,11 +101,6 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
 
         }).start();
     }, [attop]);
-
-
-
-
-
 
 
 
@@ -177,7 +165,6 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
 
 
     var decode = jwtDecode(token)
-    // console.log(decode);
 
     var editprofilepage;
 
@@ -315,12 +302,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
 
     const handleTabChange = (index) => {
         setTabIndex(index);
-        // Update minHeight based on the active tab
-        // if (index === 0) {
-        //   setMinHeight(200); // About tab active, set minHeight to 200
-        // } else if (index === 1) {
-        //   setMinHeight(1400); // Posts tab active, set minHeight to 1000
-        // }
+        
     };
 
 
@@ -338,8 +320,6 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
 
     }
 
-    // console.log(decode);
-    // console.log(decode._id);
 
     var id = decode._id
 
@@ -372,40 +352,41 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                 },
             });
             const data = await response.json();
+            console.log(data.data);
+            console.log(data.data.hiddenInfo.socialProof[0].url);
+            console.log(data.data.hiddenInfo.socialProof[1].url);
+            console.log(data.data.hiddenInfo.socialProof[2].url);
+            
+            
 
-            console.log(data.profileCompletion, "completion ka data");
-            console.log(data);
             
 
 
-            // console.log(data.data.chatUsers, "poiuytr");
+            (data.data.chatUsers, "poiuytr");
+            const f2 = new Set()
+            const tree101 = data.data.chatUsers.filter((e) => {
+              if (f2.has(e._id)) {
+                return false
+              }
+              else {
+                f2.add(e._id)
+                return true
+              }
+            })
 
-            setinvestorarray(data.data?.chatUsers.filter((e) => e.role == "Investor"))
-            setnoninvestor(data.data?.chatUsers.filter((e) => e.role != "Investor"))
+            setinvestorarray(tree101.filter((e) => e.role == "Investor"))
+            setnoninvestor(tree101.filter((e) => e.role != "Investor"))
 
             setGeneralModelId(data.data._id)
             setemail(data.data.email)
-
-            setuserdata(data.data)
             setprofilecompletion(data.profileCompletion)
-
             var rec1 = data.data.portfolio.filter((e) => e.name != "")
             var rec2 = data.data.certification.filter((e) => e.name != "")
             var combined = [...rec1, ...rec2]
             setCertficate(combined)
-
-            // console.log(data.data.hiddenInfo.socialProof);
-
-            // var instaurl = data.data.hiddenInfo.socialProof[0].url
-            // var LinkedinURl = data.data.hiddenInfo.socialProof[1].url
-            // var yturl = data.data.hiddenInfo.socialProof[2].url
-
             setinstaurl(data.data.hiddenInfo.socialProof[0].url)
             setlinkedInUrl(data.data.hiddenInfo.socialProof[1].url)
             setyturl(data.data.hiddenInfo.socialProof[2].url)
-            
-
-
 
             if (true) {
                 var data1 = data.data.posts.map(e => {
@@ -427,25 +408,13 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                 }
             }
             setfollowstatus(data.data.status)
-
-            // console.log(data.data.posts.length, "post ka length");
-
             setMinHeight(data.data.posts.length * 700)
-            // console.log(data.data.posts.length * 500);
-
             setImage(data.data.user_id.bannerImage)
-
-            // console.log(data.data);
-            // console.log(data.data.user_id.bannerImage);
-            // console.log(image);
-
-
-
-
+            setuserdata(data.data)
 
         }
         catch (err) {
-            console.log(err);
+            console.log(err , "apk erro");
 
         }
     }
@@ -930,9 +899,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
 
     function getfund(fund) {
 
-        // console.log('====================================');
-        // console.log(fund);
-        // console.log('====================================');
+        
 
         if (fund == 69) {
             return 0
@@ -961,7 +928,6 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
             route = "investor/getInvestorChatUserList"
         }
         else  {
-            // console.log("fuck");
             route = "founder/getFounderChatUserList"
 
         }
@@ -1013,20 +979,16 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
 
 
     function length1(data) {
-        // console.log(data.length);
 
         const uniqueData = data.filter((item, index, self) =>
             index === self.findIndex(t => t._id === item._id)
         );
 
-        // console.log(uniqueData);
         
 
-        // console.log(uniqueData.length);
 
         return uniqueData.length
 
-        // console.log('====================================');
     }
 
     const handleswitch = ()=>{
@@ -1071,7 +1033,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                             </View>}
 
 
-                        {(image != "" && image != undefined) && <Image style={styles1.bimg} source={{ uri: image }} />}
+                        {(image != "" && image != undefined) && <Image   style={styles1.bimg} source={{ uri: image }} />}
                     </Pressable>
                     <View style={styles1.bottom}>
 
@@ -1126,9 +1088,9 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                            </TouchableOpacity>
                              }
                              
-                              {instaurl != "" && <Pressable onPress={() => Linking.openURL(instaurl)} >
-                                       <AntDesign name="instagram" style={styles.plus1} size={20} color="#bbbbbb" />
-                                     </Pressable>}
+                                    {instaurl != "" && <Pressable onPress={() => Linking.openURL(instaurl)} >
+                                            <AntDesign name="instagram" style={styles.plus1} size={20} color="#bbbbbb" />
+                                        </Pressable>}
                                      {yturl != "" && <Pressable onPress={() => {Linking.openURL(yturl)}} >
                                        <AntDesign name="youtube" style={styles.plus1} size={20} color="#bbbbbb" />
                                      </Pressable>
@@ -1136,7 +1098,6 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                                      {LinkedinURl != "" && <Pressable onPress={() => Linking.openURL(LinkedinURl)} >
                                        <AntDesign name="linkedin-square" style={styles.plus1} size={20} color="#bbbbbb" />
                                      </Pressable>}
-
 
                            </View>
                         }
@@ -1153,17 +1114,12 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                         </Text>
 
                       <View style={{display : "flex" , flexDirection : "row" , gap : 0}}>
-                      {/* <Pressable onPress={() => {
-                            navigation.navigate(editprofilepage)
-                        }} style={styles1.f1}>
-                            <Text style={styles1.ft}>Edit profile</Text>
-                            
-                        </Pressable> */}
+                      
                        {userdata.user_id.role == "CommunityMember" &&  <Pressable style={styles1.f1} onPress={() => handleswitch()}>
                             <Text style={styles1.ft}>Switch Role </Text>
                         </Pressable>}
 
-{/* <Pressable style={styles1.f1} onPress={() => handleswitch()}>
+                        {/* <Pressable style={styles1.f1} onPress={() => handleswitch()}>
                             <Text style={styles1.ft}>Switch Role </Text>
                         </Pressable> */}
                       </View>
@@ -1225,7 +1181,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                                 ))}
 
 
-                                <Text style={styles1.t6}>{userdata.investorConnections} investor connections</Text>
+                                <Text style={styles1.t6}>{investor.length} investor connections</Text>
                             </View>}
                             <TouchableOpacity onPress={() => {
                                 // console.log("users page");
@@ -1247,7 +1203,7 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                                     </View>
                                 ))}
 
-                                <Text style={styles1.t6}>{length1(userdata.chatUsers)} connections</Text>
+                                <Text style={styles1.t6}>{noninvestor.length} connections</Text>
                             </TouchableOpacity>
                         </View>
 
@@ -1699,14 +1655,14 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
                         <RefreshControl progressViewOffset={0} refreshing={refreshing} progressBackgroundColor="#16181a"
                             colors={['#00de62']}
                             onRefresh={() => {
-                                setRefreshing(true);
+                                // setRefreshing(true);
                                 getdata()
                                 Vibration.vibrate(200)
 
 
-                                setTimeout(() => {
-                                    setRefreshing(false); // Stop refreshing after fetching data
-                                }, 2000); // Adjust the delay as needed
+                                // setTimeout(() => {
+                                //     setRefreshing(false); // Stop refreshing after fetching data
+                                // }, 2000); // Adjust the delay as needed
                             }} />}
 
                     data={[1]}
@@ -1780,14 +1736,8 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
 
                 </BottomSheet>
                 
-
-
-
-
-
-
             </Animated.View>
-            <ReadMore1 attop={attop} GeneralModelId={GeneralModelId} setattop={setattop} animatedtop={animatedtop} email={email} token={token} />
+           {keepSwitchMoreReady &&  <ReadMore1 attop={attop} GeneralModelId={GeneralModelId} setattop={setattop} animatedtop={animatedtop} email={email} token={token} />}
 
 
         </>
@@ -1798,7 +1748,9 @@ const Apnauser = ({ props, token, mainpagebottomsheet, closeall, openshare }) =>
 
 }
 
-export default Apnauser
+// Apnauser.whyDidYouRender = true;
+
+export default memo(Apnauser)
 
 const { width, height } = Dimensions.get("window");
 

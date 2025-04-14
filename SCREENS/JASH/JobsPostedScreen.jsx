@@ -116,7 +116,7 @@ const JobsPostedScreen = ({ route, navigation }) => {
   
 
       <View style={styles.buttonContainer}>
-        <Button onPress={() => navigation.navigate('ApplicantsList', { Applicants: item.jobPosts?.jobApplicants, token: token, navigation: navigation })} isDisabled={false} title={`${item.jobPosts.jobApplicants.length} Applicants`} />
+        <Button onPress={() => navigation.navigate('ApplicantsList', { Applicants: item.jobPosts?.jobApplicants, jobId : item.jobPosts._id, token: token, navigation: navigation })} isDisabled={false} title={`${item.jobPosts.jobApplicants.length} Applicants`} />
         {/* <Button onPress={() => console.log('Disable Job Clicked')} isDisabled={true} title={'Disable Job'} /> */}
       </View>
     </View>
@@ -128,7 +128,7 @@ const JobsPostedScreen = ({ route, navigation }) => {
 
       {data.length == 0 &&
         <Pressable onPress={() => { navigation.navigate("Jobpost") }} style={styles.noparent}>
-          <AntDesign style={styles.plus} name="pluscircleo" size={77} color="#ccc" />
+          <AntDesign style={styles.plus} name="pluscircleo" size={56} color="#ccc" />
           <Text style={styles.noJobtext1}>No active jobs</Text>
         </Pressable>
       }
@@ -246,14 +246,16 @@ const styles = StyleSheet.create({
     color : "#ccc"
   },
   headerText: {
-    fontSize: 32,
+    fontSize: 30,
     fontWeight: "bold",
     color: "#00DE62",
-    // marginBottom: -12,
-    backgroundColor: "#16181a",
+    // marginBottom: 12,
     fontFamily: "myanmar",
-    color: "#00DE62",
-    paddingLeft: 25
+   
+    paddingLeft: 10,
+    paddingBottom:10,
+    // marginBottom : 10,
+    backgroundColor:'#16181a'
   },
   noparent: {
     position: "relative",
@@ -266,7 +268,7 @@ const styles = StyleSheet.create({
   noJobtext1: {
     textAlign: "center",
     color: "#ccc",
-    fontSize: 30
+    fontSize: 24
   },
   plus: {
     justifyContent: "center",

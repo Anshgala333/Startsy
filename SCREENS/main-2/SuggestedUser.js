@@ -8,7 +8,7 @@ import {
     View,
     Text,
     TextInput,
-    Image,
+
     Animated,
     Pressable,
     StyleSheet,
@@ -22,13 +22,19 @@ import {
     Vibration
 
 } from "react-native";
+import { Image } from "expo-image";
 import { useFocusEffect, useNavigation } from "expo-router";
 import { url } from "../../config.js"
 import { GlobalContext } from "@/Global/globalcontext.js";
 import { jwtDecode } from "jwt-decode";
 
 
-const User = memo(({ handleTabChange, token , navigation , suggestionarray , setsuggestionarray }) => {
+const User = memo(({ handleTabChange, navigation, token, suggestionarray, setsuggestionarray }) => {
+
+    console.log("user re render");
+
+
+
 
     const scrollPosition = useRef(0);
     const listRef = useRef(null);
@@ -36,12 +42,11 @@ const User = memo(({ handleTabChange, token , navigation , suggestionarray , set
     const handleScroll = (event) => {
         scrollPosition.current = event.nativeEvent.contentOffset.y;
     };
-    // const [suggestionarray, setsuggestionarray] = useState([])
     const [refreshing1, setRefreshing1] = useState(false)
 
-    var decode = jwtDecode(token)
     useEffect(() => {
-        if (token) {
+        var decode = jwtDecode(token)
+        if (token.length > 0) {
             console.log(decode);
             setloggedin(decode._id)
         }
@@ -50,7 +55,6 @@ const User = memo(({ handleTabChange, token , navigation , suggestionarray , set
 
     useEffect(() => {
         async function searchUser() {
-
             // console.log("user search");
             var final = `showAllUser`
             try {
@@ -63,7 +67,7 @@ const User = memo(({ handleTabChange, token , navigation , suggestionarray , set
                 });
                 const data = await response.json();
                 // console.log(data);
-                var filterUser = data.data.filter(e => e._id != loggedinuserid)
+                var filterUser = data.data?.filter(e => e._id != loggedinuserid)
 
 
                 setsuggestionarray(filterUser)
@@ -74,7 +78,9 @@ const User = memo(({ handleTabChange, token , navigation , suggestionarray , set
 
             }
         }
-        searchUser()
+        if (token) {
+            searchUser()
+        }
     }, [token])
 
     async function searchUser() {
@@ -93,7 +99,7 @@ const User = memo(({ handleTabChange, token , navigation , suggestionarray , set
             });
             const data = await response.json();
             console.log(data);
-            var filterUser = data.data.filter(e => e._id != loggedinuserid)
+            var filterUser = data.data?.filter(e => e._id != loggedinuserid)
 
             setsuggestionarray(filterUser)
 
@@ -111,13 +117,7 @@ const User = memo(({ handleTabChange, token , navigation , suggestionarray , set
 
     async function sendfollowrequest(stat, id) {
 
-        // if (stat) return
 
-        // console.log(stat);
-        // console.log(stat);
-        // console.log(stat);
-        // console.log(stat);
-        // console.log(stat);
 
         if (stat == "Connected" || stat == "Request Sent") {
 
@@ -197,7 +197,7 @@ const User = memo(({ handleTabChange, token , navigation , suggestionarray , set
         if (item.role == "Admin") return
         if (item._id == loggedinuserid) return
         // console.log(decode.role);
-        
+
         // if(decode.role == "Investor" && item.role != "Investor") return
         return (
             // <Text style={{color : "#fff"}}>hello</Text>
@@ -205,11 +205,9 @@ const User = memo(({ handleTabChange, token , navigation , suggestionarray , set
                 navigation.navigate("Singleuserpage", { token: token, id: item._id, page: "NewsLetter" })
             }}>
                 <View style={[styles.listItem, {}]}>
-                    {/* <Image
-                        source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8slgZXgqnSIXDS8wF2uDT_SmsYlBe-W1soQ&s" }}
-                        style={styles.avatar} /> */}
+
                     {!item.profilePhoto && <Image style={styles.avatar} source={require("../../assets/images/blank.png")} />}
-                    {item.profilePhoto && <Image style={styles.avatar} source={{ uri: item.profilePhoto }} />}
+                    {item.profilePhoto && <Image transition={500} cachePolicy="memory-disk" placeholder={require("../../assets/images/blank.png")} style={styles.avatar} source={{ uri: item.profilePhoto }} />}
 
                     <View style={styles.textContainer}>
                         <Text numberOfLines={1}
@@ -240,35 +238,39 @@ const User = memo(({ handleTabChange, token , navigation , suggestionarray , set
         })
     )
 
-    useEffect(()=>{
-        
+    useEffect(() => {
+
         // console.log("suggestion array changes");
         // console.log(suggestionarray.length);
-        
-        
-    } , [suggestionarray])
+
+
+    }, [suggestionarray])
     return (
 
 
-        <View style={{ flex: 1, backgroundColor: "#16181a" }}>
+        <View style={{ flex: 1, backgroundColor: "#16181a", minHeight: 600 }}>
 
 
             <FlatList
+                onEndReached={() => {
+                    console.log("end");
+                }}
+                onEndReachedThreshold={0.5}
                 keyExtractor={(item, index) => index}
                 data={suggestionarray}
                 ref={listRef}
                 renderItem={renderSuggestion}
                 onScroll={handleScroll}
                 style={[styles.suggestionbox]}
-                contentContainerStyle={{ paddingBottom: 100 }}
+                contentContainerStyle={{ paddingBottom: 100, minHeight: 800 }}
                 extraData={suggestionarray}
                 getItemLayout={(data, index) => ({ length: 200, offset: 200 * index, index })}
                 maintainVisibleContentPosition={{ minIndexForVisible: 20 }}
-                onContentSizeChange={() => {
-                    if (listRef.current) {
-                        listRef.current.scrollToOffset({ offset: scrollPosition.current, animated: false });
-                    }
-                }}
+                // onContentSizeChange={() => {
+                //     if (listRef.current) {
+                //         listRef.current.scrollToOffset({ offset: scrollPosition.current, animated: false });
+                //     }
+                // }}
 
                 refreshControl={
                     <RefreshControl
@@ -298,7 +300,7 @@ export default User
 
 
 const styles = StyleSheet.create({
-    
+
     username: {
         fontSize: 18,
         width: "90%",

@@ -25,42 +25,40 @@ const scalingfactor = Math.sqrt(a * b)
 
 const Community = ({ allpost, setallpost, getpost, scrollY, navigation ,onReportCallBack}) => {
 
-    console.log("community re render");
+    // console.log("community re render");
 
-    useEffect(() => {
-        console.log("navigation re render page 2 ");
-    }, [navigation])
-    useEffect(() => {
-        console.log("allpost re render page 2");
-    }, [allpost])
-    useEffect(() => {
-        console.log("setallpost re render page 2");
-    }, [setallpost])
-    useEffect(() => {
-        console.log("scrollY re render page 2");
-    }, [scrollY])
-    useEffect(() => {
-        console.log("getpost re render page 2");
-    }, [getpost])
-    useEffect(() => {
-        console.log("isready re render page 2");
-    }, [isready])
-    useEffect(() => {
-        console.log("refreshing11 re render page 2");
-    }, [refreshing11])
-    useEffect(() => {
-        console.log("applycommunity re render page 2");
-    }, [applycommunity])
-    useEffect(() => {
-        console.log("showToastWithGravity re render page 2");
-    }, [showToastWithGravity])
+    // useEffect(() => {
+    //     console.log("navigation re render page 2 ");
+    // }, [navigation])
+    // useEffect(() => {
+    //     console.log("allpost re render page 2");
+    // }, [allpost])
+    // useEffect(() => {
+    //     console.log("setallpost re render page 2");
+    // }, [setallpost])
+    // useEffect(() => {
+    //     console.log("scrollY re render page 2");
+    // }, [scrollY])
+    // useEffect(() => {
+    //     console.log("getpost re render page 2");
+    // }, [getpost])
+    // useEffect(() => {
+    //     console.log("isready re render page 2");
+    // }, [isready])
+    // useEffect(() => {
+    //     console.log("refreshing11 re render page 2");
+    // }, [refreshing11])
+    // useEffect(() => {
+    //     console.log("applycommunity re render page 2");
+    // }, [applycommunity])
+    // useEffect(() => {
+    //     console.log("showToastWithGravity re render page 2");
+    // }, [showToastWithGravity])
 
     const [isready, setisready] = useState(false)
     const [ActiveTab, setActiveTab] = useState("")
 
     async function gotochatscreen(item) {
-        console.log(item.communityPost.communityName);
-        console.log(item.communityPost._id);
 
         var id = item.communityPost._id
         var additionaldetail = {
@@ -81,9 +79,7 @@ const Community = ({ allpost, setallpost, getpost, scrollY, navigation ,onReport
                 }
             );
             const result = await response.json();
-            console.log(result.data);
 
-            // setmessage(result.data)
 
             navigation.navigate("Chat1", { item: additionaldetail, messages: result.data, token, navigation })
         } catch (err) {
@@ -123,7 +119,6 @@ const Community = ({ allpost, setallpost, getpost, scrollY, navigation ,onReport
 
     async function applycommunity(id, index) {
         if (allpost[index].Applied) {
-            console.log("vaapis");
             return
 
         }
@@ -145,8 +140,6 @@ const Community = ({ allpost, setallpost, getpost, scrollY, navigation ,onReport
                 },
             });
             const data = await response.json();
-            console.log(data);
-            console.log(response.status);
             if (response.status === 403) {
                 showToastWithGravity("you are not allowed to join this community")
             }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext, useCallback } from "react";
-import { View, Text, StyleSheet, TextInput, Keyboard, FlatList, Image, RefreshControl, Dimensions, TouchableOpacity, Vibration } from "react-native";
+import { View, Text, StyleSheet, TextInput, Keyboard, FlatList, Image, RefreshControl, Dimensions, TouchableOpacity, Vibration, Pressable } from "react-native";
 import { useFocusEffect, useNavigation } from "expo-router";
 
 import { url } from "../../config.js"
@@ -8,6 +8,7 @@ import { url } from "../../config.js"
 import { jwtDecode } from "jwt-decode";
 import { Skeleton } from 'moti/skeleton';
 import { MotiView } from 'moti';
+import GlobalSocket from "@/Global/globalSocket.js";
 
 
 const data1 = Array(5).fill({
@@ -27,6 +28,50 @@ const data1 = Array(5).fill({
 
 
 const ConnectionsScreen = ({ search, token, setk, inputref }) => {
+
+    var socket = useContext(GlobalSocket)
+    
+    const [count, setcount] = useState(0)
+    const handleShuffleChatList = (data) => {
+        console.log(data, "received on ShuffleChatList");
+        console.log(filtereddata.length, "length");
+
+
+        const temp = [...filtereddata];
+        const index = temp.findIndex((e) => e.user._id.toString() === data.senderId);
+
+        if (index !== -1) {
+            const filter = temp.splice(index, 1);
+            filter[0].lastMessage.message = data.message;
+            filter[0].lastMessage.isRead = false;
+            filter[0].lastMessage.createdAt = Date.now();
+            temp.unshift(filter[0]);
+            setfiltereddata(temp);
+        }
+    };
+    useEffect(() => {
+
+        if (socket) {
+            socket.emit("registerUser", loggedinuserid)
+            console.log("i am connection socke url, ", url);
+            socket.on("ShuffleChatList", handleShuffleChatList);
+        }
+
+    }, [socket , count]);
+
+
+
+
+    useFocusEffect(
+        useCallback(() => {
+            console.log("inc");
+            setcount(count + 1)
+            setcount(count + 1)
+        }, [])
+    );
+
+
+
 
 
 
@@ -77,8 +122,6 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
         var route = ""
         const decoded = jwtDecode(token);
 
-
-
         if (decoded.role == "Founder") {
             route = "founder/getFounderChatUserList"
         }
@@ -86,16 +129,10 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
             route = "investor/getInvestorChatUserList"
         }
         else {
-            // console.log("fuck");
-
             route = "founder/getFounderChatUserList"
-
         }
         // else if()
-        console.log(`${url}${route}`);
-
-
-        setloading(true); // Start loading before fetching data
+        // setloading(true); // Start loading before fetching data
         if (token) {
             try {
                 setskeletonloading(true)
@@ -110,6 +147,8 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
                     }
                 );
                 const result = await response.json();
+                console.log("rr");
+
 
                 if (decoded.role == "Founder") {
                     var rec1 = result.filter(e => e.user.role != "Investor")
@@ -117,15 +156,9 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
                 else {
                     var rec1 = result
                 }
-
-
-
-
                 const uniqueData = rec1.filter((item, index, self) =>
                     self.findIndex(innerItem => innerItem.user.userName === item.user.userName) === index
                 );
-
-
                 const sortedData = uniqueData.sort((a, b) => {
                     if (a.lastMessage === null && b.lastMessage === null) return 0;
                     if (a.lastMessage === null) return 1;
@@ -135,14 +168,12 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
                     const dateB = new Date(b.lastMessage.createdAt);
                     return dateB - dateA; // Sort in descending order of time
                 });
-
-                console.log(sortedData);
-
-
-
                 if (response.status === 200) {
                     setData(sortedData)
                     setfiltereddata(sortedData)
+                    // socket.emit("registerUser", loggedinuserid)
+                    // socket.on("ShuffleChatList", handleShuffleChatList);
+
                 }
             } catch (err) {
                 console.log(err);
@@ -172,9 +203,6 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
 
         async function getData() {
             try {
-                // console.log(token, "function ke under wala");
-
-                // console.log(`${url}investor/recommendation/getFounderProfile`);
 
                 const response = await fetch(
                     `${url}chats/getMessage/individual/${id}`,
@@ -187,12 +215,7 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
                     }
                 );
                 const result = await response.json();
-                console.log(result, "chatscreen pe jaane se pehle");
-
-                // setData(result.data);
-                // setloading(false);
-
-
+                // console.log(result, "chatscreen pe jaane se pehle");
 
 
                 navigation.push("Chat", { item, messages: result.data?.messages || [], token, navigation, photo1: result.senderProfilePhoto, photo2: result.recieverProfilePhoto, tabnavigation: navigation });
@@ -248,8 +271,11 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
 
     return (
         <View style={styles.listContainer}>
+            <Pressable onPress={() => setcount(count + 1)}>
+                <Text style={{ color: "white" }}>socket</Text>
+            </Pressable>
 
-            {filtereddata && !skeleton && <FlatList
+            <FlatList
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{ paddingBottom: 100 }}
 
@@ -268,7 +294,7 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
                     </>
                 }
                 data={filtereddata}
-                keyExtractor={(item, index) => index.toString()}
+                keyExtractor={(item, index) => item.user?.userName?.toString()}
                 refreshControl={<RefreshControl refreshing={refreshing}
                     progressBackgroundColor="#16181a"
                     colors={['#00de62']}
@@ -276,12 +302,9 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
                         Vibration.vibrate(200)
                         fetchData()
                     }}
-
                 />}
                 renderItem={({ item }) => {
-                    // console.log(item.lastMessage, "ooo");
-
-
+                    // console.log(item, "ooo");
                     return (
                         <TouchableOpacity onPress={() => {
                             gotochatscreen(item)
@@ -330,53 +353,9 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
                         </TouchableOpacity>
                     )
                 }}
-            />}
-
-            {skeleton && <View style={styles.listItem1}>
-
-                {[1, 2, 3, 4, 5, 6, 7, 8].map(e =>
-
-                    <View style={{ display: "flex", flexDirection: "row", gap: 5, marginBottom: 20 }}>
-                        <Skeleton
-                            // colorMode="dark"
-                            width={50}
-                            colors={["#272a2e", "#1A1D1F", "#272a2e", "#272a2e", "#1A1D1F", "#272a2e"]}
-
-                            // backgroundColor="red" // Changed to red
-
-                            height={50}
-                            radius={"round"}
-                            // backgroundColor="black"
-                            highlightColor="#000"  // Set highlight color
-                        />
-                        {/* <Spacer height={8} /> */}
-                        <View style={{ justifyContent: "center" }}>
-                            <Skeleton
-                                colors={["#272a2e", "#1A1D1F", "#272a2e", "#272a2e", "#1A1D1F", "#272a2e"]}
-
-                                colorMode="dark"
-                                width={'87%'}
-                                height={12}
-                                highlightColor="#333"  // Set highlight color
-                            />
-                            <Spacer height={8} />
-
-                            <Skeleton
-                                colors={["#272a2e", "#1A1D1F", "#272a2e", "#272a2e", "#1A1D1F", "#272a2e"]}
-
-                                colorMode="dark"
-                                width={'80%'}
-                                height={12}
-                                highlightColor="#333"  // Set highlight color
-                            />
-                        </View>
+            />
 
 
-
-                    </View>
-
-                )}
-            </View>}
 
 
 

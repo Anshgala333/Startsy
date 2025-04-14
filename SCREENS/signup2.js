@@ -107,6 +107,7 @@ const Signup2 = function ({ navigation, route }) {
                                 placeholder="Password"
                                 placeholderTextColor="#828282"
                                 style={signupstyles.input}
+                                // style={[signupstyles.input ,{marginBottom:10} ]}
                                 value={password}
                                 secureTextEntry={showPassword}
                                 onChangeText={(text) => {
@@ -119,9 +120,9 @@ const Signup2 = function ({ navigation, route }) {
                                 onPress={() => setShowPassword(prev => !prev)}
                             >
                                 {showPassword ?
-                                    <Entypo name="eye-with-line" size={24} color="#828282" />
+                                    <Ionicons name="eye-off-outline" size={24} color="#828282" />
                                     :
-                                    <Entypo name="eye" size={24} color="#828282" />
+                                    <Ionicons name="eye-outline" size={24} color="#828282" />
 
                                 }
                             </TouchableOpacity>
@@ -130,7 +131,7 @@ const Signup2 = function ({ navigation, route }) {
                             <Text style={signupstyles.error}>{passwordError}</Text>
                         ) : null}
 
-                        <View style={{ width: '92%', padding: 0, borderBottomWidth: 1, borderBottomColor: '#ccc',marginTop:20 }}>
+                        <View style={{ width: '92%', padding: 0, borderBottomWidth: 1, borderBottomColor: '#ccc', marginTop: 20 }}>
                             <TextInput
                                 allowFontScaling={false}
                                 placeholder="Confirm Password"
@@ -148,9 +149,9 @@ const Signup2 = function ({ navigation, route }) {
                                 onPress={() => setShowConfirmPassword(prev => !prev)}
                             >
                                 {showConfirmPassword ?
-                                    <Entypo name="eye-with-line" size={24} color="#828282" />
+                                    <Ionicons name="eye-off-outline" size={24} color="#828282" />
                                     :
-                                    <Entypo name="eye" size={24} color="#828282" />
+                                    <Ionicons name="eye-outline" size={24} color="#828282" />
 
                                 }
                             </TouchableOpacity>

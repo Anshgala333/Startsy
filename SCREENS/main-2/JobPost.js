@@ -17,8 +17,8 @@ import { jwtDecode } from "jwt-decode";
 
 const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation, onReportCallBack }) => {
 
-    console.log("job re render");
 
+    const [loading,setLoading]=useState(false);
 
 
     useFocusEffect(useCallback(() => {
@@ -43,16 +43,19 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation, o
     };
 
 
+    var decode = jwtDecode(token)
 
     async function applyjob(id, index) {
 
-
+        // console.log('helllllo')
+        // return
+        setLoading(true);
+        
         if (allpost[index].Jobapplied) {
             return
 
 
         }
-        var decode = jwtDecode(token)
         if (decode.role == "CommunityMember") {
             showToastWithGravity("Switch to Job Seeker role to apply for jobs")
             return
@@ -82,8 +85,6 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation, o
                 },
             });
             const data = await response.json();
-            console.log(data);
-            console.log(response.status);
             if (response.status === 200) {
                 setallpost(allpost.map((e, i) => {
                     if (i == index) {
@@ -93,9 +94,12 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation, o
                     else return e
                 }))
             }
+            setLoading(false);
             if (response.status === 400) {
                 showToastWithGravity("you have already applied")
             }
+
+            navigation.goBack();
 
         }
         catch (err) {
@@ -113,7 +117,6 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation, o
                 return
             }
             else {
-                console.log(item.jobPosts?.amount);
 
 
                 if (item.type == "jobPost") {
@@ -153,7 +156,33 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation, o
                                 {/* <Text allowFontScaling={false} style={styles.u8}><Text style={{ color: "#828282" }}>Payment mode: {item.jobPosts.pay} </Text> </Text> */}
                                 {item.jobPosts.amount != "" && <Text allowFontScaling={false} style={styles.u8}><Text style={{ color: "#828282" }}></Text>Offering: {item.jobPosts.amount} </Text>}
 
-                                <TouchableOpacity onPress={() => { applyjob(item._id, index) }} style={[!item.Jobapplied ? styles.job : styles.job,]} >
+                                <TouchableOpacity onPress={() => {
+                                    if (item.Jobapplied) {
+                                        return
+
+                                    }
+                                    if (decode.role == "CommunityMember") {
+                                        showToastWithGravity("Switch to Job Seeker role to apply for jobs")
+                                        return
+
+                                    }
+
+
+                                   
+                                    navigation.navigate('JobApply', {
+                                        item: item,
+                                        index: index,
+                                        applyjobCallBack: applyjob,
+                                        loading:loading,
+                                        allpost:allpost,
+                                        setallpost:setallpost,
+                                        showToastWithGravity:showToastWithGravity,
+                                        decode:decode,
+                                        token:token,
+                                    });
+                                
+
+                                }} style={[!item.Jobapplied ? styles.job : styles.job,]} >
                                     <Text allowFontScaling={false} style={!item.Jobapplied ? styles.nexttext : styles.nexttext}>{item.Jobapplied ? 'Applied' : "Apply"}</Text>
                                 </TouchableOpacity>
                             </View>
