@@ -323,7 +323,8 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
                                             numberOfLines={1}
                                             ellipsizeMode="tail"
                                             allowFontScaling={false}
-                                            style={!item.lastMessage.isRead && item.lastMessage.senderId != loggedinuserid ? styles.bold : styles.message}>
+                                            style={!item.lastMessage.isRead && item.lastMessage.senderId != loggedinuserid ? styles.bold : styles.message}
+                                            >
                                             {item.lastMessage?.message || "No chats yet"}
                                         </Text>
                                     }
@@ -340,7 +341,8 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
                                         <Text
                                             numberOfLines={1}
                                             ellipsizeMode="tail"
-                                            allowFontScaling={false} style={styles.message}>Shared a post</Text>
+                                            style={!item.lastMessage.isRead && item.lastMessage.senderId != loggedinuserid ? styles.bold : styles.message}
+                                            allowFontScaling={false}>Shared a post</Text>
                                     }
                                 </View>
                                 <Text

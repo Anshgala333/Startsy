@@ -404,7 +404,7 @@ const Signup13 = ({ navigation, route }) => {
                             <TextInput
                                 allowFontScaling={false}
                                 placeholder="LinkedIN URL*"
-                                placeholderTextColor="#B8B8B8"
+                                placeholderTextColor="#828282"
                                 style={[styles.input, { marginTop: 20, paddingRight: 10 }]}
                                 value={linkedinurl}
                                 onChangeText={(text) => { setlinkedinurl(text) }}
@@ -414,7 +414,7 @@ const Signup13 = ({ navigation, route }) => {
                             {(role1 == "Angel Investor" || role1 == "Institutional Investor") && <TextInput
                                 allowFontScaling={false}
                                 placeholder="Website URL / Angel list url"
-                                placeholderTextColor="#B8B8B8"
+                                placeholderTextColor="#828282"
                                 style={styles.input}
                                 value={websiteurl}
                                 onChangeText={(text) => { setwebsiteurl(text) }}
@@ -428,7 +428,7 @@ const Signup13 = ({ navigation, route }) => {
                                     <TextInput
                                         allowFontScaling={false}
                                         placeholder="Official Domain Email *"
-                                        placeholderTextColor="#B8B8B8"
+                                        placeholderTextColor="#828282"
                                         style={styles.input}
                                         value={domainemail}
                                         onChangeText={(text) => { setdomainemail(text) }}
@@ -566,7 +566,7 @@ var b = height / 800;
 const scalingfactor = Math.sqrt(a * b)
 const styles = StyleSheet.create({
     t1: {
-        textAlign: 'center',
+        textAlign: 'left',
         marginLeft: 10,
         color: "#D9D9D9",
         fontFamily: 'Alata',
@@ -625,8 +625,8 @@ const styles = StyleSheet.create({
     }
     ,
     btn: {
-        width: 168,
-        height: 48,
+        width: 150,
+        height: 40,
         // height : scalingfactor*48,
         backgroundColor: "#00DF60",
         // padding: scalingfactor * 12,
@@ -647,7 +647,7 @@ const styles = StyleSheet.create({
     }, nexttext: {
         color: "#24272A",
         fontFamily: "Alata",
-        fontSize: scalingfactor * 22,
+        fontSize: scalingfactor * 20,
         textAlign: "center",
         // lineHeight : 16
         marginTop: -4
@@ -673,18 +673,19 @@ const styles = StyleSheet.create({
     },
     input: {
         marginHorizontal: "auto",
-        // padding : 10,
-        borderRadius: 20,
-        height: 47,
+        borderRadius: 0,
+        // height: 47,
+        borderWidth : 0,
+        borderBottomWidth :1,
+        borderBottomColor : "#ccc",
         width: "92%",
-        borderWidth: 1,
         borderColor: "#ccc",
         marginTop: 10,
-        paddingLeft: 20,
-        color: "#B8B8B8",
+        paddingLeft: 0,
         fontFamily: "Alata",
-        fontSize: scalingfactor * 16,
-        marginBottom: scalingfactor * 16
+        marginBottom: scalingfactor * 16,
+        fontSize:  20, // Responsive font size
+        color: "#ccc",
     },
 
     errorText: {

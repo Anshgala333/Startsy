@@ -265,12 +265,12 @@ const Signup12 = ({ navigation, route }) => {
                             <Pressable onPress={() => { handleOutsideTouch() }} style={styles.btn1}>
                                 <Text allowFontScaling={false} style={styles.nexttext}>{sliderrange1.toLocaleString("en-IN")} {sliderrange1 > 1 ? "years" : "year"}</Text>
                             </Pressable>
-                            <View style={[styles.box, { left: 10 }]}></View>
-                            <View style={[styles.box1, { right: 10 }]}></View>
+                            {/* <View style={[styles.box, { left: 10 }]}></View>
+                            <View style={[styles.box1, { right: 10 }]}></View> */}
 
                             <Slider
                                 // style={styles.sliderbox}
-                                style={{ marginTop: -7 }}
+                                style={{ marginTop: 25 }}
                                 minimumValue={0}
                                 maximumValue={50}
                                 value={sliderrange1}
@@ -299,7 +299,7 @@ const Signup12 = ({ navigation, route }) => {
                             )} */}
 
 
-                            <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 10, marginTop: 25 }]}>Preferred startup stage <Text style={{fontSize:15 ,color: "#94A3B8"}}>*</Text></Text>
+                            <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 10, marginTop: 15 }]}>Preferred startup stage <Text style={{fontSize:15 ,color: "#94A3B8"}}>*</Text></Text>
                             <Text allowFontScaling={false} style={[styles.t2, { marginBottom: 15 }]}>Indicate the stages of development at which you prefer to invest.</Text>
                             <Drop borderwidth={0} bb={1} width={"97%"} borderColor={"#ccc"} items={stage} onValueChange={(value) => { setsetstartupstage(value) }} setOpen={setOpen2} open={open2} nestedScrollEnabled={true} />
                             {errors.startupStage && (
@@ -319,16 +319,16 @@ const Signup12 = ({ navigation, route }) => {
 
 
                             <Pressable onPress={() => { handleOutsideTouch() }} style={styles.btn}>
-                                <Text allowFontScaling={false} style={styles.nexttext}>{sliderrange.toLocaleString("en-IN")}</Text>
+                                <Text allowFontScaling={false} style={styles.nexttext}>₹ {sliderrange.toLocaleString("en-IN")}</Text>
 
                             </Pressable>
 
                             {/* slider */}
-                            <View style={[styles.box, { left: 10 }]}></View>
-                            <View style={[styles.box1, { right: 10 }]}></View>
+                            {/* <View style={[styles.box, { left: 10 }]}></View>
+                            <View style={[styles.box1, { right: 10 }]}></View> */}
                             <Slider
                                 // style={styles.sliderbox}
-                                style={{ marginTop: -7 }}
+                                style={{ marginTop: 22 }}
                                 minimumValue={0}
                                 maximumValue={10000000}
                                 value={sliderrange}
@@ -455,21 +455,20 @@ const styles = StyleSheet.create({
     },
 
     btn: {
-        width: "92%",
-        height: 40,
+        width: "60%",
+        height: 46,
         margin: "auto",
         backgroundColor: "transparent",
-        borderRadius: 20,
         borderWidth: 1,
         borderColor: "#ccc",
-        borderRadius: 10,
+        borderRadius: 20,
         marginBottom: 10,
         justifyContent: 'center',
 
     },
     btn1: {
-        width: 173,
-        height: 48,
+        width: "60%",
+        height: 46,
         margin: "auto",
         backgroundColor: "transparent",
         borderRadius: 20,

@@ -52,6 +52,7 @@ const Signup10 = ({ navigation, route }) => {
     const [sserror, setsserror] = useState(false)
     const [stageerror, setstageerror] = useState(false)
     const [fundingstatuserror, setfunderror] = useState(false)
+    const [descriptionError, setdescriptionError] = useState(false)
 
 
 
@@ -83,6 +84,10 @@ const Signup10 = ({ navigation, route }) => {
             setstageerror(true)
             error = true
 
+        }
+        if (description == "") {
+            setdescriptionError(true)
+            error = true
         }
         // if (sliderrange = ) {
         //     setfunderror(true)
@@ -288,10 +293,11 @@ const Signup10 = ({ navigation, route }) => {
                         {/* bottom */}
 
                         <View style={styles.bottom}>
-                            <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 15 }]}>About Startup</Text>
+                            <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 15 }]}>About Startup <Text style={{fontSize : 20}}>*</Text></Text>
+                            
                             <TextInput
                                 allowFontScaling={false}
-                                placeholder="Name *"
+                                placeholder="Name"
                                 placeholderTextColor="#828282"
                                 style={styles.input11}
                                 value={name}
@@ -300,7 +306,7 @@ const Signup10 = ({ navigation, route }) => {
                             {nameerror && <Text style={styles.err}>* please write a startup name</Text>}
                             <TextInput
                                 allowFontScaling={false}
-                                placeholder="One liner for your startup *"
+                                placeholder="One liner for your startup"
                                 placeholderTextColor="#828282"
                                 style={styles.input11}
                                 value={goal}
@@ -329,16 +335,21 @@ const Signup10 = ({ navigation, route }) => {
                                     }}
                                 />
                             </View>
+                            {descriptionError && <Text style={[styles.err1, { marginTop: -15 }]}>* please enter a description </Text>}
 
-                            <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 10 }]}>Startup sector <Text style={{fontSize:15 ,color: "#94A3B8"}}>*</Text></Text>
+                            <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 10 }]}>Startup sector
+                                {/* <Text style={{ fontSize: 15, color: "#94A3B8" }}>*</Text> */}
+                            </Text>
                             <Text allowFontScaling={false} style={[styles.t2, { marginBottom: 10 }]}>Define your startup’s focus: horizontal sectors serve multiple industries, while vertical sectors target a specific niche.</Text>
-                            <Drop  borderwidth={0} bb={1} borderColor={"#ccc"} width={"97%"} items={ss} onValueChange={(value) => { setstartupsector(value) }} setOpen={setOpen1} open={open1} nestedScrollEnabled={true} />
+                            <Drop borderwidth={0} bb={1} borderColor={"#ccc"} width={"97%"} items={ss} onValueChange={(value) => { setstartupsector(value) }} setOpen={setOpen1} open={open1} nestedScrollEnabled={true} />
                             {sserror && <Text style={styles.err1}>* please select a sector </Text>}
 
 
-                            <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 10, marginTop: 25 }]}>Startup stage <Text style={{fontSize:15 ,color: "#94A3B8"}}>*</Text></Text>
+                            <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 10, marginTop: 25 }]}>Startup stage
+                                {/* <Text style={{ fontSize: 15, color: "#94A3B8" }}>*</Text> */}
+                            </Text>
                             <Text allowFontScaling={false} style={[styles.t2, { marginBottom: 15 }]}>Identify where your startup is in its journey—whether you’re in ideation, have a prototype, or are generating revenue.</Text>
-                            <Drop borderwidth={0} bb={1} borderColor={"#ccc"} width={"97%"}  items={stage} onValueChange={(value) => { setsetstartupstage(value) }} setOpen={setOpen2} open={open2} nestedScrollEnabled={true} />
+                            <Drop borderwidth={0} bb={1} borderColor={"#ccc"} width={"97%"} items={stage} onValueChange={(value) => { setsetstartupstage(value) }} setOpen={setOpen2} open={open2} nestedScrollEnabled={true} />
                             {stageerror && <Text style={styles.err1}>* please select your startup stage </Text>}
 
 
@@ -346,22 +357,22 @@ const Signup10 = ({ navigation, route }) => {
                             <Text allowFontScaling={false} style={[styles.t1, { marginTop: 15, marginBottom: 12 }]}>Funding Status</Text>
                             <Text allowFontScaling={false} style={[styles.t2, { marginBottom: 15 }]}>Indicate the amount of funding your startup has received so far. This information will only be visible to verified investors and helps them assess your startup's financial backing and growth potential.</Text>
                             <Pressable onPress={() => { handleOutsideTouch() }} style={styles.btn}>
-                                <Text allowFontScaling={false} style={styles.nexttext}>{sliderrange.toLocaleString("en-IN")}</Text>
+                                <Text allowFontScaling={false} style={styles.nexttext}>₹ {sliderrange.toLocaleString("en-IN")}</Text>
                             </Pressable>
 
                             {/* slider */}
-                            <View style={[styles.box, { left: 10 }]}></View>
-                            <View style={[styles.box1, { right: 10 }]}></View>
+                            {/* <View style={[styles.box, { left: 10 }]}></View> */}
+                            {/* <View style={[styles.box1, { right: 10 }]}></View> */}
                             <Slider
                                 // style={styles.sliderbox}
-                                style={{ marginTop: -7 }}
+                                style={{ marginTop: 15 }}
                                 minimumValue={0}
                                 maximumValue={10000000}
                                 value={sliderrange}
                                 step={200000}
                                 minimumTrackTintColor="#00DE62"
                                 maximumTrackTintColor="#00DE62"
-                                thumbTintColor="#737373"
+                                thumbTintColor="#ccc"
 
                                 // step={100}
                                 // thumbTintColor="#737373" // Color of the slider thumb
@@ -498,7 +509,7 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         color: "#ccc",
         fontFamily: 'Alata',
-        fontSize:  24,
+        fontSize: 24,
         // backgroundColor : "red",
         width: "97%",
         marginBottom: scalingfactor * 3,
@@ -565,14 +576,14 @@ const styles = StyleSheet.create({
     },
 
     btn: {
-        width: "92%",
+        width: "60%",
         height: 48,
         margin: "auto",
         backgroundColor: "transparent",
         borderRadius: 20,
         borderWidth: 1,
         borderColor: "#ccc",
-        borderRadius: 10,
+        borderRadius: 20,
         marginBottom: 15,
 
         // elevation: 5,
@@ -650,7 +661,7 @@ const styles = StyleSheet.create({
         borderRadius: 3,
         backgroundColor: "#00DE62",
         // top: -3,
-        top: 22,
+        top: 23,
         elevation: 10
     },
     box1: {

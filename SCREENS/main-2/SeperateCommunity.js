@@ -182,9 +182,11 @@ const Community = ({ allpost, setallpost, getpost, scrollY, navigation ,onReport
             if (item.user_id == null) {
                 return
             }
+            if(decode.role == "Investor" && item.user_id.role != "Investor")return
             // if (item.Applied == true) {
             //     return
             // }
+            
             else {
                 function getVideoHeight() {
                     return item.aspectRatio === "16/9" ? newwidth * (9 / 16) : newwidth * (1 / 1);

@@ -493,7 +493,7 @@ const styles = StyleSheet.create({
         // backgroundColor : "red",
         color: "#00de62",
         fontFamily: "Roboto",
-        paddingRight: 60
+        // paddingRight: 60
     },
     placeholderText: {
         color: "#B8B8B8",

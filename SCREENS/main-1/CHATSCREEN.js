@@ -582,7 +582,7 @@ const Chat = ({ route }) => {
 
     return (
         // <KeyboardAvoidingView style={{ flex: 1, height: height }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}>
-        <Animated.View style={{ flex: 1, }}>
+        <Animated.View style={{ flex: 1, paddingBottom : 10 , backgroundColor :"#16181a" }}>
             <View style={{ flex: 1.1, backgroundColor: "#16181a" }}>
 
 
@@ -720,7 +720,7 @@ const styles = StyleSheet.create({
         alignContent: "center",
         display: "flex",
         // height: 100,
-        width: "98%",
+        width: "97%",
         // bottom : 10,
         // marginBottom: 320,
         backgroundColor: "#16181a",
@@ -746,7 +746,7 @@ const styles = StyleSheet.create({
         // borderColor: "#00DE62",
 
         // borderWidth: 1,
-        borderRadius: 30,
+        borderRadius: 20,
         paddingHorizontal: 20,
         color: "#bbbbbb",
         fontFamily: "Roboto",

@@ -810,6 +810,7 @@ const Main2 = ({ navigation, route }) => {
 
                             lazy={false}
                             // unmountOnBlur={false}
+                            firstRoute="Startsy"
                             initialRouteName="Startsy"
                             detachInactiveScreens={true}
                             // keyboardBehavior={true}

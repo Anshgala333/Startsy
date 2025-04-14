@@ -8,7 +8,7 @@ const Followerpage = ({ route }) => {
 
 
 
-    var { people, token } = route.params;
+    var { people, token , stat } = route.params;
 
 
     // console.log(people);
@@ -111,6 +111,9 @@ const Followerpage = ({ route }) => {
     // console.log(people);
 
     function renderSuggestion({ item }) {
+        if(stat == true){
+            if(item.role != "Investor")return
+        }
 
         return (
             // <Text style={{color : "#fff"}}>hello</Text>

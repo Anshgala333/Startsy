@@ -515,8 +515,8 @@ const EditInvestorInfo = ({ navigation }) => {
                     <Pressable onPress={() => { handleOutsideTouch() }} style={[styles.btn1, { marginTop: 0 }]}>
                         <Text allowFontScaling={false} style={styles.nexttext}>{sliderrange1.toLocaleString("en-IN")} {sliderrange1 > 1 ? "years" : "year"}</Text>
                     </Pressable>
-                    <View style={[styles.box, { left: 20 }]}></View>
-                    <View style={[styles.box1, { left: "95%" }]}></View>
+                    {/* <View style={[styles.box, { left: 20 }]}></View>
+                    <View style={[styles.box1, { left: "95%" }]}></View> */}
 
                     <Slider
                         // style={styles.sliderbox}

@@ -74,7 +74,7 @@ const Chat1 = ({ navigation, route }) => {
         }
 
         console.log(finaldata, "finaldata");
-        // console.log(data, "data ");
+        console.log(data, "data");
 
         socket.emit("groupMessage", finaldata)
         setdata([
@@ -175,7 +175,7 @@ const Chat1 = ({ navigation, route }) => {
 
     useEffect(() => {
         // Connect to the Socket.IO server
-        const newSocket = io(`${url}`, {
+        const newSocket = io(`${url}chatScreen`, {
             transports: ["websocket"], // Ensure WebSocket is used
         });
 
@@ -516,7 +516,7 @@ const Chat1 = ({ navigation, route }) => {
 
         <Animated.View style={{ flex: 1, }}>
 
-            <View style={{ flex: 1.1, backgroundColor: "#16181a" }}>
+            <View style={{ flex: 1.1, backgroundColor: "#16181a" , paddingBottom : 10}}>
 
 
                 <View style={[styles.header]}>
@@ -654,7 +654,7 @@ const styles = StyleSheet.create({
         alignContent: "center",
         display: "flex",
         // height: 100,
-        width: "98%",
+        width: "97%",
         // marginBottom: 320,
         // backgroundColor: "yellow",
         borderColor: "#ccc",
@@ -819,7 +819,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         elevation: 10000,
         zIndex: 100000,
-        top: 12,
+        top: 13,
         right: 20,
         transform: [{ scale: 1.1 }],
         alignSelf: "center",

@@ -352,10 +352,10 @@ const Apnauser = ({ props, token, closeall, openshare }) => {
                 },
             });
             const data = await response.json();
-            console.log(data.data);
-            console.log(data.data.hiddenInfo.socialProof[0].url);
-            console.log(data.data.hiddenInfo.socialProof[1].url);
-            console.log(data.data.hiddenInfo.socialProof[2].url);
+            // console.log(data.data.hiddenInfo.socialProof);
+            // console.log(data.data.hiddenInfo.socialProof[0].url);
+            // console.log(data.data.hiddenInfo.socialProof[1].url);
+            // console.log(data.data.hiddenInfo.socialProof[2].url);
             
             
 
@@ -914,7 +914,7 @@ const Apnauser = ({ props, token, closeall, openshare }) => {
 // console.log(token);
 
 
-    async function shownormalconnection() {
+    async function shownormalconnection(stat) {
 
         var decoded = jwtDecode(token)
 
@@ -962,7 +962,7 @@ const Apnauser = ({ props, token, closeall, openshare }) => {
 
 
 
-            navigation.navigate("Followerpage", { people: filter2 ,token:token})
+            navigation.navigate("Followerpage", { people: filter2 ,token:token , stat})
 
 
 
@@ -1078,7 +1078,7 @@ const Apnauser = ({ props, token, closeall, openshare }) => {
                         
                             <View style={{ transform: [{ scale: 1.1 }], marginRight: 0 }} >
                                 {/* <Upvote width={decode.role == "Investor" ? 0 : 50} height={44} /> */}
-                                {(decode.role == "CommunityMember" || decode.role == "Job seeker") && 
+                                {(decode.role == "CommunityMember" || decode.role == "Job seeker" || decode.role == "Founder") && 
                            <View style={styles1.ss}>
                             
                             
@@ -1163,9 +1163,8 @@ const Apnauser = ({ props, token, closeall, openshare }) => {
                         {userdata.hiddenInfo?.stageOfStartup != undefined && <Text style={styles1.fund}>{userdata.hiddenInfo.stageOfStartup}</Text>} */}
 
                         <View style={styles1.main}>
-                            {decode.role != "Investor" && decode.role != "CommunityMember" && decode.role != "Job seeker" && <View style={styles1.connectionContainer}>
-
-
+                            {decode.role != "Investor" && decode.role != "CommunityMember" && decode.role != "Job seeker" &&
+                             <TouchableOpacity onPress={()=>{shownormalconnection(true)}} style={styles1.connectionContainer}>
                                 {Array(3).fill(null).map((_, index) => (
                                     <View key={index} style={styles1.circle}>
                                         <Image
@@ -1180,9 +1179,8 @@ const Apnauser = ({ props, token, closeall, openshare }) => {
                                     </View>
                                 ))}
 
-
                                 <Text style={styles1.t6}>{investor.length} investor connections</Text>
-                            </View>}
+                            </TouchableOpacity>}
                             <TouchableOpacity onPress={() => {
                                 // console.log("users page");
                                 shownormalconnection()

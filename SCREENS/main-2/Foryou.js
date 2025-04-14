@@ -247,7 +247,7 @@ const Foryou =
                                     setnewaspect("1/1")
                                     fileupload([1, 1])
                                 }} style={styles1.button}>
-                                    <Text style={styles1.buttonText}>1/1 (Square)</Text>
+                                    <Text style={styles1.buttonText}>1:1 (Square)</Text>
                                 </TouchableOpacity>
                             </View>
                             {/* </TouchableWithoutFeedback> */}

@@ -34,29 +34,26 @@ const InvestorCard = ({ route }) => {
             const { data } = result
 
             const filteredData = data.filter((e) => e.investor != null)
-   
 
 
             if (response.status == 200) {
 
 
                 var array = result.data.map((item, index) => {
-                    
-
                     item["id"] = index + 1
 
                     // console.log(item["id"]);
                     return item
                 })
-               
+
 
 
                 const uniqueData = filteredData.filter((item, index, self) =>
                     self.findIndex(innerItem => innerItem.investor._id === item.investor._id) === index
                 );
 
-               
-                setItems(uniqueData)
+
+                setItems(uniqueData.reverse())
             }
 
 
@@ -173,7 +170,7 @@ const InvestorCard = ({ route }) => {
 
             else if (direction == "right") {
 
-               
+
 
                 const id = item.investor._id;
                 async function makesubmit() {
@@ -186,7 +183,7 @@ const InvestorCard = ({ route }) => {
                             }
                         })
                         const data = await response.json();
-                        
+
 
                     }
                     catch (err) {
@@ -269,12 +266,12 @@ const InvestorCard = ({ route }) => {
                                     style={styles.image}
                                 />
                             </View>
-                            
-                            <View style={{ alignItems: 'flex-start', }}>
+
+                            <View style={{ alignItems: 'flex-start', marginTop:-2 }}>
 
                                 <AutoSizeText
                                     numberOfLines={1}
-                                    fontSize={20}
+                                    fontSize={18}
                                     mode={ResizeTextMode.max_lines}
                                     ellipsizeMode='tail'
                                     style={styles.name}>{item.investor.roleId.fullName}
@@ -282,7 +279,7 @@ const InvestorCard = ({ route }) => {
 
                                 <AutoSizeText
                                     numberOfLines={1}
-                                    // fontSize={26}
+                                    fontSize={10}
                                     mode={ResizeTextMode.max_lines}
                                     ellipsizeMode='tail'
                                     style={styles.role}>{item.investor.role == "CommunityMember" ? "Member" : item.investor.role}
@@ -301,7 +298,7 @@ const InvestorCard = ({ route }) => {
 
                     <View style={styles.divider1}></View>
 
-                    <View style={{ paddingHorizontal: 12 }}>
+                    <View style={{ paddingHorizontal: 12 , paddingTop : 15 }}>
 
                         {item.investor.role == "Investor" && <Text style={styles.info}>Investing experience - {item.investor.roleId.previousExperience} years</Text>}
                         {item.investor.role == "Investor" && <Text style={styles.info1}>Investing Capacity - {item.investor.roleId.investmentRange}</Text>}
@@ -310,8 +307,13 @@ const InvestorCard = ({ route }) => {
                         {item.investor.role == "Founder" && <Text style={styles.info1}>Startup Sector - {item.investor.roleId.hiddenInfo.sector}</Text>}
 
                         {(item.investor.role == "CommunityMember" && item.investor.roleId.skills != "") &&
-                            <Text style={styles.info}>{item.investor.roleId.skills}</Text >}
+                            <Text style={styles.info} >{item.investor.roleId.skills}</Text >}
                         {(item.investor.role == "CommunityMember" && item.investor.roleId.tagline != "") &&
+                            <Text style={styles.info}>{item.investor.roleId.tagline}</Text >}
+
+                        {(item.investor.role == "Job seeker" && item.investor.roleId.skills != "") &&
+                            <Text style={styles.info}>Skills - {item.investor.roleId.skills}</Text >}
+                        {(item.investor.role == "Job seeker" && item.investor.roleId.tagline != "") &&
                             <Text style={styles.info}>{item.investor.roleId.tagline}</Text >}
                     </View>
 
@@ -351,7 +353,7 @@ const InvestorCard = ({ route }) => {
     return (
 
         <View
-            
+
             style={{ flex: 1, backgroundColor: "#16181a" }}>
             <View style={styles.topHeader}>
                 <View style={styles.headerSide}>
@@ -389,7 +391,7 @@ const InvestorCard = ({ route }) => {
                 renderItem={rendercard} // Correct integration
             />
 
-     
+
         </View>
 
     );
@@ -405,7 +407,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#1a1a1a',
         borderRadius: 20,
         margin: 16,
-     
+
     },
     divider1: {
         width: "100%",
@@ -426,40 +428,41 @@ const styles = StyleSheet.create({
         // marginBottom: 8,
     },
     image: {
-        width: 50,
-        height: 50,
+        width: 40,
+        height: 40,
         borderRadius: 25,
     },
     role: {
-        fontSize: 11,
+        fontSize: 10,
         color: '#00de62',
+        marginTop:2,
 
         fontFamily: "Roboto"
     },
     date: {
         fontSize: 10,
         color: '#666',
-  
+
         right: 0,
 
         fontFamily: "Roboto",
-       
+
     },
     name: {
-        fontSize: 20,
+        fontSize: 18,
         color: '#ccc',
         fontFamily: "Alata",
     },
     info: {
         fontSize: 16,
-        color: '#D9D9D9',
+        color: '#828282',
         marginBottom: 4,
         marginTop: 4,
         fontFamily: "Roboto"
     },
     info1: {
         fontSize: 16,
-        color: '#00DE62',
+        color: '#828282',
         marginBottom: 4,
         marginTop: 4,
         fontFamily: "Roboto"
@@ -476,7 +479,7 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         paddingVertical: 0,
         paddingHorizontal: 20,
-        height: 41,
+        height: 40,
         width: 117,
         borderWidth: 2,
         borderColor: "#B8B8B8",
