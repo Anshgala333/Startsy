@@ -2,9 +2,8 @@
 
 
 import React, { useState, useRef, useEffect, useMemo, useContext, useCallback, memo } from "react";
-import * as Application from 'expo-application';
 import {
-    View, Text, Animated, Pressable, StyleSheet, StatusBar, Dimensions, TouchableWithoutFeedback, BackHandler,
+    View, Text, Animated, Pressable, StyleSheet, TouchableWithoutFeedback, BackHandler,
     TouchableOpacity,
     Modal,
 } from "react-native";
@@ -13,38 +12,26 @@ import Scroll from "./Scroll.js"
 import JobpostPage from "./JobPost.js"
 import Question from "./Question.js"
 
-const { width } = Dimensions.get('window');
 import { Skeleton } from 'moti/skeleton';
-import { MotiView } from 'moti';
 
 import styles from "../../styles/post.js"
 import main from "../../styles/main.js"
 import AntDesign from '@expo/vector-icons/AntDesign';
-import { useFocusEffect, useNavigation } from "expo-router";
+import {  useNavigation } from "expo-router";
 import * as ImagePicker from 'expo-image-picker';
 import { GlobalContext } from "@/Global/globalcontext.js";
 import Community from "./SeperateCommunity.js"
 import { url } from "../../config.js"
 import { jwtDecode } from "jwt-decode";
 import Startsy from "../main-1/Startsy.js";
-// import Constants from "expo-constants";
 
-// const appVersion = Constants.manifest.version; // For classic builds
-// console.log("App Version:", appVersion);
 const Foryou =
     ({ scroll, settype, token, mainpagebottomsheet, opencomment, openshare, visible, setVisible, setnewaspect, setImage,onReportCallBack }) => {
 
         // console.log("for you re render");
 
 
-        useFocusEffect(() => {
-            // console.log('for you 1 focused');
-
-            return () => {
-                // console.log('for you 1 blurred'); // This fires when switching screens
-            };
-        });
-
+        
 
 
         // useEffect(() => {
@@ -111,7 +98,7 @@ const Foryou =
 
         const navigation = useNavigation()
         const [allpost, setallpost] = useState([])
-        const [ActiveTab, setActiveTab] = useState()
+        const [ActiveTab, setActiveTab] = useState("Connections")
         // const memoizedAllPost = useMemo(() => allpost, [allpost]);
 
         const [loggedinUserID, setloggedInuserID] = useState("")
@@ -144,7 +131,6 @@ const Foryou =
                     },
                 });
                 const data = await response.json();
-                console.log(data[2] , "ullu 1");
                 
 
 
@@ -155,16 +141,13 @@ const Foryou =
                 
 
                 var data1 = data.data.map(e => {
-                    console.log(e);
                     if(!e)return
-                    
+
                     var object = { ...e, isliked: e.likedBy.includes(loggedinUserID), Applied: e.communityPost ? e.communityPost.communityMembers.includes(loggedinUserID) : false, Jobapplied: e.jobPosts ? e.jobPosts.jobApplicants.includes(loggedinUserID) : false, itemlikedcount: e.likedBy.length , issaved : !data.bookmarks.includes(e._id) }
                     return object
                 })
-                console.log("recahed here");
                 
 
-                console.log(data1 , "ullu");
                 
 
                 if (data.data.length > 0) {
@@ -352,9 +335,6 @@ const Foryou =
 
                 <View style={{ flex: 1, height: "100%", minHeight: 500 }}>
                     <Tab.Navigator initialRouteName="Connections"
-
-
-
                         screenOptions={({ route }) => ({
                             swipeEnabled: loggedinRole != "Investor",
                             unmountOnBlur: false,

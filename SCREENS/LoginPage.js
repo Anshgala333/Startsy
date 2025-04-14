@@ -36,8 +36,6 @@ const LoginPage = function ({ navigation, route }) {
     const [message, setmessage] = useState("* username already taken")
     const [error, seterror] = useState(false)
     const [loading, setloading] = useState(false)
-    // console.log(globaldata);
-    // console.log(globaldata.token);
     const [emailerror, setemailerror] = useState(false)
     const [passworderror, setpassworderror] = useState(false)
     const [passworderror1, setpassworderror1] = useState(false)
@@ -76,7 +74,6 @@ const LoginPage = function ({ navigation, route }) {
 
         setloading(true)
         var ExistingToken = await AsyncStorage.getItem("notificationToken")
-        console.log(ExistingToken);
 
 
 
@@ -87,9 +84,7 @@ const LoginPage = function ({ navigation, route }) {
             notificationToken: ExistingToken
 
         }
-        console.log(final);
 
-        // Alert.alert(`${url}api/authenticate`)
 
 
 
@@ -104,24 +99,12 @@ const LoginPage = function ({ navigation, route }) {
 
                 }
             });
-            // const response =
-            //  await fetch(`https://afraid-ants-move.loca.lt/api/authenticate`, {
-            //     method: 'POST',
-            //     body: JSON.stringify(final),
-            //     headers: {
-            //         'Accept': 'application/json',
-            //         'Content-Type': 'application/json',
-
-            //     }
-            // });
+            
             const data = await response.json();
-            console.log(data);
-            // Alert.alert(JSON.stringify(data))
             if (response.status === 200) {
                 updateField("token", data.accessToken);
                 try {
                     await AsyncStorage.setItem('accessToken', data.accessToken);
-                    console.log('Data saved successfully!');
                 } catch (error) {
                     console.error('Error saving data:', error);
                 }
@@ -129,11 +112,9 @@ const LoginPage = function ({ navigation, route }) {
                 try {
                     const token = data.accessToken;
                     const decoded = jwtDecode(token);
-                    console.log(decoded, "ok");
                     if (decoded.role == "Investor") {
 
                         if (decoded.isInvestorVerified == true) {
-                            console.log("reaced here 1");
                             navigation.reset({
                                 index: 0,
                                 routes: [{ name: "Main2" }],
@@ -141,11 +122,9 @@ const LoginPage = function ({ navigation, route }) {
                             // navigation.navigate("Main2")
                         }
                         else if (decoded.investorRejected == true) {
-                            console.log("reaced here 2");
                             navigation.navigate("InvestorNotVerifiedScreen")
                         }
                         else {
-                            console.log("reaced here");
 
                             navigation.navigate("InvestorWaitingPage")
                         }
@@ -155,11 +134,9 @@ const LoginPage = function ({ navigation, route }) {
                             index: 0,
                             routes: [{ name: "Main2" }],
                         });
-                        // navigation.navigate("Main2");
                     }
                 }
                 catch (err) {
-                    // Alert.alert(JSON.stringify(data))
 
                 }
             }
@@ -170,7 +147,6 @@ const LoginPage = function ({ navigation, route }) {
 
         }
         catch (err) {
-            // Alert.alert(JSON.stringify(err))
             console.log(err);
 
         }

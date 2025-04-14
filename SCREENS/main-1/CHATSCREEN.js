@@ -30,8 +30,8 @@ const Chat = ({ route }) => {
 
 
 
-    console.log(photo1);
-    console.log(photo2);
+    // console.log(photo1);
+    // console.log(photo2);
 
 
 
@@ -170,7 +170,7 @@ const Chat = ({ route }) => {
 
 
     useEffect(() => {
-        const newSocket = io(`${url}`, {
+        const newSocket = io(`${url}chatScreen`, {
             // transports: ["websocket"], // Ensure WebSocket is used
         });
 
@@ -528,15 +528,15 @@ const Chat = ({ route }) => {
         async function markAsRead() {
             console.log("marking read");
             var decode = jwtDecode(token)
-            console.log(decode);
+            // console.log(decode);
 
             var object = {
                 senderId: decode._id,
                 receiverId: jisuserkosendkarnahaiuskiid,
             }
 
-            console.log(object);
-            console.log(`${url}test/markAsRead`);
+            // console.log(object);
+            // console.log(`${url}test/markAsRead`);
 
 
             try {
@@ -552,8 +552,8 @@ const Chat = ({ route }) => {
                     }
                 );
                 const result = await response.json();
-                console.log(response);
-                console.log(result);
+                // console.log(response);
+                // console.log(result);
 
             }
             catch (e) {
@@ -621,7 +621,7 @@ const Chat = ({ route }) => {
                     contentInset={{ top: 10 }}
                     ref={flatListRef}
                     renderItem={renderItem}
-                    keyExtractor={(item, index) => item._id}
+                    keyExtractor={(item, index) => index.toString()}
                     // onContentSizeChange={() => flatListRef.current?.scrollToEnd({ animated: true })}
                     style={{paddingLeft : 4 , paddingRight : 4}}
 

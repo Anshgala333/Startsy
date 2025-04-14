@@ -19,6 +19,8 @@
       "bundleIdentifier": "com.rspytech.startsy"
     },
     "android": {
+      "jsEngine": "hermes",
+      "newArchEnabled": true,
       "notification": {
         "icon": "./assets/images/logofinal.png",
         "color": "#FF5733"

@@ -24,23 +24,7 @@ import { LinearGradient } from "expo-linear-gradient";
 
 // import Toast from 'react-native-toast-message';
 const Login1 = ({ navigation, showtoast, falsetoken }) => {
-  // const navigation = useNavigation();
-  // console.log(navigation);
-
-
-  // const showStyledToast = () => {
-  //   Toast.show({
-  //     type: 'success', // Types: 'success', 'error', 'info'
-  //     text1: 'Notice',
-  //     text2: `You don't have to apply to this community`,
-  //     position: 'top', // Toast appears at the top
-  //     visibilityTime: 3000, // Duration in ms
-  //     topOffset: 50, // Offset from the top
-  //   });
-  // };
-  // console.log(falsetoken, "tmep hai yeh");
-
-  // console.log(showtoast, "toast staus");
+ 
 
 
 
@@ -69,9 +53,7 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
         },
       });
       const data = await response.json();
-      // setloading(false)
-      // console.log(data);
-      // console.log(response.status);
+    
     }
     catch (err) {
       console.log(err);
@@ -102,7 +84,6 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
 
 
   const animation2 = (first) => {
-    // console.log(first);
 
 
     setTimeout(() => {
@@ -135,12 +116,10 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
     if (route.params && route.params.isForm1Visible !== undefined) {
       // setForm1Visible(route.params.isForm1Visible);
 
-      // console.log("will change to back");
 
       setinitial(false)
       setForm1Visible(false)
       animation2(first)
-      // console.log(moverfirst, "moverfirst ");
 
 
       // setattop(true)
@@ -170,7 +149,6 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
 
   const handlelogin = async (navigation) => {
 
-    // console.log("login route called");
 
 
 
@@ -195,7 +173,6 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
 
     setloading(true)
     var ExistingToken = await AsyncStorage.getItem("notificationToken")
-    console.log(ExistingToken);
 
     // return
 
@@ -219,12 +196,10 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
         }
       });
       const data = await response.json();
-      console.log(data);
       if (response.status === 200) {
         updateField("token", data.accessToken);
         try {
           await AsyncStorage.setItem('accessToken', data.accessToken);
-          // console.log('Data saved successfully!');
         } catch (error) {
           console.error('Error saving data:', error);
         }
@@ -232,7 +207,6 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
         try {
           const token = data.accessToken;
           const decoded = jwtDecode(token);
-          console.log(decoded);
           if (decoded.role == "Investor") {
 
             if (decoded.isInvestorVerified == true) {
@@ -470,7 +444,6 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
   }, [initial]);
 
   function showsignuppage(type, navigation) {
-    console.log(type);
     navigation.navigate("Signup1", { type: type });
 
   }
@@ -478,13 +451,9 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
     React.useCallback(() => {
       // Adding back button handler only when the screen is focused
       const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-        // console.log('====================================');
-        // console.log("back called");
-        // console.log('====================================');
         // emailInput.current?.blur()
 
         if (!isForm1Visible) {
-          // console.log("ok");
           setForm1Visible(true);
           animation3();
           return true; // Prevent default back action
@@ -503,18 +472,7 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
 
   const [tree, setstatus] = useState(false); // Default 100px
 
-  useEffect(() => {
-    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-      // console.log('====================================');
-      // console.log("back called");
-      // console.log('====================================');
-      // emailInput.current?.blur()
-    });
-
-    return () => {
-      backHandler.remove();
-    };
-  }, [])
+ 
   useEffect(() => {
     const keyboardShowListener = Keyboard.addListener("keyboardDidShow", () => {
       setstatus(true); // Move up
@@ -601,10 +559,7 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
             <Text allowFontScaling={false} style={styles.label}></Text>
             <Pressable
               onPress={() => {
-                // console.log('====================================');
-                // console.log("scroll");
                 scrollContainer.current?.scrollTo({ y: 100, animate: true })
-                // console.log('====================================');
               }}
             >
               {/* <TextInput allowFontScaling={false}

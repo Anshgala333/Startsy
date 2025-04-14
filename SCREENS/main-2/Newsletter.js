@@ -7,7 +7,7 @@ import {
     View,
     Text,
     TextInput,
-    Image,
+    
     Animated,
     Pressable,
     StyleSheet,
@@ -21,6 +21,7 @@ import {
     Vibration
 
 } from "react-native";
+import { Image } from "expo-image";
 import Post from "./SeperatePost.js"
 import { Skeleton } from 'moti/skeleton'
 import { MotiView } from 'moti';
@@ -51,11 +52,7 @@ const NewsLetter = React.memo(
             // console.log("closeall re render");
             // console.log('====================================');
         }, [closeall])
-        useEffect(() => {
-            // console.log('====================================');
-            // console.log("token re render");
-            // console.log('====================================');
-        }, [token])
+
         useEffect(() => {
             // console.log('====================================');
             // console.log("newsletter re render");
@@ -129,8 +126,6 @@ const NewsLetter = React.memo(
         useEffect(() => {
             if (token) {
                 var decode = jwtDecode(token)
-                console.log(decode);
-
                 setloggedin(decode._id)
             }
         }, [token])
@@ -140,9 +135,7 @@ const NewsLetter = React.memo(
         const [filterednewsletter, setfilterednewsletter] = useState([])
 
 
-        // async function getdata() {
-
-        // }
+        
         const getdata = useCallback(async () => {
             try {
                 const response = await fetch(`${url}admin/getAllNewletters`, {
@@ -153,16 +146,10 @@ const NewsLetter = React.memo(
                 });
                 const data = await response.json();
 
-                var special = data.data.filter((e) => e.leaderboardCategory == null)
-
-                // console.log(special);
-                // console.log(special.length);
-
-                var normal = data.data.filter((e) => e.leaderboardCategory != null)
+                var special = data.data?.filter((e) => e.leaderboardCategory == null)
+                var normal = data.data?.filter((e) => e.leaderboardCategory != null)
 
                 // console.log(normal.length);
-
-
                 setnewsletter(normal)
                 setfilterednewsletter(special)
 
@@ -176,7 +163,7 @@ const NewsLetter = React.memo(
             finally {
                 setTimeout(() => {
                     setloading(false)
-                }, 3000);
+                }, 0);
             }
         }, [token])
 
@@ -186,11 +173,7 @@ const NewsLetter = React.memo(
         }, [token])
 
 
-        // useFocusEffect(
-        //     useCallback(() => {
-        //         getdata()
-        //     }, [token])
-        // );
+
 
 
         const renderItem = useCallback(({ item }) => {
@@ -239,7 +222,7 @@ const NewsLetter = React.memo(
                         start={{ x: 0, y: 0 }}
                         end={{ x: 0, y: 1 }}
                         style={styles.box}>
-                        <Image style={styles.image} source={{ uri: item.newsletterImage }} />
+                        <Image transition={500} cachePolicy="memory-disk"  style={styles.image} source={{ uri: item.newsletterImage }} />
 
 
                         <Text style={styles.text}>
@@ -250,7 +233,7 @@ const NewsLetter = React.memo(
                         </Text>
 
                         <View style={styles.bottominfo}>
-                            <Image style={styles.topimage} source={{ uri: item.taggedUser.profilePhoto }} />
+                            <Image transition={500} cachePolicy="memory"   style={styles.topimage} source={{ uri: item.taggedUser.profilePhoto }} />
                             <Text style={styles.topu1}>{item.taggedUserName}</Text>
                             {/* <Text style={styles.topu2}>{item.taggedUser.role}</Text> */}
                             <Text style={styles.topu2}>{item.taggedUser.role == "CommunityMember" ? "Member" : item.taggedUser.role}</Text>
@@ -332,7 +315,7 @@ const NewsLetter = React.memo(
                             </Text>
 
                             <View style={styles.bottominfo1}>
-                                <Image style={styles.topimage} source={{ uri: item.taggedUser.profilePhoto }} />
+                                <Image transition={500} cachePolicy="memory"   style={styles.topimage} source={{ uri: item.taggedUser.profilePhoto }} />
                                 <Text style={styles.topu1}>{item.taggedUserName}</Text>
                                 {/* <Text style={styles.topu2}>{item.taggedUser.role}</Text> */}
                                 <Text style={styles.topu2}>{item.taggedUser.role == "CommunityMember" ? "Member" : item.taggedUser.role}</Text>
@@ -350,7 +333,7 @@ const NewsLetter = React.memo(
                             </View>
                         </View>
                         <View style={styles.right}>
-                            <Image style={styles.image1} source={{ uri: item.newsletterImage }} />
+                            <Image transition={500} cachePolicy="memory-disk"   style={styles.image1} source={{ uri: item.newsletterImage }} />
                         </View>
                     </LinearGradient>
                 </Pressable>
@@ -360,13 +343,12 @@ const NewsLetter = React.memo(
         }
 
         const [refreshing, setRefreshing] = useState(false)
-        const [refreshing1, setRefreshing1] = useState(false)
         const [suggestionarray, setsuggestionarray] = useState([])
         const [text1, settext] = useState("")
 
         function search(text) {
             if (text[0] != "@" && selectedword == "Newsletter") {
-                setfilterednewsletter(newsletter.filter(item =>
+                setfilterednewsletter(newsletter?.filter(item =>
                     text === "" || item.content.toLowerCase().includes(text.toLowerCase())
                 ))
             }
@@ -374,20 +356,16 @@ const NewsLetter = React.memo(
 
         const [loading, setloading] = useState(true)
 
-       
+
 
 
 
         async function searchUser(text) {
 
-            // console.log("user search");
-            console.log(text, "from function");
 
             var final = text ? `@${text}` : `showAllUser`
-            console.log(final);
-            console.log(final);
-            console.log(final);
-            // return
+            // console.log(final);
+
 
             try {
                 const response = await fetch(`${url}api/getUserNameSuggestions/${final}`, {
@@ -398,15 +376,7 @@ const NewsLetter = React.memo(
                     },
                 });
                 const data = await response.json();
-                console.log(data.length);
-                var filterUser = data.data.filter(e => e._id != loggedinuserid)
-                console.log(filterUser.length, "habibi");
-
-                // console.log("reacehd gere");
-
-
-
-
+                var filterUser = data.data?.filter(e => e._id != loggedinuserid)
                 setsuggestionarray(filterUser)
 
             }
@@ -417,47 +387,44 @@ const NewsLetter = React.memo(
         }
 
         useEffect(() => {
-
             searchUser()
         }, [token])
+
         const inputref = useRef(null)
+        const opacity = useRef(new Animated.Value(0.3)).current;
+
         useEffect(() => {
-            const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-
-            });
-            const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
-                // inputref.current?.blur()
-            });
-
-            return () => {
-                backHandler.remove()
-
-                keyboardDidHideListener.remove();
-            }
+            Animated.loop(
+                Animated.sequence([
+                    Animated.timing(opacity, {
+                        toValue: 1,
+                        duration: 800,
+                        useNativeDriver: true,
+                    }),
+                    Animated.timing(opacity, {
+                        toValue: 0.3,
+                        duration: 800,
+                        useNativeDriver: true,
+                    }),
+                ])
+            ).start();
         }, []);
+
 
         const Spacer = ({ height = 16 }) => <View style={{ height }} />;
 
-
-
         const NewsletterComponent = memo(() => {
-
+            // console.log("tab 1of newswletter re render");
             useFocusEffect(
                 useCallback(() => {
-
-                    // console.log("ok");
-
-
-                    console.log("ok");
-
                     handleTabChange("Newsletter")
                 }, [])
             )
-            return (
 
+
+            return (
                 <>
                     <FlatList
-
                         getItemLayout={(data, index) => ({
                             length: 300, // Fixed height of each item
                             offset: 300 * index,
@@ -473,12 +440,12 @@ const NewsLetter = React.memo(
                                 progressBackgroundColor="#16181a"
                                 colors={['#00de62']}
                                 onRefresh={() => {
-                                    setRefreshing(true)
+                                    // setRefreshing(true)
                                     Vibration.vibrate(200)
                                     getdata()
-                                    setTimeout(() => {
-                                        setRefreshing(false)
-                                    }, 1000);
+                                    // setTimeout(() => {
+                                    //     setRefreshing(false)
+                                    // }, 1000);
                                 }} refreshing={(refreshing)} />
                         }
                         // style={styles.scroll1}
@@ -486,7 +453,8 @@ const NewsLetter = React.memo(
                             <>
                                 <View style={styles.divider}></View>
                                 <Text allowFontScaling={false} style={styles.headline}>Leaderboard </Text>
-                                {loading && <View style={{ paddingHorizontal: 20, paddingBottom: 10 }}>
+
+                                {/* {loading && <View style={{ paddingHorizontal: 20, paddingBottom: 10 }}>
                                     <MotiView
                                         transition={{ type: 'timing', duration: 1000, repeatReverse: true }}
                                         // style={[styles.container, styles.padded]}
@@ -549,22 +517,21 @@ const NewsLetter = React.memo(
                                             />
                                         </View>
                                     </MotiView>
-                                </View>}
+                                </View>} */}
 
-                                {!loading && <FlatList
+
+                                 <FlatList
 
                                     horizontal={true}
                                     style={styles.scroll}
                                     data={newsletter}
                                     renderItem={renderItem}
                                 >
-                                </FlatList>}
-
-
+                                </FlatList>
                                 <View style={styles.divider}></View>
                                 <Text allowFontScaling={false} style={styles.headline}>Community news </Text>
 
-                                {
+                                {/* {
                                     loading && <View style={{ paddingHorizontal: 20, paddingBottom: 10 }}>
                                         <MotiView
                                             transition={{ type: 'timing', duration: 1000, repeatReverse: true }}
@@ -647,18 +614,12 @@ const NewsLetter = React.memo(
                                             </View>
                                         </MotiView>
                                     </View>
-                                }
-
-
-
+                                } */}
                             </>
                         }
                     >
+                    </FlatList >
 
-
-
-
-                    </FlatList>
 
                 </>
 
@@ -668,14 +629,9 @@ const NewsLetter = React.memo(
 
 
         const globalsearch = (text) => {
-
-
             if (selectedword == "users") {
-                console.log(text1);
-
                 searchUser(text1)
             }
-
         }
 
 
@@ -683,17 +639,13 @@ const NewsLetter = React.memo(
 
         function handleTabChange(selected) {
             setselectedword(selected)
-            console.log(selected);
 
         }
 
-       
+
 
         return (
             <SafeAreaView style={{ flexGrow: 1, minHeight: 700, backgroundColor: "#16181a", position: "relative" }}>
-
-                {/* {filterednewsletter.length == 0 && <Render />} */}
-
 
                 <Animated.View><Text allowFontScaling={false} style={styles.headerText}>Search</Text></Animated.View>
 
@@ -719,14 +671,10 @@ const NewsLetter = React.memo(
                 </View>
 
                 <View style={{ flex: 1, height: "100%", minHeight: 500, backgroundColor: "#16181a" }}>
-
-
                     <Tab.Navigator
                         //  detachInactiveScreens={true}
-
                         screenOptions={({ route }) => ({
                             unmountOnBlur: false,
-
                             // animationEnabled: true,
                             tabBarStyle: {
                                 backgroundColor: "#16181a",
@@ -747,6 +695,8 @@ const NewsLetter = React.memo(
                         <Tab.Screen
                             name="Connections"
                             component={NewsletterComponent}
+                            // children={(props) => <User handleTabChange={handleTabChange} token={token} navigation={navigation} suggestionarray={suggestionarray} setsuggestionarray={setsuggestionarray} />}
+
                             options={{
                                 lazy: false,
                                 unmountOnBlur: false,
@@ -770,19 +720,14 @@ const NewsLetter = React.memo(
                         />
 
                         <Tab.Screen
-
-
                             name="Job"
                             // component={User}
                             children={(props) => <User handleTabChange={handleTabChange} token={token} navigation={navigation} suggestionarray={suggestionarray} setsuggestionarray={setsuggestionarray} />}
-
 
                             options={{
                                 lazy: false,
                                 unmountOnBlur: false,
                                 freezeOnBlur: true,
-
-
                                 tabBarLabel: ({ focused }) => (
                                     <Text allowFontScaling={false} style={[
                                         styles.tabbarpill, {
@@ -796,7 +741,6 @@ const NewsLetter = React.memo(
                                 ),
 
                             }}
-
                         />
                     </Tab.Navigator>
                 </View>

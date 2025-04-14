@@ -54,7 +54,6 @@ const Question = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
             "content": blog,
         };
 
-        console.log(finaldata);
         // return
         setUploading(true)
 
@@ -77,7 +76,6 @@ const Question = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
             }
 
             const data = await response.json();
-            console.log(data);
             const newQuestion = data.post
 
 
@@ -170,8 +168,6 @@ const Question = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
             }
             if (!item.content) return
             else if (item.type == "Question") {
-
-                console.log(item.content);
                 return (
                     <TouchableOpacity onPress={() => { navigation.navigate("QuestionReply", { data: item, token }) }}
                     >
@@ -244,7 +240,7 @@ const Question = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
                     showsVerticalScrollIndicator={false}
                     data={allpost}
                     contentContainerStyle={{ paddingBottom: 100 }}
-                    keyExtractor={(item) => item.id}
+                    keyExtractor={(item) => item._id}
 
                     refreshControl={
 

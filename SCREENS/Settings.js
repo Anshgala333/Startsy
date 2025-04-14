@@ -34,7 +34,9 @@ const Settings = ({ navigation, route }) => {
 
   useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-      // navigation.navigate("Apnauser")
+      // tabnavigation.navigate("Profile")
+      navigation.goBack()
+      return true
 
     });
 

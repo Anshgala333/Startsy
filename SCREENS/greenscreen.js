@@ -18,10 +18,7 @@ import { GlobalContext } from "@/Global/globalcontext.js";
 
 const Green = ({ navigation }) => {
 
-    // const {globaldata} = useContext(Global);
-    // useEffect(() => {
-    //     console.log(globaldata, "global data");
-    // }, [globaldata]);
+  
 
     useFocusEffect(() => {
         StatusBar.setBackgroundColor("#16181a")
@@ -39,7 +36,6 @@ const Green = ({ navigation }) => {
     useEffect(() => {
         async function getToken() {
             temp = await AsyncStorage.getItem("accessToken");
-            // console.log(temp, "app khulte vakt toke hai ya nai");
 
             setfalsetoken(temp)
 
@@ -50,17 +46,8 @@ const Green = ({ navigation }) => {
             }
             if (temp) {
                 var decode = jwtDecode(temp)
-                // console.log(decode);
-
-                //  console.log();
-                //  console.log(decode.exp * 1000 , "exp ");
-                //  console.log(new Date(decode.exp) , "new dtae ");
-
-                //  console.log(Date.now());
 
                 if (decode.exp * 1000 < Date.now()) {
-                    // console.log("expired");
-
                     setstate("");
                     return
 
@@ -69,8 +56,6 @@ const Green = ({ navigation }) => {
 
                 if (decode.status == false) {
                     setstate("")
-                    // console.log("unauthorized user hai yeh");
-
                     setshowtoast(true)
                 }
 
@@ -96,17 +81,14 @@ const Green = ({ navigation }) => {
 
 
     useEffect(() => {
-        console.log("outside");
 
         async function f1(params) {
 
-            console.log("insider");
             
 
             temp = await AsyncStorage.getItem("accessToken");
-            console.log(temp, "app khulte vakt toke hai ya nai");
+            // console.log(temp, "app khulte vakt toke hai ya nai");
             var decode = jwtDecode(temp)
-            console.log(decode , "pppp");
 
 
             if (state == "Investor" && animationover) {
@@ -114,7 +96,6 @@ const Green = ({ navigation }) => {
                     navigation.navigate("Main2")
                     return
                 }
-                console.log("recahed here");
                 var data
                 try {
                     const response = await fetch(`${url}test/getInvestorStatus`, {
@@ -124,8 +105,6 @@ const Green = ({ navigation }) => {
                         },
                     })
                     data = await response.json()
-                    console.log(data.token);
-                    console.log(data);
                     if (data.message.isInvestorVerified == true) {
                         navigation.navigate("Main2")
                     }
@@ -145,12 +124,10 @@ const Green = ({ navigation }) => {
                 }
                 finally {
                     try {
-                        console.log(data.token , "okkkkkkkkkkkkkkkkkkk");
                         
                         await AsyncStorage.setItem('accessToken', data.token);
                         updateField("token", data.token);
 
-                        console.log('Data saved successfully!');
                     } catch (error) {
                         console.error('Error saving data:', error);
                     }

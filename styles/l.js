@@ -3,19 +3,13 @@ import React from "react";
 import { SafeAreaView, Text, Pressable, TextInput, View, Image, StyleSheet, Dimensions, StatusBar, Animated, PixelRatio } from "react-native";
 import { scale, moderateScale, verticalScale } from 'react-native-size-matters';
 const { width, height } = Dimensions.get("window");
-// console.log(height);
 const ratio = PixelRatio.get();
-console.log(ratio, "ratio");
 
 var a = width / 360;
 var b = height / 800;
 // console.log(a,b);
 
 const scalingfactor = Math.sqrt(a * b)
-
-// console.log(width);
-// console.log(height);
-// console.log(scalingfactor);
 
 
 

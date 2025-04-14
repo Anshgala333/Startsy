@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
-import { View, Text, Image, Linking, FlatList, StatusBar, ActivityIndicator, RefreshControl, StyleSheet, BackHandler, SafeAreaView, ScrollView, Pressable, TextInput, Vibration, TouchableOpacity } from "react-native";
+import { View, Text, Linking, FlatList, StatusBar, ActivityIndicator, RefreshControl, StyleSheet, BackHandler, SafeAreaView, ScrollView, Pressable, TextInput, Vibration, TouchableOpacity } from "react-native";
 import Entypo from '@expo/vector-icons/Entypo';
 import EvilIcons from '@expo/vector-icons/EvilIcons'; import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import Banner from "../assets/icons/banner.js"
@@ -7,6 +7,7 @@ import Upvote from '@/assets/icons/upvote';
 import { Skeleton } from 'moti/skeleton'
 import { MotiView } from 'moti';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { Image } from 'expo-image';
 
 import * as ImagePicker from 'expo-image-picker';
 import Post from "../components/Post.js"
@@ -795,7 +796,7 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
                 <Banner />
               </View>}
 
-            {(image != "" && image != undefined) && <Image style={styles1.bimg} source={{ uri: image }} />}
+            {(image != "" && image != undefined) && <Image placeholder="blurhash" blurhash= "LEHV6nWB2yk8pyo0adR*.7KCMdnj" style={styles1.bimg} source={{ uri: image }} />}
           </Pressable>
           <View style={styles1.bottom}>
 
