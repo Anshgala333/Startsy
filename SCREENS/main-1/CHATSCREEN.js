@@ -26,13 +26,6 @@ const Chat = ({ route }) => {
     const navigation = useNavigation();
 
 
-    // console.log(messages.at(-2), "blog");
-
-
-
-    // console.log(photo1);
-    // console.log(photo2);
-
 
 
     const btn11 = useRef(null)
@@ -45,15 +38,14 @@ const Chat = ({ route }) => {
     function sendmessage() {
 
 
-        // console.log("hiiii");
+     
 
 
         if (newtext == "") {
             return
         }
 
-        // console.log(messages);
-
+       
         const finaldata = {
             senderId: id,
             receiverId: jisuserkosendkarnahaiuskiid,
@@ -63,40 +55,8 @@ const Chat = ({ route }) => {
         }
         socket.emit("privateMessage", finaldata)
         setdata((data) => [{ message: newtext, senderId: id, updatedAt: new Date() }, ...data])
-        // setdata([...data, { message: newtext, senderId: id, updatedAt: new Date() }])
-        // if (flatListRef.current) {
+   
 
-        //     console.log("scroll karne wala hu");
-
-        //     flatListRef.current.scrollToOffset({
-        //         offset: data.length * 200,
-        //         animated: true,
-        //     });
-
-        // }
-        // if (flatListRef.current) {
-
-        //     console.log("scroll karne wala hu");
-
-        //     flatListRef.current.scrollToOffset({
-        //         offset: data.length * 200,
-        //         animated: true,
-        //     });
-
-        // }
-
-        // setTimeout(() => {
-        //     if (flatListRef.current) {
-        //         flatListRef.current.scrollToOffset({
-        //             offset: (data.length + 1) * 700,
-        //             animated: false,
-        //         });
-        //         // flatListRef.current.scrollToEnd({ animated: false });
-        //         // flatListRef.current.scrollToEnd({ animated: false });
-        //         // flatListRef.current.scrollToEnd({ animated: false });
-
-        //     }
-        // }, 1000);
         setnewtext("")
 
 
@@ -155,13 +115,7 @@ const Chat = ({ route }) => {
             setTimeout(() => {
                 // Ensure we are only scrolling when new messages are added
                 InteractionManager.runAfterInteractions(() => {
-                    // console.log('====================================');
-                    // console.log(messages.length);
-                    // console.log('====================================');
-                    // flatListRef.current?.scrollToOffset({
-                    //     offset: messages.length * 100,  // Adjust to actual item height
-                    //     animated: false,
-                    // });
+                  
                 });
             }, 500);
         }, [messages])
@@ -171,18 +125,30 @@ const Chat = ({ route }) => {
 
     useEffect(() => {
         const newSocket = io(`${url}chatScreen`, {
-            // transports: ["websocket"], // Ensure WebSocket is used
+            transports:['websocket']
         });
 
         setSocket(newSocket);
         setid(decoded._id)
 
 
-        // Clean up the connection on unmount
+   
         return () => {
             newSocket.disconnect();
         };
     }, []);
+
+
+
+    // useEffect(()=>{
+    //     const newSocket = io(`${url}/chatScreen`,{
+
+    //     })
+       
+    //     return ()=>{
+    //         newSocket.disconnect();
+    //     }
+    // },[])
 
 
 
@@ -197,7 +163,7 @@ const Chat = ({ route }) => {
                 message: newtext
             }
             socket.emit("registerUser", finaldata)
-            console.log("i am connection socke url, ", url);
+            // console.log("i am connection socke url, ", url);
             // Listen for incoming private messages
             socket.on("privateMessage", (data1) => {
                 // console.log(data1);
@@ -582,7 +548,7 @@ const Chat = ({ route }) => {
 
     return (
         // <KeyboardAvoidingView style={{ flex: 1, height: height }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}>
-        <Animated.View style={{ flex: 1, }}>
+        <Animated.View style={{ flex: 1, paddingBottom : 10 , backgroundColor :"#16181a" }}>
             <View style={{ flex: 1.1, backgroundColor: "#16181a" }}>
 
 
@@ -720,7 +686,7 @@ const styles = StyleSheet.create({
         alignContent: "center",
         display: "flex",
         // height: 100,
-        width: "98%",
+        width: "97%",
         // bottom : 10,
         // marginBottom: 320,
         backgroundColor: "#16181a",
@@ -746,7 +712,7 @@ const styles = StyleSheet.create({
         // borderColor: "#00DE62",
 
         // borderWidth: 1,
-        borderRadius: 30,
+        borderRadius: 20,
         paddingHorizontal: 20,
         color: "#bbbbbb",
         fontFamily: "Roboto",

@@ -6,24 +6,24 @@ import { url } from "../../config.js"
 import { AutoSizeText, ResizeTextMode } from 'react-native-auto-size-text';
 import { jwtDecode } from "jwt-decode";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import { Skeleton } from 'moti/skeleton';
 import styles1 from '@/styles/Alert2.js';
 
 
+import { LinearGradient } from "expo-linear-gradient";
 
 
 
 
 
-function Upvotedata({token }) {
+function Upvotedata({ token }) {
 
 
 
 
     const navigation = useNavigation()
 
-    // var { token, navigation } = route.params
 
     const [refreshing, setRefreshing] = useState(false)
     const [data, setdata] = useState([])
@@ -42,6 +42,7 @@ function Upvotedata({token }) {
 
     const [visible, setVisible] = useState(false)
     const [entirecontent, setentirecontent] = useState("")
+    const [length, setLength] = useState("")
 
     const CustomAlert = ({ visible, onClose }) => {
         const fadeAnim = useRef(new Animated.Value(0)).current; // Persistent animated value
@@ -60,7 +61,7 @@ function Upvotedata({token }) {
 
         if (!visible) return null; // Prevent rendering when not visible
 
-    
+
 
         return (
             <Modal transparent visible={visible} animationType="none" onRequestClose={() => onClose?.()}>
@@ -73,13 +74,7 @@ function Upvotedata({token }) {
 
                                 <View style={{ display: "flex", flexDirection: "row", gap: 10 }}>
 
-                                    {/* <TouchableOpacity onPress={() => onClose?.()} style={styles1.button}>
-                                            <Text style={styles1.buttonText}>Cancel</Text>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity onPress={() => deletepost1()} style={styles1.button}>
-                                            {isdeleting && <ActivityIndicator size={24} color="#16181a" />}
-                                            {!isdeleting && <Text style={styles1.buttonText}>Confirm</Text>}
-                                        </TouchableOpacity> */}
+
                                 </View>
                             </View>
                         </TouchableWithoutFeedback>
@@ -160,6 +155,8 @@ function Upvotedata({token }) {
                 setnormal(normalArray)
                 var array = result.data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
                 setSubNotification(array);
+
+                setLength(result.pendingRequest)
 
             }
 
@@ -261,28 +258,28 @@ function Upvotedata({token }) {
 
         if (item.notificationType == "suggestion") {
             return (
-
-
-
-
-
-                <TouchableOpacity onLongPress={() => {
+                <TouchableOpacity onPress={() => {
                     setVisible(true)
                     setentirecontent(item.notificationMessage)
                     Vibration.vibrate(10)
-
-
                 }}>
-                    <View style={{
-                        backgroundColor: "#24272A",
-                        borderRadius: 20,
-                        height: "auto",
-                        maxHeight: 200,
-                        marginHorizontal: 20,
-                        marginVertical: 10,
-                        paddingHorizontal: 10,
-                        paddingBottom: 10
-                    }}  >
+                    <LinearGradient
+                        colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}
+                        locations={[0, 1]}
+                        style={{
+                            backgroundColor: "#24272A",
+                            borderRadius: 20,
+                            height: "auto",
+                            maxHeight: 300,
+                            minHeight: 100,
+                            marginHorizontal: 10,
+                            marginVertical: 10,
+                            paddingHorizontal: 10,
+                            paddingBottom: 10
+                        }}
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 0, y: 1 }} >
+
                         <View style={styles.left}>
                             <Pressable
                                 style={{ paddingTop: 10 }}
@@ -291,19 +288,19 @@ function Upvotedata({token }) {
                             >
                                 {item.sendingUserId?.profilePhoto && <Image style={styles.topimage101} source={{ uri: item.sendingUserId?.profilePhoto }} />}
                                 {!item.sendingUserId?.profilePhoto && <Image style={styles.topimage101} source={require("../../assets/images/p2.png")} />}
-                                {/* <Image style={styles.topimage} source={require("../../assets/images/p2.png")} /> */}
+
 
                             </Pressable>
                             <View style={styles.bottominfo101}>
                                 <View style={{ display: "flex", flexDirection: "row" }}>
 
                                     <Pressable
-                                    // onPress={() => { navigation.navigate("Singleuserpage", { token: token, id: item.sendingUserId._id, page: "bell" }) }}
+
 
                                     >
                                         <View style={{ display: "flex", flexDirection: "row", marginTop: 10 }}>
                                             <Text style={styles.topu101}>
-                                                {/* {item.sendingUserId.userName}   */}
+
                                                 Investor
                                             </Text>
                                             <View style={styles.circle1}></View>
@@ -325,7 +322,7 @@ function Upvotedata({token }) {
                                 </View>
 
 
-                                {/* <Text style={styles.sub2}>{item.notificationMessage}</Text> */}
+
                             </View>
                         </View>
 
@@ -346,30 +343,27 @@ function Upvotedata({token }) {
 
                         </View>
                         <Text
-                            numberOfLines={1}
+                            numberOfLines={2}
                             // fontSize={12}
                             // mode={ResizeTextMode.max_lines}
                             ellipsizeMode='tail'
                             style={[styles.sub2, { width: "auto", maxWidth: 250 }]}>
                             {item.notificationMessage}
                         </Text>
-                    </View>
+                    </LinearGradient>
                 </TouchableOpacity>
             );
         }
 
 
         else {
-
-
             return (
-
-
-
-
-                <View style={styles.box1}>
-
-
+                <LinearGradient
+                    colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}
+                    locations={[0, 1]}
+                    style={styles.box1}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 0, y: 1 }} >
                     <View style={styles.left}>
 
 
@@ -419,8 +413,9 @@ function Upvotedata({token }) {
                         {item.notificationType == "upvotePost"}
                         {item.notificationType == "upvoteProfile"}
                         {item.notificationType == "jobApplied" &&
-                            <Pressable onPress={sendmessage} style={{ top: 16, right: 0 }}>
-                                <MaterialCommunityIcons name="message-text-outline" size={34} color={"#00DE62"} />
+                            <Pressable onPress={sendmessage} style={{ top: 20, right: 10 }}>
+                                {/* <MaterialCommunityIcons name="message-text-outline" size={34} color={"#00DE62"} /> */}
+                                <FontAwesome6 name="user-tie" size={24} color="#ccc" />
                             </Pressable>
                         }
                         {item.notificationType == "joinCommunity"}
@@ -448,7 +443,7 @@ function Upvotedata({token }) {
 
 
                     </View>
-                </View>
+                </LinearGradient>
                 // </TouchableOpacity>
 
 
@@ -464,15 +459,48 @@ function Upvotedata({token }) {
 
 
         if (decode.role == "CommunityMember") {
-            return
+            return (
+                <Pressable style={styles.Jobbtn} onPress={() => {
+                    navigation.navigate('AllRequests', {
+                        token: token, navigation: navigation
+                    })
+                }
+                }>
+                    <Text style={styles.jobbtntext}><Text style={{color : "#00de62" , borderColor : "red" , borderWidth : 1}}>{length}</Text>   Connection Requests</Text>
+
+                </Pressable>
+            )
         }
         if (suggestion && suggestion.length == 0) {
             return (
-                <></>
+                <Pressable style={styles.Jobbtn} onPress={() => {
+                    navigation.navigate('AllRequests', {
+                        token: token, navigation: navigation
+                    })
+                }
+
+
+                }>
+                    <Text style={styles.jobbtntext}><Text style={{color : "#00de62" , borderColor : "red" , borderWidth : 1}}>{length}</Text>  Connection Requests </Text>
+
+                </Pressable>
             )
         }
         return (
             <>
+
+
+                <Pressable style={[styles.Jobbtn, { marginBottom: 10 }]} onPress={() => {
+                    navigation.navigate('AllRequests', {
+                        token: token, navigation: navigation
+                    })
+                }
+
+                }>
+                    <Text style={styles.jobbtntext}><Text style={{color : "#00de62" , borderColor : "red" , borderWidth : 1}}>{length}</Text>  Connection Requests  </Text>
+
+                </Pressable>
+
                 <View style={styles.divider}></View>
                 <Text style={styles.t11}>Investor Suggestions</Text>
                 <FlatList
@@ -484,17 +512,7 @@ function Upvotedata({token }) {
                 // renderItem={() => <Text style={{ fontSize: 100 }}>okkk</Text>}
                 />
                 <View style={[styles.divider, { marginBottom: -10 }]}></View>
-                <Pressable style={styles.Jobbtn} onPress={() => {
-                    navigation.navigate('AllRequests', {
-                        token: token, navigation: navigation
-                    })
-                }
 
-
-                }>
-                    <Text style={styles.jobbtntext}>View your Requests</Text>
-
-                </Pressable>
 
 
 
@@ -575,18 +593,55 @@ function Upvotedata({token }) {
                 {
                     (suggestion.length == 0 && normal.length == 0) ?
                         <View style={[styles.emptyListContainer]}>
+                            <Pressable style={styles.Jobbtn} onPress={() => {
+                                navigation.navigate('AllRequests', {
+                                    token: token, navigation: navigation
+                                })
+                            }
+
+                            }>
+                                <Text style={styles.jobbtntext}>View your Requests</Text>
+
+                            </Pressable>
                             <Text style={[styles.emptyListText, {}]}>No new notifications</Text>
                         </View>
                         :
                         (suggestion.length != 0 && normal.length == 0) ?
                             <View>
                                 <Suggestions />
+
+
+                                <Pressable style={styles.Jobbtn} onPress={() => {
+                                    navigation.navigate('AllRequests', {
+                                        token: token, navigation: navigation
+                                    })
+                                }
+
+                                }>
+                                    <Text style={styles.jobbtntext}>View your Requests</Text>
+
+                                </Pressable>
+
                                 <View style={[styles.emptyListContainer]}>
-                                    <Text style={[styles.emptyListText, { paddingTop: 200 }]}>No new notifications</Text>
+                                    <Text style={[styles.emptyListText, { paddingTop: 150 }]}>No new notifications</Text>
                                 </View>
                             </View>
                             :
-                            <Suggestions />
+                            <>
+
+                                <Suggestions />
+
+                                <Pressable style={styles.Jobbtn} onPress={() => {
+                                    navigation.navigate('AllRequests', {
+                                        token: token, navigation: navigation
+                                    })
+                                }
+
+                                }>
+                                    <Text style={styles.jobbtntext}>View your Requests</Text>
+
+                                </Pressable>
+                            </>
 
                 }
 
@@ -634,7 +689,6 @@ function Upvotedata({token }) {
                 // ListHeaderComponent={top3data}
                 data={normal}
                 // rendersub
-                // data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
                 renderItem={rendersub}
                 contentContainerStyle={{ paddingBottom: 100, elevation: 0, backgroundColor: "#16181a", marginTop: 10 }}
 
@@ -676,11 +730,11 @@ const styles = StyleSheet.create({
         width: "93%",
         paddingHorizontal: 10,
         // height: 40,
-        paddingVertical: 10,
-        marginBottom: -8,
+        // paddingVertical: 10,
+        marginBottom: 8,
         paddingTop: 8,
         paddingBottom: 8,
-        marginTop: 25,
+        marginTop: 0,
         justifyContent: "center",
         borderWidth: 1,
         borderColor: "#ccc",
@@ -688,7 +742,7 @@ const styles = StyleSheet.create({
     },
     jobbtntext: {
         textAlign: "center",
-        color: "#828282",
+        color: "#ccc",
         fontFamily: "Alata",
         fontSize: 18,
         verticalAlign: "top",
@@ -953,6 +1007,8 @@ const styles = StyleSheet.create({
         width: 40,
         height: 40,
         borderRadius: 50,
+        // marginVertical : "auto",
+        paddingTop: 4,
         alignSelf: "center",
         justifyContent: "center",
     },
@@ -1077,6 +1133,8 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
         // margin: "auto",
         marginVertical: 10,
+        marginTop: 5,
+        marginBottom: 5,
         // justifyContent: "center",
         // alignSelf: "center",
     },

@@ -372,9 +372,7 @@ const Founder2 = ({ navigation, route }) => {
         }
 
 
-        console.log('====================================');
-        console.log(final);
-        console.log('====================================');
+   
         setloading(true);
 
 
@@ -406,9 +404,7 @@ const Founder2 = ({ navigation, route }) => {
                 }
 
             }
-            console.log('====================================');
-            console.log(data);
-            console.log('====================================');
+       
 
         }
         catch (err) {
@@ -483,8 +479,7 @@ const Founder2 = ({ navigation, route }) => {
             console.log(existingdata.roleId.hiddenInfo.socialProof[2].url);
             
 
-            // console.log(existingdata.roleId.hiddenInfo.sector);
-            // console.log(existingdata.roleId.hiddenInfo.stageOfStartup);
+         
             console.log(+existingdata.roleId.hiddenInfo.fundingStatus , "bllll");
 
 
@@ -492,7 +487,6 @@ const Founder2 = ({ navigation, route }) => {
                 // setLinkedinURl(existingdata.roleId.hiddenInfo.socialProof["name"] )
             }
 
-            // setImage(existingdata.profilePhoto)
 
             setNameOfStartup(existingdata.roleId.nameOfStartup)
             setGoal(existingdata.roleId.goal)
@@ -803,7 +797,7 @@ const Founder2 = ({ navigation, route }) => {
 
 
                     <View onTouchStart={handleOutsideTouch} s style={styles1.icons}>
-                        <Pressable onPress={() => navigation.goBack()} style={{ alignSelf: "center" }}><FontAwesome6 name="chevron-left" size={30} color="#00DF60" /></Pressable>
+                        <Pressable onPress={() => navigation.goBack()} style={{ alignSelf: "center" }}><FontAwesome6 name="chevron-left" size={25} color="#00DF60" /></Pressable>
                         <Pressable onPress={savedata} style={styles1.btn}>
                             {loading && <ActivityIndicator size={24} color="#16181a" />}
                             {!loading && <Text allowFontScaling={false} style={styles1.nexttext}>Save</Text>}

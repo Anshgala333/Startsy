@@ -696,14 +696,14 @@ const Signup5 = ({ navigation, route }) => {
                                     // BackHandler.exitApp()
                                     // navigation.goBack()
 
-                                }}><FontAwesome6 name="chevron-left" size={30} color="#00DF60" /></Pressable>
+                                }}><FontAwesome6 name="chevron-left" size={25} color="#00DF60" /></Pressable>
                                 {skip && <Pressable style={s5.btn} onPress={() => { handleSubmit() }}>
                                     <Text allowFontScaling={false} style={styles.nexttext}>Skip</Text>
                                     {/* <FontAwesome6 name="chevron-right" size={40} color="#00DF60" /> */}
                                 </Pressable>}
                                 {!skip && <Pressable onPress={() => { handleSubmit() }}>
                                     {/* <Text allowFontScaling={false} style={styles.nexttext}>Skip</Text> */}
-                                    <FontAwesome6 name="chevron-right" size={30} color="#00DF60" />
+                                    <FontAwesome6 name="chevron-right" size={25} color="#00DF60" />
                                 </Pressable>}
 
                             </View>

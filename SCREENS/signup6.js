@@ -278,10 +278,10 @@ const Signup6 = ({ navigation, route }) => {
                             <View style={styles.icons}>
                                 <Pressable onPress={() => {
                                     navigation.goBack();
-                                }}><FontAwesome6 name="chevron-left" size={35} color="#00DF60" /></Pressable>
+                                }}><FontAwesome6 name="chevron-left" size={25} color="#00DF60" /></Pressable>
                                 <Pressable onPress={() => {
                                     nextpage()
-                                }}><FontAwesome6 name="chevron-right" size={35} color="#00DF60" /></Pressable>
+                                }}><FontAwesome6 name="chevron-right" size={25} color="#00DF60" /></Pressable>
 
 
                                 {/* <Pressable style={styles.btn} onPress={() => { finalsubmit() }}>

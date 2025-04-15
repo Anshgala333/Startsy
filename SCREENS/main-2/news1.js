@@ -79,7 +79,7 @@ const NewsletterPage = ({ navigation, route }) => {
             <View style={styles.iconcontainer}>
                 <View style={styles.i1}>
                     <Pressable onPress={() => navigation.goBack()}>
-                        <FontAwesome6 name="chevron-left" size={32} color="#00DF60" />
+                        <FontAwesome6 name="chevron-left" size={25} color="#00DF60" />
                     </Pressable>
                 </View>
                 <View style={styles.i2}>

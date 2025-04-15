@@ -82,7 +82,7 @@ const Signup4 = ({ navigation, route }) => {
                     <Pressable style={styles.back} onPress={() => {
                         navigation.setParams({ type });
                         navigation.goBack();
-                    }}><FontAwesome6 name="chevron-left" size={50} color="#00DF60" /></Pressable>
+                    }}><FontAwesome6 name="chevron-left" size={25} color="#00DF60" /></Pressable>
 
 
                 </View>

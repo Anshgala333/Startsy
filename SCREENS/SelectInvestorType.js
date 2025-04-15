@@ -33,22 +33,22 @@ import { useFocusEffect } from "expo-router";
 const SelectInvestor = ({ navigation, route }) => {
     const { form, image } = route.params;
 
-  
+
     const nextPage = () => {
 
-        if(selectedOption == "")return
+        if (selectedOption == "") return
 
         const final = new FormData();
         for (let item of form["_parts"]) {
             if (item[0] === "fullname" || item[0] === "password") continue;
             final.append(item[0], item[1]);
         }
-       console.log(final);
-       console.log(selectedOption);
-    //    return
-       
+        console.log(final);
+        console.log(selectedOption);
+        //    return
 
-        navigation.navigate("Signup13", { form: final, image , selectedOption });
+
+        navigation.navigate("Signup13", { form: final, image, selectedOption });
     };
 
 
@@ -101,9 +101,9 @@ const SelectInvestor = ({ navigation, route }) => {
 
 
     const [selectedOption, setSelectedOption] = useState(null);
-    const options = ["Angel Investor", "Venture Capitalist", "Institutional Investor" , "Family Offices" , "New Investor"];
+    const options = ["Angel Investor", "Venture Capitalist", "Institutional Investor", "Family Offices", "New Investor"];
 
-   
+
     const RadioBox = ({ label, selected, onPress }) => {
         return (
             <TouchableOpacity
@@ -150,7 +150,7 @@ const SelectInvestor = ({ navigation, route }) => {
 
     return (
 
-        < SafeAreaView style={[signup3styles.container, { position: "relative" , height : "100%" }]} >
+        < SafeAreaView style={[signup3styles.container, { position: "relative", height: "100%" }]} >
             <ScrollView nestedScrollEnabled={true}
             >
                 <View
@@ -170,8 +170,10 @@ const SelectInvestor = ({ navigation, route }) => {
 
                     {/* bottom */}
 
-                    <View style={[styles.bottom, {flexGrow : 1}]}>
-                        <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 15 }]}>Select Investor Type <Text style={{ fontSize: 15, color: "#94A3B8" }}>*</Text></Text>
+                    <View style={[styles.bottom, { flexGrow: 1 }]}>
+                        <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 15 }]}>Select Investor Type
+                            {/* <Text style={{ fontSize: 15, color: "#94A3B8" }}>*</Text> */}
+                        </Text>
 
 
                         {options.map((option, index) => (
@@ -193,8 +195,8 @@ const SelectInvestor = ({ navigation, route }) => {
 
 
                         <View style={styles.icons}>
-                            <Pressable style={{ marginTop: 5 }} onPress={() => { navigation.goBack() }}><FontAwesome6 name="chevron-left" size={30} color="#00DF60" /></Pressable>
-                            <Pressable onPress={() => { nextPage() }}><FontAwesome6 name="chevron-right" size={30} color="#00DF60" /></Pressable>
+                            <Pressable style={{ marginTop: 5 }} onPress={() => { navigation.goBack() }}><FontAwesome6 name="chevron-left" size={25} color="#00DF60" /></Pressable>
+                            <Pressable onPress={() => { nextPage() }}><FontAwesome6 name="chevron-right" size={25} color="#00DF60" /></Pressable>
 
                         </View>
 
@@ -221,7 +223,7 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         color: "#ccc",
         fontFamily: 'Alata',
-        fontSize:  24,
+        fontSize: 24,
         // backgroundColor : "red",
         width: "97%",
         marginBottom: scalingfactor * 3,
@@ -230,10 +232,10 @@ const styles = StyleSheet.create({
         width: 30,
         height: 30
     },
-   
+
     bottom: {
         width: "100%",
-        height: height*0.85,
+        height: height * 0.85,
         backgroundColor: "#24272A",
         // backgroundColor: "red",
         borderTopLeftRadius: 70,
@@ -272,10 +274,10 @@ const styles = StyleSheet.create({
     }
     , icons: {
         display: "flex",
-        position : "absolute",
+        position: "absolute",
         bottom: 0,
-        left : 0,
-        paddingHorizontal : 30,
+        left: 0,
+        paddingHorizontal: 30,
 
         flexDirection: "row",
         justifyContent: "space-between",

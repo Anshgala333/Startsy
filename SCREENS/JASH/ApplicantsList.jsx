@@ -1,28 +1,21 @@
 import { View, Text, TouchableOpacity, StyleSheet, Image, FlatList, BackHandler, Pressable, Linking } from 'react-native'
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import BottomSheet, { BottomSheetView, BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import BottomSheetContent from '../JASH/BottomSheetContent.jsx'
 import { url } from "../../config.js"
-
 import { useFocusEffect } from 'expo-router';
-// import { LinearGradient } from 'react-native-svg';
 import { AutoSizeText, ResizeTextMode } from 'react-native-auto-size-text';
 import { FontAwesome6, MaterialCommunityIcons } from '@expo/vector-icons';
-
 import { LinearGradient } from 'expo-linear-gradient';
-// import { navigate } from 'expo-router/build/global-state/routing.js';
+
+
+
+
 const ApplicantsList = ({ route, navigation }) => {
-
   const { Applicants, token, jobId } = route.params
-  console.log(Applicants);
-  console.log(token);
-  console.log(jobId);
-  
   const [data, setdata] = useState()
-
 
   useEffect(() => {
     async function getdata() {
@@ -37,11 +30,6 @@ const ApplicantsList = ({ route, navigation }) => {
           },
         });
         const data = await response.json();
-        
-
-        console.log("daaaaaaaaaaaaaattttaaaa",data);
-        
-
 
         setdata(data.data)
 
@@ -55,7 +43,6 @@ const ApplicantsList = ({ route, navigation }) => {
 
   }, [])
 
-  // const snapPoints = useMemo(() => ['20%'], []);
   const bottomSheetRefApplicant = useRef(null);
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
@@ -74,7 +61,9 @@ const ApplicantsList = ({ route, navigation }) => {
 
     return () => backHandler.remove();
   }, []);
-  // let selectedRef = useRef("")
+  
+
+
   const open = (name, email, phone) => {
 
     setName(name)
@@ -90,27 +79,18 @@ const ApplicantsList = ({ route, navigation }) => {
   const renderBackdrop = (props) => (
     <BottomSheetBackdrop
       {...props}
-      disappearsOnIndex={-1} // Backdrop disappears when BottomSheet is closed
-      appearsOnIndex={0} // Backdrop appears when BottomSheet is open
-      opacity={0.7} // Set opacity for the backdrop
+      disappearsOnIndex={-1} 
+      appearsOnIndex={0} 
+      opacity={0.7} 
     />
   );
-  const openDialer = (phoneNumber) => {
-    let number = '';
-    if (Platform.OS === 'ios') {
-      number = `telprompt:${phoneNumber}`;
-    } else {
-      number = `tel:${phoneNumber}`;
-    }
-    Linking.openURL(number);
-  };
 
 
 
 
-  const openEmail = (email) => {
-    Linking.openURL(`mailto:${email}`);
-  }
+
+
+
   const snapPoints7 = useMemo(() => ['30%'], []);
 
   const RenderItem = (item) => {
@@ -127,11 +107,11 @@ const ApplicantsList = ({ route, navigation }) => {
         <View style={styles.header}>
           <Pressable
             onPress={() => {
-                navigation.navigate("Singleprofilepage", {
-                    token: token,
-                    id: item.item.user_id._id,
-                    page: "bell",
-                });
+              navigation.navigate("Singleprofilepage", {
+                token: token,
+                id: item.item.user_id._id,
+                page: "bell",
+              });
             }}
             style={{ display: "flex", flexDirection: "row", }}
           >
@@ -160,13 +140,10 @@ const ApplicantsList = ({ route, navigation }) => {
 
           </Pressable>
 
-          {/* <Text style={styles.date}>{time(item.requestDate)}</Text> */}
         </View>
 
 
         <View style={styles.divider}></View>
-
-
 
         <Text
           style={styles.info}
@@ -181,10 +158,6 @@ const ApplicantsList = ({ route, navigation }) => {
         <View style={{ marginTop: 16, paddingHorizontal: 16, }}>
           <MaterialCommunityIcons name="certificate" size={32} color="gray" />
         </View>
-
-
-
-
 
         <View style={styles.contactView}>
           <TouchableOpacity
@@ -202,7 +175,7 @@ const ApplicantsList = ({ route, navigation }) => {
     );
   }
 
- 
+
 
 
 
@@ -252,10 +225,6 @@ const ApplicantsList = ({ route, navigation }) => {
 }
 
 
-
-
-
-
 const styles = StyleSheet.create({
   headerRow: {
     flexDirection: 'row',
@@ -283,11 +252,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     padding: 15,
-    // backgroundColor: "#666",
     borderBottomColor: "#666",
     borderBottomWidth: 1
-    // marginVertical: 5,
-    // borderRadius: 10,
+
   },
   toggleFollow: {
 
@@ -315,14 +282,7 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: '#1a1a1a',
     borderRadius: 20,
-    // padding: 16,
-    // shadowColor: '#000',
-    // shadowOffset: { width: 0, height: 4 },
-    // shadowOpacity: 0.3,
-    // shadowRadius: 5,
-    // elevation: 8,
     width: '100%',
-    // marginHorizontal:10,
     marginBottom: 10
 
   },
@@ -330,7 +290,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    // marginBottom: 8,
     marginHorizontal: 16,
     marginTop: 16,
 
@@ -351,13 +310,8 @@ const styles = StyleSheet.create({
   date: {
     fontSize: 12,
     color: '#666',
-    // position: "absolute",
-    // right: 0,
-    // top: 20,
     fontFamily: "Roboto",
-    // alignSelf: "center",
     marginTop: -10,
-    // backgroundColor : "red"
   },
   name: {
     fontSize: 32,

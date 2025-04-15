@@ -243,7 +243,7 @@ const Signup9 = ({ navigation, route }) => {
                                 value={skills}
                                 onChangeText={(text) => { setskills(text) }}
                             />
-                            <Text style={[styles.t1, { marginBottom: 5 }]}>Education <Text style={{fontSize:14 ,color: "#94A3B8"}}>*</Text></Text>
+                            <Text style={[styles.t1, { marginBottom: 5 }]}>Education <Text style={{fontSize:14 ,color: "#828282"}}>*</Text></Text>
                             <Text style={[styles.t2, { marginBottom: 15 }]}>List your highest degree achieved, which helps to establish your academic background and qualifications.</Text>
                             <Drop search={false} borderwidth={0} bb={1} width={"97%"}   borderColor={"#ccc"} 
                              items={education} open={open} setOpen={setOpen} onValueChange={(value) => {
@@ -311,8 +311,8 @@ const Signup9 = ({ navigation, route }) => {
                                 <Pressable onPress={() => {
                                     navigation.goBack()
                                     // console.log(workexperience);
-                                }}><FontAwesome6 name="chevron-left" size={30} color="#00DF60" /></Pressable>
-                                <Pressable onPress={() => { nextpage(navigation, type) }}><FontAwesome6 name="chevron-right" size={30} color="#00DF60" /></Pressable>
+                                }}><FontAwesome6 name="chevron-left" size={25} color="#00DF60" /></Pressable>
+                                <Pressable onPress={() => { nextpage(navigation, type) }}><FontAwesome6 name="chevron-right" size={25} color="#00DF60" /></Pressable>
                             </View>
 
                         </View>
