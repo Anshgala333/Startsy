@@ -22,7 +22,7 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation, o
 
 
     useFocusEffect(useCallback(() => {
-        console.log("focused ");
+      
         scrollY.setValue(0)
 
     }, []))
@@ -85,6 +85,7 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation, o
                 },
             });
             const data = await response.json();
+      
             if (response.status === 200) {
                 setallpost(allpost.map((e, i) => {
                     if (i == index) {
@@ -117,8 +118,6 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation, o
                 return
             }
             else {
-
-
                 if (item.type == "jobPost") {
                     return (
                         <LinearGradient

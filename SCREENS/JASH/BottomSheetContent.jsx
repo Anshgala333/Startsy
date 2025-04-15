@@ -40,9 +40,7 @@ const BottomSheetContent = ({name , email , phone}) => {
                 </TouchableOpacity>
             </View> 
 
-            {/* <View style={styles.listContainer} >
-                <Entypo name="chat" size={30} color="white" />
-            </View> */}
+   
 
 
         </View>

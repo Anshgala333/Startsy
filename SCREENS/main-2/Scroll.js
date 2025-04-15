@@ -276,12 +276,27 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                                 {!item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5, marginTop: 6 }} />}
                                                 {item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5, marginTop: 6 }} selected={true} />}
                                             </TouchableOpacity>
-                                            <Text style={{ color: "#ccc", fontFamily: 'Roboto', fontSize: 16, top: 3 }}>{item.itemlikedcount}</Text>
+                                            <Text style={{ color: "#ccc", fontFamily: 'Roboto', fontSize: 14, top: 3 }}>0</Text>
                                         </View>
 
 
                                         {/* comment */}
 
+
+                                        <View style={{ flexDirection: 'row', gap: 7, marginRight: 4, alignItems: 'center' }}>
+                                            <TouchableOpacity onPress={() => {
+                                                Vibration.vibrate(20)
+                                                opencomment(item._id)
+
+                                            }}
+                                            >
+                                                <FontAwesome name="comment-o" size={28} color="#ccc" />
+
+                                            </TouchableOpacity>
+
+                                            <Text style={{ color: "#ccc", fontFamily: 'Roboto', fontSize: 16, top: 3 }}>{item.postComments.length}</Text>
+                                        </View>
+                                        {/* 
                                         <Pressable onPress={() => {
                                             Vibration.vibrate(20)
                                             opencomment(item._id)
@@ -289,7 +304,8 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                         }}
                                         >
                                             <FontAwesome name="comment-o" size={27} color="#ccc" />
-                                        </Pressable>
+                                          
+                                        </Pressable> */}
 
 
                                         {/* share */}
@@ -327,7 +343,8 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                 <View style={styles.lower}>
                                     {item.type != "textBlog" && <Text allowFontScaling={false} style={styles.u3}>{item.caption != undefined ? item.caption : "caption"} </Text>}
                                     <Pressable onPress={() => { opencomment(item._id) }} allowFontScaling={false} style={styles.u4}>
-                                        <Text style={styles.u4}>View {item.postComments.length} comments</Text>
+                                        {/* <Text style={styles.u4}>View {item.postComments.length} comments</Text> */}
+                                        <Text style={{color:'gray',fontFamily:'Alata'}}>lorem</Text>
                                     </Pressable>
 
                                 </View>

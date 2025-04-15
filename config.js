@@ -6,11 +6,12 @@ export const url = "http://172.18.4.79:5002/"
 
 
 // -- college
-// export const url = 'http://115.113.39.69:5002/'
+// export const url = 'https://startsy.in:5002/'
 
 //startsy
 
 // export const url = 'https://startsy.in:5002/'
+
 
 
 

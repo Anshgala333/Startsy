@@ -11,14 +11,14 @@ import { MotiView } from 'moti';
 import GlobalSocket from "@/Global/globalSocket.js";
 
 
-const data1 = Array(5).fill({
-    user: {
-        userName: "raz.shhh",
-        message: "text...",
-        time: "Today",
-        profilePhoto: "https://res.cloudinary.com/dldbd8zhs/image/upload/v1734618122/wn6f65kia1xlzsn8ygnd.jpg"
-    }// Replace with your image path
-});
+// const data1 = Array(5).fill({
+//     user: {
+//         userName: "raz.shhh",
+//         message: "text...",
+//         time: "Today",
+//         profilePhoto: "https://res.cloudinary.com/dldbd8zhs/image/upload/v1734618122/wn6f65kia1xlzsn8ygnd.jpg"
+//     }// Replace with your image path
+// });
 
 
 
@@ -82,7 +82,7 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
     const [loggedinuserid, setLoggedInUserId] = useState([])
 
     useEffect(() => {
-        console.log(search);
+
         if (data && data.length > 0) {
             setfiltereddata(data.filter(item =>
                 search === "" || item.user.userName.toLowerCase().startsWith(search.toLowerCase())
@@ -95,8 +95,7 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
     useEffect(() => {
         if (token) {
             var decode = jwtDecode(token)
-            console.log(decode._id);
-
+        
             setLoggedInUserId(decode._id)
         }
     }, [token])
@@ -131,8 +130,11 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
         else {
             route = "founder/getFounderChatUserList"
         }
-        // else if()
-        // setloading(true); // Start loading before fetching data
+
+   
+
+
+        setloading(true); // Start loading before fetching data
         if (token) {
             try {
                 setskeletonloading(true)
@@ -168,6 +170,11 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
                     const dateB = new Date(b.lastMessage.createdAt);
                     return dateB - dateA; // Sort in descending order of time
                 });
+
+                // console.log(sortedData);
+
+
+
                 if (response.status === 200) {
                     setData(sortedData)
                     setfiltereddata(sortedData)
@@ -197,12 +204,13 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
 
 
     function gotochatscreen(item) {
-        console.log(item.user._id);
+
 
         const id = item.user._id;
 
         async function getData() {
             try {
+           
 
                 const response = await fetch(
                     `${url}chats/getMessage/individual/${id}`,
@@ -215,14 +223,14 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
                     }
                 );
                 const result = await response.json();
-                // console.log(result, "chatscreen pe jaane se pehle");
+
+
+
+
 
 
                 navigation.push("Chat", { item, messages: result.data?.messages || [], token, navigation, photo1: result.senderProfilePhoto, photo2: result.recieverProfilePhoto, tabnavigation: navigation });
-                // navigation.push("Ansh", { item, messages: result.data?.messages || [], token, navigation, photo1: result.senderProfilePhoto, photo2: result.recieverProfilePhoto });
-
-                // navigation.push("Ansh");
-
+            
 
 
             } catch (err) {
@@ -235,13 +243,9 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
     }
 
     function time(time) {
-        // console.log('====================================');
-        // console.log(time);
+
         var data1 = new Date(time)
-        // console.log('====================================');
-        // console.log(data1);
-        // console.log('====================================');
-        // console.log('====================================');
+        
         var seconds = Math.floor((new Date() - data1) / 1000);
 
         var interval = seconds / 31536000;

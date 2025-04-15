@@ -24,7 +24,6 @@ function Upvotedata({ token }) {
 
     const navigation = useNavigation()
 
-    // var { token, navigation } = route.params
 
     const [refreshing, setRefreshing] = useState(false)
     const [data, setdata] = useState([])
@@ -75,13 +74,7 @@ function Upvotedata({ token }) {
 
                                 <View style={{ display: "flex", flexDirection: "row", gap: 10 }}>
 
-                                    {/* <TouchableOpacity onPress={() => onClose?.()} style={styles1.button}>
-                                            <Text style={styles1.buttonText}>Cancel</Text>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity onPress={() => deletepost1()} style={styles1.button}>
-                                            {isdeleting && <ActivityIndicator size={24} color="#16181a" />}
-                                            {!isdeleting && <Text style={styles1.buttonText}>Confirm</Text>}
-                                        </TouchableOpacity> */}
+
                                 </View>
                             </View>
                         </TouchableWithoutFeedback>
@@ -150,9 +143,6 @@ function Upvotedata({ token }) {
                 }
             );
             const result = await response.json();
-            console.log(result);
-            console.log(response.status);
-            
 
 
             if (response.status != 404) {
@@ -298,19 +288,19 @@ function Upvotedata({ token }) {
                             >
                                 {item.sendingUserId?.profilePhoto && <Image style={styles.topimage101} source={{ uri: item.sendingUserId?.profilePhoto }} />}
                                 {!item.sendingUserId?.profilePhoto && <Image style={styles.topimage101} source={require("../../assets/images/p2.png")} />}
-                                {/* <Image style={styles.topimage} source={require("../../assets/images/p2.png")} /> */}
+
 
                             </Pressable>
                             <View style={styles.bottominfo101}>
                                 <View style={{ display: "flex", flexDirection: "row" }}>
 
                                     <Pressable
-                                    // onPress={() => { navigation.navigate("Singleuserpage", { token: token, id: item.sendingUserId._id, page: "bell" }) }}
+
 
                                     >
                                         <View style={{ display: "flex", flexDirection: "row", marginTop: 10 }}>
                                             <Text style={styles.topu101}>
-                                                {/* {item.sendingUserId.userName}   */}
+
                                                 Investor
                                             </Text>
                                             <View style={styles.circle1}></View>
@@ -332,7 +322,7 @@ function Upvotedata({ token }) {
                                 </View>
 
 
-                                {/* <Text style={styles.sub2}>{item.notificationMessage}</Text> */}
+
                             </View>
                         </View>
 
@@ -526,7 +516,6 @@ function Upvotedata({ token }) {
 
 
 
-
                 {skeleton && <View style={styles.listItem1}>
 
                     {[1, 2, 3, 4, 5, 6, 7, 8].map(e =>
@@ -603,18 +592,55 @@ function Upvotedata({ token }) {
                 {
                     (suggestion.length == 0 && normal.length == 0) ?
                         <View style={[styles.emptyListContainer]}>
+                            <Pressable style={styles.Jobbtn} onPress={() => {
+                                navigation.navigate('AllRequests', {
+                                    token: token, navigation: navigation
+                                })
+                            }
+
+                            }>
+                                <Text style={styles.jobbtntext}>View your Requests</Text>
+
+                            </Pressable>
                             <Text style={[styles.emptyListText, {}]}>No new notifications</Text>
                         </View>
                         :
                         (suggestion.length != 0 && normal.length == 0) ?
                             <View>
                                 <Suggestions />
+
+
+                                <Pressable style={styles.Jobbtn} onPress={() => {
+                                    navigation.navigate('AllRequests', {
+                                        token: token, navigation: navigation
+                                    })
+                                }
+
+                                }>
+                                    <Text style={styles.jobbtntext}>View your Requests</Text>
+
+                                </Pressable>
+
                                 <View style={[styles.emptyListContainer]}>
-                                    <Text style={[styles.emptyListText, { paddingTop: 200 }]}>No new notifications</Text>
+                                    <Text style={[styles.emptyListText, { paddingTop: 150 }]}>No new notifications</Text>
                                 </View>
                             </View>
                             :
-                            <Suggestions />
+                            <>
+
+                                <Suggestions />
+
+                                <Pressable style={styles.Jobbtn} onPress={() => {
+                                    navigation.navigate('AllRequests', {
+                                        token: token, navigation: navigation
+                                    })
+                                }
+
+                                }>
+                                    <Text style={styles.jobbtntext}>View your Requests</Text>
+
+                                </Pressable>
+                            </>
 
                 }
 
@@ -703,8 +729,8 @@ const styles = StyleSheet.create({
         width: "93%",
         paddingHorizontal: 10,
         // height: 40,
-        paddingVertical: 10,
-        marginBottom: -8,
+        // paddingVertical: 10,
+        marginBottom: 8,
         paddingTop: 8,
         paddingBottom: 8,
         marginTop: 0,

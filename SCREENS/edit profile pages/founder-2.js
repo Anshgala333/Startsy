@@ -372,9 +372,7 @@ const Founder2 = ({ navigation, route }) => {
         }
 
 
-        console.log('====================================');
-        console.log(final);
-        console.log('====================================');
+   
         setloading(true);
 
 
@@ -406,9 +404,7 @@ const Founder2 = ({ navigation, route }) => {
                 }
 
             }
-            console.log('====================================');
-            console.log(data);
-            console.log('====================================');
+       
 
         }
         catch (err) {
@@ -483,8 +479,7 @@ const Founder2 = ({ navigation, route }) => {
             console.log(existingdata.roleId.hiddenInfo.socialProof[2].url);
             
 
-            // console.log(existingdata.roleId.hiddenInfo.sector);
-            // console.log(existingdata.roleId.hiddenInfo.stageOfStartup);
+         
             console.log(+existingdata.roleId.hiddenInfo.fundingStatus , "bllll");
 
 
@@ -492,7 +487,6 @@ const Founder2 = ({ navigation, route }) => {
                 // setLinkedinURl(existingdata.roleId.hiddenInfo.socialProof["name"] )
             }
 
-            // setImage(existingdata.profilePhoto)
 
             setNameOfStartup(existingdata.roleId.nameOfStartup)
             setGoal(existingdata.roleId.goal)

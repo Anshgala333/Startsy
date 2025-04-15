@@ -8,7 +8,7 @@ import { url } from "../../config.js"
 const JobsPostedScreen = ({ route, navigation }) => {
   // const navigation = useNavigation();
   const { token } = route.params
-  console.log(token);
+
 
   useFocusEffect(
     useCallback(() => {
@@ -32,7 +32,7 @@ const JobsPostedScreen = ({ route, navigation }) => {
       );
       const result = await response.json();
       // console.log(result.data);
-      console.log(result.data[0]);
+      // console.log(result.data[0]);
       setdata(result.data)
 
     } catch (err) {
@@ -47,7 +47,7 @@ const JobsPostedScreen = ({ route, navigation }) => {
   }, [])
 
   useFocusEffect(() => {
-    console.log("job");
+ 
 
     const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
       navigation.navigate("Startsy")
@@ -105,19 +105,13 @@ const JobsPostedScreen = ({ route, navigation }) => {
   const renderItem = ({ item }) => (
     <View style={styles.post}>
       <Text style={styles.jobTitle}>{item.jobPosts.role}</Text>
-      {/* <Text style={styles.company}>{item.jobPosts.duration}</Text> */}
 
-      {/* <Text style={styles.status}>
-        {time(item.jobPosts.updatedAt)}
-      </Text> */}
-      {/* <Text style={styles.stats}>{item.jobPosts.jobApplicants.length} applicants</Text> */}
-      {/* <Text style={styles.jobType}>{item.jobPosts.pay}</Text> */}
 
   
 
       <View style={styles.buttonContainer}>
         <Button onPress={() => navigation.navigate('ApplicantsList', { Applicants: item.jobPosts?.jobApplicants, jobId : item.jobPosts._id, token: token, navigation: navigation })} isDisabled={false} title={`${item.jobPosts.jobApplicants.length} Applicants`} />
-        {/* <Button onPress={() => console.log('Disable Job Clicked')} isDisabled={true} title={'Disable Job'} /> */}
+    
       </View>
     </View>
   );

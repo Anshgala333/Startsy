@@ -57,12 +57,11 @@ const Stack = createNativeStackNavigator();
 SystemUI.setBackgroundColorAsync("#16181a");
 
 Notifications.addNotificationReceivedListener((notification) => {
-  // Handle the notification when received
 });
 
 Notifications.addNotificationResponseReceivedListener((response) => {
   // Handle response when the user taps on the notification
-  console.log("Notification tapped:", response);
+  // console.log("Notification tapped:", response);
 });
 import { enableFreeze } from "react-native-screens";
 import { enableScreens } from "react-native-screens";
@@ -144,7 +143,7 @@ export default function App() {
 
     responseListener.current =
       Notifications.addNotificationResponseReceivedListener((response) => {
-        console.log(response);
+
       });
 
     return () => {
@@ -434,7 +433,7 @@ const styles = StyleSheet.create({
 });
 
 async function schedulePushNotification() {
-  console.log("hello ");
+
 
   fetch("https://exp.host/--/api/v2/push/send", {
     method: "POST",
@@ -480,6 +479,7 @@ async function registerForPushNotificationsAsync() {
   }
 
   if (Device.isDevice) {
+  
     const { status: existingStatus } =
       await Notifications.getPermissionsAsync();
     let finalStatus = existingStatus;
@@ -487,7 +487,7 @@ async function registerForPushNotificationsAsync() {
       const { status } = await Notifications.requestPermissionsAsync();
       finalStatus = status;
     }
-
+ 
     if (finalStatus !== "granted") {
       alert("Failed to get push token for push notification!");
       return;
