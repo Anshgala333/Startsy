@@ -42,7 +42,7 @@ function Upvotedata({ token }) {
 
     const [visible, setVisible] = useState(false)
     const [entirecontent, setentirecontent] = useState("")
-    const [length, setLength] = useState("")
+    const [length, setLength] = useState("0")
 
     const CustomAlert = ({ visible, onClose }) => {
         const fadeAnim = useRef(new Animated.Value(0)).current; // Persistent animated value
@@ -144,8 +144,14 @@ function Upvotedata({ token }) {
             );
             const result = await response.json();
 
+            // console.log('respomseeeeeeee',response.status)
+            if(response.status==404){
+                setLength("0");
+            }
+            
 
-            if (response.status != 404) {
+
+            else if (response.status != 404) {
                 var suggestionArray = result.data.filter((e) => e.notificationType == "suggestion")
                 setsuggestion([...suggestionArray.reverse()])
 
@@ -156,6 +162,7 @@ function Upvotedata({ token }) {
                 var array = result.data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
                 setSubNotification(array);
 
+                
                 setLength(result.pendingRequest)
 
             }
@@ -458,48 +465,48 @@ function Upvotedata({ token }) {
 
 
 
-        if (decode.role == "CommunityMember") {
-            return (
-                <Pressable style={styles.Jobbtn} onPress={() => {
-                    navigation.navigate('AllRequests', {
-                        token: token, navigation: navigation
-                    })
-                }
-                }>
-                    <Text style={styles.jobbtntext}><Text style={{color : "#00de62" , borderColor : "red" , borderWidth : 1}}>{length}</Text>   Connection Requests</Text>
+        // if (decode.role == "CommunityMember") {
+        //     return (
+        //         <Pressable style={styles.Jobbtn} onPress={() => {
+        //             navigation.navigate('AllRequests', {
+        //                 token: token, navigation: navigation
+        //             })
+        //         }
+        //         }>
+        //             <Text style={styles.jobbtntext}><Text style={{ color: "#00de62", borderColor: "red", borderWidth: 1 }}>{length}</Text>   Connection Requests</Text>
 
-                </Pressable>
-            )
-        }
-        if (suggestion && suggestion.length == 0) {
-            return (
-                <Pressable style={styles.Jobbtn} onPress={() => {
-                    navigation.navigate('AllRequests', {
-                        token: token, navigation: navigation
-                    })
-                }
+        //         </Pressable>
+        //     )
+        // }
+        // if (suggestion && suggestion.length == 0) {
+        //     return (
+        //         <Pressable style={[styles.Jobbtn, { marginBottom: -10 }]} onPress={() => {
+        //             navigation.navigate('AllRequests', {
+        //                 token: token, navigation: navigation
+        //             })
+        //         }
 
 
-                }>
-                    <Text style={styles.jobbtntext}><Text style={{color : "#00de62" , borderColor : "red" , borderWidth : 1}}>{length}</Text>  Connection Requests </Text>
+        //         }>
+        //             <Text style={styles.jobbtntext}><Text style={{ color: "#00de62", borderWidth: 1 }}>{length}</Text>  Connection Requests </Text>
 
-                </Pressable>
-            )
-        }
+        //         </Pressable>
+        //     )
+        // }
         return (
             <>
 
 
-                <Pressable style={[styles.Jobbtn, { marginBottom: 10 }]} onPress={() => {
+                {/* <Pressable style={[styles.Jobbtn, { marginBottom: 10 }]} onPress={() => {
                     navigation.navigate('AllRequests', {
                         token: token, navigation: navigation
                     })
                 }
 
                 }>
-                    <Text style={styles.jobbtntext}><Text style={{color : "#00de62" , borderColor : "red" , borderWidth : 1}}>{length}</Text>  Connection Requests  </Text>
+                    <Text style={styles.jobbtntext}><Text style={{ color: "#00de62", borderColor: "red", borderWidth: 1 }}>{length}</Text>  Connection Requests  </Text>
 
-                </Pressable>
+                </Pressable> */}
 
                 <View style={styles.divider}></View>
                 <Text style={styles.t11}>Investor Suggestions</Text>
@@ -597,9 +604,8 @@ function Upvotedata({ token }) {
                                     token: token, navigation: navigation
                                 })
                             }
-
                             }>
-                                <Text style={styles.jobbtntext}>View your Requests</Text>
+                                <Text style={styles.jobbtntext}><Text style={{ color: "#00de62", borderColor: "red", borderWidth: 1 }}>{length}</Text>   Connection Requests</Text>
 
                             </Pressable>
                             <Text style={[styles.emptyListText, {}]}>No new notifications</Text>
@@ -607,19 +613,19 @@ function Upvotedata({ token }) {
                         :
                         (suggestion.length != 0 && normal.length == 0) ?
                             <View>
-                                <Suggestions />
-
-
                                 <Pressable style={styles.Jobbtn} onPress={() => {
                                     navigation.navigate('AllRequests', {
                                         token: token, navigation: navigation
                                     })
                                 }
-
                                 }>
-                                    <Text style={styles.jobbtntext}>View your Requests</Text>
+                                    <Text style={styles.jobbtntext}><Text style={{ color: "#00de62", borderColor: "red", borderWidth: 1 }}>{length}</Text>   Connection Requests</Text>
 
                                 </Pressable>
+                                <Suggestions />
+
+
+
 
                                 <View style={[styles.emptyListContainer]}>
                                     <Text style={[styles.emptyListText, { paddingTop: 150 }]}>No new notifications</Text>
@@ -628,18 +634,18 @@ function Upvotedata({ token }) {
                             :
                             <>
 
-                                <Suggestions />
-
                                 <Pressable style={styles.Jobbtn} onPress={() => {
                                     navigation.navigate('AllRequests', {
                                         token: token, navigation: navigation
                                     })
                                 }
-
                                 }>
-                                    <Text style={styles.jobbtntext}>View your Requests</Text>
+                                    <Text style={styles.jobbtntext}><Text style={{ color: "#00de62", borderColor: "red", borderWidth: 1 }}>{length}</Text>   Connection Requests</Text>
 
                                 </Pressable>
+                                <Suggestions />
+
+
                             </>
 
                 }
