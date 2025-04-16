@@ -116,7 +116,7 @@ const Signup1 = function ({ navigation, route }) {
 
                 <View style={signupstyles.row}>
                    <Pressable onPress={() => navigation.goBack()}>
-                        <FontAwesome6 name="chevron-left" size={34} style={{ alignSelf: 'flex-start', marginLeft: 16 }} color="#00DF60" />
+                        <FontAwesome6 name="chevron-left" size={25} style={{ alignSelf: 'flex-start', marginLeft: 16 }} color="#00DF60" />
                     </Pressable>
                     <View style={signupstyles.top}>
                         <Image style={signupstyles.logo} source={require("../assets/images/logo.png")} />

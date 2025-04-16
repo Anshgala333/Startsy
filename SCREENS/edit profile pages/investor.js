@@ -493,7 +493,7 @@ const EditInvestorInfo = ({ navigation }) => {
                     // value={username}
                     // onChangeText={(text) => { setusername(text) }}
                     /> */}
-                    <Drop width={"96%"} borderColor={"#ccc"} bb={1} pccolor={"#828282"} bradius={0} bottomsheet={true} items={country1} placeholder={"India"} width={"93.0%"} onValueChange={handlerole} open={open1} setOpen={t1} extra={true} />
+                    <Drop width={"96%"} borderColor={"#ccc"} bb={1} pccolor={"#828282"} bradius={0} bottomsheet={true} items={country1} placeholder={"India"}  onValueChange={handlerole} open={open1} setOpen={t1} extra={true} />
 
                     {/* <Drop items={country1} width={"95%"} open={open1} setOpen={t1} onValueChange={handlerole} nestedScrollEnabled={true} extra={true} /> */}
                     {errors.country && <Text style={styles1.errnew}>{errors.country}</Text>}
@@ -558,7 +558,7 @@ const EditInvestorInfo = ({ navigation }) => {
 
                         <Text allowFontScaling={false} style={[styles.t1, { marginTop: 20, marginBottom: 10, paddingLeft: 7 }]}>Investment capacity</Text>
                         <Pressable onPress={() => { handleOutsideTouch() }} style={[styles.btn1, {  marginBottom: 10 }]}>
-                            <Text allowFontScaling={false} style={styles.nexttext}>{sliderrange.toLocaleString("en-IN")}</Text>
+                            <Text allowFontScaling={false} style={styles.nexttext}>{sliderrange.toLocaleString("en-IN")} </Text>
                         </Pressable>
 
                         {/* slider */}
@@ -590,7 +590,7 @@ const EditInvestorInfo = ({ navigation }) => {
 
 
                     <View onTouchStart={handleOutsideTouch} s style={styles1.icons}>
-                        <Pressable onPress={() => { navigation.goBack() }} style={{ alignSelf: "center" }}><FontAwesome6 name="chevron-left" size={30} color="#00DF60" /></Pressable>
+                        <Pressable onPress={() => { navigation.goBack() }} style={{ alignSelf: "center" }}><FontAwesome6 name="chevron-left" size={25} color="#00DF60" /></Pressable>
                         <Pressable onPress={savedata} style={styles1.btn}>
                             {loading && <ActivityIndicator size={24} color="#16181a" />}
                             {!loading && <Text allowFontScaling={false} style={styles1.nexttext}>Save</Text>}

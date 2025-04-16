@@ -47,7 +47,7 @@ const JobsPostedScreen = ({ route, navigation }) => {
   }, [])
 
   useFocusEffect(() => {
- 
+
 
     const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
       navigation.navigate("Startsy")
@@ -69,7 +69,7 @@ const JobsPostedScreen = ({ route, navigation }) => {
       style={[styles.button, { backgroundColor: isDisabled ? 'transparent' : 'transparent' }]}
       onPress={onPress}
     >
-      <Text style={[styles.buttonText, { color: isDisabled ? '#ddd' : '#ccc',fontFamily:'Roboto' }]}>{title}</Text>
+      <Text style={[styles.buttonText, { color: isDisabled ? '#ddd' : '#ccc', fontFamily: 'Roboto' }]}>{title}</Text>
     </TouchableOpacity>
   );
   function time(time) {
@@ -107,11 +107,13 @@ const JobsPostedScreen = ({ route, navigation }) => {
       <Text style={styles.jobTitle}>{item.jobPosts.role}</Text>
 
 
-  
+
 
       <View style={styles.buttonContainer}>
-        <Button onPress={() => navigation.navigate('ApplicantsList', { Applicants: item.jobPosts?.jobApplicants, jobId : item.jobPosts._id, token: token, navigation: navigation })} isDisabled={false} title={`${item.jobPosts.jobApplicants.length} Applicants`} />
-    
+        <Button onPress={() => navigation.navigate('ApplicantsList',
+          { Applicants: item.jobPosts?.jobApplicants, jobId: item.jobPosts._id, token: token, navigation: navigation })}
+          isDisabled={false} title={`${item.jobPosts.jobApplicants.length} Applicants`} />
+
       </View>
     </View>
   );
@@ -131,7 +133,7 @@ const JobsPostedScreen = ({ route, navigation }) => {
 
         style={styles.container}
         data={data}
-        contentContainerStyle={{paddingBottom : 100}}
+        contentContainerStyle={{ paddingBottom: 100 }}
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
       />}
@@ -153,7 +155,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#16181a',
     paddingTop: 10,
     paddingHorizontal: 16,
-    paddingBottom : 50,
+    paddingBottom: 50,
   },
   post: {
     // backgroundColor: '#1e1e1e',
@@ -221,7 +223,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 12,
-    paddingHorizontal:10
+    paddingHorizontal: 10
   },
   button: {
     paddingVertical: 12,
@@ -231,13 +233,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal: 6,
     elevation: 3,
-    borderWidth : 1,
-    borderColor : "#ccc"
+    borderWidth: 1,
+    borderColor: "#ccc"
   },
   buttonText: {
     fontSize: 14,
     // fontWeight: 'bold',
-    color : "#ccc"
+    color: "#ccc"
   },
   headerText: {
     fontSize: 30,
@@ -245,11 +247,11 @@ const styles = StyleSheet.create({
     color: "#00DE62",
     // marginBottom: 12,
     fontFamily: "myanmar",
-   
+
     paddingLeft: 10,
-    paddingBottom:10,
+    paddingBottom: 10,
     // marginBottom : 10,
-    backgroundColor:'#16181a'
+    backgroundColor: '#16181a'
   },
   noparent: {
     position: "relative",

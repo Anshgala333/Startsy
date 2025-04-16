@@ -275,9 +275,9 @@ const ConnectionsScreen = ({ search, token, setk, inputref }) => {
 
     return (
         <View style={styles.listContainer}>
-            <Pressable onPress={() => setcount(count + 1)}>
+            {/* <Pressable onPress={() => setcount(count + 1)}>
                 <Text style={{ color: "white" }}>socket</Text>
-            </Pressable>
+            </Pressable> */}
 
             <FlatList
                 showsVerticalScrollIndicator={false}

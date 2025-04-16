@@ -206,7 +206,7 @@ const Signup8 = ({ navigation, route }) => {
                             }} style={styles.btn}><Text style={styles.nexttext}>Maximum</Text></Pressable>
 
                             <View style={styles.icons}>
-                                <Pressable style={{ marginTop: 5 }} onPress={() => { navigation.goBack() }}><FontAwesome6 name="chevron-left" size={40} color="#00DF60" /></Pressable>
+                                <Pressable style={{ marginTop: 5 }} onPress={() => { navigation.goBack() }}><FontAwesome6 name="chevron-left" size={25} color="#00DF60" /></Pressable>
                                 <Pressable style={[styles.submit,]} onPress={() => { handleOutsideTouch(), finalsubmit() }}>
                                     <Text allowFontScaling={false} style={styles.submittext}>Submit</Text>
                                 </Pressable>

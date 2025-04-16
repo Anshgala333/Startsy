@@ -249,7 +249,7 @@ const SeperateInvestor = ({ search, token, setk, inputref }) => {
     return (
         <View style={styles.listContainer}>
 
-            {filtereddata && !skeleton && <FlatList
+            {filtereddata  && <FlatList
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{ paddingBottom: 100 }}
 
@@ -330,51 +330,7 @@ const SeperateInvestor = ({ search, token, setk, inputref }) => {
                 }}
             />}
 
-            {skeleton && <View style={styles.listItem1}>
-
-                {[1, 2, 3, 4, 5, 6, 7, 8].map(e =>
-
-                    <View key={e} style={{ display: "flex", flexDirection: "row", gap: 5, marginBottom: 20 }}>
-                        <Skeleton
-                            // colorMode="dark"
-                            width={50}
-                            colors={["#272a2e", "#1A1D1F", "#272a2e", "#272a2e", "#1A1D1F", "#272a2e"]}
-
-                            // backgroundColor="red" // Changed to red
-
-                            height={50}
-                            radius={"round"}
-                            // backgroundColor="black"
-                            highlightColor="#000"  // Set highlight color
-                        />
-                        {/* <Spacer height={8} /> */}
-                        <View style={{ justifyContent: "center" }}>
-                            <Skeleton
-                                colors={["#272a2e", "#1A1D1F", "#272a2e", "#272a2e", "#1A1D1F", "#272a2e"]}
-
-                                colorMode="dark"
-                                width={'87%'}
-                                height={12}
-                                highlightColor="#333"  // Set highlight color
-                            />
-                            <Spacer height={8} />
-
-                            <Skeleton
-                                colors={["#272a2e", "#1A1D1F", "#272a2e", "#272a2e", "#1A1D1F", "#272a2e"]}
-
-                                colorMode="dark"
-                                width={'80%'}
-                                height={12}
-                                highlightColor="#333"  // Set highlight color
-                            />
-                        </View>
-
-
-
-                    </View>
-
-                )}
-            </View>}
+            
 
 
 

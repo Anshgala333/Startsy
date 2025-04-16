@@ -195,8 +195,8 @@ const SelectInvestor = ({ navigation, route }) => {
 
 
                         <View style={styles.icons}>
-                            <Pressable style={{ marginTop: 5 }} onPress={() => { navigation.goBack() }}><FontAwesome6 name="chevron-left" size={30} color="#00DF60" /></Pressable>
-                            <Pressable onPress={() => { nextPage() }}><FontAwesome6 name="chevron-right" size={30} color="#00DF60" /></Pressable>
+                            <Pressable style={{ marginTop: 5 }} onPress={() => { navigation.goBack() }}><FontAwesome6 name="chevron-left" size={25} color="#00DF60" /></Pressable>
+                            <Pressable onPress={() => { nextPage() }}><FontAwesome6 name="chevron-right" size={25} color="#00DF60" /></Pressable>
 
                         </View>
 

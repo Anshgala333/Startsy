@@ -183,6 +183,15 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
     };
 
     var decode = jwtDecode(token)
+    function messagetime(date) {
+        var date1 = new Date(date);
+        const messageDate1 = date1.toLocaleDateString("en-US", {
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+        });
+        return messageDate1
+    }
 
 
 
@@ -346,7 +355,7 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                     {item.type != "textBlog" && <Text allowFontScaling={false} style={styles.u3}>{item.caption != undefined ? item.caption : "caption"} </Text>}
                                     <Pressable onPress={() => { opencomment(item._id) }} allowFontScaling={false} style={styles.u4}>
                                         {/* <Text style={styles.u4}>View {item.postComments.length} comments</Text> */}
-                                        <Text style={{color:'gray',fontFamily:'Alata'}}>lorem</Text>
+                                        <Text style={{color:'gray',fontFamily:'Roboto' , fontSize : 12}}>{messagetime(item.createdAt)}</Text>
                                     </Pressable>
 
                                 </View>

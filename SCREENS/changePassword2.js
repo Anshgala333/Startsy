@@ -172,7 +172,7 @@ const ChangePassword2 = ({ navigation, route }) => {
         <SafeAreaView style={styles.container}>
             <StatusBar backgroundColor="#16181a" barStyle={"light-content"} />
             {/* <Text allowFontScaling={false} style={styles.headerText}>Profile</Text> */}
-            <Text style={styles.t1}>Create a password</Text>
+            <Text style={styles.t1}>Create a passwordd</Text>
             <Text style={styles.t2}>Use a strong password</Text>
 
             <View style={{ width: '92%', padding: 0, borderBottomWidth: 1, borderBottomColor: '#ccc', marginTop: 20 }}>
@@ -180,7 +180,7 @@ const ChangePassword2 = ({ navigation, route }) => {
                     allowFontScaling={false}
                     placeholder="Password"
                     placeholderTextColor="#828282"
-                    style={signupstyles.input}
+                    style={signupstyles.input }
                     value={password}
                     secureTextEntry={showPassword}
                     onChangeText={(text) => {

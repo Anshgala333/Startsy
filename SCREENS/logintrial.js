@@ -506,12 +506,12 @@ const Login1 = ({ navigation, showtoast, falsetoken }) => {
             // transform: [{ scale: opacityAnim }]
           }}
         >
-          {/* <LottieView
+          <LottieView
             source={require("../assets/icons/Animation - 1743765657437.json")}
             autoPlay={true}
             loop
             style={styles.animation}
-          /> */}
+          />
         </Animated.View>
         {!isForm1Visible && (
           <Pressable style={[styles.back, { zIndex: (attop) ? 1 : 0 }]} onPress={() => {

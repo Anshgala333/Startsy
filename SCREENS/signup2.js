@@ -92,7 +92,7 @@ const Signup2 = function ({ navigation, route }) {
             <ScrollView>
                 <View style={signupstyles.row}>
                     <Pressable onPress={() => navigation.goBack()}>
-                        <FontAwesome6 name="chevron-left" size={34} style={{ alignSelf: 'flex-start', marginLeft: 16 }} color="#00DF60" />
+                        <FontAwesome6 name="chevron-left" size={25} style={{ alignSelf: 'flex-start', marginLeft: 16 }} color="#00DF60" />
                     </Pressable>
                     <View style={signupstyles.top}>
                         <Image style={signupstyles.logo} source={require("../assets/images/logo.png")} />
@@ -107,6 +107,7 @@ const Signup2 = function ({ navigation, route }) {
                                 placeholder="Password"
                                 placeholderTextColor="#828282"
                                 style={signupstyles.input}
+                                // style={[signupstyles.input ,{marginBottom:10} ]}
                                 value={password}
                                 secureTextEntry={showPassword}
                                 onChangeText={(text) => {

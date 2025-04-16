@@ -481,7 +481,7 @@ const Signup10 = ({ navigation, route }) => {
 
                             <View style={styles.icons}>
                                 <Pressable style={{ marginTop: 5 }} onPress={() => { navigation.goBack() }}><FontAwesome6 name="chevron-left" size={30} color="#00DF60" /></Pressable>
-                                <Pressable onPress={() => { nextpage(navigation, type) }}><FontAwesome6 name="chevron-right" size={30} color="#00DF60" /></Pressable>
+                                <Pressable onPress={() => { nextpage(navigation, type) }}><FontAwesome6 name="chevron-right" size={25} color="#00DF60" /></Pressable>
 
                             </View>
 

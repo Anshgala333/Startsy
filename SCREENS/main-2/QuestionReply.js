@@ -142,7 +142,7 @@ const QuestionReply = ({ route }) => {
 
                     <LinearGradient style={styles.item} colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}>
                         <View style={{ flexDirection: 'row', gap: 10, padding: 10 }}>
-                            <Image source={require('../../assets/images/logo.png')} style={{ width: 40, height: 40, borderRadius: 30, borderWidth: 1, borderColor: "#333", padding: 5, }} />
+                            <Image source={require('../../assets/images/incologo.png')} style={{ width: 40, height: 40, borderRadius: 30, padding: 5, }} />
                             <Text style={styles.userNameStyle}>Anonymous</Text>
                         </View>
 
@@ -235,7 +235,7 @@ const QuestionReply = ({ route }) => {
                     :
                     allComments.length == 0 ?
                         <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center' }}>
-                            <Text style={{ color: '#ccc', fontSize: 18 }}>No replies yet</Text>
+                          <Text style={[{ color: 'gray' }, styles.emptyListText]}>No replies yet</Text>
                         </View>
                         : null
 
@@ -288,6 +288,18 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingTop: 20,
         // paddingHorizontal: 20,
+    },
+    emptyListText: {
+        textAlign: "center",
+        color: "#666",
+        alignSelf: "center",
+        justifyContent: "center",
+        // position : "absolute",
+        elevation: 100,
+        bottom: 0,
+
+        fontSize: 16,
+        
     },
     header: {
         flexDirection: 'column',

@@ -96,10 +96,10 @@ export default function Drop({ items,search, bleft,bright,btop,bbottom, backgrou
                 marginTop: 0,
             }}
             ArrowDownIconComponent={({ style }) => (
-                <FontAwesome6 name="chevron-down" size={20} color="#828282" />
+                <FontAwesome6 name="chevron-down" size={25} color="#828282" />
             )}
             ArrowUpIconComponent={({ style }) => (
-                <FontAwesome6 name="chevron-up" size={20} color="#828282" />
+                <FontAwesome6 name="chevron-up" size={25} color="#828282" />
             )}
             style={{
                 width: extra ? "91%" : "94%",

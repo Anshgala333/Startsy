@@ -9,6 +9,8 @@
     "resizeMode": "contain",
     "backgroundColor": "#16181a",
     "userInterfaceStyle": "dark",
+    "jsEngine": "hermes",
+
     "splash": {
       "image": "./assets/images/logofinal.png",
       "resizeMode": "contain",
@@ -19,8 +21,6 @@
       "bundleIdentifier": "com.rspytech.startsy"
     },
     "android": {
-      "jsEngine": "hermes",
-      "newArchEnabled": true,
       "notification": {
         "icon": "./assets/images/logofinal.png",
         "color": "#FF5733"

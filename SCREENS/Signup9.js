@@ -311,8 +311,8 @@ const Signup9 = ({ navigation, route }) => {
                                 <Pressable onPress={() => {
                                     navigation.goBack()
                                     // console.log(workexperience);
-                                }}><FontAwesome6 name="chevron-left" size={30} color="#00DF60" /></Pressable>
-                                <Pressable onPress={() => { nextpage(navigation, type) }}><FontAwesome6 name="chevron-right" size={30} color="#00DF60" /></Pressable>
+                                }}><FontAwesome6 name="chevron-left" size={25} color="#00DF60" /></Pressable>
+                                <Pressable onPress={() => { nextpage(navigation, type) }}><FontAwesome6 name="chevron-right" size={25} color="#00DF60" /></Pressable>
                             </View>
 
                         </View>

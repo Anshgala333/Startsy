@@ -147,7 +147,13 @@ const Settings = ({ navigation, route }) => {
 
   }
 
-
+  const checkHermes = () => {
+    if (global.HermesInternal) {
+      Alert.alert('Hermes is enabled!');
+    } else {
+      Alert.alert('Hermes is not enabled.');
+    }
+  };
 
 
   return (
@@ -164,7 +170,7 @@ const Settings = ({ navigation, route }) => {
           <TouchableOpacity style={styles.option} onPress={() => downloadAPK()}>
             {/* <Icon name="bookmark-outline" size={24} color="#00DE62" /> */}
             <MaterialIcons name="update" size={24} color="#00de62" />
-            <Text style={styles.optionText}>Update</Text>
+            <Text style={styles.optionText}>Update</Text> 
           </TouchableOpacity>
           <TouchableOpacity style={styles.option} onPress={() => {
             console.log(editprofilepage);
@@ -194,6 +200,13 @@ const Settings = ({ navigation, route }) => {
           <TouchableOpacity style={styles.option} onPress={() => Logout()}>
             <Icon name="logout" size={24} color="#00DE62" />
             <Text style={[styles.optionText, { color: "#ccc" }]}>Logout</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.option} onPress={() => {
+            checkHermes()
+          }}>
+            <Icon name="logout" size={24} color="#00DE62" />
+            <Text style={[styles.optionText, { color: "#ccc" }]}>Check hermes</Text>
           </TouchableOpacity>
 
         </View>
