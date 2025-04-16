@@ -202,12 +202,12 @@ const Settings = ({ navigation, route }) => {
             <Text style={[styles.optionText, { color: "#ccc" }]}>Logout</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.option} onPress={() => {
+          {/* <TouchableOpacity style={styles.option} onPress={() => {
             checkHermes()
           }}>
             <Icon name="logout" size={24} color="#00DE62" />
             <Text style={[styles.optionText, { color: "#ccc" }]}>Check hermes</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 
         </View>
 

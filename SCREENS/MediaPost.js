@@ -1,7 +1,7 @@
 import { View, Text, Vibration, ToastAndroid } from 'react-native'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 // import { Button, Image } from 'react-native-web'
-import { Pressable, Image, TextInput, StyleSheet, Dimensions, ActivityIndicator } from 'react-native'
+import { Pressable, Image, TextInput, StyleSheet, Dimensions, ActivityIndicator, BackHandler } from 'react-native'
 // import styles from '../styles/MediaStyle'
 const { height, width } = Dimensions.get("window");
 import B3 from "../assets/icons/b3.js"
@@ -19,6 +19,16 @@ const MediaPost = ({ route }) => {
 
 
     const [isPrivate, setIsPrivate] = useState(false);
+
+    useEffect(() => {
+        const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+            navigation.goBack()
+
+            return true;
+        });
+
+        return () => backHandler.remove();
+    }, []);
 
 
     const post3 = async () => {
@@ -65,16 +75,25 @@ const MediaPost = ({ route }) => {
                     'Authorization': `Bearer ${token}`
                 }
             });
-
-            if (!response.ok) {
-                const errorText = await response.text();
-                throw new Error(`Server Error: ${response.status} - ${errorText}`);
+            if (response.status == 412) {
+                ToastAndroid.showWithGravityAndOffset(
+                    `Server Error`,
+                    ToastAndroid.LONG,
+                    ToastAndroid.TOP,
+                    100, 100
+                );
             }
+
+            // if (!response.ok) {
+            //     const errorText = await response.text();
+            //     throw new Error(`Server Error: ${response.status} - ${errorText}`);
+            // }
 
             if (response.status === 200) {
                 Vibration.vibrate(100)
                 navigation.goBack()
             }
+
 
             const data = await response.json();
             setp3text("Posted");

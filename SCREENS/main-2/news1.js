@@ -4,16 +4,15 @@ import { View, Text, StyleSheet, Image, FlatList, TextInput, Dimensions, BackHan
 import Share from "../../assets/icons/share.js"
 import Upvote from "../../assets/icons/upvote.js"
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import { useRoute } from "@react-navigation/native";
 
-const NewsletterPage = ({ navigation, route }) => {
-
-
-
+const NewsletterPage = ({  openshare }) => {
 
 
-    const { item } = route.params
 
 
+    const route = useRoute();
+    const { item  , navigation} = route.params
 
     useEffect(() => {
         // StatusBar.setBackgroundColor("")
@@ -82,11 +81,11 @@ const NewsletterPage = ({ navigation, route }) => {
                         <FontAwesome6 name="chevron-left" size={25} color="#00DF60" />
                     </Pressable>
                 </View>
-                <View style={styles.i2}>
+                <TouchableOpacity onPress={()=>openshare(item._id)} style={styles.i2}>
                     {/* <Upvote width={36} height={36} style={{marginRight : 10}}/> */}
                     <Share style={{ marginTop: 3 }} />
 
-                </View>
+                </TouchableOpacity>
             </View>
             <View style={styles.postContainer}>
                 <Image source={{ uri: item.newsletterImage }} style={styles.postImage} />

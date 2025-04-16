@@ -533,7 +533,7 @@ const Signup13 = ({ navigation, route }) => {
                                     style={styles.btn}
                                     onPress={finalsubmit} // Submit button is always enabled for other roles
                                 >
-                                    {loading && <ActivityIndicator style={{ marginTop: 7 }} size={24} color="#16181a" />}
+                                    {loading && <ActivityIndicator style={{ marginTop: 0 }} size={24} color="#16181a" />}
                                     {!loading && <Text style={styles.nexttext}>Submit</Text>}
                                 </Pressable>
                             )}

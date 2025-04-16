@@ -38,14 +38,14 @@ const Chat = ({ route }) => {
     function sendmessage() {
 
 
-     
+
 
 
         if (newtext == "") {
             return
         }
 
-       
+
         const finaldata = {
             senderId: id,
             receiverId: jisuserkosendkarnahaiuskiid,
@@ -55,7 +55,7 @@ const Chat = ({ route }) => {
         }
         socket.emit("privateMessage", finaldata)
         setdata((data) => [{ message: newtext, senderId: id, updatedAt: new Date() }, ...data])
-   
+
 
         setnewtext("")
 
@@ -115,7 +115,7 @@ const Chat = ({ route }) => {
             setTimeout(() => {
                 // Ensure we are only scrolling when new messages are added
                 InteractionManager.runAfterInteractions(() => {
-                  
+
                 });
             }, 500);
         }, [messages])
@@ -125,14 +125,14 @@ const Chat = ({ route }) => {
 
     useEffect(() => {
         const newSocket = io(`${url}chatScreen`, {
-            transports:['websocket']
+            transports: ['websocket']
         });
 
         setSocket(newSocket);
         setid(decoded._id)
 
 
-   
+
         return () => {
             newSocket.disconnect();
         };
@@ -144,7 +144,7 @@ const Chat = ({ route }) => {
     //     const newSocket = io(`${url}/chatScreen`,{
 
     //     })
-       
+
     //     return ()=>{
     //         newSocket.disconnect();
     //     }
@@ -374,7 +374,10 @@ const Chat = ({ route }) => {
                             )}
                             {index == 0 && <Image style={item.senderId == jisuserkosendkarnahaiuskiid ? styles.pfpleft1 : styles.pfpright1} source={{ uri: item.senderId == jisuserkosendkarnahaiuskiid ? photo2 : photo1 }} />}
 
-                            <TouchableOpacity onPress={() => tabnavigation.navigate("ViewSendedPost", { id: item.message.postShared })}>
+                            <TouchableOpacity onPress={() => {
+                               item.message.isNewsLetter == true ?  tabnavigation.navigate("NewsletterPage", { navigation, item: item }) :
+                                tabnavigation.navigate("ViewSendedPost", { id: item.message.postShared })
+                            }}>
 
                                 <View style={[styles.box, {
                                     marginRight: item.senderId != jisuserkosendkarnahaiuskiid ? 25 : 0,
@@ -382,19 +385,21 @@ const Chat = ({ route }) => {
 
                                 }]}>
                                     <View style={styles.top} >
-                                        <Pressable
-
+                                        {!item.message.isNewsLetter && <Pressable
                                             onPress={() => {
                                                 navigation.navigate("Singleprofilepage", { token: token, id: jisuserkosendkarnahaiuskiid, page: "Chat", item: itemdummy, messages, })
-
                                             }}
                                             style={{ display: "flex", flexDirection: "row", width: "100%" }}>
-                                            <Image style={styles.userimg} source={{ uri: item.message.profilePhoto }} />
+                                            <Image style={styles.userImgPost} source={{ uri: item.message.profilePhoto }} />
                                             <View style={styles.userdetail}>
                                                 <Text allowFontScaling={false} style={styles.u1}>{item.message.userName}</Text>
-
                                             </View>
-                                        </Pressable>
+                                        </Pressable>}
+                                        {item.message.isNewsLetter &&
+
+                                            <View style={styles.userdetail}>
+                                                <Text allowFontScaling={false} style={styles.u1}>Newsletter</Text>
+                                            </View>}
                                     </View>
                                     {item.message.postImage == null && <View style={styles.divider}></View>
                                     }
@@ -425,7 +430,6 @@ const Chat = ({ route }) => {
                                     </View>
                                     <View style={styles.lower}>
                                         <Text allowFontScaling={false} style={styles.u3}>{item.message.postCaption != undefined ? item.message.postCaption : "caption"} </Text>
-
                                     </View>
 
                                 </View>
@@ -548,7 +552,7 @@ const Chat = ({ route }) => {
 
     return (
         // <KeyboardAvoidingView style={{ flex: 1, height: height }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}>
-        <Animated.View style={{ flex: 1, paddingBottom : 10 , backgroundColor :"#16181a" }}>
+        <Animated.View style={{ flex: 1, paddingBottom: 10, backgroundColor: "#16181a" }}>
             <View style={{ flex: 1.1, backgroundColor: "#16181a" }}>
 
 
@@ -589,15 +593,15 @@ const Chat = ({ route }) => {
                     renderItem={renderItem}
                     keyExtractor={(item, index) => index.toString()}
                     // onContentSizeChange={() => flatListRef.current?.scrollToEnd({ animated: true })}
-                    style={{paddingLeft : 4 , paddingRight : 4}}
+                    style={{ paddingLeft: 4, paddingRight: 4 }}
 
                     getItemLayout={(data, index) => ({ length: 100, offset: 100 * index, index })}
                     contentContainerStyle={styles.messagesContainer}
-                    // onContentSizeChange={() => flatListRef.current?.scrollToOffset({ offset: 0, animated: false })}
-                    // onLayout={() => flatListRef.current?.scrollToOffset({ offset: 0, animated: false })}
+                // onContentSizeChange={() => flatListRef.current?.scrollToOffset({ offset: 0, animated: false })}
+                // onLayout={() => flatListRef.current?.scrollToOffset({ offset: 0, animated: false })}
                 />
 
-               
+
 
 
 
@@ -841,7 +845,7 @@ const styles = StyleSheet.create({
         alignItems: "flex-end",
         justifyContent: "center",
         marginVertical: 5,
-        marginRight : 5,
+        marginRight: 5,
     }
     , received: {
         alignItems: "flex-start",
@@ -884,7 +888,7 @@ const styles = StyleSheet.create({
         height: 25,
         right: 0,
         borderRadius: 100,
-        bottom:10,
+        bottom: 10,
     },
     pfpright1: {
         position: "absolute",
@@ -936,6 +940,16 @@ const styles = StyleSheet.create({
         alignSelf: "flex-start",
         justifyContent: "flex-start"
     },
+    userImgPost: {
+        borderRadius: 100,
+        width: 36,
+        aspectRatio: 1,
+        margin: 10,
+        marginLeft: 10,
+        marginRight: 5,
+        alignSelf: "flex-start",
+        justifyContent: "flex-start"
+    },
     userdetail: {
         flex: 1,
         alignSelf: "flex-start",
@@ -973,7 +987,8 @@ const styles = StyleSheet.create({
         // flexDirection: "row",
         width: "95%",
         marginHorizontal: "auto",
-        marginTop: 10,
+        paddingHorizontal: 10,
+        marginTop: 0,
         paddingLeft: 5,
         // justifyContent: "space-between"
     },

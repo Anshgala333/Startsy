@@ -709,6 +709,9 @@ const Main2 = ({ navigation, route }) => {
             });
             const data = await response.json();
             // setloading(false)
+            console.log(data);
+            console.log(response.status);
+            
 
             bottomSheetRef6.current?.close()
             showToastWithGravity("Post shared successfully")
@@ -865,7 +868,7 @@ const Main2 = ({ navigation, route }) => {
                         >
                             <Tab.Screen
                                 name="NewsLetter"
-                                children={(props) => <NewsLetter mainpagebottomsheet={mainpagebottomsheet} token={token} closeall={closeall} k={k} setk={setk} />}
+                                children={(props) => <NewsLetter openshare={openshare} mainpagebottomsheet={mainpagebottomsheet} token={token} closeall={closeall} k={k} setk={setk} />}
                                 options={{
 
                                     freezeOnBlur: true,
@@ -952,7 +955,8 @@ const Main2 = ({ navigation, route }) => {
                             />
                             <Tab.Screen
                                 name="NewsletterPage"
-                                component={NewsletterPage}
+                                children={(props) => <NewsletterPage openshare={openshare} />}
+                                // component={NewsletterPage}
                                 options={{
                                     tabBarLabel: "okkk",
                                     unmountOnBlur: true,

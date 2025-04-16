@@ -143,6 +143,8 @@ function Upvotedata({ token }) {
                 }
             );
             const result = await response.json();
+            console.log(result);
+            
 
             if (response.status == 404) {
                 setLength(result.pendingRequest);
@@ -521,7 +523,7 @@ function Upvotedata({ token }) {
 
                 {skeleton && <View style={styles.listItem1}>
 
-                    {[1, 2, 3, 4, 5, 6, 7, 8].map(e =>
+                    {[1, 2, 3, 4, 5, 6, 7, 8 , 9 , 10].map(e =>
 
                         <View style={{ display: "flex", flexDirection: "row", gap: 5, marginBottom: 20 }}>
                             <Skeleton

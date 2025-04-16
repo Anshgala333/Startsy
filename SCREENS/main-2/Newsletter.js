@@ -40,7 +40,7 @@ import User from "../main-2/SuggestedUser.js"
 // import styles from "@/styles/l.js";
 
 const NewsLetter = React.memo(
-    ({ closeall, }) => {
+    ({ closeall }) => {
         const navigation = useNavigation()
         const Tab = createMaterialTopTabNavigator();
         // console.log('newsletter okkkkkkkkkkk re render');

@@ -355,7 +355,7 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                     {item.type != "textBlog" && <Text allowFontScaling={false} style={styles.u3}>{item.caption != undefined ? item.caption : "caption"} </Text>}
                                     <Pressable onPress={() => { opencomment(item._id) }} allowFontScaling={false} style={styles.u4}>
                                         {/* <Text style={styles.u4}>View {item.postComments.length} comments</Text> */}
-                                        <Text style={{color:'gray',fontFamily:'Roboto' , fontSize : 12}}>{messagetime(item.createdAt)}</Text>
+                                        <Text style={{color:'gray',fontFamily:'Roboto' , fontSize : 11}}>{messagetime(item.createdAt)}</Text>
                                     </Pressable>
 
                                 </View>

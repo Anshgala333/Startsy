@@ -369,6 +369,10 @@ const Apnauser = ({ props, token, closeall, openshare }) => {
                 return true
               }
             })
+            var temp1 = tree101.filter((e) => e.role == "Investor")
+
+            console.log(temp1 , "truu");
+            
 
             setinvestorarray(tree101.filter((e) => e.role == "Investor"))
             setnoninvestor(tree101.filter((e) => e.role != "Investor"))
@@ -949,7 +953,7 @@ const Apnauser = ({ props, token, closeall, openshare }) => {
                 }
             );
             const result = await response.json();
-            // console.log(result);
+            console.log(result.length);
             
             // console.log(result,"kwsowusxquqeguiqevuasgofqegfqv8euhjXU   3JYCNHADSHYU");
             var array = result.map((e) => e.user)
@@ -964,7 +968,7 @@ const Apnauser = ({ props, token, closeall, openshare }) => {
 
 
 
-            navigation.navigate("Followerpage", { people: filter2 ,token:token , stat})
+            navigation.navigate("Followerpage", { people: filter2 ,token:token , stat , tabNavigation : navigation})
 
 
 

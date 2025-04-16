@@ -1,23 +1,37 @@
 import React, { Component, useEffect, useState } from 'react'
-import { FlatList, SafeAreaView, Text, View, TouchableOpacity, StyleSheet, navigation , Image,Pressable } from 'react-native'
+import { FlatList, SafeAreaView, Text, View, TouchableOpacity, StyleSheet, navigation, Image, Pressable, BackHandler } from 'react-native'
 import { url } from '../config.js';
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { jwtDecode } from 'jwt-decode';
-const Followerpage = ({ navigation ,route }) => {
+const Followerpage = ({ navigation, route }) => {
 
 
 
 
 
-    var { people, token , stat } = route.params;
+    var { people, token, stat, tabNavigation } = route.params;
+    console.log(stat);
 
 
-    // console.log(people);
+
+    console.log(people.length, "pams");
     // console.log(token);
 
     const decoded = jwtDecode(token)
 
     const id = decoded._id
+
+
+
+    useEffect(() => {
+        const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+            tabNavigation.navigate("Profile")
+
+            return true;
+        });
+
+        return () => backHandler.remove();
+    }, [token]);
 
 
 
@@ -27,8 +41,8 @@ const Followerpage = ({ navigation ,route }) => {
 
 
     useEffect(() => {
-        const filteredPeople = people.filter(person => person.role !== "Investor");
-        setsuggestionarray(filteredPeople);
+        // const filteredPeople = people.filter(person => person.role !== "Investor");
+        setsuggestionarray(people);
     }, [people]);
 
 
@@ -113,8 +127,12 @@ const Followerpage = ({ navigation ,route }) => {
     // console.log(people);
 
     function renderSuggestion({ item }) {
-        if(stat == true){
-            if(item.role != "Investor")return
+        if (stat == true) {
+            console.log("hi");
+            if (item.role != "Investor") return
+        }
+        else {
+            if (item.role == "Investor") return
         }
 
         return (
@@ -165,7 +183,7 @@ const Followerpage = ({ navigation ,route }) => {
 
             <View style={styles.header}>
                 <View style={styles.headerSide}>
-                    <Pressable onPress={() => navigation.navigate("Apnauser")}>
+                    <Pressable onPress={() => tabNavigation.navigate("Profile")}>
                         <FontAwesome6 name="chevron-left" size={25} style={styles.backIcon} color="#00DF60" />
                     </Pressable>
                 </View>
@@ -181,9 +199,9 @@ const Followerpage = ({ navigation ,route }) => {
             <FlatList
                 data={suggestionarray}
                 renderItem={renderSuggestion}
-                contentContainerStyle={{ paddingBottom: 200 }} 
-            /> 
-             
+                contentContainerStyle={{ paddingBottom: 200 }}
+            />
+
         </SafeAreaView>
     )
 
@@ -195,7 +213,7 @@ export default Followerpage
 
 const styles = StyleSheet.create({
     listItem: {
-        
+
         flexDirection: "row",
         alignItems: "center",
         paddingVertical: 5,
@@ -241,7 +259,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         borderBottomWidth: 1,
         borderBottomColor: "#24272A",
-        marginBottom:5
+        marginBottom: 5
     },
 
     headerSide: {
