@@ -43,8 +43,7 @@ const SelectInvestor = ({ navigation, route }) => {
             if (item[0] === "fullname" || item[0] === "password") continue;
             final.append(item[0], item[1]);
         }
-        console.log(final);
-        console.log(selectedOption);
+       
         //    return
 
 
@@ -91,7 +90,7 @@ const SelectInvestor = ({ navigation, route }) => {
 
         //     })
         // }
-        console.log(final);
+      
         navigation.navigate("Signup13", { form: final, image })
     }
     function finalsubmit() {

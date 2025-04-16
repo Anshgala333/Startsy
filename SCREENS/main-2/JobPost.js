@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef, memo, useCallback } from "react";
+import React, { useContext, useState, useRef, memo, useCallback, useEffect } from "react";
 import { FlatList, Text, Touchable, TouchableOpacity, Pressable, View, Vibration, Image, SafeAreaView, RefreshControl, ToastAndroid } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import FontAwesome from '@expo/vector-icons/FontAwesome';
@@ -13,16 +13,17 @@ import { useFocusEffect } from "expo-router";
 import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 import { jwtDecode } from "jwt-decode";
 
-
+import AntDesign from '@expo/vector-icons/AntDesign';
+import { ScrollView } from "react-native-gesture-handler";
 
 const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation, onReportCallBack }) => {
 
 
-    const [loading,setLoading]=useState(false);
+    const [loading, setLoading] = useState(false);
 
 
     useFocusEffect(useCallback(() => {
-      
+
         scrollY.setValue(0)
 
     }, []))
@@ -44,17 +45,21 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation, o
 
 
     var decode = jwtDecode(token)
+    var [lengthOfJobs, setLength] = useState(0)
+    useEffect(() => {
+        var filter = allpost.filter((e) => { e.type == "jobPost" })
+        console.log(filter.length, "yyy");
+        setLength(filter.length)
+    }, [])
 
     async function applyjob(id, index) {
 
         // console.log('helllllo')
         // return
         setLoading(true);
-        
+
         if (allpost[index].Jobapplied) {
             return
-
-
         }
         if (decode.role == "CommunityMember") {
             showToastWithGravity("Switch to Job Seeker role to apply for jobs")
@@ -85,7 +90,7 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation, o
                 },
             });
             const data = await response.json();
-      
+
             if (response.status === 200) {
                 setallpost(allpost.map((e, i) => {
                     if (i == index) {
@@ -114,11 +119,15 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation, o
         ({ item, index }) => {
 
 
+
             if (item.user_id == null) {
                 return
             }
+            if (decode.role == "Founder" && item.user_id._id != decode._id) return
+
             else {
                 if (item.type == "jobPost") {
+                    console.log(item);
                     return (
                         <LinearGradient
                             colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}
@@ -155,41 +164,47 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation, o
                                 {/* <Text allowFontScaling={false} style={styles.u8}><Text style={{ color: "#828282" }}>Payment mode: {item.jobPosts.pay} </Text> </Text> */}
                                 {item.jobPosts.amount != "" && <Text allowFontScaling={false} style={styles.u8}><Text style={{ color: "#828282" }}></Text>Offering: {item.jobPosts.amount} </Text>}
 
-                                <TouchableOpacity onPress={() => {
-                                    if (item.Jobapplied) {
-                                        return
-
-                                    }
+                                {decode.role != "Founder" && <TouchableOpacity onPress={() => {
+                                    if (item.Jobapplied) { return }
                                     if (decode.role == "CommunityMember") {
                                         showToastWithGravity("Switch to Job Seeker role to apply for jobs")
                                         return
-
                                     }
-
-
-                                   
                                     navigation.navigate('JobApply', {
                                         item: item,
                                         index: index,
                                         applyjobCallBack: applyjob,
-                                        loading:loading,
-                                        allpost:allpost,
-                                        setallpost:setallpost,
-                                        showToastWithGravity:showToastWithGravity,
-                                        decode:decode,
-                                        token:token,
+                                        loading: loading,
+                                        allpost: allpost,
+                                        setallpost: setallpost,
+                                        showToastWithGravity: showToastWithGravity,
+                                        decode: decode,
+                                        token: token,
                                     });
-                                
+
 
                                 }} style={[!item.Jobapplied ? styles.job : styles.job,]} >
                                     <Text allowFontScaling={false} style={!item.Jobapplied ? styles.nexttext : styles.nexttext}>{item.Jobapplied ? 'Applied' : "Apply"}</Text>
-                                </TouchableOpacity>
+                                </TouchableOpacity>}
+                                {decode.role == "Founder" && <TouchableOpacity onPress={() => {
+
+                                    navigation.navigate('ApplicantsList', {
+                                        navigation: navigation,
+                                        Applicants: item.jobPosts.jobApplicants,
+                                        jobId: item.jobPosts._id,
+                                        token: token,
+                                    });
+
+                                }} style={styles.job} >
+                                    <Text allowFontScaling={false} style={styles.nexttext}>Applicants</Text>
+                                </TouchableOpacity>}
                             </View>
                         </LinearGradient>
                     )
                 }
 
             }
+
 
         }
 
@@ -198,17 +213,18 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation, o
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "#16181a", minHeight: 500 }}>
+            
 
-            <FlatList
-                ListHeaderComponent={() => {
-                    return (
-                        <Pressable onPress={() => navigation.navigate("Jobposted", { token: token })} style={styles.Jobbtn}>
-                            <Text style={styles.jobbtntext}>View your job posts</Text>
-                        </Pressable>
-                    )
-                }}
+            {<FlatList
+                // ListHeaderComponent={() => {
+
+                //     return (
+                //         <Pressable onPress={() => navigation.navigate("Jobposted", { token: token })} style={styles.Jobbtn}>
+                //             <Text style={styles.jobbtntext}>View your job posts</Text>
+                //         </Pressable>
+                //     )
+                // }}
                 showsVerticalScrollIndicator={false}
-                // style={main.scroll1}
                 initialNumToRender={5}
                 windowSize={10}
                 maxToRenderPerBatch={5}
@@ -225,10 +241,6 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation, o
                 onScroll={(e) => {
                     scrollY.setValue(e.nativeEvent.contentOffset.y)
                 }}
-
-
-
-
                 refreshControl={
 
                     <RefreshControl
@@ -248,7 +260,7 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation, o
                     />
                 }
 
-            />
+            />}
         </SafeAreaView>
     )
 })

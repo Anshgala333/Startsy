@@ -53,11 +53,9 @@ import ApplicantsList from "./JASH/ApplicantsList.jsx";
 import CommentBottomSheet from "../SCREENS/JASH/comment-bottom-sheet/CommentBottomSheet.jsx";
 import ViewSendedPost from "./JASH/View post/ViewSendedPost.jsx";
 import ReportBottomSheet from '../SCREENS/JASH/bottom-sheet/reportBottomSheet.jsx'
-
 import GlobalSocket from "@/Global/globalSocket.js";
 // import GlobalSocket from "../../Global/Global/globalSocket.js"
 // GlobalSocket
-
 
 
 configureReanimatedLogger({
@@ -370,32 +368,7 @@ const Main2 = ({ navigation, route }) => {
     };
 
     const [keyboardOffset, setKeyboardOffset] = useState(new Animated.Value(0));
-    // useFocusEffect(
-    //     useCallback(() => {
-    //         const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', (event) => {
-    //             Animated.timing(keyboardOffset, {
-    //                 toValue: 0,
-    //                 duration: 300,
-    //                 useNativeDriver: false,
-    //             }).start();
-    //         });
 
-    //         const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
-    //             Animated.timing(keyboardOffset, {
-    //                 toValue: 0,
-    //                 duration: 300,
-    //                 useNativeDriver: false,
-    //             }).start();
-    //             // setk(false)
-    //             // inputRef.current?.blur()
-    //         });
-
-    //         return () => {
-    //             keyboardDidShowListener.remove();
-    //             keyboardDidHideListener.remove();
-    //         };
-    //     }, [keyboardOffset])
-    // )
 
     const openBottomSheet1 = () => {
         navigation.navigate("CommunityPage")

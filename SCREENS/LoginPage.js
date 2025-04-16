@@ -50,7 +50,7 @@ const LoginPage = function ({ navigation, route }) {
     const handlelogin = async () => {
 
         console.log("login route called");
-        // Alert.alert(`${url}api/authenticate`)
+        Alert.alert(`${url}api/authenticate`)
 
 
         setemailerror(false)

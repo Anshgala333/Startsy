@@ -450,7 +450,7 @@ async function schedulePushNotification() {
     }),
   })
     .then((response) => response.json())
-    .then((data) => console.log(data))
+    .then((data) => console.log())
     .catch((error) => console.error("Error:", error));
 
   // await Notifications.scheduleNotificationAsync({

@@ -30,6 +30,8 @@ const ApplicantsList = ({ route, navigation }) => {
           },
         });
         const data = await response.json();
+        console.log(data.data);
+
 
         setdata(data.data)
 
@@ -61,7 +63,7 @@ const ApplicantsList = ({ route, navigation }) => {
 
     return () => backHandler.remove();
   }, []);
-  
+
 
 
   const open = (name, email, phone) => {
@@ -79,9 +81,9 @@ const ApplicantsList = ({ route, navigation }) => {
   const renderBackdrop = (props) => (
     <BottomSheetBackdrop
       {...props}
-      disappearsOnIndex={-1} 
-      appearsOnIndex={0} 
-      opacity={0.7} 
+      disappearsOnIndex={-1}
+      appearsOnIndex={0}
+      opacity={0.7}
     />
   );
 
@@ -92,6 +94,35 @@ const ApplicantsList = ({ route, navigation }) => {
 
 
   const snapPoints7 = useMemo(() => ['30%'], []);
+  function time(time) {
+
+    var data1 = new Date(time)
+
+    var seconds = Math.floor((new Date() - data1) / 1000);
+
+    var interval = seconds / 31536000;
+
+    if (interval > 1) {
+      return Math.floor(interval) + " years ago";
+    }
+    interval = seconds / 2592000;
+    if (interval > 1) {
+      return Math.floor(interval) + " months ago";
+    }
+    interval = seconds / 86400;
+    if (interval > 1) {
+      return Math.floor(interval) + " days ago";
+    }
+    interval = seconds / 3600;
+    if (interval > 1) {
+      return Math.floor(interval) + " hours ago";
+    }
+    interval = seconds / 60;
+    if (interval > 1) {
+      return Math.floor(interval) + " minutes ago";
+    }
+    return Math.floor(seconds) + " seconds ago";
+  }
 
   const RenderItem = (item) => {
     return (
@@ -131,7 +162,7 @@ const ApplicantsList = ({ route, navigation }) => {
                 {item.item.user_id.userName}
               </AutoSizeText>
 
-              <Text style={{ color: "#00de62", fontSize: 12, fontFamily: 'Roboto' }}>
+              <Text style={{ color: "#00de62", fontSize: 11, fontFamily: 'Roboto' }}>
                 {item.item.user_id.role === "CommunityMember"
                   ? "Member"
                   : item.item.user_id.role}
@@ -139,35 +170,39 @@ const ApplicantsList = ({ route, navigation }) => {
             </View>
 
           </Pressable>
+          <Text style={styles.time}>{time(item.item.createdAt)}</Text>
 
         </View>
 
 
-        <View style={styles.divider}></View>
+        {/* <View style={styles.divider}></View> */}
 
         <Text
           style={styles.info}
           numberOfLines={null}
           ellipsizeMode="tail"
-
         >
+          {/* <Text>Applicant Description</Text> */}
           {item.item.userDescription}
         </Text>
 
 
-        <View style={{ marginTop: 16, paddingHorizontal: 16, }}>
+        {/* <View style={{ marginTop: 16, paddingHorizontal: 16, }}>
           <MaterialCommunityIcons name="certificate" size={32} color="gray" />
-        </View>
+        </View> */}
 
         <View style={styles.contactView}>
+          <MaterialCommunityIcons name="certificate" size={30} color="#828282" />
           <TouchableOpacity
             onPress={() => open(item.item.user_id.userName, item.item.user_id.email, item.item.user_id.contactInfo)}
-
-            style={styles.contact}
+            // style={styles.contact}
+            style={{ display: "flex" }}
           >
-            <Text style={{ color: "#16181a", fontFamily: "Alata" }}>
+
+            <FontAwesome6 name="contact-card" size={24} color="#828282" />
+            {/* <Text style={{ color: "#16181a", fontFamily: "Alata", fontSize: 14 }}>
               Contact
-            </Text>
+            </Text> */}
           </TouchableOpacity>
         </View>
 
@@ -203,20 +238,42 @@ const ApplicantsList = ({ route, navigation }) => {
   return (
     <GestureHandlerRootView>
       <View style={{ backgroundColor: "#16181a", flex: 1, paddingHorizontal: 10 }}>
-        <View style={styles.headerRow}>
+        {/* <View style={styles.headerRow}>
           <Pressable onPress={() => navigation.goBack()}>
             <FontAwesome6 name="chevron-left" size={25} style={{ alignSelf: 'flex-start', marginLeft: 6, marginTop: -6 }} color="#00DF60" />
           </Pressable>
-          <Text allowFontScaling={false} style={styles.headerText}>Applicants</Text>
-        </View>
-        <FlatList
+          <View style={styles.headerCenter}>
+            <Text style={styles.title}>Applicants</Text>
+          </View>
+        </View> */}
 
+        <View style={styles.header}>
+          <View style={styles.headerSide}>
+            <Pressable onPress={() => navigation.goBack()}>
+              <FontAwesome6 name="chevron-left" size={25} style={styles.backIcon} color="#00DF60" />
+            </Pressable>
+          </View>
+
+          <View style={styles.headerCenter}>
+            <Text style={styles.title}>Applicants</Text>
+          </View>
+
+          <View style={styles.headerSide} />
+        </View>
+        {data && data.length == 0 &&
+
+          <View style={{ flex: 1, alignItems: "center", justifyContent: "center", marginTop: -50, }}>
+            <Text style={styles.noConnection}>No Applicants</Text>
+          </View>
+
+        }
+        {data && data.length > 0 && <FlatList
           data={data}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             // <View></View>
             <RenderItem item={item} />
-          )} />
+          )} />}
 
       </View>
       {onthispage && <OpenBottomSheet />}
@@ -271,6 +328,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 32,
+    textAlign: "center",
     fontWeight: "bold",
     color: "#00DE62",
     marginBottom: 12,
@@ -296,16 +354,15 @@ const styles = StyleSheet.create({
 
   },
   image: {
-    width: 50,
-    height: 50,
+    width: 45,
+    height: 45,
     borderRadius: 25,
     marginRight: 12,
   },
   role: {
-    fontSize: 24,
-    color: '#E9E9E9',
-    flex: 1,
-    fontFamily: "Roboto"
+    fontFamily: "Roboto",
+    fontSize: 11,
+    color: "#00DE62"
   },
   date: {
     fontSize: 12,
@@ -322,20 +379,19 @@ const styles = StyleSheet.create({
     // backgroundColor: "red"
   },
   info: {
-    color: "gray",
-    // backgroundColor:'red',
-    fontSize: 14,
-    marginTop: 16,
+    // marginTop: 16,
     lineHeight: 20,
     marginHorizontal: 16,
-    fontFamily: 'Roboto'
+    color: "#ccc",
+    fontSize: 16,
     // textAlign: 'justify'
   },
 
   contactView: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    gap: 30,
+    gap: 20,
+    display: "flex",
     marginTop: 16,
     marginBottom: 16,
     paddingHorizontal: 16
@@ -387,11 +443,57 @@ const styles = StyleSheet.create({
 
   contact: {
 
-    paddingVertical: 5,
-    paddingHorizontal: 15,
     borderRadius: 5,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 8,
     backgroundColor: '#ccc'
   },
+  noConnection: {
+    textAlign: "center",
+    color: "#666",
+    alignSelf: "center",
+    justifyContent: "center",
+    elevation: 100,
+    bottom: 0,
+    fontSize: 16,
+    marginTop: -50
+  },
+  headerCenter: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  title: {
+    fontSize: 20,
+    color: "#E9E9E9",
+    fontFamily: "Alata",
+    textAlign: "center",
+  },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    borderBottomWidth: 1,
+    marginBottom: 20,
+    borderBottomColor: "#24272A",
+  },
+
+  headerSide: {
+    width: 40, // same width as the icon button area
+    alignItems: "flex-start",
+    justifyContent: "center",
+  },
+  time: {
+    width: 100,
+    textAlign: "right",
+    color: "#666",
+    fontSize: 10,
+    fontFamily: "Roboto",
+  }
+
 
 });
 

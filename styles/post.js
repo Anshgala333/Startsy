@@ -684,6 +684,16 @@ const styles = StyleSheet.create({
         fontFamily: "myanmar",
         color: "#00DE62",
         paddingLeft: 15
+    },
+    noJob : {
+        textAlign: "center",
+        color: "#666",
+        alignSelf: "center",
+        justifyContent: "center",
+        // position : "absolute",
+        elevation: 100,
+        bottom: 0,
+        fontSize: 18,
     }
 
 });

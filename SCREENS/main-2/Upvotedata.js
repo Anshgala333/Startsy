@@ -144,11 +144,10 @@ function Upvotedata({ token }) {
             );
             const result = await response.json();
 
-            // console.log('respomseeeeeeee',response.status)
-            if(response.status==404){
-                setLength("0");
+            if (response.status == 404) {
+                setLength(result.pendingRequest);
             }
-            
+
 
 
             else if (response.status != 404) {
@@ -161,11 +160,9 @@ function Upvotedata({ token }) {
                 setnormal(normalArray)
                 var array = result.data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
                 setSubNotification(array);
-
-                
-                setLength(result.pendingRequest)
-
+     
             }
+            setLength(result.pendingRequest)
 
 
 
@@ -201,7 +198,6 @@ function Upvotedata({ token }) {
                     },
                 });
                 const data = await response.json();
-                // setloading(false)
             }
             catch (err) {
 
@@ -509,16 +505,15 @@ function Upvotedata({ token }) {
                 </Pressable> */}
 
                 <View style={styles.divider}></View>
-                <Text style={styles.t11}>Investor Suggestions</Text>
+                {decode.role != "Investor" && <Text style={styles.t11}>Investor Suggestions</Text>}
                 <FlatList
                     horizontal={true}
-                    showsHorizontalScrollIndicator={false}
                     style={{ display: "flex", flexDirection: "row", gap: 10 }}
                     data={suggestion}
                     renderItem={rendersub}
                 // renderItem={() => <Text style={{ fontSize: 100 }}>okkk</Text>}
                 />
-                <View style={[styles.divider, { marginBottom: -10 }]}></View>
+                {decode.role != "Investor" && <View style={[styles.divider, { marginBottom: -10 }]}></View>}
 
 
 

@@ -300,12 +300,12 @@ const Signup13 = ({ navigation, route }) => {
 
     const showToastWithGravity = (message) => {
         ToastAndroid.showWithGravityAndOffset(
-          `${message}`,
-          ToastAndroid.LONG,
-          ToastAndroid.TOP,
-          100, 100
+            `${message}`,
+            ToastAndroid.LONG,
+            ToastAndroid.TOP,
+            100, 100
         );
-      };
+    };
 
     const openFilePicker = async () => {
         try {
@@ -402,6 +402,7 @@ const Signup13 = ({ navigation, route }) => {
                             <Text allowFontScaling={false} style={styles.t1}>Authenticity Verification </Text>
 
                             <TextInput
+                            numberOfLines={1}
                                 allowFontScaling={false}
                                 placeholder="LinkedIN URL*"
                                 placeholderTextColor="#828282"
@@ -443,14 +444,14 @@ const Signup13 = ({ navigation, route }) => {
                                         //     <Text style={styles.verifyOtpText}>Send OTP</Text>
                                         // </Pressable>
 
-                                        <Pressable style={styles.verifyOtpButton1 } onPress={handleSendOtp} >
-                                        {sendotpStatus ? (
-                                            <ActivityIndicator size={24} color="#16181a" />
-                                        ) : (
-                                            <Text style={styles.verifyOtpText}>Send OTP</Text>
-                                        )}
-                                    </Pressable>
-                                        
+                                        <Pressable style={styles.verifyOtpButton1} onPress={handleSendOtp} >
+                                            {sendotpStatus ? (
+                                                <ActivityIndicator size={24} color="#16181a" />
+                                            ) : (
+                                                <Text style={styles.verifyOtpText}>Send OTP</Text>
+                                            )}
+                                        </Pressable>
+
                                     )}
                                 </>
                             )}
@@ -532,7 +533,8 @@ const Signup13 = ({ navigation, route }) => {
                                     style={styles.btn}
                                     onPress={finalsubmit} // Submit button is always enabled for other roles
                                 >
-                                    <Text style={styles.nexttext}>Submit</Text>
+                                    {loading && <ActivityIndicator style={{ marginTop: 7 }} size={24} color="#16181a" />}
+                                    {!loading && <Text style={styles.nexttext}>Submit</Text>}
                                 </Pressable>
                             )}
 
@@ -543,7 +545,8 @@ const Signup13 = ({ navigation, route }) => {
                                     onPress={() => isOtpVerified && finalsubmit()}  // Only call finalSubmit if OTP is verified
                                     disabled={!isOtpVerified}  // Disable button if OTP not verified
                                 >
-                                    <Text style={styles.nexttext}>Submit</Text>
+                                    {loading && <ActivityIndicator style={{ marginTop: 7 }} size={24} color="#16181a" />}
+                                    {!loading && <Text style={styles.nexttext}>Submit</Text>}
                                 </Pressable>
                             )}
                         </View>
@@ -614,7 +617,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         width: "92%",
-        paddingHorizontal : 20,
+        paddingHorizontal: 20,
         position: "absolute",
         marginHorizontal: "auto",
         // marginTop: scalingfactor * 30,
@@ -675,16 +678,16 @@ const styles = StyleSheet.create({
         marginHorizontal: "auto",
         borderRadius: 0,
         // height: 47,
-        borderWidth : 0,
-        borderBottomWidth :1,
-        borderBottomColor : "#ccc",
+        borderWidth: 0,
+        borderBottomWidth: 1,
+        borderBottomColor: "#ccc",
         width: "92%",
         borderColor: "#ccc",
         marginTop: 10,
         paddingLeft: 0,
         fontFamily: "Alata",
         marginBottom: scalingfactor * 16,
-        fontSize:  20, // Responsive font size
+        fontSize: 20, // Responsive font size
         color: "#ccc",
     },
 
@@ -751,7 +754,7 @@ const styles = StyleSheet.create({
     // Text inside the OTP verification button
     verifyOtpText: {
         fontSize: 16,
-        marginTop : -2,
+        marginTop: -2,
         fontFamily: "Alata",
         color: '#24272A',
     },

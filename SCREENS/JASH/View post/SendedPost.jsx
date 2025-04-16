@@ -25,6 +25,17 @@ const SendedPost = ({ item, opencomment, openshare, upvotepost, index, toggleSav
         lastTap.current = now;
     };
 
+
+    function messagetime(date) {
+        var date1 = new Date(date);
+        const messageDate1 = date1.toLocaleDateString("en-US", {
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+        });
+        return messageDate1
+    }
+
     return (
         <View >
             <Text style={styles.header1}>Startsy</Text>
@@ -40,16 +51,6 @@ const SendedPost = ({ item, opencomment, openshare, upvotepost, index, toggleSav
                     <View style={styles.top} >
                         <Pressable
                             onPress={() => {
-                                // console.log(decode.role);
-
-                                // if (decode.role == "Investor") {
-                                //     console.log("qpqpqp");
-                                //     if (item.user_id.role == "Founder") return
-                                //     else navigation.navigate("Singleuserpage", { token: token, id: item.user_id._id, page: "Startsy" })
-                                // }
-                                // else if (item.user_id.role != "Investor") {
-                                //     navigation.navigate("Singleuserpage", { token: token, id: item.user_id._id, page: "Startsy" })
-                                // }
 
                             }}
                             style={{ display: "flex", flexDirection: "row", width: "100%" }}>
@@ -111,17 +112,7 @@ const SendedPost = ({ item, opencomment, openshare, upvotepost, index, toggleSav
                                 <Text style={{ color: "#ccc", fontFamily: 'Roboto', fontSize: 16, top: 3 }}>{item.postComments.length}</Text>
                             </View>
 
-                            {/* <Pressable onPress={() => {
-                                Vibration.vibrate(20)
-                                opencomment(item._id)
 
-                            }}
-                            >
-                                <FontAwesome name="comment-o" size={27} color="#ccc" />
-                            </Pressable> */}
-
-
-                            {/* share */}
 
                             <Pressable onPress={() => {
                                 Vibration.vibrate(20)
@@ -153,8 +144,8 @@ const SendedPost = ({ item, opencomment, openshare, upvotepost, index, toggleSav
                     </View>
                     <View style={styles.lower}>
                         {item.type != "textBlog" && <Text allowFontScaling={false} style={styles.u3}>{item.caption != undefined ? item.caption : "caption"} </Text>}
-                        <Pressable onPress={() => { opencomment(item._id) }} allowFontScaling={false} style={styles.u4}>
-                            <Text style={styles.u4}>Lorem</Text>
+                        <Pressable allowFontScaling={false} style={styles.u4}>
+                            <Text style={styles.u4}>{messagetime(item.createdAt)}</Text>
                         </Pressable>
 
                     </View>

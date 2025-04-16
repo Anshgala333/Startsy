@@ -33,9 +33,7 @@ const CommentBottomSheet = ({ commentRef, backdropComponent, allcomments, commen
         snapPoints={snapPoints5}
       
         index={-1}
-        // initialSnapIndex={0}
-        // handleStyle={{display : "none"}}
-        // contentContainerStyle={{ zIndex: 1000000, elevation: 20000000, height: 100 }}
+        
     >
 
 
@@ -73,7 +71,6 @@ const CommentBottomSheet = ({ commentRef, backdropComponent, allcomments, commen
                     inputRef.current?.blur()
                     setInFocus(false)
                 }}
-                // onblur={() => setmax(500)}
                 style={styles.input}
                 placeholder="Type here..."
                 placeholderTextColor="#828282"
@@ -100,15 +97,6 @@ const styles = StyleSheet.create({
     },
     input: {
         backgroundColor: 'transparent',
-        // borderColor: "#828282",
-        // // padding: 10,
-        // color: '#fff',
-        // width: "94%",
-        // marginHorizontal: "auto",
-        // fontSize: 16,
-        // paddingLeft: 10,
-        // // marginTop: 20,
-        // marginBottom: 25
         height: 50,
         width: "96%",
         marginHorizontal: "auto",
@@ -118,13 +106,14 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         color: "#ccc",
         fontSize: 18,
-        marginBottom: 10
+        marginBottom: 10,
+    
 
     },
     send: {
         position: "absolute",
-        top: 12,
-        right: 30,
+        top: 14,
+        right: 25,
         transform: [{ scale: 1.1 }],
         alignSelf: "center",
         verticalAlign: "center",
