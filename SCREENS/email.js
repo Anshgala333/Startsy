@@ -255,7 +255,7 @@ const Email = ({ navigation, route }) => {
                                 {otperror && <Text style={[signupstyles.error , {marginTop : 25 , fontSize : 15}]}>Invalid OTP</Text>}
 
                                 {/* ✅ "Verify OTP" Button */}
-                                <Pressable style={signupstyles.next} onPress={() => check()}>
+                                <Pressable style={[signupstyles.next,{marginTop:25}]} onPress={() => check()}>
                                     {!otploading && <Text style={signupstyles.nexttext}>Verify OTP</Text>}
                                     {otploading &&  <ActivityIndicator style={{marginTop :7}} size={24} color="#16181a" />}
                                 </Pressable>

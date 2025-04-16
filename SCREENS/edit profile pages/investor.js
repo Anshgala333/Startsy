@@ -512,7 +512,7 @@ const EditInvestorInfo = ({ navigation }) => {
 
 
                     <Text allowFontScaling={false} style={[styles.t1, { marginTop: 15, marginBottom: 20, paddingLeft: 7 }]}>Investing experience</Text>
-                    <Pressable onPress={() => { handleOutsideTouch() }} style={[styles.btn1, { marginTop: 0 }]}>
+                    <Pressable onPress={() => { handleOutsideTouch() }} style={[styles.btn1, { marginTop:0, marginBottom:40}]}>
                         <Text allowFontScaling={false} style={styles.nexttext}>{sliderrange1.toLocaleString("en-IN")} {sliderrange1 > 1 ? "years" : "year"}</Text>
                     </Pressable>
                     {/* <View style={[styles.box, { left: 20 }]}></View>
@@ -557,13 +557,13 @@ const EditInvestorInfo = ({ navigation }) => {
 
 
                         <Text allowFontScaling={false} style={[styles.t1, { marginTop: 20, marginBottom: 10, paddingLeft: 7 }]}>Investment capacity</Text>
-                        <Pressable onPress={() => { handleOutsideTouch() }} style={[styles.btn1, {  marginBottom: 10 }]}>
+                        <Pressable onPress={() => { handleOutsideTouch() }} style={[styles.btn1, {   marginBottom: 40}]}>
                             <Text allowFontScaling={false} style={styles.nexttext}>{sliderrange.toLocaleString("en-IN")} </Text>
                         </Pressable>
 
                         {/* slider */}
-                        <View style={[styles.box, { left: 20 }]}></View>
-                        <View style={[styles.box1, { left: "95%" }]}></View>
+                        {/* <View style={[styles.box, { left: 20 }]}></View> */}
+                        {/* <View style={[styles.box1, { left: "95%" }]}></View> */}
                         <Slider onTouchStart={handleOutsideTouch}
                             // style={styles.sliderbox}
                             style={{ marginTop: -7, width: "90%", margin: "auto" }}

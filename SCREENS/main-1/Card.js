@@ -152,7 +152,7 @@ function Cards({ navigation, route }) {
       {item.teamInfo && item.teamInfo.map((work, index) => {
         return (
           <View style={styles.teamCard}>
-            <Text style={styles.username1}>{work.username ? work.username : work.name}</Text>
+            {/* <Text style={styles.username1}>{work.username ? work.username : work.name}</Text> */}
             <Text style={styles.text2}>{work.name}</Text>
             <Text style={styles.text2}>{work.role}</Text>
           </View>
