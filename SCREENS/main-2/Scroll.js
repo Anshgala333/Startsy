@@ -273,28 +273,30 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                         <View style={{ flexDirection: 'row', gap: 7, marginRight: 4, alignItems: 'center' }}>
                                             <TouchableOpacity onPress={() => { upvotepost(item._id, index) }}>
 
-                                                {!item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5, marginTop: 6 }} />}
-                                                {item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5, marginTop: 6 }} selected={true} />}
+                                                {!item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5,  }} />}
+                                                {item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5, }} selected={true} />}
                                             </TouchableOpacity>
-                                            <Text style={{ color: "#ccc", fontFamily: 'Roboto', fontSize: 14, top: 3 }}>0</Text>
+                                            <Text style={{ color: "#ccc", fontFamily: 'Roboto', fontSize: 14, }}>{item.itemlikedcount}</Text>
                                         </View>
 
 
                                         {/* comment */}
 
 
-                                        <View style={{ flexDirection: 'row', gap: 7, marginRight: 4, alignItems: 'center' }}>
+                                        <View style={{ flexDirection: 'row', gap: 7, marginRight: 4, alignItems: 'flex-start',justifyContent:'flex-start' }}>
                                             <TouchableOpacity onPress={() => {
                                                 Vibration.vibrate(20)
                                                 opencomment(item._id)
+                                                
 
                                             }}
+                                            style={{marginTop:-6}}
                                             >
-                                                <FontAwesome name="comment-o" size={28} color="#ccc" />
+                                                <FontAwesome name="comment-o" size={28} color="#ccc"  />
 
                                             </TouchableOpacity>
 
-                                            <Text style={{ color: "#ccc", fontFamily: 'Roboto', fontSize: 16, top: 3 }}>{item.postComments.length}</Text>
+                                            <Text style={{ color: "#ccc", fontFamily: 'Roboto', fontSize: 16, }}>{item.postComments.length}</Text>
                                         </View>
                                         {/* 
                                         <Pressable onPress={() => {
@@ -314,7 +316,7 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                             Vibration.vibrate(20)
                                             openshare(item._id)
                                         }}>
-                                            <Share style={{ top: 3 }} />
+                                            <Share style={{ }} />
                                         </Pressable>
 
 
