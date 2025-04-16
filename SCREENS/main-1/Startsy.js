@@ -212,7 +212,7 @@ export default function Startsy({ navigation, route, token }) {
         //     return
         // }
 
-
+        // ......................................................................
         return (
             <Pressable onPress={() => {
                 console.log("showing big");
@@ -271,23 +271,11 @@ export default function Startsy({ navigation, route, token }) {
                     {/* Description Section */}
                     <Text style={styles.sectionHeader}>Description:</Text>
                     <Text style={styles.text}>
-                        {item.description}
+                        {item.description.split(" ").slice(0, 46).join(" ")}
+                        {item.description.split(" ").length > 46 && (
+                            <Text style={{ color: "#00de62" }}> ...Read more</Text>
+                        )}
                     </Text>
-                    <LinearGradient
-                        colors={[
-                            'rgba(25, 26, 27, 0)',
-                            'rgba(25, 26, 27, 0.2)',
-                            'rgba(25, 26, 27, 0.4)',
-                            'rgba(25, 26, 27, 0.6)',
-                            'rgba(25, 26, 27, 0.8)',
-                            'rgba(25, 26, 27, 1)',
-                        ]}
-                        style={{ position: 'absolute', height: '300', zIndex: 10000, justifyContent: 'center', width: '110%', alignItems: 'center', top: '60%', }}
-                    >
-                        <View style={{}} >
-                            <Text style={{ color: '#00de62', fontFamily: 'Alata', fontSize: 18, elevation: 4.0,top:35 }}>Read more</Text>
-                        </View>
-                    </LinearGradient>
 
                     {/* 
                     <BlurView
@@ -360,8 +348,7 @@ export default function Startsy({ navigation, route, token }) {
             </Pressable>
         )
     }
-
-
+    // ...................................................................
     function check() {
         if (swipeDistance < 50) {
             console.log("hi");

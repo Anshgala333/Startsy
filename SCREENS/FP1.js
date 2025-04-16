@@ -88,7 +88,7 @@ const FP1 = ({ navigation }) => {
                 console.log("hi");
                 navigation.goBack()  
             }}>
-                <FontAwesome6 name="chevron-left" size={34}
+                <FontAwesome6 name="chevron-left" size={25}
                     style={{ alignSelf: 'flex-start', marginLeft: 16, marginTop: 20, position: "relative" }} color="#00DF60" />
             </Pressable>
 

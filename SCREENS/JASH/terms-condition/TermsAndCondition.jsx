@@ -14,7 +14,7 @@ const TermsAndConditions = () => {
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, left: 0 }}>
                     <TouchableOpacity onPress={() => navigation.goBack()}>
-                        <FontAwesome6 name="chevron-left" size={28} style={{ alignSelf: 'flex-start', marginTop: 4 }} color="#00DF60" />
+                        <FontAwesome6 name="chevron-left" size={25} style={{ alignSelf: 'flex-start', marginTop: 4 }} color="#00DF60" />
                     </TouchableOpacity>
                     <Text style={styles.header}>Terms & Conditions</Text>
                 </View>

@@ -301,7 +301,7 @@ const InvestorCard = ({ route }) => {
 
                     <View style={{ paddingHorizontal: 12 , paddingTop : 15 }}>
 
-                        {item.investor.role == "Investor" && <Text style={styles.info}>Investing experience - {item.investor.roleId.previousExperience} years</Text>}
+                        {item.investor.role == "Investor" && <Text style={styles.info}>Investing Experience - {item.investor.roleId.previousExperience} years</Text>}
                         {item.investor.role == "Investor" && <Text style={styles.info1}>Investing Capacity - {item.investor.roleId.investmentRange}</Text>}
 
                         {item.investor.role == "Founder" && <Text style={styles.info}>Stage of Startup - {item.investor.roleId.hiddenInfo.stageOfStartup} </Text>}

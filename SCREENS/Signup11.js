@@ -389,7 +389,7 @@ const Signup11 = ({ navigation, route }) => {
                              onPress={() => {
                                 navigation.goBack()
                                 // console.log(workexperience);
-                            }}><FontAwesome6 name="chevron-left" size={30} color="#00DF60" /></Pressable>
+                            }}><FontAwesome6 name="chevron-left" size={25} color="#00DF60" /></Pressable>
                             <Pressable style={styles.btn} onPress={() => { finalsubmit() }}>
                                 {loading && <ActivityIndicator size={24} color="#16181a" />}
                                 {!loading && <Text allowFontScaling={false} style={styles.nexttext}>Submit</Text>}

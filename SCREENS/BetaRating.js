@@ -71,6 +71,7 @@ const RatingPage = ({ navigation }) => {
             }, 1000);
         }
 
+        
     };
 
     return (

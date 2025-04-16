@@ -961,7 +961,7 @@ const Editcommunity = ({ navigation }) => {
 
 
                         <View onTouchStart={handleOutsideTouch} s style={styles1.icons}>
-                            <Pressable onPress={() => { navigation.goBack() }} style={{ alignSelf: "center" }}><FontAwesome6 name="chevron-left" size={30} color="#00DF60" /></Pressable>
+                            <Pressable onPress={() => { navigation.goBack() }} style={{ alignSelf: "center" }}><FontAwesome6 name="chevron-left" size={25} color="#00DF60" /></Pressable>
                             <Pressable onPress={savedata} style={styles1.btn}>
                                 {loading && <ActivityIndicator size={24} color="#16181a" />}
                                 {!loading && <Text allowFontScaling={false} style={styles1.nexttext}>Save</Text>}

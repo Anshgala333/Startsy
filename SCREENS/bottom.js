@@ -54,10 +54,10 @@ export default function OK() {
               marginTop: -3,
             }}
             ArrowDownIconComponent={({ style }) => (
-              <FontAwesome6 name="chevron-down" size={20} color="#00DE62" />
+              <FontAwesome6 name="chevron-down" size={25} color="#00DE62" />
             )}
             ArrowUpIconComponent={({ style }) => (
-              <FontAwesome6 name="chevron-up" size={20} color="#00DE62" />
+              <FontAwesome6 name="chevron-up" size={25} color="#00DE62" />
             )}
             style={{
               width: '94%',

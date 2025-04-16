@@ -512,6 +512,7 @@ function Upvotedata({ token }) {
                 <Text style={styles.t11}>Investor Suggestions</Text>
                 <FlatList
                     horizontal={true}
+                    showsHorizontalScrollIndicator={false}
                     style={{ display: "flex", flexDirection: "row", gap: 10 }}
                     data={suggestion}
                     renderItem={rendersub}

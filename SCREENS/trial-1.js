@@ -149,7 +149,7 @@ const ReadMore1 = function ({ attop, setattop, animatedtop, animatedValue, Gener
         setattop(true)
       }}>
         {/* <Ionicons name="arrow-back-circle-outline" size={50} color="#00DE62" /> */}
-        <FontAwesome6 name="chevron-left" size={34}  color="#00DF60" />
+        <FontAwesome6 name="chevron-left" size={25}  color="#00DF60" />
 
 
       </Pressable>

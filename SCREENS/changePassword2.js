@@ -6,12 +6,12 @@ import signupstyles from "@/styles/signup1styles.js";
 import { Entypo } from "@expo/vector-icons";
 const ChangePassword2 = ({ navigation, route }) => {
 
-    const{token} = route.params;
+    const { token } = route.params;
     const isforgot = route.params.isforgot
     const email = route.params.email
     const epassword = route.params.password
 
-    
+
 
     const [password, setPassword] = useState("");
     const [success, setsuccess] = useState("");
@@ -49,7 +49,7 @@ const ChangePassword2 = ({ navigation, route }) => {
         // Proceed with saving the password
         setloading(true)
         try {
-   
+
             var route = isforgot ? "forgotPassword" : "changePassword"
             console.log(route);
 
@@ -70,13 +70,13 @@ const ChangePassword2 = ({ navigation, route }) => {
                 },
             });
             const data = await response.json();
-         
+
 
             if (response.status === 400) {
-           
+
             }
             else if (response.status === 200) {
-         
+
                 seterror(false);
                 setsuccess(true)
                 navigation.navigate("Green");
@@ -89,7 +89,7 @@ const ChangePassword2 = ({ navigation, route }) => {
             console.log(err);
 
         }
-        finally{
+        finally {
             setloading(false)
         }
     };
@@ -171,11 +171,19 @@ const ChangePassword2 = ({ navigation, route }) => {
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar backgroundColor="#16181a" barStyle={"light-content"} />
-            {/* <Text allowFontScaling={false} style={styles.headerText}>Profile</Text> */}
-            <Text style={styles.t1}>Create a password</Text>
+            <Text style={styles.t1}>Create a passwordd</Text>
             <Text style={styles.t2}>Use a strong password</Text>
 
-            <View style={{ width: '92%', padding: 0, borderBottomWidth: 1, borderBottomColor: '#ccc', marginTop: 20 }}>
+            <View style={{
+                position: "relative",
+                padding: 0,
+                borderBottomColor: "white",
+                borderBottomWidth: 1,
+                width: "95%",
+                paddingBottom: 8,
+                paddingStart: 8,
+                marginTop: 30,
+            }}>
                 <TextInput
                     allowFontScaling={false}
                     placeholder="Password"
@@ -204,7 +212,16 @@ const ChangePassword2 = ({ navigation, route }) => {
                 <Text style={signupstyles.error}>{passwordError}</Text>
             ) : null}
 
-            <View style={{ width: '92%', padding: 0, borderBottomWidth: 1, borderBottomColor: '#ccc', marginTop: 20 }}>
+            <View style={{
+                position: "relative",
+                padding: 0,
+                borderBottomColor: "white",
+                borderBottomWidth: 1,
+                width: "95%",
+                paddingBottom: 8,
+                paddingStart: 8,
+                marginTop: 30,
+            }}>
                 <TextInput
                     allowFontScaling={false}
                     placeholder="Confirm Password"

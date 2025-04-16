@@ -516,7 +516,7 @@ const Signup13 = ({ navigation, route }) => {
                             <Pressable onPress={() => {
 
                                 navigation.goBack();
-                            }}><FontAwesome6 name="chevron-left" size={35} color="#00DF60" /></Pressable>
+                            }}><FontAwesome6 name="chevron-left" size={25} color="#00DF60" /></Pressable>
 
                             {/* <Pressable style={[styles.btn,{ opacity: isOtpVerified ? 1 : 0.5 }]} onPress={() => { finalsubmit() }}>
 

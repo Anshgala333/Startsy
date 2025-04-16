@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback, useMemo, useEffect, useContext } from "react";
-import { FlatList, Pressable, Text, View, SafeAreaView, Linking, Animated, TouchableOpacity, RefreshControl } from "react-native";
+import { FlatList, Pressable, Text, View, SafeAreaView, Linking, Animated,StyleSheet, TouchableOpacity, RefreshControl } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import styles from "../styles/post.js";
@@ -105,7 +105,7 @@ const CertificatePortfolioPage = () => {
             >
 
                 <View
-                    style={[styles.box, { paddingVertical: 15, paddingHorizontal: 20, borderRadius: 12 , backgroundColor : "transparent" , borderColor : "#777" , borderWidth : 1 , width : "92%" }]}
+                    style={[styles.box, { paddingVertical: 15, paddingHorizontal: 20, borderRadius: 12 , backgroundColor : "transparent" , borderColor : "#ccc" , borderWidth : 1 , width : "92%" }]}
                 >
 
                     <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
@@ -133,9 +133,19 @@ const CertificatePortfolioPage = () => {
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "#16181a", minHeight: 700 }}>
-            <Pressable onPress={() => navigation.goBack()}>
-                <FontAwesome6 name="chevron-left" size={34} style={{ alignSelf: 'flex-start', marginLeft: 16, marginTop: 10 }} color="#00DF60" />
-            </Pressable>
+              <View style={styles1.header}>
+                <View style={styles1.headerSide}>
+                    <Pressable onPress={() => navigation.goBack()}>
+                        <FontAwesome6 name="chevron-left" size={25} style={styles1.backIcon} color="#00DF60" />
+                    </Pressable>
+                </View>
+
+                <View style={styles1.headerCenter}>
+                    <Text style={styles1.title}>Certifications</Text>
+                </View>
+
+                <View style={styles1.headerSide} />
+            </View>
             {allUrls.length == 0 && <Text style={{ textAlign: "center", marginTop: 300, color: "gray", fontSize: 18 }}>No certifications Yet</Text>}
             <FlatList
                 showsVerticalScrollIndicator={false}
@@ -158,5 +168,38 @@ const CertificatePortfolioPage = () => {
         </SafeAreaView>
     );
 };
+const styles1 = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#16181A',
+        padding: 20,
+    },
+    title: {
+        fontSize: 20,
+        color: "#E9E9E9",
+        fontFamily: "Alata",
+        textAlign: "center",
+    },
+    header: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        paddingVertical: 15,
+        paddingHorizontal: 20,
+        borderBottomWidth: 1,
+        borderBottomColor: "#24272A",
+    },
 
+    headerSide: {
+        width: 40, // same width as the icon button area
+        alignItems: "flex-start",
+        justifyContent: "center",
+    },
+
+    headerCenter: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+});
 export default CertificatePortfolioPage;

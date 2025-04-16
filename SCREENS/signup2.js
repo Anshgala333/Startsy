@@ -92,7 +92,7 @@ const Signup2 = function ({ navigation, route }) {
             <ScrollView>
                 <View style={signupstyles.row}>
                     <Pressable onPress={() => navigation.goBack()}>
-                        <FontAwesome6 name="chevron-left" size={34} style={{ alignSelf: 'flex-start', marginLeft: 16 }} color="#00DF60" />
+                        <FontAwesome6 name="chevron-left" size={25} style={{ alignSelf: 'flex-start', marginLeft: 16 }} color="#00DF60" />
                     </Pressable>
                     <View style={signupstyles.top}>
                         <Image style={signupstyles.logo} source={require("../assets/images/logo.png")} />
@@ -101,12 +101,22 @@ const Signup2 = function ({ navigation, route }) {
                         <Text allowFontScaling={false} style={signupstyles.t1}>Create a password</Text>
                         <Text allowFontScaling={false} style={signupstyles.t2}>Use a strong password</Text>
 
-                        <View style={{ width: '92%', padding: 0, borderBottomWidth: 1, borderBottomColor: '#ccc', }}>
+                        <View style={{ 
+                            position: "relative",
+                            padding: 0,
+                            borderBottomColor: "white",
+                            borderBottomWidth: 1,
+                            width: "95%",
+                            paddingBottom: 8,
+                            paddingStart: 8,
+                            marginTop: 30,
+                             }}>
                             <TextInput
                                 allowFontScaling={false}
                                 placeholder="Password"
                                 placeholderTextColor="#828282"
                                 style={signupstyles.input}
+                                // style={[signupstyles.input ,{marginBottom:10} ]}
                                 value={password}
                                 secureTextEntry={showPassword}
                                 onChangeText={(text) => {
@@ -130,7 +140,16 @@ const Signup2 = function ({ navigation, route }) {
                             <Text style={signupstyles.error}>{passwordError}</Text>
                         ) : null}
 
-                        <View style={{ width: '92%', padding: 0, borderBottomWidth: 1, borderBottomColor: '#ccc', marginTop: 20 }}>
+                        <View style={{
+                            position: "relative",
+                            padding: 0,
+                            borderBottomColor: "white",
+                            borderBottomWidth: 1,
+                            width: "95%",
+                            paddingBottom: 8,
+                            paddingStart: 8,
+                            marginTop: 30,
+                        }}>
                             <TextInput
                                 allowFontScaling={false}
                                 placeholder="Confirm Password"
@@ -144,7 +163,7 @@ const Signup2 = function ({ navigation, route }) {
                                     setConfirmPassword(text)
                                 }}
                             />
-                            <TouchableOpacity style={{ position: 'absolute', marginRight: 10, right: 0, bottom: 0, marginBottom: 10 }}
+                            <TouchableOpacity style={{ position: 'absolute', right: 0, bottom: 0, marginBottom: 10, marginRight: 10 }}
                                 onPress={() => setShowConfirmPassword(prev => !prev)}
                             >
                                 {showConfirmPassword ?
