@@ -625,14 +625,14 @@ const Founder2 = ({ navigation, route }) => {
                         <Text onTouchStart={handleOutsideTouch} allowFontScaling={false} style={[styles.t1, { marginBottom: 10, marginTop: 25, paddingLeft: 7 }]}>Funding Status</Text>
                         <Text onTouchStart={handleOutsideTouch} allowFontScaling={false} style={[styles.t2, { marginBottom: 15 }]}>Indicate the amount of funding your startup has received so far. This information will only be visible to verified investors and helps them assess your startup's financial backing and growth potential.</Text>
 
-                        <Pressable onPress={() => { handleOutsideTouch() }} style={[styles.btn1, {  marginBottom: 10, width: 220, height: 40 }]}>
+                        <Pressable onPress={() => { handleOutsideTouch() }} style={[styles.btn1, {  marginBottom: 40, width: 220, height: 40 }]}>
                             <Text allowFontScaling={false} style={styles.nexttext}>{sliderrange.toLocaleString("en-IN")}</Text>
                         </Pressable>
 
                         {/* slider */}
-                        <View style={[styles.box, { left: 20 }]}></View>
-                        <View style={[styles.box1, { left: "95%" }]}></View>
-                        <Slider onTouchStart={handleOutsideTouch} s
+                        {/* <View style={[styles.box, { left: 20 }]}></View> */}
+                        {/* <View style={[styles.box1, { left: "95%" }]}></View> */}
+                        <Slider onTouchStart={handleOutsideTouch} 
                             // style={styles.sliderbox}
                             style={{ marginTop: -7, width: "90%", margin: "auto" }}
                             minimumValue={0}

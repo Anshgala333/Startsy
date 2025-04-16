@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity ,Linking} from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity ,Linking, Pressable} from 'react-native';
 import { useFonts } from 'expo-font';
 import { FontAwesome6 } from '@expo/vector-icons';
 import { useNavigation } from 'expo-router';
@@ -11,13 +11,22 @@ const TermsAndConditions = () => {
 
     return (
         <View style={styles.container}>
+             <View style={styles.header1}>
+                    <View style={styles.headerSide}>
+                      <Pressable onPress={() => navigation.goBack()}>
+                        <FontAwesome6 name="chevron-left" size={25} style={styles.backIcon} color="#00DF60" />
+                      </Pressable>
+                    </View>
+            
+                    <View style={styles.headerCenter}>
+                      <Text style={styles.title}>Terms and Conditions</Text>
+                    </View>
+            
+                    <View style={styles.headerSide} />
+                  </View>
             <ScrollView showsVerticalScrollIndicator={false}>
-                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, left: 0 }}>
-                    <TouchableOpacity onPress={() => navigation.goBack()}>
-                        <FontAwesome6 name="chevron-left" size={25} style={{ alignSelf: 'flex-start', marginTop: 4 }} color="#00DF60" />
-                    </TouchableOpacity>
-                    <Text style={styles.header}>Terms & Conditions</Text>
-                </View>
+          
+            <View style={{ padding: 20 }}>
 
                 <Text style={{ color: '#ccc', fontFamily: 'alata', marginTop: 20, fontSize: 16 }}>Last Updated: 2nd April 2025</Text>
 
@@ -122,6 +131,8 @@ const TermsAndConditions = () => {
                 </View>
                
                 <Text style={styles.text}>By using Startsy, Users acknowledge that they have read, understood, and agreed to abide by these Terms and Conditions.</Text>
+            </View>
+            
             </ScrollView>
         </View>
     );
@@ -131,8 +142,36 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#16181a',
-        padding: 20,
+        // padding: 20,
     },
+    title: {
+        fontSize: 20,
+        color: "#E9E9E9",
+        fontFamily: "Alata",
+        textAlign: "center",
+      },
+      header1: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        paddingVertical: 15,
+        paddingHorizontal: 20,
+        borderBottomWidth: 1,
+        borderBottomColor: "#24272A",
+      },
+    
+      headerSide: {
+        width: 40, // same width as the icon button area
+        alignItems: "flex-start",
+        justifyContent: "center",
+      },
+    
+      headerCenter: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+      },
+    
     header: {
         fontSize: 26,
         fontWeight: 'bold',

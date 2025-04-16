@@ -42,7 +42,7 @@ const FP2 = ({ navigation, route }) => {
   async function check() {
     // console.log(`${url}api/checkCurrentPassword`);
     if (password == "") {
-      setmessage("* please enter your email")
+      setmessage("* please enter OTP")
       seterror(true)
       return
     }
@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "70%",
     marginHorizontal: "auto",
-    marginVertical: 40,
+    marginVertical: 30,
     backgroundColor: "#00DF60"
   },
   btntext: {

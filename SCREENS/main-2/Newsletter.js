@@ -944,7 +944,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 30,
         paddingHorizontal: 15,
-        color: "#828282",
+        color: "#ccc",
         fontFamily: "Roboto",
         fontSize: 18,
     },
