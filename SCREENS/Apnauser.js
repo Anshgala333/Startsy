@@ -35,7 +35,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 // import dotenv from 'dotenv/config'
 
 
-const Apnauser = ({ props, token, closeall, openshare }) => {
+const Apnauser = ({ props, token, closeall, openshare , opencomment }) => {
     // console.log("apnauser re render");
     
     // dotenv.config()
@@ -338,6 +338,18 @@ const Apnauser = ({ props, token, closeall, openshare }) => {
 
 
 
+    function messagetime(date) {
+        var date1 = new Date(date);
+        const messageDate1 = date1.toLocaleDateString("en-US", {
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+        });
+        return messageDate1
+    }
+
+
+
     async function getdata(params) {
         try {
 
@@ -350,10 +362,7 @@ const Apnauser = ({ props, token, closeall, openshare }) => {
                 },
             });
             const data = await response.json();
-            // console.log(data.data.hiddenInfo.socialProof);
-            // console.log(data.data.hiddenInfo.socialProof[0].url);
-            // console.log(data.data.hiddenInfo.socialProof[1].url);
-            // console.log(data.data.hiddenInfo.socialProof[2].url);
+        
             
             
 
@@ -665,14 +674,7 @@ const Apnauser = ({ props, token, closeall, openshare }) => {
                                             <Text style={{ color: "#ccc", fontFamily: 'Roboto', fontSize: 16, top: 3 }}>{item.postComments.length}</Text>
                                         </View>
 
-                                        {/* <Pressable onPress={() => {
-                                            Vibration.vibrate(20)
-                                            opencomment(item._id)
-
-                                        }}
-                                        >
-                                            <FontAwesome name="comment-o" size={27} color="#ccc" />
-                                        </Pressable> */}
+                                      
 
 
                                         {/* share */}
@@ -697,8 +699,8 @@ const Apnauser = ({ props, token, closeall, openshare }) => {
 
                                 <View style={styles.lower}>
                                     {item.type != "textBlog" && <Text allowFontScaling={false} style={styles.u3}>{item.caption != undefined ? item.caption : "caption"} </Text>}
-                                    <Pressable onPress={() => { opencomment(item._id) }} allowFontScaling={false} style={styles.u4}>
-                                        <Text style={styles.u4}>Lorem</Text>
+                                    <Pressable allowFontScaling={false} style={styles.u4}>
+                                        <Text style={styles.u4}>{messagetime(item.createdAt)}</Text>
                                     </Pressable>
                                </View>
                     </LinearGradient>
@@ -1274,43 +1276,43 @@ const Apnauser = ({ props, token, closeall, openshare }) => {
     const bottomSheetRef5 = useRef(null);
 
 
-    async function opencomment(id) {
-        setcomment(true)
-        bottomSheetRef5.current?.expand();
-        setpostid(id);
-        setiscommentopen(true)
+    // async function opencomment(id) {
+    //     setcomment(true)
+    //     bottomSheetRef5.current?.expand();
+    //     setpostid(id);
+    //     setiscommentopen(true)
 
-        // console.log("open comment");
-
-
-        try {
-            // console.log(token);
-            const response = await fetch(`${url}posts/getComments/${id}`, {
-                method: 'GET',
-                headers: {
-                    "Authorization": `Bearer ${token}`,
-                },
-            });
-            const data = await response.json();
-            // console.log(response.status);
-            // console.log(data.data);
-            setallcomments(data.data)
-            if (data.data.length == 0) {
-                setemptycomment(true)
-            }
-            else {
-                setemptycomment(false)
-
-            }
-
-        }
-        catch (err) {
-            console.log(err);
-        }
+    //     // console.log("open comment");
 
 
+    //     try {
+    //         // console.log(token);
+    //         const response = await fetch(`${url}posts/getComments/${id}`, {
+    //             method: 'GET',
+    //             headers: {
+    //                 "Authorization": `Bearer ${token}`,
+    //             },
+    //         });
+    //         const data = await response.json();
+    //         // console.log(response.status);
+    //         // console.log(data.data);
+    //         setallcomments(data.data)
+    //         if (data.data.length == 0) {
+    //             setemptycomment(true)
+    //         }
+    //         else {
+    //             setemptycomment(false)
 
-    }
+    //         }
+
+    //     }
+    //     catch (err) {
+    //         console.log(err);
+    //     }
+
+
+
+    // }
 
 
 

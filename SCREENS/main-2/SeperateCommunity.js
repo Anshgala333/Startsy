@@ -202,7 +202,7 @@ const Community = ({ allpost, setallpost, getpost, scrollY, navigation ,onReport
                             <View style={[styles.top,{flexDirection:'row',alignItems:'center',paddingRight:20 , width : "100%"}]} >
                                 <TouchableOpacity
                                     onPress={() => {
-                                        if(decode.role == "Investor")return
+                                        if(decode.role == "Investor" && item.user_id.role != "Investor")return
                                         navigation.navigate("Singleuserpage", { token: token, id: item.user_id._id, page: "Startsy" })
                                     }}
                                     style={{ display: "flex", flexDirection: "row", width: "90%"  }}>

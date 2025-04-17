@@ -387,7 +387,10 @@ function Upvotedata({ token }) {
                             <View style={{ display: "flex", flexDirection: "row" }}>
 
                                 <Pressable
-                                    onPress={() => { navigation.navigate("Singleuserpage", { token: token, id: item.sendingUserId._id, page: "bell" }) }}
+                                    onPress={() => { 
+                                        if(decode.role == "Investor" && item.sendingUserId.role != "Investor")return
+                                        navigation.navigate("Singleuserpage", { token: token, id: item.sendingUserId._id, page: "bell" }) 
+                                    }}
 
                                 >
                                     <Text style={styles.topu1}>{item.sendingUserId.userName} <Text style={styles.topu2}>{item.sendingUserId.role == "CommunityMember" ? "Member" : item.sendingUserId.role}</Text> <View style={styles.circle}></View> <AutoSizeText

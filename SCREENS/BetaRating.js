@@ -57,7 +57,7 @@ const RatingPage = ({ navigation }) => {
             const data = await response.json();
             showToastWithGravity(`Thank You ! `)
 
-            console.log(data);
+            // console.log(data);
 
         }
         catch (err) {

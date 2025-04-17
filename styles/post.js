@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
     desc1: {
         fontFamily: "Roboto",
         color: "#D9D9D9",
-        fontWeight: "bold",
+        // fontWeight: "bold",
         fontSize: 14,
         marginTop : -10
         // marginBottom : -10

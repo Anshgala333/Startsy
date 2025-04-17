@@ -8,85 +8,86 @@ import { ActivityIndicator } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 // import {  } from 'react-native-gesture-handler';
 
-const CommentBottomSheet = ({ commentRef, backdropComponent, allcomments, comments , docomment, uploadingcomment, setcommenttext, commenttext,backgroundStyle }) => {
+const CommentBottomSheet = ({ commentRef, backdropComponent, allcomments, comments, docomment, uploadingcomment, setcommenttext, commenttext, backgroundStyle }) => {
 
     const snapPoints5 = useMemo(() => ["70%",], []);
 
 
     // console.log(allcomments);
 
-    const [ inFocus,setInFocus]=useState(false)
+    const [inFocus, setInFocus] = useState(false)
 
 
 
     const inputRef = useRef(null);
     return (
         <BottomSheet
-        overlayColor="rgba(0, 0, 0, 0.9)"
-        enablePanDownToClose
-        backgroundStyle={backgroundStyle}
-        handleIndicatorStyle={{ backgroundColor: '#00de62' }}
-        ref={commentRef}
-        nestedScrollEnabled={true}
-        backdropComponent={backdropComponent}
-        enableDynamicSizing={false}
-        snapPoints={snapPoints5}
-      
-        index={-1}
-        // initialSnapIndex={0}
-        // handleStyle={{display : "none"}}
-        // contentContainerStyle={{ zIndex: 1000000, elevation: 20000000, height: 100 }}
-    >
+            overlayColor="rgba(0, 0, 0, 0.9)"
+            enablePanDownToClose
+            backgroundStyle={backgroundStyle}
+            handleIndicatorStyle={{ backgroundColor: '#00de62' }}
+            ref={commentRef}
+            nestedScrollEnabled={true}
+            backdropComponent={backdropComponent}
+            enableDynamicSizing={false}
+            snapPoints={snapPoints5}
+
+            index={-1}
+
+        >
 
 
-       <Pressable onPress={() => {
-            // console.log("openin");
-            inputRef.current?.focus()
-            // commentRef.current?.snapToIndex(1);
-
-        }}>
-            <Text style={{ textAlign: 'center', color: '#ccc', fontFamily: 'Alata', fontSize: 16 }}>Comments</Text>
-
-        </Pressable>
-
-
-        <BottomSheetFlatList
-            style={{ flexGrow: 0.98, }}
-            data={allcomments}
-            renderItem={comments}
-            scrollEnabled={true}
-            contentContainerStyle={{ flexGrow: 1, padding: 10, }}
-
-        />
-
-        <Animated.View style={{ position: "relative" }}>
-            <TextInput
-                ref={inputRef}
-               onPress={()=>{
+            <Pressable onPress={() => {
+                // console.log("openin");
                 inputRef.current?.focus()
-               }}
-                onPressIn={()=>{
-                    inputRef.current?.focus();
-                }}
-                onBlur={()=>{
-                   
-                    inputRef.current?.blur()
-                    setInFocus(false)
-                }}
-                // onblur={() => setmax(500)}
-                style={styles.input}
-                placeholder="Type here..."
-                placeholderTextColor="#828282"
-                value={commenttext}
-                onChangeText={text => setcommenttext(text)}
-            />
-            <Pressable onPress={docomment} style={[styles.send,{}]}>
-                {uploadingcomment && <ActivityIndicator size={24} color="#828282" />}
-                {!uploadingcomment && <Ionicons name="send" size={24} color="#828282" />}
+                // commentRef.current?.snapToIndex(1);
+
+            }}>
+                <Text style={{ textAlign: 'center', color: '#ccc', fontFamily: 'Alata', fontSize: 16 }}>Comments</Text>
+
             </Pressable>
-        </Animated.View>
-       
-    </BottomSheet>
+
+            {allcomments.length == 0 && <View style={{ flexGrow: 0.98, justifyContent: "center", alignItems: "center" }}>
+                <Text style={styles.nocomment}>No comments</Text>
+            </View>}
+
+
+            {allcomments.length > 0 && <BottomSheetFlatList
+                style={{ flexGrow: 0.98, }}
+                data={allcomments}
+                renderItem={comments}
+                scrollEnabled={true}
+                contentContainerStyle={{ flexGrow: 1, padding: 10, }}
+
+            />}
+
+            <Animated.View style={{ position: "relative" }}>
+                <TextInput
+                    ref={inputRef}
+                    onPress={() => {
+                        inputRef.current?.focus()
+                    }}
+                    onPressIn={() => {
+                        inputRef.current?.focus();
+                    }}
+                    onBlur={() => {
+
+                        inputRef.current?.blur()
+                        setInFocus(false)
+                    }}
+                    style={styles.input}
+                    placeholder="Type here..."
+                    placeholderTextColor="#828282"
+                    value={commenttext}
+                    onChangeText={text => setcommenttext(text)}
+                />
+                <Pressable onPress={docomment} style={[styles.send, {}]}>
+                    {uploadingcomment && <ActivityIndicator size={24} color="#828282" />}
+                    {!uploadingcomment && <Ionicons name="send" size={24} color="#828282" />}
+                </Pressable>
+            </Animated.View>
+
+        </BottomSheet>
     )
 }
 
@@ -100,15 +101,6 @@ const styles = StyleSheet.create({
     },
     input: {
         backgroundColor: 'transparent',
-        // borderColor: "#828282",
-        // // padding: 10,
-        // color: '#fff',
-        // width: "94%",
-        // marginHorizontal: "auto",
-        // fontSize: 16,
-        // paddingLeft: 10,
-        // // marginTop: 20,
-        // marginBottom: 25
         height: 50,
         width: "96%",
         marginHorizontal: "auto",
@@ -118,18 +110,29 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         color: "#ccc",
         fontSize: 18,
-        marginBottom: 10
+        marginBottom: 10,
+
 
     },
     send: {
         position: "absolute",
-        top: 12,
-        right: 30,
+        top: 14,
+        right: 25,
         transform: [{ scale: 1.1 }],
         alignSelf: "center",
         verticalAlign: "center",
         bottom: 0,
     },
+    nocomment: {
+        textAlign: "center",
+        color: "#666",
+        alignSelf: "center",
+        justifyContent: "center",
+        elevation: 100,
+        marginTop : -10,
+        bottom: 0,
+        fontSize: 16,
+    }
 })
 
 

@@ -197,8 +197,14 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
 
     const renderItem =
         ({ item, index }) => {
+            
             // console.log(item.user_id.profilePhoto, "treeeeeeeeeeeeeeee");
             // const isVideoPlaying = videoStates[item._id] || false;
+          if(item.user_id.userName == "oo"){
+            console.log(item.mediaUrl);
+            
+          }
+            
             if (item.user_id == null) {
                 return
             }
@@ -220,19 +226,19 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                         onPress={() => {
                                             // console.log(decode.role);
 
-                                            if (decode.role == "Investor") {
-                                                // console.log("qpqpqp");
+                                            if (decode.role == "Investor" && item.user_id.role != "Investor") {
+                                                console.log("qpqpqp");
                                                 return;
                                                 if (item.user_id.role == "Founder") return
                                                 else navigation.navigate("Singleuserpage", { token: token, id: item.user_id._id, page: "Startsy" })
                                             }
-                                            else if (item.user_id.role != "Investor") {
+                                            else   {
                                                 navigation.navigate("Singleuserpage", { token: token, id: item.user_id._id, page: "Startsy" })
                                             }
 
                                         }}
                                         style={{ display: "flex", flexDirection: "row", width: "90%", }}>
-                                        <Image  placeholder="blurhash" blurhash= "LEHV6nWB2yk8pyo0adR*.7KCMdnj"
+                                        <Image  placeholder={require("../../assets/images/p2.png")} blurhash= "LEHV6nWB2yk8pyo0adR*.7KCMdnj"
                                             transition={100} style={styles.userimg} source={{ uri: item.user_id.profilePhoto }} />
                                         <View style={styles.userdetail}>
                                             <Text allowFontScaling={false} style={styles.u1}>{item.user_id.userName}</Text>
@@ -258,7 +264,7 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
 
                                 {item.type == "textBlog" && <View style={styles.divider}></View>}
 
-                                {item.type == "photo" && <Image  placeholder="blurhash" blurhash= "LEHV6nWB2yk8pyo0adR*.7KCMdnj" transition={100} cachePolicy="immutable" style={[styles.template, { aspectRatio: item.aspectRatio ? item.aspectRatio : 1 / 1 }]} source={{ uri: item.mediaUrl }} />}
+                                {item.type == "photo" && <Image placeholder={require("../../assets/images/loading1.gif")} blurhash= "LEHV6nWB2yk8pyo0adR*.7KCMdnj" transition={100} cachePolicy="immutable" style={[styles.template, { aspectRatio: item.aspectRatio ? item.aspectRatio : 1 / 1 }]} source={{ uri: item.mediaUrl }} />}
                                 {item.type == "video" &&
                                     <Video
                                         ref={ref => videoRefs.current[item._id] = ref}

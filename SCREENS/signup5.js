@@ -400,7 +400,7 @@ const Signup5 = ({ navigation, route }) => {
 
         }
 
-        console.log(image == "xyz");
+   
         if(image == "xyz"){
             console.log("no image ");
             

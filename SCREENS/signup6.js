@@ -35,11 +35,7 @@ const Signup6 = ({ navigation, route }) => {
     })
 
     const { form, image } = route.params;
-    console.log('====================================');
-    console.log(form);
-    console.log('====================================');
-
-
+ 
 
     const type = "Freelancer"
     const [role1, setrole] = useState("")
@@ -138,8 +134,7 @@ const Signup6 = ({ navigation, route }) => {
 
             })
         }
-        console.log("will make final submit");
-        console.log(final);
+ 
 
 
         setloading(true)
@@ -153,7 +148,7 @@ const Signup6 = ({ navigation, route }) => {
         });
         const data = await response.json();
         setloading(false)
-        console.log(data);
+
         if (data.status === 200) {
             navigation.navigate("Main2", { username })
         }

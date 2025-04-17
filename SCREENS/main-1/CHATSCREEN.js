@@ -318,7 +318,12 @@ const Chat = ({ route }) => {
             // console.log(index);
 
 
+            if(item.message.isNewsLetter == true){
+                console.log(item.message);
+                
+            }
             return (
+                
                 <>
 
                     {typeof item.message == "string" && <TouchableOpacity onLongPress={() => {
@@ -375,7 +380,7 @@ const Chat = ({ route }) => {
                             {index == 0 && <Image style={item.senderId == jisuserkosendkarnahaiuskiid ? styles.pfpleft1 : styles.pfpright1} source={{ uri: item.senderId == jisuserkosendkarnahaiuskiid ? photo2 : photo1 }} />}
 
                             <TouchableOpacity onPress={() => {
-                               item.message.isNewsLetter == true ?  tabnavigation.navigate("NewsletterPage", { navigation, item: item }) :
+                               item.message.isNewsLetter == true ?  tabnavigation.push("NewsletterPage", { navigation:tabnavigation, item: item.message.NewsletterContent }) :
                                 tabnavigation.navigate("ViewSendedPost", { id: item.message.postShared })
                             }}>
 

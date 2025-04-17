@@ -53,17 +53,9 @@ import ApplicantsList from "./JASH/ApplicantsList.jsx";
 import CommentBottomSheet from "../SCREENS/JASH/comment-bottom-sheet/CommentBottomSheet.jsx";
 import ViewSendedPost from "./JASH/View post/ViewSendedPost.jsx";
 import ReportBottomSheet from '../SCREENS/JASH/bottom-sheet/reportBottomSheet.jsx'
-<<<<<<< HEAD
 import GlobalSocket from "@/Global/globalSocket.js";
 // import GlobalSocket from "../../Global/Global/globalSocket.js"
 // GlobalSocket
-=======
-
-import GlobalSocket from "@/Global/globalSocket.js";
-// import GlobalSocket from "../../Global/Global/globalSocket.js"
-// GlobalSocket
-
->>>>>>> 489e4c8aa0611cf8cea2294a64bbea1ca1a14013
 
 
 configureReanimatedLogger({
@@ -376,32 +368,7 @@ const Main2 = ({ navigation, route }) => {
     };
 
     const [keyboardOffset, setKeyboardOffset] = useState(new Animated.Value(0));
-    // useFocusEffect(
-    //     useCallback(() => {
-    //         const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', (event) => {
-    //             Animated.timing(keyboardOffset, {
-    //                 toValue: 0,
-    //                 duration: 300,
-    //                 useNativeDriver: false,
-    //             }).start();
-    //         });
 
-    //         const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
-    //             Animated.timing(keyboardOffset, {
-    //                 toValue: 0,
-    //                 duration: 300,
-    //                 useNativeDriver: false,
-    //             }).start();
-    //             // setk(false)
-    //             // inputRef.current?.blur()
-    //         });
-
-    //         return () => {
-    //             keyboardDidShowListener.remove();
-    //             keyboardDidHideListener.remove();
-    //         };
-    //     }, [keyboardOffset])
-    // )
 
     const openBottomSheet1 = () => {
         navigation.navigate("CommunityPage")
@@ -719,7 +686,7 @@ const Main2 = ({ navigation, route }) => {
             // setloading(false)
             console.log(data);
             console.log(response.status);
-            
+
 
             bottomSheetRef6.current?.close()
             showToastWithGravity("Post shared successfully")
@@ -792,7 +759,7 @@ const Main2 = ({ navigation, route }) => {
 
 
     const isKeyboardVisible = useRef(false);
-    var [socket , setSocket] = useState("")
+    var [socket, setSocket] = useState("")
 
     useEffect(() => {
         const newSocket = io(`${url}`, {
@@ -808,7 +775,7 @@ const Main2 = ({ navigation, route }) => {
 
 
     return (
-        // <GlobalSocket.Provider value={socket}>
+        <GlobalSocket.Provider value={socket}>
             <GestureHandlerRootView
                 waitfor={commentinput}
                 style={{ flex: 1, backgroundColor: "#16181a" }}>
@@ -942,7 +909,7 @@ const Main2 = ({ navigation, route }) => {
                             />
                             <Tab.Screen
                                 name="Profile"
-                                children={() => <Apnauser closeall={closeall} openshare={openshare} mainpagebottomsheet={mainpagebottomsheet} navigation={navigation} token={token} />}
+                                children={() => <Apnauser closeall={closeall} openshare={openshare} mainpagebottomsheet={mainpagebottomsheet} navigation={navigation} opencomment={opencomment} token={token} />}
                                 options={{
                                     freezeOnBlur: true,
                                     unmountOnBlur: true,
@@ -1182,7 +1149,7 @@ const Main2 = ({ navigation, route }) => {
 
                 </KeyboardAvoidingView>
             </GestureHandlerRootView>
-        //  </GlobalSocket.Provider>
+        </GlobalSocket.Provider>
     );
 };
 

@@ -58,9 +58,7 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
 
 
   async function docomment() {
-    console.log("doing comment");
-    console.log(postid);
-    console.log(commenttext);
+
     setuploadingcomment(true)
 
 
@@ -75,10 +73,9 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
         },
       });
       const data = await response.json();
-      console.log(data);
+
       setemptycomment(false)
 
-      console.log(response.status);
       setcommenttext("");
 
       var object = {
@@ -119,6 +116,17 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
       setposts([])
     }, [])
   );
+
+
+  function messagetime(date) {
+    var date1 = new Date(date);
+    const messageDate1 = date1.toLocaleDateString("en-US", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+    });
+    return messageDate1
+}
 
   const comments = ({ item, index }) => {
 
@@ -206,7 +214,7 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
 
       const { data } = await response.json();
       // console.log('dataaaayfwyfdywf',data);
-      navigation.navigate("Followerpage", { people: data, token: token })
+      navigation.navigate("Followerpage", { people: data, token: token ,tabNavigation : navigation })
 
     } catch (error) {
       console.log(error);
@@ -226,9 +234,7 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
   const [posts, setposts] = useState([])
 
 
-  // const Tab = createMaterialTopTabNavigator();
 
-  // console.log(id , "id");
   var decode = jwtDecode(token)
 
 
@@ -263,7 +269,7 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
           return true
         }
       })
-      console.log(rec1);
+
       // return
 
 
@@ -276,15 +282,10 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
       var decode = jwtDecode(token)
       var data1 = data.data.posts.map(e => {
 
-        // console.log(e);
 
         var object = { ...e, isliked: e.likedBy ? e.likedBy.includes(decode._id) : false, Applied: e.communityPost ? e.communityPost.communityMembers.includes(decode._id) : false, Jobapplied: e.jobPosts ? e.jobPosts.jobApplicants.includes(decode._id) : false }
         return object
       })
-
-      // console.log(data1);
-
-
 
 
 
@@ -306,7 +307,7 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
 
       setImage(data.data.user_id.bannerImage)
 
-      console.log(data.status, "oiuy");
+
       // setImage(data.data.user_id.bannerImage)
       setconnecteddata(data.status)
 
@@ -486,17 +487,7 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
                 <Text style={{ color: "#ccc", fontFamily: 'Roboto', fontSize: 16, top: 3 }}>{item.postComments.length}</Text>
               </View>
 
-              {/* <Pressable onPress={() => {
-                Vibration.vibrate(20)
-                opencomment(item._id)
-
-              }}
-              >
-                <FontAwesome name="comment-o" size={27} color="#ccc" />
-              </Pressable> */}
-
-
-              {/* share */}
+              
 
               <Pressable onPress={() => {
                 Vibration.vibrate(20)
@@ -509,27 +500,15 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
             </View>
 
 
-            {/* 
-<TouchableOpacity style={{ paddingRight: 0, paddingRight: 8 }} onPress={() => toggleSavePost(item._id, index)}>
-    {!item.isSaved? (
-        <MaterialIcons name="bookmark-border" size={32} color="#ccc" />
-    ) : (
-        <MaterialCommunityIcons
-            name="bookmark"
-            size={32}
-            color="#ccc"             // Gray when unsaved
-
-        />
-    )}
-</TouchableOpacity> */}
+          
 
 
 
           </View>
           <View style={styles.lower}>
             <Text allowFontScaling={false} style={styles.u3}>{item.caption != undefined ? item.caption : "caption"} </Text>
-            <Pressable onPress={() => { opencomment(item._id) }} allowFontScaling={false} style={styles.u4}>
-              <Text style={styles.u4}>View {item.postComments?.length} comments</Text>
+            <Pressable allowFontScaling={false} style={styles.u4}>
+              <Text style={styles.u4}>{messagetime(item.createdAt)}</Text>
             </Pressable>
 
           </View>
@@ -707,7 +686,7 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
             }
           })
           const data = await response.json();
-          console.log(data);
+
 
         }
         catch (err) {
@@ -732,11 +711,7 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
         },
       });
       const data = await response.json();
-      // setloading(false)
-      console.log(data);
-      // console.log(response.status);
 
-      // setfollowstatus("request sent")
       setconnecteddata("Pending Request")
 
 
@@ -810,7 +785,7 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
                 <Banner />
               </View>}
 
-            {(image != "" && image != undefined) && <Image placeholder="blurhash" blurhash= "LEHV6nWB2yk8pyo0adR*.7KCMdnj" style={styles1.bimg} source={{ uri: image }} />}
+            {(image != "" && image != undefined) && <Image placeholder="blurhash" blurhash="LEHV6nWB2yk8pyo0adR*.7KCMdnj" style={styles1.bimg} source={{ uri: image }} />}
           </Pressable>
           <View style={styles1.bottom}>
 
@@ -986,8 +961,7 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
         },
       });
       const data = await response.json();
-      console.log(data);
-      console.log(response.status);
+
 
     }
     catch (err) {
@@ -1028,8 +1002,7 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
         },
       });
       const data = await response.json();
-      // console.log(response.status);
-      console.log(data.data);
+
       setallcomments(data.data)
       if (data.data.length == 0) {
         setemptycomment(true)

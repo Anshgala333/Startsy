@@ -127,6 +127,9 @@ const Followerpage = ({ navigation, route }) => {
     // console.log(people);
 
     function renderSuggestion({ item }) {
+        console.log('====================================');
+        console.log(item);
+        console.log('====================================');
         if (stat == true) {
             console.log("hi");
             if (item.role != "Investor") return
@@ -183,7 +186,10 @@ const Followerpage = ({ navigation, route }) => {
 
             <View style={styles.header}>
                 <View style={styles.headerSide}>
-                    <Pressable onPress={() => tabNavigation.navigate("Profile")}>
+                    <Pressable onPress={() => {
+                        // tabNavigation.goBack()
+                        tabNavigation.navigate("Profile")
+                    }}>
                         <FontAwesome6 name="chevron-left" size={25} style={styles.backIcon} color="#00DF60" />
                     </Pressable>
                 </View>

@@ -85,7 +85,7 @@ const FP1 = ({ navigation }) => {
             {/* Header Section */}
             {/* <Text allowFontScaling={false} style={styles.headerText}>Profile</Text> */}
             <Pressable onPress={() => {
-                console.log("hi");
+                
                 navigation.goBack()  
             }}>
                 <FontAwesome6 name="chevron-left" size={25}

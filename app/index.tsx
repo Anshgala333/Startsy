@@ -67,6 +67,7 @@ import { enableFreeze } from "react-native-screens";
 import { enableScreens } from "react-native-screens";
 import QuestionReply from "@/SCREENS/main-2/QuestionReply.js";
 import Settings from "../SCREENS/Settings.js";
+import NewsletterPage from "@/SCREENS/main-2/news1.js";
 
 // if (__DEV__) {
 //   const whyDidYouRender = require('@welldone-software/why-did-you-render');
@@ -274,6 +275,7 @@ export default function App() {
           <Stack.Screen name="ApplicantsList" component={ApplicantsList} />
           <Stack.Screen name="JobsPostedScreen" component={JobsPostedScreen} />
           <Stack.Screen name="Email" component={Email} />
+          <Stack.Screen name="NewsletterPage" component={NewsletterPage} />
           <Stack.Screen
             name="InvestorWaitingPage"
             component={InvestorWaitingPage}
@@ -450,7 +452,7 @@ async function schedulePushNotification() {
     }),
   })
     .then((response) => response.json())
-    .then((data) => console.log(data))
+    .then((data) => console.log())
     .catch((error) => console.error("Error:", error));
 
   // await Notifications.scheduleNotificationAsync({

@@ -120,7 +120,7 @@ const Settings = ({ navigation, route }) => {
         },
       });
       const data = await response.json();
-      console.log(data);
+ 
       console.log(response.status);
 
       if (response.status === 200) {
@@ -173,7 +173,7 @@ const Settings = ({ navigation, route }) => {
             <Text style={styles.optionText}>Update</Text> 
           </TouchableOpacity>
           <TouchableOpacity style={styles.option} onPress={() => {
-            console.log(editprofilepage);
+      
 
             navigation.navigate(editprofilepage)
           }}>

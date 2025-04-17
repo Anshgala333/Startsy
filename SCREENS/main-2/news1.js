@@ -14,6 +14,10 @@ const NewsletterPage = ({  openshare }) => {
     const route = useRoute();
     const { item  , navigation} = route.params
 
+    console.log(item.taggedUser , "oo");
+    console.log(item , "oo");
+    
+
     useEffect(() => {
         // StatusBar.setBackgroundColor("")
         StatusBar.setBarStyle("light-content")
@@ -91,16 +95,17 @@ const NewsletterPage = ({  openshare }) => {
                 <Image source={{ uri: item.newsletterImage }} style={styles.postImage} />
                 <Text style={styles.postTitle}>{item.title}</Text>
                 <View style={styles.authorInfo}>
-                    <Image source={{ uri: item.taggedUser.profilePhoto }} style={styles.profileImage} />
+                    {/* {item.profilePhoto && <Image source={{ uri: item.profilePhoto }} style={styles.profileImage} />} */}
+                    {item.taggedUser.profilePhoto && <Image source={{ uri: item.taggedUser.profilePhoto }} style={styles.profileImage} />}
                     <View style={styles.userinfo}>
 
                         <View style={{ display: "flex", flexDirection: "row", alignSelf: "center" }}>
                             <Text style={styles.authorName}>
                                 {item.taggedUserName}
                             </Text>
-                            <Text style={styles.role}>{item.taggedUser.role == "CommunityMember" ? "Member" : item.taggedUser.role}</Text>
+                            <Text style={styles.role}>{item.taggedUser.role == "CommunityMember" ? "Member" : item.taggedUser.role }</Text>
                         </View>
-                        <Text style={styles.time}>{time(item.taggedUser.createdAt)}</Text>
+                        <Text style={styles.time}>{time(item.createdAt)}</Text>
                     </View>
                 </View>
                 <Text style={styles.postContent}>{item.content}</Text>

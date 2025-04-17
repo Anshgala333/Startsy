@@ -20,8 +20,8 @@ const signupstyles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#16181a",
-        minHeight : height,
-        
+        minHeight: height,
+
         justifyContent: "center",
         alignContent: "center",
     },
@@ -69,7 +69,7 @@ const signupstyles = StyleSheet.create({
         width: "85%",
         marginHorizontal: "auto",
         color: "#E65858",
-        textAlign : "center",
+        textAlign: "center",
         fontSize: 12,
         fontFamily: "Roboto",
 
@@ -82,7 +82,7 @@ const signupstyles = StyleSheet.create({
         width: "85%",
         marginHorizontal: "auto",
         color: "#E65858",
-        textAlign : "center",
+        textAlign: "center",
         fontSize: 12,
         fontFamily: "Roboto",
 
@@ -97,7 +97,7 @@ const signupstyles = StyleSheet.create({
     },
     t2: {
         fontFamily: "Roboto",
-        fontSize:  12,
+        fontSize: 12,
         color: "#828282",
         textAlign: "center",
         marginBottom: scalingfactor * 30,
@@ -105,19 +105,16 @@ const signupstyles = StyleSheet.create({
 
     },
     input: {
-        // height: height * 0.045, // Responsive height
-        backgroundColor: "transparent",
-        // margin: height * 0.016,
-        marginTop: 0,
-        // borderBottomWidth: 1,
-        // borderRadius : 20,
-        paddingLeft: scalingfactor * 10,
-        // borderBottomColor: "#ccc",
-        fontSize: scalingfactor * 20, // Responsive font size
-        color: "#B8B8B8",
-        // paddingBottom: scalingfactor * 10,
-        width: "92%",
+
+        width: "75%",
+
+        fontSize: scalingfactor * 18, // Responsive font size
+        color: "white",
+        padding: 0,
+        // paddingBottom: height * 0.012,
         fontFamily: "Alata",
+        // lineHeight : scalingfactor * 20
+        //marginBottom:40,
 
     },
     input2: {

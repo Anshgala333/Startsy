@@ -33,6 +33,18 @@ const SuggestedPost = ({ item, index, opencomment, openshare, upvotepost, id, to
 
 
 
+    function messagetime(date) {
+        var date1 = new Date(date);
+        const messageDate1 = date1.toLocaleDateString("en-US", {
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+        });
+        return messageDate1
+    }
+
+
+
 
 
     return (
@@ -141,7 +153,7 @@ const SuggestedPost = ({ item, index, opencomment, openshare, upvotepost, id, to
                             <MaterialCommunityIcons
                                 name="bookmark"
                                 size={32}
-                                color="#ccc"           
+                                color="#ccc"
 
                             />
                         )}
@@ -152,8 +164,8 @@ const SuggestedPost = ({ item, index, opencomment, openshare, upvotepost, id, to
                 </View>
                 <View style={styles.lower}>
                     {item.type != "textBlog" && <Text allowFontScaling={false} style={styles.u3}>{item.caption != undefined ? item.caption : "caption"} </Text>}
-                    <Pressable onPress={() => { opencomment(item._id) }} allowFontScaling={false} style={styles.u4}>
-                        <Text style={styles.u4}>Lorem</Text>
+                    <Pressable allowFontScaling={false} style={styles.u4}>
+                        <Text style={styles.u4}>{messagetime(item.createdAt)}</Text>
                     </Pressable>
 
                 </View>

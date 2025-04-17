@@ -10,8 +10,7 @@ const FP2 = ({ navigation, route }) => {
   var email = route.params.email
   var isforgot = route.params.isforgot
 
-  // console.log(email);
-  // console.log(isforgot);
+
 
 
   const [loading, setloading] = useState(false);

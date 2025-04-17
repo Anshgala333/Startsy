@@ -48,7 +48,6 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation, o
     var [lengthOfJobs, setLength] = useState(0)
     useEffect(() => {
         var filter = allpost.filter((e) => { e.type == "jobPost" })
-        console.log(filter.length, "yyy");
         setLength(filter.length)
     }, [])
 
@@ -127,7 +126,7 @@ const JobpostPage = memo(({ allpost, setallpost, getpost, scrollY, navigation, o
 
             else {
                 if (item.type == "jobPost") {
-                    console.log(item);
+                    // console.log(item);
                     return (
                         <LinearGradient
                             colors={["rgba(33, 34, 35, 0.4)", "rgba(25, 26, 27, 0.6)"]}
