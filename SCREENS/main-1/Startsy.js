@@ -19,6 +19,8 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { LinearGradient } from 'expo-linear-gradient';
 import Idea from "../../assets/icons/idea1.js"
 import styles1 from '@/styles/Alert.js';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 import { BlurView } from 'expo-blur';
 
@@ -217,7 +219,7 @@ export default function Startsy({ navigation, route, token }) {
             <Pressable onPress={() => {
                 console.log("showing big");
                 showbigcard(item)
-            }} style={{ flex: 1, height: 100 }}>
+            }} style={{ flexShrink: 1, alignSelf:'stretch' }}>
 
                 <LinearGradient
                     colors={["rgba(33, 34, 35, 1)", "rgba(25, 26, 27, 1)"]}
@@ -271,8 +273,8 @@ export default function Startsy({ navigation, route, token }) {
                     {/* Description Section */}
                     <Text style={styles.sectionHeader}>Description:</Text>
                     <Text style={styles.text}>
-                        {item.description.split(" ").slice(0, 46).join(" ")}
-                        {item.description.split(" ").length > 46 && (
+                        {item.description.split(" ").slice(0, 36).join(" ")}
+                        {item.description.split(" ").length > 36 && (
                             <Text style={{ color: "#00de62" }}> ...Read more</Text>
                         )}
                     </Text>
@@ -665,29 +667,34 @@ export default function Startsy({ navigation, route, token }) {
 
                     <View style={styles.iconcontainer}>
 
-                        <Pressable onPress={swipeLeft} style={{ width: 80, height: 80, backgroundColor: "transparent" }}><Trash /></Pressable>
-                        <Pressable onPress={() => {
-                            setselected(true)
-                            setVisible(true)
-                            incrementupvote()
-                        }}
-                            style={{ width: 70, height: 70, marginLeft: 6 }}>
-                            <Idea />
+                        <View style={styles.iconWithText}>
+                            <Pressable onPress={swipeLeft}>
+                                <Ionicons name="return-up-back" size={42} color="#ccc" />
+                            </Pressable>
+                            <Text style={styles.iconLabel}>Reject</Text>
+                        </View>
 
-
-
+                        <Pressable
+                            onPress={() => {
+                                setselected(true);
+                                setVisible(true);
+                                incrementupvote();
+                            }}
+                            style={{ alignItems: 'center' }}
+                        >
+                            <MaterialCommunityIcons name="message-processing-outline" size={41} color="#ccc" />
+                            <Text style={styles.iconLabel}>Suggest</Text>
                         </Pressable>
-                        {/* <LinearGradient
-                        style={{ transform: [{ scale: 1 }], width: 60, height: 60, backgroundColor: "#16181a", borderRadius: 100, justifyContent: "center", alignItems: "center" , borderColor :  }}
-                        locations={[0, 0.8]}
-                        colors={['#24272A', '#16181a']}
-                        start={{ x: 0, y: 0 }} // Starting point of the gradient
-                        end={{ x: 1, y: 0 }}
-                    > */}
-                        {/* 
-                    </LinearGradient> */}
-                        <Pressable onPress={swipeRight} style={{ width: 80, height: 80, backgroundColor: "transparent", marginLeft: 10 }}><Addicon /></Pressable>
+
+                        <View style={styles.iconWithText}>
+                            <Pressable onPress={swipeRight}>
+                                <Ionicons name="return-up-forward" size={42} color="#ccc" />
+                            </Pressable>
+                            <Text style={styles.iconLabel}>Connect</Text>
+                        </View>
+
                     </View>
+
 
                 </SafeAreaView>
             </ScrollView>
@@ -698,33 +705,45 @@ export default function Startsy({ navigation, route, token }) {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        // backgroundColor: 'rgba(33, 34, 35, 1)',
-        // backgroundColor: "#16181a",
-        paddingHorizontal: 16,
-        maxWidth: width - 30,
-        width: "99%",
-        maxHeight: height * 0.7,
-
-        // shadowColor: 'rgba(0, 0, 0, 0.2)', // Shadow color
-        // shadowOffset: {
-        //     width: 0, // x offset
-        //     height: 50, // y offset
-        // },
-        // elevation : 30,
-
-        // shadowOpacity: 1, // Full opacity for shadow effect
-        // shadowRadius: 100, // Blur radius
-
-        marginHorizontal: "auto",
-        // marginHorizontal: 10,
-        // maxHeight: height - 100,
-        borderRadius: 10,
-        // borderColor : "#666",
-        // borderWidth: 1,
-        paddingTop: 20,
-        overflow: "scroll"
+        // flex: 1,
+        // paddingHorizontal: 16,
+        // maxWidth: width - 30,
+        // width: "99%",
+        // maxHeight: height * 0.7,
+        // verticalpadding: 8,
+        // marginHorizontal: "auto",
+        // borderRadius: 10,
+        // paddingTop: 20,
+        // overflow: "scroll",
+    
+            paddingVertical: 10,
+            paddingHorizontal: 14,
+            borderRadius: 12,
+            marginVertical: 8,
+            height: 470, // <--- ADD THIS
+            overflow: 'scroll',
+          
+          
+       
+        },
+    iconcontainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        paddingHorizontal: 20,
     },
+
+    iconWithText: {
+        alignItems: 'center',
+    },
+
+    iconLabel: {
+        marginTop: 4,
+        fontSize: 14,
+        color: '#828282',
+        fontFamily: 'Alata',
+    },
+
     contentContainer: {
         paddingBottom: 80,
         // maxWidth: width,
@@ -790,7 +809,7 @@ const styles = StyleSheet.create({
         color: '#D9D9D9',
         fontSize: 14,
         fontWeight: 'bold',
-        marginTop: 16,
+        // marginTop: 10,
         marginBottom: 4,
         fontFamily: "Roboto"
     },
@@ -873,14 +892,14 @@ const styles = StyleSheet.create({
         zIndex: 1000,
         display: "flex",
         flexDirection: "row",
+        alignItems: "center",
         width: width,
+        justifyContent: "center",
         backgroundColor: "transparent",
         paddingHorizontal: 10,
-        marginLeft: 2,
-        // backgroundColor : "red",
+        marginBottom: 30,
+        gap: 80,
 
-        justifyContent: "space-between"
-        // zIndex : 100
     },
     t2: {
         textAlign: 'Left',
