@@ -38,9 +38,9 @@ const CommentBottomSheet = ({ commentRef, backdropComponent, allcomments, commen
 
 
        <Pressable onPress={() => {
-            // console.log("openin");
+
             inputRef.current?.focus()
-            // commentRef.current?.snapToIndex(1);
+           
 
         }}>
             <Text style={{ textAlign: 'center', color: '#ccc', fontFamily: 'Alata', fontSize: 16 }}>Comments</Text>
