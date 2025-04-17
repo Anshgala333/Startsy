@@ -53,17 +53,11 @@ import ApplicantsList from "./JASH/ApplicantsList.jsx";
 import CommentBottomSheet from "../SCREENS/JASH/comment-bottom-sheet/CommentBottomSheet.jsx";
 import ViewSendedPost from "./JASH/View post/ViewSendedPost.jsx";
 import ReportBottomSheet from '../SCREENS/JASH/bottom-sheet/reportBottomSheet.jsx'
-<<<<<<< HEAD
-import GlobalSocket from "@/Global/globalSocket.js";
-// import GlobalSocket from "../../Global/Global/globalSocket.js"
-// GlobalSocket
-=======
+
 
 import GlobalSocket from "@/Global/globalSocket.js";
 // import GlobalSocket from "../../Global/Global/globalSocket.js"
 // GlobalSocket
-
->>>>>>> 489e4c8aa0611cf8cea2294a64bbea1ca1a14013
 
 
 configureReanimatedLogger({
