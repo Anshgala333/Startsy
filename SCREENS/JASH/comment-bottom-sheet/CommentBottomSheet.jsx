@@ -32,13 +32,6 @@ const CommentBottomSheet = ({ commentRef, backdropComponent, allcomments, commen
             enableDynamicSizing={false}
             snapPoints={snapPoints5}
             index={-1}
-            // onClose={()=>{
-            //     console.log("ok");
-                
-
-            //     setcomment(false)
-            // }}
-
         >
 
 

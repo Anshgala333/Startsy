@@ -87,16 +87,9 @@ function Upvotedata({ token }) {
 
 
 
-  
-
     useEffect(() => {
         getData1()
     }, [])
-
-
-
-
-
 
     async function getData1() {
         try {
@@ -435,62 +428,22 @@ function Upvotedata({ token }) {
 
 
 
-        // if (decode.role == "CommunityMember") {
-        //     return (
-        //         <Pressable style={styles.Jobbtn} onPress={() => {
-        //             navigation.navigate('AllRequests', {
-        //                 token: token, navigation: navigation
-        //             })
-        //         }
-        //         }>
-        //             <Text style={styles.jobbtntext}><Text style={{ color: "#00de62", borderColor: "red", borderWidth: 1 }}>{length}</Text>   Connection Requests</Text>
 
-        //         </Pressable>
-        //     )
-        // }
-        // if (suggestion && suggestion.length == 0) {
-        //     return (
-        //         <Pressable style={[styles.Jobbtn, { marginBottom: -10 }]} onPress={() => {
-        //             navigation.navigate('AllRequests', {
-        //                 token: token, navigation: navigation
-        //             })
-        //         }
-
-
-        //         }>
-        //             <Text style={styles.jobbtntext}><Text style={{ color: "#00de62", borderWidth: 1 }}>{length}</Text>  Connection Requests </Text>
-
-        //         </Pressable>
-        //     )
-        // }
         return (
             <>
 
 
-                {/* <Pressable style={[styles.Jobbtn, { marginBottom: 10 }]} onPress={() => {
-                    navigation.navigate('AllRequests', {
-                        token: token, navigation: navigation
-                    })
-                }
-
-                }>
-                    <Text style={styles.jobbtntext}><Text style={{ color: "#00de62", borderColor: "red", borderWidth: 1 }}>{length}</Text>  Connection Requests  </Text>
-
-                </Pressable> */}
 
                 <View style={styles.divider}></View>
                 {decode.role != "Investor" && <Text style={styles.t11}>Investor Suggestions</Text>}
                 <FlatList
                     horizontal={true}
+                    showsHorizontalScrollIndicator={false}
                     style={{ display: "flex", flexDirection: "row", gap: 10 }}
                     data={suggestion}
                     renderItem={rendersub}
-                // renderItem={() => <Text style={{ fontSize: 100 }}>okkk</Text>}
                 />
                 {decode.role != "Investor" && <View style={[styles.divider, { marginBottom: -10 }]}></View>}
-
-
-
 
 
                 {skeleton && <View style={styles.listItem1}>
@@ -544,23 +497,29 @@ function Upvotedata({ token }) {
     var decode;
 
 
-    // useEffect(()=>{
-    //     nor
-    // },[])
 
     function Suggestions() {
 
         decode = jwtDecode(token)
 
-        return (
-            <FlatList
-                // contentContainerStyle={{ height: 300, backgroundColor: "red" }}
-                data={null}
-                renderItem={() => null}
-                ListHeaderComponent={top100}
-                style={{ marginBottom: 20 }}
-            />
-        )
+        
+        if(decode.role != 'Founder') return;
+        if(decode.role == "Founder" && suggestion.length > 0){
+            return (
+                <FlatList
+                    // contentContainerStyle={{ height: 300, backgroundColor: "red" }}
+                    data={null}
+                    renderItem={() => null}
+                    ListHeaderComponent={top100}
+                    showsHorizontalScrollIndicator={false}
+                    showsVerticalScrollIndicator={false}
+                    style={{ marginBottom: 20 }}
+                />
+            )
+        }
+
+
+       
     }
 
     const emptyListText = () => {
