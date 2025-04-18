@@ -120,7 +120,10 @@ const Community = ({ allpost, setallpost, getpost, scrollY, navigation ,onReport
     async function applycommunity(id, index) {
         if (allpost[index].Applied) {
             return
-
+        }
+        if(decode.role != "Investor" && allpost[index].user_id.role == "Investor"){
+            showToastWithGravity("you are not allowed to join this community")
+            return
         }
         setallpost(allpost.map((e, i) => {
             if (i == index) {

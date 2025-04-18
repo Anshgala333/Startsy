@@ -682,7 +682,7 @@ const Founder2 = ({ navigation, route }) => {
 
                         <View style={styles1.v1} >
                             <Pressable onPress={addurl}>
-                                <AntDesign name="instagram" style={styles1.plus1} size={24} color="#828282" />
+                                {/* <AntDesign name="instagram" style={styles1.plus1} size={24} color="#828282" /> */}
                                 {/* <Entypo style={styles.plus1} name="plus" size={24} color="#00DE62" /> */}
                             </Pressable>
 
@@ -702,7 +702,7 @@ const Founder2 = ({ navigation, route }) => {
                         <View style={styles1.v1} >
                             <Pressable onPress={addurl}>
                                 {/* <Feather name="youtube" style={styles.plus1} size={24} color="#bbbbbb" /> */}
-                                <AntDesign name="youtube" style={styles1.plus1} size={24} color="#828282" />
+                                {/* <AntDesign name="youtube" style={styles1.plus1} size={24} color="#828282" /> */}
                                 {/* <Entypo style={styles.plus1} name="plus" size={24} color="#00DE62" /> */}
                             </Pressable>
 
@@ -721,7 +721,7 @@ const Founder2 = ({ navigation, route }) => {
 
                         <View style={styles1.v1} >
                             <Pressable onPress={addurl}>
-                                <AntDesign name="linkedin-square" style={styles1.plus1} size={24} color="#828282" />
+                                {/* <AntDesign name="linkedin-square" style={styles1.plus1} size={24} color="#828282" /> */}
                                 {/* <Entypo style={styles.plus1} name="plus" size={24} color="#00DE62" /> */}
                             </Pressable>
 
@@ -1037,7 +1037,7 @@ const styles1 = StyleSheet.create({
         //     //    backgroundColor :"red",
         paddingBottom: 0,
         marginTop: 10,
-        marginBottom: 20
+        // marginBottom: 20
     },
     input101: {
 
@@ -1112,15 +1112,16 @@ const styles1 = StyleSheet.create({
         marginBottom: scalingfactor * 3,
     },
     inputf: {
-        margin: height * 0.016,
+        // margin: height * 0.016,
         marginTop: 0,
+        marginBottom : 10,
 
         fontSize: scalingfactor * 20,
         color: "#B8B8B8",
         paddingBottom: scalingfactor * 0,
         width: "90%",
         marginLeft: 0,
-        paddingLeft: 40,
+        paddingLeft: 0,
         // marginBottom : 30,
         // fontFamily: "Roboto",
         // lineHeight: scalingfactor * 18,

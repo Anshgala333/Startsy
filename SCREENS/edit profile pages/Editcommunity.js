@@ -896,7 +896,7 @@ const Editcommunity = ({ navigation }) => {
 
                             <View style={styles1.v1} >
                                 {/* <Pressable onPress={addurl}> */}
-                                <AntDesign name="instagram" style={styles1.plusss} size={24} color="#828282" />
+                                {/* <AntDesign name="instagram" style={styles1.plusss} size={24} color="#828282" /> */}
                                 {/* <Entypo style={styles.plus1} name="plus" size={24} color="#00DE62" /> */}
                                 {/* </Pressable> */}
 
@@ -915,7 +915,7 @@ const Editcommunity = ({ navigation }) => {
                             <View style={styles1.v1} >
                                 {/* <Pressable onPress={addurl}> */}
                                 {/* <Feather name="youtube" style={styles.plus1} size={24} color="#bbbbbb" /> */}
-                                <AntDesign name="youtube" style={styles1.plusss} size={24} color="#828282" />
+                                {/* <AntDesign name="youtube" style={styles1.plusss} size={24} color="#828282" /> */}
                                 {/* <Entypo style={styles.plus1} name="plus" size={24} color="#00DE62" /> */}
                                 {/* </Pressable> */}
 
@@ -934,7 +934,7 @@ const Editcommunity = ({ navigation }) => {
 
                             <View style={styles1.v1} >
                                 {/* <Pressable onPress={addurl}> */}
-                                <AntDesign name="linkedin-square" style={styles1.plusss} size={24} color="#828282" />
+                                {/* <AntDesign name="linkedin-square" style={styles1.plusss} size={24} color="#828282" /> */}
                                 {/* <Entypo style={styles.plus1} name="plus" size={24} color="#00DE62" /> */}
                                 {/* </Pressable> */}
 
@@ -1248,7 +1248,7 @@ const styles1 = StyleSheet.create({
     },
 
     inputss: {
-        margin: height * 0.016,
+        // margin: height * 0.016,
         marginTop: 0,
         paddingLeft: 20,
 
@@ -1257,9 +1257,10 @@ const styles1 = StyleSheet.create({
         // paddingBottom: scalingfactor * 0,
         width: "90%",
         marginLeft: 0,
-        paddingLeft: 50,
+        paddingLeft: 0,
         borderBottomColor: "red",
-        borderwidth: 10
+        borderwidth: 10,
+        // backgroundColor : "red"
 
     },
     certificate: {

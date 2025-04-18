@@ -175,8 +175,8 @@ const Chat1 = ({ navigation, route }) => {
 
     useEffect(() => {
         // Connect to the Socket.IO server
-        const newSocket = io(`${url}chatScreen`, {
-            transports: ["websocket"], // Ensure WebSocket is used
+        const newSocket = io(`${url}`, {
+            // transports: ["websocket"], // Ensure WebSocket is used
         });
 
         setSocket(newSocket);

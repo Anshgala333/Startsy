@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
-import { View, Text, Linking, FlatList, StatusBar, ActivityIndicator, RefreshControl, StyleSheet, BackHandler, SafeAreaView, ScrollView, Pressable, TextInput, Vibration, TouchableOpacity } from "react-native";
+import { View, Text, Linking, FlatList, StatusBar, Image, ActivityIndicator, RefreshControl, StyleSheet, BackHandler, SafeAreaView, ScrollView, Pressable, TextInput, Vibration, TouchableOpacity } from "react-native";
 import Entypo from '@expo/vector-icons/Entypo';
 import EvilIcons from '@expo/vector-icons/EvilIcons'; import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import Banner from "../assets/icons/banner.js"
@@ -7,7 +7,7 @@ import Upvote from '@/assets/icons/upvote';
 import { Skeleton } from 'moti/skeleton'
 import { MotiView } from 'moti';
 import AntDesign from '@expo/vector-icons/AntDesign';
-import { Image } from 'expo-image';
+// import { Image } from 'expo-image';
 
 import * as ImagePicker from 'expo-image-picker';
 import Post from "../components/Post.js"
@@ -30,7 +30,7 @@ import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 import { LinearGradient } from 'expo-linear-gradient';
 
 
-const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
+const Singleprofilepage = ({ props, openshare, onReportCallBack , opencomment }) => {
 
 
 
@@ -984,42 +984,42 @@ const Singleprofilepage = ({ props, openshare, onReportCallBack }) => {
 
 
 
-  async function opencomment(id) {
-    setcomment(true)
-    bottomSheetRef5.current?.expand();
-    setpostid(id);
-    setiscommentopen(true)
+  // async function opencomment(id) {
+  //   setcomment(true)
+  //   bottomSheetRef5.current?.expand();
+  //   setpostid(id);
+  //   setiscommentopen(true)
 
-    // console.log("open comment");
-
-
-    try {
-      console.log(token);
-      const response = await fetch(`${url}posts/getComments/${id}`, {
-        method: 'GET',
-        headers: {
-          "Authorization": `Bearer ${token}`,
-        },
-      });
-      const data = await response.json();
-
-      setallcomments(data.data)
-      if (data.data.length == 0) {
-        setemptycomment(true)
-      }
-      else {
-        setemptycomment(false)
-
-      }
-
-    }
-    catch (err) {
-      console.log(err);
-    }
+  //   // console.log("open comment");
 
 
+  //   try {
+  //     console.log(token);
+  //     const response = await fetch(`${url}posts/getComments/${id}`, {
+  //       method: 'GET',
+  //       headers: {
+  //         "Authorization": `Bearer ${token}`,
+  //       },
+  //     });
+  //     const data = await response.json();
 
-  }
+  //     setallcomments(data.data)
+  //     if (data.data.length == 0) {
+  //       setemptycomment(true)
+  //     }
+  //     else {
+  //       setemptycomment(false)
+
+  //     }
+
+  //   }
+  //   catch (err) {
+  //     console.log(err);
+  //   }
+
+
+
+  // }
 
 
 

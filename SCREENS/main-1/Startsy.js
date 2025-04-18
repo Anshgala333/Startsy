@@ -219,10 +219,10 @@ export default function Startsy({ navigation, route, token }) {
             <Pressable onPress={() => {
                 console.log("showing big");
                 showbigcard(item)
-            }} style={{ flexShrink: 1, alignSelf:'stretch' }}>
+            }} style={{ flexShrink: 1, alignSelf: 'stretch' }}>
 
                 <LinearGradient
-                    colors={["rgba(33, 34, 35, 1)", "rgba(25, 26, 27, 1)"]}
+                    colors={["rgba(33, 34, 35, 1)", "rgba(22, 24, 26 , 0.8)"]}
                     locations={[0, 1]}
                     style={[styles.container]} contentContainerStyle={styles.contentContainer}
                     // style={styles.box}
@@ -271,13 +271,17 @@ export default function Startsy({ navigation, route, token }) {
 
 
                     {/* Description Section */}
-                    <Text style={styles.sectionHeader}>Description:</Text>
+                    {/* <Text style={styles.sectionHeader}>Description:</Text>
                     <Text style={styles.text}>
                         {item.description.split(" ").slice(0, 36).join(" ")}
                         {item.description.split(" ").length > 36 && (
                             <Text style={{ color: "#00de62" }}> ...Read more</Text>
                         )}
-                    </Text>
+                    </Text> */}
+
+                    <Text style={styles.ReadMore}> Read more</Text>
+
+
 
                     {/* 
                     <BlurView
@@ -628,7 +632,7 @@ export default function Startsy({ navigation, route, token }) {
                         nestedScrollEnabled={true}
                         backgroundColor='#16181a'
                         horizontalThreshold={50}
-                        secondCardZoom={1000}
+                        // secondCardZoom={1000}
                         infinite={true}
 
                         showSecondCard={true}
@@ -639,7 +643,7 @@ export default function Startsy({ navigation, route, token }) {
                         }}
                         // keyExtractor={(index) => {return index} }
                         // infinite={true}
-                        stackSeparation={10}
+                        // stackSeparation={10}
                         animateCardOpacity={true}
                         swipeAnimationDuration={350}
                         cards={data}
@@ -680,7 +684,7 @@ export default function Startsy({ navigation, route, token }) {
                                 setVisible(true);
                                 incrementupvote();
                             }}
-                            style={{ alignItems: 'center' }}
+                            style={{ alignItems: 'center' , marginLeft : 5 }}
                         >
                             <MaterialCommunityIcons name="message-processing-outline" size={41} color="#ccc" />
                             <Text style={styles.iconLabel}>Suggest</Text>
@@ -715,17 +719,17 @@ const styles = StyleSheet.create({
         // borderRadius: 10,
         // paddingTop: 20,
         // overflow: "scroll",
-    
-            paddingVertical: 10,
-            paddingHorizontal: 14,
-            borderRadius: 12,
-            marginVertical: 8,
-            height: 470, // <--- ADD THIS
-            overflow: 'scroll',
-          
-          
-       
-        },
+
+        paddingVertical: 10,
+        paddingHorizontal: 14,
+        borderRadius: 12,
+        marginVertical: 8,
+        height: height - 195, // <--- ADD THIS
+        overflow: 'scroll',
+
+
+
+    },
     iconcontainer: {
         flexDirection: 'row',
         justifyContent: 'space-around',
@@ -756,8 +760,8 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     profileImage: {
-        width: 50,
-        height: 50,
+        width: 45,
+        height: 45,
         borderRadius: 25,
         marginRight: 10,
     },
@@ -786,6 +790,7 @@ const styles = StyleSheet.create({
     title: {
         color: '#B8B8B8',
         fontSize: 48,
+        marginTop: 20,
         // fontWeight: 'bold',
         marginBottom: 4,
         fontFamily: "Alata",
@@ -794,13 +799,13 @@ const styles = StyleSheet.create({
     },
     subtitle: {
         color: '#D9D9D9',
-        fontSize: 14,
+        fontSize: 20,
         marginBottom: 4,
         fontFamily: "Roboto"
     },
     status: {
         color: '#00DE62',
-        fontSize: 15,
+        fontSize: 20,
         marginBottom: 16,
         fontFamily: "Roboto"
 
@@ -809,6 +814,7 @@ const styles = StyleSheet.create({
         color: '#D9D9D9',
         fontSize: 14,
         fontWeight: 'bold',
+        marginTop: 10,
         // marginTop: 10,
         marginBottom: 4,
         fontFamily: "Roboto"
@@ -888,7 +894,7 @@ const styles = StyleSheet.create({
     },
     iconcontainer: {
         position: "absolute",
-        bottom: 60,
+        bottom: 40,
         zIndex: 1000,
         display: "flex",
         flexDirection: "row",
@@ -899,6 +905,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         marginBottom: 30,
         gap: 80,
+        // backgroundColor : "red"
 
     },
     t2: {
@@ -976,6 +983,12 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         backgroundColor: "#24272A"
     },
+    ReadMore: {
+        color: "#00de62", fontSize: 14,
+        position : "absolute",
+        bottom : 100,
+        alignSelf : "center"
+    }
 });
 
 

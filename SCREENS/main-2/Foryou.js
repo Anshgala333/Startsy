@@ -394,12 +394,12 @@ const Foryou =
                         />
 
                         <Tab.Screen
-                            listeners={({ navigation, route }) => ({
-                                tabPress: (e) => {
-                                    console.log("Tab Pressed:", route.name); // ✅ Should log tab name
-                                    setActiveTab(route.name); // ✅ Updates state when tab is pressed
-                                },
-                            })}
+                            // listeners={({ navigation, route }) => ({
+                            //     tabPress: (e) => {
+                            //         console.log("Tab Pressed:", route.name); // ✅ Should log tab name
+                            //         setActiveTab(route.name); // ✅ Updates state when tab is pressed
+                            //     },
+                            // })}
 
                             name="Q&A"
                             
@@ -507,7 +507,7 @@ const Foryou =
                 </View>
 
                 <Animated.View style={[styles.add, { transform: [{ scale: scale }] }]}>
-                    {ActiveTab != "Cards" && ActiveTab != "Q&A"&& <Pressable onPress={openBottomSheet} >
+                    {ActiveTab != "Cards" && <Pressable onPress={openBottomSheet} >
                         <AntDesign name="pluscircle" size={50} color="#00de62" />
                     </Pressable>}
                 </Animated.View>

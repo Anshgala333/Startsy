@@ -44,8 +44,8 @@ const CertificatePortfolioPage = () => {
             const { certification, portfolio } = responsedData;
             console.log(portfolio);
 
-            var rec1 = certification.filter((e) => e.name != "")
-            var rec2 = portfolio.filter((e) => e.name != "")
+            var rec1 = certification.filter((e) => e.url != "")
+            var rec2 = portfolio.filter((e) => e.url != "")
 
 
             console.log(rec2, "poortfolioo");

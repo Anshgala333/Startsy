@@ -35,12 +35,12 @@ const MediaPost = ({ route }) => {
         setp3u(true);
         let hasError = false;
 
-        if (c2 == "") {
-            seterr7(true);
-            setp3u(false);
+        // if (c2 == "") {
+        //     seterr7(true);
+        //     setp3u(false);
 
-            hasError = true;
-        }
+        //     hasError = true;
+        // }
 
         if (hasError) {
             setp3u(false);

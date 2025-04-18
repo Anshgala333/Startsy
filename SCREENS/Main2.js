@@ -14,6 +14,7 @@ import {
     TouchableOpacity,
     KeyboardAvoidingView,
     Vibration,
+    BackHandler,
     ToastAndroid,
 } from "react-native";
 
@@ -96,6 +97,33 @@ const Main2 = ({ navigation, route }) => {
         getToken();
     }, []);
 
+
+    var bottomSheetRefTree = useRef()
+
+    useEffect(() => {
+        const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+            console.log("thi is back from main 2");
+            if (bottomSheetRefTree.current == true) {
+                console.log("hi");
+                commentRef.current.close()
+                bottomSheetRefTree.current = false
+                return true;
+            }
+            else if(openshareRef.current == true){
+                bottomSheetRef6.current.close()
+                openshareRef.current = false
+                return true
+            }
+            else if(reportRef.current == true){
+                reportBottomSheetRef.current.close()
+                reportRef.current = false
+                return true
+            }
+        });
+
+        return () => backHandler.remove();
+    }, [token]);
+
     const [peopledata, setpeopledata] = useState([])
     const [people1, setpeople1] = useState([])
 
@@ -134,7 +162,7 @@ const Main2 = ({ navigation, route }) => {
         if (token != "") {
             fetchProfilePhoto()
         }
-    }, [])
+    }, [token])
 
     async function fetchdata() {
         if (token) {
@@ -469,6 +497,7 @@ const Main2 = ({ navigation, route }) => {
         setansh(true);
         setcomment(true);
         setOpen(true)
+        bottomSheetRefTree.current = true
 
         commentRef.current?.expand();
         // bottomSheetRef5.current?.expand();
@@ -492,6 +521,7 @@ const Main2 = ({ navigation, route }) => {
             console.log(err);
         }
     }
+    var openshareRef = useRef()
 
 
     async function openshare(postid) {
@@ -500,6 +530,7 @@ const Main2 = ({ navigation, route }) => {
         setpostToShareId(postid);
         setcanbeshared(true)
         setSelectedItems(new Set())
+        openshareRef.current = true
 
         var final1 = peopledata.map((item) => {
             return { ...item, isSelected: false }
@@ -509,12 +540,14 @@ const Main2 = ({ navigation, route }) => {
 
     }
 
+    var reportRef = useRef()
     async function onReport(id, isPost) {
 
         if (isPost != null) {
             setReportPost(true);
         }
         setReportId(id);
+        reportRef.current = true
         reportBottomSheetRef.current?.expand();
     }
 
@@ -759,349 +792,349 @@ const Main2 = ({ navigation, route }) => {
 
 
     const isKeyboardVisible = useRef(false);
-    var [socket, setSocket] = useState("")
+    // var [socket, setSocket] = useState("")
 
-    useEffect(() => {
-        const newSocket = io(`${url}`, {
-            // transports: ["websocket"], // Ensure WebSocket is used
-        });
+    // useEffect(() => {
+    //     const newSocket = io(`${url}`, {
+    //         // transports: ["websocket"], // Ensure WebSocket is used
+    //     });
 
-        setSocket(newSocket);
-        return () => {
-            newSocket.disconnect();
-        };
-    }, []);
+    //     setSocket(newSocket);
+    //     return () => {
+    //         newSocket.disconnect();
+    //     };
+    // }, []);
 
 
 
     return (
-        <GlobalSocket.Provider value={socket}>
-            <GestureHandlerRootView
-                waitfor={commentinput}
-                style={{ flex: 1, backgroundColor: "#16181a" }}>
+        // <GlobalSocket.Provider value={socket}>
+        <GestureHandlerRootView
+            waitfor={commentinput}
+            style={{ flex: 1, backgroundColor: "#16181a" }}>
 
-                <KeyboardAvoidingView behavior="" keyboardVerticalOffset={100} style={{ flex: 1, position: "relative" }}>
-
-
+            <KeyboardAvoidingView behavior="" keyboardVerticalOffset={100} style={{ flex: 1, position: "relative" }}>
 
 
-                    <View style={{ flex: 1, backgroundColor: "red", position: "absolute", top: 0, width: "100%", height: height }}>
-                        <Tab.Navigator
 
-                            lazy={false}
-                            // unmountOnBlur={false}
-                            firstRoute="Startsy"
-                            initialRouteName="Startsy"
-                            detachInactiveScreens={true}
-                            // keyboardBehavior={true}
-                            screenOptions={{
+
+                <View style={{ flex: 1, backgroundColor: "red", position: "absolute", top: 0, width: "100%", height: height }}>
+                    <Tab.Navigator
+
+                        lazy={false}
+                        // unmountOnBlur={false}
+                        firstRoute="Startsy"
+                        initialRouteName="Startsy"
+                        detachInactiveScreens={true}
+                        // keyboardBehavior={true}
+                        screenOptions={{
+
+                            freezeOnBlur: true,
+                            tabBarPosition: "bottom",
+                            // position: "absolute",
+                            // animationEnabled: true,
+
+                            tabBarActiveTintColor: "#00DE62",
+                            tabBarInactiveTintColor: "#7A7B7C",
+                            headerShown: false,
+                            // tabBarVisible: false,
+                            tabBarHideOnKeyboard: true,
+
+
+                            tabBarBackground: () => (
+                                <BlurView
+                                    experimentalBlurMethod="dimezisBlurView"
+                                    blurAmount={30}
+                                    intensity={90} style={{ flex: 1 }} tint="dark" />
+                            ),
+
+                            tabBarButton: (props) => (
+                                <TouchableOpacity
+                                    {...props}
+                                    onPress={() => {
+                                        Vibration.vibrate(20); // Vibrates for 100ms
+                                        props.onPress?.();
+                                    }}
+                                />
+                            ),
+
+                            tabBarStyle: {
+                                backgroundColor: 'transparent',
+                                // backgroundColor: 'red',
+                                height: 55,
+                                // zIndex  : -1,
+                                opacity: 1,
+                                borderTopWidth: 0,
+                                paddingTop: 12,
+                                position: "absolute",
+                                tabBarHideOnKeyboard: true,
+                                display: isKeyboardVisible.current ? "none" : "block",
+                                transform: [{ translateY: bottomposition }]
+                            },
+
+                        }}
+                    >
+                        <Tab.Screen
+                            name="NewsLetter"
+                            children={(props) => <NewsLetter openshare={openshare} mainpagebottomsheet={mainpagebottomsheet} token={token} closeall={closeall} k={k} setk={setk} />}
+                            options={{
 
                                 freezeOnBlur: true,
-                                tabBarPosition: "bottom",
-                                // position: "absolute",
-                                // animationEnabled: true,
-
-                                tabBarActiveTintColor: "#00DE62",
-                                tabBarInactiveTintColor: "#7A7B7C",
-                                headerShown: false,
-                                // tabBarVisible: false,
-                                tabBarHideOnKeyboard: true,
-
-
-                                tabBarBackground: () => (
-                                    <BlurView
-                                        experimentalBlurMethod="dimezisBlurView"
-                                        blurAmount={30}
-                                        intensity={90} style={{ flex: 1 }} tint="dark" />
+                                unmountOnBlur: true,
+                                tabBarLabel: "",
+                                tabBarIcon: ({ focused }) => (
+                                    <View style={{ flex: 1, width: 30, marginLeft: 10, marginTop: -3, justifyContent: "center", height: 30 }}>
+                                        <Feather name="search" size={24} color={focused ? "#00DE62" : "#7A7B7C"} />
+                                    </View>
                                 ),
+                            }}
+                        />
+                        <Tab.Screen
+                            name="bell"
+                            children={(props) => <Notification token={token} closeall={closeall} />}
+                            options={{
+                                freezeOnBlur: true,
+                                unmountOnBlur: true,
 
-                                tabBarButton: (props) => (
-                                    <TouchableOpacity
-                                        {...props}
-                                        onPress={() => {
-                                            Vibration.vibrate(20); // Vibrates for 100ms
-                                            props.onPress?.();
-                                        }}
-                                    />
+                                tabBarLabel: "",
+                                tabBarIcon: ({ focused }) => (
+                                    <View style={{ marginTop: -4 }}>
+                                        <Fontisto name="bell" size={24} color={focused ? "#00DE62" : "#7A7B7C"} />
+                                        {/* <Feather name="bell" size={32} color={focused ? "#00DE62" : "#7A7B7C"} /> */}
+                                    </View>
                                 ),
+                            }}
+                        />
+                        <Tab.Screen
+                            name="Startsy"
+                            children={(props) => <Foryou
+                                type={type}
+                                settype={settype} setImage={setImage} scroll={updatescroll} token={token} mainpagebottomsheet={mainpagebottomsheet} opencomment={opencomment} visible={visible} setVisible={setVisible} newaspect={newaspect} setnewaspect={setnewaspect} openshare={openshare} onReportCallBack={onReport} />}
+                            options={{
+                                keyboardBehavior: true,
+                                freezeOnBlur: true,
 
-                                tabBarStyle: {
-                                    backgroundColor: 'transparent',
-                                    // backgroundColor: 'red',
-                                    height: 55,
-                                    // zIndex  : -1,
-                                    opacity: 1,
-                                    borderTopWidth: 0,
-                                    paddingTop: 12,
-                                    position: "absolute",
-                                    tabBarHideOnKeyboard: true,
-                                    display: isKeyboardVisible.current ? "none" : "block",
-                                    transform: [{ translateY: bottomposition }]
-                                },
+                                tabBarLabel: "",
+                                tabBarIcon: ({ focused }) => (
+
+                                    <>
+                                        {!focused && <Image style={{ width: 40, height: 40, marginTop: -5 }} source={require("../assets/images/logogray1.png")} />}
+                                        {focused && <Image style={{ width: 40, height: 40, marginTop: -5 }} source={require("../assets/images/logo.png")} />}
+                                    </>
+                                ),
+                            }}
+
+                        />
+                        <Tab.Screen
+                            name="Message"
+                            children={(props) => <ChatScreen k={k} setk={setk} mainpagebottomsheet={mainpagebottomsheet} closeall={closeall} token={token} />}
+                            options={{
+                                freezeOnBlur: true,
+                                unmountOnBlur: true,
+
+                                keyboardBehavior: true,
+
+                                tabBarLabel: "",
+                                tabBarIcon: ({ focused }) => (
+                                    <View style={{ marginTop: -3 }}><MaterialCommunityIcons name="message-text-outline" size={24} color={focused ? "#00DE62" : "#7A7B7C"} /></View>
+                                ),
+                            }}
+                        />
+                        <Tab.Screen
+                            name="Profile"
+                            children={() => <Apnauser closeall={closeall} openshare={openshare} mainpagebottomsheet={mainpagebottomsheet} navigation={navigation} opencomment={opencomment} token={token} />}
+                            options={{
+                                freezeOnBlur: true,
+                                unmountOnBlur: true,
+
+                                tabBarLabel: "",
+                                tabBarIcon: ({ focused }) => (
+                                    <View style={{ marginTop: -4, marginLeft: -2 }}>
+                                        {
+                                            userProfilePhoto == null ?
+                                                <FontAwesome6 name="circle-user" size={30} color={focused ? "#00DE62" : "#7A7B7C"} />
+                                                :
+                                                <Image source={{ uri: (userProfilePhoto) }} width={26} height={26} style={{ borderRadius: 50, borderColor: "#00de62", borderWidth: focused ? 1 : 0 }} />
+                                        }
+                                    </View>
+                                ),
 
                             }}
-                        >
-                            <Tab.Screen
-                                name="NewsLetter"
-                                children={(props) => <NewsLetter openshare={openshare} mainpagebottomsheet={mainpagebottomsheet} token={token} closeall={closeall} k={k} setk={setk} />}
-                                options={{
-
-                                    freezeOnBlur: true,
-                                    unmountOnBlur: true,
-                                    tabBarLabel: "",
-                                    tabBarIcon: ({ focused }) => (
-                                        <View style={{ flex: 1, width: 30, marginLeft: 10, marginTop: -3, justifyContent: "center", height: 30 }}>
-                                            <Feather name="search" size={24} color={focused ? "#00DE62" : "#7A7B7C"} />
-                                        </View>
-                                    ),
-                                }}
-                            />
-                            <Tab.Screen
-                                name="bell"
-                                children={(props) => <Notification token={token} closeall={closeall} />}
-                                options={{
-                                    freezeOnBlur: true,
-                                    unmountOnBlur: true,
-
-                                    tabBarLabel: "",
-                                    tabBarIcon: ({ focused }) => (
-                                        <View style={{ marginTop: -4 }}>
-                                            <Fontisto name="bell" size={24} color={focused ? "#00DE62" : "#7A7B7C"} />
-                                            {/* <Feather name="bell" size={32} color={focused ? "#00DE62" : "#7A7B7C"} /> */}
-                                        </View>
-                                    ),
-                                }}
-                            />
-                            <Tab.Screen
-                                name="Startsy"
-                                children={(props) => <Foryou
-                                    type={type}
-                                    settype={settype} setImage={setImage} scroll={updatescroll} token={token} mainpagebottomsheet={mainpagebottomsheet} opencomment={opencomment} visible={visible} setVisible={setVisible} newaspect={newaspect} setnewaspect={setnewaspect} openshare={openshare} onReportCallBack={onReport} />}
-                                options={{
-                                    keyboardBehavior: true,
-                                    freezeOnBlur: true,
-
-                                    tabBarLabel: "",
-                                    tabBarIcon: ({ focused }) => (
-
-                                        <>
-                                            {!focused && <Image style={{ width: 40, height: 40, marginTop: -5 }} source={require("../assets/images/logogray1.png")} />}
-                                            {focused && <Image style={{ width: 40, height: 40, marginTop: -5 }} source={require("../assets/images/logo.png")} />}
-                                        </>
-                                    ),
-                                }}
-
-                            />
-                            <Tab.Screen
-                                name="Message"
-                                children={(props) => <ChatScreen k={k} setk={setk} mainpagebottomsheet={mainpagebottomsheet} closeall={closeall} token={token} />}
-                                options={{
-                                    freezeOnBlur: true,
-                                    unmountOnBlur: true,
-
-                                    keyboardBehavior: true,
-
-                                    tabBarLabel: "",
-                                    tabBarIcon: ({ focused }) => (
-                                        <View style={{ marginTop: -3 }}><MaterialCommunityIcons name="message-text-outline" size={24} color={focused ? "#00DE62" : "#7A7B7C"} /></View>
-                                    ),
-                                }}
-                            />
-                            <Tab.Screen
-                                name="Profile"
-                                children={() => <Apnauser closeall={closeall} openshare={openshare} mainpagebottomsheet={mainpagebottomsheet} navigation={navigation} opencomment={opencomment} token={token} />}
-                                options={{
-                                    freezeOnBlur: true,
-                                    unmountOnBlur: true,
-
-                                    tabBarLabel: "",
-                                    tabBarIcon: ({ focused }) => (
-                                        <View style={{ marginTop: -4, marginLeft: -2 }}>
-                                            {
-                                                userProfilePhoto == null ?
-                                                    <FontAwesome6 name="circle-user" size={30} color={focused ? "#00DE62" : "#7A7B7C"} />
-                                                    :
-                                                    <Image source={{ uri: (userProfilePhoto) }} width={26} height={26} style={{ borderRadius: 50, borderColor: "#00de62", borderWidth: focused ? 1 : 0 }} />
-                                            }
-                                        </View>
-                                    ),
-
-                                }}
-                            />
-                            <Tab.Screen
-                                name="NewsletterPage"
-                                children={(props) => <NewsletterPage openshare={openshare} />}
-                                // component={NewsletterPage}
-                                options={{
-                                    tabBarLabel: "okkk",
-                                    unmountOnBlur: true,
-                                    tabBarItemStyle: { display: 'none' },
-                                    tabBarButton: () => null,
-                                    tabBarVisible: true,
-                                }}
-                            />
-                            <Tab.Screen
-                                name="Singleuserpage"
-                                children={() => <Singleprofilepage navigation={navigation} openshare={openshare} onReportCallBack={onReport} />}
-                                options={{
-                                    tabBarItemStyle: { display: 'none' },
-                                    tabBarButton: () => null,
-                                    tabBarVisible: false,
-                                }}
-                            />
-                            <Tab.Screen
-                                name="Followerpage"
-                                component={Followerpage}
-                                // children={() => <Followerpage navigation={navigation}  />}
-                                options={{
-                                    tabBarItemStyle: { display: 'none' },
-                                    tabBarButton: () => null,
-                                    tabBarVisible: false,
-                                }}
-                            />
-                            <Tab.Screen
-                                name="Jobposted"
-                                component={JobsPostedScreen}
-                                // children={() => <Followerpage navigation={navigation}  />}
-                                options={{
-                                    tabBarItemStyle: { display: 'none' },
-                                    tabBarButton: () => null,
-                                    tabBarVisible: false,
-                                }}
-                            />
+                        />
+                        <Tab.Screen
+                            name="NewsletterPage"
+                            children={(props) => <NewsletterPage openshare={openshare} />}
+                            // component={NewsletterPage}
+                            options={{
+                                tabBarLabel: "okkk",
+                                unmountOnBlur: true,
+                                tabBarItemStyle: { display: 'none' },
+                                tabBarButton: () => null,
+                                tabBarVisible: true,
+                            }}
+                        />
+                        <Tab.Screen
+                            name="Singleuserpage"
+                            children={() => <Singleprofilepage navigation={navigation} openshare={openshare} opencomment={opencomment} onReportCallBack={onReport} />}
+                            options={{
+                                tabBarItemStyle: { display: 'none' },
+                                tabBarButton: () => null,
+                                tabBarVisible: false,
+                            }}
+                        />
+                        <Tab.Screen
+                            name="Followerpage"
+                            component={Followerpage}
+                            // children={() => <Followerpage navigation={navigation}  />}
+                            options={{
+                                tabBarItemStyle: { display: 'none' },
+                                tabBarButton: () => null,
+                                tabBarVisible: false,
+                            }}
+                        />
+                        <Tab.Screen
+                            name="Jobposted"
+                            component={JobsPostedScreen}
+                            // children={() => <Followerpage navigation={navigation}  />}
+                            options={{
+                                tabBarItemStyle: { display: 'none' },
+                                tabBarButton: () => null,
+                                tabBarVisible: false,
+                            }}
+                        />
 
 
-                            <Tab.Screen
-                                name="Applicant"
-                                component={ApplicantsList}
-                                // children={() => <Followerpage navigation={navigation}  />}
-                                options={{
-                                    tabBarItemStyle: { display: 'none' },
-                                    tabBarButton: () => null,
-                                    tabBarVisible: false,
-                                }}
-                            />
+                        <Tab.Screen
+                            name="Applicant"
+                            component={ApplicantsList}
+                            // children={() => <Followerpage navigation={navigation}  />}
+                            options={{
+                                tabBarItemStyle: { display: 'none' },
+                                tabBarButton: () => null,
+                                tabBarVisible: false,
+                            }}
+                        />
 
-                            <Tab.Screen
-                                name="ViewSendedPost"
-                                // component={ViewSendedPost}
-                                children={(props) => <ViewSendedPost openshare={openshare} opencomment={opencomment} />}
-                                options={{
-                                    tabBarItemStyle: { display: 'none' },
-                                    tabBarButton: () => null,
-                                    tabBarVisible: false,
-                                }}
-                            />
+                        <Tab.Screen
+                            name="ViewSendedPost"
+                            // component={ViewSendedPost}
+                            children={(props) => <ViewSendedPost openshare={openshare} opencomment={opencomment} />}
+                            options={{
+                                tabBarItemStyle: { display: 'none' },
+                                tabBarButton: () => null,
+                                tabBarVisible: false,
+                            }}
+                        />
 
-                        </Tab.Navigator>
-                        {showBottomSheet && (<BottomSheet
-                            enablePanDownToClose
-                            backgroundStyle={{ backgroundColor: '#16181a', borderRadius: 30 }}
-                            handleIndicatorStyle={{ backgroundColor: '#00de62' }}
-                            style={{ zIndex: 1000000, elevation: 1000 }}
-                            enableDynamicSizing={false}
-                            ref={mainpagebottomsheet}
-                            snapPoints={snapPoints}
-                            backdropComponent={renderBackdrop}
-                            index={-1}
-                        >
-                            <BottomSheetContent />
-                        </BottomSheet>)
-                        }
-
-
-                        {
-                            showReportBottomSheet && (
-                                <ReportBottomSheet
-                                    token={token}
-
-                                    reportPost={reportPost}
-                                    reportId={reportId}
-                                    reportBottomSheetRef={reportBottomSheetRef}
-                                    renderBackdrop={renderBackdrop}
-                                />
-                            )
-                        }
-
-                    </View>
-
-
-
-
-                    {/* <BottomSheet1 mainpagebottomsheet={mainpagebottomsheet}/> */}
-                    {openBottomSheet6 && (
-
-
-                        <BottomSheet
-                            overlayColor="rgba(0, 0, 0, 0.9)"
-                            enablePanDownToClose
-                            backgroundStyle={{ backgroundColor: '#1A1D1F', borderRadius: 30 }}
-                            handleIndicatorStyle={{ backgroundColor: '#00de62' }}
-                            ref={bottomSheetRef6}
-                            nestedScrollEnabled={true}
-                            backdropComponent={renderBackdrop}
-                            enableDynamicSizing={false}
-                            snapPoints={snapPoints6}
-                            index={-1}
-                            // handleStyle={{display : "none"}}
-                            contentContainerStyle={{ zIndex: 1000000, elevation: 20000000, height: 100 }}
-                        >
-                            <View style={{ flex: 1 }}>
-                                <Pressable onPress={() => {
-
-
-                                }
-                                }>
-                                    <Text style={{ textAlign: 'center', color: '#ccc', fontFamily: 'Alata', fontSize: 16 }}>Share</Text>
-                                </Pressable>
-
-
-                                {peopledata.length == 0 ?
-
-
-                                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-
-
-                                        <Text style={{ color: 'gray' }}>You are not connected to anyone</Text>
-
-                                    </View>
-
-                                    :
-                                    <>
-
-
-                                        <BottomSheetFlatList
-                                            ref={flatListRef}
-                                            data={peopledata}
-                                            nestedScrollEnabled={true}
-                                            renderItem={renderpeople}
-                                            contentContainerStyle={{ paddingBottom: 80 }}
-                                            scrollEnabled={true}
-
-                                        />
-
-
-                                        <>
-                                            {SelectedItems.size > 0 && (<TouchableOpacity onPress={finalsubmit} style={styles1.confirm}>
-                                                {!sendingpost && <Text style={styles1.confirmText}>Confirm</Text>}
-                                                {sendingpost && <ActivityIndicator style={{ marginTop: 9 }} size={24} color="#16181a" />}
-                                            </TouchableOpacity>)}
-                                        </>
-
-                                    </>
-
-                                }
-
-
-
-                            </View>
-                        </BottomSheet>)
+                    </Tab.Navigator>
+                    {showBottomSheet && (<BottomSheet
+                        enablePanDownToClose
+                        backgroundStyle={{ backgroundColor: '#16181a', borderRadius: 30 }}
+                        handleIndicatorStyle={{ backgroundColor: '#00de62' }}
+                        style={{ zIndex: 1000000, elevation: 1000 }}
+                        enableDynamicSizing={false}
+                        ref={mainpagebottomsheet}
+                        snapPoints={snapPoints}
+                        // backdropComponent={renderBackdrop}
+                        index={-1}
+                    >
+                        <BottomSheetContent />
+                    </BottomSheet>)
                     }
 
 
+                    {
+                        showReportBottomSheet && (
+                            <ReportBottomSheet
+                                token={token}
+
+                                reportPost={reportPost}
+                                reportId={reportId}
+                                reportBottomSheetRef={reportBottomSheetRef}
+                                renderBackdrop={renderBackdrop}
+                            />
+                        )
+                    }
+
+                </View>
 
 
-                    {/* 
+
+
+                {/* <BottomSheet1 mainpagebottomsheet={mainpagebottomsheet}/> */}
+                {openBottomSheet6 && (
+
+
+                    <BottomSheet
+                        overlayColor="rgba(0, 0, 0, 0.9)"
+                        enablePanDownToClose
+                        backgroundStyle={{ backgroundColor: '#1A1D1F', borderRadius: 30 }}
+                        handleIndicatorStyle={{ backgroundColor: '#00de62' }}
+                        ref={bottomSheetRef6}
+                        nestedScrollEnabled={true}
+                        // backdropComponent={renderBackdrop}
+                        enableDynamicSizing={false}
+                        snapPoints={snapPoints6}
+                        index={-1}
+                        // handleStyle={{display : "none"}}
+                        contentContainerStyle={{ zIndex: 1000000, elevation: 20000000, height: 100 }}
+                    >
+                        <View style={{ flex: 1 }}>
+                            <Pressable onPress={() => {
+
+
+                            }
+                            }>
+                                <Text style={{ textAlign: 'center', color: '#ccc', fontFamily: 'Alata', fontSize: 16 }}>Share</Text>
+                            </Pressable>
+
+
+                            {peopledata.length == 0 ?
+
+
+                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+
+
+                                    <Text style={{ color: 'gray' }}>You are not connected to anyone</Text>
+
+                                </View>
+
+                                :
+                                <>
+
+
+                                    <BottomSheetFlatList
+                                        ref={flatListRef}
+                                        data={peopledata}
+                                        nestedScrollEnabled={true}
+                                        renderItem={renderpeople}
+                                        contentContainerStyle={{ paddingBottom: 80 }}
+                                        scrollEnabled={true}
+
+                                    />
+
+
+                                    <>
+                                        {SelectedItems.size > 0 && (<TouchableOpacity onPress={finalsubmit} style={styles1.confirm}>
+                                            {!sendingpost && <Text style={styles1.confirmText}>Confirm</Text>}
+                                            {sendingpost && <ActivityIndicator style={{ marginTop: 9 }} size={24} color="#16181a" />}
+                                        </TouchableOpacity>)}
+                                    </>
+
+                                </>
+
+                            }
+
+
+
+                        </View>
+                    </BottomSheet>)
+                }
+
+
+
+
+                {/* 
                 <RB
                     open={open}
                     setOpen={setOpen}
@@ -1116,40 +1149,41 @@ const Main2 = ({ navigation, route }) => {
                     backgroundStyle={{ backgroundColor: '#1A1D1F', borderRadius: 30 }}
                     commenttext={commenttext} /> */}
 
-                    {
-                        openCommentBottomSheet && (
-                            <CommentBottomSheet
-                                nestedScrollEnabled={true}
-                                backdropComponent={renderBackdrop}
-                                enableDynamicSizing={false}
-                                index={-1}
+                {
+                    openCommentBottomSheet && (
+                        <CommentBottomSheet
+                            nestedScrollEnabled={true}
+                            // backdropComponent={renderBackdrop}
+                            enableDynamicSizing={false}
+                            index={-1}
+                            setcomment={setcomment}
 
-                                comments={comments}
-                                docomment={docomment}
-                                uploadingcomment={uploadingcomment}
-                                setAllComments={setAllComments}
-                                setcommenttext={setCommentText}
-                                commenttext={commentText}
-                                allcomments={allComments}
+                            comments={comments}
+                            docomment={docomment}
+                            uploadingcomment={uploadingcomment}
+                            setAllComments={setAllComments}
+                            setcommenttext={setCommentText}
+                            commenttext={commentText}
+                            allcomments={allComments}
 
-                                contentContainerStyle={{ zIndex: 1000000, elevation: 20000000, height: 100 }}
-                                enablePanDownToClose
-                                backgroundStyle={{ backgroundColor: '#1A1D1F', borderRadius: 30 }}
-                                handleIndicatorStyle={{ backgroundColor: '#00de62' }}
-                                commentRef={commentRef}
-
-
-                            />
-                        )
-                    }
+                            contentContainerStyle={{ zIndex: 1000000, elevation: 20000000, height: 100 }}
+                            enablePanDownToClose
+                            backgroundStyle={{ backgroundColor: '#1A1D1F', borderRadius: 30 }}
+                            handleIndicatorStyle={{ backgroundColor: '#00de62' }}
+                            commentRef={commentRef}
 
 
+                        />
+                    )
+                }
 
 
 
-                </KeyboardAvoidingView>
-            </GestureHandlerRootView>
-        </GlobalSocket.Provider>
+
+
+            </KeyboardAvoidingView>
+        </GestureHandlerRootView>
+        // </GlobalSocket.Provider>
     );
 };
 

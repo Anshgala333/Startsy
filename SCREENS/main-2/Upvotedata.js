@@ -87,38 +87,7 @@ function Upvotedata({ token }) {
 
 
 
-    // async function getdata() {
-    //     try {
-    //         setskeletonloading(true)
-    //         const response = await fetch(
-    //             `${url}founder/getFounderProfileDetails`,
-    //             {
-    //                 method: "GET",
-    //                 headers: {
-    //                     accept: "application/json",
-    //                     Authorization: `Bearer ${token}`,
-    //                 },
-    //             }
-    //         );
-    //         const result = await response.json();
-
-
-    //         var object = {
-    //             totalUpvotes: result.data.totalUpvotes,
-    //             upvotesPerDay: result.data.upvotesPerDay,
-    //             investorUpvotes: result.data.investorUpvotes
-    //         }
-
-    //         setstatistic(object);
-
-    //     } catch (err) {
-    //         console.log(err);
-    //     }
-    //     finally {
-    //         setskeletonloading(false)
-    //         setloading(false);
-    //     }
-    // }
+  
 
     useEffect(() => {
         getData1()

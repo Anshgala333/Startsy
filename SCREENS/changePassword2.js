@@ -171,7 +171,7 @@ const ChangePassword2 = ({ navigation, route }) => {
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar backgroundColor="#16181a" barStyle={"light-content"} />
-            <Text style={styles.t1}>Create a passwordd</Text>
+            <Text style={styles.t1}>Create a password</Text>
             <Text style={styles.t2}>Use a strong password</Text>
 
             <View style={{

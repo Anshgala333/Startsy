@@ -244,7 +244,7 @@ const NewsLetter = React.memo(
                                 fontSize={8}
                                 mode={ResizeTextMode.max_lines}
                                 ellipsizeMode='tail'
-                                style={styles.time}>{time(item.taggedUser.createdAt)}
+                                style={styles.time}>{time(item.createdAt)}
                             </AutoSizeText>
                         </View>
                     </LinearGradient>
@@ -328,7 +328,7 @@ const NewsLetter = React.memo(
                                     fontSize={12}
                                     mode={ResizeTextMode.max_lines}
                                     ellipsizeMode='tail'
-                                    style={styles.time}>{time(item.taggedUser.createdAt)}
+                                    style={styles.time}>{time(item.createdAt)}
                                 </AutoSizeText>
                             </View>
                         </View>

@@ -124,8 +124,8 @@ const Chat = ({ route }) => {
 
 
     useEffect(() => {
-        const newSocket = io(`${url}chatScreen`, {
-            transports: ['websocket']
+        const newSocket = io(`${url}`, {
+            // transports: ['websocket']
         });
 
         setSocket(newSocket);
@@ -318,10 +318,10 @@ const Chat = ({ route }) => {
             // console.log(index);
 
 
-            if(item.message.isNewsLetter == true){
-                console.log(item.message);
+            // if(item.message.isNewsLetter == true){
+            //     console.log(item.message);
                 
-            }
+            // }
             return (
                 
                 <>

@@ -8,7 +8,7 @@ import { url } from "../../config.js"
 import { jwtDecode } from "jwt-decode";
 import { Skeleton } from 'moti/skeleton';
 import { MotiView } from 'moti';
-import GlobalSocket from "@/Global/globalSocket.js";
+// import GlobalSocket from "@/Global/globalSocket.js";
 
 
 // const data1 = Array(5).fill({
@@ -29,46 +29,46 @@ import GlobalSocket from "@/Global/globalSocket.js";
 
 const ConnectionsScreen = ({ search, token, setk, inputref }) => {
 
-    var socket = useContext(GlobalSocket)
+    // var socket = useContext(GlobalSocket)
     
     const [count, setcount] = useState(0)
-    const handleShuffleChatList = (data) => {
-        console.log(data, "received on ShuffleChatList");
-        console.log(filtereddata.length, "length");
+    // const handleShuffleChatList = (data) => {
+    //     console.log(data, "received on ShuffleChatList");
+    //     console.log(filtereddata.length, "length");
 
 
-        const temp = [...filtereddata];
-        const index = temp.findIndex((e) => e.user._id.toString() === data.senderId);
+    //     const temp = [...filtereddata];
+    //     const index = temp.findIndex((e) => e.user._id.toString() === data.senderId);
 
-        if (index !== -1) {
-            const filter = temp.splice(index, 1);
-            filter[0].lastMessage.message = data.message;
-            filter[0].lastMessage.isRead = false;
-            filter[0].lastMessage.createdAt = Date.now();
-            temp.unshift(filter[0]);
-            setfiltereddata(temp);
-        }
-    };
-    useEffect(() => {
+    //     if (index !== -1) {
+    //         const filter = temp.splice(index, 1);
+    //         filter[0].lastMessage.message = data.message;
+    //         filter[0].lastMessage.isRead = false;
+    //         filter[0].lastMessage.createdAt = Date.now();
+    //         temp.unshift(filter[0]);
+    //         setfiltereddata(temp);
+    //     }
+    // };
+    // useEffect(() => {
 
-        if (socket) {
-            socket.emit("registerUser", loggedinuserid)
-            console.log("i am connection socke url, ", url);
-            socket.on("ShuffleChatList", handleShuffleChatList);
-        }
+    //     if (socket) {
+    //         socket.emit("registerUser", loggedinuserid)
+    //         console.log("i am connection socke url, ", url);
+    //         socket.on("ShuffleChatList", handleShuffleChatList);
+    //     }
 
-    }, [socket , count]);
-
-
+    // }, [socket , count]);
 
 
-    useFocusEffect(
-        useCallback(() => {
-            console.log("inc");
-            setcount(count + 1)
-            setcount(count + 1)
-        }, [])
-    );
+
+
+    // useFocusEffect(
+    //     useCallback(() => {
+    //         console.log("inc");
+    //         setcount(count + 1)
+    //         setcount(count + 1)
+    //     }, [])
+    // );
 
 
 

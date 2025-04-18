@@ -167,11 +167,11 @@ const Settings = ({ navigation, route }) => {
       <View style={styles.bottom}>
 
         <View>
-          <TouchableOpacity style={styles.option} onPress={() => downloadAPK()}>
+          {/* <TouchableOpacity style={styles.option} onPress={() => downloadAPK()}> */}
             {/* <Icon name="bookmark-outline" size={24} color="#00DE62" /> */}
-            <MaterialIcons name="update" size={24} color="#00de62" />
-            <Text style={styles.optionText}>Update</Text> 
-          </TouchableOpacity>
+            {/* <MaterialIcons name="update" size={24} color="#00de62" /> */}
+            {/* <Text style={styles.optionText}>Update</Text>  */}
+          {/* </TouchableOpacity> */}
           <TouchableOpacity style={styles.option} onPress={() => {
       
 
@@ -212,7 +212,7 @@ const Settings = ({ navigation, route }) => {
         </View>
 
         <View style={styles.footer}>
-          <Text style={styles.devtext1}> Beta Version 7</Text>
+          <Text style={styles.devtext1}> Beta Version 1.0.0</Text>
           <Text style={styles.devtext}>  Developed by RSPY Tech Pvt. Ltd.</Text>
         </View>
       </View>
@@ -300,6 +300,7 @@ const styles = StyleSheet.create({
     color: "#828282",
     alignSelf: "center",
     bottom: 0,
+    marginBottom : 4,
     fontFamily: "Roboto",
     fontSize: 12,
     

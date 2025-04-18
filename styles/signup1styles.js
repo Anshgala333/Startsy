@@ -107,7 +107,6 @@ const signupstyles = StyleSheet.create({
     input: {
 
         width: "75%",
-
         fontSize: scalingfactor * 18, // Responsive font size
         color: "white",
         padding: 0,

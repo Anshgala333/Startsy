@@ -534,7 +534,7 @@ const Signup7 = ({ navigation, route }) => {
                             <Text allowFontScaling={false} style={[styles.t1, { marginBottom: 0 , marginTop : 25 }]}>Instagram</Text>
                             <View style={styles.v2} >
                                 <Pressable onPress={addurl}>
-                                    <AntDesign name="instagram" style={styles.plus2} size={24} color="#828282" />
+                                    {/* <AntDesign name="instagram" style={styles.plus2} size={24} color="#828282" /> */}
                                     {/* <Entypo style={styles.plus1} name="plus" size={24} color="#00DE62" /> */}
                                 </Pressable>
 
@@ -554,7 +554,7 @@ const Signup7 = ({ navigation, route }) => {
                             <View style={styles.v2} >
                                 <Pressable onPress={addurl}>
                                     {/* <Feather name="youtube" style={styles.plus1} size={24} color="#bbbbbb" /> */}
-                                    <AntDesign name="youtube" style={styles.plus2} size={24} color="#828282" />
+                                    {/* <AntDesign name="youtube" style={styles.plus2} size={24} color="#828282" /> */}
                                     {/* <Entypo style={styles.plus1} name="plus" size={24} color="#00DE62" /> */}
                                 </Pressable>
 
@@ -573,7 +573,7 @@ const Signup7 = ({ navigation, route }) => {
 
                             <View style={styles.v2} >
                                 <Pressable onPress={addurl}>
-                                    <AntDesign name="linkedin-square" style={styles.plus2} size={24} color="#828282" />
+                                    {/* <AntDesign name="linkedin-square" style={styles.plus2} size={24} color="#828282" /> */}
                                     {/* <Entypo style={styles.plus1} name="plus" size={24} color="#00DE62" /> */}
                                 </Pressable>
 
@@ -726,9 +726,10 @@ const styles = StyleSheet.create({
     },
     inputss: {
         backgroundColor: "transparent",
-        margin: height * 0.016,
+        // margin: height * 0.016,
         marginTop: 0,
-        paddingLeft: scalingfactor * 25,
+        marginBottom : 10,
+        paddingLeft: scalingfactor * 5,
         fontSize: scalingfactor * 20,
         color: "#ccc",
         paddingBottom: scalingfactor * 5,

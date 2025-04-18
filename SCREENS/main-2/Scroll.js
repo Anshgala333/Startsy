@@ -197,14 +197,14 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
 
     const renderItem =
         ({ item, index }) => {
-            
+
             // console.log(item.user_id.profilePhoto, "treeeeeeeeeeeeeeee");
             // const isVideoPlaying = videoStates[item._id] || false;
-          if(item.user_id.userName == "oo"){
-            console.log(item.mediaUrl);
-            
-          }
-            
+            //   if(item.user_id.userName == "oo"){
+            //     console.log(item.mediaUrl);
+
+            //   }
+
             if (item.user_id == null) {
                 return
             }
@@ -232,13 +232,13 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                                 if (item.user_id.role == "Founder") return
                                                 else navigation.navigate("Singleuserpage", { token: token, id: item.user_id._id, page: "Startsy" })
                                             }
-                                            else   {
+                                            else {
                                                 navigation.navigate("Singleuserpage", { token: token, id: item.user_id._id, page: "Startsy" })
                                             }
 
                                         }}
                                         style={{ display: "flex", flexDirection: "row", width: "90%", }}>
-                                        <Image  placeholder={require("../../assets/images/p2.png")} blurhash= "LEHV6nWB2yk8pyo0adR*.7KCMdnj"
+                                        <Image placeholder={require("../../assets/images/blank.png")} blurhash="LEHV6nWB2yk8pyo0adR*.7KCMdnj"
                                             transition={100} style={styles.userimg} source={{ uri: item.user_id.profilePhoto }} />
                                         <View style={styles.userdetail}>
                                             <Text allowFontScaling={false} style={styles.u1}>{item.user_id.userName}</Text>
@@ -264,7 +264,7 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
 
                                 {item.type == "textBlog" && <View style={styles.divider}></View>}
 
-                                {item.type == "photo" && <Image placeholder={require("../../assets/images/loading1.gif")} blurhash= "LEHV6nWB2yk8pyo0adR*.7KCMdnj" transition={100} cachePolicy="immutable" style={[styles.template, { aspectRatio: item.aspectRatio ? item.aspectRatio : 1 / 1 }]} source={{ uri: item.mediaUrl }} />}
+                                {item.type == "photo" && <Image placeholder={require("../../assets/images/loading1.gif")} blurhash="LEHV6nWB2yk8pyo0adR*.7KCMdnj" transition={100} cachePolicy="immutable" style={[styles.template, { aspectRatio: item.aspectRatio ? item.aspectRatio : 1 / 1 }]} source={{ uri: item.mediaUrl }} />}
                                 {item.type == "video" &&
                                     <Video
                                         ref={ref => videoRefs.current[item._id] = ref}
@@ -288,7 +288,7 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                         <View style={{ flexDirection: 'row', gap: 7, marginRight: 4, alignItems: 'center' }}>
                                             <TouchableOpacity onPress={() => { upvotepost(item._id, index) }}>
 
-                                                {!item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5,  }} />}
+                                                {!item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5, }} />}
                                                 {item.isliked && <Upvote width={32} height={34} style={{ marginLeft: 5, marginRight: -5, }} selected={true} />}
                                             </TouchableOpacity>
                                             <Text style={{ color: "#ccc", fontFamily: 'Roboto', fontSize: 14, }}>{item.itemlikedcount}</Text>
@@ -298,16 +298,16 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                         {/* comment */}
 
 
-                                        <View style={{ flexDirection: 'row', gap: 7, marginRight: 4, alignItems: 'flex-start',justifyContent:'flex-start' }}>
+                                        <View style={{ flexDirection: 'row', gap: 7, marginRight: 4, alignItems: 'flex-start', justifyContent: 'flex-start' }}>
                                             <TouchableOpacity onPress={() => {
                                                 Vibration.vibrate(20)
                                                 opencomment(item._id)
-                                                
+
 
                                             }}
-                                            style={{marginTop:-6}}
+                                                style={{ marginTop: -6 }}
                                             >
-                                                <FontAwesome name="comment-o" size={28} color="#ccc"  />
+                                                <FontAwesome name="comment-o" size={28} color="#ccc" />
 
                                             </TouchableOpacity>
 
@@ -331,7 +331,7 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                             Vibration.vibrate(20)
                                             openshare(item._id)
                                         }}>
-                                            <Share style={{ }} />
+                                            <Share style={{}} />
                                         </Pressable>
 
 
@@ -361,7 +361,7 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
                                     {item.type != "textBlog" && <Text allowFontScaling={false} style={styles.u3}>{item.caption != undefined ? item.caption : "caption"} </Text>}
                                     <Pressable onPress={() => { opencomment(item._id) }} allowFontScaling={false} style={styles.u4}>
                                         {/* <Text style={styles.u4}>View {item.postComments.length} comments</Text> */}
-                                        <Text style={{color:'gray',fontFamily:'Roboto' , fontSize : 11}}>{messagetime(item.createdAt)}</Text>
+                                        <Text style={{ color: 'gray', fontFamily: 'Roboto', fontSize: 11 }}>{messagetime(item.createdAt)}</Text>
                                     </Pressable>
 
                                 </View>

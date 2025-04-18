@@ -109,7 +109,7 @@ const Signup2 = function ({ navigation, route }) {
                             width: "95%",
                             paddingBottom: 8,
                             paddingStart: 8,
-                            marginTop: 30,
+                            marginTop: 10,
                              }}>
                             <TextInput
                                 allowFontScaling={false}
@@ -178,7 +178,7 @@ const Signup2 = function ({ navigation, route }) {
                             <Text style={signupstyles.error}>{confirmPasswordError}</Text>
                         ) : null}
 
-                        <Pressable onPress={handleSubmit} style={signupstyles.next} disabled={loading}>
+                        <Pressable onPress={handleSubmit} style={[signupstyles.next , {marginTop : 40}]} disabled={loading}>
                             {!loading ? (
                                 <Text allowFontScaling={false} style={signupstyles.nexttext}>Next</Text>
                             ) : (

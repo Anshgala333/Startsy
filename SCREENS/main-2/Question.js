@@ -153,7 +153,7 @@ const Question = ({ allpost, setallpost, getpost, scrollY, navigation }) => {
                 if (interval > 1) {
                     return Math.floor(interval) + " minutes ago";
                 }
-                return Math.floor(seconds) + " seconds ago";
+                return Math.abs(Math.floor(seconds)) + " seconds ago";
             }
 
 

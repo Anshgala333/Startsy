@@ -8,7 +8,7 @@ import { ActivityIndicator } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 // import {  } from 'react-native-gesture-handler';
 
-const CommentBottomSheet = ({ commentRef, backdropComponent, allcomments, comments, docomment, uploadingcomment, setcommenttext, commenttext, backgroundStyle }) => {
+const CommentBottomSheet = ({ commentRef, backdropComponent, allcomments, comments, docomment, uploadingcomment, setcommenttext, commenttext, backgroundStyle , setcomment }) => {
 
     const snapPoints5 = useMemo(() => ["70%",], []);
 
@@ -31,8 +31,13 @@ const CommentBottomSheet = ({ commentRef, backdropComponent, allcomments, commen
             backdropComponent={backdropComponent}
             enableDynamicSizing={false}
             snapPoints={snapPoints5}
-
             index={-1}
+            // onClose={()=>{
+            //     console.log("ok");
+                
+
+            //     setcomment(false)
+            // }}
 
         >
 
