@@ -196,7 +196,10 @@ const User = memo(({ handleTabChange, navigation, token, suggestionarray, setsug
 
         if (item.role == "Admin") return
         if (item._id == loggedinuserid) return
+        if(!item.isProfileComplete)return
         // console.log(decode.role);
+        // console.log(item.isProfileComplete);
+        
 
         // if(decode.role == "Investor" && item.role != "Investor") return
         return (

@@ -1,7 +1,6 @@
 
 // 3.4 second last of freelancer
 import React, { useState, useRef, useEffect, useContext } from "react";
-import * as Linking from 'expo-linking'
 import {
 
     SafeAreaView,

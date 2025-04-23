@@ -19,7 +19,6 @@ import {
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { url } from "../config.js"
 
-// import CalendarPicker from "react-native-calendar-picker";
 import Profile from "../assets/icons/profile.js"
 import Drop from "./dropdown.js";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";

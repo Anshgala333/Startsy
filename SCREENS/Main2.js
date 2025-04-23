@@ -109,12 +109,12 @@ const Main2 = ({ navigation, route }) => {
                 bottomSheetRefTree.current = false
                 return true;
             }
-            else if(openshareRef.current == true){
+            else if (openshareRef.current == true) {
                 bottomSheetRef6.current.close()
                 openshareRef.current = false
                 return true
             }
-            else if(reportRef.current == true){
+            else if (reportRef.current == true) {
                 reportBottomSheetRef.current.close()
                 reportRef.current = false
                 return true
@@ -399,6 +399,8 @@ const Main2 = ({ navigation, route }) => {
 
 
     const openBottomSheet1 = () => {
+        console.log("okkk");
+
         navigation.navigate("CommunityPage")
     };
 
@@ -633,9 +635,6 @@ const Main2 = ({ navigation, route }) => {
 
 
     }
-
-
-
 
 
 

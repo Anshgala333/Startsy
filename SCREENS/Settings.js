@@ -5,8 +5,8 @@ import { View, Text, TouchableOpacity, StyleSheet, Platform, ToastAndroid, Image
 import { List, Avatar, Divider } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import * as FileSystem from "expo-file-system";
-import * as IntentLauncher from "expo-intent-launcher";
+// import * as FileSystem from "expo-file-system";
+// import * as IntentLauncher from "expo-intent-launcher";
 import * as Updates from "expo-updates";
 import * as MediaLibrary from 'expo-media-library';
 import { url } from "@/config.js";

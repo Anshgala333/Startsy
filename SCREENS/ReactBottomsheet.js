@@ -13,7 +13,7 @@ import {
     Image,
     Dimensions, Keyboard, ActivityIndicator, Animated
 } from 'react-native';
-import RBSheet from 'react-native-raw-bottom-sheet';
+// import RBSheet from 'react-native-raw-bottom-sheet';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { InteractionManager } from "react-native";
 import BottomSheet, { BottomSheetView, BottomSheetScrollView, BottomSheetTextInput, BottomSheetFlatList, BottomSheetBackdrop } from '@gorhom/bottom-sheet';

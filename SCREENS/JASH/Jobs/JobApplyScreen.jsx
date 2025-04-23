@@ -134,7 +134,7 @@ const JobApplyScreen = () => {
                         <View >
                             <TextInput
                                 style={styles.input}
-                                maxLength={15}
+                                maxLength={100}
                                 placeholder="Resume / Portfolio url"
                                 placeholderTextColor={"gray"}
                                 value={portfolioUrl}

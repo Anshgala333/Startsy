@@ -222,7 +222,7 @@ export default function Startsy({ navigation, route, token }) {
             }} style={{ flexShrink: 1, alignSelf: 'stretch' }}>
 
                 <LinearGradient
-                    colors={["rgba(33, 34, 35, 1)", "rgba(22, 24, 26 , 0.8)"]}
+                    colors={["rgba(33, 34, 35, 1)", "rgba(22, 24, 26 , 1)"]}
                     locations={[0, 1]}
                     style={[styles.container]} contentContainerStyle={styles.contentContainer}
                     // style={styles.box}

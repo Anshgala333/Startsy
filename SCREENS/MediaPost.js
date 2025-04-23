@@ -1,4 +1,4 @@
-import { View, Text, Vibration, ToastAndroid } from 'react-native'
+import { View, Text, Vibration, ToastAndroid, Alert } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 // import { Button, Image } from 'react-native-web'
 import { Pressable, Image, TextInput, StyleSheet, Dimensions, ActivityIndicator, BackHandler } from 'react-native'
@@ -52,6 +52,7 @@ const MediaPost = ({ route }) => {
         }
 
         const finaldata = new FormData();
+        // Alert.alert(JSON.stringify(uri))
         if (uri) {
             finaldata.append("media", {
                 uri: uri,
@@ -62,6 +63,7 @@ const MediaPost = ({ route }) => {
         finaldata.append("caption", c2);
         finaldata.append("aspectRatio", aspectRatio);
         finaldata.append("isPrivate", isPrivate);
+        // Alert.alert(JSON.stringify(finaldata))
 
         try {
             if (type == "images") {
@@ -70,11 +72,14 @@ const MediaPost = ({ route }) => {
             const response = await fetch(`${url}posts/createPost/${type}`, {
                 method: 'POST',
                 body: finaldata,
+                timeout : 120000,
                 headers: {
                     'Accept': 'application/json',
                     'Authorization': `Bearer ${token}`
                 }
             });
+
+            // Alert.alert(response)
             if (response.status == 412) {
                 ToastAndroid.showWithGravityAndOffset(
                     `Server Error`,
@@ -84,11 +89,7 @@ const MediaPost = ({ route }) => {
                 );
             }
 
-            // if (!response.ok) {
-            //     const errorText = await response.text();
-            //     throw new Error(`Server Error: ${response.status} - ${errorText}`);
-            // }
-
+           
             if (response.status === 200) {
                 Vibration.vibrate(100)
                 navigation.goBack()
@@ -97,12 +98,11 @@ const MediaPost = ({ route }) => {
 
             const data = await response.json();
             setp3text("Posted");
-            // mainpagebottomsheet.current?.close();
-            // setTimeout(() => {
-            //     bottomSheetRef3.current?.close();
-            // }, 1000);
-        } catch (err) {
+        } 
+        catch (err) {
             console.error("Error:", err);
+            // Alert.alert(err)
+
         } finally {
             setp3u(false);
             seterr7(false);

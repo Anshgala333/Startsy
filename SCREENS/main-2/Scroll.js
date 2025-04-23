@@ -200,10 +200,10 @@ const Scroll = ({ allpost, setallpost, opencomment, openshare, scroll, scrollY, 
 
             // console.log(item.user_id.profilePhoto, "treeeeeeeeeeeeeeee");
             // const isVideoPlaying = videoStates[item._id] || false;
-            //   if(item.user_id.userName == "oo"){
-            //     console.log(item.mediaUrl);
+              if(item.user_id.userName == "anshgala"){
+                console.log(item.mediaUrl);
 
-            //   }
+              }
 
             if (item.user_id == null) {
                 return
