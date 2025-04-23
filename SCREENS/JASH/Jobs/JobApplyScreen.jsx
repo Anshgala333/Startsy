@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { GestureHandlerRootView, } from 'react-native-gesture-handler'
 import B4 from '@/assets/icons/b4'
 import { useRoute } from '@react-navigation/native'
-import { jwtDecode } from 'jwt-decode'
 import { url } from '@/config'
 import { ActivityIndicator } from 'react-native-paper'
 import { useNavigation } from 'expo-router'
@@ -134,7 +133,7 @@ const JobApplyScreen = () => {
                         <View >
                             <TextInput
                                 style={styles.input}
-                                maxLength={15}
+                                maxLength={100}
                                 placeholder="Resume / Portfolio url"
                                 placeholderTextColor={"gray"}
                                 value={portfolioUrl}
