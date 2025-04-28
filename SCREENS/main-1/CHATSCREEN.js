@@ -322,6 +322,11 @@ const Chat = ({ route }) => {
             //     console.log(item.message);
                 
             // }
+
+            if(typeof item.message == "object" ){
+                console.log(item);
+                
+            }
             return (
                 
                 <>

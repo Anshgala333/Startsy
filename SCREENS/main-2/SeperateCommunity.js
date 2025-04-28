@@ -25,51 +25,13 @@ const scalingfactor = Math.sqrt(a * b)
 
 const Community = ({ allpost, setallpost, getpost, scrollY, navigation ,onReportCallBack}) => {
 
-    // console.log("community re render");
-
-    // useEffect(() => {
-    //     console.log("navigation re render page 2 ");
-    // }, [navigation])
-    // useEffect(() => {
-    //     console.log("allpost re render page 2");
-    // }, [allpost])
-    // useEffect(() => {
-    //     console.log("setallpost re render page 2");
-    // }, [setallpost])
-    // useEffect(() => {
-    //     console.log("scrollY re render page 2");
-    // }, [scrollY])
-    // useEffect(() => {
-    //     console.log("getpost re render page 2");
-    // }, [getpost])
-    // useEffect(() => {
-    //     console.log("isready re render page 2");
-    // }, [isready])
-    // useEffect(() => {
-    //     console.log("refreshing11 re render page 2");
-    // }, [refreshing11])
-    // useEffect(() => {
-    //     console.log("applycommunity re render page 2");
-    // }, [applycommunity])
-    // useEffect(() => {
-    //     console.log("showToastWithGravity re render page 2");
-    // }, [showToastWithGravity])
-
-    const [isready, setisready] = useState(false)
-    const [ActiveTab, setActiveTab] = useState("")
 
     async function gotochatscreen(item) {
-
-        var id = item.communityPost._id
-        var additionaldetail = {
-            _id: id,
-            "communityName": item.communityPost.communityName
-        }
 
 
         try {
             const response = await fetch(
-                `${url}groupChat/getGroupChatMessage/${id}`,
+                `${url}groupChat/getGroupChatMessage/${item.communityPost._id}`,
                 {
                     method: "GET",
                     headers: {
@@ -81,11 +43,11 @@ const Community = ({ allpost, setallpost, getpost, scrollY, navigation ,onReport
             const result = await response.json();
 
 
-            navigation.navigate("Chat1", { item: additionaldetail, messages: result.data, token, navigation })
+            navigation.navigate("Chat1", { item: item.communityPost, messages: result.data, token, navigation })
         } catch (err) {
             console.log(err);
         } finally {
-            // setloading(false); // Set loading to false when done
+           
         }
 
     }

@@ -18,10 +18,11 @@ import {
     RefreshControl,
     TouchableOpacity,
     Keyboard,
+    Image,
     Vibration
 
 } from "react-native";
-import { Image } from "expo-image";
+// import { Image } from "expo-image";
 import Post from "./SeperatePost.js"
 import { Skeleton } from 'moti/skeleton'
 import { MotiView } from 'moti';
@@ -222,7 +223,7 @@ const NewsLetter = React.memo(
                         start={{ x: 0, y: 0 }}
                         end={{ x: 0, y: 1 }}
                         style={styles.box}>
-                        <Image transition={500} cachePolicy="memory-disk" style={styles.image} source={{ uri: item.newsletterImage }} />
+                        <Image cachePolicy="memory-disk" style={styles.image} source={{ uri: item.newsletterImage }} />
 
 
                         <Text style={styles.text}>
@@ -233,7 +234,7 @@ const NewsLetter = React.memo(
                         </Text>
 
                         <View style={styles.bottominfo}>
-                            <Image transition={500} cachePolicy="memory" style={styles.topimage} source={{ uri: item.taggedUser.profilePhoto }} />
+                            <Image cachePolicy="memory" style={styles.topimage} source={{ uri: item.taggedUser.profilePhoto }} />
                             <Text style={styles.topu1}>{item.taggedUserName}</Text>
                             {/* <Text style={styles.topu2}>{item.taggedUser.role}</Text> */}
                             <Text style={styles.topu2}>{item.taggedUser.role == "CommunityMember" ? "Member" : item.taggedUser.role}</Text>
@@ -315,7 +316,7 @@ const NewsLetter = React.memo(
                             </Text>
 
                             <View style={styles.bottominfo1}>
-                                <Image transition={500} cachePolicy="memory" style={styles.topimage} source={{ uri: item.taggedUser.profilePhoto }} />
+                                <Image  cachePolicy="memory" style={styles.topimage} source={{ uri: item.taggedUser.profilePhoto }} />
                                 <Text style={styles.topu1}>{item.taggedUserName}</Text>
                                 {/* <Text style={styles.topu2}>{item.taggedUser.role}</Text> */}
                                 <Text style={styles.topu2}>{item.taggedUser.role == "CommunityMember" ? "Member" : item.taggedUser.role}</Text>
@@ -333,7 +334,7 @@ const NewsLetter = React.memo(
                             </View>
                         </View>
                         <View style={styles.right}>
-                            <Image transition={500} cachePolicy="memory-disk" style={styles.image1} source={{ uri: item.newsletterImage }} />
+                            <Image cachePolicy="memory-disk" style={styles.image1} source={{ uri: item.newsletterImage }} />
                         </View>
                     </LinearGradient>
                 </Pressable>

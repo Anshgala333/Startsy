@@ -28,73 +28,7 @@ import Startsy from "../main-1/Startsy.js";
 const Foryou =
     ({ scroll, settype, token, mainpagebottomsheet, opencomment, openshare, visible, setVisible, setnewaspect, setImage,onReportCallBack }) => {
 
-        // console.log("for you re render");
-
-
         
-
-
-        // useEffect(() => {
-        //     console.log("scroll of parent page re render");
-        // }, [scroll,Tab,settype,getpost,scrollY,token,mainpagebottomsheet,opencomment,setVisible,openshare,visible,setnewaspect])
-        // // useEffect(() => {
-        // // 
-        // //     console.log("globaldata of parent page re render");
-        // // 
-        // // }, [globaldata])
-        // useEffect(() => {
-        //     // console.log("settype of parent page re render");
-        // }, [settype])
-        // useEffect(() => {
-        //     // console.log("getpost of parent page re render");
-        // }, [getpost])
-        // useEffect(() => {
-        //     // console.log("scrolly of parent page re render");
-        // }, [scrollY])
-        // useEffect(() => {
-        //     // console.log("token of parent page re render");
-        // }, [token])
-        // useEffect(() => {
-        //     // console.log("mainpagebottomsheet of parent page re render");
-        // }, [mainpagebottomsheet])
-        // useEffect(() => {
-        //     // console.log("opencomment of parent page re render");
-        // }, [opencomment])
-        // useEffect(() => {
-        //     // console.log("setVisible of parent page re render");
-        // }, [setVisible])
-        // useEffect(() => {
-        //     // console.log("openshare of parent page re render");
-        // }, [openshare])
-        // useEffect(() => {
-        //     // console.log("visible of parent page re render");
-        // }, [visible])
-        // useEffect(() => {
-        //     // console.log("setnewaspect of parent page re render");
-        // }, [setnewaspect])
-        // useEffect(() => {
-        //     // console.log("setImage of parent page re render");
-        // }, [setImage])
-        // useEffect(() => {
-        //     console.log("allpost of parnet page re render");
-        // }, [allpost])
-        // useEffect(() => {
-        //     // console.log("loggedinUserID parent page re render");
-        // }, [loggedinUserID])
-        // useEffect(() => {
-        //     // console.log("skeleton re parent page render");
-        // }, [skeleton])
-
-        // useEffect(() => {
-        //     // console.log(", re render");
-        // }, [,])
-        // useEffect(() => {
-        //     // console.log("openbottomsheet re render");
-        // }, [openBottomSheet])
-        // useEffect(() => {
-        //     // console.log("tab re render");
-        // }, [Tab])
-
 
         const navigation = useNavigation()
         const [allpost, setallpost] = useState([])

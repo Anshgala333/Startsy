@@ -5,18 +5,19 @@ import Share from "../../assets/icons/share.js"
 import Upvote from "../../assets/icons/upvote.js"
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { useRoute } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
 
-const NewsletterPage = ({  openshare }) => {
+const NewsletterPage = ({ openshare }) => {
 
 
 
 
     const route = useRoute();
-    const { item  , navigation} = route.params
+    const { item, navigation } = route.params
 
-    console.log(item.taggedUser , "oo");
-    console.log(item , "oo");
-    
+    console.log(item.taggedUser, "oo");
+    console.log(item, "oo");
+
 
     useEffect(() => {
         // StatusBar.setBackgroundColor("")
@@ -24,7 +25,7 @@ const NewsletterPage = ({  openshare }) => {
     }, [])
 
     function time(time) {
-       
+
         var data1 = new Date(time)
         var seconds = Math.floor((new Date() - data1) / 1000);
 
@@ -67,8 +68,8 @@ const NewsletterPage = ({  openshare }) => {
         <ScrollView style={styles.container}>
             {/* Header */}
             <View style={styles.header}>
-                <Text style={styles.headerText}>Newsletter</Text>
-                <View style={styles.headerIcons}>
+                {/* <Text style={styles.headerText}>Newsletter</Text> */}
+                {/* <View style={styles.headerIcons}>
                     <View>
                         <Pressable>
 
@@ -77,23 +78,34 @@ const NewsletterPage = ({  openshare }) => {
                     <View>
 
                     </View>
-                </View>
+                </View> */}
             </View>
             <View style={styles.iconcontainer}>
                 <View style={styles.i1}>
                     <Pressable onPress={() => navigation.goBack()}>
-                        <FontAwesome6 name="chevron-left" size={25} color="#00DF60" />
+                        <FontAwesome6 name="chevron-left" size={26} color="#00DF60" />
                     </Pressable>
                 </View>
-                <TouchableOpacity onPress={()=>openshare(item._id)} style={styles.i2}>
+                <TouchableOpacity onPress={() => openshare(item._id)} style={styles.i2}>
                     {/* <Upvote width={36} height={36} style={{marginRight : 10}}/> */}
                     <Share style={{ marginTop: 3 }} />
 
                 </TouchableOpacity>
             </View>
             <View style={styles.postContainer}>
-                <Image source={{ uri: item.newsletterImage }} style={styles.postImage} />
-                <Text style={styles.postTitle}>{item.title}</Text>
+                <View style={styles.ImageContainer}>
+                    <Image source={{ uri: item.newsletterImage }} style={styles.postImage} />
+
+                    <LinearGradient
+                        colors={["rgba(0, 0, 0, 0)", "rgba(0, 0, 0, 0.93)"]}
+                        locations={[0, 1]}
+                        style={styles.postTitle}
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 0, y: 0.8 }} >
+
+                        <Text style={styles.tittleContent}>{item.title}</Text>
+                    </LinearGradient>
+                </View>
                 <View style={styles.authorInfo}>
                     {/* {item.profilePhoto && <Image source={{ uri: item.profilePhoto }} style={styles.profileImage} />} */}
                     {item.taggedUser.profilePhoto && <Image source={{ uri: item.taggedUser.profilePhoto }} style={styles.profileImage} />}
@@ -103,7 +115,7 @@ const NewsletterPage = ({  openshare }) => {
                             <Text style={styles.authorName}>
                                 {item.taggedUserName}
                             </Text>
-                            <Text style={styles.role}>{item.taggedUser.role == "CommunityMember" ? "Member" : item.taggedUser.role }</Text>
+                            <Text style={styles.role}>{item.taggedUser.role == "CommunityMember" ? "Member" : item.taggedUser.role}</Text>
                         </View>
                         <Text style={styles.time}>{time(item.createdAt)}</Text>
                     </View>
@@ -165,23 +177,43 @@ const styles = StyleSheet.create({
     },
     postImage: {
         width: width,
-        height: 200,
-        // borderRadius: 10,
-        marginBottom: 20,
+        height: 250,
+        objectFit: "cover",
+        marginBottom: 10,
         left: -10
 
     },
     postTitle: {
-        color: "#B8B8B8",
+        color: "#fff",
         fontSize: 23,
-        marginBottom: 10,
+        // marginBottom: 10,
         lineHeight: 26,
-        fontFamily: "Alata"
+        position: "absolute",
+        bottom: 10,
+        paddingHorizontal: 20,
+        left: -10,
+        height : 250,
+        paddingTop : 0,
+        justifyContent : "center",
+        alignContent : "baseline",
+        // backgroundColor: "red",
+        width: "107%",
+
+    },
+    tittleContent :{
+        position : "absolute",
+        bottom : 10,
+        left : 12,
+        color: "#fff",
+        fontSize: 24,
+        lineHeight: 26,
+        fontFamily: "Alata",
     },
     authorInfo: {
         flexDirection: "row",
         alignItems: "center",
         marginVertical: 10,
+        marginTop : 0
     },
     profileImage: {
         width: 40,
@@ -245,9 +277,11 @@ const styles = StyleSheet.create({
         display: "flex",
         justifyContent: "space-between",
         flexDirection: "row",
-        width: "92%",
+        width: "93%",
+        paddingHorizontal : 5,
         margin: "auto",
-        marginVertical: 5
+        marginVertical: 5,
+        marginTop : -8
 
     },
     i2: {
@@ -256,6 +290,10 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         gap: 10,
         // marginVertical : 20
+    },
+    ImageContainer: {
+        // display : "flex",
+        // flexDirection  : "row"
     }
 });
 

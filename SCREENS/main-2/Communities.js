@@ -84,7 +84,6 @@ const Communities = ({ token, navigation }) => {
 
     async function gotochatscreen(item) {
 
-        // console.log(item, "okkkkkkkkkk");
 
 
 
@@ -103,14 +102,14 @@ const Communities = ({ token, navigation }) => {
                     }
                 );
                 const result = await response.json();
-                console.log(result.data);
+
 
                 setmessage(result.data)
                 navigation.navigate("Chat1", { item: item.community.community, messages: result.data, token, navigation })
             } catch (err) {
                 console.log(err);
             } finally {
-                // setloading(false); // Set loading to false when done
+
             }
         }
 
@@ -119,8 +118,7 @@ const Communities = ({ token, navigation }) => {
     }
 
     function time(time) {
-        // console.log('====================================');
-        // console.log(time);
+
         var data1 = new Date(time)
 
         var seconds = Math.floor((new Date() - data1) / 1000);
@@ -321,7 +319,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignSelf: "flex-start",
     },
-   
+
     message: {
         fontSize: 14,
         color: "gray",

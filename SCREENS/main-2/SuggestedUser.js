@@ -39,9 +39,9 @@ const User = memo(({ handleTabChange, navigation, token, suggestionarray, setsug
     const scrollPosition = useRef(0);
     const listRef = useRef(null);
     const [loggedinuserid, setloggedin] = useState("");
-    const handleScroll = (event) => {
-        scrollPosition.current = event.nativeEvent.contentOffset.y;
-    };
+    // const handleScroll = (event) => {
+    //     scrollPosition.current = event.nativeEvent.contentOffset.y;
+    // };
     const [refreshing1, setRefreshing1] = useState(false)
 
     useEffect(() => {
@@ -263,12 +263,12 @@ const User = memo(({ handleTabChange, navigation, token, suggestionarray, setsug
                 data={suggestionarray}
                 ref={listRef}
                 renderItem={renderSuggestion}
-                onScroll={handleScroll}
+                // onScroll={handleScroll}
                 style={[styles.suggestionbox]}
                 contentContainerStyle={{ paddingBottom: 100, minHeight: 800 }}
-                extraData={suggestionarray}
-                getItemLayout={(data, index) => ({ length: 200, offset: 200 * index, index })}
-                maintainVisibleContentPosition={{ minIndexForVisible: 20 }}
+                // extraData={suggestionarray}
+                // getItemLayout={(data, index) => ({ length: 200, offset: 200 * index, index })}
+                // maintainVisibleContentPosition={{ minIndexForVisible: 20 }}
                 // onContentSizeChange={() => {
                 //     if (listRef.current) {
                 //         listRef.current.scrollToOffset({ offset: scrollPosition.current, animated: false });
