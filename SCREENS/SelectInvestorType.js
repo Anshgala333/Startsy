@@ -60,11 +60,6 @@ const SelectInvestor = ({ navigation, route }) => {
 
 
 
-
-
-
-
-
     function nextpage(navigation, type) {
 
         const final = new FormData();

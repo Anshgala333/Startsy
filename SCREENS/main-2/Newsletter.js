@@ -154,9 +154,6 @@ const NewsLetter = React.memo(
                 setnewsletter(normal)
                 setfilterednewsletter(special)
 
-
-
-
             }
             catch (err) {
                 // console.log(err);

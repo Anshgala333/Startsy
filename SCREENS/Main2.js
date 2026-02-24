@@ -743,8 +743,6 @@ const Main2 = ({ navigation, route }) => {
         }
 
 
-
-
     }
 
 
